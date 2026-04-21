@@ -427,6 +427,28 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(2
   .sg{gap:8px}.tool-grid{gap:8px}
   .sets-header,.set-row{grid-template-columns:24px 1fr 1fr 1fr 36px 30px}
 }
+/* ══ NEW FEATURES CSS ══ */
+.session-timer-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(110,231,183,.07);border:1px solid rgba(110,231,183,.18);border-radius:12px;margin-bottom:10px;font-size:.78em;font-weight:800;color:var(--ok)}
+.muscle-map{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.mm-cell{border-radius:10px;padding:8px 6px;text-align:center;border:1px solid rgba(255,255,255,.08);cursor:pointer;transition:.25s}
+.mm-cell .mm-ic{font-size:1.2em;margin-bottom:3px}
+.mm-cell .mm-nm{font-size:.58em;font-weight:800}
+.mm-cell .mm-st{font-size:.52em;margin-top:2px}
+.mm-fresh{background:rgba(110,231,183,.08);border-color:rgba(110,231,183,.2);color:var(--ok)}
+.mm-moderate{background:rgba(253,230,138,.07);border-color:rgba(253,230,138,.18);color:var(--wn)}
+.mm-fatigued{background:rgba(252,165,165,.07);border-color:rgba(252,165,165,.18);color:var(--no)}
+.mm-unknown{background:rgba(255,255,255,.04);color:var(--tx3)}
+.push-compare{background:rgba(255,255,255,.06);border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.08)}
+.pc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:.8em;font-weight:800}
+.pc-row{display:flex;gap:8px;align-items:center;margin-bottom:5px;font-size:.72em}
+.pc-label{color:var(--tx2);min-width:120px;flex-shrink:0}
+.pc-a{color:var(--p);font-weight:800}.pc-b{color:var(--cy);font-weight:800}
+.auto-suggest-day{background:linear-gradient(135deg,rgba(192,132,252,.08),rgba(110,231,183,.05));border:1px solid rgba(192,132,252,.2);border-radius:14px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.asd-text{flex:1}.asd-title{font-size:.82em;font-weight:800}
+.asd-sub{font-size:.68em;color:var(--tx2);margin-top:2px}
+.ri-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:7px;font-size:.6em;font-weight:800;background:rgba(221,214,254,.08);color:var(--pu);border:1px solid rgba(221,214,254,.15);margin-top:4px}
+.rpe-sparkline{display:flex;gap:3px;align-items:flex-end;height:32px;margin-top:4px}
+.rpe-sparkline div{flex:1;border-radius:3px 3px 0 0;min-height:3px;transition:.4s}
 </style>
 </head>
 <body>
@@ -461,6 +483,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(2
 <!-- ══ WORKOUT PAGE ══ -->
 <div class="pg act" id="pg-wo">
   <div id="morningCard"></div>
+  <div id="autoSuggestDay"></div>
   <div id="dayStatusBanner"></div>
   <div class="period-banner" id="periodBanner"></div>
   <div class="ai-coach-card">
@@ -481,6 +504,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(2
     <div class="dscroll" id="dayList"></div>
   </div>
   <div id="compBarArea"></div>
+  <div id="sessionTimerBar" style="display:none"></div>
   <div id="woArea"></div>
   <div id="sesAct" style="display:none">
     <button class="save-btn" onclick="saveSes()">💾 حفظ الجلسة</button>
@@ -631,6 +655,9 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(2
   <div class="card"><div class="ct">📊 إحصائيات عامة</div><div class="sg" id="oStats"></div></div>
   <div class="card"><div class="ct">📈 الحجم الأسبوعي</div><div class="chart-wrap"><div class="chart-bars" id="weeklyVolumeChart"></div></div></div>
   <div class="card"><div class="ct">💪 حجم كل عضلة</div><div id="volInfo"></div></div>
+  <div class="card"><div class="ct">🗺️ خريطة تعافي العضلات</div><div id="muscleMapArea"></div></div>
+  <div class="card"><div class="ct">⚡ مقارنة Push A vs Push B</div><div id="pushCompareArea"></div></div>
+  <div class="card"><div class="ct">📉 اتجاه RPE</div><div id="rpeTrendArea"></div></div>
   <div class="card"><div class="ct">🏆 أرقام قياسية PR</div><div id="prL"></div></div>
   <div class="card">
     <div class="ct">🔮 توقعات القوة (12 أسبوع)</div>
@@ -716,15 +743,11 @@ function predictStrength(id){const h=G.ses.filter(s=>s.exs?.[id]).slice(0,6);if(
 const SCI={calc1RM(w,r){return!w||!r?0:r===1?w:Math.round(w*(1+r/30)*10)/10},sessionVolume(s){return Object.values(s.exs||{}).reduce((t,e)=>t+(e.vol>0?e.vol:e.sets?.length?e.sets.reduce((v,t)=>v+(t.w||0)*(t.r||1),0):e.w||0),0)},weeklyVolume(){const ws=new Date();ws.setDate(ws.getDate()-ws.getDay());ws.setHours(0,0,0,0);return Math.round(G.ses.filter(s=>new Date(s.date)>=ws).reduce((t,s)=>t+SCI.sessionVolume(s),0))},getBestPR(id){return getBestSet(id)},volumeTrend(id){const r=G.ses.filter(s=>s.exs?.[id]).slice(-6).map(s=>{const e=s.exs[id];return e.vol>0?e.vol:e.sets?.length?e.sets.reduce((v,t)=>v+(t.w||0)*(t.r||1),0):e.w||0}).filter(v=>v>0);return r.length<2?0:r[0]>0?Math.round((r[r.length-1]-r[0])/r[0]*100):0}};
 const OE={CK:['Bench Press','Deadlift','Squat','Row','OHP','Pull','Press','RDL','Hip Thrust','Split Squat','T-Bar','Barbell','Overhead'],isCompound(n){return this.CK.some(c=>n.toLowerCase().includes(c.toLowerCase()))},detectPlateau(id){const h=G.ses.filter(s=>s.exs?.[id]).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,4).map(s=>{const e=s.exs[id];return e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):e.w||0}).filter(w=>w>0);return h.length>=3&&h[0]===h[1]&&h[1]===h[2]},getRecommendation(id,name,lastW){if(!lastW||lastW<=0)return{status:'new',suggestedWeight:lastW,msg:'',trend:0};const h=G.ses.filter(s=>s.exs?.[id]).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5).map(s=>{const e=s.exs[id];return e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):e.w||0}).filter(w=>w>0);const trend=SCI.volumeTrend(id);if(h.length<2)return{status:'stable',suggestedWeight:lastW,msg:'',trend};const inc=this.isCompound(name)?2.5:1,rt=this.isCompound(name)?2.5:1;if(h.length>=4&&h[0]===h[1]&&h[1]===h[2]&&h[2]===h[3]){const dl=Math.round(lastW*.9/rt)*rt;return{status:'deload',suggestedWeight:dl,msg:`⚠️ Deload — ${dl}كجم (90%)`,trend}}if(this.detectPlateau(id)){const sg=Math.round((lastW+inc)/rt)*rt;return{status:'plateau',suggestedWeight:sg,msg:`⚠️ ثبات — جرب ${sg}كجم`,trend}}if(h.length>=2&&h[0]>h[1]){const sg=Math.round((lastW+inc)/rt)*rt;return{status:'progressing',suggestedWeight:sg,msg:`✅ تقدم! الهدف: ${sg}كجم`,trend}}return{status:'stable',suggestedWeight:lastW,msg:'',trend}}};
 function recoveryScore(){const l7=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5),freq=Math.min(l7.length,6),wv=SCI.weeklyVolume(),bwT=G.bw.length>=2?Math.abs(G.bw[G.bw.length-1].w-G.bw[G.bw.length-2].w):0;return Math.min(Math.max(Math.round(freq/6*40+Math.min(wv/5000*30,30)+Math.min((G.streak||0)/7*20,20)+(bwT<2?10:5)),0),100)}
-function loadD(){try{const s=localStorage.getItem(K);if(s){const d=JSON.parse(s);G={...G,...d}}
-// تحقق إن كل الأيام الستة موجودة بشكل صحيح
-if(!G.days||!G.days.pushA||!G.days.pullA||!G.days.legA||!G.days.pushB||!G.days.pullB||!G.days.legB){G.days=JSON.parse(JSON.stringify(MY_DAYS))}
-else{dayOrder.forEach(k=>{if(!G.days[k])G.days[k]=JSON.parse(JSON.stringify(MY_DAYS[k]))})}
-if(!G.ses)G.ses=[];if(!G.bw)G.bw=[];if(!G.doneExs)G.doneExs={};if(!G.completedDays)G.completedDays={};if(!G.chatHistory)G.chatHistory=[];if(!G.currentSets)G.currentSets={};if(!G.schedule)G.schedule=JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));if(!G.wellness)G.wellness={};if(!G.nextSessionPlan)G.nextSessionPlan={};if(!G.rpeHistory)G.rpeHistory={};if(G.notifications===undefined)G.notifications=true;if(G.aiKey)setTimeout(()=>{const i=document.getElementById('apiKeyInput');if(i)i.value=G.aiKey},100);const t=document.getElementById('notifToggle');if(t)t.checked=G.notifications}catch(e){G.days=JSON.parse(JSON.stringify(MY_DAYS))}}
+function loadD(){try{const s=localStorage.getItem(K);if(s){const d=JSON.parse(s);G={...G,...d}}if(!G.days||!Object.keys(G.days).length)G.days=JSON.parse(JSON.stringify(MY_DAYS));if(!G.ses)G.ses=[];if(!G.bw)G.bw=[];if(!G.doneExs)G.doneExs={};if(!G.completedDays)G.completedDays={};if(!G.chatHistory)G.chatHistory=[];if(!G.currentSets)G.currentSets={};if(!G.schedule)G.schedule=JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));if(!G.wellness)G.wellness={};if(!G.nextSessionPlan)G.nextSessionPlan={};if(!G.rpeHistory)G.rpeHistory={};if(G.notifications===undefined)G.notifications=true;if(G.aiKey)setTimeout(()=>{const i=document.getElementById('apiKeyInput');if(i)i.value=G.aiKey},100);const t=document.getElementById('notifToggle');if(t)t.checked=G.notifications}catch(e){G.days=JSON.parse(JSON.stringify(MY_DAYS))}}
 function saveD(){try{localStorage.setItem(K,JSON.stringify(G))}catch(e){}}
 function rDate(){const d=new Date(),dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],mn=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],el=document.getElementById('tDate');if(el)el.textContent=`${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`}
 function rBlockBadge(){const i=PERIOD.info(),el=document.getElementById('blockBadge');if(!el)return;el.className='block-badge '+i.color;el.textContent=`${i.icon} ${i.label}`}
-function rFatigueBar(){const sc=FATIGUE.score(),lv=FATIGUE.level(),wr=document.getElementById('fatigueBarWrap'),fi=document.getElementById('fatigueBarFill'),lb=document.getElementById('fatigueBarLabel'),bl=document.getElementById('blockLabel');if(!fi)return;wr.className=`fatigue-bar-wrap fatigue-${lv}`;fi.style.width=`${sc}%`;lb.textContent=`Block ${PERIOD.week()}/4 — ${PERIOD.info().label}`;const lb2=document.getElementById('fatigueBarLabel');if(lb2)lb2.textContent=`Fatigue ${sc}% — ${FATIGUE.label()}`}
+function rFatigueBar(){const sc=FATIGUE.score(),lv=FATIGUE.level(),wr=document.getElementById('fatigueBarWrap'),fi=document.getElementById('fatigueBarFill'),lb=document.getElementById('fatigueBarLabel'),bl=document.getElementById('blockLabel');if(!fi)return;wr.className=`fatigue-bar-wrap fatigue-${lv}`;fi.style.width=`${sc}%`;lb.textContent=`Block ${PERIOD.week()}/4 — ${PERIOD.info().label}`;lb2=document.getElementById('fatigueBarLabel');if(lb2)lb2.textContent=`Fatigue ${sc}% — ${FATIGUE.label()}`}
 function rPeriodBanner(){const el=document.getElementById('periodBanner');if(!el)return;const i=PERIOD.info(),w=PERIOD.week(),chips=[1,2,3,4].map(n=>`<div class="pw-chip ${n<w?'done':n===w?'active':''}">${n}</div>`).join('');el.innerHTML=`<div class="period-info"><div class="period-title" style="color:var(--p)">${i.icon} ${i.label}</div><div class="period-desc">${i.desc}</div></div><div class="period-week-chips">${chips}</div>`}
 function rRecoveryBadge(){const rs=recoveryScore(),el=document.getElementById('recoveryBadgeArea');if(!el)return;const c=rs>=70?'high':rs>=50?'mid':'low',ic=rs>=70?'✅':rs>=50?'⚡':'⚠️',lb=rs>=70?'استعداد ممتاز':rs>=50?'استعداد جيد':'يُنصح بالراحة';el.innerHTML=`<div class="recovery-badge ${c}">${ic} Recovery ${rs}/100 — ${lb}</div>`}
 function rFatigueBadge(){const el=document.getElementById('fatigueBadgeArea');if(!el)return;el.innerHTML=`<div class="fatigue-badge ${FATIGUE.level()}">🔥 Fatigue ${FATIGUE.score()}/100 — ${FATIGUE.label()}</div>`}
@@ -732,7 +755,7 @@ function rLaggingMuscleAlert(){const el=document.getElementById('laggingMuscleAl
 function rQuickStats(){const el=document.getElementById('quickStats');if(!el)return;const v=SCI.weeklyVolume(),lw=G.bw.length?G.bw[G.bw.length-1].w:0;el.innerHTML=`<div class="qstat"><span>🏋️</span><span class="qv">${v}</span><span class="ql">كجم/أسبوع</span></div><div class="qstat"><span>📊</span><span class="qv">${G.ses.length}</span><span class="ql">جلسة</span></div><div class="qstat"><span>🔥</span><span class="qv">${recoveryScore()}%</span><span class="ql">Recovery</span></div><div class="qstat"><span>⚡</span><span class="qv">${FATIGUE.score()}</span><span class="ql">Fatigue</span></div>${lw?`<div class="qstat"><span>⚖️</span><span class="qv">${lw}</span><span class="ql">كجم</span></div>`:''}`}
 let curDay=null;
 function rDays(){const wk=weekKey(),done=G.completedDays[wk]||{},c=getCompletedCount(),wb=document.getElementById('weekBdg'),st=document.getElementById('strk'),dl=document.getElementById('dayList');if(wb)wb.textContent=`📅 ${c}/${dayOrder.length}`;if(st)st.textContent=G.streak||0;if(!dl)return;dl.innerHTML=dayOrder.map(k=>{const d=G.days[k];if(!d)return'';const ic=done[k],ia=curDay===k;return`<div class="dchip ${ia?'act':''} ${ic&&!ia?'completed':''}" onclick="selDay('${k}')">${ic?'<div class="done-mark">✓</div>':''}<div class="dn">${d.name}</div><div class="dm">${d.muscles}</div></div>`}).join('')}
-function selDay(k){curDay=k;rDays();rExs();const el=document.getElementById('sesAct');if(el)el.style.display='block';setTimeout(()=>{const w=document.getElementById('woArea');if(w)w.scrollIntoView({behavior:'smooth',block:'start'})},100)}
+function selDay(k){curDay=k;rDays();rExs();startSessionTimer();const el=document.getElementById('sesAct');if(el)el.style.display='block';setTimeout(()=>{const w=document.getElementById('woArea');if(w)w.scrollIntoView({behavior:'smooth',block:'start'})},100)}
 function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;wo.innerHTML=`<div class="card"><div class="ct">💪 ${day.muscles} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} تمرين</span></div>${day.exercises.map(ex=>{if(ex.isWarmup)return`<div class="warmup-box"><span style="font-size:1.4em">🔥</span><div><strong>إحماء:</strong> ${ex.reps}</div></div>`;const ns=ex.sets||3,ls=getLastSets(ex.id),be=getBestSet(ex.id)||ex.lastW||0,dn=G.doneExs[sk]&&G.doneExs[sk][ex.id],or=OE.getRecommendation(ex.id,ex.name,be),sg=pfl[ex.id],vs=VELOCITY.state(ex.id),ss=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[],dc=ss.length?eliteDecision(ex.id,ex.name,ss):{action:'stable',weight:be,msg:''};const osH=or.msg?`<div class="oe-suggest ${or.status}"><span>${or.status==='deload'?'🔄':or.status==='plateau'?'⚠️':'✅'}</span><span>${or.msg}</span></div>`:'';const edH=dc.msg?`<div class="elite-decision ${dc.action==='increase'?'increase':dc.action==='deload'?'deload':dc.action==='maintain'&&dc.msg.includes('⚠')?'warn':'maintain'}"><span>🧠</span><span>Elite: ${dc.msg}${dc.weight>0?' → '+dc.weight+'كجم':''}</span></div>`:'';const vcH=vs!=='stable'?`<span class="velocity-chip velocity-${vs}">${VELOCITY.label(vs)}</span>`:'';const lsH=sg?`<div style="background:rgba(221,214,254,.07);border:1px dashed rgba(221,214,254,.25);border-radius:10px;padding:10px;margin-top:8px;font-size:.76em"><strong style="color:var(--pu)">💡 من الجلسة السابقة:</strong> ${sg.reason}<div style="margin-top:4px;color:var(--tx2)">الهدف: ${sg.nextWeight}كجم × ${sg.targetReps}</div></div>`:'';const rows=Array.from({length:ns},(_,i)=>{const ps=ls[i]||null,pw=ps?ps.w:be,pr=ps?ps.r:'',pp=ps?ps.rpe:'',pt=pw>0?(pr?`${pw}×${pr}`:`${pw}`):'--';return`<div class="set-row" id="sr-${ex.id}-${i}"><div class="set-num" id="snum-${ex.id}-${i}">${i+1}</div><div class="set-prev">${pt}${pp?'<br><span style="font-size:.7em;color:var(--pu)">RPE '+pp+'</span>':''}</div><input type="number" class="set-in" id="sw-${ex.id}-${i}" placeholder="${pw>0?pw:''}" step="0.5" min="0" inputmode="decimal" oninput="onSetChange('${ex.id}',${i},${be})"><input type="number" class="set-in" id="sr2-${ex.id}-${i}" placeholder="${pr||'عدات'}" step="1" min="1" inputmode="numeric" oninput="onSetChange('${ex.id}',${i},${be})" style="font-size:.78em"><input type="number" class="rpe-in" id="srpe-${ex.id}-${i}" placeholder="${pp||'RPE'}" step="0.5" min="1" max="10" inputmode="decimal" oninput="onRPEChange('${ex.id}',${i})"><div class="set-chk" id="sc-${ex.id}-${i}" onclick="toggleSetDone('${ex.id}',${i})"></div></div>`}).join('');return`<div class="exi ${dn?'done':''}" id="exi-${ex.id}"><div class="ext"><div style="flex:1"><div class="exn">${ex.name}</div><div class="exd">${ns} سيتات | ${ex.reps} عدة | ${ex.unit}</div>${ex.muscle?`<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:4px"><span class="muscle-tag">${ex.muscle}</span>${vcH}</div>`:''} ${be>0?`<div style="font-size:.65em;color:var(--wn);margin-top:3px">🏆 أفضل: ${be} ${ex.unit}</div>`:''}</div><div class="done-check ${dn?'checked':''}" id="chk-${ex.id}" onclick="toggleDone('${ex.id}')">${dn?'✓':''}</div></div>${osH}${edH}${lsH}<div class="sets-header"><span>#</span><span>سابق</span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE</span><span>✓</span></div>${rows}<div class="sets-summary" id="sum-${ex.id}"><span class="ss-chip">0/${ns} سيت</span></div><textarea class="ex-note" id="n-${ex.id}" placeholder="📝 ملاحظة..." rows="1"></textarea></div>`}).join('')}</div>`;updateCompBar();restoreSetInputs()}
 function onRPEChange(id,i){const el=document.getElementById(`srpe-${id}-${i}`);if(!el)return;const v=parseFloat(el.value)||0;el.classList.remove('rpe-easy','rpe-hard','rpe-max');if(v>0&&v<=6)el.classList.add('rpe-easy');else if(v>8.5&&v<10)el.classList.add('rpe-hard');else if(v>=10)el.classList.add('rpe-max');saveCurrentSet(id,i);updateSetSummary(id)}
 function restoreSetInputs(){if(!curDay)return;const sk=sesKey(curDay),sv=G.currentSets&&G.currentSets[sk];if(!sv)return;Object.entries(sv).forEach(([id,sets])=>{sets.forEach((s,i)=>{const w=document.getElementById(`sw-${id}-${i}`),r=document.getElementById(`sr2-${id}-${i}`),rp=document.getElementById(`srpe-${id}-${i}`),c=document.getElementById(`sc-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(w&&s.w){w.value=s.w;w.classList.add('si-filled')}if(r&&s.r)r.value=s.r;if(rp&&s.rpe){rp.value=s.rpe;onRPEChange(id,i)}if(s.done&&c){c.classList.add('sc-done');c.textContent='✓';document.getElementById(`sr-${id}-${i}`)?.classList.add('set-done');if(n)n.classList.add('sn-done')}});updateSetSummary(id)})}
@@ -745,14 +768,22 @@ function checkAllSetsDone(id){const ex=G.days[curDay]?.exercises.find(e=>e.id===
 function toggleDone(id){const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=!G.doneExs[sk][id];saveD();const e=document.getElementById('exi-'+id),c=document.getElementById('chk-'+id);if(!e||!c)return;if(G.doneExs[sk][id]){e.classList.add('done');c.classList.add('checked');c.innerHTML='✓';if(navigator.vibrate)navigator.vibrate(30);toast('✅ تم!','s')}else{e.classList.remove('done');c.classList.remove('checked');c.innerHTML=''}updateCompBar()}
 function updateCompBar(){if(!curDay)return;const day=G.days[curDay],sk=sesKey(curDay),total=day.exercises.filter(e=>!e.isWarmup).length,done=day.exercises.filter(e=>!e.isWarmup&&G.doneExs[sk]&&G.doneExs[sk][e.id]).length,pct=total?Math.round(done/total*100):0,full=done===total&&total>0,el=document.getElementById('compBarArea');if(!el)return;el.innerHTML=`<div class="comp-bar"><div class="cb-info"><div class="cb-label">${done}/${total} تمرين مكتمل</div><div class="cb-track"><div class="cb-fill ${full?'full':''}" style="width:${pct}%"></div></div></div><div class="cb-pct ${full?'full':''}">${pct}%</div></div>`;if(full&&!isDayCompleted(curDay))markDayComplete()}
 function markDayComplete(){const wk=weekKey();if(!G.completedDays[wk])G.completedDays[wk]={};G.completedDays[wk][curDay]=true;G.streak=(G.streak||0)+1;saveD();toast('🎉 '+G.days[curDay].name+' مكتمل! '+MOTIVATIONAL[Math.floor(Math.random()*MOTIVATIONAL.length)],'s');if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);showNotification('يوم مكتمل!🎉',G.days[curDay].name);rDays();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar()}
-function saveSes(){if(!curDay)return toast('اختر يوم التمرين','e');const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${ex.id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week()};G.ses.push(sd);G.lastWo=new Date().toISOString().split('T')[0];if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();rLaggingMuscleAlert()}
+function saveSes(){if(!curDay)return toast('اختر يوم التمرين','e');const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${ex.id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const dur=stopSessionTimer();const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),duration:dur};G.ses.push(sd);G.lastWo=new Date().toISOString().split('T')[0];if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();rLaggingMuscleAlert()}
 function generateNextSessionSuggestions(sd){const r={};Object.entries(sd.exs).forEach(([id,e])=>{const ex=findExerciseById(id);if(!ex||ex.isWarmup)return;const tw=e.sets?.length?Math.max(...e.sets.map(s=>s.w||0)):e.w||0,dc=eliteDecision(id,e.name,e.sets||[]),ic=OE.isCompound(e.name);r[id]={name:e.name,muscle:e.muscle||'',currentWeight:tw,nextWeight:dc.weight||tw,reason:dc.msg||'',status:dc.action,sets:e.sets?.length||3,targetReps:ic?'6-10':'10-12'}});return r}
 function showSessionSummaryModal(s,sug){const tv=Math.round(SCI.sessionVolume(s)),prs=Object.entries(s.exs).filter(([id,e])=>{const b=getBestSet(id),c=e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):e.w;return c>b&&c>0}).length,bl=PERIOD.info(),fa=FATIGUE.level(),sh=Object.values(sug).filter(s=>!s.name.includes('إحماء')).map(s=>`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:8px;border-right:3px solid var(--${s.status==='increase'?'ok':s.status==='deload'?'pu':'bl'})"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-weight:800;font-size:.88em">${s.name}</div><div><span style="color:var(--tx3);font-size:.78em">${s.currentWeight}كجم</span> <span style="color:var(--p)">→</span> <span style="color:var(--p);font-weight:900">${s.nextWeight}كجم</span></div></div><div style="font-size:.76em;color:var(--tx2)">${s.reason}</div></div>`).join('');document.getElementById('aiMoT').textContent='📊 ملخص الجلسة';document.getElementById('aiMoB').innerHTML=`<div style="text-align:center;padding:16px;background:linear-gradient(135deg,rgba(110,231,183,.1),rgba(165,243,252,.06));border-radius:14px;margin-bottom:14px"><div style="font-size:2.2em">🎉</div><div style="font-size:1.1em;font-weight:900;color:var(--ok);margin:8px 0">جلسة ممتازة يا شهاب!</div><div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><div><div style="font-size:1.4em;font-weight:900;color:var(--p)">${tv}</div><div style="font-size:.68em;color:var(--tx2)">حجم كجم</div></div>${prs>0?`<div><div style="font-size:1.4em;font-weight:900;color:var(--wn)">${prs}</div><div style="font-size:.68em;color:var(--tx2)">🏆 PR</div></div>`:''}<div><div style="font-size:1.4em;font-weight:900;color:var(--ok)">${Object.keys(s.exs).length}</div><div style="font-size:.68em;color:var(--tx2)">تمارين</div></div></div><div style="margin-top:10px;display:flex;gap:8px;justify-content:center"><span class="block-badge ${bl.color}">${bl.icon} ${bl.label}</span><span class="fatigue-badge ${fa}" style="font-size:.68em;padding:3px 9px;margin:0">🔥 ${FATIGUE.label()}</span></div></div><div style="font-weight:800;color:var(--p);margin-bottom:10px">🎯 خطة الجلسة القادمة</div>${sh}<button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت!</button>`;document.getElementById('aiMo').classList.add('act');if(!G.nextSessionPlan)G.nextSessionPlan={};G.nextSessionPlan[curDay]=sug;saveD()}
 function popHSel(){const s=document.getElementById('hSel');if(!s)return;const a={};Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(!ex.isWarmup)a[ex.id]=ex.name}));s.innerHTML='<option value="">-- اختر التمرين --</option>'+Object.entries(a).map(([id,n])=>`<option value="${id}">${n}</option>`).join('')}
 function rHist(){const id=document.getElementById('hSel').value,c=document.getElementById('hContent');if(!c)return;if(!id){c.innerHTML='<div class="empty"><div class="eic">📊</div><h3>اختر تمرين</h3></div>';return}const ss=G.ses.filter(s=>s.exs&&s.exs[id]&&(s.exs[id].w>0||(s.exs[id].sets&&s.exs[id].sets.some(t=>t.w>0)))).sort((a,b)=>new Date(b.date)-new Date(a.date));if(!ss.length){c.innerHTML='<div class="empty"><div class="eic">📊</div><h3>لا يوجد سجل</h3></div>';return}const best=getBestSet(id),trend=SCI.volumeTrend(id),proj=predictStrength(id);c.innerHTML=`<div class="sg" style="margin-bottom:12px"><div class="sc"><div class="sn">${best}</div><div class="sl">🏆 أفضل وزن</div></div><div class="sc"><div class="sn">${ss.length}</div><div class="sl">جلسات</div></div><div class="sc wn"><div class="sn">${trend>0?'+':''}${trend}%</div><div class="sl">📈 الاتجاه</div></div>${proj?`<div class="sc"><div class="sn" style="font-size:.9em;color:var(--wn)">${proj}كجم</div><div class="sl">🔮 12 أسبوع</div></div>`:''}</div>${proj?`<div class="strength-proj"><div class="sp-title">🔮 توقع القوة</div><div class="sp-value">${proj} كجم</div><div class="sp-sub">بناءً على معدل تقدمك</div></div>`:''}${ss.slice(0,15).map((s,i)=>{const e=s.exs[id];let tw=0,vol=0,sh='',rh='';if(e.sets?.length){const f=e.sets.filter(t=>t.w>0);tw=f.length?Math.max(...f.map(t=>t.w)):0;vol=f.reduce((v,t)=>v+(t.w||0)*(t.r||1),0);sh=`<div style="font-size:.68em;color:var(--tx2);margin-top:3px">${f.map(t=>`${t.w}×${t.r||'?'}${t.rpe?'<span style="color:var(--pu)"> R'+t.rpe+'</span>':''}`).join(' | ')}</div>`;const rp=f.filter(t=>t.rpe>0);if(rp.length){const ar=Math.round(rp.reduce((v,t)=>v+t.rpe,0)/rp.length*10)/10;rh=`<span style="font-size:.65em;color:var(--pu)">RPE⌀ ${ar}</span>`}}else tw=e.w||0;const prev=ss[i+1]?ss[i+1].exs[id]:null,pt=prev?(prev.sets?.length?Math.max(...prev.sets.filter(t=>t.w>0).map(t=>t.w)):prev.w||0):tw,d=Math.round((tw-pt)*10)/10,ip=tw===best&&best>0;return`<div style="background:rgba(255,255,255,.06);padding:10px;border-radius:12px;margin-bottom:6px;${ip?'border:1px solid var(--wn)':''}"><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:.72em;color:var(--tx2)">${new Date(s.date).toLocaleDateString('ar-EG',{weekday:'short',month:'short',day:'numeric'})}</div>${sh}</div><div style="display:flex;gap:5px;align-items:center">${ip?'<span>🏆</span>':''}<span style="font-weight:900;color:var(--p)">${tw}</span>${rh}${d!==0?`<span style="font-size:.68em;padding:2px 7px;border-radius:7px;${d>0?'background:rgba(110,231,183,.1);color:var(--ok)':'background:rgba(252,165,165,.08);color:var(--no)'}">${d>0?'+':''}${d}</span>`:''}</div></div></div>`}).join('')}`}
-function renderSessionsList(){const el=document.getElementById('sessionsList');if(!el)return;const ss=G.ses.slice(-10).reverse();if(!ss.length){el.innerHTML='<div class="empty"><div class="eic">📋</div><h3>لا توجد جلسات</h3></div>';return}el.innerHTML=ss.map(s=>{const ec=Object.values(s.exs).filter(e=>e.w>0||e.vol>0||(e.sets&&e.sets.some(t=>t.w>0))).length,tv=Math.round(SCI.sessionVolume(s));return`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:7px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div><div style="font-weight:800;font-size:.85em;color:var(--p)">${s.dn}</div><div style="font-size:.68em;color:var(--tx2)">${s.ds}</div></div><div style="text-align:right"><div style="font-weight:800;color:var(--ok)">${ec} تمرين</div><div style="font-size:.68em;color:var(--tx2)">${tv}كجم</div></div></div><button class="btn btn-ai btn-sm" onclick="analyzeSpecificSession('${s.id}')">🔍 تحليل</button></div>`}).join('')}
+function renderSessionsList(){const el=document.getElementById('sessionsList');if(!el)return;const ss=G.ses.slice(-10).reverse();if(!ss.length){el.innerHTML='<div class="empty"><div class="eic">📋</div><h3>لا توجد جلسات</h3></div>';return}el.innerHTML=ss.map(s=>{const ec=Object.values(s.exs).filter(e=>e.w>0||e.vol>0||(e.sets&&e.sets.some(t=>t.w>0))).length,tv=Math.round(SCI.sessionVolume(s));return`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:7px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div><div style="font-weight:800;font-size:.85em;color:var(--p)">${s.dn}</div><div style="font-size:.68em;color:var(--tx2)">${s.ds}${s.duration?" · ⏱️ "+s.duration+"د":""}</div></div><div style="text-align:right"><div style="font-weight:800;color:var(--ok)">${ec} تمرين</div><div style="font-size:.68em;color:var(--tx2)">${tv}كجم</div></div></div><button class="btn btn-ai btn-sm" onclick="analyzeSpecificSession('${s.id}')">🔍 تحليل</button></div>`}).join('')}
 function renderVolumeChart(cid='volumeChart'){const el=document.getElementById(cid);if(!el)return;const days=[],td=new Date();for(let i=6;i>=0;i--){const d=new Date(td);d.setDate(d.getDate()-i);const k=d.toISOString().split('T')[0],v=G.ses.filter(s=>s.date.split('T')[0]===k).reduce((t,s)=>t+SCI.sessionVolume(s),0);days.push({vol:v,label:d.toLocaleDateString('ar-EG',{weekday:'short'})})}const mx=Math.max(...days.map(d=>d.vol),1);el.innerHTML=days.map(d=>`<div class="chart-bar"><div style="font-size:.55em;color:var(--p);font-weight:800;margin-bottom:2px">${d.vol||''}</div><div style="width:100%;height:${Math.max(d.vol/mx*80,3)}px;background:var(--gg);border-radius:5px 5px 0 0;min-height:3px"></div><div style="font-size:.55em;color:var(--tx3);margin-top:2px">${d.label}</div></div>`).join('')}
-function rStats(){const el=document.getElementById('oStats');if(!el)return;const wa=weeklyAnalysis();el.innerHTML=`<div class="sc"><div class="sn">${G.ses.length}</div><div class="sl">إجمالي الجلسات</div></div><div class="sc ok"><div class="sn">${wa.weeklyVolume}</div><div class="sl">حجم الأسبوع</div></div><div class="sc wn"><div class="sn">${wa.PRcount}</div><div class="sl">🏆 PRs</div></div><div class="sc"><div class="sn">${recoveryScore()}%</div><div class="sl">Recovery</div></div><div class="sc"><div class="sn">${FATIGUE.score()}</div><div class="sl">Fatigue</div></div><div class="sc"><div class="sn">${PERIOD.info().icon} ${PERIOD.week()}/4</div><div class="sl">${PERIOD.info().label}</div></div>`;renderVolumeChart('weeklyVolumeChart');rMuscleVol();rPRList();rStrengthProjections()}
+function rStats(){const el=document.getElementById('oStats');if(!el)return;const wa=weeklyAnalysis();
+  // حساب متوسط مدة الجلسة
+  const sesDurs=G.ses.filter(s=>s.duration>0);
+  const avgDur=sesDurs.length?Math.round(sesDurs.reduce((t,s)=>t+(s.duration||0),0)/sesDurs.length):0;
+  el.innerHTML=`<div class="sc"><div class="sn">${G.ses.length}</div><div class="sl">إجمالي الجلسات</div></div><div class="sc ok"><div class="sn">${wa.weeklyVolume}</div><div class="sl">حجم الأسبوع</div></div><div class="sc wn"><div class="sn">${wa.PRcount}</div><div class="sl">🏆 PRs</div></div><div class="sc"><div class="sn">${recoveryScore()}%</div><div class="sl">Recovery</div></div><div class="sc"><div class="sn">${FATIGUE.score()}</div><div class="sl">Fatigue</div></div><div class="sc"><div class="sn">${PERIOD.info().icon} ${PERIOD.week()}/4</div><div class="sl">${PERIOD.info().label}</div></div>${avgDur>0?`<div class="sc bl"><div class="sn">${avgDur}د</div><div class="sl">⏱️ متوسط الجلسة</div></div>`:''}`;
+  renderVolumeChart('weeklyVolumeChart');rMuscleVol();rMuscleMap();rPushCompare();rRPETrend();rPRList();rStrengthProjections();
+  // Deload auto-apply button if needed
+  if(PERIOD.type()==='deload'){const dl=document.getElementById('strengthProjections');if(dl){const dbtn=document.createElement('div');dbtn.style.cssText='margin-top:12px';dbtn.innerHTML=`<div style="background:rgba(221,214,254,.07);border:1px solid rgba(221,214,254,.2);border-radius:12px;padding:12px;font-size:.8em"><strong style="color:var(--pu)">🔄 أسبوع Deload</strong><div style="color:var(--tx2);margin:6px 0">طبّق 90% من الأوزان تلقائياً على يوم</div><div style="display:flex;gap:6px;flex-wrap:wrap">${dayOrder.map(k=>`<button class="btn btn-pu btn-sm" onclick="applyDeloadToDay('${k}')">${G.days[k]?.name||k}</button>`).join('')}</div></div>`;dl.appendChild(dbtn)}}
+}
 function rMuscleVol(){const el=document.getElementById('volInfo');if(!el)return;const m={};G.ses.slice(-10).forEach(s=>Object.values(s.exs||{}).forEach(e=>{if(e.muscle){const v=e.sets?.length?e.sets.reduce((t,s)=>t+(s.w||0)*(s.r||1),0):e.vol||0;m[e.muscle]=(m[e.muscle]||0)+v}}));const a=Object.entries(m).sort((x,y)=>y[1]-x[1]);if(!a.length){el.innerHTML='<div class="empty"><div class="eic">💪</div><h3>لا بيانات</h3></div>';return}const mx=a[0][1],lg=laggingMuscle();el.innerHTML=a.map(([n,v])=>`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:.78em;font-weight:800">${n} ${n===lg?'<span style="color:var(--no)">⚠️</span>':''}</span><span style="font-size:.75em;color:var(--p);font-weight:800">${Math.round(v)}كجم</span></div><div class="progress"><div class="progress-bar" style="width:${Math.round(v/mx*100)}%"></div></div></div>`).join('')}
 function rPRList(){const el=document.getElementById('prL');if(!el)return;const prs=[];Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(!ex.isWarmup){const b=getBestSet(ex.id);if(b>0)prs.push({name:ex.name,best:b,muscle:ex.muscle||'',unit:ex.unit||'كجم'})}}));prs.sort((a,b)=>b.best-a.best);if(!prs.length){el.innerHTML='<div class="empty"><div class="eic">🏆</div><h3>سجل جلسة أولاً</h3></div>';return}el.innerHTML=prs.slice(0,10).map((p,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:9px;background:rgba(255,255,255,.06);border-radius:11px;margin-bottom:6px"><div style="width:28px;height:28px;border-radius:8px;background:${i===0?'var(--wn)':i===1?'rgba(255,255,255,.3)':i===2?'var(--p)':'rgba(255,255,255,.08)'};display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:900;color:#000">${i+1}</div><div style="flex:1"><div style="font-weight:800;font-size:.85em">${p.name}</div><div style="font-size:.65em;color:var(--tx2)">${p.muscle}</div></div><div style="font-weight:900;color:var(--p)">${p.best}<span style="font-size:.65em;color:var(--tx2)"> ${p.unit}</span></div></div>`).join('')}
 function rStrengthProjections(){const el=document.getElementById('strengthProjections');if(!el)return;const pj=[];Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(!ex.isWarmup){const p=predictStrength(ex.id);if(p){const c=getBestSet(ex.id);pj.push({name:ex.name,current:c,projected:p,gain:Math.round((p-c)*10)/10,muscle:ex.muscle||''})}}}));if(!pj.length){el.innerHTML='<div class="empty"><div class="eic">🔮</div><h3>سجل جلستين لكل تمرين</h3></div>';return}pj.sort((a,b)=>b.gain-a.gain);el.innerHTML=pj.map(p=>`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:8px;border-right:3px solid var(--wn)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div><div style="font-weight:800">${p.name}</div><div style="font-size:.65em;color:var(--tx2)">${p.muscle}</div></div><div style="text-align:right"><div style="font-weight:900;color:var(--wn)">${p.projected}كجم</div><div style="font-size:.65em;color:var(--ok)">+${p.gain}كجم / 12 أسبوع</div></div></div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:.7em;color:var(--tx2)">${p.current}كجم</span><div style="flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:5px;overflow:hidden"><div style="height:100%;width:${Math.min(p.current/p.projected*100,95)}%;background:var(--gg);border-radius:5px"></div></div><span style="font-size:.7em;color:var(--wn)">${p.projected}كجم</span></div></div>`).join('')}
@@ -844,13 +875,11 @@ function toast(m,t='s'){const c=document.getElementById('toasts');if(!c)return;c
 function expD(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(G,null,2)],{type:'application/json'}));a.download=`GymProElite_${new Date().toISOString().split('T')[0]}.json`;a.click();toast('📤 تم التصدير','s')}
 function impD(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.days&&confirm('⚠️ استبدال جميع البيانات؟')){G=d;saveD();toast('📥 تم الاستيراد','s');setTimeout(()=>location.reload(),800)}}catch{toast('❌ خطأ في الملف','e')}};r.readAsText(f)}
 function saveAPIKey(){const k=document.getElementById('apiKeyInput')?.value?.trim();if(!k)return toast('أدخل API Key','w');G.aiKey=k;saveD();toast('✅ تم حفظ API Key!','s')}
-// ══ SERVICE WORKER — single registration ══
-if('serviceWorker' in navigator){
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => { window._swReg = reg; })
-      .catch(err => console.log('SW failed:', err));
-  });
+// ── Service Worker Registration ──
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+    .then(reg => console.log('SW registered'))
+    .catch(err => console.warn('SW failed:', err));
 }
 function swTimerStart(seconds, endAt) {
   if (!('serviceWorker' in navigator)) return;
@@ -899,7 +928,6 @@ function swTimerStop() {
   window._hft = hft;
 
   const onDone = () => {
-    if(window._stopKeepAlive) window._stopKeepAlive();
     playBeep();
     if(navigator.vibrate) navigator.vibrate([300,100,300,100,500]);
     if('Notification' in window && Notification.permission==='granted')
@@ -939,7 +967,6 @@ function swTimerStop() {
     cancelAnimationFrame(window._tmrRAF);
     window._tmrRAF = null;
     swTimerStop();
-    if(window._stopKeepAlive) window._stopKeepAlive();
     const bn=document.getElementById('timerStartBtn');
     if(bn){ bn.textContent='▶️ ابدأ'; bn.disabled=false; }
     const d=document.getElementById('timerDisp');
@@ -963,7 +990,6 @@ function swTimerStop() {
     if(bn){ bn.textContent='⏸ شغال...'; bn.disabled=true; }
     cancelAnimationFrame(window._tmrRAF);
     window._tmrRAF = requestAnimationFrame(tick);
-    if(window._startKeepAlive) window._startKeepAlive();
   };
 
   window.setTimer = s => {
@@ -978,9 +1004,10 @@ function quickStartTimer(seconds){
   window._timerDefault = seconds;
   window._timerRemaining = seconds;
   window._tmrEndAt = Date.now() + seconds * 1000;
+  // أبلغ الـ Service Worker يضرب الإشعار لما الوقت ينتهي
   swTimerStart(seconds, window._tmrEndAt);
+  // request notification permission if needed
   if('Notification' in window && Notification.permission==='default') Notification.requestPermission();
-  if(window._startKeepAlive) window._startKeepAlive();
   cancelAnimationFrame(window._tmrRAF);
   const tick = () => {
     if(!window._tmrEndAt) return;
@@ -995,7 +1022,6 @@ function quickStartTimer(seconds){
     if(d){d.textContent=`${Math.floor(rem/60)}:${String(rem%60).padStart(2,'0')}`;d.style.color=col;}
     if(rem<=0){
       window._tmrEndAt=0;
-      if(window._stopKeepAlive) window._stopKeepAlive();
       window.playBeep();
       if(navigator.vibrate) navigator.vibrate([300,100,300,100,500]);
       if('Notification' in window && Notification.permission==='granted')
@@ -1008,6 +1034,26 @@ function quickStartTimer(seconds){
   };
   window._tmrRAF = requestAnimationFrame(tick);
 }
+// ══ SERVICE WORKER REGISTRATION ══
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => {
+        console.log('SW registered');
+        window._swReg = reg;
+      })
+      .catch(err => console.log('SW failed:', err));
+  });
+}
+
+// ══ Service Worker Registration ══
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/sw.js').then(reg=>{
+    console.log('SW registered:', reg.scope);
+    window._swReg = reg;
+  }).catch(e=>console.log('SW error:',e));
+}
+
 // ══ مساعد إرسال رسالة للـ SW ══
 function swMsg(data){
   if(navigator.serviceWorker && navigator.serviceWorker.controller)
@@ -1016,29 +1062,139 @@ function swMsg(data){
     window._swReg.active.postMessage(data);
 }
 
-// ══ iOS KEEP-ALIVE: Silent Audio Loop ══
-(function initKeepAlive(){
-  let _audioCtx=null,_sourceNode=null,_keepAliveActive=false;
-  function createSilentLoop(){try{if(_audioCtx){_audioCtx.close();_audioCtx=null;}_audioCtx=new(window.AudioContext||window.webkitAudioContext)();const buf=_audioCtx.createBuffer(1,_audioCtx.sampleRate,_audioCtx.sampleRate);const src=_audioCtx.createBufferSource();src.buffer=buf;src.loop=true;const gain=_audioCtx.createGain();gain.gain.value=0.001;src.connect(gain);gain.connect(_audioCtx.destination);src.start();_sourceNode=src;_keepAliveActive=true;}catch(e){}}
-  function stopKeepAlive(){try{if(_sourceNode){_sourceNode.stop();_sourceNode=null;}if(_audioCtx){_audioCtx.close();_audioCtx=null;}}catch(e){}_keepAliveActive=false;}
-  window._startKeepAlive=()=>{if(!_keepAliveActive)createSilentLoop();};
-  window._stopKeepAlive=()=>stopKeepAlive();
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&_keepAliveActive&&_audioCtx)if(_audioCtx.state==='suspended')_audioCtx.resume().catch(()=>{});});
-})();
+// ══ AUTO-SUGGEST DAY ══
+function rAutoSuggestDay(){
+  const el=document.getElementById('autoSuggestDay');if(!el)return;
+  const sc=getTodaySchedule();
+  if(sc.type!=='train'){el.innerHTML='';return}
+  // إيجاد اليوم المناسب في برنامج PPL
+  const dow=new Date().getDay();
+  const dayMap={1:'pullA',2:'pushA',3:'legA',5:'pullB',6:'pushB'};
+  const suggested=dayMap[dow];
+  if(!suggested||curDay){el.innerHTML='';return}
+  const d=G.days[suggested];if(!d)return;
+  const wk=weekKey(),done=G.completedDays[wk]||{};
+  if(done[suggested]){el.innerHTML='';return}
+  el.innerHTML=`<div class="auto-suggest-day"><span style="font-size:1.8em">💡</span><div class="asd-text"><div class="asd-title">يوم تمرينك اليوم: ${d.name}</div><div class="asd-sub">${d.muscles}</div></div><button class="btn btn-p btn-sm" onclick="selDay('${suggested}');document.getElementById('autoSuggestDay').innerHTML=''">ابدأ ▶️</button></div>`
+}
 
-// ══ زر Reset طارئ — يظهر لو الأيام مش شغالة ══
-(function checkDaysHealth(){
-  setTimeout(()=>{
-    const dl=document.getElementById('dayList');
-    if(dl&&dl.children.length===0){
-      G.days=JSON.parse(JSON.stringify(MY_DAYS));
-      saveD();rDays();
-      toast('🔄 تم إعادة تحميل الأيام','w');
-    }
-  },800);
-})();
+// ══ SESSION DURATION TIMER ══
+let _sesStartTime=null,_sesTimerInterval=null;
+function startSessionTimer(){
+  _sesStartTime=Date.now();
+  const bar=document.getElementById('sessionTimerBar');
+  if(bar)bar.style.display='flex';
+  clearInterval(_sesTimerInterval);
+  _sesTimerInterval=setInterval(()=>{
+    if(!_sesStartTime)return;
+    const s=Math.floor((Date.now()-_sesStartTime)/1000),m=Math.floor(s/60),sec=s%60;
+    const bar=document.getElementById('sessionTimerBar');
+    if(bar)bar.innerHTML=`<div class="session-timer-bar">⏱️ مدة الجلسة: <span>${m}:${String(sec).padStart(2,'0')}</span></div>`;
+  },1000);
+}
+function stopSessionTimer(){
+  clearInterval(_sesTimerInterval);
+  const dur=_sesStartTime?Math.floor((Date.now()-_sesStartTime)/60000):0;
+  _sesStartTime=null;
+  const bar=document.getElementById('sessionTimerBar');
+  if(bar)bar.style.display='none';
+  return dur;
+}
 
-document.addEventListener('DOMContentLoaded',()=>{loadD();rDate();rDays();rQuickStats();initTheme();initNotifications();showDailyTip();initLibrary();renderChatHistory();rRecoveryBadge();rFatigueBadge();rFatigueBar();rBlockBadge();rPeriodBanner();rDayStatusBanner();rMorningCard();rLaggingMuscleAlert()});
+// ══ MUSCLE RECOVERY MAP ══
+function rMuscleMap(){
+  const el=document.getElementById('muscleMapArea');if(!el)return;
+  const muscles=[
+    {id:'صدر',ic:'💪',label:'صدر'},
+    {id:'ظهر',ic:'🔙',label:'ظهر'},
+    {id:'كتف',ic:'🦾',label:'كتف'},
+    {id:'باي',ic:'💪',label:'باي'},
+    {id:'تراي',ic:'💪',label:'تراي'},
+    {id:'رجل',ic:'🦵',label:'رجل'},
+    {id:'رجل خلفي',ic:'🦵',label:'Hams'},
+    {id:'بطن',ic:'🫁',label:'بطن'},
+    {id:'سمانة',ic:'🦶',label:'سمانة'},
+    {id:'مؤخرة',ic:'🍑',label:'Glutes'},
+    {id:'كتف خلفي',ic:'🎯',label:'Rear D'},
+    {id:'ترابيس',ic:'🏔️',label:'Traps'},
+  ];
+  const now=Date.now();
+  el.innerHTML='<div class="muscle-map">'+muscles.map(m=>{
+    const lastSes=G.ses.filter(s=>Object.values(s.exs||{}).some(e=>e.muscle&&e.muscle.includes(m.id))).sort((a,b)=>new Date(b.date)-new Date(a.date))[0];
+    if(!lastSes){return`<div class="mm-cell mm-unknown"><div class="mm-ic">${m.ic}</div><div class="mm-nm">${m.label}</div><div class="mm-st">جديد</div></div>`}
+    const hrs=Math.round((now-new Date(lastSes.date))/3600000);
+    const status=hrs<24?'fatigued':hrs<48?'moderate':'fresh';
+    const stLabel=hrs<24?`${hrs}h`:hrs<48?`${Math.round(hrs/24)}يوم`:'✅ جاهز';
+    return`<div class="mm-cell mm-${status}" onclick="selDay('${lastSes.dk||''}')"><div class="mm-ic">${m.ic}</div><div class="mm-nm">${m.label}</div><div class="mm-st">${stLabel}</div></div>`
+  }).join('')+'</div>';
+}
+
+// ══ PUSH A vs PUSH B COMPARE ══
+function rPushCompare(){
+  const el=document.getElementById('pushCompareArea');if(!el)return;
+  const pairs=[
+    {a:'pushA',b:'pushB',label:'Push'},
+    {a:'pullA',b:'pullB',label:'Pull'},
+  ];
+  el.innerHTML=pairs.map(p=>{
+    const dA=G.days[p.a],dB=G.days[p.b];
+    if(!dA||!dB)return'';
+    const sesA=G.ses.filter(s=>s.dk===p.a).slice(-3),sesB=G.ses.filter(s=>s.dk===p.b).slice(-3);
+    const volA=sesA.length?Math.round(sesA.reduce((t,s)=>t+SCI.sessionVolume(s),0)/sesA.length):0;
+    const volB=sesB.length?Math.round(sesB.reduce((t,s)=>t+SCI.sessionVolume(s),0)/sesB.length):0;
+    const rpeA=sesA.length?Math.round(sesA.reduce((t,s)=>t+Object.values(s.exs||{}).filter(e=>e.avgRPE>0).reduce((r,e)=>r+e.avgRPE,0)/Math.max(Object.values(s.exs||{}).filter(e=>e.avgRPE>0).length,1),0)/sesA.length*10)/10:0;
+    const rpeB=sesB.length?Math.round(sesB.reduce((t,s)=>t+Object.values(s.exs||{}).filter(e=>e.avgRPE>0).reduce((r,e)=>r+e.avgRPE,0)/Math.max(Object.values(s.exs||{}).filter(e=>e.avgRPE>0).length,1),0)/sesB.length*10)/10:0;
+    if(!volA&&!volB)return`<div class="push-compare"><div class="pc-header">${p.label} A vs ${p.label} B <span style="font-size:.7em;color:var(--tx3)">سجل جلسات أولاً</span></div></div>`;
+    return`<div class="push-compare">
+      <div class="pc-header"><span>${p.label} A <span style="color:var(--p)">vs</span> ${p.label} B</span><span style="font-size:.68em;color:var(--tx2)">آخر 3 جلسات</span></div>
+      <div class="pc-row"><span class="pc-label">📦 حجم متوسط</span><span class="pc-a">${volA}كجم</span><span style="color:var(--tx3)">vs</span><span class="pc-b">${volB}كجم</span></div>
+      ${rpeA||rpeB?`<div class="pc-row"><span class="pc-label">🎯 RPE متوسط</span><span class="pc-a">${rpeA||'--'}</span><span style="color:var(--tx3)">vs</span><span class="pc-b">${rpeB||'--'}</span></div>`:''}
+      <div class="pc-row"><span class="pc-label">📊 جلسات مسجلة</span><span class="pc-a">${G.ses.filter(s=>s.dk===p.a).length}</span><span style="color:var(--tx3)">vs</span><span class="pc-b">${G.ses.filter(s=>s.dk===p.b).length}</span></div>
+    </div>`;
+  }).join('');
+}
+
+// ══ RPE TREND ══
+function rRPETrend(){
+  const el=document.getElementById('rpeTrendArea');if(!el)return;
+  // جمع متوسط RPE لكل جلسة
+  const data=G.ses.slice(-10).map(s=>{
+    const rpes=Object.values(s.exs||{}).filter(e=>e.avgRPE>0).map(e=>e.avgRPE);
+    return{date:s.ds||s.date,dn:s.dn,rpe:rpes.length?Math.round(rpes.reduce((t,r)=>t+r,0)/rpes.length*10)/10:0};
+  }).filter(d=>d.rpe>0);
+  if(!data.length){el.innerHTML='<div class="empty"><div class="eic">📉</div><h3>سجل RPE في السيتات</h3></div>';return}
+  const mx=Math.max(...data.map(d=>d.rpe),10);
+  const trend=data.length>=2?data[data.length-1].rpe-data[0].rpe:0;
+  const trendColor=trend>1?'var(--no)':trend<-0.5?'var(--ok)':'var(--wn)';
+  const trendLabel=trend>1?'📈 ارتفاع — ارتاح':trend<-0.5?'📉 انخفاض — تحسن':'➡️ مستقر';
+  el.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:.75em;color:var(--tx2)">آخر ${data.length} جلسات</span><span style="font-size:.75em;font-weight:800;color:${trendColor}">${trendLabel}</span></div>
+  <div class="rpe-sparkline">${data.map(d=>{const h=Math.max(d.rpe/mx*100,8),c=d.rpe>=9?'rgba(252,165,165,.6)':d.rpe>=7?'rgba(253,230,138,.6)':'rgba(110,231,183,.6)';return`<div title="${d.dn}: RPE ${d.rpe}" style="height:${h}%;background:${c};flex:1;border-radius:3px 3px 0 0;min-height:3px"></div>`}).join('')}</div>
+  <div style="display:flex;justify-content:space-between;margin-top:4px"><span style="font-size:.55em;color:var(--tx3)">${data[0]?.dn?.split(' ')[0]||''}</span><span style="font-size:.55em;color:var(--tx3)">${data[data.length-1]?.dn?.split(' ')[0]||''}</span></div>
+  <div style="margin-top:10px">${data.slice(-5).reverse().map(d=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.72em"><span style="color:var(--tx2)">${d.dn}</span><span style="font-weight:800;color:${d.rpe>=9?'var(--no)':d.rpe>=7?'var(--wn)':'var(--ok)'}">RPE ${d.rpe}</span></div>`).join('')}</div>`;
+}
+
+// ══ Relative Intensity في كل تمرين ══
+function getRelativeIntensity(id,w){
+  const orm=getBestSet(id);
+  if(!orm||!w)return'';
+  const pct=Math.round(w/orm*100);
+  return`<span class="ri-badge">%1RM: ${pct}%</span>`;
+}
+
+// ══ DELOAD AUTO-APPLY ══
+function applyDeloadToDay(dk){
+  if(!G.days[dk])return;
+  G.days[dk].exercises.forEach(ex=>{
+    if(ex.isWarmup)return;
+    const best=getBestSet(ex.id);
+    if(best>0)ex.lastW=Math.round(best*.9*2)/2;
+  });
+  saveD();
+  if(curDay===dk)rExs();
+  toast(`🔄 تم تطبيق Deload على ${G.days[dk].name}`,'i');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{loadD();rDate();rDays();rQuickStats();initTheme();initNotifications();showDailyTip();initLibrary();renderChatHistory();rRecoveryBadge();rFatigueBadge();rFatigueBar();rBlockBadge();rPeriodBanner();rDayStatusBanner();rMorningCard();rLaggingMuscleAlert();rAutoSuggestDay();});
 </script>
 </body>
 </html>
