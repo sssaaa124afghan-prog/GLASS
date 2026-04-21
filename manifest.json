@@ -1,0 +1,25 @@
+{
+  "name": "GymPro AI Titan Elite",
+  "short_name": "GymPro",
+  "description": "تطبيق تتبع التمارين الذكي لشهاب",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a0533",
+  "theme_color": "#1a0533",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "health",
+    "fitness",
+    "sports"
+  ]
+}
