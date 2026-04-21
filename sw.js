@@ -8,7 +8,6 @@ const CACHE_FILES = [
   './icon.svg'
 ];
 
-// ── Install ──
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NAME)
@@ -17,7 +16,6 @@ self.addEventListener('install', e => {
   );
 });
 
-// ── Activate ──
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
@@ -28,7 +26,6 @@ self.addEventListener('activate', e => {
   );
 });
 
-// ── Fetch (Offline Cache) ──
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
   if (e.request.url.includes('groq.com') || e.request.url.includes('anthropic.com')) return;
@@ -46,15 +43,11 @@ self.addEventListener('fetch', e => {
   );
 });
 
-// ── Timer State ──
 let _timerTimeout = null;
 let _timerEnd = 0;
-
-// ── Scheduled Notifications State ──
 let _dailyTimeout = null;
 let _missedTimeout = null;
 
-// ── Helper: Fire Notification ──
 function fireNotif(title, body, tag, required = false) {
   return self.registration.showNotification(title, {
     body,
@@ -67,20 +60,16 @@ function fireNotif(title, body, tag, required = false) {
   });
 }
 
-// ── Helper: Cancel Scheduled Notifications ──
 function cancelScheduled() {
   if (_dailyTimeout)  { clearTimeout(_dailyTimeout);  _dailyTimeout = null; }
   if (_missedTimeout) { clearTimeout(_missedTimeout); _missedTimeout = null; }
 }
 
-// ── Schedule Daily & Missed Workout Notifications ──
 function scheduleDailyNotif(schedule, lastWorkout) {
   cancelScheduled();
   if (!schedule?.length) return;
 
   const now = new Date();
-
-  // إشعار صباحي الساعة 8
   const morning = new Date();
   morning.setHours(8, 0, 0, 0);
   if (morning <= now) morning.setDate(morning.getDate() + 1);
@@ -96,7 +85,6 @@ function scheduleDailyNotif(schedule, lastWorkout) {
     scheduleDailyNotif(schedule, lastWorkout);
   }, morning - now);
 
-  // إشعار الساعة 7 مساءً لو فات التمرين
   const todayDow = now.getDay();
   const todaySched = schedule[todayDow];
   if (lastWorkout && todaySched?.type === 'train') {
@@ -113,7 +101,6 @@ function scheduleDailyNotif(schedule, lastWorkout) {
   }
 }
 
-// ── Messages from Main Thread ──
 self.addEventListener('message', e => {
   const { type, seconds, endAt, schedule, lastWorkout } = e.data || {};
 
@@ -140,16 +127,10 @@ self.addEventListener('message', e => {
     e.source?.postMessage({ type: 'STATUS', remaining, endAt: _timerEnd });
   }
 
-  if (type === 'SCHEDULE_DAILY') {
-    scheduleDailyNotif(schedule, lastWorkout);
-  }
-
-  if (type === 'CANCEL_NOTIFS') {
-    cancelScheduled();
-  }
+  if (type === 'SCHEDULE_DAILY') scheduleDailyNotif(schedule, lastWorkout);
+  if (type === 'CANCEL_NOTIFS') cancelScheduled();
 });
 
-// ── Notification Click ──
 self.addEventListener('notificationclick', e => {
   e.notification.close();
   e.waitUntil(
