@@ -428,12 +428,6 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(2
   .sets-header,.set-row{grid-template-columns:24px 1fr 1fr 1fr 36px 30px}
 }
 </style>
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="GymPro AI">
-<link rel="manifest" href="manifest.json">
 </head>
 <body>
 <div class="tc" id="toasts"></div>
@@ -722,11 +716,15 @@ function predictStrength(id){const h=G.ses.filter(s=>s.exs?.[id]).slice(0,6);if(
 const SCI={calc1RM(w,r){return!w||!r?0:r===1?w:Math.round(w*(1+r/30)*10)/10},sessionVolume(s){return Object.values(s.exs||{}).reduce((t,e)=>t+(e.vol>0?e.vol:e.sets?.length?e.sets.reduce((v,t)=>v+(t.w||0)*(t.r||1),0):e.w||0),0)},weeklyVolume(){const ws=new Date();ws.setDate(ws.getDate()-ws.getDay());ws.setHours(0,0,0,0);return Math.round(G.ses.filter(s=>new Date(s.date)>=ws).reduce((t,s)=>t+SCI.sessionVolume(s),0))},getBestPR(id){return getBestSet(id)},volumeTrend(id){const r=G.ses.filter(s=>s.exs?.[id]).slice(-6).map(s=>{const e=s.exs[id];return e.vol>0?e.vol:e.sets?.length?e.sets.reduce((v,t)=>v+(t.w||0)*(t.r||1),0):e.w||0}).filter(v=>v>0);return r.length<2?0:r[0]>0?Math.round((r[r.length-1]-r[0])/r[0]*100):0}};
 const OE={CK:['Bench Press','Deadlift','Squat','Row','OHP','Pull','Press','RDL','Hip Thrust','Split Squat','T-Bar','Barbell','Overhead'],isCompound(n){return this.CK.some(c=>n.toLowerCase().includes(c.toLowerCase()))},detectPlateau(id){const h=G.ses.filter(s=>s.exs?.[id]).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,4).map(s=>{const e=s.exs[id];return e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):e.w||0}).filter(w=>w>0);return h.length>=3&&h[0]===h[1]&&h[1]===h[2]},getRecommendation(id,name,lastW){if(!lastW||lastW<=0)return{status:'new',suggestedWeight:lastW,msg:'',trend:0};const h=G.ses.filter(s=>s.exs?.[id]).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5).map(s=>{const e=s.exs[id];return e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):e.w||0}).filter(w=>w>0);const trend=SCI.volumeTrend(id);if(h.length<2)return{status:'stable',suggestedWeight:lastW,msg:'',trend};const inc=this.isCompound(name)?2.5:1,rt=this.isCompound(name)?2.5:1;if(h.length>=4&&h[0]===h[1]&&h[1]===h[2]&&h[2]===h[3]){const dl=Math.round(lastW*.9/rt)*rt;return{status:'deload',suggestedWeight:dl,msg:`⚠️ Deload — ${dl}كجم (90%)`,trend}}if(this.detectPlateau(id)){const sg=Math.round((lastW+inc)/rt)*rt;return{status:'plateau',suggestedWeight:sg,msg:`⚠️ ثبات — جرب ${sg}كجم`,trend}}if(h.length>=2&&h[0]>h[1]){const sg=Math.round((lastW+inc)/rt)*rt;return{status:'progressing',suggestedWeight:sg,msg:`✅ تقدم! الهدف: ${sg}كجم`,trend}}return{status:'stable',suggestedWeight:lastW,msg:'',trend}}};
 function recoveryScore(){const l7=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5),freq=Math.min(l7.length,6),wv=SCI.weeklyVolume(),bwT=G.bw.length>=2?Math.abs(G.bw[G.bw.length-1].w-G.bw[G.bw.length-2].w):0;return Math.min(Math.max(Math.round(freq/6*40+Math.min(wv/5000*30,30)+Math.min((G.streak||0)/7*20,20)+(bwT<2?10:5)),0),100)}
-function loadD(){try{const s=localStorage.getItem(K);if(s){const d=JSON.parse(s);G={...G,...d}}if(!G.days||!Object.keys(G.days).length)G.days=JSON.parse(JSON.stringify(MY_DAYS));if(!G.ses)G.ses=[];if(!G.bw)G.bw=[];if(!G.doneExs)G.doneExs={};if(!G.completedDays)G.completedDays={};if(!G.chatHistory)G.chatHistory=[];if(!G.currentSets)G.currentSets={};if(!G.schedule)G.schedule=JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));if(!G.wellness)G.wellness={};if(!G.nextSessionPlan)G.nextSessionPlan={};if(!G.rpeHistory)G.rpeHistory={};if(G.notifications===undefined)G.notifications=true;if(G.aiKey)setTimeout(()=>{const i=document.getElementById('apiKeyInput');if(i)i.value=G.aiKey},100);const t=document.getElementById('notifToggle');if(t)t.checked=G.notifications}catch(e){G.days=JSON.parse(JSON.stringify(MY_DAYS))}}
+function loadD(){try{const s=localStorage.getItem(K);if(s){const d=JSON.parse(s);G={...G,...d}}
+// تحقق إن كل الأيام الستة موجودة بشكل صحيح
+if(!G.days||!G.days.pushA||!G.days.pullA||!G.days.legA||!G.days.pushB||!G.days.pullB||!G.days.legB){G.days=JSON.parse(JSON.stringify(MY_DAYS))}
+else{dayOrder.forEach(k=>{if(!G.days[k])G.days[k]=JSON.parse(JSON.stringify(MY_DAYS[k]))})}
+if(!G.ses)G.ses=[];if(!G.bw)G.bw=[];if(!G.doneExs)G.doneExs={};if(!G.completedDays)G.completedDays={};if(!G.chatHistory)G.chatHistory=[];if(!G.currentSets)G.currentSets={};if(!G.schedule)G.schedule=JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));if(!G.wellness)G.wellness={};if(!G.nextSessionPlan)G.nextSessionPlan={};if(!G.rpeHistory)G.rpeHistory={};if(G.notifications===undefined)G.notifications=true;if(G.aiKey)setTimeout(()=>{const i=document.getElementById('apiKeyInput');if(i)i.value=G.aiKey},100);const t=document.getElementById('notifToggle');if(t)t.checked=G.notifications}catch(e){G.days=JSON.parse(JSON.stringify(MY_DAYS))}}
 function saveD(){try{localStorage.setItem(K,JSON.stringify(G))}catch(e){}}
 function rDate(){const d=new Date(),dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],mn=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],el=document.getElementById('tDate');if(el)el.textContent=`${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`}
 function rBlockBadge(){const i=PERIOD.info(),el=document.getElementById('blockBadge');if(!el)return;el.className='block-badge '+i.color;el.textContent=`${i.icon} ${i.label}`}
-function rFatigueBar(){const sc=FATIGUE.score(),lv=FATIGUE.level(),wr=document.getElementById('fatigueBarWrap'),fi=document.getElementById('fatigueBarFill'),lb=document.getElementById('fatigueBarLabel'),bl=document.getElementById('blockLabel');if(!fi)return;wr.className=`fatigue-bar-wrap fatigue-${lv}`;fi.style.width=`${sc}%`;lb.textContent=`Block ${PERIOD.week()}/4 — ${PERIOD.info().label}`;lb2=document.getElementById('fatigueBarLabel');if(lb2)lb2.textContent=`Fatigue ${sc}% — ${FATIGUE.label()}`}
+function rFatigueBar(){const sc=FATIGUE.score(),lv=FATIGUE.level(),wr=document.getElementById('fatigueBarWrap'),fi=document.getElementById('fatigueBarFill'),lb=document.getElementById('fatigueBarLabel'),bl=document.getElementById('blockLabel');if(!fi)return;wr.className=`fatigue-bar-wrap fatigue-${lv}`;fi.style.width=`${sc}%`;lb.textContent=`Block ${PERIOD.week()}/4 — ${PERIOD.info().label}`;const lb2=document.getElementById('fatigueBarLabel');if(lb2)lb2.textContent=`Fatigue ${sc}% — ${FATIGUE.label()}`}
 function rPeriodBanner(){const el=document.getElementById('periodBanner');if(!el)return;const i=PERIOD.info(),w=PERIOD.week(),chips=[1,2,3,4].map(n=>`<div class="pw-chip ${n<w?'done':n===w?'active':''}">${n}</div>`).join('');el.innerHTML=`<div class="period-info"><div class="period-title" style="color:var(--p)">${i.icon} ${i.label}</div><div class="period-desc">${i.desc}</div></div><div class="period-week-chips">${chips}</div>`}
 function rRecoveryBadge(){const rs=recoveryScore(),el=document.getElementById('recoveryBadgeArea');if(!el)return;const c=rs>=70?'high':rs>=50?'mid':'low',ic=rs>=70?'✅':rs>=50?'⚡':'⚠️',lb=rs>=70?'استعداد ممتاز':rs>=50?'استعداد جيد':'يُنصح بالراحة';el.innerHTML=`<div class="recovery-badge ${c}">${ic} Recovery ${rs}/100 — ${lb}</div>`}
 function rFatigueBadge(){const el=document.getElementById('fatigueBadgeArea');if(!el)return;el.innerHTML=`<div class="fatigue-badge ${FATIGUE.level()}">🔥 Fatigue ${FATIGUE.score()}/100 — ${FATIGUE.label()}</div>`}
@@ -846,11 +844,13 @@ function toast(m,t='s'){const c=document.getElementById('toasts');if(!c)return;c
 function expD(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(G,null,2)],{type:'application/json'}));a.download=`GymProElite_${new Date().toISOString().split('T')[0]}.json`;a.click();toast('📤 تم التصدير','s')}
 function impD(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.days&&confirm('⚠️ استبدال جميع البيانات؟')){G=d;saveD();toast('📥 تم الاستيراد','s');setTimeout(()=>location.reload(),800)}}catch{toast('❌ خطأ في الملف','e')}};r.readAsText(f)}
 function saveAPIKey(){const k=document.getElementById('apiKeyInput')?.value?.trim();if(!k)return toast('أدخل API Key','w');G.aiKey=k;saveD();toast('✅ تم حفظ API Key!','s')}
-// ── Service Worker Registration ──
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js')
-    .then(reg => console.log('SW registered'))
-    .catch(err => console.warn('SW failed:', err));
+// ══ SERVICE WORKER — single registration ══
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => { window._swReg = reg; })
+      .catch(err => console.log('SW failed:', err));
+  });
 }
 function swTimerStart(seconds, endAt) {
   if (!('serviceWorker' in navigator)) return;
@@ -899,6 +899,7 @@ function swTimerStop() {
   window._hft = hft;
 
   const onDone = () => {
+    if(window._stopKeepAlive) window._stopKeepAlive();
     playBeep();
     if(navigator.vibrate) navigator.vibrate([300,100,300,100,500]);
     if('Notification' in window && Notification.permission==='granted')
@@ -938,6 +939,7 @@ function swTimerStop() {
     cancelAnimationFrame(window._tmrRAF);
     window._tmrRAF = null;
     swTimerStop();
+    if(window._stopKeepAlive) window._stopKeepAlive();
     const bn=document.getElementById('timerStartBtn');
     if(bn){ bn.textContent='▶️ ابدأ'; bn.disabled=false; }
     const d=document.getElementById('timerDisp');
@@ -961,6 +963,7 @@ function swTimerStop() {
     if(bn){ bn.textContent='⏸ شغال...'; bn.disabled=true; }
     cancelAnimationFrame(window._tmrRAF);
     window._tmrRAF = requestAnimationFrame(tick);
+    if(window._startKeepAlive) window._startKeepAlive();
   };
 
   window.setTimer = s => {
@@ -975,10 +978,9 @@ function quickStartTimer(seconds){
   window._timerDefault = seconds;
   window._timerRemaining = seconds;
   window._tmrEndAt = Date.now() + seconds * 1000;
-  // أبلغ الـ Service Worker يضرب الإشعار لما الوقت ينتهي
   swTimerStart(seconds, window._tmrEndAt);
-  // request notification permission if needed
   if('Notification' in window && Notification.permission==='default') Notification.requestPermission();
+  if(window._startKeepAlive) window._startKeepAlive();
   cancelAnimationFrame(window._tmrRAF);
   const tick = () => {
     if(!window._tmrEndAt) return;
@@ -993,6 +995,7 @@ function quickStartTimer(seconds){
     if(d){d.textContent=`${Math.floor(rem/60)}:${String(rem%60).padStart(2,'0')}`;d.style.color=col;}
     if(rem<=0){
       window._tmrEndAt=0;
+      if(window._stopKeepAlive) window._stopKeepAlive();
       window.playBeep();
       if(navigator.vibrate) navigator.vibrate([300,100,300,100,500]);
       if('Notification' in window && Notification.permission==='granted')
@@ -1005,26 +1008,6 @@ function quickStartTimer(seconds){
   };
   window._tmrRAF = requestAnimationFrame(tick);
 }
-// ══ SERVICE WORKER REGISTRATION ══
-if('serviceWorker' in navigator){
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => {
-        console.log('SW registered');
-        window._swReg = reg;
-      })
-      .catch(err => console.log('SW failed:', err));
-  });
-}
-
-// ══ Service Worker Registration ══
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('/sw.js').then(reg=>{
-    console.log('SW registered:', reg.scope);
-    window._swReg = reg;
-  }).catch(e=>console.log('SW error:',e));
-}
-
 // ══ مساعد إرسال رسالة للـ SW ══
 function swMsg(data){
   if(navigator.serviceWorker && navigator.serviceWorker.controller)
@@ -1032,6 +1015,28 @@ function swMsg(data){
   else if(window._swReg && window._swReg.active)
     window._swReg.active.postMessage(data);
 }
+
+// ══ iOS KEEP-ALIVE: Silent Audio Loop ══
+(function initKeepAlive(){
+  let _audioCtx=null,_sourceNode=null,_keepAliveActive=false;
+  function createSilentLoop(){try{if(_audioCtx){_audioCtx.close();_audioCtx=null;}_audioCtx=new(window.AudioContext||window.webkitAudioContext)();const buf=_audioCtx.createBuffer(1,_audioCtx.sampleRate,_audioCtx.sampleRate);const src=_audioCtx.createBufferSource();src.buffer=buf;src.loop=true;const gain=_audioCtx.createGain();gain.gain.value=0.001;src.connect(gain);gain.connect(_audioCtx.destination);src.start();_sourceNode=src;_keepAliveActive=true;}catch(e){}}
+  function stopKeepAlive(){try{if(_sourceNode){_sourceNode.stop();_sourceNode=null;}if(_audioCtx){_audioCtx.close();_audioCtx=null;}}catch(e){}_keepAliveActive=false;}
+  window._startKeepAlive=()=>{if(!_keepAliveActive)createSilentLoop();};
+  window._stopKeepAlive=()=>stopKeepAlive();
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&_keepAliveActive&&_audioCtx)if(_audioCtx.state==='suspended')_audioCtx.resume().catch(()=>{});});
+})();
+
+// ══ زر Reset طارئ — يظهر لو الأيام مش شغالة ══
+(function checkDaysHealth(){
+  setTimeout(()=>{
+    const dl=document.getElementById('dayList');
+    if(dl&&dl.children.length===0){
+      G.days=JSON.parse(JSON.stringify(MY_DAYS));
+      saveD();rDays();
+      toast('🔄 تم إعادة تحميل الأيام','w');
+    }
+  },800);
+})();
 
 document.addEventListener('DOMContentLoaded',()=>{loadD();rDate();rDays();rQuickStats();initTheme();initNotifications();showDailyTip();initLibrary();renderChatHistory();rRecoveryBadge();rFatigueBadge();rFatigueBar();rBlockBadge();rPeriodBanner();rDayStatusBanner();rMorningCard();rLaggingMuscleAlert()});
 </script>
