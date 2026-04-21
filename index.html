@@ -1033,17 +1033,7 @@ function swMsg(data){
     window._swReg.active.postMessage(data);
 }
 
-document.addEventListener('DOMContentLoaded',()=>{loadD();rDate();rDays();rQuickStats();initTheme();initNotifications();showDailyTip();initLibrary();renderChatHistory();rRecoveryBadge();rFatigueBadge();rFatigueBar();rBlockBadge();rPeriodBanner();rDayStatusBanner();rMorningCard();rLaggingMuscleAlert();
-  // أبلغ Service Worker بالجدول الأسبوعي عشان يجدول الإشعارات
-  if('serviceWorker' in navigator){
-    navigator.serviceWorker.ready.then(reg=>{
-      if(!reg.active) return;
-      const schedule = Object.entries(G.schedule||DEFAULT_SCHEDULE).map(([i,v])=>({dow:parseInt(i),label:v.label,type:v.type}));
-      const lastWorkout = G.lastWo || null;
-      reg.active.postMessage({type:'SCHEDULE_DAILY', schedule, lastWorkout});
-    });
-  }
-});
+document.addEventListener('DOMContentLoaded',()=>{loadD();rDate();rDays();rQuickStats();initTheme();initNotifications();showDailyTip();initLibrary();renderChatHistory();rRecoveryBadge();rFatigueBadge();rFatigueBar();rBlockBadge();rPeriodBanner();rDayStatusBanner();rMorningCard();rLaggingMuscleAlert()});
 </script>
 </body>
 </html>
