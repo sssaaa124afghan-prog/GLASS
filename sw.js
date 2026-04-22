@@ -1,144 +1,74 @@
-/* =========================================
-   GymPro AI Titan Elite - Advanced SW v3
-========================================= */
-
-const CACHE_VERSION = "gympro-elite-v3";
-const STATIC_CACHE = `${CACHE_VERSION}-static`;
-const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
-
-const STATIC_ASSETS = [
-  "/",
-  "/index.html",
-  "/manifest.json"
+const CACHE_NAME = 'gympro-elite-v1';
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './manifest.json',
+  'https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap'
 ];
 
-/* =========================================
-   INSTALL
-========================================= */
-self.addEventListener("install", (event) => {
-  console.log("✅ SW Installing...");
+// [ميزة جديدة] - حفظ ملفات التطبيق في الـ Cache ليعمل بدون إنترنت
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(STATIC_CACHE).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS_TO_CACHE);
     })
   );
-  self.skipWaiting();
 });
 
-/* =========================================
-   ACTIVATE
-========================================= */
-self.addEventListener("activate", (event) => {
-  console.log("✅ SW Activated");
-
+// [ميزة جديدة] - مسح الـ Cache القديم عند تحديث التطبيق
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys.map((key) => {
-          if (!key.startsWith(CACHE_VERSION)) {
-            console.log("🧹 Removing old cache:", key);
-            return caches.delete(key);
-          }
-        })
-      )
-    )
-  );
-
-  self.clients.claim();
-});
-
-/* =========================================
-   FETCH STRATEGY
-========================================= */
-self.addEventListener("fetch", (event) => {
-  const { request } = event;
-
-  if (request.method !== "GET") return;
-
-  // HTML → Network First
-  if (request.headers.get("accept")?.includes("text/html")) {
-    event.respondWith(
-      fetch(request)
-        .then((res) => {
-          const clone = res.clone();
-          caches.open(DYNAMIC_CACHE).then((cache) => {
-            cache.put(request, clone);
-          });
-          return res;
-        })
-        .catch(() => caches.match(request))
-    );
-    return;
-  }
-
-  // Static files → Cache First
-  event.respondWith(
-    caches.match(request).then((cached) => {
-      return (
-        cached ||
-        fetch(request).then((res) => {
-          const clone = res.clone();
-          caches.open(DYNAMIC_CACHE).then((cache) => {
-            cache.put(request, clone);
-          });
-          return res;
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) return caches.delete(cache);
         })
       );
     })
   );
 });
 
-/* =========================================
-   BACKGROUND REST TIMER
-========================================= */
-let timerTimeout = null;
-
-self.addEventListener("message", (event) => {
-  const data = event.data;
-
-  if (data?.type === "START_TIMER") {
-    clearTimeout(timerTimeout);
-
-    const duration = data.seconds * 1000;
-
-    timerTimeout = setTimeout(() => {
-      self.registration.showNotification("⏰ الراحة انتهت", {
-        body: "يلا يا شهاب 💪 ارجع كمل التمرين",
-        icon: "/icons/icon-192.png",
-        badge: "/icons/icon-192.png",
-        vibrate: [300, 100, 300],
-        requireInteraction: true
-      });
-    }, duration);
-  }
-
-  if (data?.type === "STOP_TIMER") {
-    clearTimeout(timerTimeout);
-  }
-});
-
-/* =========================================
-   PUSH SUPPORT
-========================================= */
-self.addEventListener("push", (event) => {
-  const data = event.data?.json() || {
-    title: "GymPro AI",
-    body: "🔥 مستعد لتمرين جديد؟"
-  };
-
-  event.waitUntil(
-    self.registration.showNotification(data.title, {
-      body: data.body,
-      icon: "/icons/icon-192.png",
-      badge: "/icons/icon-192.png"
+// [ميزة جديدة] - استراتيجية Cache First للملفات المحفوظة لضمان سرعة الفتح
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request).catch(() => caches.match('./index.html'));
     })
   );
 });
 
-/* =========================================
-   NOTIFICATION CLICK
-========================================= */
-self.addEventListener("notificationclick", (event) => {
+// [ميزة جديدة] - إدارة المؤقت في الخلفية وإرسال الإشعارات
+let timerTimeout = null;
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'START_TIMER') {
+    const { seconds } = event.data;
+    if (timerTimeout) clearTimeout(timerTimeout);
+    
+    // تشغيل المنبه بعد انتهاء الوقت
+    timerTimeout = setTimeout(() => {
+      self.registration.showNotification('⏰ انتهت الراحة!', {
+        body: 'يلا يا بطل، ارجع للتمرين! ⚡',
+        icon: 'https://cdn-icons-png.flaticon.com/512/2964/2964514.png',
+        vibrate: [300, 100, 300, 100, 500],
+        requireInteraction: true,
+        tag: 'workout-timer'
+      });
+    }, seconds * 1000);
+  }
+
+  if (event.data && event.data.type === 'STOP_TIMER') {
+    if (timerTimeout) clearTimeout(timerTimeout);
+  }
+});
+
+self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  event.waitUntil(clients.openWindow("/"));
+  event.waitUntil(clients.matchAll({ type: 'window' }).then(clientList => {
+    for (const client of clientList) {
+      if (client.url === '/' && 'focus' in client) return client.focus();
+    }
+    if (clients.openWindow) return clients.openWindow('/');
+  }));
 });
