@@ -1008,37 +1008,27 @@ function quickStartTimer(seconds){
   };
   window._tmrRAF = requestAnimationFrame(tick);
 }
-// ══ مساعد إرسال رسالة للـ SW ══
-function swMsg(data){
-  if(navigator.serviceWorker && navigator.serviceWorker.controller)
-    navigator.serviceWorker.controller.postMessage(data);
-  else if(window._swReg && window._swReg.active)
-    window._swReg.active.postMessage(data);
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js")
+      .then((reg) => {
+        console.log("✅ Service Worker registered");
+
+        // Detect update
+        reg.onupdatefound = () => {
+          const newWorker = reg.installing;
+          newWorker.onstatechange = () => {
+            if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+              console.log("🔄 New version available");
+              alert("✅ تم تحديث التطبيق — أعد فتحه للحصول على آخر إصدار");
+            }
+          };
+        };
+      })
+      .catch((err) => console.error("SW failed:", err));
+  });
 }
-
-// ══ iOS KEEP-ALIVE: Silent Audio Loop ══
-(function initKeepAlive(){
-  let _audioCtx=null,_sourceNode=null,_keepAliveActive=false;
-  function createSilentLoop(){try{if(_audioCtx){_audioCtx.close();_audioCtx=null;}_audioCtx=new(window.AudioContext||window.webkitAudioContext)();const buf=_audioCtx.createBuffer(1,_audioCtx.sampleRate,_audioCtx.sampleRate);const src=_audioCtx.createBufferSource();src.buffer=buf;src.loop=true;const gain=_audioCtx.createGain();gain.gain.value=0.001;src.connect(gain);gain.connect(_audioCtx.destination);src.start();_sourceNode=src;_keepAliveActive=true;}catch(e){}}
-  function stopKeepAlive(){try{if(_sourceNode){_sourceNode.stop();_sourceNode=null;}if(_audioCtx){_audioCtx.close();_audioCtx=null;}}catch(e){}_keepAliveActive=false;}
-  window._startKeepAlive=()=>{if(!_keepAliveActive)createSilentLoop();};
-  window._stopKeepAlive=()=>stopKeepAlive();
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&_keepAliveActive&&_audioCtx)if(_audioCtx.state==='suspended')_audioCtx.resume().catch(()=>{});});
-})();
-
-// ══ زر Reset طارئ — يظهر لو الأيام مش شغالة ══
-(function checkDaysHealth(){
-  setTimeout(()=>{
-    const dl=document.getElementById('dayList');
-    if(dl&&dl.children.length===0){
-      G.days=JSON.parse(JSON.stringify(MY_DAYS));
-      saveD();rDays();
-      toast('🔄 تم إعادة تحميل الأيام','w');
-    }
-  },800);
-})();
-
-document.addEventListener('DOMContentLoaded',()=>{loadD();rDate();rDays();rQuickStats();initTheme();initNotifications();showDailyTip();initLibrary();renderChatHistory();rRecoveryBadge();rFatigueBadge();rFatigueBar();rBlockBadge();rPeriodBanner();rDayStatusBanner();rMorningCard();rLaggingMuscleAlert()});
 </script>
 </body>
 </html>
