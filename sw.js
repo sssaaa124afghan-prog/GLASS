@@ -1,74 +1,70 @@
 const CACHE_NAME = 'gympro-elite-v1';
 const ASSETS_TO_CACHE = [
-  './',
   './index.html',
   './manifest.json',
   'https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap'
 ];
 
-// [ميزة جديدة] - حفظ ملفات التطبيق في الـ Cache ليعمل بدون إنترنت
+// تثبيت الـ Service Worker وحفظ الملفات
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS_TO_CACHE);
     })
   );
+  self.skipWaiting();
 });
 
-// [ميزة جديدة] - مسح الـ Cache القديم عند تحديث التطبيق
+// تفعيل وتنظيف الكاش القديم
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) return caches.delete(cache);
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
         })
       );
     })
   );
+  self.clients.claim();
 });
 
-// [ميزة جديدة] - استراتيجية Cache First للملفات المحفوظة لضمان سرعة الفتح
+// اعتراض الطلبات لتشغيل التطبيق بدون إنترنت (Network First, fallback to Cache)
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request).catch(() => caches.match('./index.html'));
-    })
+    fetch(event.request)
+      .then((response) => {
+        const responseClone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseClone);
+        });
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
 
-// [ميزة جديدة] - إدارة المؤقت في الخلفية وإرسال الإشعارات
-let timerTimeout = null;
+// استقبال أوامر المؤقت من التطبيق للعمل في الخلفية
+let timerTimeout;
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'START_TIMER') {
-    const { seconds } = event.data;
-    if (timerTimeout) clearTimeout(timerTimeout);
-    
-    // تشغيل المنبه بعد انتهاء الوقت
-    timerTimeout = setTimeout(() => {
-      self.registration.showNotification('⏰ انتهت الراحة!', {
-        body: 'يلا يا بطل، ارجع للتمرين! ⚡',
-        icon: 'https://cdn-icons-png.flaticon.com/512/2964/2964514.png',
-        vibrate: [300, 100, 300, 100, 500],
-        requireInteraction: true,
-        tag: 'workout-timer'
-      });
-    }, seconds * 1000);
-  }
-
-  if (event.data && event.data.type === 'STOP_TIMER') {
-    if (timerTimeout) clearTimeout(timerTimeout);
-  }
-});
-
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  event.waitUntil(clients.matchAll({ type: 'window' }).then(clientList => {
-    for (const client of clientList) {
-      if (client.url === '/' && 'focus' in client) return client.focus();
+    clearTimeout(timerTimeout);
+    const timeRemaining = event.data.endAt - Date.now();
+    if (timeRemaining > 0) {
+      timerTimeout = setTimeout(() => {
+        self.registration.showNotification('⏰ انتهت الراحة!', {
+          body: 'يلا يا بطل ارجع للتمرين!',
+          icon: 'https://cdn-icons-png.flaticon.com/512/2964/2964514.png',
+          vibrate: [300, 100, 300, 100, 500],
+          requireInteraction: true
+        });
+      }, timeRemaining);
     }
-    if (clients.openWindow) return clients.openWindow('/');
-  }));
+  } else if (event.data && event.data.type === 'STOP_TIMER') {
+    clearTimeout(timerTimeout);
+  }
 });
