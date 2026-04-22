@@ -1,163 +1,144 @@
-// GymPro AI — Service Worker v3 (Merged)
+/* =========================================
+   GymPro AI Titan Elite - Advanced SW v3
+========================================= */
 
-const CACHE_NAME = 'gymglass-v3';
-const CACHE_FILES = [
-  './',
-  './gymglass_final.html',
-  './manifest.json',
-  './icon.svg'
+const CACHE_VERSION = "gympro-elite-v3";
+const STATIC_CACHE = `${CACHE_VERSION}-static`;
+const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
+
+const STATIC_ASSETS = [
+  "/",
+  "/index.html",
+  "/manifest.json"
 ];
 
-// ── Install ──
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(CACHE_FILES).catch(() => {}))
-      .then(() => self.skipWaiting())
+/* =========================================
+   INSTALL
+========================================= */
+self.addEventListener("install", (event) => {
+  console.log("✅ SW Installing...");
+  event.waitUntil(
+    caches.open(STATIC_CACHE).then((cache) => {
+      return cache.addAll(STATIC_ASSETS);
+    })
   );
+  self.skipWaiting();
 });
 
-// ── Activate ──
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(
-        keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
-      ))
-      .then(() => clients.claim())
+/* =========================================
+   ACTIVATE
+========================================= */
+self.addEventListener("activate", (event) => {
+  console.log("✅ SW Activated");
+
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (!key.startsWith(CACHE_VERSION)) {
+            console.log("🧹 Removing old cache:", key);
+            return caches.delete(key);
+          }
+        })
+      )
+    )
   );
+
+  self.clients.claim();
 });
 
-// ── Fetch (Offline Cache) ──
-self.addEventListener('fetch', e => {
-  if (e.request.method !== 'GET') return;
-  if (e.request.url.includes('groq.com') || e.request.url.includes('anthropic.com')) return;
-  e.respondWith(
-    caches.match(e.request).then(cached => {
-      if (cached) return cached;
-      return fetch(e.request).then(res => {
-        if (res.ok) {
+/* =========================================
+   FETCH STRATEGY
+========================================= */
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+
+  if (request.method !== "GET") return;
+
+  // HTML → Network First
+  if (request.headers.get("accept")?.includes("text/html")) {
+    event.respondWith(
+      fetch(request)
+        .then((res) => {
           const clone = res.clone();
-          caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
-        }
-        return res;
-      }).catch(() => cached);
+          caches.open(DYNAMIC_CACHE).then((cache) => {
+            cache.put(request, clone);
+          });
+          return res;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Static files → Cache First
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      return (
+        cached ||
+        fetch(request).then((res) => {
+          const clone = res.clone();
+          caches.open(DYNAMIC_CACHE).then((cache) => {
+            cache.put(request, clone);
+          });
+          return res;
+        })
+      );
     })
   );
 });
 
-// ── Timer State ──
-let _timerTimeout = null;
-let _timerEnd = 0;
+/* =========================================
+   BACKGROUND REST TIMER
+========================================= */
+let timerTimeout = null;
 
-// ── Scheduled Notifications State ──
-let _dailyTimeout = null;
-let _missedTimeout = null;
+self.addEventListener("message", (event) => {
+  const data = event.data;
 
-// ── Helper: Fire Notification ──
-function fireNotif(title, body, tag, required = false) {
-  return self.registration.showNotification(title, {
-    body,
-    icon: './icon.svg',
-    badge: './icon.svg',
-    tag,
-    requireInteraction: required,
-    vibrate: [300, 100, 300, 100, 500],
-    actions: [{ action: 'open', title: '🏋️ افتح التطبيق' }]
-  });
-}
+  if (data?.type === "START_TIMER") {
+    clearTimeout(timerTimeout);
 
-// ── Helper: Cancel Scheduled Notifications ──
-function cancelScheduled() {
-  if (_dailyTimeout)  { clearTimeout(_dailyTimeout);  _dailyTimeout = null; }
-  if (_missedTimeout) { clearTimeout(_missedTimeout); _missedTimeout = null; }
-}
+    const duration = data.seconds * 1000;
 
-// ── Schedule Daily & Missed Workout Notifications ──
-function scheduleDailyNotif(schedule, lastWorkout) {
-  cancelScheduled();
-  if (!schedule?.length) return;
-
-  const now = new Date();
-
-  // إشعار صباحي الساعة 8
-  const morning = new Date();
-  morning.setHours(8, 0, 0, 0);
-  if (morning <= now) morning.setDate(morning.getDate() + 1);
-
-  _dailyTimeout = setTimeout(() => {
-    const dow = new Date().getDay();
-    const s = schedule[dow];
-    if (s?.type === 'train') {
-      fireNotif('🏋️ النهارده تمرين يا شهاب!', `${s.label} — جاهز تحطم الأوزان؟ 💪`, 'daily-train');
-    } else {
-      fireNotif('😴 النهارده راحة يا شهاب', `${s?.label || 'يوم راحة'} — جسمك بيبني عضلة 🌙`, 'daily-rest');
-    }
-    scheduleDailyNotif(schedule, lastWorkout);
-  }, morning - now);
-
-  // إشعار الساعة 7 مساءً لو فات التمرين
-  const todayDow = now.getDay();
-  const todaySched = schedule[todayDow];
-  if (lastWorkout && todaySched?.type === 'train') {
-    const daysSince = Math.floor((now - new Date(lastWorkout)) / 86400000);
-    if (daysSince >= 1) {
-      const evening = new Date();
-      evening.setHours(19, 0, 0, 0);
-      if (evening > now) {
-        _missedTimeout = setTimeout(() => {
-          fireNotif('👀 فاتك التمرين يا شهاب!', `${todaySched.label} — لسه وقت تعوضه 🔥`, 'missed-workout');
-        }, evening - now);
-      }
-    }
-  }
-}
-
-// ── Messages from Main Thread ──
-self.addEventListener('message', e => {
-  const { type, seconds, endAt, schedule, lastWorkout } = e.data || {};
-
-  if (type === 'START_TIMER') {
-    if (_timerTimeout) clearTimeout(_timerTimeout);
-    _timerEnd = endAt || (Date.now() + seconds * 1000);
-    _timerTimeout = setTimeout(() => {
-      fireNotif('⏰ انتهت الراحة!', 'يلا شهاب! جهز السيت الجاي 💪', 'timer', true);
-      _timerEnd = 0;
-      _timerTimeout = null;
-    }, Math.max(0, _timerEnd - Date.now()));
+    timerTimeout = setTimeout(() => {
+      self.registration.showNotification("⏰ الراحة انتهت", {
+        body: "يلا يا شهاب 💪 ارجع كمل التمرين",
+        icon: "/icons/icon-192.png",
+        badge: "/icons/icon-192.png",
+        vibrate: [300, 100, 300],
+        requireInteraction: true
+      });
+    }, duration);
   }
 
-  if (type === 'STOP_TIMER') {
-    if (_timerTimeout) {
-      clearTimeout(_timerTimeout);
-      _timerTimeout = null;
-      _timerEnd = 0;
-    }
-  }
-
-  if (type === 'GET_STATUS') {
-    const remaining = _timerEnd > 0 ? Math.max(0, Math.round((_timerEnd - Date.now()) / 1000)) : 0;
-    e.source?.postMessage({ type: 'STATUS', remaining, endAt: _timerEnd });
-  }
-
-  if (type === 'SCHEDULE_DAILY') {
-    scheduleDailyNotif(schedule, lastWorkout);
-  }
-
-  if (type === 'CANCEL_NOTIFS') {
-    cancelScheduled();
+  if (data?.type === "STOP_TIMER") {
+    clearTimeout(timerTimeout);
   }
 });
 
-// ── Notification Click ──
-self.addEventListener('notificationclick', e => {
-  e.notification.close();
-  e.waitUntil(
-    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
-      for (const c of list) {
-        if (c.url.includes(self.location.origin)) return c.focus();
-      }
-      return clients.openWindow('./gymglass_final.html');
+/* =========================================
+   PUSH SUPPORT
+========================================= */
+self.addEventListener("push", (event) => {
+  const data = event.data?.json() || {
+    title: "GymPro AI",
+    body: "🔥 مستعد لتمرين جديد؟"
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(data.title, {
+      body: data.body,
+      icon: "/icons/icon-192.png",
+      badge: "/icons/icon-192.png"
     })
   );
+});
+
+/* =========================================
+   NOTIFICATION CLICK
+========================================= */
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(clients.openWindow("/"));
 });
