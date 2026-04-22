@@ -1,8 +1,7 @@
-
 {
   "name": "GymPro AI Titan Elite",
   "short_name": "GymPro Elite",
-  "description": "تطبيق متقدم لتتبع التمارين مدعوم بالذكاء الاصطناعي",
+  "description": "تطبيق متقدم لتتبع التمارين",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#1a0533",
