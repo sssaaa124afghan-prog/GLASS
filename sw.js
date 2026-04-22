@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gympro-elite-full-v1';
+const CACHE_NAME = 'gympro-elite-fast-v2';
 const ASSETS_TO_CACHE =[
   './index.html',
   './manifest.json',
@@ -6,15 +6,16 @@ const ASSETS_TO_CACHE =[
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS_TO_CACHE);
     })
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
+  self.clients.claim();
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -24,7 +25,6 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
@@ -50,7 +50,7 @@ self.addEventListener('message', (event) => {
     if (timeRemaining > 0) {
       timerTimeout = setTimeout(() => {
         self.registration.showNotification('⏰ انتهت الراحة!', {
-          body: 'يلا يا بطل ارجع للتمرين! 💪',
+          body: 'يلا يا وحش، ارجع للتمرين حالاً! 🦍',
           icon: 'https://cdn-icons-png.flaticon.com/512/2964/2964514.png',
           vibrate:[300, 100, 300, 100, 500],
           requireInteraction: true
@@ -61,4 +61,3 @@ self.addEventListener('message', (event) => {
     clearTimeout(timerTimeout);
   }
 });
-```
