@@ -1,0 +1,54 @@
+{
+  "name": "GymPro AI Titan Elite",
+  "short_name": "GymPro AI",
+  "description": "مدربك الشخصي الذكي — تتبع التمارين، التغذية، والأداء",
+  "start_url": "./GymPro_v12_fixed.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#1a0533",
+  "theme_color": "#1a0533",
+  "lang": "ar",
+  "dir": "rtl",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ابدأ تمرين",
+      "short_name": "تمرين",
+      "description": "افتح صفحة التمرين",
+      "url": "./GymPro_v12_fixed.html#wo",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "إحصائيات",
+      "short_name": "Stats",
+      "description": "إحصائيات وتقدمك",
+      "url": "./GymPro_v12_fixed.html#stats",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "تحدي الأسبوع",
+      "short_name": "تحدي",
+      "description": "تحدّيك الأسبوعي من AI",
+      "url": "./GymPro_v12_fixed.html#wo",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    }
+  ],
+  "categories": ["health", "fitness", "sports"],
+  "screenshots": []
+}
