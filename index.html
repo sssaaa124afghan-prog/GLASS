@@ -1136,7 +1136,98 @@ const MOTIVATIONAL = ['💪 أنت أقوى مما تفتكر','⭐ النجاح
 const SHEHAB={name:'شهاب',age:22,nationality:'مصري',location:'عجمان، الإمارات',job:'محاسب في Noor Al Khaleej Perfume',program:'Push/Pull/Legs PPL · Progressive Overload',macros:{train:{protein:175,carbs:280,fats:65,cals:2385},rest:{protein:160,carbs:180,fats:70,cals:2030}},goals:['زيادة القوة','بناء عضلة','Progressive Overload']};
 const DEFAULT_SCHEDULE={0:{type:'rest',label:'يوم راحة',day:'الأحد'},1:{type:'train',label:'Pull A — ظهر + باي',day:'الإثنين'},2:{type:'train',label:'Push A — صدر + كتف + تراي',day:'الثلاثاء'},3:{type:'train',label:'Leg A — رجل أمامي + سمانة',day:'الأربعاء'},4:{type:'rest',label:'يوم راحة',day:'الخميس'},5:{type:'train',label:'Pull B — ظهر + باي',day:'الجمعة'},6:{type:'train',label:'Push B — صدر + كتف + تراي',day:'السبت'}};
 const MY_DAYS={pushA:{name:'Push A',muscles:'صدر + كتف + تراي',exercises:[{id:'pa0',name:'إحماء',sets:1,reps:'بار فارغ ×12 + كتف جانب ×20',isWarmup:true},{id:'pa1',name:'Bench Press',sets:4,reps:'8-10',lastW:70,unit:'كجم إجمالي',muscle:'صدر'},{id:'pa2',name:'Incline DB Press',sets:4,reps:'10-12',lastW:35,unit:'كجم/دمبل',muscle:'صدر'},{id:'pa3',name:'Cable Fly',sets:3,reps:'12-15',lastW:60,unit:'بلاطات/جنب',muscle:'صدر'},{id:'pa4',name:'Smith OHP',sets:4,reps:'8-10',lastW:40,unit:'كجم/جنب',muscle:'كتف'},{id:'pa5',name:'Lateral Raises',sets:4,reps:'12-15',lastW:12.5,unit:'كجم',muscle:'كتف'},{id:'pa6',name:'Rope Pushdown',sets:4,reps:'10-12',lastW:40,unit:'كجم',muscle:'تراي'},{id:'pa7',name:'Abs Crunch',sets:3,reps:'15-20',lastW:12,unit:'وزن جسم',muscle:'بطن'}]},pullA:{name:'Pull A',muscles:'ظهر + باي',exercises:[{id:'pla0',name:'إحماء',sets:1,reps:'بار فارغ ×10 + خفيف ×5',isWarmup:true},{id:'pla1',name:'Deadlift',sets:4,reps:'6-8',lastW:100,unit:'كجم إجمالي',muscle:'ظهر'},{id:'pla2',name:'Barbell Row',sets:4,reps:'8-10',lastW:60,unit:'كجم إجمالي',muscle:'ظهر'},{id:'pla3',name:'Lat Pulldown',sets:3,reps:'10-12',lastW:70,unit:'كجم',muscle:'ظهر'},{id:'pla4',name:'Seated Cable Row',sets:3,reps:'10-12',lastW:70,unit:'كجم',muscle:'ظهر'},{id:'pla5',name:'Face Pull',sets:3,reps:'15-20',lastW:40,unit:'كجم',muscle:'كتف خلفي'},{id:'pla6',name:'Barbell Curl',sets:3,reps:'8-10',lastW:30,unit:'كجم إجمالي',muscle:'باي'},{id:'pla7',name:'Hammer Curl',sets:3,reps:'10-12',lastW:15,unit:'كجم/دمبل',muscle:'باي'}]},legA:{name:'Leg A',muscles:'رجل أمامي + سمانة',exercises:[{id:'la0',name:'إحماء',sets:1,reps:'سكوات جسم + مشي 5-10 دق',isWarmup:true},{id:'la1',name:'Back Squat',sets:4,reps:'6-8',lastW:100,unit:'كجم إجمالي',muscle:'رجل'},{id:'la2',name:'Leg Press',sets:3,reps:'8-10',lastW:100,unit:'كجم/جنب',muscle:'رجل'},{id:'la3',name:'Leg Extension',sets:3,reps:'12-15',lastW:60,unit:'كجم',muscle:'رجل أمامي'},{id:'la4',name:'Bulgarian Split Squat',sets:3,reps:'8-10/رجل',lastW:12,unit:'كجم/يد',muscle:'رجل'},{id:'la5',name:'Standing Calf Raise',sets:4,reps:'15-20',lastW:80,unit:'كجم',muscle:'سمانة'},{id:'la6',name:'Abs Leg Raises',sets:3,reps:'12-15',lastW:0,unit:'وزن جسم',muscle:'بطن'}]},pushB:{name:'Push B',muscles:'صدر + كتف + تراي',exercises:[{id:'pb0',name:'إحماء',sets:1,reps:'إنكلاين خفيف ×10-14',isWarmup:true},{id:'pb1',name:'Incline Barbell Press',sets:4,reps:'8-10',lastW:60,unit:'كجم/جنب',muscle:'صدر'},{id:'pb2',name:'Flat DB Press',sets:3,reps:'10-12',lastW:32.5,unit:'كجم/دمبل',muscle:'صدر'},{id:'pb3',name:'Pec Deck Fly',sets:3,reps:'12-15',lastW:60,unit:'كجم',muscle:'صدر'},{id:'pb4',name:'DB Shoulder Press',sets:4,reps:'8-10',lastW:30,unit:'كجم/دمبل',muscle:'كتف'},{id:'pb5',name:'Cable Lateral Raise',sets:3,reps:'12-15',lastW:20,unit:'كجم',muscle:'كتف'},{id:'pb6',name:'Overhead Extension',sets:3,reps:'10-12',lastW:30,unit:'كجم',muscle:'تراي'},{id:'pb7',name:'Cable Crunch',sets:3,reps:'12-15',lastW:50,unit:'كجم',muscle:'بطن'}]},pullB:{name:'Pull B',muscles:'ظهر + باي',exercises:[{id:'plb0',name:'إحماء',sets:1,reps:'Lat Pulldown خفيف ×15',isWarmup:true},{id:'plb1',name:'Pull-Ups',sets:3,reps:'6-10',lastW:10,unit:'وزن جسم',muscle:'ظهر'},{id:'plb2',name:'T-Bar Row',sets:4,reps:'8-10',lastW:50,unit:'كجم',muscle:'ظهر'},{id:'plb3',name:'1-Arm DB Row',sets:3,reps:'10-12',lastW:35,unit:'كجم/ذراع',muscle:'ظهر'},{id:'plb4',name:'Straight Arm Pulldown',sets:3,reps:'12-15',lastW:60,unit:'كجم',muscle:'ظهر'},{id:'plb5',name:'Shrugs',sets:3,reps:'12-15',lastW:40,unit:'كجم/دمبل',muscle:'ترابيس'},{id:'plb6',name:'Incline DB Curl',sets:3,reps:'10-12',lastW:12.5,unit:'كجم/دمبل',muscle:'باي'},{id:'plb7',name:'Cable Curl',sets:3,reps:'12-15',lastW:40,unit:'كجم',muscle:'باي'}]},legB:{name:'Leg B',muscles:'رجل خلفي + سمانة',exercises:[{id:'lb0',name:'إحماء',sets:1,reps:'سكوات جسم + مشي/دراجة',isWarmup:true},{id:'lb1',name:'Romanian Deadlift',sets:4,reps:'8-10',lastW:80,unit:'كجم إجمالي',muscle:'رجل خلفي'},{id:'lb2',name:'Leg Press (Wide)',sets:3,reps:'10-12',lastW:100,unit:'كجم/جنب',muscle:'رجل'},{id:'lb3',name:'Lying Leg Curl',sets:4,reps:'10-12',lastW:56,unit:'كجم',muscle:'رجل خلفي'},{id:'lb4',name:'Hip Thrust',sets:3,reps:'10-12',lastW:60,unit:'كجم',muscle:'مؤخرة'},{id:'lb5',name:'Seated Calf Raise',sets:4,reps:'15-20',lastW:40,unit:'كجم',muscle:'سمانة'},{id:'lb6',name:'Plank',sets:3,reps:'45-60s',lastW:0,unit:'وزن جسم',muscle:'بطن'}]}};
-const EXERCISE_LIBRARY=[{id:'ex1',name:'Barbell Bench Press',muscle:'صدر',equipment:'بار',difficulty:'medium',desc:'التمرين الأساسي للصدر.'},{id:'ex2',name:'Incline DB Press',muscle:'صدر',equipment:'دمبل',difficulty:'medium',desc:'يستهدف الصدر العلوي.'},{id:'ex3',name:'Decline Bench Press',muscle:'صدر',equipment:'بار',difficulty:'medium',desc:'يركز على الصدر السفلي.'},{id:'ex4',name:'Cable Crossover',muscle:'صدر',equipment:'كابل',difficulty:'easy',desc:'عزل ممتاز للصدر.'},{id:'ex5',name:'Dumbbell Fly',muscle:'صدر',equipment:'دمبل',difficulty:'easy',desc:'مد ممتاز للصدر.'},{id:'ex6',name:'Push-Ups',muscle:'صدر',equipment:'وزن جسم',difficulty:'easy',desc:'تمرين وزن الجسم الكلاسيكي.'},{id:'ex11',name:'Deadlift',muscle:'ظهر',equipment:'بار',difficulty:'hard',desc:'ملك التمارين!'},{id:'ex12',name:'Pull-Ups',muscle:'ظهر',equipment:'وزن جسم',difficulty:'medium',desc:'أفضل تمرين لبناء عرض الظهر.'},{id:'ex13',name:'Barbell Row',muscle:'ظهر',equipment:'بار',difficulty:'medium',desc:'أساسي لبناء كثافة الظهر.'},{id:'ex14',name:'Lat Pulldown',muscle:'ظهر',equipment:'كابل',difficulty:'easy',desc:'بديل للعقلة.'},{id:'ex15',name:'Seated Cable Row',muscle:'ظهر',equipment:'كابل',difficulty:'easy',desc:'يبني سماكة الظهر.'},{id:'ex21',name:'Overhead Press',muscle:'كتف',equipment:'بار',difficulty:'medium',desc:'التمرين الأساسي للكتف.'},{id:'ex22',name:'DB Shoulder Press',muscle:'كتف',equipment:'دمبل',difficulty:'medium',desc:'يعمل كل كتف باستقلالية.'},{id:'ex23',name:'Lateral Raises',muscle:'كتف',equipment:'دمبل',difficulty:'easy',desc:'أفضل تمرين لعرض الكتف.'},{id:'ex24',name:'Face Pull',muscle:'كتف',equipment:'كابل',difficulty:'easy',desc:'يقوي الكتف الخلفي.'},{id:'ex29',name:'Barbell Curl',muscle:'باي',equipment:'بار',difficulty:'easy',desc:'التمرين الكلاسيكي للباي.'},{id:'ex30',name:'Hammer Curl',muscle:'باي',equipment:'دمبل',difficulty:'easy',desc:'يستهدف الـ Brachialis.'},{id:'ex31',name:'Incline DB Curl',muscle:'باي',equipment:'دمبل',difficulty:'easy',desc:'أفضل استطالة للباي.'},{id:'ex35',name:'Close Grip Bench Press',muscle:'تراي',equipment:'بار',difficulty:'medium',desc:'أفضل تمرين للتراي.'},{id:'ex36',name:'Rope Pushdown',muscle:'تراي',equipment:'كابل',difficulty:'easy',desc:'عزل ممتاز للتراي.'},{id:'ex37',name:'Overhead Extension',muscle:'تراي',equipment:'دمبل',difficulty:'easy',desc:'يستهدف الرأس الطويل للتراي.'},{id:'ex41',name:'Back Squat',muscle:'رجل',equipment:'بار',difficulty:'hard',desc:'ملك تمارين الرجل!'},{id:'ex42',name:'Bulgarian Split Squat',muscle:'رجل',equipment:'دمبل',difficulty:'medium',desc:'أفضل تمرين أحادي للرجل.'},{id:'ex43',name:'Leg Press',muscle:'رجل',equipment:'جهاز',difficulty:'easy',desc:'بديل آمن للسكوات.'},{id:'ex44',name:'Leg Extension',muscle:'رجل أمامي',equipment:'جهاز',difficulty:'easy',desc:'عزل ممتاز للـ Quadriceps.'},{id:'ex45',name:'Lying Leg Curl',muscle:'رجل خلفي',equipment:'جهاز',difficulty:'easy',desc:'أفضل عزل للـ Hamstrings.'},{id:'ex46',name:'Hip Thrust',muscle:'مؤخرة',equipment:'بار',difficulty:'medium',desc:'أفضل تمرين للمؤخرة.'},{id:'ex47',name:'Romanian Deadlift',muscle:'رجل خلفي',equipment:'بار',difficulty:'medium',desc:'أفضل تمرين للرجل الخلفي.'},{id:'ex51',name:'Standing Calf Raise',muscle:'سمانة',equipment:'جهاز',difficulty:'easy',desc:'يستهدف الـ Gastrocnemius.'},{id:'ex52',name:'Seated Calf Raise',muscle:'سمانة',equipment:'جهاز',difficulty:'easy',desc:'يستهدف الـ Soleus.'},{id:'ex61',name:'Plank',muscle:'بطن',equipment:'وزن جسم',difficulty:'easy',desc:'يبني قوة الـ Core.'},{id:'ex62',name:'Cable Crunch',muscle:'بطن',equipment:'كابل',difficulty:'easy',desc:'عزل ممتاز للبطن.'},{id:'ex63',name:'Leg Raises',muscle:'بطن',equipment:'وزن جسم',difficulty:'medium',desc:'يستهدف البطن السفلي.'}];
+const EXERCISE_LIBRARY=[
+/* ═══ صدر ═══ */
+{id:'ex1',  name:'Barbell Bench Press',      muscle:'صدر',      sec:'تراي, كتف أمامي',   equipment:'بار',       type:'compound', difficulty:'medium', sets:'3-5', reps:'4-8',  focus:'قوة وكتلة',    desc:'التمرين الأساسي للصدر. يطور القوة والحجم الكلي.',        technique:'الكتف للخلف وللأسفل · قوس خفيف بالظهر · اشد البار للنحر.',  mistake:'رفع الإعجاز · الكوع بزاوية >90°'},
+{id:'ex2',  name:'Incline DB Press',          muscle:'صدر',      sec:'كتف أمامي, تراي',  equipment:'دمبل',      type:'compound', difficulty:'medium', sets:'3-4', reps:'8-12', focus:'صدر علوي',     desc:'يستهدف الحزمة العلوية للصدر الكبير. أفضل من الإنكلاين بار لتناسق الجانبين.',   technique:'زاوية 30-45° فقط · أنزل حتى مستوى الكتف.',              mistake:'زاوية أعلى من 45° تحول التمرين للكتف'},
+{id:'ex3',  name:'Decline Bench Press',       muscle:'صدر',      sec:'تراي',              equipment:'بار',       type:'compound', difficulty:'medium', sets:'3-4', reps:'8-12', focus:'صدر سفلي',     desc:'يستهدف الصدر السفلي ويطور الكثافة.',                         technique:'زاوية نزول 15-30° · ثبّت القدمين جيداً.',                mistake:'النزول الكثير يضغط على الكتف'},
+{id:'ex4',  name:'Cable Crossover',           muscle:'صدر',      sec:'',                  equipment:'كابل',      type:'isolation', difficulty:'easy',  sets:'3-4', reps:'12-15',focus:'تشكيل',        desc:'عزل ممتاز للصدر مع تنشيط طوال نطاق الحركة. مثالي لنهاية التمرين.',  technique:'ثني طفيف بالكوع · قمة الحركة: تقاطع اليدين.',          mistake:'استخدام وزن كثير يفقد العزل'},
+{id:'ex5',  name:'Dumbbell Fly',              muscle:'صدر',      sec:'كتف أمامي',         equipment:'دمبل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'12-15',focus:'مد وتشكيل',    desc:'مد ممتاز يطيل الصدر ويزيد الضخامة البصرية.',                 technique:'ثني خفيف بالكوع · أنزل حتى تشعر بالمد · لا تبالغ.',    mistake:'النزول الزائد يجهد أوتار الكتف'},
+{id:'ex6',  name:'Push-Ups',                  muscle:'صدر',      sec:'تراي, كتف',         equipment:'وزن جسم',   type:'compound', difficulty:'easy',  sets:'3',   reps:'15-25',focus:'تحمل وعزل',    desc:'تمرين الجسم الكلاسيكي. يبني القوة النسبية والتحكم.',          technique:'الجسم خط مستقيم · الكوعان بزاوية 45°.',                 mistake:'ترك الحوض ينزل أو يرتفع'},
+{id:'ex7',  name:'Chest Dips',                muscle:'صدر',      sec:'تراي, كتف أمامي',  equipment:'وزن جسم',   type:'compound', difficulty:'medium', sets:'3-4', reps:'8-12', focus:'صدر سفلي',     desc:'تمرين مركب ممتاز للصدر السفلي والتراي.',                      technique:'انحنِ للأمام أثناء النزول لتستهدف الصدر.',               mistake:'الوقوف المستقيم يحوّله لتمرين تراي فقط'},
+{id:'ex8',  name:'Pec Deck Fly',              muscle:'صدر',      sec:'',                  equipment:'جهاز',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'12-15',focus:'عزل كامل',      desc:'عزل صدر آمن على المفاصل. مثالي للمبتدئين.',                  technique:'لا تدفع للخلف عند الفتح · تحكم بالإرجاع.',              mistake:'استخدام الزخم بدلاً من العضلة'},
+{id:'ex9',  name:'Landmine Press',            muscle:'صدر',      sec:'كتف, تراي',         equipment:'بار',       type:'compound', difficulty:'medium', sets:'3',   reps:'8-12', focus:'صدر علوي وظيفي',desc:'تمرين وظيفي ممتاز للصدر العلوي يلطف على المفاصل.',           technique:'ابدأ من مستوى الصدر · ادفع بزاوية مائلة.',             mistake:'انحناء الظهر الزائد'},
+
+/* ═══ ظهر ═══ */
+{id:'ex11', name:'Deadlift',                  muscle:'ظهر',      sec:'رجل, مؤخرة, كور',  equipment:'بار',       type:'compound', difficulty:'hard',  sets:'3-5', reps:'3-6',  focus:'قوة كلية',     desc:'ملك التمارين. يعمل على معظم عضلات الجسم ويبني قوة وكتلة ضخمة.',  technique:'ظهر مستقيم · صدر للأعلى · الشد ببطء.',                 mistake:'تقريب الركبتين أو تقوس الظهر = إصابة'},
+{id:'ex12', name:'Pull-Ups',                  muscle:'ظهر',      sec:'باي, ترابيس',       equipment:'وزن جسم',   type:'compound', difficulty:'medium', sets:'3-4', reps:'5-10', focus:'عرض الظهر',    desc:'أفضل تمرين لبناء عرض الظهر والـ V-shape.',                    technique:'ابدأ من وضع المد الكامل · ادفع الكوعين للأسفل.',        mistake:'الذقن فقط للعارضة بدلاً من الصدر'},
+{id:'ex13', name:'Barbell Row',               muscle:'ظهر',      sec:'باي, ترابيس',       equipment:'بار',       type:'compound', difficulty:'medium', sets:'3-4', reps:'6-10', focus:'كثافة الظهر',  desc:'أساسي لبناء كثافة وسماكة الظهر.',                             technique:'هبط 45° · اسحب للحوض · ثبّت الظهر.',                   mistake:'استخدام الزخم والأرجحة يلغي الفائدة'},
+{id:'ex14', name:'Lat Pulldown',              muscle:'ظهر',      sec:'باي',               equipment:'كابل',      type:'compound', difficulty:'easy',  sets:'3-4', reps:'10-12',focus:'عرض الظهر',    desc:'بديل ممتاز للعقلة. يطور الـ Lats بشكل تدريجي.',              technique:'الجذع مائل قليلاً للخلف · اسحب للأعلى الصدر.',        mistake:'السحب خلف الرأس يجهد الرقبة'},
+{id:'ex15', name:'Seated Cable Row',          muscle:'ظهر',      sec:'باي, ترابيس',       equipment:'كابل',      type:'compound', difficulty:'easy',  sets:'3-4', reps:'10-12',focus:'كثافة الظهر',  desc:'يبني سماكة الظهر المتوسط. نطاق حركة ممتاز.',                  technique:'اسحب للسرة · اضغط لوحي الكتف معاً.',                   mistake:'الميل الكثير للخلف عند السحب'},
+{id:'ex16', name:'T-Bar Row',                 muscle:'ظهر',      sec:'باي, ترابيس',       equipment:'بار',       type:'compound', difficulty:'medium', sets:'3-4', reps:'8-10', focus:'كثافة وسماكة', desc:'يبني كثافة هائلة في منتصف الظهر.',                            technique:'صدر للأمام · اسحب للأسفل · تحكم بالإرجاع.',           mistake:'الانحناء الكثير يضغط على القطني'},
+{id:'ex17', name:'1-Arm DB Row',              muscle:'ظهر',      sec:'باي',               equipment:'دمبل',      type:'compound', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'كثافة أحادية', desc:'يعمل كل جانب باستقلالية. يصحح الاختلال العضلي.',             technique:'ظهر موازٍ للأرض · اسحب للحوض.',                        mistake:'تدوير الكتف بدلاً من سحب الكوع'},
+{id:'ex18', name:'Straight Arm Pulldown',     muscle:'ظهر',      sec:'',                  equipment:'كابل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'12-15',focus:'تفعيل Lats',   desc:'عزل مباشر للـ Lats. مثالي للمبتدئين لتحسين الاتصال العضلي.', technique:'ذراع مستقيمة · ادفع من الإبط.',                          mistake:'ثني الكوع يحوله لـ Pulldown عادي'},
+{id:'ex19', name:'Face Pull',                 muscle:'ظهر',      sec:'كتف خلفي, ترابيس', equipment:'كابل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'15-20',focus:'صحة الكتف',    desc:'يقوي الكتف الخلفي ويحمي المفصل. لازم في كل برنامج.',          technique:'اسحب للوجه بزاوية 45° · فتح الكوعين للخارج.',          mistake:'اسحب للعنق بدل الوجه'},
+{id:'ex20', name:'Hyperextension',            muscle:'ظهر',      sec:'مؤخرة, رجل خلفي',  equipment:'جهاز',      type:'compound', difficulty:'easy',  sets:'3',   reps:'12-15',focus:'أسفل الظهر',   desc:'يقوي أسفل الظهر والـ Erectors. مهم لصحة العمود الفقري.',      technique:'لا تفرط في الارتداد · توقف عند مستوى الجسم.',          mistake:'الارتداد الزائد يضغط على الفقرات'},
+
+/* ═══ كتف ═══ */
+{id:'ex21', name:'Overhead Press (OHP)',       muscle:'كتف',      sec:'تراي, كتف أمامي',  equipment:'بار',       type:'compound', difficulty:'medium', sets:'3-5', reps:'5-8',  focus:'قوة الكتف',    desc:'التمرين الأساسي للكتف. يبني القوة والحجم الكلي.',             technique:'Brace البطن · اضغط الجلوتس · البار يمر أمام الأنف.',  mistake:'التقوس الزائد بالظهر يضغط القطني'},
+{id:'ex22', name:'DB Shoulder Press',          muscle:'كتف',      sec:'تراي',              equipment:'دمبل',      type:'compound', difficulty:'medium', sets:'3-4', reps:'8-12', focus:'حجم الكتف',    desc:'يعمل كل كتف باستقلالية. نطاق حركة أوسع من البار.',            technique:'ابدأ من مستوى الأذن · لا ترفع للقمة الكاملة.',         mistake:'الرقبة تدخل للداخل = ضغط على الكتف'},
+{id:'ex23', name:'Lateral Raises',             muscle:'كتف',      sec:'',                  equipment:'دمبل',      type:'isolation', difficulty:'easy',  sets:'3-4', reps:'12-20',focus:'عرض الكتف',    desc:'أفضل تمرين لعرض الكتف الجانبي. يعطي المظهر العريض.',          technique:'ثني طفيف بالكوع · ارفع للمستوى فقط · إبهام للأسفل.',  mistake:'الرفع فوق مستوى الكتف يستهدف الترابيس'},
+{id:'ex24', name:'Face Pull',                  muscle:'كتف',      sec:'كتف خلفي, ترابيس', equipment:'كابل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'15-20',focus:'صحة وتوازن',   desc:'يقوي الكتف الخلفي ويعادل تأثير التمارين الأمامية.',           technique:'اسحب للوجه · فتح الكوعين.',                             mistake:'السحب للرقبة يلغي الفائدة'},
+{id:'ex25', name:'Rear Delt Fly',              muscle:'كتف',      sec:'ترابيس',            equipment:'دمبل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'12-15',focus:'كتف خلفي',     desc:'عزل الكتف الخلفي لمنع الاختلال وحماية المفصل.',               technique:'انحنِ 45° · ارفع بزاوية 45° للخلف.',                   mistake:'الأكتاف للأعلى تحول للترابيس'},
+{id:'ex26', name:'Arnold Press',               muscle:'كتف',      sec:'تراي, كتف أمامي',  equipment:'دمبل',      type:'compound', difficulty:'medium', sets:'3',   reps:'8-12', focus:'تطوير كامل',   desc:'يستهدف الرأسين الأمامي والجانبي في حركة واحدة.',              technique:'ابدأ مع الكفوف للداخل · دوّر أثناء الضغط.',            mistake:'السرعة الزائدة تفقد التحكم'},
+{id:'ex27', name:'Cable Lateral Raise',        muscle:'كتف',      sec:'',                  equipment:'كابل',      type:'isolation', difficulty:'easy',  sets:'3-4', reps:'12-15',focus:'عرض الكتف',    desc:'مثل الدمبل لكن مع تنشيط أكبر طوال المسار بسبب الكابل.',       technique:'الكابل من الجانب الآخر لأفضل تنشيط.',                  mistake:'الانحناء الجانبي الزائد'},
+{id:'ex28', name:'Upright Row',                muscle:'كتف',      sec:'ترابيس',            equipment:'بار',       type:'compound', difficulty:'medium', sets:'3',   reps:'10-12',focus:'كتف جانبي',    desc:'يستهدف الكتف الجانبي والترابيس العلوي.',                       technique:'القبضة أعرض من الكتف · الكوعان للأعلى.',               mistake:'القبضة الضيقة جداً تضغط على كتفك'},
+
+/* ═══ باي ═══ */
+{id:'ex29', name:'Barbell Curl',               muscle:'باي',      sec:'Brachialis',        equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3-4', reps:'8-12', focus:'قوة وحجم',     desc:'التمرين الأساسي والكلاسيكي للباي. يبني القوة والكتلة.',        technique:'الكوعان ثابتان جانب الجسم · لا تستعن بالظهر.',         mistake:'الأرجحة تلغي عمل الباي'},
+{id:'ex30', name:'Hammer Curl',                muscle:'باي',      sec:'Brachialis, ساعد',  equipment:'دمبل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'Brachialis',   desc:'يستهدف الـ Brachialis ويضيف سماكة للذراع بشكل عام.',         technique:'الإبهام للأعلى طوال الحركة · لا تدوير.',               mistake:'التأرجح = فائدة صفر'},
+{id:'ex31', name:'Incline DB Curl',            muscle:'باي',      sec:'',                  equipment:'دمبل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'استطالة',      desc:'أفضل تمرين لاستطالة الباي. يزيد من تنشيط الرأس الطويل.',      technique:'الكرسي بزاوية 45° · اترك الذراع تتمد كاملاً.',         mistake:'عدم النزول الكامل يلغي ميزة التمرين'},
+{id:'ex32', name:'Preacher Curl',              muscle:'باي',      sec:'',                  equipment:'جهاز',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'ذروة الباي',   desc:'يمنع الأرجحة تماماً ويعزل الباي بشكل مثالي.',                technique:'الكوع يبقى على الوسادة · انزل ببطء.',                   mistake:'فتح الكوع للجانب'},
+{id:'ex33', name:'Cable Curl',                 muscle:'باي',      sec:'',                  equipment:'كابل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'12-15',focus:'ضغط مستمر',    desc:'يبقي الضغط على الباي حتى في القمة. أفضل من الدمبل في الذروة.', technique:'اسحب للكتف · إمسك لثانية في الذروة.',                  mistake:'الكوع يتحرك للأمام'},
+{id:'ex34', name:'Concentration Curl',         muscle:'باي',      sec:'',                  equipment:'دمبل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'12-15',focus:'ذروة وعزل',    desc:'أفضل تمرين لعزل الباي وتطوير الذروة.',                        technique:'الكوع على الفخذ الداخلي · لا تحريك للكوع.',             mistake:'الميل للمساعدة بالكتف'},
+{id:'ex34b',name:'EZ-Bar Curl',                muscle:'باي',      sec:'Brachialis',        equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3-4', reps:'8-12', focus:'قوة وحجم',     desc:'أسهل على المعصم من الباربيل المستقيم مع نفس الفائدة.',         technique:'مثل الباربيل لكن بزاوية أريح للمعصم.',                  mistake:'الزاوية الغلط على المعصم'},
+
+/* ═══ تراي ═══ */
+{id:'ex35', name:'Close Grip Bench Press',     muscle:'تراي',     sec:'صدر, كتف أمامي',   equipment:'بار',       type:'compound', difficulty:'medium', sets:'3-4', reps:'6-10', focus:'قوة وكتلة',    desc:'أفضل تمرين مركب للتراي. يبني قوة ضخمة.',                     technique:'قبضة بعرض الكتف · الكوعان قريبان من الجسم.',           mistake:'قبضة ضيقة جداً تجهد المعصم'},
+{id:'ex36', name:'Rope Pushdown',              muscle:'تراي',     sec:'',                  equipment:'كابل',      type:'isolation', difficulty:'easy',  sets:'3-4', reps:'10-15',focus:'عزل كامل',     desc:'عزل ممتاز للتراي. فتح الحبل في الأسفل يزيد التنشيط.',         technique:'الكوعان ثابتان · افتح الحبل في الأسفل.',               mistake:'الكوعان يتحركان للأمام'},
+{id:'ex37', name:'Overhead Tricep Extension',  muscle:'تراي',     sec:'',                  equipment:'دمبل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'رأس طويل',     desc:'يستهدف الرأس الطويل للتراي الذي يصعب إصابته بالتمارين الأخرى.', technique:'الكوعان قريبان من الرأس · انزل خلف الرأس.',            mistake:'الكوعان ينفتحان للجانب'},
+{id:'ex38', name:'Skull Crushers',             muscle:'تراي',     sec:'',                  equipment:'بار',       type:'isolation', difficulty:'medium', sets:'3',   reps:'10-12',focus:'ضخامة تراي',   desc:'يبني ضخامة التراي بشكل ممتاز. تمرين الجدّين!',               technique:'انزل البار للجبهة · الكوعان ثابتان.',                    mistake:'الكوعان ينهاران للجانب = إصابة'},
+{id:'ex39', name:'Tricep Dips',                muscle:'تراي',     sec:'صدر, كتف',          equipment:'وزن جسم',   type:'compound', difficulty:'medium', sets:'3',   reps:'8-15', focus:'قوة وكتلة',    desc:'تمرين وزن الجسم الممتاز للتراي والصدر السفلي.',               technique:'جذع مستقيم للتراي · مائل للصدر.',                       mistake:'نزول أكثر من 90° يجهد الكتف'},
+{id:'ex40', name:'Bar Pushdown',               muscle:'تراي',     sec:'',                  equipment:'كابل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'قمة التمرين',  desc:'ضغط ثابت على التراي مع تحكم أفضل من الحبل.',                  technique:'ادفع للأسفل · إمسك في الأسفل 1 ثانية.',                mistake:'الكوعان للأمام = الصدر يعمل أكثر'},
+
+/* ═══ رجل أمامي (Quads) ═══ */
+{id:'ex41', name:'Back Squat',                 muscle:'رجل',      sec:'مؤخرة, رجل خلفي',  equipment:'بار',       type:'compound', difficulty:'hard',  sets:'3-5', reps:'4-8',  focus:'قوة وكتلة',    desc:'ملك تمارين الرجل. يبني كتلة عضلية ضخمة في الجسم كله.',        technique:'عمق أدنى من الركبة · ركبة فوق الأصبع · صدر للأعلى.',  mistake:'الركبة للداخل = إصابة قادمة'},
+{id:'ex42', name:'Bulgarian Split Squat',      muscle:'رجل',      sec:'مؤخرة, رجل خلفي',  equipment:'دمبل',      type:'compound', difficulty:'medium', sets:'3-4', reps:'8-12', focus:'أحادي وتوازن', desc:'أفضل تمرين أحادي للرجل. يبني كتلة ويصحح الاختلال.',           technique:'الفخذ الأمامي موازٍ للأرض · ركبة خلفية لا تلمس.',      mistake:'الجذع مائل كثيراً للأمام'},
+{id:'ex43', name:'Leg Press',                  muscle:'رجل',      sec:'مؤخرة',             equipment:'جهاز',      type:'compound', difficulty:'easy',  sets:'3-4', reps:'8-15', focus:'حجم وكتلة',    desc:'يتيح أحجاماً كبيرة بأمان. بديل مفيد للسكوات.',                technique:'القدمان في المنتصف أو للأعلى للمؤخرة · لا تقفل الركبة.', mistake:'الإعجاز يرتفع = ضغط على القطني'},
+{id:'ex44', name:'Leg Extension',              muscle:'رجل',      sec:'',                  equipment:'جهاز',      type:'isolation', difficulty:'easy',  sets:'3-4', reps:'12-15',focus:'عزل Quads',    desc:'عزل ممتاز للـ Quadriceps. مثالي لنهاية تمرين الرجل.',          technique:'امسك في الذروة ثانية · انزل ببطء.',                     mistake:'الأرجحة وسرعة الإرجاع'},
+{id:'ex45b',name:'Hack Squat',                 muscle:'رجل',      sec:'مؤخرة',             equipment:'جهاز',      type:'compound', difficulty:'medium', sets:'3-4', reps:'8-12', focus:'Quads',        desc:'يستهدف الـ Quads أكثر من السكوات العادي. ممتاز للضخامة.',     technique:'قدم أمامية أكثر = Quads · خلفية أكثر = مؤخرة.',        mistake:'الركبة للداخل تحت الضغط'},
+{id:'ex41b',name:'Front Squat',                muscle:'رجل',      sec:'كور',               equipment:'بار',       type:'compound', difficulty:'hard',  sets:'3-4', reps:'5-8',  focus:'Quads',        desc:'يستهدف الـ Quads أكثر ويقلل الضغط على الظهر.',               technique:'الجذع أكثر عمودية · المرفقان للأعلى.',                  mistake:'سقوط المرفقين = البار يسقط'},
+
+/* ═══ رجل خلفي (Hamstrings) ═══ */
+{id:'ex45', name:'Lying Leg Curl',             muscle:'رجل خلفي', sec:'',                  equipment:'جهاز',      type:'isolation', difficulty:'easy',  sets:'3-4', reps:'10-12',focus:'عزل Hamstrings',desc:'أفضل عزل للـ Hamstrings. ضروري في كل برنامج رجل.',            technique:'لا تشيل الإعجاز · انزل ببطء 3 ثواني.',                 mistake:'الحوض يرتفع لمساعدة الحركة'},
+{id:'ex47', name:'Romanian Deadlift',          muscle:'رجل خلفي', sec:'مؤخرة, ظهر',       equipment:'بار',       type:'compound', difficulty:'medium', sets:'3-4', reps:'8-12', focus:'الرجل الخلفية', desc:'أفضل تمرين لبناء الرجل الخلفية. يعطي استطالة ممتازة.',         technique:'ثني طفيف بالركبة · الظهر مستقيم · انزل لمستوى التوتر.', mistake:'التقوس الزائد بالظهر'},
+{id:'ex48', name:'Seated Leg Curl',            muscle:'رجل خلفي', sec:'',                  equipment:'جهاز',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'12-15',focus:'Hamstrings مستطيل',desc:'يستهدف الـ Hamstrings في وضع مقعد. يزيد استطالة الورك.',   technique:'اسحب ببطء · امسك في الأسفل ثانية.',                    mistake:'الجذع يتحرك للأمام'},
+{id:'ex49', name:'Nordic Curl',                muscle:'رجل خلفي', sec:'',                  equipment:'وزن جسم',   type:'isolation', difficulty:'hard',  sets:'3',   reps:'4-8',  focus:'قوة eccentric', desc:'أصعب تمرين للرجل الخلفية. يبني قوة استثنائية ويمنع الإصابات.', technique:'اثبت قدميك · انزل ببطء · ادفع للرجوع.',                mistake:'الانهيار السريع بدل التحكم'},
+{id:'ex50', name:'Glute Ham Raise',            muscle:'رجل خلفي', sec:'مؤخرة',             equipment:'جهاز',      type:'compound', difficulty:'hard',  sets:'3',   reps:'6-10', focus:'Hamstrings كامل',desc:'يجمع عمل الورك والركبة للـ Hamstrings في حركة واحدة.',         technique:'الظهر مستقيم · تحكم بالنزول.',                           mistake:'استخدام الزخم بدل القوة'},
+
+/* ═══ مؤخرة (Glutes) ═══ */
+{id:'ex46', name:'Hip Thrust',                 muscle:'مؤخرة',    sec:'رجل خلفي',          equipment:'بار',       type:'compound', difficulty:'medium', sets:'3-4', reps:'8-15', focus:'كتلة مؤخرة',   desc:'أفضل تمرين لبناء المؤخرة. حجم التحميل العالي يبني كتلة.',      technique:'الذقن للصدر · اضغط المؤخرة في القمة لثانيتين.',        mistake:'الظهر يقوس بدل أن يبقى مستقيم'},
+{id:'ex46b',name:'Cable Kickback',             muscle:'مؤخرة',    sec:'رجل خلفي',          equipment:'كابل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'12-15',focus:'عزل مؤخرة',    desc:'عزل مباشر للمؤخرة مع ضغط مستمر.',                             technique:'الجذع ثابت · ارفع من الورك فقط.',                       mistake:'ثني الركبة = رجل خلفية لا مؤخرة'},
+{id:'ex46c',name:'Sumo Deadlift',              muscle:'مؤخرة',    sec:'رجل, رجل خلفي',    equipment:'بار',       type:'compound', difficulty:'hard',  sets:'3-4', reps:'5-8',  focus:'مؤخرة ورجل',   desc:'يستهدف المؤخرة والرجل الداخلية أكثر من الـ Deadlift العادي.',  technique:'قدمان عريضتان · أصابع للخارج · الظهر مستقيم.',         mistake:'الركبة للداخل تحت الحمل'},
+{id:'ex46d',name:'Donkey Kick',                muscle:'مؤخرة',    sec:'',                  equipment:'وزن جسم',   type:'isolation', difficulty:'easy',  sets:'3',   reps:'15-20',focus:'عزل',           desc:'عزل بسيط للمؤخرة. مناسب للإحماء وإنهاء التمرين.',             technique:'الظهر مستقيم · ارفع من الورك.',                          mistake:'تدوير الحوض بدل رفع الرجل'},
+
+/* ═══ سمانة ═══ */
+{id:'ex51', name:'Standing Calf Raise',        muscle:'سمانة',    sec:'',                  equipment:'جهاز',      type:'isolation', difficulty:'easy',  sets:'4-5', reps:'12-20',focus:'Gastrocnemius', desc:'يستهدف الـ Gastrocnemius في وضع الوقوف.',                     technique:'نطاق حركة كامل · امسك في الذروة ثانيتين.',             mistake:'الارتداد بدل التحكم'},
+{id:'ex52', name:'Seated Calf Raise',          muscle:'سمانة',    sec:'',                  equipment:'جهاز',      type:'isolation', difficulty:'easy',  sets:'4',   reps:'15-20',focus:'Soleus',        desc:'يستهدف الـ Soleus الأعمق. ضروري لتطوير سمانة ممتلئة.',        technique:'ركبة مثنية 90° · نطاق حركة كامل.',                      mistake:'إهمال هذا التمرين يعطي سمانة ناقصة'},
+{id:'ex53', name:'Single Leg Calf Raise',      muscle:'سمانة',    sec:'',                  equipment:'وزن جسم',   type:'isolation', difficulty:'medium', sets:'3',   reps:'15-20',focus:'تقوية أحادية',  desc:'يصحح الاختلال بين الجانبين ويزيد كثافة التمرين.',             technique:'انزل ببطء 3 ثواني · ارفع بقوة.',                        mistake:'التسرع يلغي الفائدة'},
+
+/* ═══ بطن (Core) ═══ */
+{id:'ex61', name:'Plank',                      muscle:'بطن',      sec:'كور, ترابيس',       equipment:'وزن جسم',   type:'isolation', difficulty:'easy',  sets:'3',   reps:'30-60s',focus:'كور شامل',     desc:'يبني قوة الكور الشاملة. أساس كل التمارين المركبة.',            technique:'جسم خط مستقيم · لا ترفع المؤخرة أو تخفضها.',           mistake:'التنفس الغلط: اتنفس بشكل طبيعي'},
+{id:'ex62', name:'Cable Crunch',               muscle:'بطن',      sec:'',                  equipment:'كابل',      type:'isolation', difficulty:'easy',  sets:'3-4', reps:'12-15',focus:'بطن علوي',     desc:'أفضل تمرين للبطن بتحميل قابل للزيادة. يبني سماكة البطن.',     technique:'اثني من البطن لا من الورك · ابقَ عاملاً على البطن فقط.', mistake:'استخدام الثقل الزائد بدل التركيز'},
+{id:'ex63', name:'Leg Raises',                 muscle:'بطن',      sec:'رجل',               equipment:'وزن جسم',   type:'isolation', difficulty:'medium', sets:'3',   reps:'12-15',focus:'بطن سفلي',     desc:'يستهدف البطن السفلي ورباط الورك.',                             technique:'انزل ببطء · لا تلمس الأرض تماماً.',                     mistake:'الأرجحة والزخم'},
+{id:'ex64', name:'Ab Wheel Rollout',           muscle:'بطن',      sec:'ظهر, كتف',          equipment:'أداة',      type:'isolation', difficulty:'hard',  sets:'3',   reps:'8-12', focus:'كور متكامل',   desc:'أصعب وأفضل تمرين للكور. يبني قوة استثنائية.',                 technique:'ابدأ بنطاق قصير · الظهر مستقيم.',                       mistake:'السقوط للأسفل = ضغط على القطني'},
+{id:'ex65', name:'Hanging Leg Raise',          muscle:'بطن',      sec:'رجل خلفي',          equipment:'وزن جسم',   type:'isolation', difficulty:'hard',  sets:'3',   reps:'8-12', focus:'بطن سفلي',     desc:'أصعب تمرين للبطن السفلي. يبني قوة وسماكة.',                   technique:'ارفع من البطن لا من الأرداف · لا أرجحة.',              mistake:'الأرجحة تحول للرجل خلفية'},
+{id:'ex66', name:'Russian Twist',              muscle:'بطن',      sec:'',                  equipment:'وزن جسم',   type:'isolation', difficulty:'easy',  sets:'3',   reps:'15-20',focus:'بطن جانبي',    desc:'يستهدف العضلة المائلة والكور الجانبي.',                        technique:'الظهر مائل 45° · دوران من البطن لا من الذراعين.',       mistake:'الدوران من الذراعين بدل البطن'},
+
+/* ═══ ترابيس / عنق ═══ */
+{id:'ex71', name:'Barbell Shrug',              muscle:'ترابيس',   sec:'',                  equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3-4', reps:'10-15',focus:'حجم ترابيس',   desc:'يبني ترابيس ضخم يعطي مظهر القوة من الأمام.',                  technique:'ارفع عمودياً · امسك في الذروة · لا تدوير.',            mistake:'تدوير الكتفين يجهدهما'},
+{id:'ex72', name:'DB Shrug',                   muscle:'ترابيس',   sec:'',                  equipment:'دمبل',      type:'isolation', difficulty:'easy',  sets:'3',   reps:'12-15',focus:'ترابيس',        desc:'مثل الباربيل لكن نطاق حركة أوسع.',                             technique:'ارفع مباشرة للأعلى.',                                     mistake:'تدوير الكتفين للأمام أو للخلف'},
+/* ═══ ساعد ═══ */
+{id:'ex81', name:'Wrist Curl',                 muscle:'ساعد',     sec:'',                  equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3',   reps:'15-20',focus:'ساعد أمامي',   desc:'يبني قوة وحجم الساعد الأمامي.',                                technique:'الرسغ يتحرك فقط · اتكئ على الركبة.',                    mistake:'تحريك المرفق'},
+{id:'ex82', name:'Reverse Curl',               muscle:'ساعد',     sec:'Brachialis, باي',   equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'ساعد + باي',   desc:'يبني الساعد العلوي والـ Brachialis.',                           technique:'قبضة عكسية · الكوع ثابت.',                               mistake:'الأرجحة الزائدة'}
+];
 let G={days:{},ses:[],bw:[],streak:0,lastWo:null,doneExs:{},completedDays:{},aiKey:'',chatHistory:[],theme:'dark',notifications:true,currentSets:{},schedule:null,wellness:{},nextSessionPlan:{},rpeHistory:{},weeklyChallenge:null,injuries:[],supplements:[],pinnedNote:''};
 const FATIGUE={score(){const s=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5).length;const v=SCI.weeklyVolume();const td=new Date().toISOString().split('T')[0];const w=G.wellness[td]||{sleep:7,energy:7,stress:3};return Math.round(Math.min(s/6*30,30)+Math.min(v/6000*25,25)+(10-Math.min(parseFloat(w.sleep)||7,10))/10*15+(10-Math.min(parseFloat(w.energy)||7,10))/10*15+Math.min(parseFloat(w.stress)||3,10)/10*15)},level(){const s=this.score();return s<40?'low':s<70?'moderate':s<85?'high':'critical'},label(){return{low:'منخفض ✅',moderate:'متوسط ⚡',high:'مرتفع ⚠️',critical:'حرج 🚨'}[this.level()]}};
 const PERIOD={week(){return(Math.floor(G.ses.length/3)%4)+1},type(){const w=this.week();return w===1?'volume':w===2?'intensity':w===3?'peak':'deload'},info(){return{volume:{label:'Volume Week',color:'block-volume',icon:'📦',desc:'حجم عالي · أوزان متوسطة · 4 سيتات'},intensity:{label:'Intensity Week',color:'block-intensity',icon:'⚡',desc:'أوزان ثقيلة · 3 سيتات · Rep Range أقل'},peak:{label:'Peak Week',color:'block-peak',icon:'🔥',desc:'أقصى قوة · 2-3 سيتات · وزن أقصى'},deload:{label:'Deload Week',color:'block-deload',icon:'🔄',desc:'تعافي · 90% من الأوزان · 2 سيتات'}}[this.type()]}};
@@ -1180,7 +1271,7 @@ let sessionStartTime=null,sessionTimerInterval=null;
 function fmtElapsed(ms){const t=Math.floor(ms/1000),h=Math.floor(t/3600),m=Math.floor((t%3600)/60),s=t%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
 function rDays(){const wk=weekKey(),done=G.completedDays[wk]||{},c=getCompletedCount(),wb=document.getElementById('weekBdg'),st=document.getElementById('strk'),dl=document.getElementById('dayList');if(wb)wb.textContent=`📅 ${c}/${dayOrder.length}`;if(st)st.textContent=G.streak||0;if(!dl)return;dl.innerHTML=dayOrder.map(k=>{const d=G.days[k];if(!d)return'';const ic=done[k],ia=curDay===k;return`<div class="dchip ${ia?'act':''} ${ic&&!ia?'completed':''}" onclick="selDay('${k}')">${ic?'<div class="done-mark">✓</div>':''}<div class="dn">${d.name}</div><div class="dm">${d.muscles}</div></div>`}).join('')}
 function selDay(k){if(typeof resetJournal==='function')resetJournal();if(curDay!==k){sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;}curDay=k;rDays();rExs();const el=document.getElementById('sesAct');if(el)el.style.display='block';setTimeout(()=>{const w=document.getElementById('woArea');if(w)w.scrollIntoView({behavior:'smooth',block:'start'})},100)}
-function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;wo.innerHTML=`<div class="card"><div class="ct">💪 ${day.muscles} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} تمرين</span></div>${day.exercises.map(ex=>{if(ex.isWarmup)return`<div class="warmup-box"><span style="font-size:1.4em">🔥</span><div><strong>إحماء:</strong> ${ex.reps}</div></div>`;const ns=ex.sets||3,ls=getLastSets(ex.id),be=getBestSet(ex.id)||ex.lastW||0,dn=G.doneExs[sk]&&G.doneExs[sk][ex.id],or=OE.getRecommendation(ex.id,ex.name,be),sg=pfl[ex.id],vs=VELOCITY.state(ex.id),ss=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[],dc=ss.length?eliteDecision(ex.id,ex.name,ss):{action:'stable',weight:be,msg:''};const coachH=getSmartCoach(ex,ex.id,be);const osH='';const edH='';const vcH=vs!=='stable'?`<span class="velocity-chip velocity-${vs}">${VELOCITY.label(vs)}</span>`:'';const lsH=sg?`<div style="background:rgba(254,215,170,.07);border:1px dashed rgba(254,215,170,.25);border-radius:10px;padding:10px;margin-top:8px;font-size:.76em"><strong style="color:var(--pu)">💡 من الجلسة السابقة:</strong> ${sg.reason}<div style="margin-top:4px;color:var(--tx2)">الهدف: ${sg.nextWeight}كجم × ${sg.targetReps}</div></div>`:'';const rows=Array.from({length:ns},(_,i)=>{const ps=ls[i]||null,pw=ps?ps.w:be,pr=ps?ps.r:'',pp=ps?ps.rpe:'',pt=pw>0?(pr?`${pw}×${pr}`:`${pw}`):'--';return`<div class="set-row" id="sr-${ex.id}-${i}"><div class="set-num" id="snum-${ex.id}-${i}">${i+1}</div><div class="set-prev">${pt}${pp?'<br><span style="font-size:.7em;color:var(--pu)">RPE '+pp+'</span>':''}</div><input type="number" class="set-in" id="sw-${ex.id}-${i}" placeholder="${pw>0?pw:''}" step="0.5" min="0" inputmode="decimal" oninput="onSetChange('${ex.id}',${i},${be})"><input type="number" class="set-in" id="sr2-${ex.id}-${i}" placeholder="${pr||'عدات'}" step="1" min="1" inputmode="numeric" oninput="onSetChange('${ex.id}',${i},${be})" style="font-size:.78em"><input type="number" class="rpe-in" id="srpe-${ex.id}-${i}" placeholder="${pp||'RPE'}" step="0.5" min="1" max="10" inputmode="decimal" oninput="onRPEChange('${ex.id}',${i})"><div class="set-chk" id="sc-${ex.id}-${i}" onclick="toggleSetDone('${ex.id}',${i})"></div></div>`}).join('');const mClr=getMuscleColor(ex.muscle||'');return`<div class="exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="${ex.muscle||''}"><div class="muscle-stripe" style="background:rgb(${mClr})"></div><div class="ext"><div style="flex:1"><div class="exn">${ex.name}</div><div class="exd">${ns} سيتات | ${ex.reps} عدة | ${ex.unit}</div>${ex.muscle?`<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:4px"><span class="muscle-tag">${ex.muscle}</span>${vcH}</div>`:''} ${be>0?`<div style="font-size:.65em;color:var(--wn);margin-top:3px">🏆 أفضل: ${be} ${ex.unit}</div>`:''}</div><div class="done-check ${dn?'checked':''}" id="chk-${ex.id}" onclick="toggleDone('${ex.id}')">${dn?'✓':''}</div></div>${coachH}${lsH}${(()=>{const tk=Object.keys(TIPS).find(k=>ex.name.includes(k)),fpH=renderFormPhases(ex.name);if(!tk&&!fpH)return'';let _th='';if(tk)_th+=`<button class="tip-btn" onclick="this.nextElementSibling.classList.toggle('open')">📋 تقنية</button><div class="tip-box" id="tip-${ex.id}">${TIPS[tk].map(t=>`<div class="tip-item"><span>✦</span><span>${t}</span></div>`).join('')}</div>`;if(fpH)_th+=`<button class="form-btn" onclick="var _fp=document.getElementById('fp-${ex.id}');_fp.style.display=_fp.style.display==='none'?'block':'none'">🎯 حركة صحيحة</button><div id="fp-${ex.id}" style="display:none">${fpH}</div>`;return _th})()}${renderWarmupProto(ex.id,ex.name,be)}<div class="sets-header"><span>#</span><span>سابق</span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE<span class="tt-q" onclick="showTip(this,'RPE (مقياس الجهد المدرَك): من 1 إلى 10. RPE 10 = أقصى جهد مطلق. RPE 8 = يمكنك تكراران إضافيتان. RPE 7 = يمكنك 3 تكرارات إضافية. المثالي: 7-9 في معظم السيتات.')">?</span></span><span>✓</span></div>${rows}<div class="sets-summary" id="sum-${ex.id}"><span class="ss-chip">0/${ns} سيت</span></div><textarea class="ex-note" id="n-${ex.id}" placeholder="📝 ملاحظة..." rows="1"></textarea><div id="injWarn-${ex.id}"></div><div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="swapExercise('${ex.id}','${ex.muscle||''}','${ex.name}')">🔀 بديل</button>${G.injuries&&G.injuries.some(i=>i.active&&i.muscle===(ex.muscle||''))?'<span style="font-size:.72em;color:var(--no);padding:5px 0">⚠️ إصابة في '+ex.muscle+'</span>':''}</div></div>`}).join('')}</div>`;updateCompBar();restoreSetInputs();renderDeloadBanner();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
+function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;wo.innerHTML=`<div class="card"><div class="ct">💪 ${day.muscles} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} تمرين</span></div>${day.exercises.map(ex=>{if(ex.isWarmup)return`<div class="warmup-box"><span style="font-size:1.4em">🔥</span><div><strong>إحماء:</strong> ${ex.reps}</div></div>`;const ns=ex.sets||3,ls=getLastSets(ex.id),be=getBestSet(ex.id)||ex.lastW||0,dn=G.doneExs[sk]&&G.doneExs[sk][ex.id],or=OE.getRecommendation(ex.id,ex.name,be),sg=pfl[ex.id],vs=VELOCITY.state(ex.id),ss=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[],dc=ss.length?eliteDecision(ex.id,ex.name,ss):{action:'stable',weight:be,msg:''};const coachH=getSmartCoach(ex,ex.id,be);const osH='';const edH='';const vcH=vs!=='stable'?`<span class="velocity-chip velocity-${vs}">${VELOCITY.label(vs)}</span>`:'';const lsH=sg?`<div style="background:rgba(254,215,170,.07);border:1px dashed rgba(254,215,170,.25);border-radius:10px;padding:10px;margin-top:8px;font-size:.76em"><strong style="color:var(--pu)">💡 من الجلسة السابقة:</strong> ${sg.reason}<div style="margin-top:4px;color:var(--tx2)">الهدف: ${sg.nextWeight}كجم × ${sg.targetReps}</div></div>`:'';const rows=Array.from({length:ns},(_,i)=>{const ps=ls[i]||null,pw=ps?ps.w:be,pr=ps?ps.r:'',pp=ps?ps.rpe:'',pt=pw>0?(pr?`${pw}×${pr}`:`${pw}`):'--';return`<div class="set-row" id="sr-${ex.id}-${i}"><div class="set-num" id="snum-${ex.id}-${i}">${i+1}</div><div class="set-prev">${pt}${pp?'<br><span style="font-size:.7em;color:var(--pu)">RPE '+pp+'</span>':''}</div><input type="number" class="set-in" id="sw-${ex.id}-${i}" placeholder="${pw>0?pw:''}" step="0.5" min="0" inputmode="decimal" oninput="onSetChange('${ex.id}',${i},${be})"><input type="number" class="set-in" id="sr2-${ex.id}-${i}" placeholder="${pr||'عدات'}" step="1" min="1" inputmode="numeric" oninput="onSetChange('${ex.id}',${i},${be})" style="font-size:.78em"><input type="number" class="rpe-in" id="srpe-${ex.id}-${i}" placeholder="${pp||'RPE'}" step="0.5" min="1" max="10" inputmode="decimal" oninput="onRPEChange('${ex.id}',${i})"><div class="set-chk" id="sc-${ex.id}-${i}" onclick="toggleSetDone('${ex.id}',${i})"></div></div>`}).join('');const mClr=getMuscleColor(ex.muscle||'');return`<div class="exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="${ex.muscle||''}"><div class="muscle-stripe" style="background:rgb(${mClr})"></div><div class="ext"><div style="flex:1"><div class="exn">${ex.name}</div><div class="exd">${ns} سيتات | ${ex.reps} عدة | ${ex.unit}</div>${ex.muscle?`<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:4px"><span class="muscle-tag">${ex.muscle}</span>${vcH}</div>`:''} ${be>0?`<div style="font-size:.65em;color:var(--wn);margin-top:3px">🏆 أفضل: ${be} ${ex.unit}</div>`:''}</div><div class="done-check ${dn?'checked':''}" id="chk-${ex.id}" onclick="toggleDone('${ex.id}')">${dn?'✓':''}</div></div>${coachH}${lsH}${(()=>{const tk=Object.keys(TIPS).find(k=>ex.name.includes(k)),fpH=renderFormPhases(ex.name);if(!tk&&!fpH)return'';let _th='';if(tk)_th+=`<button class="tip-btn" onclick="this.nextElementSibling.classList.toggle('open')">📋 تقنية</button><div class="tip-box" id="tip-${ex.id}">${TIPS[tk].map(t=>`<div class="tip-item"><span>✦</span><span>${t}</span></div>`).join('')}</div>`;if(fpH)_th+=`<button class="form-btn" onclick="var _fp=document.getElementById('fp-${ex.id}');_fp.style.display=_fp.style.display==='none'?'block':'none'">🎯 حركة صحيحة</button><div id="fp-${ex.id}" style="display:none">${fpH}</div>`;return _th})()}${renderWarmupProto(ex.id,ex.name,be)}<div class="sets-header"><span>#</span><span>سابق</span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE<span class="tt-q" onclick="showTip(this,'RPE (مقياس الجهد المدرَك): من 1 إلى 10. RPE 10 = أقصى جهد مطلق. RPE 8 = يمكنك تكراران إضافيتان. RPE 7 = يمكنك 3 تكرارات إضافية. المثالي: 7-9 في معظم السيتات.')">?</span></span><span>✓</span></div>${rows}<div class="sets-summary" id="sum-${ex.id}"><span class="ss-chip">0/${ns} سيت</span></div><textarea class="ex-note" id="n-${ex.id}" placeholder="📝 ملاحظة..." rows="1"></textarea><div id="injWarn-${ex.id}"></div><div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="swapExercise('${ex.id}','${ex.muscle||''}','${ex.name}')">🔀 بديل</button><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="editExerciseInDay('${ex.id}')">✏️ تعديل</button>${G.injuries&&G.injuries.some(i=>i.active&&i.muscle===(ex.muscle||''))?'<span style="font-size:.72em;color:var(--no);padding:5px 0">⚠️ إصابة في '+ex.muscle+'</span>':''}</div></div>`}).join('')}</div>`;updateCompBar();restoreSetInputs();renderDeloadBanner();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
   if(G.homeMode){document.querySelectorAll('.exn').forEach(el=>{const orig=el.textContent.trim();const alt=Object.keys(HOME_ALTS||{}).find(k=>orig.includes(k));if(alt&&HOME_ALTS[alt]!==orig){el.innerHTML=`<span style="text-decoration:line-through;color:var(--tx3);font-size:.85em">${orig}</span><br><span style="color:var(--ok)">${HOME_ALTS[alt]}</span>`;}});}
 }
 function onRPEChange(id,i){const el=document.getElementById(`srpe-${id}-${i}`);if(!el)return;const v=parseFloat(el.value)||0;el.classList.remove('rpe-easy','rpe-hard','rpe-max');if(v>0&&v<=6)el.classList.add('rpe-easy');else if(v>8.5&&v<10)el.classList.add('rpe-hard');else if(v>=10)el.classList.add('rpe-max');saveCurrentSet(id,i);updateSetSummary(id)}
@@ -1254,8 +1345,139 @@ function initLibrary(){renderLibFilters();renderLibContent()}
 function renderLibFilters(){const el=document.getElementById('libFilters');if(!el)return;const ms=['all','صدر','ظهر','كتف','باي','تراي','رجل','رجل خلفي','بطن','سمانة','مؤخرة'];el.innerHTML=ms.map(m=>`<div class="lib-filter ${libFilter===m?'active':''}" onclick="setLibFilter('${m}')">${m==='all'?'🔍 الكل':m}</div>`).join('')}
 function setLibFilter(f){libFilter=f;renderLibFilters();renderLibContent()}
 function filterLibrary(){renderLibContent(document.getElementById('libSearch')?.value?.toLowerCase()||'')}
-function renderLibContent(q=''){const el=document.getElementById('libContent');if(!el)return;let items=EXERCISE_LIBRARY;if(libFilter!=='all')items=items.filter(e=>e.muscle===libFilter||e.muscle.includes(libFilter));if(q)items=items.filter(e=>e.name.toLowerCase().includes(q)||e.muscle.toLowerCase().includes(q));const cnt=document.getElementById('libCount');if(cnt)cnt.textContent=items.length+'+';if(!items.length){el.innerHTML='<div class="empty"><div class="eic">📚</div><h3>لا نتائج</h3></div>';return}const dm={easy:{t:'مبتدئ',c:'easy'},medium:{t:'متوسط',c:'medium'},hard:{t:'متقدم',c:'hard'}};el.innerHTML=items.map(ex=>{const d=dm[ex.difficulty]||dm.medium;return`<div class="lib-item" onclick="showExDetails('${ex.id}')"><div class="lib-item-header"><div class="lib-item-name">${ex.name}</div><div class="diff-badge ${d.c}">${d.t}</div></div><div style="display:flex;gap:7px;margin:5px 0"><span class="muscle-tag">${ex.muscle}</span><span style="font-size:.68em;color:var(--tx2)">⚙️ ${ex.equipment}</span></div><div class="lib-item-desc">${ex.desc}</div></div>`}).join('')}
-function showExDetails(id){const ex=EXERCISE_LIBRARY.find(e=>e.id===id);if(!ex)return;const dm={easy:{t:'مبتدئ',c:'easy',i:'🟢'},medium:{t:'متوسط',c:'medium',i:'🟡'},hard:{t:'متقدم',c:'hard',i:'🔴'}},d=dm[ex.difficulty]||dm.medium;document.getElementById('libMoT').textContent=ex.name;document.getElementById('libMoB').innerHTML=`<div style="display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap"><span class="muscle-tag">${ex.muscle}</span><span class="diff-badge ${d.c}">${d.i} ${d.t}</span></div><div style="background:rgba(255,255,255,.06);padding:13px;border-radius:12px;margin-bottom:12px"><div style="font-weight:800;font-size:.82em;color:var(--p);margin-bottom:7px">📝 الوصف</div><div style="font-size:.82em;line-height:1.65">${ex.desc}</div></div><button class="btn btn-ai btn-sm" onclick="getExTips('${ex.name}',this)">💡 نصائح AI</button>${YOUTUBE_LINKS[ex.name]?`<a class="yt-btn" href="${YOUTUBE_LINKS[ex.name]}" target="_blank" rel="noopener">▶️ شاهد التقنية على YouTube</a>`:''}${renderFormPhases(ex.name)?`<div style="margin-top:10px">${renderFormPhases(ex.name)}</div>`:''}<div id="exTipsArea"></div>`;document.getElementById('libMo').classList.add('act')}
+function renderLibContent(q=''){
+  const el=document.getElementById('libContent');if(!el)return;
+  let items=EXERCISE_LIBRARY;
+  if(libFilter!=='all')items=items.filter(e=>e.muscle===libFilter||e.muscle.includes(libFilter)||(e.sec||'').includes(libFilter));
+  if(q)items=items.filter(e=>e.name.toLowerCase().includes(q)||e.muscle.toLowerCase().includes(q)||(e.desc||'').includes(q)||(e.focus||'').toLowerCase().includes(q));
+  const cnt=document.getElementById('libCount');if(cnt)cnt.textContent=items.length;
+  if(!items.length){el.innerHTML='<div class="empty"><div class="eic">📚</div><h3>لا نتائج</h3></div>';return}
+  const dm={easy:{t:'مبتدئ',c:'easy',icon:'🟢'},medium:{t:'متوسط',c:'medium',icon:'🟡'},hard:{t:'متقدم',c:'hard',icon:'🔴'}};
+  const typeIcon={compound:'🔗',isolation:'🎯'};
+  /* group by muscle */
+  const groups={};
+  items.forEach(ex=>{if(!groups[ex.muscle])groups[ex.muscle]=[];groups[ex.muscle].push(ex);});
+  el.innerHTML=Object.entries(groups).map(([muscle,exs])=>`
+    <div style="margin-bottom:4px">
+      <div style="font-size:.72em;font-weight:800;color:var(--p);padding:8px 4px 4px;border-bottom:1px solid rgba(249,115,22,.15);margin-bottom:4px;display:flex;align-items:center;gap:6px">
+        💪 ${muscle} <span style="font-size:.85em;color:var(--tx3);font-weight:400">(${exs.length} تمرين)</span>
+      </div>
+      ${exs.map(ex=>{
+        const d=dm[ex.difficulty]||dm.medium;
+        const ti=typeIcon[ex.type]||'';
+        const inProgram=Object.values(G.days||{}).some(day=>day.exercises.some(e=>e.name===ex.name));
+        return`<div class="lib-item" onclick="showExDetails('${ex.id}')" style="${inProgram?'border-right:3px solid var(--ok)':''}">
+          <div class="lib-item-header">
+            <div class="lib-item-name">${ex.name} ${inProgram?'<span style="font-size:.65em;color:var(--ok)">✓ في برنامجك</span>':''}</div>
+            <div class="diff-badge ${d.c}">${d.icon} ${d.t}</div>
+          </div>
+          <div style="display:flex;gap:6px;margin:4px 0;flex-wrap:wrap">
+            <span class="muscle-tag">${ex.muscle}</span>
+            ${ex.sec?`<span style="font-size:.65em;color:var(--tx3);padding:2px 6px;background:rgba(255,255,255,.05);border-radius:6px">+${ex.sec}</span>`:''}
+            <span style="font-size:.65em;color:var(--tx2)">⚙️ ${ex.equipment}</span>
+            ${ti?`<span style="font-size:.65em;color:var(--tx3)">${ti} ${ex.type==='compound'?'مركب':'عزل'}</span>`:''}
+          </div>
+          <div style="font-size:.75em;color:var(--tx2);margin-top:2px">${ex.desc}</div>
+          ${ex.focus?`<div style="font-size:.68em;color:var(--p);margin-top:3px">🎯 ${ex.focus}</div>`:''}
+        </div>`;
+      }).join('')}
+    </div>`).join('');
+}
+function showExDetails(id){
+  const ex=EXERCISE_LIBRARY.find(e=>e.id===id);if(!ex)return;
+  const dm={easy:{t:'مبتدئ',c:'easy',i:'🟢'},medium:{t:'متوسط',c:'medium',i:'🟡'},hard:{t:'متقدم',c:'hard',i:'🔴'}};
+  const d=dm[ex.difficulty]||dm.medium;
+  const inProgram=Object.values(G.days||{}).some(day=>day.exercises.some(e=>e.name===ex.name));
+  /* Days that have this exercise */
+  const programDays=Object.entries(G.days||{}).filter(([dk,day])=>day.exercises.some(e=>e.name===ex.name)).map(([dk,day])=>day.name);
+
+  document.getElementById('libMoT').textContent=ex.name;
+  document.getElementById('libMoB').innerHTML=`
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+      <span class="muscle-tag">${ex.muscle}</span>
+      <span class="diff-badge ${d.c}">${d.i} ${d.t}</span>
+      <span style="font-size:.7em;padding:3px 9px;background:rgba(255,255,255,.07);border-radius:8px;color:var(--tx2)">⚙️ ${ex.equipment}</span>
+      <span style="font-size:.7em;padding:3px 9px;background:rgba(255,255,255,.07);border-radius:8px;color:var(--tx2)">${ex.type==='compound'?'🔗 مركب':'🎯 عزل'}</span>
+    </div>
+
+    ${ex.sec?`<div style="font-size:.75em;color:var(--tx3);margin-bottom:10px">عضلات مساعدة: <span style="color:var(--tx2)">${ex.sec}</span></div>`:''}
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+      <div style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:10px;text-align:center">
+        <div style="font-size:.65em;color:var(--tx3);margin-bottom:3px">🎯 الهدف</div>
+        <div style="font-size:.82em;font-weight:700;color:var(--p)">${ex.focus||'-'}</div>
+      </div>
+      <div style="background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.18);border-radius:10px;padding:10px;text-align:center">
+        <div style="font-size:.65em;color:var(--tx3);margin-bottom:3px">📊 المثالي</div>
+        <div style="font-size:.78em;font-weight:700;color:var(--ok)">${ex.sets||'3-4'} سيتات × ${ex.reps||'8-12'} عدة</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.05);border-radius:12px;padding:12px;margin-bottom:8px">
+      <div style="font-size:.75em;font-weight:800;color:var(--p);margin-bottom:6px">📝 الوصف</div>
+      <div style="font-size:.82em;line-height:1.7;color:var(--tx)">${ex.desc}</div>
+    </div>
+
+    ${ex.technique?`<div style="background:rgba(34,211,238,.05);border:1px solid rgba(34,211,238,.15);border-radius:12px;padding:12px;margin-bottom:8px">
+      <div style="font-size:.75em;font-weight:800;color:var(--ok);margin-bottom:6px">✅ التقنية الصحيحة</div>
+      <div style="font-size:.8em;line-height:1.7">${ex.technique.split(' · ').map(t=>`<div style="display:flex;gap:6px;padding:3px 0"><span style="color:var(--ok)">▸</span><span>${t}</span></div>`).join('')}</div>
+    </div>`:''}
+
+    ${ex.mistake?`<div style="background:rgba(248,113,113,.05);border:1px solid rgba(248,113,113,.18);border-radius:12px;padding:12px;margin-bottom:12px">
+      <div style="font-size:.75em;font-weight:800;color:var(--no);margin-bottom:6px">⚠️ الأخطاء الشائعة</div>
+      <div style="font-size:.8em;line-height:1.7">${ex.mistake.split(' · ').map(m=>`<div style="display:flex;gap:6px;padding:3px 0"><span style="color:var(--no)">✕</span><span>${m}</span></div>`).join('')}</div>
+    </div>`:''}
+
+    ${inProgram?`<div style="background:rgba(34,211,238,.07);border:1px solid rgba(34,211,238,.2);border-radius:10px;padding:10px;margin-bottom:10px;font-size:.78em">
+      <span style="color:var(--ok)">✓ في برنامجك:</span> <span style="color:var(--tx2)">${programDays.join('، ')}</span>
+    </div>`:''}
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button class="btn btn-ai btn-sm" onclick="getExTips('${ex.name}',this)">💡 نصائح AI تفصيلية</button>
+      <button class="btn btn-p btn-sm" onclick="showAddToWorkout('${ex.id}')">➕ أضف لبرنامجي</button>
+      ${YOUTUBE_LINKS[ex.name]?`<a class="yt-btn" href="${YOUTUBE_LINKS[ex.name]}" target="_blank" rel="noopener">▶️ شاهد التقنية</a>`:''}
+    </div>
+    ${renderFormPhases(ex.name)?`<div style="margin-top:10px">${renderFormPhases(ex.name)}</div>`:''}
+    <div id="exTipsArea"></div>
+    <div id="addToWorkoutArea"></div>`;
+  document.getElementById('libMo').classList.add('act');
+}
+
+/* ── Add exercise to workout day ── */
+function showAddToWorkout(exId){
+  const ex=EXERCISE_LIBRARY.find(e=>e.id===exId);if(!ex)return;
+  const el=document.getElementById('addToWorkoutArea');if(!el)return;
+  const days=Object.entries(G.days||{});
+  el.innerHTML=`<div style="margin-top:14px;background:rgba(255,255,255,.05);border-radius:12px;padding:14px">
+    <div style="font-size:.8em;font-weight:800;color:var(--p);margin-bottom:10px">➕ أضف "${ex.name}" ليوم:</div>
+    <select id="addToDay" style="width:100%;padding:9px;border:1.5px solid rgba(255,255,255,.15);border-radius:10px;background:rgba(20,32,58,.9);color:var(--tx);font-family:'Cairo';font-size:.82em;outline:0;margin-bottom:8px">
+      ${days.map(([dk,day])=>`<option value="${dk}">${day.name} (${day.exercises.filter(e=>!e.isWarmup).length} تمرين)</option>`).join('')}
+    </select>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
+      <div><div style="font-size:.68em;color:var(--tx3);margin-bottom:3px">سيتات</div>
+        <input type="number" id="addSets" value="${ex.sets?.split('-')[0]||3}" min="1" max="10" style="width:100%;padding:8px;border:1.5px solid rgba(255,255,255,.12);border-radius:8px;background:rgba(255,255,255,.06);color:var(--tx);font-family:'Cairo';text-align:center;outline:0"></div>
+      <div><div style="font-size:.68em;color:var(--tx3);margin-bottom:3px">عدات</div>
+        <input type="text" id="addReps" value="${ex.reps||'8-12'}" style="width:100%;padding:8px;border:1.5px solid rgba(255,255,255,.12);border-radius:8px;background:rgba(255,255,255,.06);color:var(--tx);font-family:'Cairo';text-align:center;outline:0"></div>
+    </div>
+    <button class="btn btn-ok btn-full" onclick="confirmAddToWorkout('${exId}')">✅ أضف للبرنامج</button>
+  </div>`;
+}
+
+function confirmAddToWorkout(exId){
+  const ex=EXERCISE_LIBRARY.find(e=>e.id===exId);if(!ex)return;
+  const dk=document.getElementById('addToDay')?.value;
+  const sets=parseInt(document.getElementById('addSets')?.value)||3;
+  const reps=document.getElementById('addReps')?.value||'8-12';
+  if(!dk||!G.days[dk])return toast('اختر اليوم','w');
+  const already=G.days[dk].exercises.some(e=>e.name===ex.name);
+  if(already)return toast('التمرين موجود بالفعل في هذا اليوم','w');
+  const newEx={id:'lib_'+Date.now(),name:ex.name,sets,reps,lastW:0,unit:'كجم',muscle:ex.muscle,isCustom:false,fromLibrary:exId};
+  G.days[dk].exercises.push(newEx);
+  saveD();
+  if(curDay===dk)rExs();
+  toast(`✅ ${ex.name} أُضيف لـ ${G.days[dk].name}`,'s');
+  document.getElementById('addToWorkoutArea').innerHTML=`<div style="margin-top:10px;text-align:center;color:var(--ok);font-size:.82em">✅ تم الإضافة بنجاح!</div>`;
+}
 async function getExTips(name,btn){const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const r=await callGroq([{role:'system',content:'اشرح التمرين.'},{role:'user',content:`${name}: الوضعية + الحركة + الأخطاء + نصائح`}],800,0.6,'training');if(r)document.getElementById('exTipsArea').innerHTML=`<div style="background:rgba(254,215,170,.08);border:1px solid rgba(254,215,170,.2);border-radius:12px;padding:13px;margin-top:12px"><div style="font-size:.8em;line-height:1.7;white-space:pre-wrap">${r}</div></div>`;btn.innerHTML=o;btn.disabled=false}
 function renderProfilePage(){const el=document.getElementById('profileSubLine');if(el)el.textContent=`${PERIOD.info().icon} ${PERIOD.info().label} · Fatigue ${FATIGUE.score()}/100`;const ps=document.getElementById('profileStats');if(ps)ps.innerHTML=`<div class="ps-item"><div class="ps-val">${G.ses.length}</div><div class="ps-lbl">جلسات</div></div><div class="ps-item"><div class="ps-val">${G.streak||0}</div><div class="ps-lbl">Streak 🔥</div></div><div class="ps-item"><div class="ps-val">${recoveryScore()}%</div><div class="ps-lbl">Recovery</div></div><div class="ps-item"><div class="ps-val">${FATIGUE.score()}</div><div class="ps-lbl">Fatigue</div></div>`;rSchedule();rMacroTargets();rBodyTrack();renderMeasurements();renderGoals()}
 const SCHED_TRAIN_OPTS=[{v:'Push A — صدر + كتف + تراي',l:'💪 Push A — صدر + كتف + تراي'},{v:'Pull A — ظهر + باي',l:'🏋️ Pull A — ظهر + باي'},{v:'Leg A — رجل أمامي + سمانة',l:'🦵 Leg A — رجل أمامي + سمانة'},{v:'Push B — صدر + كتف + تراي',l:'💪 Push B — صدر + كتف + تراي'},{v:'Pull B — ظهر + باي',l:'🏋️ Pull B — ظهر + باي'},{v:'Leg B — رجل خلفي + سمانة',l:'🦵 Leg B — رجل خلفي + سمانة'},{v:'Upper Body — أعلى الجسم',l:'⬆️ Upper Body'},{v:'Lower Body — أسفل الجسم',l:'⬇️ Lower Body'},{v:'Full Body — كامل الجسم',l:'🔥 Full Body'},{v:'Cardio + Core',l:'🏃 Cardio + Core'},{v:'custom',l:'✏️ مخصص...'}];
@@ -3698,8 +3920,7 @@ footer{margin-top:30px;text-align:center;font-size:.75em;color:#6b7280}
 ${prs.length?prs.map(p=>`<div class="pr"><span>${p.name}</span><strong style="color:#fbbf24">${p.w} كجم (+${(p.w-p.prev).toFixed(1)})</strong></div>`).join(''):'<p style="color:#6b7280">لا توجد PRs هذا الشهر</p>'}
 <h2>📅 الجلسات</h2>
 ${monthSes.map(s=>`<div class="ses"><span style="color:#fb923c">${new Date(s.date).toLocaleDateString('ar-EG')}</span> · <strong>${s.dn}</strong> · ${Object.keys(s.exs||{}).length} تمارين · ${s.duration||0} دق</div>`).join('')}
-<footer>GLASS Elite · جيمك في جيبك 💪</footer>
-</body></html>`;
+<footer>GLASS Elite · جيمك في جيبك 💪</footer>`;
   const blob=new Blob([html],{type:'text/html;charset=utf-8'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
@@ -3742,6 +3963,322 @@ document.addEventListener('DOMContentLoaded',function(){
   if(btn)btn.textContent='🏠 وضع المنزل: '+(G.homeMode?'تشغيل ✅':'إيقاف');
 });
 /* ═══════════════════════════════════════════════════════════ */
+
+</script>
+
+<script>
+
+/* ════════════════════════════════════════════════════════════
+   LIVE INTERACTIVE SYSTEM — v1
+   • Live stats per keystroke
+   • Achievement animations (PR, level-up, milestones)
+   • Interactive warm-up protocol with timers
+   ════════════════════════════════════════════════════════════ */
+
+/* ── 1. LIVE VOLUME TRACKER (updates as you type) ── */
+(function patchOnSetChange(){
+  const _orig = onSetChange;
+  window.onSetChange = function(id, i, be){
+    _orig(id, i, be);
+    /* live PR glow on weight input */
+    const wEl = document.getElementById(`sw-${id}-${i}`);
+    const v = parseFloat(wEl?.value) || 0;
+    if(v > 0 && v > be && be > 0){
+      wEl.style.boxShadow = '0 0 0 2px rgba(251,191,36,.55)';
+      wEl.style.borderColor = '#fbbf24';
+    } else {
+      wEl.style.boxShadow = '';
+      wEl.style.borderColor = '';
+    }
+    /* live session volume bar update */
+    _liveUpdateSessionVol();
+  };
+})();
+
+function _liveUpdateSessionVol(){
+  if(!curDay) return;
+  const day = G.days[curDay];
+  if(!day) return;
+  let totalVol = 0, totalSets = 0, doneSets = 0;
+  day.exercises.forEach(ex => {
+    if(ex.isWarmup) return;
+    const ns = ex.sets || 3;
+    for(let i=0; i<ns; i++){
+      const w = parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value) || 0;
+      const r = parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value) || 0;
+      const done = document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done');
+      totalVol += w * (r||1);
+      totalSets++;
+      if(done) doneSets++;
+    }
+  });
+  const el = document.getElementById('liveVolPill');
+  if(el){
+    el.textContent = `🏋️ ${Math.round(totalVol)} كجم | ✓ ${doneSets}/${totalSets} سيت`;
+  }
+}
+
+/* ── 2. LIVE PILL in workout header ── */
+(function injectLiveVolPill(){
+  document.addEventListener('DOMContentLoaded', () => {
+    const compBar = document.getElementById('compBarArea');
+    if(compBar && !document.getElementById('liveVolPill')){
+      const pill = document.createElement('div');
+      pill.id = 'liveVolPill';
+      pill.className = 'live-vol';
+      pill.style.cssText = 'margin:6px 0;';
+      pill.textContent = '🏋️ ابدأ لترى الحجم الحي';
+      compBar.parentNode.insertBefore(pill, compBar.nextSibling);
+    }
+  });
+})();
+
+/* ── 3. MILESTONE POPUPS ── */
+const _milestoneFired = new Set();
+function checkMilestone(pct){
+  const key = Math.floor(pct/25)*25;
+  if(key < 25 || _milestoneFired.has(key)) return;
+  _milestoneFired.add(key);
+  const msgs = {25:'💪 ربع الطريق خلصت!', 50:'🔥 النص خلص — استمر!', 75:'⚡ بس ربع تاني!', 100:'🎉 أكملت الجلسة!'};
+  if(!msgs[key]) return;
+  const el = document.createElement('div');
+  el.className = 'milestone-pop';
+  el.textContent = msgs[key];
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2800);
+  if(key === 50) fireConfetti(30);
+  if(key === 100) { fireConfetti(80); setTimeout(()=>fireConfetti(80), 600); }
+}
+
+/* patch updateCompBar to trigger milestones */
+const _origUCB = updateCompBar;
+window.updateCompBar = function(){
+  _origUCB();
+  if(!curDay) return;
+  const day = G.days[curDay], sk = sesKey(curDay);
+  const total = day.exercises.filter(e=>!e.isWarmup).length;
+  const done  = day.exercises.filter(e=>!e.isWarmup && G.doneExs[sk]?.[ e.id]).length;
+  if(total > 0) checkMilestone(Math.round(done/total*100));
+  _liveUpdateSessionVol();
+};
+
+/* ── 4. ENHANCED PR CELEBRATION ── */
+const _origToggleSD = toggleSetDone;
+window.toggleSetDone = function(id, i){
+  const prevBest = getBestSet(id);
+  _origToggleSD(id, i);
+  const isDone = document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done');
+  if(!isDone) return;
+  const wEl = document.getElementById(`sw-${id}-${i}`);
+  const newW = parseFloat(wEl?.value) || 0;
+  if(newW > prevBest && prevBest > 0){
+    /* screen flash */
+    const flash = document.createElement('div');
+    flash.className = 'screen-flash';
+    document.body.appendChild(flash);
+    setTimeout(()=>flash.remove(), 600);
+    /* big PR banner */
+    showPRBanner(document.querySelector(`#exi-${id} .exn`)?.textContent || 'تمرين', newW, prevBest);
+    /* big confetti */
+    fireConfetti(70);
+    setTimeout(()=>fireConfetti(50), 400);
+    /* XP for PR */
+    if(typeof addXP === 'function') setTimeout(()=>addXP(50,'رقم قياسي جديد 🏆'), 800);
+  } else if(isDone) {
+    /* normal set done */
+    floatXP('+10', wEl);
+    if(typeof addXP === 'function') setTimeout(()=>{ if(!G._setXPThisSession) G._setXPThisSession=0; G._setXPThisSession++; if(G._setXPThisSession%5===0){addXP(10,'5 سيتات ✅');} }, 100);
+  }
+};
+
+function showPRBanner(exName, newW, prevW){
+  const existing = document.querySelector('.pr-banner');
+  if(existing) existing.remove();
+  const el = document.createElement('div');
+  el.className = 'pr-banner';
+  el.innerHTML = `<div class="pr-banner-trophy">🏆</div>
+    <h2>رقم قياسي جديد!</h2>
+    <div class="pr-banner-weight">${newW} كجم</div>
+    <p>${exName}<br>+${(newW-prevW).toFixed(1)} كجم فوق سابق (${prevW}كجم)</p>
+    <button onclick="this.parentNode.remove()" style="margin-top:14px;padding:8px 24px;background:rgba(249,115,22,.2);border:1px solid rgba(249,115,22,.4);border-radius:20px;color:#f97316;font-family:'Cairo';font-size:.85em;cursor:pointer;font-weight:700">🔥 واصل!</button>`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 5000);
+}
+
+/* ── 5. FLOATING XP TEXT ── */
+function floatXP(text, nearEl){
+  const el = document.createElement('div');
+  el.className = 'xp-float';
+  el.textContent = text;
+  const rect = nearEl?.getBoundingClientRect() || {left: window.innerWidth/2, top: window.innerHeight/2};
+  el.style.left = (rect.left + (nearEl?.offsetWidth||0)/2) + 'px';
+  el.style.top  = (rect.top - 10) + 'px';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 1900);
+}
+
+/* ── 6. EXERCISE COMPLETE BURST ── */
+const _origCheckASD = checkAllSetsDone;
+window.checkAllSetsDone = function(id){
+  const before = document.getElementById(`chk-${id}`)?.classList.contains('checked');
+  _origCheckASD(id);
+  const after = document.getElementById(`chk-${id}`)?.classList.contains('checked');
+  if(!before && after){
+    /* burst animation on exercise card */
+    const card = document.getElementById(`exi-${id}`);
+    card?.classList.add('exi-complete-burst');
+    setTimeout(()=>card?.classList.remove('exi-complete-burst'), 800);
+    if(navigator.vibrate) navigator.vibrate([30,50,80]);
+    floatXP('✅ تمرين!', card);
+    /* check XP level-up */
+    if(typeof addXP === 'function') setTimeout(()=>{
+      const prev = getXPLevel(G.xp||0);
+      addXP(25,'تمرين مكتمل');
+      const next = getXPLevel(G.xp||0);
+      if(prev.name !== next.name) showLevelUpOverlay(next);
+    }, 300);
+  }
+};
+
+/* ── 7. LEVEL-UP OVERLAY ── */
+function showLevelUpOverlay(level){
+  const existing = document.querySelector('.lvlup-overlay');
+  if(existing) existing.remove();
+  fireConfetti(100);
+  setTimeout(()=>fireConfetti(80),500);
+  const el = document.createElement('div');
+  el.className = 'lvlup-overlay';
+  el.innerHTML = `<div class="lvlup-card">
+    <div class="lvlup-icon">${level.icon}</div>
+    <div class="lvlup-title">ترقية مستوى!</div>
+    <div class="lvlup-name">${level.name}</div>
+    <div class="lvlup-sub">أنت الآن في مستوى <strong>${level.name}</strong> 🔥</div>
+    <button onclick="this.closest('.lvlup-overlay').remove()" style="margin-top:20px;padding:10px 28px;background:linear-gradient(135deg,#f97316,#fb923c);border:none;border-radius:20px;color:#fff;font-family:'Cairo';font-size:.9em;font-weight:900;cursor:pointer">🚀 استمر!</button>
+  </div>`;
+  document.body.appendChild(el);
+  if(navigator.vibrate) navigator.vibrate([100,50,100,50,200]);
+}
+
+/* ── 8. INTERACTIVE WARM-UP PROTOCOL ── */
+window.renderWarmupProto = function(exId, exName, workingWeight){
+  if(!workingWeight || workingWeight < 20) return '';
+  /* show for all exercises with working weight, not just compound */
+  const sets = getWarmupSets(workingWeight);
+  if(!sets.length) return '';
+
+  const tips = {
+    'Bench': 'اضبط الكتف للخلف وللأسفل · قوس خفيف بالظهر',
+    'Squat': 'عمق أدنى من الركبة · ركبتك فوق أصابعك',
+    'Deadlift': 'الظهر مستقيم · الصدر للأعلى · ابدأ بالشد ببطء',
+    'OHP': 'اضغط الجلوتس · رأسك للخلف قليلاً أثناء الدفع',
+    'Row': 'ثبّت الكتف · اسحب للحوض لا للصدر',
+  };
+  const tip = Object.entries(tips).find(([k])=>exName.includes(k))?.[1] || '';
+
+  const rows = sets.map((s,i) => `
+    <div class="wup-row-interactive">
+      <div class="wup-check" id="wc-${exId}-${i}" onclick="doneWarmup('${exId}',${i},this)"></div>
+      <div style="font-size:.78em;color:var(--tx2)">${s.pct}</div>
+      <div style="font-weight:700;font-size:.88em">${s.w}كجم</div>
+      <div style="font-size:.78em;color:var(--tx2)">${s.r} عدات</div>
+      <button class="wup-timer-btn" onclick="startWarmupTimer(this,${i===sets.length-1?120:60})">
+        ⏱ ${i===sets.length-1?'2د':'1د'}
+      </button>
+    </div>`).join('');
+
+  return `<div class="warmup-proto" style="margin-top:10px">
+    <div class="wup-title" style="display:flex;justify-content:space-between;align-items:center">
+      <span>🔥 إحماء تفاعلي</span>
+      <span style="font-size:.72em;color:var(--tx3)">${sets.length} سيتات • اضغط ✓ بعد كل سيت</span>
+    </div>
+    ${tip?`<div style="font-size:.72em;color:var(--wn);margin-bottom:8px;padding:6px 10px;background:rgba(251,191,36,.07);border-radius:8px;border-right:2px solid var(--wn)">💡 ${tip}</div>`:''}
+    <div>
+      <div style="display:grid;grid-template-columns:26px 1fr 1fr 1fr 36px;gap:4px;padding:0 0 6px;border-bottom:.5px solid rgba(255,255,255,.08)">
+        <div style="font-size:.65em;color:var(--tx3)">✓</div>
+        <div style="font-size:.65em;color:var(--tx3)">نسبة</div>
+        <div style="font-size:.65em;color:var(--tx3)">وزن</div>
+        <div style="font-size:.65em;color:var(--tx3)">عدات</div>
+        <div style="font-size:.65em;color:var(--tx3)">راحة</div>
+      </div>
+      ${rows}
+    </div>
+    <div id="wup-prog-${exId}" style="margin-top:8px;font-size:.72em;color:var(--tx3);text-align:center">
+      0/${sets.length} سيتات إحماء مكتملة
+    </div>
+  </div>`;
+};
+
+/* warmup set done */
+window._wupDone = {};
+window.doneWarmup = function(exId, i, el){
+  el.classList.toggle('done');
+  el.textContent = el.classList.contains('done') ? '✓' : '';
+  if(el.classList.contains('done') && navigator.vibrate) navigator.vibrate(15);
+  /* count */
+  if(!window._wupDone[exId]) window._wupDone[exId] = new Set();
+  el.classList.contains('done') ? window._wupDone[exId].add(i) : window._wupDone[exId].delete(i);
+  const done = window._wupDone[exId].size;
+  const total = document.querySelectorAll(`[id^="wc-${exId}-"]`).length;
+  const prog = document.getElementById(`wup-prog-${exId}`);
+  if(prog){
+    prog.textContent = `${done}/${total} سيتات إحماء مكتملة`;
+    if(done === total && total > 0){
+      prog.textContent = '✅ الإحماء اكتمل! ابدأ السيتات الفعلية';
+      prog.style.color = 'var(--ok)';
+      floatXP('🔥 إحماء!', prog);
+    }
+  }
+};
+
+/* warmup rest timer inline */
+window.startWarmupTimer = function(btn, sec){
+  if(btn._interval){ clearInterval(btn._interval); btn._interval=null; btn.textContent=`⏱ ${sec>60?'2د':'1د'}`; return; }
+  let rem = sec;
+  btn.style.background = 'rgba(34,211,238,.15)';
+  btn.style.color = 'var(--ok)';
+  btn._interval = setInterval(()=>{
+    rem--;
+    btn.textContent = rem > 0 ? `${rem}ث` : '✅';
+    if(rem <= 0){
+      clearInterval(btn._interval); btn._interval=null;
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.textContent = '▶ مجدد';
+      if(navigator.vibrate) navigator.vibrate([100,50,100]);
+    }
+  }, 1000);
+};
+
+/* ── 9. AUTO-DETECT SET COMPLETE (weight+reps filled) ── */
+(function patchOnSetChangeAuto(){
+  const _origOSC = window.onSetChange || onSetChange;
+  window.onSetChange = function(id, i, be){
+    _origOSC(id, i, be);
+    /* auto-highlight row when both w+r filled */
+    const w = parseFloat(document.getElementById(`sw-${id}-${i}`)?.value) || 0;
+    const r = parseInt(document.getElementById(`sr2-${id}-${i}`)?.value) || 0;
+    const row = document.getElementById(`sr-${id}-${i}`);
+    if(w > 0 && r > 0 && row && !row.classList.contains('set-done')){
+      row.style.borderColor = 'rgba(249,115,22,.35)';
+    } else if(row && !row.classList.contains('set-done')){
+      row.style.borderColor = '';
+    }
+  };
+})();
+
+/* ── 10. LIVE FATIGUE UPDATE after each set ── */
+const _origSaveCS = saveCurrentSet;
+window.saveCurrentSet = function(id, i){
+  _origSaveCS(id, i);
+  /* debounced fatigue refresh */
+  clearTimeout(window._fatDebounce);
+  window._fatDebounce = setTimeout(()=>{
+    rFatigueBar();
+    rFatigueBadge();
+    if(typeof renderReadinessBanner==='function') renderReadinessBanner();
+  }, 800);
+};
+
 
 </script>
 </body>
