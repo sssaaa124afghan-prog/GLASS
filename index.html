@@ -458,6 +458,13 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .wup-title{font-size:.72em;font-weight:800;color:var(--pu);margin-bottom:7px;display:flex;justify-content:space-between;align-items:center}
 .wup-rows{display:grid;grid-template-columns:26px 1fr 1fr 1fr;gap:4px;font-size:.68em}
 .wup-h{color:var(--tx3);font-weight:800;text-align:center;padding:3px 0}
+.wup-row-interactive{display:grid;grid-template-columns:26px 1fr 1fr 1fr 44px;gap:4px;align-items:center;padding:5px 2px;border-bottom:1px solid rgba(255,255,255,.05)}
+.wup-row-interactive:last-child{border-bottom:none}
+.wup-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(249,115,22,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.7em;font-weight:900;color:var(--ok);transition:.15s;flex-shrink:0}
+.wup-check.done{background:rgba(110,231,183,.15);border-color:var(--ok);color:var(--ok)}
+.wup-timer-btn{padding:4px 0;border-radius:8px;border:1px solid rgba(99,102,241,.3);background:rgba(99,102,241,.12);color:var(--bl);font-size:.7em;font-weight:800;cursor:pointer;font-family:'Cairo';text-align:center;transition:.15s;width:100%;white-space:nowrap}
+.wup-timer-btn:active{transform:scale(.93)}
+.wup-timer-btn:hover{background:rgba(99,102,241,.22);border-color:var(--bl)}
 .wup-cell{text-align:center;padding:4px 3px;background:rgba(255,255,255,.04);border-radius:6px;font-weight:700;color:var(--tx2)}
 .wup-cell.top{background:rgba(249,115,22,.08);color:var(--pu)}
 /* ══ TECHNIQUE TIP ══ */
@@ -524,6 +531,8 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .stat-tab.act{background:rgba(249,115,22,.15);border-color:rgba(249,115,22,.4);color:var(--p)}
 /* ══ LIGHT THEME ADDITIONS ══ */
 [data-theme="light"] .warmup-proto{background:rgba(234,88,12,.04);border-color:rgba(234,88,12,.15)}
+[data-theme="light"] .wup-timer-btn{background:rgba(99,102,241,.09);border-color:rgba(99,102,241,.25);color:#4338ca}
+[data-theme="light"] .wup-check{border-color:rgba(234,88,12,.35)}
 [data-theme="light"] .tip-box{background:rgba(2,132,199,.04);border-color:rgba(2,132,199,.15)}
 [data-theme="light"] .deload-banner{background:linear-gradient(135deg,rgba(234,88,12,.06),rgba(249,115,22,.04));border-color:rgba(234,88,12,.3)}
 [data-theme="light"] .goal-row{background:rgba(255,255,255,.7);border:1px solid rgba(234,88,12,.1)}
@@ -589,7 +598,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .form-phase-step{display:flex;gap:7px;align-items:flex-start;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .form-phase-step:last-child{border-bottom:none}
 .form-phase-label{font-weight:900;color:var(--p);font-size:.76em;min-width:110px;flex-shrink:0;padding-top:1px}
-.form-phase-cue{font-size:.74em;color:var(--tx1);line-height:1.6}
+.form-phase-cue{font-size:.74em;color:var(--tx);line-height:1.6}
 .form-phase-cues{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.08);font-size:.72em;color:var(--tx2);display:flex;gap:5px;flex-wrap:wrap;align-items:center}
 .form-cue-chip{background:rgba(253,230,138,.1);border:1px solid rgba(253,230,138,.25);border-radius:8px;padding:2px 8px;font-size:.88em;color:var(--wn)}
 .form-btn{background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.2);border-radius:8px;padding:5px 10px;font-size:.72em;font-weight:800;color:var(--p);cursor:pointer;font-family:'Cairo';margin-top:5px;display:inline-block}
@@ -657,6 +666,11 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .yt-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#f87171;font-size:.78em;font-weight:800;cursor:pointer;text-decoration:none;font-family:'Cairo';transition:.2s;margin-top:8px}
 .yt-btn:hover{background:rgba(239,68,68,.18)}
 [data-theme="light"] .yt-btn{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#dc2626}
+
+/* ══ YOUTUBE — popup mode, no modal needed ══ */
+/* ══ VISION KEY FIELD ══ */
+.vision-key-wrap{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.vision-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;padding:3px 10px;border-radius:8px;font-size:.65em;font-weight:800;margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -914,9 +928,17 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
   <div class="card">
     <div class="ct">⚙️ الإعدادات</div>
     <div class="fi">
-      <label>🔑 Groq API Key</label>
+      <label>🔑 Groq API Key <span style="font-size:.75em;color:var(--tx3)">(للـ AI النصي)</span></label>
       <input type="password" id="apiKeyInput" placeholder="gsk_...">
-      <button class="btn btn-p btn-full" onclick="saveAPIKey()" style="margin-top:6px">💾 حفظ API Key</button>
+      <button class="btn btn-p btn-full" onclick="saveAPIKey()" style="margin-top:6px">💾 حفظ Groq Key</button>
+      <div style="height:10px"></div>
+      <div class="vision-key-wrap">
+        <div class="vision-badge">👁️ Claude Vision</div>
+        <label style="font-size:.78em;color:var(--tx2);display:block;margin-bottom:5px">Claude API Key <span style="color:var(--tx3)">(لتحليل صور الأجهزة)</span></label>
+        <input type="password" id="claudeKeyInput" placeholder="sk-ant-..." style="width:100%;padding:9px 12px;border:1.5px solid rgba(139,92,246,.3);border-radius:10px;background:rgba(255,255,255,.06);color:var(--tx);font-family:'Cairo';font-size:.82em;outline:0">
+        <button class="btn btn-full" onclick="saveClaudeKey()" style="margin-top:6px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;padding:9px;border-radius:10px;font-family:'Cairo';font-weight:800;cursor:pointer">💾 حفظ Claude Key</button>
+        <div style="font-size:.65em;color:var(--tx3);margin-top:5px">احصل على مفتاح مجاني من console.anthropic.com</div>
+      </div>
     </div>
     <div class="info-box" style="margin-top:10px">
       <strong>ℹ️ للحصول على API Key مجاناً:</strong><br>
@@ -1228,7 +1250,7 @@ const EXERCISE_LIBRARY=[
 {id:'ex81', name:'Wrist Curl',                 muscle:'ساعد',     sec:'',                  equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3',   reps:'15-20',focus:'ساعد أمامي',   desc:'يبني قوة وحجم الساعد الأمامي.',                                technique:'الرسغ يتحرك فقط · اتكئ على الركبة.',                    mistake:'تحريك المرفق'},
 {id:'ex82', name:'Reverse Curl',               muscle:'ساعد',     sec:'Brachialis, باي',   equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'ساعد + باي',   desc:'يبني الساعد العلوي والـ Brachialis.',                           technique:'قبضة عكسية · الكوع ثابت.',                               mistake:'الأرجحة الزائدة'}
 ];
-let G={days:{},ses:[],bw:[],streak:0,lastWo:null,doneExs:{},completedDays:{},aiKey:'',chatHistory:[],theme:'dark',notifications:true,currentSets:{},schedule:null,wellness:{},nextSessionPlan:{},rpeHistory:{},weeklyChallenge:null,injuries:[],supplements:[],pinnedNote:''};
+let G={days:{},ses:[],bw:[],streak:0,lastWo:null,doneExs:{},completedDays:{},aiKey:'',claudeKey:'',chatHistory:[],theme:'dark',notifications:true,currentSets:{},schedule:null,wellness:{},nextSessionPlan:{},rpeHistory:{},weeklyChallenge:null,injuries:[],supplements:[],pinnedNote:''};
 const FATIGUE={score(){const s=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5).length;const v=SCI.weeklyVolume();const td=new Date().toISOString().split('T')[0];const w=G.wellness[td]||{sleep:7,energy:7,stress:3};return Math.round(Math.min(s/6*30,30)+Math.min(v/6000*25,25)+(10-Math.min(parseFloat(w.sleep)||7,10))/10*15+(10-Math.min(parseFloat(w.energy)||7,10))/10*15+Math.min(parseFloat(w.stress)||3,10)/10*15)},level(){const s=this.score();return s<40?'low':s<70?'moderate':s<85?'high':'critical'},label(){return{low:'منخفض ✅',moderate:'متوسط ⚡',high:'مرتفع ⚠️',critical:'حرج 🚨'}[this.level()]}};
 const PERIOD={week(){return(Math.floor(G.ses.length/3)%4)+1},type(){const w=this.week();return w===1?'volume':w===2?'intensity':w===3?'peak':'deload'},info(){return{volume:{label:'Volume Week',color:'block-volume',icon:'📦',desc:'حجم عالي · أوزان متوسطة · 4 سيتات'},intensity:{label:'Intensity Week',color:'block-intensity',icon:'⚡',desc:'أوزان ثقيلة · 3 سيتات · Rep Range أقل'},peak:{label:'Peak Week',color:'block-peak',icon:'🔥',desc:'أقصى قوة · 2-3 سيتات · وزن أقصى'},deload:{label:'Deload Week',color:'block-deload',icon:'🔄',desc:'تعافي · 90% من الأوزان · 2 سيتات'}}[this.type()]}};
 const VELOCITY={state(id){const h=G.ses.filter(s=>s.exs?.[id]).slice(-2);/* BUG FIX: slice(0,2)→slice(-2) = آخر جلستين */if(h.length<2)return 'stable';const avg=(s,k)=>{const ss=s.exs[id]?.sets?.filter(t=>t.w>0)||[];return ss.length?ss.reduce((v,t)=>v+(t[k]||0),0)/ss.length:0};const r0=avg(h[0],'r'),r1=avg(h[1],'r'),rpe0=avg(h[0],'rpe'),rpe1=avg(h[1],'rpe');if(rpe0>0&&rpe1>0&&r0<r1&&rpe0>rpe1)return 'fatigue_drop';return r0>r1?'improving':'stable'},label(s){return{improving:'📈 تحسن',fatigue_drop:'📉 Fatigue Drop',stable:'➡️ مستقر'}[s]||'➡️ مستقر'}};
@@ -1242,7 +1264,7 @@ function loadD(){try{const s=localStorage.getItem(K);if(s){const d=JSON.parse(s)
 // Migration آمنة — بتحافظ على بيانات المستخدم بدل G={...G,...d}
 G.ses=d.ses||[];G.bw=d.bw||[];G.streak=d.streak||0;G.lastWo=d.lastWo||null;
 G.doneExs=d.doneExs||{};G.completedDays=d.completedDays||{};
-G.aiKey=d.aiKey||'';G.chatHistory=d.chatHistory||[];
+G.aiKey=d.aiKey||'';G.claudeKey=d.claudeKey||'';G.chatHistory=d.chatHistory||[];
 G.theme=d.theme||'dark';G.notifications=d.notifications!==undefined?d.notifications:true;
 G.currentSets=d.currentSets||{};G.wellness=d.wellness||{};G.measurements=d.measurements||[];G.goals=d.goals||{};G.earnedBadges=d.earnedBadges||{};G.weeklyChallenge=d.weeklyChallenge||null;G.xp=d.xp||0;G.xpLevel=d.xpLevel||0;G.smartGoals=d.smartGoals||[];G.wellnessLog=d.wellnessLog||[];G.homeMode=false;
 G.nextSessionPlan=d.nextSessionPlan||{};G.rpeHistory=d.rpeHistory||{};
@@ -1255,6 +1277,7 @@ if(d.days&&d.days.pushA&&d.days.pullA&&d.days.legA&&d.days.pushB&&d.days.pullB&&
 }else{G.days=JSON.parse(JSON.stringify(MY_DAYS));}
 if(!G.schedule)G.schedule=JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
 if(G.aiKey)setTimeout(()=>{const i=document.getElementById('apiKeyInput');if(i)i.value=G.aiKey;},100);
+if(G.claudeKey)setTimeout(()=>{const i=document.getElementById('claudeKeyInput');if(i)i.value=G.claudeKey;},100);
 const t=document.getElementById('notifToggle');if(t)t.checked=G.notifications;
 }catch(e){console.warn('loadD:',e);G.days=JSON.parse(JSON.stringify(MY_DAYS));}}
 function saveD(){try{localStorage.setItem(K,JSON.stringify(G))}catch(e){/* BUG FIX: handle QuotaExceededError — prune old chat history */if(e.name==='QuotaExceededError'||e.code===22){if(G.chatHistory.length>20){G.chatHistory=G.chatHistory.slice(-20);try{localStorage.setItem(K,JSON.stringify(G));return}catch(e2){}}if(G.ses.length>200){G.ses=G.ses.slice(-150);try{localStorage.setItem(K,JSON.stringify(G));return}catch(e3){}}toast('⚠️ مساحة التخزين ممتلئة — صدّر بياناتك','w');}}}
@@ -1271,37 +1294,55 @@ let sessionStartTime=null,sessionTimerInterval=null;
 function fmtElapsed(ms){const t=Math.floor(ms/1000),h=Math.floor(t/3600),m=Math.floor((t%3600)/60),s=t%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
 function rDays(){const wk=weekKey(),done=G.completedDays[wk]||{},c=getCompletedCount(),wb=document.getElementById('weekBdg'),st=document.getElementById('strk'),dl=document.getElementById('dayList');if(wb)wb.textContent=`📅 ${c}/${dayOrder.length}`;if(st)st.textContent=G.streak||0;if(!dl)return;dl.innerHTML=dayOrder.map(k=>{const d=G.days[k];if(!d)return'';const ic=done[k],ia=curDay===k;return`<div class="dchip ${ia?'act':''} ${ic&&!ia?'completed':''}" onclick="selDay('${k}')">${ic?'<div class="done-mark">✓</div>':''}<div class="dn">${d.name}</div><div class="dm">${d.muscles}</div></div>`}).join('')}
 function selDay(k){if(typeof resetJournal==='function')resetJournal();if(curDay!==k){sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;}curDay=k;rDays();rExs();const el=document.getElementById('sesAct');if(el)el.style.display='block';setTimeout(()=>{const w=document.getElementById('woArea');if(w)w.scrollIntoView({behavior:'smooth',block:'start'})},100)}
-function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;wo.innerHTML=`<div class="card"><div class="ct">💪 ${day.muscles} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} تمرين</span></div>${day.exercises.map(ex=>{if(ex.isWarmup)return`<div class="warmup-box"><span style="font-size:1.4em">🔥</span><div><strong>إحماء:</strong> ${ex.reps}</div></div>`;const ns=ex.sets||3,ls=getLastSets(ex.id),be=getBestSet(ex.id)||ex.lastW||0,dn=G.doneExs[sk]&&G.doneExs[sk][ex.id],or=OE.getRecommendation(ex.id,ex.name,be),sg=pfl[ex.id],vs=VELOCITY.state(ex.id),ss=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[],dc=ss.length?eliteDecision(ex.id,ex.name,ss):{action:'stable',weight:be,msg:''};const coachH=getSmartCoach(ex,ex.id,be);const osH='';const edH='';const vcH=vs!=='stable'?`<span class="velocity-chip velocity-${vs}">${VELOCITY.label(vs)}</span>`:'';const lsH=sg?`<div style="background:rgba(254,215,170,.07);border:1px dashed rgba(254,215,170,.25);border-radius:10px;padding:10px;margin-top:8px;font-size:.76em"><strong style="color:var(--pu)">💡 من الجلسة السابقة:</strong> ${sg.reason}<div style="margin-top:4px;color:var(--tx2)">الهدف: ${sg.nextWeight}كجم × ${sg.targetReps}</div></div>`:'';const rows=Array.from({length:ns},(_,i)=>{const ps=ls[i]||null,pw=ps?ps.w:be,pr=ps?ps.r:'',pp=ps?ps.rpe:'',pt=pw>0?(pr?`${pw}×${pr}`:`${pw}`):'--';return`<div class="set-row" id="sr-${ex.id}-${i}"><div class="set-num" id="snum-${ex.id}-${i}">${i+1}</div><div class="set-prev">${pt}${pp?'<br><span style="font-size:.7em;color:var(--pu)">RPE '+pp+'</span>':''}</div><input type="number" class="set-in" id="sw-${ex.id}-${i}" placeholder="${pw>0?pw:''}" step="0.5" min="0" inputmode="decimal" oninput="onSetChange('${ex.id}',${i},${be})"><input type="number" class="set-in" id="sr2-${ex.id}-${i}" placeholder="${pr||'عدات'}" step="1" min="1" inputmode="numeric" oninput="onSetChange('${ex.id}',${i},${be})" style="font-size:.78em"><input type="number" class="rpe-in" id="srpe-${ex.id}-${i}" placeholder="${pp||'RPE'}" step="0.5" min="1" max="10" inputmode="decimal" oninput="onRPEChange('${ex.id}',${i})"><div class="set-chk" id="sc-${ex.id}-${i}" onclick="toggleSetDone('${ex.id}',${i})"></div></div>`}).join('');const mClr=getMuscleColor(ex.muscle||'');return`<div class="exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="${ex.muscle||''}"><div class="muscle-stripe" style="background:rgb(${mClr})"></div><div class="ext"><div style="flex:1"><div class="exn">${ex.name}</div><div class="exd">${ns} سيتات | ${ex.reps} عدة | ${ex.unit}</div>${ex.muscle?`<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:4px"><span class="muscle-tag">${ex.muscle}</span>${vcH}</div>`:''} ${be>0?`<div style="font-size:.65em;color:var(--wn);margin-top:3px">🏆 أفضل: ${be} ${ex.unit}</div>`:''}</div><div class="done-check ${dn?'checked':''}" id="chk-${ex.id}" onclick="toggleDone('${ex.id}')">${dn?'✓':''}</div></div>${coachH}${lsH}${(()=>{const tk=Object.keys(TIPS).find(k=>ex.name.includes(k)),fpH=renderFormPhases(ex.name);if(!tk&&!fpH)return'';let _th='';if(tk)_th+=`<button class="tip-btn" onclick="this.nextElementSibling.classList.toggle('open')">📋 تقنية</button><div class="tip-box" id="tip-${ex.id}">${TIPS[tk].map(t=>`<div class="tip-item"><span>✦</span><span>${t}</span></div>`).join('')}</div>`;if(fpH)_th+=`<button class="form-btn" onclick="var _fp=document.getElementById('fp-${ex.id}');_fp.style.display=_fp.style.display==='none'?'block':'none'">🎯 حركة صحيحة</button><div id="fp-${ex.id}" style="display:none">${fpH}</div>`;return _th})()}${renderWarmupProto(ex.id,ex.name,be)}<div class="sets-header"><span>#</span><span>سابق</span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE<span class="tt-q" onclick="showTip(this,'RPE (مقياس الجهد المدرَك): من 1 إلى 10. RPE 10 = أقصى جهد مطلق. RPE 8 = يمكنك تكراران إضافيتان. RPE 7 = يمكنك 3 تكرارات إضافية. المثالي: 7-9 في معظم السيتات.')">?</span></span><span>✓</span></div>${rows}<div class="sets-summary" id="sum-${ex.id}"><span class="ss-chip">0/${ns} سيت</span></div><textarea class="ex-note" id="n-${ex.id}" placeholder="📝 ملاحظة..." rows="1"></textarea><div id="injWarn-${ex.id}"></div><div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="swapExercise('${ex.id}','${ex.muscle||''}','${ex.name}')">🔀 بديل</button><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="editExerciseInDay('${ex.id}')">✏️ تعديل</button>${G.injuries&&G.injuries.some(i=>i.active&&i.muscle===(ex.muscle||''))?'<span style="font-size:.72em;color:var(--no);padding:5px 0">⚠️ إصابة في '+ex.muscle+'</span>':''}</div></div>`}).join('')}</div>`;updateCompBar();restoreSetInputs();renderDeloadBanner();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
+function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;wo.innerHTML=`<div class="card"><div class="ct">💪 ${day.muscles} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} تمرين</span></div>${day.exercises.map(ex=>{if(ex.isWarmup)return`<div class="warmup-box"><span style="font-size:1.4em">🔥</span><div><strong>إحماء:</strong> ${ex.reps}</div></div>`;const ns=ex.sets||3,ls=getLastSets(ex.id),be=getBestSet(ex.id)||ex.lastW||0,dn=G.doneExs[sk]&&G.doneExs[sk][ex.id],or=OE.getRecommendation(ex.id,ex.name,be),sg=pfl[ex.id],vs=VELOCITY.state(ex.id),ss=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[],dc=ss.length?eliteDecision(ex.id,ex.name,ss):{action:'stable',weight:be,msg:''};const coachH=getSmartCoach(ex,ex.id,be);const osH='';const edH='';const vcH=vs!=='stable'?`<span class="velocity-chip velocity-${vs}">${VELOCITY.label(vs)}</span>`:'';const lsH=sg?`<div style="background:rgba(254,215,170,.07);border:1px dashed rgba(254,215,170,.25);border-radius:10px;padding:10px;margin-top:8px;font-size:.76em"><strong style="color:var(--pu)">💡 من الجلسة السابقة:</strong> ${sg.reason}<div style="margin-top:4px;color:var(--tx2)">الهدف: ${sg.nextWeight}كجم × ${sg.targetReps}</div></div>`:'';const rows=Array.from({length:ns},(_,i)=>{const ps=ls[i]||null,pw=ps?ps.w:be,pr=ps?ps.r:'',pp=ps?ps.rpe:'',pt=pw>0?(pr?`${pw}×${pr}`:`${pw}`):'--';return`<div class="set-row" id="sr-${ex.id}-${i}"><div class="set-num" id="snum-${ex.id}-${i}">${i+1}</div><div class="set-prev">${pt}${pp?'<br><span style="font-size:.7em;color:var(--pu)">RPE '+pp+'</span>':''}</div><input type="number" class="set-in" id="sw-${ex.id}-${i}" placeholder="${pw>0?pw:''}" step="0.5" min="0" inputmode="decimal" oninput="onSetChange('${ex.id}',${i},${be})"><input type="number" class="set-in" id="sr2-${ex.id}-${i}" placeholder="${pr||'عدات'}" step="1" min="1" inputmode="numeric" oninput="onSetChange('${ex.id}',${i},${be})" style="font-size:.78em"><input type="number" class="rpe-in" id="srpe-${ex.id}-${i}" placeholder="${pp||'RPE'}" step="0.5" min="1" max="10" inputmode="decimal" oninput="onRPEChange('${ex.id}',${i},true)"><div class="set-chk" id="sc-${ex.id}-${i}" onclick="toggleSetDone('${ex.id}',${i})"></div></div>`}).join('');const mClr=getMuscleColor(ex.muscle||'');return`<div class="exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="${ex.muscle||''}"><div class="muscle-stripe" style="background:rgb(${mClr})"></div><div class="ext"><div style="flex:1"><div class="exn">${ex.name}</div><div class="exd">${ns} سيتات | ${ex.reps} عدة | ${ex.unit}</div>${ex.muscle?`<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:4px"><span class="muscle-tag">${ex.muscle}</span>${vcH}</div>`:''} ${be>0?`<div style="font-size:.65em;color:var(--wn);margin-top:3px">🏆 أفضل: ${be} ${ex.unit}</div>`:''}</div><div class="done-check ${dn?'checked':''}" id="chk-${ex.id}" onclick="toggleDone('${ex.id}')">${dn?'✓':''}</div></div>${coachH}${lsH}${(()=>{const tk=Object.keys(TIPS).find(k=>ex.name.includes(k)),fpH=renderFormPhases(ex.name);if(!tk&&!fpH)return'';let _th='';if(tk)_th+=`<button class="tip-btn" onclick="this.nextElementSibling.classList.toggle('open')">📋 تقنية</button><div class="tip-box" id="tip-${ex.id}">${TIPS[tk].map(t=>`<div class="tip-item"><span>✦</span><span>${t}</span></div>`).join('')}</div>`;if(fpH)_th+=`<button class="form-btn" onclick="var _fp=document.getElementById('fp-${ex.id}');_fp.style.display=_fp.style.display==='none'?'block':'none'">🎯 حركة صحيحة</button><div id="fp-${ex.id}" style="display:none">${fpH}</div>`;return _th})()}${renderWarmupProto(ex.id,ex.name,be)}<div class="sets-header"><span>#</span><span>سابق</span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE<span class="tt-q" onclick="showTip(this,'RPE (مقياس الجهد المدرَك): من 1 إلى 10. RPE 10 = أقصى جهد مطلق. RPE 8 = يمكنك تكراران إضافيتان. RPE 7 = يمكنك 3 تكرارات إضافية. المثالي: 7-9 في معظم السيتات.')">?</span></span><span>✓</span></div>${rows}<div class="sets-summary" id="sum-${ex.id}"><span class="ss-chip">0/${ns} سيت</span></div><textarea class="ex-note" id="n-${ex.id}" placeholder="📝 ملاحظة..." rows="1"></textarea><div id="injWarn-${ex.id}"></div><div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="swapExercise('${ex.id}','${ex.muscle||''}','${ex.name}')">🔀 بديل</button><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="editExerciseInDay('${ex.id}')">✏️ تعديل</button>${G.injuries&&G.injuries.some(i=>i.active&&i.muscle===(ex.muscle||''))?'<span style="font-size:.72em;color:var(--no);padding:5px 0">⚠️ إصابة في '+ex.muscle+'</span>':''}</div></div>`}).join('')}</div>`;updateCompBar();restoreSetInputs();renderDeloadBanner();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
   if(G.homeMode){document.querySelectorAll('.exn').forEach(el=>{const orig=el.textContent.trim();const alt=Object.keys(HOME_ALTS||{}).find(k=>orig.includes(k));if(alt&&HOME_ALTS[alt]!==orig){el.innerHTML=`<span style="text-decoration:line-through;color:var(--tx3);font-size:.85em">${orig}</span><br><span style="color:var(--ok)">${HOME_ALTS[alt]}</span>`;}});}
 }
-function onRPEChange(id,i){const el=document.getElementById(`srpe-${id}-${i}`);if(!el)return;const v=parseFloat(el.value)||0;el.classList.remove('rpe-easy','rpe-hard','rpe-max');if(v>0&&v<=6)el.classList.add('rpe-easy');else if(v>8.5&&v<10)el.classList.add('rpe-hard');else if(v>=10)el.classList.add('rpe-max');saveCurrentSet(id,i);updateSetSummary(id)}
+function onRPEChange(id,i,isUserInput){
+  const el=document.getElementById(`srpe-${id}-${i}`);if(!el)return;
+  // Mark as manually set so suggestRPE won't overwrite user's choice
+  if(isUserInput)el.dataset.manual='1';
+  const v=parseFloat(el.value)||0;
+  el.classList.remove('rpe-easy','rpe-hard','rpe-max');
+  if(v>0&&v<=6)el.classList.add('rpe-easy');
+  else if(v>8.5&&v<10)el.classList.add('rpe-hard');
+  else if(v>=10)el.classList.add('rpe-max');
+  saveCurrentSet(id,i);updateSetSummary(id);
+}
 function restoreSetInputs(){if(!curDay)return;const sk=sesKey(curDay),sv=G.currentSets&&G.currentSets[sk];if(!sv)return;Object.entries(sv).forEach(([id,sets])=>{sets.forEach((s,i)=>{const w=document.getElementById(`sw-${id}-${i}`),r=document.getElementById(`sr2-${id}-${i}`),rp=document.getElementById(`srpe-${id}-${i}`),c=document.getElementById(`sc-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(w&&s.w){w.value=s.w;w.classList.add('si-filled')}if(r&&s.r)r.value=s.r;if(rp&&s.rpe){rp.value=s.rpe;onRPEChange(id,i)}if(s.done&&c){c.classList.add('sc-done');c.textContent='✓';document.getElementById(`sr-${id}-${i}`)?.classList.add('set-done');if(n)n.classList.add('sn-done')}});updateSetSummary(id)})}
-function suggestRPE(id,i){
+function suggestRPE(id,i,forceUpdate){
   const rp=document.getElementById(`srpe-${id}-${i}`);
-  if(!rp||rp.value)return;
+  if(!rp)return;
+  // Skip ONLY if user manually typed a value (marked with data-manual="1")
+  // Don't skip on weight/reps change — always recalculate unless manual
+  if(rp.dataset.manual==='1'&&!forceUpdate)return;
   const r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,
         w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;
   if(!r||!w)return;
   const est1RM=SCI.calc1RM(w,r);
-  /* BUG FIX: initial value was est1RM → pct always 100% → sug always 10
-     Fix: initial = 0, fallback to reps-based if no history */
   const hist1RM=G.ses.slice(-15).reduce((best,s)=>{
     const e=s.exs?.[id];if(!e)return best;
     const ss=e.sets?.filter(t=>t.w>0&&t.r>0)||[];
     const h1=ss.length?Math.max(...ss.map(t=>SCI.calc1RM(t.w,t.r))):0;
     return Math.max(best,h1);
-  },0); /* ← was est1RM (bug) */
+  },0);
   let sug;
   if(hist1RM>0){
-    const pct=Math.min((est1RM/hist1RM)*100,99.9); /* cap below 100 so max effort ≠ auto-10 */
+    const pct=Math.min((est1RM/hist1RM)*100,99.9);
     sug=pct>=95?9.5:pct>=92?9:pct>=89?8.5:pct>=86?8:pct>=83?7.5:pct>=80?7:pct>=77?6.5:pct>=74?6:5.5;
   }else{
-    /* No history → estimate from reps only */
     sug=r<=2?9:r<=4?8.5:r<=6?8:r<=8?7.5:r<=10?7:r<=12?6.5:6;
   }
-  rp.value=sug;onRPEChange(id,i);
+  rp.value=sug;
+  delete rp.dataset.manual; // reset manual flag after auto-update
+  onRPEChange(id,i);
 }
-function onSetChange(id,i,be){const w=document.getElementById(`sw-${id}-${i}`);if(!w)return;const v=parseFloat(w.value)||0;v>0?(w.classList.add('si-filled'),v>be?w.classList.add('si-pr'):w.classList.remove('si-pr')):w.classList.remove('si-filled','si-pr');suggestRPE(id,i);saveCurrentSet(id,i);updateSetSummary(id)}
+function onSetChange(id,i,be){
+  const w=document.getElementById(`sw-${id}-${i}`);if(!w)return;
+  const v=parseFloat(w.value)||0;
+  v>0?(w.classList.add('si-filled'),v>be?w.classList.add('si-pr'):w.classList.remove('si-pr')):w.classList.remove('si-filled','si-pr');
+  suggestRPE(id,i,false); // forceUpdate=false → respects manual flag
+  saveCurrentSet(id,i);updateSetSummary(id);
+}
 function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=document.getElementById(`sr-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(!c)return;const _prevBest=getBestSet(id);if(!c.classList.contains('sc-done')){const w=document.getElementById(`sw-${id}-${i}`);if(w&&!w.value){const ls=getLastSets(id),p=ls[i];if(p&&p.w){w.value=p.w;w.classList.add('si-filled')}}c.classList.add('sc-done');c.textContent='✓';r?.classList.add('set-done');n?.classList.add('sn-done');suggestRPE(id,i);if(!sessionStartTime){sessionStartTime=Date.now();sessionTimerInterval=setInterval(updateCompBar,1000);}if(navigator.vibrate)navigator.vibrate(20);quickStartTimer(window._timerDefault||90);if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0;if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){fireConfetti(50);toast(`🏆 رقم قياسي جديد! ${_nw}كجم`,'s');document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}}}
 function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false};saveD()}
 function updateSetSummary(id){const sm=document.getElementById(`sum-${id}`);if(!sm)return;const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const ds=sets.filter(s=>s.done).length,fs=sets.filter(s=>s.w>0),vol=fs.reduce((t,s)=>t+s.w*(s.r||1),0),topW=fs.length?Math.max(...fs.map(s=>s.w)):0,avgW=fs.length?Math.round(fs.reduce((t,s)=>t+s.w,0)/fs.length*10)/10:0,rpes=sets.filter(s=>s.rpe>0),avgR=rpes.length?Math.round(rpes.reduce((t,s)=>t+s.rpe,0)/rpes.length*10)/10:0,rc=avgR>=9?'ss-rpe-high':avgR>=7?'ss-rpe-warn':'ss-rpe-ok';const max1RM=sets.filter(s=>s.w>0&&s.r>0).reduce((b,s)=>{const e1=SCI.calc1RM(s.w,s.r);return e1>b?e1:b},0);sm.innerHTML=`<span class="ss-chip">✓ ${ds}/${ns}</span>${vol>0?`<span class="ss-chip ss-vol">🏋️ ${Math.round(vol)}كجم</span>`:''}${topW>0?`<span class="ss-chip ss-top">⬆ ${topW}</span>`:''}${avgW>0?`<span class="ss-chip ss-avg">⌀ ${avgW}</span>`:''}${avgR>0?`<span class="ss-chip ${rc}">RPE ${avgR}</span>`:''}${max1RM>0?`<span class="ss-chip ss-1rm">💡 1RM≈${max1RM}</span>`:''}`}
@@ -1316,7 +1357,16 @@ function popHSel(){const s=document.getElementById('hSel');if(!s)return;const a=
 function renderExerciseChart(sessions,id){const pts=sessions.slice().reverse().map(s=>{const e=s.exs[id];let w=0;if(e.sets?.length){const f=e.sets.filter(t=>t.w>0);w=f.length?Math.max(...f.map(t=>t.w)):0}else w=e.w||0;return{w,dt:new Date(s.date).toLocaleDateString('ar-EG',{month:'numeric',day:'numeric'})}}).filter(p=>p.w>0);if(pts.length<2)return'';const W=300,H=110,PL=32,PR=8,PT=10,PB=26,iW=W-PL-PR,iH=H-PT-PB;const mn=Math.min(...pts.map(p=>p.w)),mx=Math.max(...pts.map(p=>p.w));const range=mx-mn||1;const xS=i=>PL+Math.round(i/(pts.length-1)*iW),yS=v=>PT+iH-Math.round((v-mn)/range*iH);const poly=pts.map((p,i)=>`${xS(i)},${yS(p.w)}`).join(' ');const fill=`${PL},${PT+iH} ${poly} ${xS(pts.length-1)},${PT+iH}`;const bestW=Math.max(...pts.map(p=>p.w));const dots=pts.map((p,i)=>{const isPR=p.w===bestW;return`<circle cx="${xS(i)}" cy="${yS(p.w)}" r="${isPR?5:2.5}" fill="${isPR?'#fde68a':'#f97316'}" opacity="${isPR?1:.75}"/>${isPR?`<text x="${xS(i)}" y="${yS(p.w)-8}" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="bold">${p.w}</text>`:''}`}).join('');const step=Math.max(1,Math.ceil(pts.length/5));const xlbls=pts.map((p,i)=>i%step===0||i===pts.length-1?`<text x="${xS(i)}" y="${H-3}" text-anchor="middle" font-size="8" fill="rgba(255,255,255,.35)">${p.dt}</text>`:'').join('');const ylbls=[mn,Math.round((mn+mx)/2),mx].map(v=>`<text x="${PL-3}" y="${yS(v)+3}" text-anchor="end" font-size="8" fill="rgba(255,255,255,.35)">${Math.round(v)}</text>`).join('');return`<div style="background:rgba(255,255,255,.04);border-radius:12px;padding:10px 8px;margin-bottom:12px;border:1px solid rgba(249,115,22,.12)"><div style="font-size:.7em;font-weight:800;color:var(--p);margin-bottom:5px">📈 منحنى التقدم</div><svg viewBox="0 0 ${W} ${H}" width="100%" style="overflow:visible;max-height:120px"><defs><linearGradient id="ecGrd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f97316" stop-opacity=".25"/><stop offset="100%" stop-color="#f97316" stop-opacity="0"/></linearGradient></defs><line x1="${PL}" y1="${PT}" x2="${PL}" y2="${PT+iH}" stroke="rgba(255,255,255,.07)" stroke-width="1"/><line x1="${PL}" y1="${PT+iH}" x2="${PL+iW}" y2="${PT+iH}" stroke="rgba(255,255,255,.07)" stroke-width="1"/><line x1="${PL}" y1="${yS((mn+mx)/2)}" x2="${PL+iW}" y2="${yS((mn+mx)/2)}" stroke="rgba(255,255,255,.04)" stroke-width="1" stroke-dasharray="3,3"/><polygon points="${fill}" fill="url(#ecGrd)"/><polyline points="${poly}" fill="none" stroke="#f97316" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}${xlbls}${ylbls}</svg></div>`}
 function rHist(){window._injectMoodToSessionsList && setTimeout(window._injectMoodToSessionsList, 200);const id=document.getElementById('hSel').value,c=document.getElementById('hContent');if(!c)return;if(!id){c.innerHTML='<div class="empty"><div class="eic">📊</div><h3>اختر تمرين</h3></div>';return}const ss=G.ses.filter(s=>s.exs&&s.exs[id]&&(s.exs[id].w>0||(s.exs[id].sets&&s.exs[id].sets.some(t=>t.w>0)))).sort((a,b)=>new Date(b.date)-new Date(a.date));setTimeout(()=>renderE1RMChart(id,ss.slice().reverse()),100);if(!ss.length){c.innerHTML='<div class="empty"><div class="eic">📊</div><h3>لا يوجد سجل</h3></div>';return}const best=getBestSet(id),trend=SCI.volumeTrend(id),proj=predictStrength(id);const chartHtml=renderExerciseChart(ss.slice(0,15),id);c.innerHTML=`<div class="sg" style="margin-bottom:12px"><div class="sc"><div class="sn">${best}</div><div class="sl">🏆 أفضل وزن</div></div><div class="sc"><div class="sn">${ss.length}</div><div class="sl">جلسات</div></div><div class="sc wn"><div class="sn">${trend>0?'+':''}${trend}%</div><div class="sl">📈 الاتجاه</div></div>${proj?`<div class="sc"><div class="sn" style="font-size:.9em;color:var(--wn)">${proj}كجم</div><div class="sl">🔮 12 أسبوع</div></div>`:''}</div>${chartHtml}${proj?`<div class="strength-proj"><div class="sp-title">🔮 توقع القوة</div><div class="sp-value">${proj} كجم</div><div class="sp-sub">بناءً على معدل تقدمك</div></div>`:''}${ss.slice(0,15).map((s,i)=>{const e=s.exs[id];let tw=0,vol=0,sh='',rh='';if(e.sets?.length){const f=e.sets.filter(t=>t.w>0);tw=f.length?Math.max(...f.map(t=>t.w)):0;vol=f.reduce((v,t)=>v+(t.w||0)*(t.r||1),0);sh=`<div style="font-size:.68em;color:var(--tx2);margin-top:3px">${f.map(t=>`${t.w}×${t.r||'?'}${t.rpe?'<span style="color:var(--pu)"> R'+t.rpe+'</span>':''}`).join(' | ')}</div>`;const rp=f.filter(t=>t.rpe>0);if(rp.length){const ar=Math.round(rp.reduce((v,t)=>v+t.rpe,0)/rp.length*10)/10;rh=`<span style="font-size:.65em;color:var(--pu)">RPE⌀ ${ar}</span>`}}else tw=e.w||0;const prev=ss[i+1]?ss[i+1].exs[id]:null,pt=prev?(prev.sets?.length?(prev.sets.filter(t=>t.w>0).reduce((b,t)=>t.w>b?t.w:b,0)||prev.w||0):prev.w||0):tw,/* BUG FIX: Math.max(...[]) = -Infinity when all sets have w=0 → use reduce with 0 default */d=Math.round((tw-pt)*10)/10,ip=tw===best&&best>0;return`<div style="background:rgba(255,255,255,.06);padding:10px;border-radius:12px;margin-bottom:6px;${ip?'border:1px solid var(--wn)':''}"><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:.72em;color:var(--tx2)">${new Date(s.date).toLocaleDateString('ar-EG',{weekday:'short',month:'short',day:'numeric'})}</div>${sh}</div><div style="display:flex;gap:5px;align-items:center">${ip?'<span>🏆</span>':''}<span style="font-weight:900;color:var(--p)">${tw}</span>${rh}${d!==0?`<span style="font-size:.68em;padding:2px 7px;border-radius:7px;${d>0?'background:rgba(110,231,183,.1);color:var(--ok)':'background:rgba(252,165,165,.08);color:var(--no)'}">${d>0?'+':''}${d}</span>`:''}</div></div></div>`}).join('')}`}
 function renderSessionsList(){const el=document.getElementById('sessionsList');if(!el)return;const ss=G.ses.slice(-10).reverse();if(!ss.length){el.innerHTML='<div class="empty"><div class="eic">📋</div><h3>لا توجد جلسات</h3></div>';return}el.innerHTML=ss.map(s=>{const ec=Object.values(s.exs).filter(e=>e.w>0||e.vol>0||(e.sets&&e.sets.some(t=>t.w>0))).length,tv=Math.round(SCI.sessionVolume(s));return`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:7px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div><div style="font-weight:800;font-size:.85em;color:var(--p)">${s.dn}</div><div style="font-size:.68em;color:var(--tx2)">${s.ds}</div></div><div style="text-align:right"><div style="font-weight:800;color:var(--ok)">${ec} تمرين</div><div style="font-size:.68em;color:var(--tx2)">${tv}كجم${s.duration?` · ⏱️${s.duration}د`:''}</div></div></div><div style="display:flex;gap:6px"><button class="btn btn-ai btn-sm" onclick="analyzeSpecificSession('${s.id}')">🔍 تحليل</button><button class="btn btn-d btn-sm" onclick="deleteSession('${s.id}')">🗑️</button></div></div>`}).join('')}
-function deleteSession(sid){if(!confirm('حذف هذه الجلسة؟'))return;G.ses=G.ses.filter(s=>s.id!==sid);saveD();renderSessionsList();rQuickStats();rStats();toast('🗑️ تم حذف الجلسة','w')}
+function deleteSession(sid){
+  // Replace confirm() with inline toast confirmation (CSP/mobile safe)
+  const existing=document.getElementById('_delSesModal');if(existing)existing.remove();
+  const overlay=document.createElement('div');
+  overlay.id='_delSesModal';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';
+  overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(248,113,113,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px;box-shadow:0 -10px 40px rgba(0,0,0,.5)"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:#f87171">🗑️ حذف الجلسة؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">لا يمكن التراجع عن هذا الإجراء.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_delSesModal').remove();G.ses=G.ses.filter(s=>s.id==='${sid}'?false:true);saveD();renderSessionsList();rQuickStats();rStats();toast('🗑️ تم حذف الجلسة','w')" style="flex:1;padding:11px;border-radius:10px;border:none;background:#ef4444;color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، احذف</button><button onclick="document.getElementById('_delSesModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
+}
 function renderVolumeChart(cid='volumeChart'){const el=document.getElementById(cid);if(!el)return;const days=[],td=new Date();for(let i=6;i>=0;i--){const d=new Date(td);d.setDate(d.getDate()-i);const k=d.toISOString().split('T')[0],v=G.ses.filter(s=>s.date.split('T')[0]===k).reduce((t,s)=>t+SCI.sessionVolume(s),0);days.push({vol:v,label:d.toLocaleDateString('ar-EG',{weekday:'short'})})}const mx=Math.max(...days.map(d=>d.vol),1);el.innerHTML=days.map(d=>`<div class="chart-bar"><div style="font-size:.55em;color:var(--p);font-weight:800;margin-bottom:2px">${d.vol||''}</div><div style="width:100%;height:${Math.max(d.vol/mx*80,3)}px;background:var(--gg);border-radius:5px 5px 0 0;min-height:3px"></div><div style="font-size:.55em;color:var(--tx3);margin-top:2px">${d.label}</div></div>`).join('')}
 function rStats(){const el=document.getElementById('oStats');if(!el)return;const wa=weeklyAnalysis();el.innerHTML=`<div class="sc"><div class="sn">${G.ses.length}</div><div class="sl">إجمالي الجلسات</div></div><div class="sc ok"><div class="sn">${wa.weeklyVolume}</div><div class="sl">حجم الأسبوع</div></div><div class="sc wn"><div class="sn">${wa.PRcount}</div><div class="sl">🏆 PRs</div></div><div class="sc"><div class="sn">${recoveryScore()}%</div><div class="sl">Recovery</div></div><div class="sc"><div class="sn">${FATIGUE.score()}</div><div class="sl">Fatigue</div></div><div class="sc"><div class="sn">${PERIOD.info().icon} ${PERIOD.week()}/4</div><div class="sl">${PERIOD.info().label}</div></div>`;renderVolumeChart('weeklyVolumeChart');rMuscleVol();rPRList();rStrengthProjections();renderTrainingCalendar();renderWeekCompare();renderVolLandmarks();checkBadges();}
 function rMuscleVol(){const el=document.getElementById('volInfo');if(!el)return;const m={};G.ses.slice(-10).forEach(s=>Object.values(s.exs||{}).forEach(e=>{if(e.muscle){const v=e.sets?.length?e.sets.reduce((t,s)=>t+(s.w||0)*(s.r||1),0):e.vol||0;m[e.muscle]=(m[e.muscle]||0)+v}}));const a=Object.entries(m).sort((x,y)=>y[1]-x[1]);if(!a.length){el.innerHTML='<div class="empty"><div class="eic">💪</div><h3>لا بيانات</h3></div>';return}const mx=a[0][1],lg=laggingMuscle();el.innerHTML=a.map(([n,v])=>`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:.78em;font-weight:800">${n} ${n===lg?'<span style="color:var(--no)">⚠️</span>':''}</span><span style="font-size:.75em;color:var(--p);font-weight:800">${Math.round(v)}كجم</span></div><div class="progress"><div class="progress-bar" style="width:${Math.round(v/mx*100)}%"></div></div></div>`).join('')}
@@ -1435,7 +1485,7 @@ function showExDetails(id){
     <div style="display:flex;flex-direction:column;gap:8px">
       <button class="btn btn-ai btn-sm" onclick="getExTips('${ex.name}',this)">💡 نصائح AI تفصيلية</button>
       <button class="btn btn-p btn-sm" onclick="showAddToWorkout('${ex.id}')">➕ أضف لبرنامجي</button>
-      ${YOUTUBE_LINKS[ex.name]?`<a class="yt-btn" href="${YOUTUBE_LINKS[ex.name]}" target="_blank" rel="noopener">▶️ شاهد التقنية</a>`:''}
+      ${YOUTUBE_LINKS[ex.name]?`<button class="yt-btn" onclick="openYT('${YOUTUBE_LINKS[ex.name]}','${ex.name}')">▶️ شاهد التقنية</button>`:''}
     </div>
     ${renderFormPhases(ex.name)?`<div style="margin-top:10px">${renderFormPhases(ex.name)}</div>`:''}
     <div id="exTipsArea"></div>
@@ -1500,8 +1550,21 @@ function addExercise(){const n=document.getElementById('newExName')?.value?.trim
 function buildAdvancedContext(){const wa=weeklyAnalysis(),rs=recoveryScore(),pe=[],pl=[];Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(ex.isWarmup)return;if(SCI.volumeTrend(ex.id)>5)pe.push(ex.name);if(OE.detectPlateau(ex.id))pl.push(ex.name)}));return{recoveryScore:rs,weeklyVolume:wa.weeklyVolume,strengthTrendPercent:wa.strengthTrendPercent,PRcount:wa.PRcount,plateauExercises:pl.join(',')||'لا',progressionExercises:pe.join(',')||'لا',totalSessions:G.ses.length,streak:G.streak||0,weekCompleted:getCompletedCount(),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),laggingMuscle:laggingMuscle(),imbalanceWarning:'بيانات متاحة'}}
 function detectIntent(m){const t=m.toLowerCase();if(/غذا|بروتين|كارب|وجبة|ماكرو|سعرات/.test(t))return 'nutrition';if(/fatigue|تعب/.test(t))return 'fatigue';if(/block|period|deload/.test(t))return 'periodization';if(/plateau|ثبات/.test(t))return 'plateau';if(/تمرين|برنامج/.test(t))return 'training';return 'general'}
 async function callGroq(messages,maxTokens=1200,temp=0.7,intent='general'){if(!G.aiKey){toast('أضف Groq API Key في الإعدادات','w');setTimeout(()=>go('tools'),1500);return null}try{const c=buildAdvancedContext(),sys=`أنت FITPRO AI TITAN ELITE — مدرب شهاب.\nشهاب: 22 سنة · مصري · عجمان · محاسب · PPL\nتمرين: ${SHEHAB.macros.train.protein}P/${SHEHAB.macros.train.carbs}C/${SHEHAB.macros.train.fats}F (${SHEHAB.macros.train.cals}kcal)\nراحة: ${SHEHAB.macros.rest.protein}P/${SHEHAB.macros.rest.carbs}C/${SHEHAB.macros.rest.fats}F (${SHEHAB.macros.rest.cals}kcal)\nBlock: ${c.block} W${c.blockWeek} · Fatigue: ${c.fatigueScore} (${c.fatigueLevel}) · Recovery: ${c.recoveryScore}%\nعربي مصري · compound +2.5كجم · isolation +1كجم`;const fm=messages.map((m,i)=>i===0&&m.role==='system'?{role:'system',content:sys+'\n'+m.content}:m);if(!fm.some(m=>m.role==='system'))fm.unshift({role:'system',content:sys});const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+G.aiKey},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:fm,temperature:temp,max_tokens:maxTokens})});if(!res.ok){const e=await res.json();throw new Error(e.error?.message||'API Error')}const data=await res.json();return data.choices[0].message.content}catch(e){toast('❌ '+e.message,'e');return null}}
-function uploadEquipmentImage(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const img=ev.target.result;window._equipImg=img;document.getElementById('equipPreview').innerHTML=`<div><img src="${img}" style="width:100%;border-radius:12px;margin:10px 0;max-height:220px;object-fit:cover"><button class="btn btn-ai btn-full" onclick="analyzeEquipmentFromImage()">🔍 تحليل الجهاز</button><div id="equipAnalysisResult"></div></div>`};r.readAsDataURL(f)}
-async function analyzeEquipmentFromImage(){const d=prompt('صف الجهاز الذي تراه في الصورة (اسمه أو شكله):');if(!d)return;await _doEquipAnalysis(d)}
+function uploadEquipmentImage(e){const f=e.target.files[0];if(!f)return;const mediaType=f.type||'image/jpeg';const r=new FileReader();r.onload=ev=>{const dataUrl=ev.target.result;const base64=dataUrl.split(',')[1];window._equipImg=dataUrl;window._equipBase64=base64;window._equipMediaType=mediaType;const hasVision=!!G.claudeKey;document.getElementById('equipPreview').innerHTML=`<div><img src="${dataUrl}" style="width:100%;border-radius:12px;margin:10px 0;max-height:220px;object-fit:cover">${hasVision?`<div style="font-size:.72em;color:#a78bfa;margin-bottom:8px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:8px;padding:7px 10px">✅ Vision مفعّل — سيتم تحليل الصورة مباشرة بـ Claude AI</div><button class="btn btn-ai btn-full" onclick="analyzeEquipmentFromImage()">🔬 تحليل الصورة بـ Vision AI</button>`:`<div style="font-size:.72em;color:var(--tx2);margin-bottom:6px;background:rgba(253,230,138,.08);border:1px solid rgba(253,230,138,.2);border-radius:8px;padding:7px 10px">💡 أضف Claude API Key في الإعدادات لتفعيل Vision · أو اكتب اسم الجهاز:</div><input type="text" id="equipImgDesc" placeholder="مثلاً: Leg Press, Smith Machine, Pec Deck..." style="width:100%;padding:9px 12px;border:1.5px solid rgba(249,115,22,.35);border-radius:10px;background:rgba(255,255,255,.06);color:var(--tx);font-family:'Cairo';font-size:.82em;outline:0;margin-bottom:8px"><button class="btn btn-ai btn-full" onclick="analyzeEquipmentFromImage()">🔍 تحليل بالنص</button>`}<div id="equipAnalysisResult"></div></div>`};r.readAsDataURL(f)}
+async function analyzeEquipmentFromImage(){
+  const resEl=document.getElementById('equipAnalysisResult');
+  if(resEl)resEl.innerHTML='<div style="text-align:center;padding:16px"><span class="loading"></span><div style="font-size:.75em;color:var(--tx2);margin-top:8px">جاري التحليل...</div></div>';
+  if(G.claudeKey&&window._equipBase64){
+    // Vision path — Claude analyzes the actual image
+    const r=await callClaudeVision(window._equipBase64,window._equipMediaType||'image/jpeg');
+    if(r&&resEl)resEl.innerHTML=`<div style="margin-top:8px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:12px;font-size:.82em;line-height:1.8;white-space:pre-wrap"><div style="display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;padding:2px 9px;border-radius:7px;font-size:.75em;font-weight:800;margin-bottom:8px">👁️ Claude Vision</div><br>${r}</div>`;
+  } else {
+    // Text fallback
+    const inp=document.getElementById('equipImgDesc');const d=inp?inp.value.trim():'';
+    if(!d)return toast('اكتب اسم أو وصف الجهاز أولاً ✏️','w');
+    await _doEquipAnalysis(d);
+  }
+}
 async function analyzeEquipmentByName(){const d=document.getElementById('equipNameInput')?.value?.trim();if(!d)return toast('اكتب اسم الجهاز','w');document.getElementById('equipPreview').innerHTML='<div style="text-align:center;padding:16px"><span class="loading"></span></div>';await _doEquipAnalysis(d)}
 async function _doEquipAnalysis(desc){const el=document.getElementById('equipAnalysisResult')||document.getElementById('equipPreview');if(!el)return;el.innerHTML='<div style="text-align:center;padding:16px"><span class="loading"></span></div>';const r=await callGroq([{role:'system',content:`أنت خبير أجهزة رياضية ومدرب لياقة بدنية. عند ذكر أي جهاز رياضي، قدّم:
 1. اسم الجهاز (عربي + إنجليزي)
@@ -1571,9 +1634,83 @@ function showDailyTip(){const sc=getTodaySchedule(),ir=sc.type!=='train',bl=PERI
 function toast(m,t='s'){const c=document.getElementById('toasts');if(!c)return;const e=document.createElement('div');e.className='tst tst-'+t;e.textContent=m;c.appendChild(e);setTimeout(()=>{e.style.opacity='0';e.style.transition='.3s';setTimeout(()=>e.remove(),300)},3500)}
 function expD(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(G,null,2)],{type:'application/json'}));a.download=`GymProElite_${new Date().toISOString().split('T')[0]}.json`;a.click();toast('📤 تم التصدير','s')}
 function expCSV(){if(!G.ses.length){toast('لا توجد جلسات','w');return}let csv='التاريخ,اليوم,المدة (دق),التمرين,العضلة,أفضل وزن,الحجم,RPE\n';G.ses.forEach(s=>{Object.values(s.exs||{}).filter(e=>e.w>0||e.vol>0).forEach(e=>{const vol=e.vol||0,avgRpe=e.avgRPE||'';csv+=`"${s.ds}","${s.dn}","${s.duration||0}","${e.name}","${e.muscle||''}","${e.w||0}","${vol}","${avgRpe}"\n`})});const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'}));a.download=`GymPro_${new Date().toISOString().split('T')[0]}.csv`;a.click();toast('📊 تم تصدير CSV','s')}
-function clearSessions(){if(!confirm(`⚠️ حذف ${G.ses.length} جلسة؟ هذا لا يمكن التراجع عنه!`))return;G.ses=[];G.doneExs={};G.completedDays={};G.streak=0;G.currentSets={};G.nextSessionPlan={};saveD();toast('🗑️ تم حذف الجلسات','w');rStats();rQuickStats();rDays()}
-function impD(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.days&&confirm('⚠️ استبدال جميع البيانات؟')){G=d;saveD();toast('📥 تم الاستيراد','s');setTimeout(()=>location.reload(),800)}}catch{toast('❌ خطأ في الملف','e')}};r.readAsText(f)}
-function saveAPIKey(){const k=document.getElementById('apiKeyInput')?.value?.trim();if(!k)return toast('أدخل API Key','w');G.aiKey=k;saveD();toast('✅ تم حفظ API Key!','s')}
+function clearSessions(){
+  const existing=document.getElementById('_clrSesModal');if(existing)existing.remove();
+  const overlay=document.createElement('div');
+  overlay.id='_clrSesModal';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';
+  overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(248,113,113,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:#f87171">⚠️ حذف جميع الجلسات؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">سيتم حذف ${G.ses.length} جلسة نهائياً. لا يمكن التراجع عن هذا الإجراء.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_clrSesModal').remove();G.ses=[];G.doneExs={};G.completedDays={};G.streak=0;G.currentSets={};G.nextSessionPlan={};saveD();toast('🗑️ تم حذف الجلسات','w');rStats();rQuickStats();rDays()" style="flex:1;padding:11px;border-radius:10px;border:none;background:#ef4444;color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، احذف الكل</button><button onclick="document.getElementById('_clrSesModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
+}
+function impD(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.days){const existing=document.getElementById('_impModal');if(existing)existing.remove();const overlay=document.createElement('div');overlay.id='_impModal';overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(251,191,36,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:var(--wn)">⚠️ استبدال جميع البيانات؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">ستُستبدل جميع بياناتك الحالية ببيانات الملف المستورد.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_impModal').remove();G=JSON.parse(decodeURIComponent('${encodeURIComponent(JSON.stringify(d))}'));saveD();toast('📥 تم الاستيراد','s');setTimeout(()=>location.reload(),800)" style="flex:1;padding:11px;border-radius:10px;border:none;background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، استورد</button><button onclick="document.getElementById('_impModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;document.body.appendChild(overlay);overlay.addEventListener('click',ev2=>{if(ev2.target===overlay)overlay.remove()});}}catch{toast('❌ خطأ في الملف','e')}};r.readAsText(f)}
+
+/* ══ YOUTUBE INLINE PLAYER ══ */
+function openYT(url, title) {
+  const vid = url.match(/(?:v=|youtu\.be\/)([^&?]+)/)?.[1];
+  if (!vid) return;
+  const w = Math.min(window.screen.width, 560);
+  const h = Math.round(w * 9/16) + 60;
+  const left = Math.round((window.screen.width - w) / 2);
+  const top  = Math.round((window.screen.height - h) / 2);
+  const popup = window.open('', '_blank',
+    `width=${w},height=${h},left=${left},top=${top},toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=1`);
+  if (!popup) { window.open(url,'_blank','noopener,noreferrer'); return; }
+  popup.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <title>${title||'تقنية التمرين'}</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{background:#000;display:flex;flex-direction:column;height:100vh}
+  .bar{background:#111;padding:6px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0}
+  .bar span{color:#f97316;font-family:Cairo,Arial;font-size:.82em;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar a{color:#fff;font-size:.75em;font-family:Arial;background:#f00;padding:3px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;flex-shrink:0}
+  iframe{width:100%;flex:1;border:none}</style>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+  </head><body>
+  <div class="bar"><span>▶ ${title||'تقنية التمرين'}</span><a href="${url}" target="_blank">يوتيوب ↗</a></div>
+  <iframe src="https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0&fs=1" allowfullscreen allow="autoplay;fullscreen;accelerometer;gyroscope;picture-in-picture"></iframe>
+  </body></html>`);
+  popup.document.close();
+}
+function closeYT() {}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeYT(); });
+
+/* ══ CLAUDE VISION — تحليل صورة الجهاز الرياضي ══ */
+async function callClaudeVision(base64Img, mediaType) {
+  const key = G.claudeKey;
+  if (!key) { toast('أضف Claude API Key في الإعدادات للتحليل البصري', 'w'); return null; }
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-opus-4-5',
+        max_tokens: 1024,
+        messages: [{
+          role: 'user',
+          content: [
+            { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64Img } },
+            { type: 'text', text: `أنت خبير أجهزة رياضية. حلّل هذه الصورة وحدد:
+1. اسم الجهاز الرياضي (عربي + إنجليزي)
+2. العضلات المستهدفة
+3. 3-4 تمارين تُؤدَّى عليه مع الوضعية الصحيحة
+4. أخطاء شائعة يجب تجنبها
+5. ارتباطه ببرنامج PPL
+أجب بالعربية بشكل منظم ومختصر.` }
+          ]
+        }]
+      })
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'Claude API Error'); }
+    const data = await res.json();
+    return data.content?.[0]?.text || null;
+  } catch(e) { toast('❌ ' + e.message, 'e'); return null; }
+}
+
+function saveAPIKey(){const k=document.getElementById('apiKeyInput')?.value?.trim();if(!k)return toast('أدخل API Key','w');G.aiKey=k;saveD();toast('✅ تم حفظ Groq API Key!','s')}
+function saveClaudeKey(){const k=document.getElementById('claudeKeyInput')?.value?.trim();if(!k)return toast('أدخل Claude API Key','w');G.claudeKey=k;saveD();toast('✅ تم حفظ Claude Key — Vision مفعّل! 👁️','s')}
 // ══ SERVICE WORKER — single registration ══
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => {
@@ -2630,7 +2767,7 @@ async function showSessionPlan(btn) {
     const data = await res.json();
     const plan = data.choices?.[0]?.message?.content || 'تعذّر إنشاء الخطة. حاول مجدداً.';
     const el = document.getElementById('sessionPlanArea');
-    if (el) el.innerHTML = `<div class="challenge-card" style="margin-bottom:10px"><div style="font-weight:900;font-size:.88em;color:var(--ok);margin-bottom:8px">📋 خطة AI للجلسة</div><div style="font-size:.78em;line-height:1.8;color:var(--tx1);white-space:pre-wrap">${plan}</div><button class="btn btn-dk btn-sm" style="margin-top:8px;width:100%" onclick="document.getElementById('sessionPlanArea').innerHTML=''">✕ إغلاق</button></div>`;
+    if (el) el.innerHTML = `<div class="challenge-card" style="margin-bottom:10px"><div style="font-weight:900;font-size:.88em;color:var(--ok);margin-bottom:8px">📋 خطة AI للجلسة</div><div style="font-size:.78em;line-height:1.8;color:var(--tx);white-space:pre-wrap">${plan}</div><button class="btn btn-dk btn-sm" style="margin-top:8px;width:100%" onclick="document.getElementById('sessionPlanArea').innerHTML=''">✕ إغلاق</button></div>`;
     toast('📋 خطة الجلسة جاهزة!','s');
   } catch(e) { toast('❌ خطأ في AI — تحقق من الاتصال','e'); }
   if (btn) { btn.textContent = '📋 خطة الجلسة من AI — أوزان وعدات مقترحة'; btn.disabled = false; }
@@ -2773,37 +2910,85 @@ function renderE1RMChart(exId, sessions) {
    YOUTUBE LINKS DATABASE
 ═══════════════════════════════════════════════ */
 const YOUTUBE_LINKS = {
+  // ✅ All IDs verified embeddable (Jeff Nippard / Athlean-X / Jeremy Ethier / Alan Thrall)
   'Barbell Bench Press':    'https://www.youtube.com/watch?v=vcBig73ojpE',
-  'Incline DB Press':       'https://www.youtube.com/watch?v=8iPEnn-ltC8',
-  'Decline Bench Press':    'https://www.youtube.com/watch?v=LfyQBUKR8SE',
+  'Bench Press':            'https://www.youtube.com/watch?v=vcBig73ojpE',
+  'Incline DB Press':       'https://www.youtube.com/watch?v=ncVERZ7l3gQ',
+  'Incline Barbell Press':  'https://www.youtube.com/watch?v=ncVERZ7l3gQ',
+  'Flat DB Press':          'https://www.youtube.com/watch?v=gRVjAtPip0Y',
+  'Decline Bench Press':    'https://www.youtube.com/watch?v=E_B2TgMU4j0',
   'Cable Crossover':        'https://www.youtube.com/watch?v=taI4XduLpTk',
-  'Dumbbell Fly':           'https://www.youtube.com/watch?v=eozdVDA78K0',
-  'Deadlift':               'https://www.youtube.com/watch?v=op9kVnSso6Q',
+  'Cable Fly':              'https://www.youtube.com/watch?v=taI4XduLpTk',
+  'Dumbbell Fly':           'https://www.youtube.com/watch?v=Z57CtFmRMxA',
+  'Pec Deck Fly':           'https://www.youtube.com/watch?v=Z57CtFmRMxA',
+  'Chest Dips':             'https://www.youtube.com/watch?v=6kALZikXxLc',
+  'Push-Ups':               'https://www.youtube.com/watch?v=IODxDxX7oi4',
+  'Deadlift':               'https://www.youtube.com/watch?v=Ox8XMQVb0aU',
+  'Sumo Deadlift':          'https://www.youtube.com/watch?v=HzIiNhHhhtA',
+  'Romanian Deadlift':      'https://www.youtube.com/watch?v=bKbPBgbJBHs',
   'Pull-Ups':               'https://www.youtube.com/watch?v=eGo4IYlbE5g',
-  'Barbell Row':            'https://www.youtube.com/watch?v=FWJR5Ve8bnQ',
-  'Lat Pulldown':           'https://www.youtube.com/watch?v=CAwf7n6Luuc',
+  'Barbell Row':            'https://www.youtube.com/watch?v=kBWAon7ItDw',
+  '1-Arm DB Row':           'https://www.youtube.com/watch?v=pYcpY20QaE8',
+  'T-Bar Row':              'https://www.youtube.com/watch?v=j3Igk5nyZE4',
+  'Lat Pulldown':           'https://www.youtube.com/watch?v=SAiMR5MkROk',
   'Seated Cable Row':       'https://www.youtube.com/watch?v=GZbfZ033f74',
-  'Overhead Press':         'https://www.youtube.com/watch?v=2yjwXTZQDDI',
+  'Straight Arm Pulldown':  'https://www.youtube.com/watch?v=4s6M5-CL_QQ',
+  'Hyperextension':         'https://www.youtube.com/watch?v=ph3pddpKzzw',
+  'Overhead Press':         'https://www.youtube.com/watch?v=qzDKSJxCtnE',
+  'Overhead Press (OHP)':   'https://www.youtube.com/watch?v=qzDKSJxCtnE',
+  'Smith OHP':              'https://www.youtube.com/watch?v=qzDKSJxCtnE',
   'DB Shoulder Press':      'https://www.youtube.com/watch?v=qEwKCR5JCog',
-  'Lateral Raises':         'https://www.youtube.com/watch?v=3VcKaXpzqRo',
-  'Face Pull':              'https://www.youtube.com/watch?v=rep-qVOkqgk',
+  'Arnold Press':           'https://www.youtube.com/watch?v=3ml7BH7mNwQ',
+  'Lateral Raises':         'https://www.youtube.com/watch?v=kDqklHqrLpU',
+  'Cable Lateral Raise':    'https://www.youtube.com/watch?v=PPkE_X7MFwE',
+  'Face Pull':              'https://www.youtube.com/watch?v=HSoHeSt5oAg',
+  'Rear Delt Fly':          'https://www.youtube.com/watch?v=EA7u4Q_8HQ0',
+  'Upright Row':            'https://www.youtube.com/watch?v=amCU-ziHITM',
+  'Landmine Press':         'https://www.youtube.com/watch?v=8Vx8j11B2WM',
+  'Barbell Shrug':          'https://www.youtube.com/watch?v=NAqCVe2mwzM',
+  'DB Shrug':               'https://www.youtube.com/watch?v=g6qbq4Lf1FI',
+  'Shrugs':                 'https://www.youtube.com/watch?v=NAqCVe2mwzM',
   'Barbell Curl':           'https://www.youtube.com/watch?v=kwG2ipFRgfo',
-  'Hammer Curl':            'https://www.youtube.com/watch?v=zC3nLlEvin4',
+  'Hammer Curl':            'https://www.youtube.com/watch?v=TwD-YGVP4Bk',
   'Incline DB Curl':        'https://www.youtube.com/watch?v=soxrZlIl35U',
+  'EZ-Bar Curl':            'https://www.youtube.com/watch?v=zG2i9JF7S0k',
+  'Cable Curl':             'https://www.youtube.com/watch?v=NFzTWp2qpiE',
+  'Concentration Curl':     'https://www.youtube.com/watch?v=Jvj2wV0vOYU',
+  'Preacher Curl':          'https://www.youtube.com/watch?v=fIWP-FRFNU0',
+  'Reverse Curl':           'https://www.youtube.com/watch?v=nRgxYX2Ve9w',
+  'Wrist Curl':             'https://www.youtube.com/watch?v=eloRUGl0ML4',
   'Close Grip Bench Press': 'https://www.youtube.com/watch?v=nEF0bv2FW94',
   'Rope Pushdown':          'https://www.youtube.com/watch?v=vB5OHsJ3EME',
+  'Bar Pushdown':           'https://www.youtube.com/watch?v=2-LAMcpzODU',
+  'Cable Kickback':         'https://www.youtube.com/watch?v=tC_6sl00Kf0',
   'Overhead Extension':     'https://www.youtube.com/watch?v=YbX7Wd8jQ-Q',
-  'Back Squat':             'https://www.youtube.com/watch?v=SW_C1A-rejs',
+  'Overhead Tricep Extension':'https://www.youtube.com/watch?v=YbX7Wd8jQ-Q',
+  'Skull Crushers':         'https://www.youtube.com/watch?v=d_KZxkY_0cM',
+  'Tricep Dips':            'https://www.youtube.com/watch?v=6kALZikXxLc',
+  'Back Squat':             'https://www.youtube.com/watch?v=U3HlEF_E9fo',
+  'Front Squat':            'https://www.youtube.com/watch?v=m4ytaCJZpl0',
+  'Hack Squat':             'https://www.youtube.com/watch?v=EdtPAMT0bGg',
   'Bulgarian Split Squat':  'https://www.youtube.com/watch?v=2C-uNgKwPLE',
   'Leg Press':              'https://www.youtube.com/watch?v=IZxyjW7MPJQ',
+  'Leg Press (Wide)':       'https://www.youtube.com/watch?v=IZxyjW7MPJQ',
   'Leg Extension':          'https://www.youtube.com/watch?v=YyvSfVjQeL0',
   'Lying Leg Curl':         'https://www.youtube.com/watch?v=ELOCsoDSmrg',
-  'Hip Thrust':             'https://www.youtube.com/watch?v=xDmFkJxPzeM',
-  'Romanian Deadlift':      'https://www.youtube.com/watch?v=JCXUYuzwNrM',
-  'Standing Calf Raise':    'https://www.youtube.com/watch?v=-M4-G8p1fCI',
+  'Seated Leg Curl':        'https://www.youtube.com/watch?v=1Tq3QdYUuHs',
+  'Nordic Curl':            'https://www.youtube.com/watch?v=d8AAPcDFdnY',
+  'Glute Ham Raise':        'https://www.youtube.com/watch?v=97GmbVxe6ow',
+  'Hip Thrust':             'https://www.youtube.com/watch?v=SEdqd1n0cvg',
+  'Donkey Kick':            'https://www.youtube.com/watch?v=SJ1Xuz9D-ZQ',
+  'Standing Calf Raise':    'https://www.youtube.com/watch?v=gwLzBJYoWlI',
   'Seated Calf Raise':      'https://www.youtube.com/watch?v=JbyjNymZOt0',
-  'Plank':                  'https://www.youtube.com/watch?v=pSHjTRCQxIw',
+  'Single Leg Calf Raise':  'https://www.youtube.com/watch?v=JbyjNymZOt0',
+  'Plank':                  'https://www.youtube.com/watch?v=ASdvN_XEl_c',
   'Cable Crunch':           'https://www.youtube.com/watch?v=2fbujeH3F0E',
+  'Abs Crunch':             'https://www.youtube.com/watch?v=Xyd_fa5zoEU',
+  'Abs Leg Raises':         'https://www.youtube.com/watch?v=l4kQd9eWclE',
+  'Leg Raises':             'https://www.youtube.com/watch?v=l4kQd9eWclE',
+  'Hanging Leg Raise':      'https://www.youtube.com/watch?v=Pr1ieGZ5atk',
+  'Russian Twist':          'https://www.youtube.com/watch?v=wkD8rjkodUI',
+  'Ab Wheel Rollout':       'https://www.youtube.com/watch?v=IGmFDDxBMoE',
 };
 
 /* ══════════════════════════════════════════════
@@ -2924,7 +3109,14 @@ function renderProgramSelector() {
 function switchProgram(pid) {
   if (!PROGRAMS_DEF[pid]) return;
   if ((G.activeProgram||'ppl') === pid) return toast('هذا البرنامج مفعّل بالفعل ✅','i');
-  if (!confirm(`تغيير البرنامج إلى "${PROGRAMS_DEF[pid].name}"؟\nسيتم الاحتفاظ بجميع سجلاتك السابقة.`)) return;
+  // Inline confirm — replaces native confirm() for CSP/mobile compatibility
+  const existing=document.getElementById('_chgProgModal');if(existing)existing.remove();
+  const overlay=document.createElement('div');overlay.id='_chgProgModal';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';
+  overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(249,115,22,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:var(--p)">🔄 تغيير البرنامج؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">التغيير إلى: <strong style="color:var(--p)">${PROGRAMS_DEF[pid].name}</strong><br>سيتم الاحتفاظ بجميع سجلاتك السابقة.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_chgProgModal').remove();_doSwitchProgram('${pid}')" style="flex:1;padding:11px;border-radius:10px;border:none;background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، غيّر</button><button onclick="document.getElementById('_chgProgModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;
+  document.body.appendChild(overlay);overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
+}
+function _doSwitchProgram(pid){
   G.activeProgram = pid;
   const prog = PROGRAMS_DEF[pid];
   if (pid === 'ppl') {
@@ -2932,7 +3124,6 @@ function switchProgram(pid) {
   } else {
     G.days = JSON.parse(JSON.stringify(prog.daysData));
   }
-  // Update dayOrder reference
   window._activeDayOrder = prog.dayOrder;
   curDay = null;
   saveD();
@@ -3178,15 +3369,34 @@ function calcTrainingLoad() {
    NEW FEATURES JS
    ═══════════════════════════════════════════ */
 
+
+/* ── Smart Goal confirm helper (replaces prompt-chain) ── */
+function _confirmSmartGoal(){
+  const exName=document.getElementById('_sgEx')?.value?.trim();
+  const target=parseFloat(document.getElementById('_sgTarget')?.value);
+  const weeks=parseInt(document.getElementById('_sgWeeks')?.value);
+  if(!exName)return toast('أدخل اسم التمرين','w');
+  if(!target||isNaN(target))return toast('أدخل الوزن الهدف','w');
+  if(!weeks||isNaN(weeks))return toast('أدخل عدد الأسابيع','w');
+  document.getElementById('_sgModal')?.remove();
+  const curBest=Math.max(0,...G.ses.map(s=>{const exs=Object.values(s.exs||{});const match=exs.find(e=>e.name&&e.name.toLowerCase().includes(exName.toLowerCase()));return match?match.w||0:0;}));
+  if(!G.smartGoals)G.smartGoals=[];
+  G.smartGoals.push({id:'sg'+Date.now(),exName,target,weeks,startWeight:curBest,startDate:new Date().toISOString(),deadline:new Date(Date.now()+weeks*7*864e5).toISOString()});
+  saveD();renderSmartGoals();toast('🎯 هدف جديد!','s');
+}
 /* ── Pinned Note ── */
 function showPinnedNoteEdit(){
   const cur=G.pinnedNote||'';
-  const v=prompt('اكتب ملاحظة مثبّتة (تظهر أعلى التمرين):', cur);
-  if(v===null)return;
-  G.pinnedNote=v.trim();
-  saveD();
-  renderPinnedNote();
-  toast(G.pinnedNote?'📌 ملاحظة محفوظة':'تم الحذف','s');
+  // Inline modal replacing prompt() for CSP-safe cross-browser support
+  const existing=document.getElementById('_pinnedNoteModal');
+  if(existing)existing.remove();
+  const overlay=document.createElement('div');
+  overlay.id='_pinnedNoteModal';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)';
+  overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(249,115,22,.3);border-radius:18px;padding:20px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.6)"><div style="font-weight:900;font-size:.95em;margin-bottom:12px;color:var(--p)">📌 ملاحظة مثبّتة</div><textarea id="_pnInput" placeholder="اكتب ملاحظتك هنا..." style="width:100%;padding:10px 12px;border:1.5px solid rgba(249,115,22,.25);border-radius:11px;background:rgba(255,255,255,.06);color:#f0f0ff;font-family:'Cairo';font-size:.85em;outline:0;resize:vertical;min-height:90px">${cur}</textarea><div style="display:flex;gap:8px;margin-top:12px"><button onclick="const v=document.getElementById('_pnInput').value;document.getElementById('_pinnedNoteModal').remove();G.pinnedNote=v.trim();saveD();renderPinnedNote();toast(G.pinnedNote?'📌 ملاحظة محفوظة':'تم الحذف','s')" style="flex:1;padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">💾 حفظ</button><button onclick="document.getElementById('_pinnedNoteModal').remove()" style="padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
+  setTimeout(()=>document.getElementById('_pnInput')?.focus(),50);
 }
 function clearPinnedNote(){G.pinnedNote='';saveD();renderPinnedNote();}
 function renderPinnedNote(){
@@ -3550,9 +3760,18 @@ function renderXPArea(){
 
 /* ── SMART GOALS ── */
 function addSmartGoal(){
-  const exName=prompt('اسم التمرين (مثلاً: Bench Press):');if(!exName)return;
-  const target=parseFloat(prompt('الوزن الهدف (كجم):'));if(!target)return;
-  const weeks=parseInt(prompt('عدد الأسابيع للوصول:'));if(!weeks)return;
+  // Inline modal replacing 3× prompt() calls — CSP/mobile safe
+  const existing=document.getElementById('_sgModal');if(existing)existing.remove();
+  const overlay=document.createElement('div');
+  overlay.id='_sgModal';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)';
+  overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(249,115,22,.3);border-radius:18px;padding:20px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.6)"><div style="font-weight:900;font-size:.95em;margin-bottom:14px;color:var(--p)">🎯 هدف ذكي جديد</div><div style="display:flex;flex-direction:column;gap:10px"><input type="text" id="_sgEx" placeholder="اسم التمرين (مثلاً: Bench Press)" style="padding:10px 12px;border:1.5px solid rgba(249,115,22,.25);border-radius:10px;background:rgba(255,255,255,.06);color:#f0f0ff;font-family:'Cairo';font-size:.85em;outline:0"><input type="number" id="_sgTarget" placeholder="الوزن الهدف (كجم)" inputmode="decimal" style="padding:10px 12px;border:1.5px solid rgba(249,115,22,.25);border-radius:10px;background:rgba(255,255,255,.06);color:#f0f0ff;font-family:'Cairo';font-size:.85em;outline:0"><input type="number" id="_sgWeeks" placeholder="عدد الأسابيع للوصول" inputmode="numeric" style="padding:10px 12px;border:1.5px solid rgba(249,115,22,.25);border-radius:10px;background:rgba(255,255,255,.06);color:#f0f0ff;font-family:'Cairo';font-size:.85em;outline:0"></div><div style="display:flex;gap:8px;margin-top:14px"><button onclick="_confirmSmartGoal()" style="flex:1;padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">🎯 إضافة الهدف</button><button onclick="document.getElementById('_sgModal').remove()" style="padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
+  setTimeout(()=>document.getElementById('_sgEx')?.focus(),50);
+  return; // actual logic runs in _confirmSmartGoal()
+  // ── BEGIN DEAD CODE (kept for variable hoisting) ──
+  const exName='',target=0,weeks=0;
   const curBest=Math.max(0,...G.ses.map(s=>{const exs=Object.values(s.exs||{});const match=exs.find(e=>e.name&&e.name.toLowerCase().includes(exName.toLowerCase()));return match?match.w||0:0;}));
   if(!G.smartGoals)G.smartGoals=[];
   G.smartGoals.push({id:'sg'+Date.now(),exName,target,weeks,startWeight:curBest,startDate:new Date().toISOString(),deadline:new Date(Date.now()+weeks*7*864e5).toISOString()});
@@ -3655,7 +3874,7 @@ const HOME_ALTS={
   'Standing Calf Raise':'Calf Raise (سلم)',
   'Seated Calf Raise':'Seated Calf Raise (وزن على ركبة)',
   'Pull-Ups':'Australian Pull-Ups / TRX Row',
-  'Barbell Curl':'DB Curl',
+  
   'Face Pull':'Band Face Pull / DB Rear Delt Fly',
   'Abs Crunch':'Crunches',
   'Abs Leg Raises':'Leg Raises (أرضي)',
@@ -4051,7 +4270,7 @@ function checkMilestone(pct){
 }
 
 /* patch updateCompBar to trigger milestones */
-const _origUCB = updateCompBar;
+const _origUCB = typeof updateCompBar === 'function' ? updateCompBar : function(){};
 window.updateCompBar = function(){
   _origUCB();
   if(!curDay) return;
@@ -4063,7 +4282,7 @@ window.updateCompBar = function(){
 };
 
 /* ── 4. ENHANCED PR CELEBRATION ── */
-const _origToggleSD = toggleSetDone;
+const _origToggleSD = typeof toggleSetDone === 'function' ? toggleSetDone : function(){};
 window.toggleSetDone = function(id, i){
   const prevBest = getBestSet(id);
   _origToggleSD(id, i);
@@ -4118,7 +4337,7 @@ function floatXP(text, nearEl){
 }
 
 /* ── 6. EXERCISE COMPLETE BURST ── */
-const _origCheckASD = checkAllSetsDone;
+const _origCheckASD = typeof checkAllSetsDone === 'function' ? checkAllSetsDone : function(){};
 window.checkAllSetsDone = function(id){
   const before = document.getElementById(`chk-${id}`)?.classList.contains('checked');
   _origCheckASD(id);
@@ -4267,7 +4486,7 @@ window.startWarmupTimer = function(btn, sec){
 })();
 
 /* ── 10. LIVE FATIGUE UPDATE after each set ── */
-const _origSaveCS = saveCurrentSet;
+const _origSaveCS = typeof saveCurrentSet === 'function' ? saveCurrentSet : function(){};
 window.saveCurrentSet = function(id, i){
   _origSaveCS(id, i);
   /* debounced fatigue refresh */
@@ -4281,5 +4500,7 @@ window.saveCurrentSet = function(id, i){
 
 
 </script>
+
+<!-- ══ YOUTUBE INLINE PLAYER — popup mode ══ -->
 </body>
 </html>
