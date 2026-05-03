@@ -4642,15 +4642,44 @@ window.startWarmupTimer = function(btn, sec){
     if(!_wlActive) { await requestWakeLock(); updateWLPill(); }
   };
   window._wlAutoStop = function(){
-    releaseWakeLock(); updateWLPill();
+    // لا نوقف Wake Lock — الشاشة تفضل مفتوحة طول ما التطبيق شغال
+    // releaseWakeLock(); updateWLPill();
   };
 
   // Re-request after tab comes back (iOS releases it on hide)
   document.addEventListener('visibilitychange', async () => {
-    if(document.visibilityState === 'visible' && _wlActive && !_wakeLock){
+    if(document.visibilityState === 'visible' && !_wakeLock){
+      // دايماً نعيد الطلب لما الشاشة ترجع — مش بس لو كان مفعّل
       await requestWakeLock();
+      updateWLPill();
     }
   });
+
+  // ✅ تفعيل تلقائي عند فتح التطبيق — مع حماية من race condition
+  async function autoStartWL(){
+    const ok = await requestWakeLock();
+    updateWLPill();
+    if(!ok){
+      // fallback: لو المتصفح ما دعمش Wake Lock — نستخدم فيديو صامت خفي
+      try {
+        const v = document.createElement('video');
+        v.setAttribute('playsinline','');
+        v.setAttribute('muted','');
+        v.setAttribute('loop','');
+        v.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;z-index:-1';
+        v.src = 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAA';
+        document.body.appendChild(v);
+        v.play().catch(()=>{});
+        window._wlFallbackVideo = v;
+      } catch(e){}
+    }
+  }
+  // لو الصفحة اتحملت بالفعل نشغّل فوراً، غير كده ننتظر DOMContentLoaded
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', autoStartWL);
+  } else {
+    autoStartWL();
+  }
 })();
 
 
