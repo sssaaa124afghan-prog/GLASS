@@ -933,11 +933,11 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
       <button class="btn btn-p btn-full" onclick="saveAPIKey()" style="margin-top:6px">💾 حفظ Groq Key</button>
       <div style="height:10px"></div>
       <div class="vision-key-wrap">
-        <div class="vision-badge">👁️ Claude Vision</div>
-        <label style="font-size:.78em;color:var(--tx2);display:block;margin-bottom:5px">Claude API Key <span style="color:var(--tx3)">(لتحليل صور الأجهزة)</span></label>
-        <input type="password" id="claudeKeyInput" placeholder="sk-ant-..." style="width:100%;padding:9px 12px;border:1.5px solid rgba(139,92,246,.3);border-radius:10px;background:rgba(255,255,255,.06);color:var(--tx);font-family:'Cairo';font-size:.82em;outline:0">
-        <button class="btn btn-full" onclick="saveClaudeKey()" style="margin-top:6px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;padding:9px;border-radius:10px;font-family:'Cairo';font-weight:800;cursor:pointer">💾 حفظ Claude Key</button>
-        <div style="font-size:.65em;color:var(--tx3);margin-top:5px">احصل على مفتاح مجاني من console.anthropic.com</div>
+        <div class="vision-badge">👁️ Gemini Vision</div>
+        <label style="font-size:.78em;color:var(--tx2);display:block;margin-bottom:5px">Gemini API Key <span style="color:var(--tx3)">(لتحليل صور الأجهزة — مجاني)</span></label>
+        <input type="password" id="claudeKeyInput" placeholder="AIza..." style="width:100%;padding:9px 12px;border:1.5px solid rgba(66,133,244,.3);border-radius:10px;background:rgba(255,255,255,.06);color:var(--tx);font-family:'Cairo';font-size:.82em;outline:0">
+        <button class="btn btn-full" onclick="saveClaudeKey()" style="margin-top:6px;background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;border:none;padding:9px;border-radius:10px;font-family:'Cairo';font-weight:800;cursor:pointer">💾 حفظ Gemini Key</button>
+        <div style="font-size:.65em;color:var(--tx3);margin-top:5px">احصل على مفتاح مجاني من aistudio.google.com</div>
       </div>
     </div>
     <div class="info-box" style="margin-top:10px">
@@ -1129,8 +1129,12 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
   <div style="display:flex;gap:5px">
     <button onclick="stopTimer()" style="background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);color:var(--no);border-radius:8px;padding:4px 10px;font-size:.8em;font-weight:800;cursor:pointer">⏹</button>
     <button onclick="resetFloatTimer()" style="background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.25);color:var(--p);border-radius:8px;padding:4px 10px;font-size:.8em;font-weight:800;cursor:pointer">↺</button>
+    <button id="ttsToggleBtn" onclick="toggleTTS()" title="صوت الكوتش" style="background:rgba(110,231,183,.1);border:1px solid rgba(110,231,183,.25);color:var(--ok);border-radius:8px;padding:4px 10px;font-size:.85em;cursor:pointer">🔊</button>
   </div>
 </div>
+
+<!-- WAKE LOCK PILL -->
+<div id="wakeLockPill" style="display:none;position:fixed;top:70px;right:12px;z-index:499;background:rgba(20,5,50,.85);border:1.5px solid rgba(251,191,36,.35);border-radius:12px;padding:5px 10px;font-size:.68em;font-weight:800;color:var(--wn);backdrop-filter:blur(12px);cursor:pointer" onclick="toggleWakeLock()" title="الشاشة شغالة">📺 شغال</div>
 
 <!-- BOTTOM NAV -->
 <div class="bnav">
@@ -1350,7 +1354,7 @@ function checkAllSetsDone(id){const ex=G.days[curDay]?.exercises.find(e=>e.id===
 function toggleDone(id){const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=!G.doneExs[sk][id];saveD();const e=document.getElementById('exi-'+id),c=document.getElementById('chk-'+id);if(!e||!c)return;if(G.doneExs[sk][id]){e.classList.add('done');c.classList.add('checked');c.innerHTML='✓';if(navigator.vibrate)navigator.vibrate(30);toast('✅ تم!','s')}else{e.classList.remove('done');c.classList.remove('checked');c.innerHTML=''}updateCompBar()}
 function updateCompBar(){if(!curDay)return;const day=G.days[curDay],sk=sesKey(curDay),total=day.exercises.filter(e=>!e.isWarmup).length,done=day.exercises.filter(e=>!e.isWarmup&&G.doneExs[sk]&&G.doneExs[sk][e.id]).length,pct=total?Math.round(done/total*100):0,full=done===total&&total>0,el=document.getElementById('compBarArea');if(!el)return;const elapsed=sessionStartTime?fmtElapsed(Date.now()-sessionStartTime):null;el.innerHTML=`<div class="comp-bar"><div class="cb-info"><div class="cb-label">${done}/${total} تمرين مكتمل</div><div class="cb-track"><div class="cb-fill ${full?'full':''}" style="width:${pct}%"></div></div></div><div style="display:flex;align-items:center;gap:10px">${elapsed?`<div class="session-clock" title="وقت الجلسة">⏱️ ${elapsed}</div>`:`<div class="session-clock" style="opacity:.45;font-style:italic">ابدأ أول سيت ⏱️</div>`}<div class="cb-pct ${full?'full':''}">${pct}%</div></div></div>`;if(full&&!isDayCompleted(curDay))markDayComplete()}
 function markDayComplete(){const wk=weekKey();if(!G.completedDays[wk])G.completedDays[wk]={};G.completedDays[wk][curDay]=true;G.streak=(G.streak||0)+1;saveD();toast('🎉 '+G.days[curDay].name+' مكتمل! '+MOTIVATIONAL[Math.floor(Math.random()*MOTIVATIONAL.length)],'s');if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);showNotification('يوم مكتمل!🎉',G.days[curDay].name);rDays();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar()}
-function saveSes(){if(!curDay)return toast('اختر يوم التمرين','e');const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;const _jMood=window._selectedMood||0;const _jNote=document.getElementById('journalNote')?.value?.trim()||'';day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${ex.id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const duration=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0;const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),duration,mood:_jMood,note:_jNote};G.ses.push(sd);G.lastWo=new Date().toISOString().split('T')[0];if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;updateChallengeProgress();renderWeeklyChallenge();saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);setTimeout(checkBadges,800);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();rLaggingMuscleAlert();setTimeout(()=>showStretchModal(curDay),1800);setTimeout(()=>{if(typeof addXP==='function'){addXP(100,'جلسة مكتملة');if((G.streak||0)>0&&(G.streak%7===0))addXP(200,'أسبوع كامل!');}},2500);}
+function saveSes(){if(!curDay)return toast('اختر يوم التمرين','e');const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;const _jMood=window._selectedMood||0;const _jNote=document.getElementById('journalNote')?.value?.trim()||'';day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${ex.id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const duration=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0;const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),duration,mood:_jMood,note:_jNote};G.ses.push(sd);G.lastWo=new Date().toISOString().split('T')[0];if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;updateChallengeProgress();renderWeeklyChallenge();saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);setTimeout(checkBadges,800);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();rLaggingMuscleAlert();setTimeout(()=>showStretchModal(curDay),1800);setTimeout(()=>{if(typeof addXP==='function'){addXP(100,'جلسة مكتملة');if((G.streak||0)>0&&(G.streak%7===0))addXP(200,'أسبوع كامل!');}},2500);if(typeof _ttsSessionDone==='function')setTimeout(_ttsSessionDone,800);if(typeof _wlAutoStop==='function')_wlAutoStop();}
 function generateNextSessionSuggestions(sd){const r={};Object.entries(sd.exs).forEach(([id,e])=>{const ex=findExerciseById(id);if(!ex||ex.isWarmup)return;const tw=e.sets?.length?Math.max(...e.sets.map(s=>s.w||0)):e.w||0,dc=eliteDecision(id,e.name,e.sets||[]),ic=OE.isCompound(e.name);r[id]={name:e.name,muscle:e.muscle||'',currentWeight:tw,nextWeight:dc.weight||tw,reason:dc.msg||'',status:dc.action,sets:e.sets?.length||3,targetReps:ic?'6-10':'10-12'}});return r}
 function showSessionSummaryModal(s,sug){const tv=Math.round(SCI.sessionVolume(s)),prs=Object.entries(s.exs).filter(([id,e])=>{/* BUG FIX: getBestSet includes current session (already pushed) → b===c → always 0 PRs. Fix: compute prevBest excluding current session */const prevBest=G.ses.filter(x=>x.id!==s.id).reduce((b,x)=>{const ex=x.exs?.[id];if(!ex)return b;if(ex.sets?.length)ex.sets.forEach(t=>{if((t.w||0)>b)b=t.w||0});else if((ex.w||0)>b)b=ex.w||0;return b},0);const c=e.sets?.length?e.sets.reduce((b,t)=>t.w>b?t.w:b,0):e.w||0;return c>prevBest&&c>0}).length,bl=PERIOD.info(),fa=FATIGUE.level(),sh=Object.values(sug).filter(s=>!s.name.includes('إحماء')).map(s=>`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:8px;border-right:3px solid var(--${s.status==='increase'?'ok':s.status==='deload'?'pu':'bl'})"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-weight:800;font-size:.88em">${s.name}</div><div><span style="color:var(--tx3);font-size:.78em">${s.currentWeight}كجم</span> <span style="color:var(--p)">→</span> <span style="color:var(--p);font-weight:900">${s.nextWeight}كجم</span></div></div><div style="font-size:.76em;color:var(--tx2)">${s.reason}</div></div>`).join('');document.getElementById('aiMoT').textContent='📊 ملخص الجلسة';document.getElementById('aiMoB').innerHTML=`<div style="text-align:center;padding:16px;background:linear-gradient(135deg,rgba(110,231,183,.1),rgba(165,243,252,.06));border-radius:14px;margin-bottom:14px"><div style="font-size:2.2em">🎉</div><div style="font-size:1.1em;font-weight:900;color:var(--ok);margin:8px 0">جلسة ممتازة يا شهاب!</div><div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><div><div style="font-size:1.4em;font-weight:900;color:var(--p)">${tv}</div><div style="font-size:.68em;color:var(--tx2)">حجم كجم</div></div>${prs>0?`<div><div style="font-size:1.4em;font-weight:900;color:var(--wn)">${prs}</div><div style="font-size:.68em;color:var(--tx2)">🏆 PR</div></div>`:''}<div><div style="font-size:1.4em;font-weight:900;color:var(--ok)">${Object.keys(s.exs).length}</div><div style="font-size:.68em;color:var(--tx2)">تمارين</div></div>${s.duration?`<div><div style="font-size:1.4em;font-weight:900;color:var(--bl)">${s.duration}</div><div style="font-size:.68em;color:var(--tx2)">⏱️ دقيقة</div></div>`:''}</div><div style="margin-top:10px;display:flex;gap:8px;justify-content:center"><span class="block-badge ${bl.color}">${bl.icon} ${bl.label}</span><span class="fatigue-badge ${fa}" style="font-size:.68em;padding:3px 9px;margin:0">🔥 ${FATIGUE.label()}</span></div></div><div style="font-weight:800;color:var(--p);margin-bottom:10px">🎯 خطة الجلسة القادمة</div>${sh}<button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت!</button>`;document.getElementById('aiMo').classList.add('act');if(!G.nextSessionPlan)G.nextSessionPlan={};G.nextSessionPlan[curDay]=sug;saveD()}
 function popHSel(){const s=document.getElementById('hSel');if(!s)return;const a={};Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(!ex.isWarmup)a[ex.id]=ex.name}));s.innerHTML='<option value="">-- اختر التمرين --</option>'+Object.entries(a).map(([id,n])=>`<option value="${id}">${n}</option>`).join('')}
@@ -1557,7 +1561,7 @@ async function analyzeEquipmentFromImage(){
   if(G.claudeKey&&window._equipBase64){
     // Vision path — Claude analyzes the actual image
     const r=await callClaudeVision(window._equipBase64,window._equipMediaType||'image/jpeg');
-    if(r&&resEl)resEl.innerHTML=`<div style="margin-top:8px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:12px;font-size:.82em;line-height:1.8;white-space:pre-wrap"><div style="display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;padding:2px 9px;border-radius:7px;font-size:.75em;font-weight:800;margin-bottom:8px">👁️ Claude Vision</div><br>${r}</div>`;
+    if(r&&resEl)resEl.innerHTML=`<div style="margin-top:8px;background:rgba(66,133,244,.07);border:1px solid rgba(66,133,244,.2);border-radius:12px;padding:12px;font-size:.82em;line-height:1.8;white-space:pre-wrap"><div style="display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;padding:2px 9px;border-radius:7px;font-size:.75em;font-weight:800;margin-bottom:8px">👁️ Gemini Vision</div><br>${r}</div>`;
   } else {
     // Text fallback
     const inp=document.getElementById('equipImgDesc');const d=inp?inp.value.trim():'';
@@ -1673,44 +1677,42 @@ function openYT(url, title) {
 function closeYT() {}
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeYT(); });
 
-/* ══ CLAUDE VISION — تحليل صورة الجهاز الرياضي ══ */
+/* ══ GEMINI VISION — تحليل صورة الجهاز الرياضي ══ */
 async function callClaudeVision(base64Img, mediaType) {
-  const key = G.claudeKey;
-  if (!key) { toast('أضف Claude API Key في الإعدادات للتحليل البصري', 'w'); return null; }
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': key,
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify({
-        model: 'claude-opus-4-5',
-        max_tokens: 1024,
-        messages: [{
-          role: 'user',
-          content: [
-            { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64Img } },
-            { type: 'text', text: `أنت خبير أجهزة رياضية. حلّل هذه الصورة وحدد:
+  const key = G.claudeKey; // reused field — stores Gemini key
+  if (!key) { toast('أضف Gemini API Key في الإعدادات للتحليل البصري', 'w'); return null; }
+  const prompt = `أنت خبير أجهزة رياضية. حلّل هذه الصورة وحدد:
 1. اسم الجهاز الرياضي (عربي + إنجليزي)
 2. العضلات المستهدفة
 3. 3-4 تمارين تُؤدَّى عليه مع الوضعية الصحيحة
 4. أخطاء شائعة يجب تجنبها
 5. ارتباطه ببرنامج PPL
-أجب بالعربية بشكل منظم ومختصر.` }
-          ]
-        }]
-      })
-    });
-    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'Claude API Error'); }
+أجب بالعربية بشكل منظم ومختصر.`;
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [
+              { inline_data: { mime_type: mediaType, data: base64Img } },
+              { text: prompt }
+            ]
+          }],
+          generationConfig: { maxOutputTokens: 1024, temperature: 0.4 }
+        })
+      }
+    );
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'Gemini API Error'); }
     const data = await res.json();
-    return data.content?.[0]?.text || null;
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || null;
   } catch(e) { toast('❌ ' + e.message, 'e'); return null; }
 }
 
 function saveAPIKey(){const k=document.getElementById('apiKeyInput')?.value?.trim();if(!k)return toast('أدخل API Key','w');G.aiKey=k;saveD();toast('✅ تم حفظ Groq API Key!','s')}
-function saveClaudeKey(){const k=document.getElementById('claudeKeyInput')?.value?.trim();if(!k)return toast('أدخل Claude API Key','w');G.claudeKey=k;saveD();toast('✅ تم حفظ Claude Key — Vision مفعّل! 👁️','s')}
+function saveClaudeKey(){const k=document.getElementById('claudeKeyInput')?.value?.trim();if(!k)return toast('أدخل Gemini API Key','w');G.claudeKey=k;saveD();toast('✅ تم حفظ Gemini Key — Vision مفعّل! 👁️','s')}
 // ══ SERVICE WORKER — single registration ══
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => {
@@ -1784,7 +1786,7 @@ function swTimerStop() {
       new Notification('⏰ انتهت الراحة!', {body:'يلا شهاب! 💪', requireInteraction:true});
     }
     toast('⏰ انتهت الراحة! يلا 💪','w');
-    uft(0,'var(--ok)');
+    if(typeof _ttsTimerDone === 'function') _ttsTimerDone();
     ['timerDisp'].forEach(id=>{ const el=document.getElementById(id); if(el){el.textContent='0:00';el.style.color='var(--ok)';} });
     ['timerStartBtn'].forEach(id=>{ const el=document.getElementById(id); if(el){el.textContent='▶️ ابدأ';el.disabled=false;} });
     setTimeout(hft, 4000);
@@ -1884,6 +1886,7 @@ function quickStartTimer(seconds){
         new Notification('⏰ انتهت الراحة!',{body:'يلا شهاب! 💪',requireInteraction:true});
       }
       toast('⏰ انتهت الراحة! يلا 💪','w');
+      if(typeof _ttsTimerDone === 'function') _ttsTimerDone();
       if(ft) setTimeout(()=>{if(ft)ft.style.display='none';},4000);
       return;
     }
@@ -4288,16 +4291,28 @@ window.toggleSetDone = function(id, i){
   _origToggleSD(id, i);
   const isDone = document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done');
   if(!isDone) return;
+
   const wEl = document.getElementById(`sw-${id}-${i}`);
   const newW = parseFloat(wEl?.value) || 0;
-  if(newW > prevBest && prevBest > 0){
+  const rEl = document.getElementById(`sr2-${id}-${i}`);
+  const newR = parseInt(rEl?.value) || 0;
+  const isPR = newW > prevBest && prevBest > 0;
+
+  // TTS after set
+  const exName = document.querySelector(`#exi-${id} .exn`)?.textContent || '';
+  if(typeof _ttsSetDone === 'function') _ttsSetDone(exName, i, newW, newR, isPR);
+
+  // Wake lock auto-start on first set
+  if(typeof _wlAutoStart === 'function') _wlAutoStart();
+
+  if(isPR){
     /* screen flash */
     const flash = document.createElement('div');
     flash.className = 'screen-flash';
     document.body.appendChild(flash);
     setTimeout(()=>flash.remove(), 600);
     /* big PR banner */
-    showPRBanner(document.querySelector(`#exi-${id} .exn`)?.textContent || 'تمرين', newW, prevBest);
+    showPRBanner(exName || 'تمرين', newW, prevBest);
     /* big confetti */
     fireConfetti(70);
     setTimeout(()=>fireConfetti(50), 400);
@@ -4349,6 +4364,8 @@ window.checkAllSetsDone = function(id){
     setTimeout(()=>card?.classList.remove('exi-complete-burst'), 800);
     if(navigator.vibrate) navigator.vibrate([30,50,80]);
     floatXP('✅ تمرين!', card);
+    const exNameTTS = card?.querySelector('.exn')?.textContent || '';
+    if(typeof _ttsExDone === 'function') setTimeout(()=>_ttsExDone(exNameTTS), 300);
     /* check XP level-up */
     if(typeof addXP === 'function') setTimeout(()=>{
       const prev = getXPLevel(G.xp||0);
@@ -4485,7 +4502,158 @@ window.startWarmupTimer = function(btn, sec){
   };
 })();
 
-/* ── 10. LIVE FATIGUE UPDATE after each set ── */
+/* ══ VOICE COACH — Text-to-Speech ══ */
+(function initVoiceCoach(){
+  let _ttsEnabled = false;
+  let _voices = [];
+
+  // Load voices (async on some browsers)
+  function loadVoices(){
+    _voices = speechSynthesis.getVoices();
+  }
+  if('speechSynthesis' in window){
+    loadVoices();
+    speechSynthesis.onvoiceschanged = loadVoices;
+  }
+
+  function getBestVoice(){
+    // Prefer Arabic voice, fallback to any
+    return _voices.find(v => v.lang.startsWith('ar')) ||
+           _voices.find(v => v.lang.startsWith('en')) ||
+           _voices[0] || null;
+  }
+
+  window.speak = function(text){
+    if(!_ttsEnabled || !('speechSynthesis' in window)) return;
+    speechSynthesis.cancel(); // stop any ongoing speech
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.voice = getBestVoice();
+    utt.lang = utt.voice?.lang?.startsWith('ar') ? 'ar-SA' : 'en-US';
+    utt.rate = 1.05;
+    utt.pitch = 1;
+    utt.volume = 1;
+    speechSynthesis.speak(utt);
+  };
+
+  window.toggleTTS = function(){
+    if(!('speechSynthesis' in window)){
+      toast('المتصفح لا يدعم Text-to-Speech','e'); return;
+    }
+    _ttsEnabled = !_ttsEnabled;
+    const btn = document.getElementById('ttsToggleBtn');
+    if(btn){
+      btn.style.background = _ttsEnabled ? 'rgba(110,231,183,.25)' : 'rgba(110,231,183,.1)';
+      btn.textContent = _ttsEnabled ? '🔊' : '🔇';
+    }
+    if(_ttsEnabled){
+      toast('🔊 صوت الكوتش مفعّل','s');
+      speak('الكوتش جاهز! يلا شهاب');
+    } else {
+      speechSynthesis.cancel();
+      toast('🔇 صوت الكوتش متوقف','i');
+    }
+  };
+
+  // TTS messages for different events
+  window._ttsSetDone = function(exName, setIdx, w, r, isPR){
+    if(!_ttsEnabled) return;
+    const setNum = setIdx + 1;
+    if(isPR) {
+      speak(`رقم قياسي! ${w} كيلو`);
+    } else if(w && r) {
+      const msgs = [
+        `سيت ${setNum} خلص. ${w} كيلو. ممتاز`,
+        `أحسنت! ${w} كيلو × ${r}`,
+        `سيت ${setNum} تمام! استرح`,
+      ];
+      speak(msgs[setIdx % msgs.length]);
+    } else {
+      speak(`سيت ${setNum} خلص. استرح`);
+    }
+  };
+
+  window._ttsTimerDone = function(){
+    if(!_ttsEnabled) return;
+    speak('خلصت الراحة! يلا');
+  };
+
+  window._ttsExDone = function(exName){
+    if(!_ttsEnabled) return;
+    speak(`${exName} خلص. تمام`);
+  };
+
+  window._ttsSessionDone = function(){
+    if(!_ttsEnabled) return;
+    speak('الجلسة خلصت! عمل ممتاز يا شهاب');
+  };
+})();
+
+/* ══ WAKE LOCK — الشاشة شغالة أثناء التمرين ══ */
+(function initWakeLock(){
+  let _wakeLock = null;
+  let _wlActive = false;
+
+  async function requestWakeLock(){
+    if(!('wakeLock' in navigator)) return false;
+    try {
+      _wakeLock = await navigator.wakeLock.request('screen');
+      _wlActive = true;
+      _wakeLock.addEventListener('release', () => {
+        _wlActive = false;
+        updateWLPill();
+      });
+      return true;
+    } catch(e) { return false; }
+  }
+
+  function releaseWakeLock(){
+    _wakeLock?.release();
+    _wakeLock = null;
+    _wlActive = false;
+  }
+
+  function updateWLPill(){
+    const pill = document.getElementById('wakeLockPill');
+    if(!pill) return;
+    if(_wlActive){
+      pill.style.display = 'flex';
+      pill.innerHTML = '📺 شاشة مفتوحة';
+      pill.style.borderColor = 'rgba(110,231,183,.4)';
+      pill.style.color = 'var(--ok)';
+    } else {
+      pill.style.display = 'none';
+    }
+  }
+
+  window.toggleWakeLock = async function(){
+    if(_wlActive){
+      releaseWakeLock();
+      updateWLPill();
+      toast('📺 الشاشة رجعت عادية','i');
+    } else {
+      const ok = await requestWakeLock();
+      if(ok){ updateWLPill(); toast('📺 الشاشة هتفضل مفتوحة','s'); }
+      else toast('المتصفح لا يدعم Wake Lock','w');
+    }
+  };
+
+  // Auto-enable when workout starts, auto-disable on save
+  window._wlAutoStart = async function(){
+    if(!_wlActive) { await requestWakeLock(); updateWLPill(); }
+  };
+  window._wlAutoStop = function(){
+    releaseWakeLock(); updateWLPill();
+  };
+
+  // Re-request after tab comes back (iOS releases it on hide)
+  document.addEventListener('visibilitychange', async () => {
+    if(document.visibilityState === 'visible' && _wlActive && !_wakeLock){
+      await requestWakeLock();
+    }
+  });
+})();
+
+
 const _origSaveCS = typeof saveCurrentSet === 'function' ? saveCurrentSet : function(){};
 window.saveCurrentSet = function(id, i){
   _origSaveCS(id, i);
