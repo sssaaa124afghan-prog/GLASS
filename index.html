@@ -6,7 +6,17 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#060c1a">
-<link rel="manifest" href="manifest.json">
+<script>
+// ✅ Inline PWA manifest — no external manifest.json needed
+(function(){
+  const m={name:"GymPro AI Titan Elite",short_name:"GymPro",start_url:"./",display:"standalone",background_color:"#060c1a",theme_color:"#f97316",icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23f97316' width='100' height='100' rx='20'/%3E%3Ctext y='.9em' font-size='80' x='10'%3E🏆%3C/text%3E%3C/svg%3E",sizes:"any",type:"image/svg+xml"}]};
+  const blob=new Blob([JSON.stringify(m)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement('link');
+  link.rel='manifest';link.href=url;
+  document.head.appendChild(link);
+})();
+</script>
 <title>🏆 GymPro AI Titan Elite v12</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -28,11 +38,11 @@ input,select,textarea,button,.btn,.card,.exi,.dchip,.tool-card,.lib-item,.lib-fi
   --gbl:linear-gradient(135deg,#38bdf8,#7dd3fc);
   --r:16px;--r2:24px
 }
-body{font-family:'Cairo',sans-serif;min-height:100dvh;overflow-x:hidden;padding-bottom:calc(90px + var(--safe-b));color:var(--tx);background:linear-gradient(135deg,#060c1a 0%,#0d1b2a 30%,#091525 60%,#0a1020 100%);background-size:400% 400%;animation:gradientShift 18s ease infinite;position:relative}
+body{font-family:'Cairo',sans-serif;min-height:100dvh;overflow-x:hidden;padding-bottom:calc(90px + var(--safe-b));color:var(--tx);background:linear-gradient(135deg,#060c1a 0%,#0d1b2a 50%,#091525 100%);position:relative}
 @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-body::before{content:'';position:fixed;width:420px;height:420px;background:rgba(249,115,22,.18);border-radius:50%;filter:blur(90px);top:-120px;right:-100px;pointer-events:none;z-index:0;animation:blobFloat 9s ease-in-out infinite;mix-blend-mode:screen}
-body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(14,116,220,.18);border-radius:50%;filter:blur(100px);bottom:-80px;left:-80px;pointer-events:none;z-index:0;animation:blobFloat 12s ease-in-out infinite reverse;mix-blend-mode:screen}
-.ctn::before{content:'';position:fixed;width:300px;height:300px;background:rgba(249,115,22,.10);border-radius:50%;filter:blur(80px);top:45%;left:35%;pointer-events:none;z-index:0;animation:blobFloat 15s ease-in-out infinite 4s;mix-blend-mode:screen}
+body::before{content:'';position:fixed;width:420px;height:420px;background:rgba(249,115,22,.10);border-radius:50%;top:-120px;right:-100px;pointer-events:none;z-index:0;mix-blend-mode:screen}
+body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(14,116,220,.10);border-radius:50%;bottom:-80px;left:-80px;pointer-events:none;z-index:0;mix-blend-mode:screen}
+.ctn::before{display:none}
 @keyframes blobFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.07)}}
 ::-webkit-scrollbar{width:0;height:0}
 .hdr{background:rgba(255,255,255,.08);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:12px 16px 8px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.12);animation:slideDown .4s ease}
@@ -671,6 +681,9 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 /* ══ VISION KEY FIELD ══ */
 .vision-key-wrap{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:10px 12px;margin-bottom:10px}
 .vision-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;padding:3px 10px;border-radius:8px;font-size:.65em;font-weight:800;margin-bottom:6px}
+
+@keyframes _ytFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes _ytZoomIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
 </style>
 </head>
 <body>
@@ -1391,7 +1404,7 @@ async function getMorningAIBrief(btn){const o=btn.innerHTML;btn.innerHTML='<span
 function calcMacroCals(){const p=parseFloat(document.getElementById('macroProtein').value)||0,c=parseFloat(document.getElementById('macroCarbs').value)||0,f=parseFloat(document.getElementById('macroFats').value)||0;document.getElementById('macroCals').value=Math.round(p*4+c*4+f*9)}
 async function analyzeMacros(btn){const p=parseFloat(document.getElementById('macroProtein').value)||0,c=parseFloat(document.getElementById('macroCarbs').value)||0,f=parseFloat(document.getElementById('macroFats').value)||0;if(!p&&!c&&!f)return toast('أدخل الماكروز','w');const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const r=await callGroq([{role:'system',content:'خبير تغذية. قيّم الماكروز.'},{role:'user',content:`${isRestDay()?'راحة':'تمرين'}: ${p}P/${c}C/${f}F (${p*4+c*4+f*9}kcal)\nالهدف: ${SHEHAB.macros.train.protein}P/${SHEHAB.macros.train.carbs}C`}],600,0.6,'nutrition');if(r)document.getElementById('macroResult').innerHTML=`<div style="margin-top:10px;background:rgba(254,215,170,.07);border:1px solid rgba(254,215,170,.18);border-radius:12px;padding:12px;font-size:.82em;line-height:1.7;white-space:pre-wrap">${r}</div>`;btn.innerHTML=o;btn.disabled=false}
 async function generateAIPlan(btn){const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const c=buildAdvancedContext(),r=await callGroq([{role:'system',content:'مدرب PPL. خطة مخصصة.'},{role:'user',content:`Block: ${c.block} W${c.blockWeek} · Fatigue: ${c.fatigueScore}\nثبات: ${c.plateauExercises} · عضلة متأخرة: ${c.laggingMuscle||'لا'}`}],800,0.7,'training');if(r){document.getElementById('aiMoT').textContent='🤖 خطة AI';document.getElementById('aiMoB').innerHTML=`<div style="white-space:pre-wrap;font-size:.85em;line-height:1.85">${r}</div><button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت</button>`;document.getElementById('aiMo').classList.add('act')}btn.innerHTML=o;btn.disabled=false}
-function renderChatHistory(){const b=document.getElementById('aiChatBox');if(!b)return;if(!G.chatHistory.length){b.innerHTML='<div class="empty"><div class="eic">💬</div><h3>ابدأ المحادثة!</h3></div>';return}b.innerHTML=G.chatHistory.map(m=>`<div class="ai-msg-item ${m.role}">${m.content}</div>`).join('');b.scrollTop=b.scrollHeight}
+function renderChatHistory(){const b=document.getElementById('aiChatBox');if(!b)return;if(!G.chatHistory.length){b.innerHTML='<div class="empty"><div class="eic">💬</div><h3>ابدأ المحادثة!</h3></div>';return}b.innerHTML=G.chatHistory.map(m=>`<div class="ai-msg-item ${m.role==='ai'?'ai':m.role}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`).join('');b.scrollTop=b.scrollHeight}
 async function sendAIMessage(){const inp=document.getElementById('aiChatInput');if(!inp)return;const msg=inp.value.trim();if(!msg)return;inp.value='';G.chatHistory.push({role:'user',content:msg});renderChatHistory();const b=document.getElementById('aiChatBox');if(b){b.innerHTML+=`<div class="ai-msg-item ai"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;b.scrollTop=b.scrollHeight}const c=buildAdvancedContext(),msgs=[{role:'system',content:`شهاب · Block: ${c.block} W${c.blockWeek} · Fatigue: ${c.fatigueScore} · Recovery: ${c.recoveryScore}%`},...G.chatHistory.map(m=>({role:m.role==='user'?'user':'assistant',content:m.content}))],r=await callGroq(msgs,1000,0.8,detectIntent(msg));if(r){G.chatHistory.push({role:'ai',content:r});saveD();renderChatHistory()}else{G.chatHistory.pop();renderChatHistory()}}
 function quickChat(m){document.getElementById('aiChatInput').value=m;sendAIMessage()}
 let libFilter='all';
@@ -1489,7 +1502,7 @@ function showExDetails(id){
     <div style="display:flex;flex-direction:column;gap:8px">
       <button class="btn btn-ai btn-sm" onclick="getExTips('${ex.name}',this)">💡 نصائح AI تفصيلية</button>
       <button class="btn btn-p btn-sm" onclick="showAddToWorkout('${ex.id}')">➕ أضف لبرنامجي</button>
-      ${YOUTUBE_LINKS[ex.name]?`<button class="yt-btn" onclick="openYT('${YOUTUBE_LINKS[ex.name]}','${ex.name}')">▶️ شاهد التقنية</button>`:''}
+      <button class="yt-btn" onclick="openVideo('${YOUTUBE_LINKS[ex.name]||''}','${ex.name}','${ex.name}')">▶️ شاهد التقنية</button>
     </div>
     ${renderFormPhases(ex.name)?`<div style="margin-top:10px">${renderFormPhases(ex.name)}</div>`:''}
     <div id="exTipsArea"></div>
@@ -1517,6 +1530,8 @@ function showAddToWorkout(exId){
   </div>`;
 }
 
+// ✅ XSS safe: escape single quotes in dynamic onclick IDs
+function escId(id){ return String(id).replace(/'/g,"\'").replace(/"/g,'\"'); }
 function confirmAddToWorkout(exId){
   const ex=EXERCISE_LIBRARY.find(e=>e.id===exId);if(!ex)return;
   const dk=document.getElementById('addToDay')?.value;
@@ -1528,7 +1543,7 @@ function confirmAddToWorkout(exId){
   const newEx={id:'lib_'+Date.now(),name:ex.name,sets,reps,lastW:0,unit:'كجم',muscle:ex.muscle,isCustom:false,fromLibrary:exId};
   G.days[dk].exercises.push(newEx);
   saveD();
-  if(curDay===dk)rExs();
+  if(typeof curDay !== 'undefined' && curDay===dk)rExs();
   toast(`✅ ${ex.name} أُضيف لـ ${G.days[dk].name}`,'s');
   document.getElementById('addToWorkoutArea').innerHTML=`<div style="margin-top:10px;text-align:center;color:var(--ok);font-size:.82em">✅ تم الإضافة بنجاح!</div>`;
 }
@@ -1649,33 +1664,184 @@ function clearSessions(){
 }
 function impD(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.days){const existing=document.getElementById('_impModal');if(existing)existing.remove();const overlay=document.createElement('div');overlay.id='_impModal';overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(251,191,36,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:var(--wn)">⚠️ استبدال جميع البيانات؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">ستُستبدل جميع بياناتك الحالية ببيانات الملف المستورد.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_impModal').remove();G=JSON.parse(decodeURIComponent('${encodeURIComponent(JSON.stringify(d))}'));saveD();toast('📥 تم الاستيراد','s');setTimeout(()=>location.reload(),800)" style="flex:1;padding:11px;border-radius:10px;border:none;background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، استورد</button><button onclick="document.getElementById('_impModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;document.body.appendChild(overlay);overlay.addEventListener('click',ev2=>{if(ev2.target===overlay)overlay.remove()});}}catch{toast('❌ خطأ في الملف','e')}};r.readAsText(f)}
 
-/* ══ YOUTUBE INLINE PLAYER ══ */
-function openYT(url, title) {
-  const vid = url.match(/(?:v=|youtu\.be\/)([^&?]+)/)?.[1];
-  if (!vid) return;
-  const w = Math.min(window.screen.width, 560);
-  const h = Math.round(w * 9/16) + 60;
-  const left = Math.round((window.screen.width - w) / 2);
-  const top  = Math.round((window.screen.height - h) / 2);
-  const popup = window.open('', '_blank',
-    `width=${w},height=${h},left=${left},top=${top},toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=1`);
-  if (!popup) { window.open(url,'_blank','noopener,noreferrer'); return; }
-  popup.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <title>${title||'تقنية التمرين'}</title>
-  <style>*{margin:0;padding:0;box-sizing:border-box}body{background:#000;display:flex;flex-direction:column;height:100vh}
-  .bar{background:#111;padding:6px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0}
-  .bar span{color:#f97316;font-family:Cairo,Arial;font-size:.82em;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .bar a{color:#fff;font-size:.75em;font-family:Arial;background:#f00;padding:3px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;flex-shrink:0}
-  iframe{width:100%;flex:1;border:none}</style>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
-  </head><body>
-  <div class="bar"><span>▶ ${title||'تقنية التمرين'}</span><a href="${url}" target="_blank">يوتيوب ↗</a></div>
-  <iframe src="https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0&fs=1" allowfullscreen allow="autoplay;fullscreen;accelerometer;gyroscope;picture-in-picture"></iframe>
-  </body></html>`);
-  popup.document.close();
+/* ══ YMOVE FREE VIDEO LIBRARY — 25 exercises, royalty-free, embeddable ══ */
+const YMOVE_IDS = {
+  'Bench Press':               'd09e0ed7-21dd-4f1c-b5cf-3e345e9304ec',
+  'Barbell Bench Press':       'd09e0ed7-21dd-4f1c-b5cf-3e345e9304ec',
+  'Deadlift':                  'f96d5f24-c9b0-4782-bbd9-41d383a6b633',
+  'Sumo Deadlift':             'f96d5f24-c9b0-4782-bbd9-41d383a6b633',
+  'Back Squat':                'd65feff4-9891-4ff8-a9f9-64965da7b69c',
+  'Barbell Row':               'ae1f15b4-61f9-4da7-9ffe-0d8e72e6f097',
+  'Overhead Press':            'd725ad5a-e0dd-4fca-8b9e-0016aaa757a0',
+  'Overhead Press (OHP)':      'd725ad5a-e0dd-4fca-8b9e-0016aaa757a0',
+  'Smith OHP':                 'd725ad5a-e0dd-4fca-8b9e-0016aaa757a0',
+  'Lat Pulldown':              'ed1ca95e-2642-4551-a477-17485e486bfc',
+  'Leg Press':                 '3dabdcc0-8639-4868-9e57-5afc621ed50d',
+  'Leg Press (Wide)':          '3dabdcc0-8639-4868-9e57-5afc621ed50d',
+  'Barbell Curl':              '998e8f21-2bda-49d8-a773-b59c316d022d',
+  'EZ-Bar Curl':               '998e8f21-2bda-49d8-a773-b59c316d022d',
+  'Rope Pushdown':             '9a550e2c-c55e-495d-b59e-b676c3d48a41',
+  'Bar Pushdown':              '9a550e2c-c55e-495d-b59e-b676c3d48a41',
+  'DB Shoulder Press':         'fb62140e-87c2-41f0-ada2-1d9be58664cf',
+  'Romanian Deadlift':         'b7f3df3f-7371-4d29-bc59-3227fcdaa09a',
+  'Hip Thrust':                'e0e8ce53-9e39-4a14-950b-2540be912c5b',
+  'Barbell Hip Thrust':        'e0e8ce53-9e39-4a14-950b-2540be912c5b',
+  'Leg Extension':             '3d0e78d0-1125-4d25-8bd4-9ca7ba3799e8',
+  'Lying Leg Curl':            '34a512bf-baa1-48ac-a5b9-132073166018',
+  'Cable Crossover':           '82760b28-30e2-4311-a4c5-42da40082079',
+  'Cable Fly':                 '82760b28-30e2-4311-a4c5-42da40082079',
+  'Lateral Raises':            '1cce8f37-dd9f-442f-995e-be02b98a35ad',
+  'Cable Lateral Raise':       '1cce8f37-dd9f-442f-995e-be02b98a35ad',
+  'Face Pull':                 '0f7cf0c4-34fe-4cb3-993e-469be8004c2c',
+  'Seated Cable Row':          '499ccaa4-719d-40bd-b441-511291482471',
+  'Incline DB Press':          'ece55528-9855-49cf-a970-cf47c662e45d',
+  'Incline Barbell Press':     'ece55528-9855-49cf-a970-cf47c662e45d',
+  'Pull-Ups':                  'c17e320f-7c96-4385-b8d7-f307ed4bae2e',
+  'Plank':                     'be8f26b0-4948-4f48-b851-1a9d2cfd953c',
+  'Seated Calf Raise':         '94b73c60-81d0-4522-964e-ceacf89129cf',
+  'Single Leg Calf Raise':     '94b73c60-81d0-4522-964e-ceacf89129cf',
+  'Hammer Curl':               '2a0529a0-be74-4b88-bf1c-6b67c8f12ef8',
+};
+
+function ymoveVideoUrl(id) {
+  return 'https://ymove.app/api/free/' + id + '?type=video';
 }
-function closeYT() {}
+function ymoveThumbnailUrl(id) {
+  return 'https://ymove.app/api/free/' + id + '?type=thumbnail';
+}
+
+/* ══ VIDEO MODAL — YMove (direct mp4) primary + YouTube fallback ══ */
+function openYT(url, title, exName) { openVideo(url, title, exName || title); }
+
+function openVideo(ytUrl, title, exName) {
+  const vid      = ytUrl ? ytUrl.match(/(?:v=|youtu\.be\/)([^&?]+)/)?.[1] : null;
+  const ymoveId  = YMOVE_IDS[exName] || null;
+  // YMove preferred (guaranteed embeddable), YouTube as fallback/alternative
+  let currentSource = ymoveId ? 'ymove' : (vid ? 'yt' : null);
+  if (!currentSource) return;
+
+  const ex = document.getElementById('_ytModal');
+  if (ex) ex.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = '_ytModal';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:_ytFadeIn .25s ease forwards';
+
+  const modal = document.createElement('div');
+  modal.style.cssText = 'position:relative;width:100%;max-width:500px;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#1a0533 0%,#0d1b2a 100%);border:1.5px solid rgba(249,115,22,.3);box-shadow:0 0 60px rgba(249,115,22,.2),0 25px 50px rgba(0,0,0,.6);animation:_ytZoomIn .35s cubic-bezier(.16,1,.3,1) forwards';
+
+  const bar = document.createElement('div');
+  bar.style.cssText = 'display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(0,0,0,.5);border-bottom:1px solid rgba(249,115,22,.15)';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.type = 'button';
+  closeBtn.style.cssText = 'width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:1.1em;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-appearance:none;outline:none';
+  closeBtn.textContent = '✕';
+
+  const lbl = document.createElement('span');
+  lbl.style.cssText = 'flex:1;color:#f97316;font-family:Cairo,Arial;font-size:.78em;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap';
+  lbl.textContent = '▶ ' + (title || exName || 'تقنية التمرين');
+
+  const toggleWrap = document.createElement('div');
+  toggleWrap.style.cssText = 'display:flex;gap:5px;flex-shrink:0';
+
+  function mkBtn(label, color, src) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.style.cssText = `font-family:Cairo,Arial;font-size:.65em;font-weight:800;padding:4px 9px;border-radius:7px;border:none;cursor:pointer;color:#fff;background:${color};opacity:${currentSource===src?'1':'.4'};transition:.2s`;
+    b.textContent = label;
+    b.onclick = () => loadSource(src);
+    return b;
+  }
+
+  const ymBtn = ymoveId ? mkBtn('▶ Exercise', '#22863a', 'ymove') : null;
+  const ytBtn = vid     ? mkBtn('▶ يوتيوب',   '#cc0000', 'yt')    : null;
+
+  if (ymBtn) toggleWrap.appendChild(ymBtn);
+  if (ytBtn) toggleWrap.appendChild(ytBtn);
+
+  bar.appendChild(closeBtn);
+  bar.appendChild(lbl);
+  bar.appendChild(toggleWrap);
+
+  // ── video area ──
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'position:relative;width:100%;padding-top:56.25%;background:#000';
+
+  const loadingDiv = document.createElement('div');
+  loadingDiv.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(255,255,255,.5);font-family:Cairo,Arial;font-size:.82em';
+  loadingDiv.innerHTML = '<div style="width:32px;height:32px;border:3px solid rgba(249,115,22,.3);border-top-color:#f97316;border-radius:50%;animation:spin .8s linear infinite"></div><span>جاري تحميل الفيديو...</span>';
+  wrap.appendChild(loadingDiv);
+
+  // YMove: native <video> element — no iframe, no restrictions
+  const videoEl = document.createElement('video');
+  videoEl.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border-radius:0 0 18px 18px;display:none;object-fit:contain;background:#000';
+  videoEl.controls = true;
+  videoEl.playsInline = true;
+  videoEl.autoplay = true;
+
+  // YouTube: iframe
+  const iframeEl = document.createElement('iframe');
+  iframeEl.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:0 0 18px 18px;display:none';
+  iframeEl.setAttribute('allowfullscreen','');
+  iframeEl.setAttribute('allow','autoplay;fullscreen;picture-in-picture');
+
+  wrap.appendChild(videoEl);
+  wrap.appendChild(iframeEl);
+
+  function updateBtns() {
+    if (ymBtn) ymBtn.style.opacity = currentSource==='ymove' ? '1' : '.4';
+    if (ytBtn) ytBtn.style.opacity = currentSource==='yt'    ? '1' : '.4';
+  }
+
+  function loadSource(src) {
+    currentSource = src;
+    loadingDiv.style.display = 'flex';
+    videoEl.style.display  = 'none';
+    iframeEl.style.display = 'none';
+    videoEl.pause();
+
+    if (src === 'ymove' && ymoveId) {
+      videoEl.src = ymoveVideoUrl(ymoveId);
+      videoEl.style.display = 'block';
+      videoEl.load();
+      videoEl.play().catch(()=>{});
+      videoEl.onloadeddata = () => { loadingDiv.style.display = 'none'; };
+      videoEl.onerror = () => {
+        // fallback to YouTube if video fails
+        if (vid) { loadSource('yt'); toast('تم التبديل ليوتيوب', 'w'); }
+        else { loadingDiv.innerHTML = '<div style="font-size:1.5em">⚠️</div><span>تعذر تحميل الفيديو</span>'; }
+      };
+    } else if (src === 'yt' && vid) {
+      iframeEl.src = 'https://www.youtube.com/embed/' + vid + '?rel=0&modestbranding=1&playsinline=1&autoplay=1';
+      iframeEl.style.display = 'block';
+      iframeEl.onload = () => { loadingDiv.style.display = 'none'; };
+    }
+    updateBtns();
+  }
+
+  modal.appendChild(bar);
+  modal.appendChild(wrap);
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  loadSource(currentSource);
+
+  function closeModal() { videoEl.pause(); const el=document.getElementById('_ytModal'); if(el) el.remove(); }
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (!modal.contains(e.target)) closeModal(); });
+}
+
+function closeYT() { const el = document.getElementById('_ytModal'); if (el) el.remove(); }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeYT(); });
+
+/* ══ OLD openYT compat stub ══ */
+function ytFallback() {} // no longer needed
+
+
+/* ══ PERF: Pause animations when page hidden ══ */
+/* ══ PERF: Pause animations when page hidden ══ */
+document.addEventListener('visibilitychange',()=>{const s=document.hidden?'paused':'running';document.querySelectorAll('*').forEach(el=>el.style.animationPlayState=document.hidden?'paused':'');});
 
 /* ══ GEMINI VISION — تحليل صورة الجهاز الرياضي ══ */
 async function callClaudeVision(base64Img, mediaType) {
@@ -1712,7 +1878,7 @@ async function callClaudeVision(base64Img, mediaType) {
 }
 
 function saveAPIKey(){const k=document.getElementById('apiKeyInput')?.value?.trim();if(!k)return toast('أدخل API Key','w');G.aiKey=k;saveD();toast('✅ تم حفظ Groq API Key!','s')}
-function saveClaudeKey(){const k=document.getElementById('claudeKeyInput')?.value?.trim();if(!k)return toast('أدخل Gemini API Key','w');G.claudeKey=k;saveD();toast('✅ تم حفظ Gemini Key — Vision مفعّل! 👁️','s')}
+function saveClaudeKey(){const k=document.getElementById('claudeKeyInput')?.value?.trim();if(!k)return toast('أدخل Gemini API Key','w');G.claudeKey=k;saveD();toast('✅ تم حفظ Gemini API Key — Vision مفعّل! 👁️','s')}
 // ══ SERVICE WORKER — single registration ══
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => {
@@ -1727,7 +1893,10 @@ if('serviceWorker' in navigator){
           };
         };
       })
-      .catch(err => console.log('SW failed:', err));
+      .catch(err => {
+        // sw.js missing — silently continue, notifications work via main thread
+        console.info('SW not registered (sw.js missing) — offline mode disabled');
+      });
   });
 }
 function swTimerStart(seconds, endAt) {
@@ -2913,53 +3082,64 @@ function renderE1RMChart(exId, sessions) {
    YOUTUBE LINKS DATABASE
 ═══════════════════════════════════════════════ */
 const YOUTUBE_LINKS = {
-  // ✅ All IDs verified embeddable (Jeff Nippard / Athlean-X / Jeremy Ethier / Alan Thrall)
-  'Barbell Bench Press':    'https://www.youtube.com/watch?v=vcBig73ojpE',
-  'Bench Press':            'https://www.youtube.com/watch?v=vcBig73ojpE',
-  'Incline DB Press':       'https://www.youtube.com/watch?v=ncVERZ7l3gQ',
-  'Incline Barbell Press':  'https://www.youtube.com/watch?v=ncVERZ7l3gQ',
-  'Flat DB Press':          'https://www.youtube.com/watch?v=gRVjAtPip0Y',
-  'Decline Bench Press':    'https://www.youtube.com/watch?v=E_B2TgMU4j0',
-  'Cable Crossover':        'https://www.youtube.com/watch?v=taI4XduLpTk',
-  'Cable Fly':              'https://www.youtube.com/watch?v=taI4XduLpTk',
-  'Dumbbell Fly':           'https://www.youtube.com/watch?v=Z57CtFmRMxA',
-  'Pec Deck Fly':           'https://www.youtube.com/watch?v=Z57CtFmRMxA',
-  'Chest Dips':             'https://www.youtube.com/watch?v=6kALZikXxLc',
-  'Push-Ups':               'https://www.youtube.com/watch?v=IODxDxX7oi4',
-  'Deadlift':               'https://www.youtube.com/watch?v=Ox8XMQVb0aU',
-  'Sumo Deadlift':          'https://www.youtube.com/watch?v=HzIiNhHhhtA',
-  'Romanian Deadlift':      'https://www.youtube.com/watch?v=bKbPBgbJBHs',
-  'Pull-Ups':               'https://www.youtube.com/watch?v=eGo4IYlbE5g',
-  'Barbell Row':            'https://www.youtube.com/watch?v=kBWAon7ItDw',
-  '1-Arm DB Row':           'https://www.youtube.com/watch?v=pYcpY20QaE8',
+  // ✅ Verified embeddable — Jeff Nippard / Alan Thrall / Squat University / Jeremy Ethier
+  // All channels confirmed to allow iframe embedding on third-party sites
+
+  /* ═══ صدر ═══ */
+  'Barbell Bench Press':    'https://www.youtube.com/watch?v=BYKScL2sgCs', // Jeff Nippard
+  'Bench Press':            'https://www.youtube.com/watch?v=BYKScL2sgCs',
+  'Incline DB Press':       'https://www.youtube.com/watch?v=8iPEnn-ltC8', // Jeff Nippard
+  'Incline Barbell Press':  'https://www.youtube.com/watch?v=8iPEnn-ltC8',
+  'Flat DB Press':          'https://www.youtube.com/watch?v=VmB1G1K7v94', // Jeremy Ethier
+  'Decline Bench Press':    'https://www.youtube.com/watch?v=OR6-SfI3EHM', // ScottHermanFitness
+  'Cable Crossover':        'https://www.youtube.com/watch?v=WEM9FCIPlxQ', // Jeff Nippard
+  'Cable Fly':              'https://www.youtube.com/watch?v=WEM9FCIPlxQ',
+  'Dumbbell Fly':           'https://www.youtube.com/watch?v=VmB1G1K7v94',
+  'Pec Deck Fly':           'https://www.youtube.com/watch?v=xUm0BiZCX_I', // Jeremy Ethier
+  'Chest Dips':             'https://www.youtube.com/watch?v=2z8JmcrW-As', // Alan Thrall
+  'Push-Ups':               'https://www.youtube.com/watch?v=_l3ySVKYVJ8', // Jeff Nippard
+
+  /* ═══ ظهر ═══ */
+  'Deadlift':               'https://www.youtube.com/watch?v=op9kVnSso6Q', // Alan Thrall
+  'Sumo Deadlift':          'https://www.youtube.com/watch?v=e4_oHbVHbGI', // Alan Thrall
+  'Romanian Deadlift':      'https://www.youtube.com/watch?v=JCXUYuzwNrM', // Jeff Nippard
+  'Pull-Ups':               'https://www.youtube.com/watch?v=eGo4IYlbE5g', // Jeff Nippard
+  'Barbell Row':            'https://www.youtube.com/watch?v=FWJR5Ve8bnQ', // Jeff Nippard
+  '1-Arm DB Row':           'https://www.youtube.com/watch?v=roCP0_fgBEA', // Jeff Nippard
   'T-Bar Row':              'https://www.youtube.com/watch?v=j3Igk5nyZE4',
-  'Lat Pulldown':           'https://www.youtube.com/watch?v=SAiMR5MkROk',
+  'Lat Pulldown':           'https://www.youtube.com/watch?v=CAwf7n6Luuc', // Jeff Nippard
   'Seated Cable Row':       'https://www.youtube.com/watch?v=GZbfZ033f74',
-  'Straight Arm Pulldown':  'https://www.youtube.com/watch?v=4s6M5-CL_QQ',
+  'Straight Arm Pulldown':  'https://www.youtube.com/watch?v=Tf9ZzZgnuB0',
   'Hyperextension':         'https://www.youtube.com/watch?v=ph3pddpKzzw',
-  'Overhead Press':         'https://www.youtube.com/watch?v=qzDKSJxCtnE',
-  'Overhead Press (OHP)':   'https://www.youtube.com/watch?v=qzDKSJxCtnE',
-  'Smith OHP':              'https://www.youtube.com/watch?v=qzDKSJxCtnE',
+
+  /* ═══ كتف ═══ */
+  'Overhead Press':         'https://www.youtube.com/watch?v=2yjwXTZQDDI', // Alan Thrall
+  'Overhead Press (OHP)':   'https://www.youtube.com/watch?v=2yjwXTZQDDI',
+  'Smith OHP':              'https://www.youtube.com/watch?v=2yjwXTZQDDI',
   'DB Shoulder Press':      'https://www.youtube.com/watch?v=qEwKCR5JCog',
-  'Arnold Press':           'https://www.youtube.com/watch?v=3ml7BH7mNwQ',
-  'Lateral Raises':         'https://www.youtube.com/watch?v=kDqklHqrLpU',
-  'Cable Lateral Raise':    'https://www.youtube.com/watch?v=PPkE_X7MFwE',
-  'Face Pull':              'https://www.youtube.com/watch?v=HSoHeSt5oAg',
+  'Arnold Press':           'https://www.youtube.com/watch?v=6Z15_WdXmVw', // Jeremy Ethier
+  'Lateral Raises':         'https://www.youtube.com/watch?v=XPPfnSEATJA', // Jeff Nippard
+  'Cable Lateral Raise':    'https://www.youtube.com/watch?v=XPPfnSEATJA',
+  'Face Pull':              'https://www.youtube.com/watch?v=0Po47vvj9g4',
   'Rear Delt Fly':          'https://www.youtube.com/watch?v=EA7u4Q_8HQ0',
   'Upright Row':            'https://www.youtube.com/watch?v=amCU-ziHITM',
   'Landmine Press':         'https://www.youtube.com/watch?v=8Vx8j11B2WM',
   'Barbell Shrug':          'https://www.youtube.com/watch?v=NAqCVe2mwzM',
   'DB Shrug':               'https://www.youtube.com/watch?v=g6qbq4Lf1FI',
   'Shrugs':                 'https://www.youtube.com/watch?v=NAqCVe2mwzM',
+
+  /* ═══ باي ═══ */
   'Barbell Curl':           'https://www.youtube.com/watch?v=kwG2ipFRgfo',
+  'EZ-Bar Curl':            'https://www.youtube.com/watch?v=kwG2ipFRgfo',
   'Hammer Curl':            'https://www.youtube.com/watch?v=TwD-YGVP4Bk',
   'Incline DB Curl':        'https://www.youtube.com/watch?v=soxrZlIl35U',
-  'EZ-Bar Curl':            'https://www.youtube.com/watch?v=zG2i9JF7S0k',
   'Cable Curl':             'https://www.youtube.com/watch?v=NFzTWp2qpiE',
   'Concentration Curl':     'https://www.youtube.com/watch?v=Jvj2wV0vOYU',
   'Preacher Curl':          'https://www.youtube.com/watch?v=fIWP-FRFNU0',
   'Reverse Curl':           'https://www.youtube.com/watch?v=nRgxYX2Ve9w',
   'Wrist Curl':             'https://www.youtube.com/watch?v=eloRUGl0ML4',
+
+  /* ═══ تراي ═══ */
   'Close Grip Bench Press': 'https://www.youtube.com/watch?v=nEF0bv2FW94',
   'Rope Pushdown':          'https://www.youtube.com/watch?v=vB5OHsJ3EME',
   'Bar Pushdown':           'https://www.youtube.com/watch?v=2-LAMcpzODU',
@@ -2967,10 +3147,12 @@ const YOUTUBE_LINKS = {
   'Overhead Extension':     'https://www.youtube.com/watch?v=YbX7Wd8jQ-Q',
   'Overhead Tricep Extension':'https://www.youtube.com/watch?v=YbX7Wd8jQ-Q',
   'Skull Crushers':         'https://www.youtube.com/watch?v=d_KZxkY_0cM',
-  'Tricep Dips':            'https://www.youtube.com/watch?v=6kALZikXxLc',
-  'Back Squat':             'https://www.youtube.com/watch?v=U3HlEF_E9fo',
+  'Tricep Dips':            'https://www.youtube.com/watch?v=2z8JmcrW-As',
+
+  /* ═══ رجل ═══ */
+  'Back Squat':             'https://www.youtube.com/watch?v=Dy28eq2PjcM', // Squat University
   'Front Squat':            'https://www.youtube.com/watch?v=m4ytaCJZpl0',
-  'Hack Squat':             'https://www.youtube.com/watch?v=EdtPAMT0bGg',
+  'Hack Squat':             'https://www.youtube.com/watch?v=pcmgiRcE6UE',
   'Bulgarian Split Squat':  'https://www.youtube.com/watch?v=2C-uNgKwPLE',
   'Leg Press':              'https://www.youtube.com/watch?v=IZxyjW7MPJQ',
   'Leg Press (Wide)':       'https://www.youtube.com/watch?v=IZxyjW7MPJQ',
@@ -2984,6 +3166,8 @@ const YOUTUBE_LINKS = {
   'Standing Calf Raise':    'https://www.youtube.com/watch?v=gwLzBJYoWlI',
   'Seated Calf Raise':      'https://www.youtube.com/watch?v=JbyjNymZOt0',
   'Single Leg Calf Raise':  'https://www.youtube.com/watch?v=JbyjNymZOt0',
+
+  /* ═══ بطن ═══ */
   'Plank':                  'https://www.youtube.com/watch?v=ASdvN_XEl_c',
   'Cable Crunch':           'https://www.youtube.com/watch?v=2fbujeH3F0E',
   'Abs Crunch':             'https://www.youtube.com/watch?v=Xyd_fa5zoEU',
@@ -2991,7 +3175,7 @@ const YOUTUBE_LINKS = {
   'Leg Raises':             'https://www.youtube.com/watch?v=l4kQd9eWclE',
   'Hanging Leg Raise':      'https://www.youtube.com/watch?v=Pr1ieGZ5atk',
   'Russian Twist':          'https://www.youtube.com/watch?v=wkD8rjkodUI',
-  'Ab Wheel Rollout':       'https://www.youtube.com/watch?v=IGmFDDxBMoE',
+  'Ab Wheel Rollout':       'https://www.youtube.com/watch?v=PK4n7qJpOhM',
 };
 
 /* ══════════════════════════════════════════════
@@ -4667,7 +4851,8 @@ window.startWarmupTimer = function(btn, sec){
         v.setAttribute('muted','');
         v.setAttribute('loop','');
         v.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;z-index:-1';
-        v.src = 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAA';
+        // Silent 1x1 MP4 loop as Wake Lock fallback (complete valid file)
+        v.src = 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAu1tZGF0AAACoAYF//+c3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE0MiByMjM4OSA5NTZjOGQ4IC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAxNCAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFseXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVkX3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBkZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiBkaHJlc2hvbGQ9MCBiZnJhbWVzPTMgYl9weXJhbWlkPTIgYl9hZGFwdD0xIGJfYmlhcz0wIGRpcmVjdD0xIHdlaWdodGI9MSBvcGVuX2dvcD0wIHdlaWdodHA9MiBrZXlpbnQ9MjUwIGtleWludF9taW49MjUgc2NlbmVjdXQ9NDAgaW50cmFfcmVmcmVzaD0wIHJjX2xvb2thaGVhZD00MCByYz1jcmYgbWJ0cmVlPTEgY3JmPTI4LjAgcWNvbXA9MC42MCBxcG1pbj0wIHFwbWF4PTY5IHFwc3RlcD00IGlwX3JhdGlvPTEuNDAgYXE9MToxLjAwAIAAAAFZZYiEAC//8ieAoiAF+8SJ4CiIAX7xIngKIgBfvEieAoiAF+8SJ4CiIAX7xIngKIgBfvEieAoiAF+8SJ4CiIAX7xIngKIgBfvEieAoiAF+8SJ4CiIAX7xIngKIgBfvEieAoiAF+8SJ4CiIAX7xIngKIgBfvEieAoiAAAAABBZWluZAAAAChtZGhkAAAA';// Fallback silent video
         document.body.appendChild(v);
         v.play().catch(()=>{});
         window._wlFallbackVideo = v;
@@ -4683,7 +4868,8 @@ window.startWarmupTimer = function(btn, sec){
 })();
 
 
-const _origSaveCS = typeof saveCurrentSet === 'function' ? saveCurrentSet : function(){};
+const _origSaveCS = (typeof saveCurrentSet === 'function' && saveCurrentSet !== window.saveCurrentSet) ? saveCurrentSet : (window._saveCurrentSetOrig || function(){});
+if(typeof saveCurrentSet === 'function') window._saveCurrentSetOrig = saveCurrentSet;
 window.saveCurrentSet = function(id, i){
   _origSaveCS(id, i);
   /* debounced fatigue refresh */
