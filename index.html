@@ -4868,11 +4868,23 @@ function handleNutFile(file){
   rd.readAsText(file);
 }
 function parseNutritionJSON(raw){
-  var out={days:[],source:'unknown'};
+  var out={days:[],source:'unknown',weight_log:[],profile:{}};
   function mkDay(d){return{date:d||'',cal:0,protein:0,carbs:0,fat:0,fiber:0,sodium:0,sugar:0};}
   function num(v){return parseFloat(v)||0;}
+  // NutriPro AI export (nutripro_gym_v1) — use daily_summaries for accuracy
+  if(raw._format==='nutripro_gym_v1'){
+    out.source='NutriPro AI';
+    if(raw.profile)out.profile=raw.profile;
+    if(Array.isArray(raw.weight_log))out.weight_log=raw.weight_log;
+    if(Array.isArray(raw.daily_summaries)&&raw.daily_summaries.length){
+      raw.daily_summaries.forEach(function(r){
+        out.days.push({date:r.date||'',cal:num(r.calories),protein:num(r.protein),
+          carbs:num(r.carbohydrates),fat:num(r.fat),fiber:0,sodium:0,sugar:0});
+      });
+    }
+  }
   // MyFitnessPal
-  if(raw.diary_entries||raw.food_diary||raw.entries){
+  else if(raw.diary_entries||raw.food_diary||raw.entries){
     out.source='MyFitnessPal';
     var entries=raw.diary_entries||raw.food_diary||raw.entries||[];
     var byDate={};
@@ -4951,6 +4963,11 @@ function showNutSummary(data){
   var tCal=parseInt(document.getElementById('nutTargetCal').value)||0;
   var tPro=parseInt(document.getElementById('nutTargetPro').value)||0;
   var goal=document.getElementById('nutGoal').value||'bulk';
+  // auto-fill weight from NutriPro profile if field is empty
+  if(data.profile&&data.profile.current_weight){
+    var wtEl=document.getElementById('nutWeight');
+    if(wtEl&&!parseFloat(wtEl.value))wtEl.value=data.profile.current_weight;
+  }
   var bw=parseFloat(document.getElementById('nutWeight').value)||0;
   var gLabel={bulk:'🔺 زيادة الكتلة',cut:'🔻 حرق الدهون',maintain:'⚖️ الحفاظ',recomp:'🔄 إعادة التشكيل'}[goal];
   var a=data.avg;
@@ -4990,6 +5007,27 @@ function showNutSummary(data){
     +'<div style="background:rgba(255,255,255,.06);border-radius:8px;padding:6px 12px;font-size:.72em"><span style="color:var(--tx3)">📈 أعلى: </span><b style="color:var(--p)">'+data.maxCal+' cal</b></div>'
     +'<div style="background:rgba(255,255,255,.06);border-radius:8px;padding:6px 12px;font-size:.72em"><span style="color:var(--tx3)">📉 أدنى: </span><b style="color:var(--bl)">'+data.minCal+' cal</b></div>'
     +'</div>':'')
+    // weight trend block (if weight_log present from NutriPro)
+    +(data.weight_log&&data.weight_log.length>=2?(function(){
+      var wl=data.weight_log.sort(function(a,b){return a.date.localeCompare(b.date);});
+      var first=wl[0].weight_kg, last=wl[wl.length-1].weight_kg;
+      var diff=(last-first).toFixed(1);
+      var arrow=diff>0?'↑':'↓';
+      var clr=diff>0?(goal==='cut'?'#f87171':'#4ade80'):(goal==='cut'?'#4ade80':'#f87171');
+      var dots=wl.map(function(e){return e.weight_kg;});
+      var mn=Math.min.apply(null,dots)-1, mx=Math.max.apply(null,dots)+1;
+      var pts=dots.map(function(v,i){return(i/(dots.length-1)*280).toFixed(1)+','+(60-(v-mn)/(mx-mn)*55).toFixed(1);}).join(' ');
+      return '<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;margin-bottom:10px">'
+        +'<div style="font-size:.7em;color:var(--tx3);margin-bottom:6px">⚖️ منحنى الوزن — '+wl.length+' قياس</div>'
+        +'<svg viewBox="0 0 280 65" style="width:100%;height:60px"><polyline points="'+pts+'" fill="none" stroke="'+clr+'" stroke-width="2" stroke-linejoin="round"/>'
+        +'<circle cx="'+pts.split(' ')[pts.split(' ').length-1].split(',')[0]+'" cy="'+pts.split(' ')[pts.split(' ').length-1].split(',')[1]+'" r="3" fill="'+clr+'"/>'
+        +'</svg>'
+        +'<div style="display:flex;justify-content:space-between;font-size:.72em;margin-top:4px">'
+        +'<span style="color:var(--tx3)">'+wl[0].date.slice(5)+' · '+first+'kg</span>'
+        +'<span style="color:'+clr+';font-weight:900">'+arrow+' '+Math.abs(diff)+'kg</span>'
+        +'<span style="color:var(--tx3)">'+wl[wl.length-1].date.slice(5)+' · '+last+'kg</span>'
+        +'</div></div>';
+    })():'')
     +'<button class="btn btn-p" id="nutAiBtn" onclick="analyzeNutritionAI('+JSON.stringify(data).replace(/</g,'\\u003c')+',this)" style="width:100%;font-size:.88em;padding:13px">🤖 تحليل بالذكاء الاصطناعي — هدف "'+gLabel+'"</button>'
     +(!G.aiKey?'<div style="margin-top:8px;font-size:.72em;color:var(--no);text-align:center">⚠️ أضف مفتاح AI في إعدادات الملف الشخصي أولاً</div>':'')
     +'</div><div id="nutAIReport"></div>';
@@ -5005,14 +5043,36 @@ async function analyzeNutritionAI(data,btn){
   var a=data.avg;
   btn.disabled=true; btn.textContent='⏳ جاري التحليل...';
   document.getElementById('nutAIReport').innerHTML='<div class="card" style="text-align:center;padding:30px"><div class="typing-dots"><span></span><span></span><span></span></div><div style="margin-top:10px;font-size:.8em;color:var(--tx2)">يحلل الذكاء الاصطناعي بياناتك...</div></div>';
+    // build weight trend summary for AI
+  var wtTrend='';
+  if(data.weight_log&&data.weight_log.length>=2){
+    var wl=data.weight_log.slice().sort(function(a,b){return a.date.localeCompare(b.date);});
+    var wFirst=wl[0], wLast=wl[wl.length-1];
+    var wDiff=(wLast.weight_kg-wFirst.weight_kg).toFixed(1);
+    wtTrend='\n=== منحنى الوزن ===\n'
+      +'عدد القياسات: '+wl.length+'\n'
+      +'الوزن عند البداية: '+wFirst.weight_kg+'كجم ('+wFirst.date+')\n'
+      +'الوزن الحالي: '+wLast.weight_kg+'كجم ('+wLast.date+')\n'
+      +'التغير: '+(wDiff>0?'+':'')+wDiff+'كجم خلال '+wl.length+' قياس\n';
+  }
+  var profTxt='';
+  if(data.profile&&(data.profile.age||data.profile.height_cm)){
+    var p=data.profile;
+    profTxt='\n=== الملف الشخصي ===\n'
+      +(p.age?'العمر: '+p.age+' سنة\n':'')
+      +(p.height_cm?'الطول: '+p.height_cm+'سم\n':'')
+      +(p.gender?'الجنس: '+(p.gender==='male'?'ذكر':'أنثى')+'\n':'')
+      +(p.activity_factor?'مستوى النشاط: '+p.activity_factor+'\n':'');
+  }
   var prompt='أنت خبير تغذية رياضية. حلّل هذه البيانات الغذائية بالعربية وأعطِ تقريراً شاملاً.\n\n'
-    +'الهدف: '+gLabel+'\nالوزن: '+(bw?bw+'كجم':'غير محدد')+'\nأيام التقرير: '+data.totalDays+'\nالمصدر: '+data.source+'\n\n'
+    +'الهدف: '+gLabel+'\nالوزن: '+(bw?bw+'كجم':'غير محدد')+'\nأيام التقرير: '+data.totalDays+'\nالمصدر: '+data.source+'\n'
+    +profTxt+wtTrend+'\n'
     +'=== متوسط اليوم ===\n'
     +'السعرات: '+a.cal+' kcal'+(tCal?' (الهدف: '+tCal+')':'')+'\n'
     +'البروتين: '+a.protein+'g'+(bw?' = '+(a.protein/bw).toFixed(1)+'g/كجم':'')+'\n'
     +'الكربوهيدرات: '+a.carbs+'g | الدهون: '+a.fat+'g\n'
-    +(a.fiber?'الألياف: '+a.fiber+'g | ':'')+(a.sodium?'الصوديوم: '+a.sodium+'mg':'')
-    +(a.cal>0?'\nنسبة الماكرو: بروتين '+Math.round(a.protein*4/a.cal*100)+'% | كارب '+Math.round(a.carbs*4/a.cal*100)+'% | دهون '+Math.round(a.fat*9/a.cal*100)+'%':'')+'\n'
+    +(a.fiber?'الألياف: '+a.fiber+'g | ':'')+( a.sodium?'الصوديوم: '+a.sodium+'mg':'')
+    +(a.cal>0?'\nنسبة الماكرو: بروتين '+Math.round(a.protein*4/a.cal*100)+'% | كارب '+Math.round(a.carbs*4/a.cal*100)+'% | دهون '+Math.round(a.fat*9/a.cal*100)+'%':'')+"\n"
     +'أعلى يوم: '+data.maxCal+' | أدنى يوم: '+data.minCal+'\n\n'
     +'المطلوب:\n1. حكم نهائي واضح: ✅ مناسب / ❌ غير مناسب للهدف\n'
     +'2. تحليل السعرات: هل كافية للهدف؟ كم يجب أن تكون؟\n'
@@ -5020,6 +5080,7 @@ async function analyzeNutritionAI(data,btn){
     +'4. تحليل الكارب والدهون والتوازن\n'
     +'5. نقاط القوة في النظام الحالي\n'
     +'6. المشاكل والنقاط الضعيفة\n'
+    +(wtTrend?'6ب. تحليل منحنى الوزن: هل التقدم في الاتجاه الصحيح؟\n':'')
     +'7. توصيات عملية (3-5 نقاط قابلة للتطبيق فوراً)\n'
     +'8. تقدير زمني: بهذا النظام كم يستغرق تحقيق الهدف؟';
   try{
