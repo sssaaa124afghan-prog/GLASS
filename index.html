@@ -1120,6 +1120,51 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
     <button class="goal-add-btn" onclick="showAddGoal()">➕ إضافة هدف</button>
   </div>
 </div>
+<div class="pg" id="pg-nutrition">
+<div class="ctn">
+<div class="card" style="background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(16,185,129,.04));border:1px solid rgba(34,197,94,.2)">
+  <div class="ct" style="color:#4ade80">🥗 تحليل الغذاء بالذكاء الاصطناعي</div>
+  <div style="font-size:.8em;color:var(--tx2);margin-bottom:14px;line-height:1.7">ارفع تقرير JSON من تطبيق الغذاء (MyFitnessPal، Cronometer، أو أي تطبيق يدعم تصدير JSON) وسيحلله الذكاء الاصطناعي ويقارنه مع أهدافك.</div>
+  <div style="background:rgba(255,255,255,.06);border-radius:12px;padding:12px;margin-bottom:14px">
+    <div style="font-size:.78em;font-weight:800;color:var(--p);margin-bottom:10px">🎯 إعدادات التحليل</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+      <div class="fi" style="margin:0"><label>الهدف</label>
+        <select id="nutGoal">
+          <option value="bulk">زيادة الكتلة (Bulk)</option>
+          <option value="cut">حرق الدهون (Cut)</option>
+          <option value="maintain">الحفاظ (Maintain)</option>
+          <option value="recomp">إعادة التشكيل (Recomp)</option>
+        </select>
+      </div>
+      <div class="fi" style="margin:0"><label>الوزن (كجم)</label>
+        <input type="number" id="nutWeight" placeholder="80" min="40" max="200" step="0.5" inputmode="decimal">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div class="fi" style="margin:0"><label>هدف السعرات/يوم</label>
+        <input type="number" id="nutTargetCal" placeholder="2500" inputmode="numeric">
+      </div>
+      <div class="fi" style="margin:0"><label>هدف البروتين (جم)</label>
+        <input type="number" id="nutTargetPro" placeholder="160" inputmode="numeric">
+      </div>
+    </div>
+  </div>
+  <div id="nutDropZone" onclick="document.getElementById('nutFileIn').click()"
+    style="border:2px dashed rgba(74,222,128,.3);border-radius:14px;padding:28px 16px;text-align:center;cursor:pointer;background:rgba(34,197,94,.03)"
+    ondragover="event.preventDefault();this.style.borderColor='#4ade80'"
+    ondragleave="this.style.borderColor='rgba(74,222,128,.3)'"
+    ondrop="event.preventDefault();this.style.borderColor='rgba(74,222,128,.3)';handleNutFile(event.dataTransfer.files[0])">
+    <div style="font-size:2.2em;margin-bottom:8px">📂</div>
+    <div style="font-weight:800;font-size:.9em;color:#4ade80">اضغط لرفع ملف JSON</div>
+    <div style="font-size:.72em;color:var(--tx3);margin-top:5px">أو اسحب الملف وأفلته هنا</div>
+    <div style="font-size:.65em;color:var(--tx3);margin-top:3px">MyFitnessPal · Cronometer · أي تطبيق JSON</div>
+  </div>
+  <input type="file" id="nutFileIn" accept=".json" style="display:none" onchange="handleNutFile(this.files[0])">
+</div>
+<div id="nutResultArea"></div>
+</div>
+</div>
+
 </div><!-- end .ctn -->
 <div id="confettiContainer" style="pointer-events:none;position:fixed;inset:0;z-index:9999;overflow:hidden"></div>
 <!-- FLOAT TIMER -->
@@ -1141,6 +1186,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
   <button class="bni" onclick="go('ai',this)"><span class="ic">🤖</span>AI</button>
   <button class="bni" onclick="go('lib',this)"><span class="ic">📚</span>المكتبة</button>
   <button class="bni" onclick="go('tools',this)"><span class="ic">🛠️</span>أدوات</button>
+  <button class="bni" onclick="go('nutrition',this);setTimeout(nutAutoFill,100)"><span class="ic">🥗</span>غذاء</button>
   <button class="bni" onclick="go('profile',this)"><span class="ic">👤</span>شهاب</button>
 </div>
 <!-- MODALS -->
@@ -1482,7 +1528,7 @@ function showExDetails(id){
     <div style="display:flex;flex-direction:column;gap:8px">
       <button class="btn btn-ai btn-sm" onclick="getExTips('${ex.name}',this)">💡 نصائح AI تفصيلية</button>
       <button class="btn btn-p btn-sm" onclick="showAddToWorkout('${ex.id}')">➕ أضف لبرنامجي</button>
-      <button class="yt-btn" onclick="openVideo('${YOUTUBE_LINKS[ex.name]||''}','${ex.name}','${ex.name}')">▶️ شاهد التقنية</button>
+      <button class="yt-btn" onclick="openVideo(getBestVideoUrl('${ex.name}'),'${ex.name}','${ex.name}')">▶️ شاهد التقنية</button>
     </div>
     ${renderFormPhases(ex.name)?`<div style="margin-top:10px">${renderFormPhases(ex.name)}</div>`:''}
     <div id="exTipsArea"></div>
@@ -1699,8 +1745,18 @@ function ymoveThumbnailUrl(id) {
 }
 /* ══ VIDEO MODAL — YMove (direct mp4) primary + YouTube fallback ══ */
 function openYT(url, title, exName) { openVideo(url, title, exName || title); }
+function getBestVideoUrl(name){
+  if(YOUTUBE_LINKS[name])return YOUTUBE_LINKS[name];
+  var l=name.toLowerCase();
+  var keys=Object.keys(YOUTUBE_LINKS);
+  for(var i=0;i<keys.length;i++){
+    var k=keys[i];
+    if(l===k.toLowerCase()||l.includes(k.toLowerCase())||k.toLowerCase().includes(l))return YOUTUBE_LINKS[k];
+  }
+  return '';
+}
 function getYTBtn(name){
-  const url=YOUTUBE_LINKS[name]||'';
+  const url=getBestVideoUrl(name);
   const hasVideo=url||(YMOVE_IDS&&YMOVE_IDS[name]);
   if(!hasVideo)return'';
   const safeUrl=url.replace(/'/g,"\'");
@@ -3135,7 +3191,7 @@ const YOUTUBE_LINKS = {
   'Chin-ups':                     'https://www.youtube.com/shorts/ZPG8OsHKXLw',
   'Chin Ups':                     'https://www.youtube.com/shorts/ZPG8OsHKXLw',
   'Lat Pulldown':                 'https://www.youtube.com/shorts/ZPG8OsHKXLw',
-  'Straight Arm Pulldown':        'https://www.youtube.com/shortcuts/ZPG8OsHKXLw',
+  'Straight Arm Pulldown':        'https://www.youtube.com/shorts/ZPG8OsHKXLw',
   'Seated Cable Row':             'https://www.youtube.com/shorts/qD1WZ5pSuvk',
   'Cable Row':                    'https://www.youtube.com/shorts/qD1WZ5pSuvk',
   'Face Pull':                    'https://www.youtube.com/shorts/MChHOiaCR7s',
@@ -3176,6 +3232,31 @@ const YOUTUBE_LINKS = {
   'Calf Raises':                  'https://www.youtube.com/shorts/baEXLy09Ncc',
   'Hip Thrust':                   'https://www.youtube.com/shorts/GAZC6bt30Yg',
   'Barbell Hip Thrust':           'https://www.youtube.com/shorts/GAZC6bt30Yg',
+  'Front Squat':                  'https://www.youtube.com/shorts/MLoZuAkIyZI',
+  'Seated Leg Curl':              'https://www.youtube.com/shorts/OwTgO_e78ws',
+  'Nordic Curl':                  'https://www.youtube.com/shorts/OwTgO_e78ws',
+  'Glute Ham Raise':              'https://www.youtube.com/shorts/GAZC6bt30Yg',
+  'Donkey Kick':                  'https://www.youtube.com/shorts/GAZC6bt30Yg',
+  'Cable Kickback':               'https://www.youtube.com/shorts/GAZC6bt30Yg',
+  'Sumo Deadlift':                'https://www.youtube.com/shorts/ZaTM37cfiDs',
+  'Seated Calf Raise':            'https://www.youtube.com/shorts/baEXLy09Ncc',
+  'Single Leg Calf Raise':        'https://www.youtube.com/shorts/baEXLy09Ncc',
+  'Plank':                        'https://www.youtube.com/shorts/ASdvT5F-kog',
+  'Cable Crunch':                 'https://www.youtube.com/shorts/e8fZC2bEZ6I',
+  'Abs Crunch':                   'https://www.youtube.com/shorts/e8fZC2bEZ6I',
+  'Leg Raises':                   'https://www.youtube.com/shorts/l4kQd9eWclI',
+  'Abs Leg Raises':               'https://www.youtube.com/shorts/l4kQd9eWclI',
+  'Hanging Leg Raise':            'https://www.youtube.com/shorts/l4kQd9eWclI',
+  'Ab Wheel Rollout':             'https://www.youtube.com/shorts/QqTGfS4qkpw',
+  'Russian Twist':                'https://www.youtube.com/shorts/JyUqwkVpsi8',
+  'Wrist Curl':                   'https://www.youtube.com/shorts/MKWBV29S6c0',
+  'Reverse Curl':                 'https://www.youtube.com/shorts/MKWBV29S6c0',
+  'Smith OHP':                    'https://www.youtube.com/shorts/zoN5EH50Dro',
+  'Cable Fly':                    'https://www.youtube.com/shorts/I-Ue34qLxc4',
+  'Overhead Extension':           'https://www.youtube.com/shorts/ZY7HEE_A-ns',
+  'Leg Press (Wide)':             'https://www.youtube.com/shorts/nDh_BlnLCGc',
+  '1-Arm DB Row':                 'https://www.youtube.com/shorts/qD1WZ5pSuvk',
+  'T-Bar Row':                    'https://www.youtube.com/shorts/Nqh7q3zDCoQ',
 };
 /* ══════════════════════════════════════════════
    MULTI-PROGRAM SUPPORT
@@ -4767,6 +4848,218 @@ window.saveCurrentSet = function(id, i){
     if(typeof renderReadinessBanner==='function') renderReadinessBanner();
   }, 800);
 };
+
+/* ══ NUTRITION ANALYSIS ══ */
+function nutAutoFill(){
+  if(G.bw&&G.bw.length){const el=document.getElementById('nutWeight');if(el&&!el.value)el.value=G.bw[G.bw.length-1].w;}
+}
+function handleNutFile(file){
+  if(!file)return;
+  if(!file.name.toLowerCase().endsWith('.json')){nutAlert('❌ الملف يجب أن يكون بصيغة .json');return;}
+  const rd=new FileReader();
+  rd.onload=e=>{
+    try{
+      const raw=JSON.parse(e.target.result);
+      const parsed=parseNutritionJSON(raw);
+      if(!parsed){nutAlert('❌ لم أتمكن من قراءة البيانات — تأكد أن الملف من تطبيق غذائي صحيح');return;}
+      showNutSummary(parsed);
+    }catch(err){nutAlert('❌ الملف تالف: '+err.message);}
+  };
+  rd.readAsText(file);
+}
+function parseNutritionJSON(raw){
+  var out={days:[],source:'unknown'};
+  function mkDay(d){return{date:d||'',cal:0,protein:0,carbs:0,fat:0,fiber:0,sodium:0,sugar:0};}
+  function num(v){return parseFloat(v)||0;}
+  // MyFitnessPal
+  if(raw.diary_entries||raw.food_diary||raw.entries){
+    out.source='MyFitnessPal';
+    var entries=raw.diary_entries||raw.food_diary||raw.entries||[];
+    var byDate={};
+    entries.forEach(function(e){
+      var d=e.date||e.day||'?';
+      if(!byDate[d])byDate[d]=mkDay(d);
+      var n=e.nutrition||e.nutritional_contents||e;
+      byDate[d].cal    +=num(n.calories||n.energy);
+      byDate[d].protein+=num(n.protein);
+      byDate[d].carbs  +=num(n.carbohydrates||n.carbs);
+      byDate[d].fat    +=num(n.fat);
+      byDate[d].fiber  +=num(n.fiber);
+      byDate[d].sodium +=num(n.sodium);
+      byDate[d].sugar  +=num(n.sugar);
+    });
+    out.days=Object.values(byDate);
+  }
+  // Cronometer
+  else if(raw.Daily_Summaries||raw.dailySummaries){
+    out.source='Cronometer';
+    var rows=raw.Daily_Summaries||raw.dailySummaries||[];
+    rows.forEach(function(r){
+      out.days.push({date:r.Date||r.date||'',
+        cal:num(r['Energy (kcal)']||r.calories||r.energy),
+        protein:num(r['Protein (g)']||r.protein),
+        carbs:num(r['Carbs (g)']||r.carbohydrates),
+        fat:num(r['Fat (g)']||r.fat),
+        fiber:num(r['Fiber (g)']||r.fiber),
+        sodium:num(r['Sodium (mg)']||r.sodium),
+        sugar:num(r['Sugars (g)']||r.sugar)});
+    });
+  }
+  // Array مباشر
+  else if(Array.isArray(raw)&&raw[0]&&(raw[0].calories||raw[0].cal||raw[0].energy)){
+    out.source='Generic';
+    raw.forEach(function(r){
+      out.days.push({date:r.date||r.day||'',
+        cal:num(r.calories||r.cal||r.energy),
+        protein:num(r.protein||r.Protein),
+        carbs:num(r.carbs||r.carbohydrates),
+        fat:num(r.fat||r.Fat),
+        fiber:num(r.fiber||r.Fiber),
+        sodium:num(r.sodium||r.Sodium),
+        sugar:num(r.sugar||r.Sugar)});
+    });
+  }
+  // بحث عميق تلقائي
+  else{
+    out.source='Auto';
+    function dig(obj,depth){
+      if(depth>5||!obj||typeof obj!=='object')return;
+      if(Array.isArray(obj)){obj.forEach(function(i){dig(i,depth+1);});return;}
+      var cal=obj.calories||obj.cal||obj.energy||obj.kcal||obj.Calories;
+      if(cal&&num(cal)>50){
+        out.days.push({date:obj.date||obj.Date||obj.day||'',
+          cal:num(cal),protein:num(obj.protein||obj.Protein),
+          carbs:num(obj.carbs||obj.carbohydrates||obj.Carbs),
+          fat:num(obj.fat||obj.Fat),fiber:num(obj.fiber||obj.Fiber),
+          sodium:num(obj.sodium||obj.Sodium),sugar:num(obj.sugar||obj.Sugar)});
+      }else{Object.values(obj).forEach(function(v){dig(v,depth+1);});}
+    }
+    dig(raw,0);
+  }
+  if(!out.days.length)return null;
+  var n=out.days.length;
+  function avg(k){return Math.round(out.days.reduce(function(s,d){return s+d[k];},0)/n*10)/10;}
+  out.avg={cal:Math.round(avg('cal')),protein:avg('protein'),carbs:avg('carbs'),
+           fat:avg('fat'),fiber:avg('fiber'),sodium:Math.round(avg('sodium')),sugar:avg('sugar')};
+  out.totalDays=n;
+  var cals=out.days.map(function(d){return d.cal;}).filter(function(v){return v>0;});
+  out.maxCal=cals.length?Math.max.apply(null,cals):0;
+  out.minCal=cals.length?Math.min.apply(null,cals):0;
+  return out;
+}
+function showNutSummary(data){
+  var tCal=parseInt(document.getElementById('nutTargetCal').value)||0;
+  var tPro=parseInt(document.getElementById('nutTargetPro').value)||0;
+  var goal=document.getElementById('nutGoal').value||'bulk';
+  var bw=parseFloat(document.getElementById('nutWeight').value)||0;
+  var gLabel={bulk:'🔺 زيادة الكتلة',cut:'🔻 حرق الدهون',maintain:'⚖️ الحفاظ',recomp:'🔄 إعادة التشكيل'}[goal];
+  var a=data.avg;
+  function pct(v,t){return t>0?Math.round(v/t*100):0;}
+  function bar(v,t){
+    var p=Math.min(pct(v,t),120);
+    var clr=p<75?'#f87171':p<90?'#fbbf24':p<=110?'#4ade80':'#f97316';
+    return '<div style="height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-top:5px"><div style="height:100%;width:'+Math.min(p,100)+'%;background:'+clr+';border-radius:4px"></div></div>';
+  }
+  var calPct=tCal?pct(a.cal,tCal):0;
+  var proBw=bw?(a.protein/bw).toFixed(1)+'g/كجم':'';
+  var html='<div class="card" style="animation:cardIn .35s ease">'
+    +'<div class="ct" style="color:#4ade80">📊 ملخص التقرير — '+data.totalDays+' يوم ('+data.source+')</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">'
+    +'<div style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:12px;padding:12px">'
+    +'<div style="font-size:.65em;color:var(--tx3)">🔥 متوسط السعرات</div>'
+    +'<div style="font-size:1.5em;font-weight:900;color:var(--p)">'+a.cal.toLocaleString()+'</div>'
+    +'<div style="font-size:.65em;color:var(--tx3)">'+(tCal?'الهدف: '+tCal.toLocaleString()+' ('+calPct+'%)':'سعرة/يوم')+'</div>'
+    +(tCal?bar(a.cal,tCal):'')+'</div>'
+    +'<div style="background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);border-radius:12px;padding:12px">'
+    +'<div style="font-size:.65em;color:var(--tx3)">💪 متوسط البروتين</div>'
+    +'<div style="font-size:1.5em;font-weight:900;color:var(--bl)">'+a.protein+'g</div>'
+    +'<div style="font-size:.65em;color:var(--tx3)">'+(proBw||'جم/يوم')+(bw?' · هدف '+(bw*2).toFixed(0)+'g':'')+'</div>'
+    +(bw?bar(a.protein,bw*2):(tPro?bar(a.protein,tPro):''))+'</div>'
+    +'<div style="background:rgba(167,243,208,.08);border:1px solid rgba(167,243,208,.2);border-radius:12px;padding:12px">'
+    +'<div style="font-size:.65em;color:var(--tx3)">🍞 كربوهيدرات</div>'
+    +'<div style="font-size:1.5em;font-weight:900;color:#4ade80">'+a.carbs+'g</div>'
+    +'<div style="font-size:.65em;color:var(--tx3)">'+(a.cal>0?Math.round(a.carbs*4/a.cal*100)+'% من السعرات':'')+'</div></div>'
+    +'<div style="background:rgba(253,230,138,.08);border:1px solid rgba(253,230,138,.2);border-radius:12px;padding:12px">'
+    +'<div style="font-size:.65em;color:var(--tx3)">🧈 دهون</div>'
+    +'<div style="font-size:1.5em;font-weight:900;color:var(--wn)">'+a.fat+'g</div>'
+    +'<div style="font-size:.65em;color:var(--tx3)">'+(a.cal>0?Math.round(a.fat*9/a.cal*100)+'% من السعرات':'')+'</div></div></div>'
+    +(a.fiber>0||a.sodium>0||a.sugar>0?'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">'
+    +(a.fiber>0?'<div style="background:rgba(255,255,255,.06);border-radius:8px;padding:6px 12px;font-size:.72em"><span style="color:var(--tx3)">🌾 ألياف: </span><b>'+a.fiber+'g</b></div>':'')
+    +(a.sodium>0?'<div style="background:rgba(255,255,255,.06);border-radius:8px;padding:6px 12px;font-size:.72em"><span style="color:var(--tx3)">🧂 صوديوم: </span><b>'+a.sodium+'mg</b></div>':'')
+    +(a.sugar>0?'<div style="background:rgba(255,255,255,.06);border-radius:8px;padding:6px 12px;font-size:.72em"><span style="color:var(--tx3)">🍬 سكر: </span><b>'+a.sugar+'g</b></div>':'')
+    +'<div style="background:rgba(255,255,255,.06);border-radius:8px;padding:6px 12px;font-size:.72em"><span style="color:var(--tx3)">📈 أعلى: </span><b style="color:var(--p)">'+data.maxCal+' cal</b></div>'
+    +'<div style="background:rgba(255,255,255,.06);border-radius:8px;padding:6px 12px;font-size:.72em"><span style="color:var(--tx3)">📉 أدنى: </span><b style="color:var(--bl)">'+data.minCal+' cal</b></div>'
+    +'</div>':'')
+    +'<button class="btn btn-p" id="nutAiBtn" onclick="analyzeNutritionAI('+JSON.stringify(data).replace(/</g,'\\u003c')+',this)" style="width:100%;font-size:.88em;padding:13px">🤖 تحليل بالذكاء الاصطناعي — هدف "'+gLabel+'"</button>'
+    +(!G.aiKey?'<div style="margin-top:8px;font-size:.72em;color:var(--no);text-align:center">⚠️ أضف مفتاح AI في إعدادات الملف الشخصي أولاً</div>':'')
+    +'</div><div id="nutAIReport"></div>';
+  document.getElementById('nutResultArea').innerHTML=html;
+  document.getElementById('nutResultArea').scrollIntoView({behavior:'smooth',block:'start'});
+}
+async function analyzeNutritionAI(data,btn){
+  if(!G.aiKey){nutAlert('⚠️ أضف مفتاح AI في إعدادات الملف الشخصي');return;}
+  var goal=document.getElementById('nutGoal').value||'bulk';
+  var bw=parseFloat(document.getElementById('nutWeight').value)||0;
+  var tCal=parseInt(document.getElementById('nutTargetCal').value)||0;
+  var gLabel={bulk:'زيادة الكتلة العضلية',cut:'حرق الدهون مع الحفاظ على العضل',maintain:'الحفاظ على الوزن',recomp:'إعادة تشكيل الجسم'}[goal];
+  var a=data.avg;
+  btn.disabled=true; btn.textContent='⏳ جاري التحليل...';
+  document.getElementById('nutAIReport').innerHTML='<div class="card" style="text-align:center;padding:30px"><div class="typing-dots"><span></span><span></span><span></span></div><div style="margin-top:10px;font-size:.8em;color:var(--tx2)">يحلل الذكاء الاصطناعي بياناتك...</div></div>';
+  var prompt='أنت خبير تغذية رياضية. حلّل هذه البيانات الغذائية بالعربية وأعطِ تقريراً شاملاً.\n\n'
+    +'الهدف: '+gLabel+'\nالوزن: '+(bw?bw+'كجم':'غير محدد')+'\nأيام التقرير: '+data.totalDays+'\nالمصدر: '+data.source+'\n\n'
+    +'=== متوسط اليوم ===\n'
+    +'السعرات: '+a.cal+' kcal'+(tCal?' (الهدف: '+tCal+')':'')+'\n'
+    +'البروتين: '+a.protein+'g'+(bw?' = '+(a.protein/bw).toFixed(1)+'g/كجم':'')+'\n'
+    +'الكربوهيدرات: '+a.carbs+'g | الدهون: '+a.fat+'g\n'
+    +(a.fiber?'الألياف: '+a.fiber+'g | ':'')+(a.sodium?'الصوديوم: '+a.sodium+'mg':'')
+    +(a.cal>0?'\nنسبة الماكرو: بروتين '+Math.round(a.protein*4/a.cal*100)+'% | كارب '+Math.round(a.carbs*4/a.cal*100)+'% | دهون '+Math.round(a.fat*9/a.cal*100)+'%':'')+'\n'
+    +'أعلى يوم: '+data.maxCal+' | أدنى يوم: '+data.minCal+'\n\n'
+    +'المطلوب:\n1. حكم نهائي واضح: ✅ مناسب / ❌ غير مناسب للهدف\n'
+    +'2. تحليل السعرات: هل كافية للهدف؟ كم يجب أن تكون؟\n'
+    +'3. تحليل البروتين: هل كافٍ لبناء/حماية العضل؟\n'
+    +'4. تحليل الكارب والدهون والتوازن\n'
+    +'5. نقاط القوة في النظام الحالي\n'
+    +'6. المشاكل والنقاط الضعيفة\n'
+    +'7. توصيات عملية (3-5 نقاط قابلة للتطبيق فوراً)\n'
+    +'8. تقدير زمني: بهذا النظام كم يستغرق تحقيق الهدف؟';
+  try{
+    var res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+G.aiKey},
+      body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}],max_tokens:1200,temperature:0.7})
+    });
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    var json=await res.json();
+    renderNutReport(json.choices[0].message.content,goal);
+  }catch(e){
+    document.getElementById('nutAIReport').innerHTML='<div class="card" style="border:1px solid rgba(248,113,113,.3)"><div style="color:var(--no);font-weight:800">❌ خطأ: '+e.message+'</div></div>';
+  }finally{btn.disabled=false;btn.textContent='🔄 إعادة التحليل';}
+}
+function renderNutReport(text,goal){
+  var gc={bulk:'rgba(249,115,22,.15)',cut:'rgba(248,113,113,.12)',maintain:'rgba(56,189,248,.12)',recomp:'rgba(167,243,208,.1)'};
+  var gb={bulk:'rgba(249,115,22,.3)',cut:'rgba(248,113,113,.3)',maintain:'rgba(56,189,248,.3)',recomp:'rgba(167,243,208,.3)'};
+  var lines=text.split('\n').filter(function(l){return l.trim();});
+  var html=lines.map(function(l){
+    if(l.includes('✅')||l.includes('❌')||l.includes('⚠️'))
+      return '<div style="background:rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;margin:6px 0;font-weight:800;font-size:.86em">'+l+'</div>';
+    if(/^\d+\./.test(l.trim()))
+      return '<div style="padding:6px 0;font-size:.84em;border-bottom:1px solid rgba(255,255,255,.05)">'+l+'</div>';
+    return '<div style="padding:3px 0;font-size:.82em;color:var(--tx2)">'+l+'</div>';
+  }).join('');
+  document.getElementById('nutAIReport').innerHTML=
+    '<div class="card" style="background:'+gc[goal]+';border:1px solid '+gb[goal]+';animation:cardIn .4s ease">'
+    +'<div class="ct" style="color:#4ade80">🤖 تقرير الذكاء الاصطناعي</div>'
+    +'<div style="line-height:1.8">'+html+'</div>'
+    +'<div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:8px;flex-wrap:wrap">'
+    +'<button class="btn btn-dk btn-sm" onclick="document.getElementById(\'nutFileIn\').click()">📂 تقرير جديد</button>'
+    +'<button class="btn btn-dk btn-sm" onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById(\'nutAIReport\').innerText).then(function(){toast(\'✅ تم النسخ\',\'s\')})">📋 نسخ</button>'
+    +'</div></div>';
+  document.getElementById('nutAIReport').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function nutAlert(msg){
+  document.getElementById('nutResultArea').innerHTML='<div class="card" style="border:1px solid rgba(248,113,113,.3);color:var(--no);font-size:.84em">'+msg+'</div>';
+}
+
 </script>
 <!-- ══ YOUTUBE INLINE PLAYER — popup mode ══ -->
 </body>
