@@ -5007,6 +5007,61 @@ function showNutSummary(data){
     +'<div style="background:rgba(255,255,255,.06);border-radius:8px;padding:6px 12px;font-size:.72em"><span style="color:var(--tx3)">📈 أعلى: </span><b style="color:var(--p)">'+data.maxCal+' cal</b></div>'
     +'<div style="background:rgba(255,255,255,.06);border-radius:8px;padding:6px 12px;font-size:.72em"><span style="color:var(--tx3)">📉 أدنى: </span><b style="color:var(--bl)">'+data.minCal+' cal</b></div>'
     +'</div>':'')
+    // ── تشخيص فوري ──
+    +(function(){
+      var insights=[];
+      var recCal=bw?(goal==='bulk'?bw*38:goal==='cut'?bw*28:goal==='recomp'?bw*32:bw*33):0;
+      var recPro=bw?(goal==='bulk'?bw*2.2:goal==='cut'?bw*2.4:bw*2.0):0;
+      // سعرات
+      var calTarget=tCal||recCal;
+      if(calTarget){
+        var calDiff=a.cal-calTarget;
+        var calPctDiff=Math.round(Math.abs(calDiff)/calTarget*100);
+        if(calDiff<-200)
+          insights.push({icon:'🔥',color:'#f87171',title:'السعرات أقل من الهدف بـ '+Math.abs(Math.round(calDiff))+' سعرة ('+calPctDiff+'%)',
+            tip:goal==='cut'?'✅ عجز مقصود — جيد للحرق، لكن تأكد أنه لا يؤثر على أداء التمرين':
+                goal==='bulk'?'❌ لن تبني عضلاً في عجز سعراتي — أضف '+Math.abs(Math.round(calDiff))+' سعرة يومياً':
+                '⚠️ زِد السعرات للوصول للهدف'});
+        else if(calDiff>300)
+          insights.push({icon:'🔥',color:'#f97316',title:'السعرات أعلى من الهدف بـ '+Math.round(calDiff)+' سعرة',
+            tip:goal==='bulk'?'✅ فائض مناسب لبناء الكتلة':
+                goal==='cut'?'❌ فائض سعراتي يوقف الحرق — قلل من الكارب أو الدهون':
+                '⚠️ فائض قد يؤدي لزيادة دهون'});
+        else
+          insights.push({icon:'🔥',color:'#4ade80',title:'السعرات في النطاق المثالي ('+a.cal+' kcal)',tip:'✅ ممتاز — استمر بهذا المستوى'});
+      }
+      // بروتين
+      var proTarget=recPro||tPro||(bw*2);
+      if(proTarget){
+        var proRatio=a.protein/proTarget;
+        if(proRatio<0.8)
+          insights.push({icon:'💪',color:'#f87171',title:'البروتين منخفض — '+a.protein+'g مقابل الموصى '+Math.round(proTarget)+'g',
+            tip:'❌ '+(goal==='cut'?'بروتين منخفض أثناء الحرق = ستفقد عضلاً — أضف صدر دجاج، بيض، أو مكمل بروتين':
+                 goal==='bulk'?'بروتين غير كافٍ لبناء العضل — استهدف '+Math.round(proTarget)+'g يومياً كحد أدنى':
+                 'زِد البروتين لحماية الكتلة العضلية')});
+        else if(proRatio>1.4)
+          insights.push({icon:'💪',color:'#fbbf24',title:'البروتين مرتفع جداً — '+a.protein+'g',tip:'⚠️ الزيادة لا تُبنى عضلاً إضافياً — أعد توزيع السعرات للكارب لتحسين الأداء'});
+        else
+          insights.push({icon:'💪',color:'#4ade80',title:'البروتين ممتاز — '+a.protein+'g ('+( a.protein/bw).toFixed(1)+'g/كجم)',tip:'✅ كافٍ لبناء وحماية العضل'});
+      }
+      // كارب للأداء
+      if(goal==='bulk'&&a.cal>0){
+        var carbPct=Math.round(a.carbs*4/a.cal*100);
+        if(carbPct<35)
+          insights.push({icon:'🍞',color:'#fbbf24',title:'الكربوهيدرات منخفضة ('+carbPct+'% فقط)',tip:'⚠️ الكارب وقود العضلات — مستوى منخفض يضعف الأداء والتعافي في مرحلة البناء'});
+      }
+      // ثبات السعرات
+      if(data.maxCal&&data.minCal&&data.maxCal-data.minCal>800)
+        insights.push({icon:'📊',color:'#fbbf24',title:'تذبذب في السعرات اليومية ('+data.minCal+' ↔ '+data.maxCal+')',tip:'⚠️ فرق '+( data.maxCal-data.minCal)+' سعرة بين أعلى وأدنى يوم — الثبات أهم من الكمال. حاول أن لا يتجاوز الفارق 400 سعرة'});
+      if(!insights.length)return '';
+      return '<div style="margin-bottom:14px">'
+        +'<div style="font-size:.72em;font-weight:800;color:var(--tx2);margin-bottom:8px;letter-spacing:.5px">⚡ تشخيص فوري</div>'
+        +insights.map(function(ins){return '<div style="background:rgba(255,255,255,.04);border-right:3px solid '+ins.color+';border-radius:0 10px 10px 0;padding:10px 12px;margin-bottom:8px">'
+          +'<div style="font-size:.75em;font-weight:800;color:'+ins.color+';margin-bottom:4px">'+ins.icon+' '+ins.title+'</div>'
+          +'<div style="font-size:.72em;color:var(--tx2);line-height:1.5">'+ins.tip+'</div>'
+          +'</div>';}).join('')
+        +'</div>';
+    })()
     // weight trend block (if weight_log present from NutriPro)
     +(data.weight_log&&data.weight_log.length>=2?(function(){
       var wl=data.weight_log.sort(function(a,b){return a.date.localeCompare(b.date);});
