@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#060c1a">
@@ -672,7 +672,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .e1rm-stat-lbl{color:var(--tx2);margin-top:1px;font-size:.88em}
 [data-theme="light"] .e1rm-wrap{background:rgba(255,255,255,.7);border-color:rgba(234,88,12,.12)}
 /* ══ YOUTUBE LINK BUTTON ══ */
-.yt-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#fca5a5;font-size:.78em;font-weight:800;cursor:pointer;text-decoration:none;font-family:'Cairo';transition:.2s;margin-top:8px}
+.yt-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#f87171;font-size:.78em;font-weight:800;cursor:pointer;text-decoration:none;font-family:'Cairo';transition:.2s;margin-top:8px}
 .yt-btn:hover{background:rgba(239,68,68,.18)}
 [data-theme="light"] .yt-btn{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#dc2626}
 /* ══ YOUTUBE — popup mode, no modal needed ══ */
@@ -683,967 +683,9 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 @keyframes _ytZoomIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
 /* Shorts portrait */ 
 .app-hidden *,.app-hidden *::before,.app-hidden *::after{animation-play-state:paused!important}
-
-/* ═══ REDESIGN v2 — Less Clutter, Better Hierarchy ═══ */
-/* تقليل padding في الكاردات + spacing أفضل */
-.ctn { padding: 10px 12px 14px; }
-.card { padding: 14px; margin-bottom: 10px; border-radius: 20px; }
-.ct { font-size: .84em; margin-bottom: 10px; padding-bottom: 8px; }
-.ct .bdg { padding: 2px 8px; font-size: .64em; }
-
-/* إخفاء الكاردات الفارغة تماماً */
-.card:empty, .card > div:only-child:empty { display: none !important; }
-
-/* تقليل ارتفاع شريط fatigue + هدوء بصري */
-.fatigue-bar-wrap { padding: 0 14px 6px; }
-
-/* الـ AI coach card أقل بروزاً (لو غير ضرورية حالياً) */
-.ai-coach-card { padding: 14px; margin-bottom: 10px; }
-.ai-coach-card .ai-icon { font-size: 1.8em; margin-bottom: 6px; }
-.ai-coach-card .ai-title { font-size: .92em; }
-.ai-coach-msg { font-size: .78em; line-height: 1.55; margin-bottom: 9px; }
-
-/* qstats أقل ضوضاء — alignment أفضل */
-.qstats { padding: 2px 0; gap: 6px; }
-.qstat { padding: 6px 10px; font-size: .68em; }
-
-/* Period banner أصغر */
-.period-banner { padding: 10px 12px; margin-bottom: 10px; }
-.period-title { font-size: .76em; }
-.period-desc { font-size: .64em; }
-.pw-chip { width: 25px; height: 25px; font-size: .58em; }
-
-/* الـ exi (exercise item) إيقاع أفضل */
-.exi { padding: 12px; margin-bottom: 8px; border-radius: 13px; }
-.ext { margin-bottom: 8px; }
-.exn { font-size: .9em; }
-.exd { font-size: .68em; }
-
-/* السيتز header أنظف */
-.sets-header { padding: 4px 3px; margin-top: 8px; gap: 3px; }
-.set-row { padding: 4px 3px; gap: 3px; }
-
-/* Mini-bar داخل الـ header */
-#_gamifyMini { animation: slideDown .4s ease; }
-#_gamifyMini > span { transition: transform .15s; }
-#_gamifyMini > span:active { transform: scale(.94); }
-
-/* FAB animations */
-#_gamifyFab:active { transform: scale(.92) !important; }
-@keyframes fabFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-#_gamifyFab { animation: fabFloat 3.5s ease-in-out infinite; }
-
-/* Bottom sheet polish */
-#_gamifySheet::-webkit-scrollbar { width: 0; }
-#_gamifySheet h3, #_gamifySheet h4 { font-weight: 900; }
-
-/* Hide gamify card if accidentally injected (legacy cleanup) */
-#_gamifyCard { display: none !important; }
-
-/* Compact view for narrow screens */
-@media (max-width: 380px) {
-  .ctn { padding: 8px 10px 12px; }
-  .card { padding: 12px; }
-  .qstat { padding: 5px 9px; font-size: .64em; }
-  #_gamifyFab { width: 48px; height: 48px; font-size: 1.3em; right: 10px; }
-}
-
-/* Sticky FAB respects safe area */
-@supports (padding: env(safe-area-inset-top)) {
-  #_gamifyFab { top: calc(env(safe-area-inset-top,0px) + 64px); }
-}
-
-/* تقليل التباعد بين الـ stats grid */
-.sg { gap: 6px; margin-bottom: 10px; }
-.sc { padding: 10px 8px; }
-.sn { font-size: 1.1em; }
-.sl { font-size: .62em; }
-
-/* تخفيف blur للأداء */
-.card, .exi, .ai-coach-card { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-
-/* Header sticky أنظف */
-.hdr { padding: 10px 14px 6px; }
-.hdr h1 { font-size: 1.1em; }
-.hdr-sub { font-size: .64em; }
-
-/* Bottom nav أقصر شويه */
-.bnav { padding: 5px 8px; }
-.bni { padding: 6px 0; font-size: .54em; }
-.bni .ic { font-size: 1.35em; }
-
-
-
-
-
-
-
-
-/* ════════════════════════════════════════════════════════════════
-   💎 LIQUID GLASS DESIGN v5.0 — iOS 26 Inspired
-   Pure transparent glass · Single accent · Refined hierarchy
-   ════════════════════════════════════════════════════════════════ */
-
-:root {
-  /* Spacing & Radius */
-  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px; --s-7:32px;
-  --rd-sm:10px; --rd-md:14px; --rd-lg:20px; --rd-xl:26px; --rd-2xl:32px; --rd-full:9999px;
-
-  /* Backgrounds — Frost Blue gradient */
-  --bg-0:#0a1a35;
-  --bg-1:#0f2347;
-  --bg-2:#16315e;
-  --frost-deep:#091428;
-  --frost-mid:#1e3a6b;
-  --frost-light:#3b6fb8;
-  --frost-glow:#5b8fd9;
-
-  /* ── Liquid Glass surfaces (pure white tints) ── */
-  --liq-1:rgba(255,255,255,.04);  /* base */
-  --liq-2:rgba(255,255,255,.07);  /* elevated */
-  --liq-3:rgba(255,255,255,.11);  /* hover */
-  --liq-4:rgba(255,255,255,.16);  /* active */
-  --liq-5:rgba(255,255,255,.22);  /* peak */
-
-  /* Borders — frosty edges */
-  --br-1:rgba(255,255,255,.08);
-  --br-2:rgba(255,255,255,.14);
-  --br-3:rgba(255,255,255,.22);
-  --br-4:rgba(255,255,255,.32);
-
-  /* ── Single accent: Bright frost cyan (pops on blue) ── */
-  --acc:#93cdf3;
-  --acc-2:#7ab7e5;
-  --acc-3:#5a9fd0;
-  --acc-soft:rgba(147,205,243,.10);
-  --acc-glow:rgba(147,205,243,.22);
-
-  /* Brand maps to accent */
-  --p:#7dd3fc; --p2:#38bdf8;
-  --p-soft:rgba(125,211,252,.12);
-  --p-glow:rgba(125,211,252,.35);
-
-  /* Semantic (muted) */
-  --ok:#86efac; --ok-soft:rgba(134,239,172,.10);
-  --no:#fca5a5; --no-soft:rgba(252,165,165,.10);
-  --wn:#fde68a; --wn-soft:rgba(253,230,138,.10);
-  --bl:#a5b4fc; --bl-soft:rgba(165,180,252,.10);
-  --vio:#c4b5fd; --vio-soft:rgba(196,181,253,.10);
-  --pk:#f5d0fe; --pk-soft:rgba(245,208,254,.10);
-  --cy:#a5e9ff; --cy-soft:rgba(165,233,255,.10);
-  --gr:#86efac; --gr-soft:rgba(134,239,172,.10);
-
-  /* Text */
-  --tx:rgba(255,255,255,.98);
-  --tx2:rgba(255,255,255,.68);
-  --tx3:rgba(255,255,255,.42);
-  --tx4:rgba(255,255,255,.22);
-
-  /* Single subtle gradient (very soft) */
-  --gg:linear-gradient(135deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.06) 100%);
-  --g-ai:linear-gradient(135deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.08) 100%);
-  --g-ok:linear-gradient(135deg, rgba(134,239,172,.20), rgba(134,239,172,.08));
-  --g-bl:linear-gradient(135deg, rgba(165,180,252,.20), rgba(165,180,252,.08));
-
-  /* Liquid glass shadows */
-  --sh-1:0 1px 3px rgba(0,0,0,.2), 0 4px 16px rgba(0,0,0,.2);
-  --sh-2:0 4px 12px rgba(0,0,0,.3), 0 12px 36px rgba(0,0,0,.35);
-  --sh-3:0 20px 60px rgba(0,0,0,.5);
-  --sh-inner:inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.20);
-  --sh-inner-strong:inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(0,0,0,.25);
-  --sh-glow:0 0 0 1px rgba(255,255,255,.06), 0 8px 32px rgba(0,0,0,.4);
-
-  --safe-b:env(safe-area-inset-bottom,0px);
-}
-
-/* ════ RESET ════ */
-html { -webkit-text-size-adjust:100%; }
-body {
-  background:linear-gradient(180deg, #0a1422 0%, #0f1c33 35%, #142745 65%, #0d1a2e 100%) !important;
-  background-attachment:fixed !important;
-  font-family:'Cairo', system-ui, sans-serif;
-  font-weight:500;
-  color:var(--tx);
-  letter-spacing:-0.01em;
-  min-height:100dvh;
-  padding-bottom:calc(100px + var(--safe-b)) !important;
-  position:relative;
-  overflow-x:hidden;
-}
-body::before, body::after { content:none !important; }
-
-/* ════ LIQUID BG — soft neutral light (no color) ════ */
-.liq-bg { position:fixed; inset:0; z-index:-2; pointer-events:none; background:radial-gradient(ellipse at 50% -10%, rgba(91,143,217,.18) 0%, transparent 60%), radial-gradient(ellipse at 50% 110%, rgba(59,111,184,.12) 0%, transparent 60%); overflow:hidden; }
-.liq-blob { position:absolute; border-radius:50%; filter:blur(120px); pointer-events:none; mix-blend-mode:screen; }
-.liq-blob.l1 { width:550px; height:550px; background:radial-gradient(circle, rgba(99,179,237,.18) 0%, rgba(91,143,217,.08) 35%, transparent 70%); top:-180px; right:-160px; opacity:.5; animation:liqDrift 28s ease-in-out infinite; }
-.liq-blob.l2 { width:480px; height:480px; background:radial-gradient(circle, rgba(125,217,255,.14) 0%, rgba(56,189,248,.06) 35%, transparent 70%); bottom:-150px; left:-140px; opacity:.4; animation:liqDrift 32s ease-in-out infinite reverse; animation-delay:-10s; }
-.liq-blob.l3 { width:380px; height:380px; background:radial-gradient(circle, rgba(165,233,255,.12) 0%, transparent 70%); top:42%; left:50%; transform:translate(-50%,-50%); opacity:.28; animation:liqDrift 36s ease-in-out infinite; animation-delay:-18s; }
-@keyframes liqDrift { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,40px)} }
-.liq-noise { position:absolute; inset:0; opacity:.025; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' /></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>"); pointer-events:none; mix-blend-mode:overlay; }
-@media (prefers-reduced-motion:reduce) { .liq-blob { animation:none !important; } }
-
-/* ════ HEADER ════ */
-.hdr {
-  background:rgba(13,26,46,.65) !important;
-  backdrop-filter:saturate(180%) blur(40px) !important;
-  -webkit-backdrop-filter:saturate(200%) blur(40px) !important;
-  border-bottom:1px solid var(--br-1) !important;
-  padding:14px 18px 12px !important;
-  box-shadow:0 1px 0 rgba(255,255,255,.05);
-}
-.hdr-top { margin-bottom:8px; }
-.hdr h1 {
-  font-size:1.15em !important; font-weight:800 !important;
-  letter-spacing:-0.02em;
-  color:var(--tx) !important;
-  background:none !important;
-  -webkit-text-fill-color:var(--tx) !important;
-}
-.hdr-sub { font-size:.68em !important; color:var(--tx2) !important; gap:6px; font-weight:600; }
-
-/* AI badge — frosted white */
-.ai-badge {
-  padding:3px 11px !important; border-radius:var(--rd-full) !important;
-  font-size:.6em !important; font-weight:700 !important;
-  background:var(--liq-3) !important;
-  color:var(--tx) !important;
-  border:1px solid var(--br-2) !important;
-  letter-spacing:0.06em; text-transform:uppercase;
-  backdrop-filter:blur(20px);
-  box-shadow:var(--sh-inner);
-  animation:none !important;
-}
-.block-badge {
-  padding:3px 11px !important; border-radius:var(--rd-full) !important;
-  font-size:.6em !important; font-weight:700 !important;
-  letter-spacing:0.06em; text-transform:uppercase;
-  border:1px solid var(--br-2) !important;
-  background:var(--liq-2) !important;
-  color:var(--tx2) !important;
-  backdrop-filter:blur(20px);
-  box-shadow:var(--sh-inner);
-  animation:none !important;
-}
-.block-volume, .block-intensity, .block-peak, .block-deload {
-  background:var(--liq-2) !important;
-  color:var(--tx2) !important;
-  border-color:var(--br-2) !important;
-}
-
-.streak-badge, .week-badge {
-  padding:5px 12px !important; border-radius:var(--rd-full) !important;
-  font-size:.7em !important; font-weight:700 !important;
-  backdrop-filter:blur(20px);
-  background:var(--liq-2) !important;
-  border:1px solid var(--br-2) !important;
-  color:var(--tx) !important;
-  box-shadow:var(--sh-inner);
-}
-
-.theme-btn {
-  width:36px !important; height:36px !important;
-  background:var(--liq-2) !important;
-  border:1px solid var(--br-2) !important;
-  border-radius:var(--rd-full) !important;
-  backdrop-filter:blur(20px);
-  box-shadow:var(--sh-inner);
-}
-.theme-btn:hover { background:var(--liq-3) !important; }
-
-/* qstats — clean chips */
-.qstats { gap:6px !important; padding:6px 0 0 !important; }
-.qstat {
-  padding:7px 12px !important; border-radius:var(--rd-md) !important;
-  background:var(--liq-1) !important;
-  border:1px solid var(--br-1) !important;
-  backdrop-filter:blur(20px);
-  font-size:.7em !important; font-weight:700 !important;
-  box-shadow:var(--sh-inner);
-  transition:all .25s !important;
-}
-.qstat:hover { background:var(--liq-2) !important; }
-.qstat .qv { color:var(--tx) !important; font-weight:800 !important; }
-.qstat .ql { color:var(--tx2) !important; }
-
-/* Fatigue bar — single color */
-.fatigue-bar-wrap { padding:0 18px 8px !important; }
-.fatigue-bar-inner { height:3px !important; border-radius:var(--rd-full) !important; background:var(--liq-2) !important; }
-.fatigue-bar-fill { border-radius:var(--rd-full) !important; }
-.fatigue-low .fatigue-bar-fill { background:#86efac !important; }
-.fatigue-moderate .fatigue-bar-fill { background:#fde68a !important; }
-.fatigue-high .fatigue-bar-fill { background:#fb923c !important; }
-.fatigue-critical .fatigue-bar-fill { background:#f87171 !important; }
-.fatigue-label { font-size:.54em !important; color:var(--tx3) !important; margin-top:5px !important; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; }
-
-/* Hide the colored mini-bar entirely */
-#_gamifyMini { display:none !important; }
-
-/* ════ CONTAINER ════ */
-.ctn {
-  max-width:460px !important;
-  padding:14px 14px 18px !important;
-  position:relative; z-index:1;
-  display:flex; flex-direction:column; gap:10px;
-}
-
-/* ════ CARDS — Pure Liquid Glass ════ */
-.card {
-  background:rgba(255,255,255,.045) !important;
-  backdrop-filter:blur(36px) saturate(200%) brightness(1.05) !important;
-  -webkit-backdrop-filter:blur(40px) saturate(180%) !important;
-  border:1px solid var(--br-1) !important;
-  border-radius:var(--rd-xl) !important;
-  padding:18px !important;
-  margin-bottom:0 !important;
-  box-shadow:var(--sh-1), var(--sh-inner) !important;
-  transition:transform .3s, background .3s !important;
-  position:relative; overflow:hidden;
-  animation:liqRise .5s cubic-bezier(.16,1,.3,1);
-}
-@keyframes liqRise { from{opacity:0;transform:translateY(16px) scale(.985)} to{opacity:1;transform:translateY(0) scale(1)} }
-/* Inner highlight (top edge light) */
-.card::before {
-  content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
-  background:linear-gradient(90deg, transparent, rgba(255,255,255,.40), transparent);
-  pointer-events:none;
-}
-/* Soft top gradient */
-.card::after {
-  content:''; position:absolute; top:0; left:0; right:0; height:80px;
-  background:linear-gradient(180deg, rgba(255,255,255,.04), transparent);
-  pointer-events:none; z-index:0;
-}
-.card > * { position:relative; z-index:1; }
-
-.ct {
-  font-size:.84em !important;
-  font-weight:800 !important;
-  color:var(--tx) !important;
-  letter-spacing:-0.01em;
-  margin-bottom:14px !important;
-  padding-bottom:12px !important;
-  border-bottom:1px solid var(--br-1) !important;
-  display:flex; align-items:center; gap:8px;
-}
-.ct .bdg {
-  margin-right:auto !important; margin-left:0 !important;
-  background:var(--liq-3) !important;
-  color:var(--tx) !important;
-  padding:3px 10px !important;
-  border-radius:var(--rd-full) !important;
-  font-size:.6em !important;
-  font-weight:700 !important;
-  letter-spacing:0.06em; text-transform:uppercase;
-  border:1px solid var(--br-2);
-  backdrop-filter:blur(20px);
-  box-shadow:none !important;
-}
-
-/* AI Coach — same liquid glass, accent border only */
-.ai-coach-card {
-  background:var(--liq-1) !important;
-  border:1px solid var(--br-2) !important;
-  border-radius:var(--rd-xl) !important;
-  padding:18px !important;
-  backdrop-filter:blur(40px) saturate(180%);
-  -webkit-backdrop-filter:blur(40px) saturate(180%);
-  box-shadow:var(--sh-1), var(--sh-inner-strong) !important;
-  position:relative; overflow:hidden;
-}
-.ai-coach-card::before {
-  content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
-  background:linear-gradient(90deg, transparent, var(--acc-glow), transparent) !important;
-  animation:none !important;
-}
-.ai-icon { font-size:1.8em !important; opacity:.95; filter:none !important; }
-.ai-title {
-  font-size:.95em !important; font-weight:800 !important;
-  color:var(--tx) !important;
-  background:none !important; -webkit-text-fill-color:var(--tx) !important;
-}
-.ai-coach-msg { font-size:.8em !important; line-height:1.7 !important; color:var(--tx2) !important; }
-
-/* Period banner — Liquid */
-.period-banner {
-  background:var(--liq-1) !important;
-  border:1px solid var(--br-1) !important;
-  border-radius:var(--rd-lg) !important;
-  padding:14px 16px !important;
-  backdrop-filter:blur(40px);
-  box-shadow:var(--sh-inner);
-}
-.period-title { font-size:.82em !important; font-weight:800 !important; color:var(--tx) !important; }
-.period-desc { font-size:.66em !important; color:var(--tx2) !important; line-height:1.55 !important; }
-
-.pw-chip {
-  width:28px !important; height:28px !important;
-  border-radius:var(--rd-full) !important;
-  border:1px solid var(--br-2) !important;
-  font-size:.62em !important; font-weight:800 !important;
-  background:var(--liq-1) !important;
-  backdrop-filter:blur(10px);
-  color:var(--tx3) !important;
-}
-.pw-chip.active {
-  border-color:var(--br-4) !important; color:var(--tx) !important;
-  background:var(--liq-3) !important;
-  box-shadow:0 0 0 3px rgba(255,255,255,.08), var(--sh-inner-strong) !important;
-}
-.pw-chip.done {
-  border-color:rgba(134,239,172,.4) !important; color:var(--gr) !important;
-  background:rgba(134,239,172,.08) !important;
-}
-
-/* Recovery/Fatigue badges */
-.recovery-badge, .fatigue-badge {
-  padding:5px 12px !important; border-radius:var(--rd-full) !important;
-  font-size:.7em !important; font-weight:700 !important;
-  backdrop-filter:blur(20px);
-  border:1px solid var(--br-2) !important;
-  background:var(--liq-2) !important;
-  color:var(--tx2) !important;
-}
-.recovery-badge.high, .fatigue-badge.low { color:var(--gr) !important; border-color:rgba(134,239,172,.3) !important; background:rgba(134,239,172,.06) !important; }
-.recovery-badge.mid, .fatigue-badge.moderate { color:var(--wn) !important; border-color:rgba(253,230,138,.3) !important; background:rgba(253,230,138,.06) !important; }
-.recovery-badge.low, .fatigue-badge.high, .fatigue-badge.critical { color:var(--no) !important; border-color:rgba(252,165,165,.3) !important; background:rgba(252,165,165,.06) !important; }
-
-/* ════ Day Chips — Liquid pills ════ */
-.dscroll { gap:8px !important; padding:4px 0 !important; }
-.dchip {
-  padding:12px 18px !important;
-  border-radius:var(--rd-lg) !important;
-  background:var(--liq-1) !important;
-  border:1px solid var(--br-2) !important;
-  font-size:.78em !important;
-  font-weight:700 !important;
-  letter-spacing:-0.01em;
-  min-width:96px !important;
-  backdrop-filter:blur(20px);
-  box-shadow:var(--sh-inner);
-  transition:all .3s cubic-bezier(.4,0,.2,1) !important;
-  color:var(--tx2) !important;
-}
-.dchip:hover { background:var(--liq-2) !important; }
-.dchip.act {
-  background:var(--liq-4) !important;
-  color:var(--tx) !important;
-  border-color:var(--br-3) !important;
-  box-shadow:var(--sh-2), var(--sh-inner-strong) !important;
-  transform:translateY(-2px) !important;
-}
-.dchip.completed {
-  border-color:rgba(134,239,172,.3) !important;
-}
-.dchip .dn { font-size:1em !important; font-weight:900 !important; color:var(--tx); }
-.dchip .dm { font-size:.66em !important; opacity:.75 !important; margin-top:2px !important; }
-
-/* ════ Exercises ════ */
-.exi {
-  background:var(--liq-1) !important;
-  border:1px solid var(--br-1) !important;
-  border-radius:var(--rd-lg) !important;
-  padding:14px !important;
-  margin-bottom:8px !important;
-  backdrop-filter:blur(30px) saturate(180%);
-  -webkit-backdrop-filter:blur(30px) saturate(180%);
-  box-shadow:var(--sh-inner);
-  transition:all .25s !important;
-  position:relative; overflow:hidden;
-}
-.exi::before {
-  content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
-  background:linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
-}
-.exi:hover { background:var(--liq-2) !important; }
-.exi.done {
-  background:rgba(134,239,172,.04) !important;
-  border-color:rgba(134,239,172,.22) !important;
-}
-.exi.pr-glow {
-  border-color:rgba(253,230,138,.4) !important;
-  box-shadow:0 0 0 1px rgba(253,230,138,.15), 0 8px 24px rgba(253,230,138,.10) !important;
-}
-.exn { font-size:.94em !important; font-weight:800 !important; letter-spacing:-0.01em; color:var(--tx); }
-.exd { font-size:.7em !important; color:var(--tx2) !important; font-weight:500 !important; }
-
-.muscle-tag {
-  background:var(--liq-2) !important;
-  color:var(--tx2) !important;
-  padding:3px 10px !important;
-  border-radius:var(--rd-full) !important;
-  font-size:.62em !important;
-  font-weight:700 !important;
-  border:1px solid var(--br-2) !important;
-  backdrop-filter:blur(10px);
-}
-
-.done-check {
-  width:36px !important; height:36px !important;
-  border-radius:var(--rd-md) !important;
-  border:1.5px solid var(--br-2) !important;
-  background:var(--liq-2) !important;
-  backdrop-filter:blur(20px);
-  box-shadow:var(--sh-inner);
-  transition:all .25s !important;
-  font-size:.95em !important;
-}
-.done-check:hover { background:var(--liq-3) !important; border-color:var(--br-3) !important; }
-.done-check.checked {
-  background:rgba(134,239,172,.18) !important;
-  border-color:rgba(134,239,172,.5) !important;
-  color:#86efac !important;
-  box-shadow:0 0 0 3px rgba(134,239,172,.10), var(--sh-inner-strong) !important;
-}
-
-/* Sets — minimalist */
-.sets-header { padding:8px 4px !important; border-bottom:1px solid var(--br-1) !important; margin-top:12px !important; }
-.sets-header span { font-size:.54em !important; color:var(--tx3) !important; font-weight:800 !important; letter-spacing:0.10em; text-transform:uppercase; }
-.set-row { padding:6px 4px !important; border-bottom:1px solid rgba(255,255,255,.04) !important; }
-.set-row.set-done { background:rgba(134,239,172,.04) !important; border-radius:var(--rd-sm) !important; }
-.set-num {
-  width:26px !important; height:26px !important;
-  border-radius:var(--rd-md) !important;
-  background:var(--liq-2) !important;
-  font-size:.7em !important; font-weight:800 !important;
-  color:var(--tx2) !important;
-  backdrop-filter:blur(10px);
-  box-shadow:var(--sh-inner);
-}
-.set-num.sn-done {
-  background:rgba(134,239,172,.18) !important;
-  color:#86efac !important;
-  border:1px solid rgba(134,239,172,.4);
-  box-shadow:none !important;
-}
-
-.set-in, .rpe-in {
-  padding:9px 4px !important;
-  border-radius:var(--rd-md) !important;
-  border:1px solid var(--br-2) !important;
-  background:var(--liq-1) !important;
-  color:var(--tx) !important;
-  font-family:'Cairo',sans-serif !important;
-  font-size:.86em !important;
-  font-weight:800 !important;
-  transition:all .25s !important;
-  backdrop-filter:blur(10px);
-  box-shadow:var(--sh-inner);
-}
-.set-in:focus, .rpe-in:focus {
-  border-color:var(--br-4) !important;
-  background:var(--liq-3) !important;
-  box-shadow:0 0 0 3px rgba(255,255,255,.10), var(--sh-inner-strong) !important;
-  outline:none !important;
-}
-.set-in.si-filled { border-color:rgba(134,239,172,.4) !important; background:rgba(134,239,172,.05) !important; }
-.set-in.si-pr { border-color:rgba(253,230,138,.4) !important; background:rgba(253,230,138,.06) !important; }
-.rpe-in.rpe-easy { border-color:rgba(134,239,172,.4) !important; color:var(--gr) !important; }
-.rpe-in.rpe-hard { border-color:rgba(252,165,165,.4) !important; color:var(--no) !important; }
-
-.set-chk {
-  width:32px !important; height:32px !important;
-  border-radius:var(--rd-md) !important;
-  border:1px solid var(--br-2) !important;
-  background:var(--liq-1) !important;
-  backdrop-filter:blur(10px);
-  box-shadow:var(--sh-inner);
-}
-.set-chk:hover { background:var(--liq-2) !important; }
-.set-chk.sc-done {
-  background:rgba(134,239,172,.18) !important;
-  border-color:rgba(134,239,172,.5) !important;
-  color:#86efac !important;
-}
-
-.set-prev { font-size:.7em !important; color:var(--tx3) !important; background:var(--liq-1) !important; border-radius:var(--rd-sm) !important; font-weight:600 !important; padding:7px 3px !important; }
-.sets-summary { padding:10px 13px !important; background:var(--liq-1) !important; border-radius:var(--rd-md) !important; border:1px solid var(--br-1) !important; margin-top:10px !important; backdrop-filter:blur(20px); box-shadow:var(--sh-inner); }
-.ss-chip {
-  padding:4px 10px !important;
-  border-radius:var(--rd-full) !important;
-  font-size:.66em !important; font-weight:800 !important;
-  background:var(--liq-2) !important;
-  border:1px solid var(--br-1) !important;
-  color:var(--tx2) !important;
-  backdrop-filter:blur(10px);
-}
-.ss-chip.ss-vol { color:var(--tx) !important; }
-.ss-chip.ss-avg, .ss-chip.ss-top { color:var(--tx) !important; }
-.ss-chip.ss-rpe-ok { color:var(--gr) !important; background:rgba(134,239,172,.10) !important; border-color:rgba(134,239,172,.25) !important; }
-.ss-chip.ss-rpe-warn { color:var(--wn) !important; background:rgba(253,230,138,.10) !important; border-color:rgba(253,230,138,.25) !important; }
-.ss-chip.ss-rpe-high { color:var(--no) !important; background:rgba(252,165,165,.10) !important; border-color:rgba(252,165,165,.25) !important; }
-
-/* ════ BOTTOM NAV — Floating Glass Pill ════ */
-.bnav {
-  bottom:max(16px, var(--safe-b)) !important;
-  background:rgba(13,26,46,.62) !important;
-  backdrop-filter:blur(40px) saturate(180%) !important;
-  -webkit-backdrop-filter:blur(40px) saturate(200%) !important;
-  border:1px solid var(--br-2) !important;
-  border-radius:var(--rd-2xl) !important;
-  padding:7px 10px !important;
-  gap:4px !important;
-  box-shadow:var(--sh-3), var(--sh-inner-strong) !important;
-  max-width:440px;
-  width:calc(100% - 28px);
-  left:50% !important; transform:translateX(-50%) !important;
-}
-.bni {
-  padding:9px 0 !important;
-  font-size:.54em !important;
-  font-weight:700 !important;
-  letter-spacing:0.04em;
-  border-radius:var(--rd-md) !important;
-  color:var(--tx3) !important;
-  transition:all .25s !important;
-}
-.bni .ic { font-size:1.35em !important; filter:grayscale(.7) !important; opacity:.55 !important; margin-bottom:2px; }
-.bni.act {
-  color:var(--tx) !important;
-  background:var(--liq-4) !important;
-  box-shadow:var(--sh-inner-strong);
-}
-.bni.act .ic { filter:none !important; opacity:1 !important; transform:scale(1.08); }
-
-/* ════ BUTTONS ════ */
-.btn, button.btn {
-  padding:11px 18px !important;
-  border-radius:var(--rd-md) !important;
-  font-family:'Cairo',sans-serif !important;
-  font-weight:700 !important;
-  font-size:.82em !important;
-  border:1px solid var(--br-2) !important;
-  background:var(--liq-2) !important;
-  color:var(--tx) !important;
-  cursor:pointer;
-  backdrop-filter:blur(20px);
-  box-shadow:var(--sh-inner);
-  transition:all .25s !important;
-}
-.btn:hover { background:var(--liq-3) !important; border-color:var(--br-3) !important; }
-.btn-primary, .btn.primary {
-  background:var(--liq-4) !important;
-  border-color:var(--br-3) !important;
-  color:var(--tx) !important;
-  box-shadow:var(--sh-inner-strong) !important;
-}
-.btn-primary:hover { background:var(--liq-5) !important; }
-
-/* Inputs */
-input:not([type=checkbox]):not([type=radio]):not(.set-in):not(.rpe-in), select, textarea {
-  border-radius:var(--rd-md) !important;
-  background:var(--liq-1) !important;
-  border:1px solid var(--br-2) !important;
-  color:var(--tx) !important;
-  padding:11px 14px !important;
-  font-family:'Cairo',sans-serif !important;
-  font-size:.86em !important;
-  backdrop-filter:blur(20px);
-  box-shadow:var(--sh-inner);
-  transition:all .25s !important;
-}
-input:focus, select:focus, textarea:focus {
-  border-color:var(--br-4) !important;
-  background:var(--liq-3) !important;
-  box-shadow:0 0 0 3px rgba(255,255,255,.10) !important;
-  outline:none !important;
-}
-
-/* Comp bar */
-.comp-bar {
-  background:var(--liq-1) !important;
-  border:1px solid var(--br-1) !important;
-  border-radius:var(--rd-lg) !important;
-  padding:14px 16px !important;
-  backdrop-filter:blur(30px);
-  box-shadow:var(--sh-inner);
-}
-.cb-label { font-size:.74em !important; font-weight:700 !important; color:var(--tx2) !important; }
-.cb-track { height:6px !important; border-radius:var(--rd-full) !important; background:var(--liq-2) !important; }
-.cb-fill { background:linear-gradient(90deg, var(--tx2), var(--tx)) !important; border-radius:var(--rd-full) !important; box-shadow:0 0 8px rgba(255,255,255,.15); }
-.cb-fill.full { background:linear-gradient(90deg, #86efac, #4ade80) !important; }
-.cb-pct { font-size:1.15em !important; font-weight:900 !important; color:var(--tx) !important; }
-.session-clock {
-  background:var(--liq-2) !important;
-  border:1px solid var(--br-2) !important;
-  color:var(--tx) !important;
-  padding:5px 13px !important;
-  border-radius:var(--rd-full) !important;
-  font-weight:800 !important;
-  backdrop-filter:blur(20px);
-  box-shadow:var(--sh-inner);
-}
-
-/* ════ GAMIFY UI ════ */
-#_gamifyFab {
-  width:54px !important; height:54px !important;
-  border-radius:var(--rd-full) !important;
-  background:rgba(91,143,217,.30) !important;
-  border:1px solid var(--br-3) !important;
-  box-shadow:var(--sh-2), var(--sh-inner-strong) !important;
-  font-size:1.45em !important;
-  top:calc(env(safe-area-inset-top,0px) + 76px) !important;
-  right:16px !important;
-  backdrop-filter:blur(30px) saturate(200%) !important;
-  -webkit-backdrop-filter:blur(30px) saturate(200%) !important;
-  transition:all .25s cubic-bezier(.4,0,.2,1) !important;
-  color:var(--tx) !important;
-}
-#_gamifyFab:hover { background:var(--liq-5) !important; transform:scale(1.06) !important; }
-#_gamifyFab:active { transform:scale(.94) !important; }
-#_gamifyDot {
-  width:12px !important; height:12px !important;
-  border:2px solid var(--bg-0) !important;
-  background:#f87171 !important;
-}
-
-#_gamifySheet {
-  background:rgba(15,35,71,.78) !important;
-  border-top:1px solid var(--br-2) !important;
-  border-radius:var(--rd-2xl) var(--rd-2xl) 0 0 !important;
-  backdrop-filter:blur(50px) saturate(200%);
-  -webkit-backdrop-filter:blur(50px) saturate(200%);
-  box-shadow:var(--sh-3), var(--sh-inner-strong) !important;
-  padding:14px 18px calc(28px + var(--safe-b)) !important;
-}
-
-/* Toasts */
-.tst {
-  border-radius:var(--rd-lg) !important;
-  background:rgba(15,35,71,.85) !important;
-  backdrop-filter:blur(40px) saturate(180%);
-  border:1px solid var(--br-2) !important;
-  box-shadow:var(--sh-2), var(--sh-inner) !important;
-  font-weight:700 !important;
-  padding:12px 18px !important;
-  font-size:.84em !important;
-  color:var(--tx);
-}
-
-/* Stats Grid — bento with frosted glass */
-.sg { gap:8px !important; }
-.sc {
-  background:var(--liq-1) !important;
-  border:1px solid var(--br-1) !important;
-  border-radius:var(--rd-lg) !important;
-  padding:14px 10px !important;
-  backdrop-filter:blur(20px);
-  box-shadow:var(--sh-inner);
-  transition:all .25s;
-}
-.sc:hover { background:var(--liq-2) !important; }
-.sn { font-size:1.25em !important; font-weight:900 !important; letter-spacing:-0.02em; color:var(--tx) !important; background:none !important; -webkit-text-fill-color:var(--tx) !important; }
-.sl { font-size:.64em !important; color:var(--tx2) !important; font-weight:700 !important; margin-top:3px; letter-spacing:0.02em; }
-
-/* Empty */
-.empty { text-align:center; padding:40px 20px; color:var(--tx2); }
-.empty .eic { font-size:2.8em; opacity:.45; margin-bottom:8px; }
-.empty h3 { font-size:1em; font-weight:800; color:var(--tx); }
-
-/* Decisions */
-.elite-decision, .oe-suggest {
-  border-radius:var(--rd-md) !important;
-  padding:10px 14px !important;
-  font-size:.76em !important;
-  font-weight:700 !important;
-  border:1px solid var(--br-2) !important;
-  margin-top:10px !important;
-  backdrop-filter:blur(20px);
-  background:var(--liq-2) !important;
-  color:var(--tx2) !important;
-  box-shadow:var(--sh-inner);
-}
-.elite-decision.increase { background:rgba(134,239,172,.06) !important; border-color:rgba(134,239,172,.25) !important; color:var(--gr) !important; }
-.elite-decision.maintain { background:rgba(165,180,252,.06) !important; border-color:rgba(165,180,252,.25) !important; color:var(--bl) !important; }
-.elite-decision.deload { background:rgba(196,181,253,.06) !important; border-color:rgba(196,181,253,.25) !important; color:var(--vio) !important; }
-.elite-decision.warn { background:rgba(253,230,138,.06) !important; border-color:rgba(253,230,138,.25) !important; color:var(--wn) !important; }
-
-.velocity-chip { padding:3px 10px !important; border-radius:var(--rd-full) !important; font-size:.62em !important; font-weight:700 !important; backdrop-filter:blur(10px); background:var(--liq-2) !important; color:var(--tx2) !important; border:1px solid var(--br-1); }
-.velocity-improving { color:var(--gr) !important; border-color:rgba(134,239,172,.25) !important; }
-.velocity-fatigue_drop { color:var(--no) !important; border-color:rgba(252,165,165,.25) !important; }
-
-/* Strength projection */
-.strength-proj {
-  background:var(--liq-1) !important;
-  border:1px solid var(--br-2) !important;
-  border-radius:var(--rd-lg) !important;
-  padding:14px 16px !important;
-  margin-top:12px !important;
-  backdrop-filter:blur(20px);
-  box-shadow:var(--sh-inner);
-}
-.sp-title { font-size:.7em !important; color:var(--tx2) !important; font-weight:800 !important; letter-spacing:0.06em; text-transform:uppercase; }
-.sp-value { font-size:1.5em !important; font-weight:900 !important; letter-spacing:-0.02em; color:var(--tx) !important; background:none !important; -webkit-text-fill-color:var(--tx) !important; }
-.sp-sub { font-size:.66em !important; color:var(--tx2) !important; }
-
-.lagging-alert {
-  background:rgba(252,165,165,.06) !important;
-  border:1px solid rgba(252,165,165,.25) !important;
-  border-radius:var(--rd-md) !important;
-  padding:12px 14px !important;
-  backdrop-filter:blur(20px);
-}
-.lagging-alert-text { color:var(--no) !important; }
-
-.mo { background:rgba(8,18,38,.65) !important; backdrop-filter:blur(20px); }
-::-webkit-scrollbar { width:0; height:0; }
-html { scroll-behavior:smooth; }
-::selection { background:rgba(125,211,252,.40); color:var(--tx); }
-
-.coach-prog {
-  padding:5px 12px !important;
-  border-radius:var(--rd-full) !important;
-  font-size:.66em !important;
-  font-weight:800 !important;
-  margin:6px 0 4px !important;
-  backdrop-filter:blur(10px);
-  background:var(--liq-2) !important;
-  border:1px solid var(--br-1) !important;
-}
-.cp-up { color:var(--gr) !important; border-color:rgba(134,239,172,.25) !important; }
-.cp-down { color:var(--no) !important; border-color:rgba(252,165,165,.25) !important; }
-.cp-same { color:var(--bl) !important; border-color:rgba(165,180,252,.25) !important; }
-
-#_gamifySheet h3, #_gamifySheet h4 { font-weight:900; color:var(--tx); }
-#_gamifySheet::-webkit-scrollbar { width:0; }
-
-/* ── WORKOUT SCREEN — better organization ── */
-/* Group AI coach + period banner compact */
-.ai-coach-card + .period-banner { margin-top:-2px; }
-/* Reduce vertical noise */
-.lagging-alert + .exi { margin-top:4px; }
-/* Compact warmup sets card */
-[class*="warmup"] { padding:12px 14px !important; }
-
-/* Mobile */
-@media (max-width:380px) {
-  .ctn { padding:12px 12px 14px !important; }
-  .card { padding:15px !important; border-radius:var(--rd-lg) !important; }
-  .hdr { padding:12px 14px 10px !important; }
-  .bnav { padding:6px 10px !important; }
-  .bni { padding:7px 0 !important; font-size:.52em !important; }
-  .dchip { padding:11px 14px !important; min-width:88px !important; }
-  #_gamifyFab { width:48px !important; height:48px !important; top:calc(env(safe-area-inset-top,0px) + 68px) !important; right:12px !important; font-size:1.3em !important; }
-}
-
-*:focus-visible { outline:2px solid var(--tx); outline-offset:2px; border-radius:var(--rd-sm); }
-@keyframes gradientShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
-
-/* Hide chart shimmer overlay (cleaner) */
-.cb-fill::after { display:none; }
-
-/* Make sure h1 has no gradient */
-.hdr h1 { -webkit-background-clip:initial !important; -webkit-text-fill-color:initial !important; background:none !important; }
-
-
-/* ════ WORKOUT SCREEN — BETTER ORGANIZATION ════ */
-
-/* 1) Hide quickStats inside header on workout view (already shown in card body) */
-/* Actually leave qstats — they're useful but make them more compact */
-.qstats { max-width:100%; overflow-x:auto; }
-.qstats::-webkit-scrollbar { display:none; }
-
-/* 2) Period banner — make it inline mini badge style */
-.period-banner {
-  padding:10px 14px !important;
-  border-radius:var(--rd-lg) !important;
-}
-.period-banner .period-title { font-size:.78em !important; }
-.period-banner .period-desc { font-size:.62em !important; opacity:.85; }
-.pw-chip { width:24px !important; height:24px !important; font-size:.56em !important; }
-
-/* 3) Recovery + Fatigue badges — keep inline */
-.recovery-badge, .fatigue-badge { font-size:.66em !important; padding:4px 10px !important; }
-
-/* 4) Group consecutive exercises with subtle spacing */
-.exi + .exi { margin-top:6px !important; }
-
-/* 5) Day chips scroll container — full-width with subtle scroll cue */
-.dscroll { padding:6px 2px !important; mask-image:linear-gradient(90deg, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%); -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%); }
-
-/* 6) Sticky workout title (current day) */
-.card.workout-day-card .ct {
-  position:sticky; top:0;
-  background:rgba(15,35,71,.85);
-  backdrop-filter:blur(20px);
-  z-index:5; padding-top:14px;
-}
-
-/* 7) Quick stats hover */
-.qstat { transition:transform .2s, background .25s !important; }
-.qstat:active { transform:scale(.96); }
-
-/* 8) AI coach card — collapsible if too tall */
-.ai-coach-card .ai-coach-msg { max-height:120px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
-.ai-coach-card .ai-coach-msg::-webkit-scrollbar { width:0; }
-
-/* 9) Set inputs — better grid spacing on narrow screens */
-@media (max-width: 360px) {
-  .sets-header, .set-row { gap:2px !important; grid-template-columns:24px 1fr 1fr 1fr 38px 32px !important; }
-  .set-in, .rpe-in { font-size:.78em !important; padding:7px 2px !important; }
-  .set-prev { font-size:.62em !important; }
-}
-
-/* 10) Exercise compact row when collapsed */
-.exi[data-collapsed="1"] .sets-header,
-.exi[data-collapsed="1"] .set-row,
-.exi[data-collapsed="1"] .sets-summary,
-.exi[data-collapsed="1"] .oe-suggest,
-.exi[data-collapsed="1"] .elite-decision { display:none; }
-
-/* 11) Polish the rest timer / session clock */
-.session-clock { font-variant-numeric:tabular-nums; font-size:.78em !important; }
-
-/* 12) Floating compact rest timer (if exists) */
-#floatTimer {
-  background:rgba(15,35,71,.78) !important;
-  backdrop-filter:blur(40px) saturate(200%);
-  -webkit-backdrop-filter:blur(40px) saturate(200%);
-  border:1px solid var(--br-2) !important;
-  border-radius:var(--rd-2xl) !important;
-  box-shadow:var(--sh-2), var(--sh-inner-strong) !important;
-  color:var(--tx) !important;
-}
-
-/* 13) WakeLock pill */
-#wakeLockPill {
-  background:rgba(134,239,172,.08) !important;
-  border:1px solid rgba(134,239,172,.25) !important;
-  border-radius:var(--rd-full) !important;
-  color:#86efac !important;
-  backdrop-filter:blur(20px);
-  padding:5px 11px !important;
-  font-size:.72em !important;
-  font-weight:700 !important;
-}
-
-/* 14) Tighten gaps in main container */
-.ctn { gap:8px !important; }
-
-/* 15) Card titles more polished */
-.ct { gap:6px !important; }
-
-/* 16) Settings inputs row */
-.fi { gap:8px !important; }
-.fi input, .fi select { font-size:.84em !important; }
-
-/* 17) Toasts container */
-#toasts {
-  position:fixed; bottom:calc(100px + var(--safe-b));
-  left:50%; transform:translateX(-50%);
-  z-index:9000; display:flex; flex-direction:column; gap:8px;
-  pointer-events:none;
-}
-#toasts > * { pointer-events:auto; }
-
-/* 18) Light borders around interactive elements get inner highlight */
-button, .btn, .dchip, .qstat, .pw-chip, .done-check, .set-chk, .set-in, .rpe-in {
-  -webkit-tap-highlight-color:transparent;
-}
-
 </style>
 </head>
 <body>
-<div class="liq-bg" aria-hidden="true"><div class="liq-blob l1"></div><div class="liq-blob l2"></div><div class="liq-blob l3"></div><div class="liq-noise"></div></div>
 <div class="tc" id="toasts"></div>
 <!-- HEADER -->
 <div class="hdr">
@@ -2082,7 +1124,7 @@ button, .btn, .dchip, .qstat, .pw-chip, .done-check, .set-chk, .set-in, .rpe-in 
 <div class="pg" id="pg-nutrition">
 <div class="ctn">
 <div class="card" style="background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(16,185,129,.04));border:1px solid rgba(34,197,94,.2)">
-  <div class="ct" style="color:#86efac">🥗 تحليل الغذاء بالذكاء الاصطناعي</div>
+  <div class="ct" style="color:#4ade80">🥗 تحليل الغذاء بالذكاء الاصطناعي</div>
   <div style="font-size:.8em;color:var(--tx2);margin-bottom:14px;line-height:1.7">ارفع تقرير JSON من تطبيق الغذاء (MyFitnessPal، Cronometer، أو أي تطبيق يدعم تصدير JSON) وسيحلله الذكاء الاصطناعي ويقارنه مع أهدافك.</div>
   <div style="background:rgba(255,255,255,.06);border-radius:12px;padding:12px;margin-bottom:14px">
     <div style="font-size:.78em;font-weight:800;color:var(--p);margin-bottom:10px">🎯 إعدادات التحليل</div>
@@ -2114,7 +1156,7 @@ button, .btn, .dchip, .qstat, .pw-chip, .done-check, .set-chk, .set-in, .rpe-in 
     ondragleave="this.style.borderColor='rgba(74,222,128,.3)'"
     ondrop="event.preventDefault();this.style.borderColor='rgba(74,222,128,.3)';handleNutFile(event.dataTransfer.files[0])">
     <div style="font-size:2.2em;margin-bottom:8px">📂</div>
-    <div style="font-weight:800;font-size:.9em;color:#86efac">اضغط لرفع ملف JSON</div>
+    <div style="font-weight:800;font-size:.9em;color:#4ade80">اضغط لرفع ملف JSON</div>
     <div style="font-size:.72em;color:var(--tx3);margin-top:5px">أو اسحب الملف وأفلته هنا</div>
     <div style="font-size:.65em;color:var(--tx3);margin-top:3px">MyFitnessPal · Cronometer · أي تطبيق JSON</div>
   </div>
@@ -2245,46 +1287,18 @@ const EXERCISE_LIBRARY=[
 {id:'ex82', name:'Reverse Curl',               muscle:'ساعد',     sec:'Brachialis, باي',   equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'ساعد + باي',   desc:'يبني الساعد العلوي والـ Brachialis.',                           technique:'قبضة عكسية · الكوع ثابت.',                               mistake:'الأرجحة الزائدة'}
 ];
 let G={days:{},ses:[],bw:[],streak:0,lastWo:null,doneExs:{},completedDays:{},aiKey:'',claudeKey:'',chatHistory:[],theme:'dark',notifications:true,currentSets:{},schedule:null,wellness:{},nextSessionPlan:{},rpeHistory:{},weeklyChallenge:null,injuries:[],supplements:[],pinnedNote:''};
-const FATIGUE={score(){const s=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5).length;const v=SCI.weeklyVolume();const td=new Date().toISOString().split('T')[0];const w=G.wellness[td]||{sleep:7,energy:7,stress:3};return Math.round(Math.min(s/6*30,30)+Math.min(v/6000*25,25)+Math.max(0,(10-Math.min(parseFloat(w.sleep)||7,10)))/6*15+Math.max(0,(10-Math.min(parseFloat(w.energy)||7,10)))/6*15+Math.min(parseFloat(w.stress)||3,10)/10*15)},level(){const s=this.score();return s<40?'low':s<70?'moderate':s<85?'high':'critical'},label(){return{low:'منخفض ✅',moderate:'متوسط ⚡',high:'مرتفع ⚠️',critical:'حرج 🚨'}[this.level()]}};
-const PERIOD={week(){if(!G.blockStart)G.blockStart=Date.now();const w=Math.floor((Date.now()-G.blockStart)/(7*864e5))%4;return w+1},type(){const w=this.week();return w===1?'volume':w===2?'intensity':w===3?'peak':'deload'},info(){return{volume:{label:'Volume Week',color:'block-volume',icon:'📦',desc:'حجم عالي · أوزان متوسطة · 4 سيتات'},intensity:{label:'Intensity Week',color:'block-intensity',icon:'⚡',desc:'أوزان ثقيلة · 3 سيتات · Rep Range أقل'},peak:{label:'Peak Week',color:'block-peak',icon:'🔥',desc:'أقصى قوة · 2-3 سيتات · وزن أقصى'},deload:{label:'Deload Week',color:'block-deload',icon:'🔄',desc:'تعافي · 90% من الأوزان · 2 سيتات'}}[this.type()]}};
+const FATIGUE={score(){const s=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5).length;const v=SCI.weeklyVolume();const td=new Date().toISOString().split('T')[0];const w=G.wellness[td]||{sleep:7,energy:7,stress:3};return Math.round(Math.min(s/6*30,30)+Math.min(v/6000*25,25)+(10-Math.min(parseFloat(w.sleep)||7,10))/10*15+(10-Math.min(parseFloat(w.energy)||7,10))/10*15+Math.min(parseFloat(w.stress)||3,10)/10*15)},level(){const s=this.score();return s<40?'low':s<70?'moderate':s<85?'high':'critical'},label(){return{low:'منخفض ✅',moderate:'متوسط ⚡',high:'مرتفع ⚠️',critical:'حرج 🚨'}[this.level()]}};
+const PERIOD={week(){return(Math.floor(G.ses.length/3)%4)+1},type(){const w=this.week();return w===1?'volume':w===2?'intensity':w===3?'peak':'deload'},info(){return{volume:{label:'Volume Week',color:'block-volume',icon:'📦',desc:'حجم عالي · أوزان متوسطة · 4 سيتات'},intensity:{label:'Intensity Week',color:'block-intensity',icon:'⚡',desc:'أوزان ثقيلة · 3 سيتات · Rep Range أقل'},peak:{label:'Peak Week',color:'block-peak',icon:'🔥',desc:'أقصى قوة · 2-3 سيتات · وزن أقصى'},deload:{label:'Deload Week',color:'block-deload',icon:'🔄',desc:'تعافي · 90% من الأوزان · 2 سيتات'}}[this.type()]}};
 const VELOCITY={state(id){const h=G.ses.filter(s=>s.exs?.[id]).slice(-2);if(h.length<2)return 'stable';const avg=(s,k)=>{const ss=s.exs[id]?.sets?.filter(t=>t.w>0)||[];return ss.length?ss.reduce((v,t)=>v+(t[k]||0),0)/ss.length:0};const r0=avg(h[0],'r'),r1=avg(h[1],'r'),rpe0=avg(h[0],'rpe'),rpe1=avg(h[1],'rpe');if(rpe0>0&&rpe1>0&&r0<r1&&rpe0>rpe1)return 'fatigue_drop';return r0>r1?'improving':'stable'},label(s){return{improving:'📈 تحسن',fatigue_drop:'📉 Fatigue Drop',stable:'➡️ مستقر'}[s]||'➡️ مستقر'}};
 function eliteDecision(id,name,sets){const fat=FATIGUE.level(),vel=VELOCITY.state(id),blk=PERIOD.type(),fs=sets.filter(s=>s.w>0);if(!fs.length)return{action:'new',weight:0,msg:'أدخل الوزن أولاً'};const best=Math.max(...fs.map(s=>s.w)),avgR=fs.reduce((v,s)=>v+(s.r||0),0)/fs.length,rpes=fs.filter(s=>s.rpe>0),avgRPE=rpes.length?rpes.reduce((v,s)=>v+s.rpe,0)/rpes.length:0,inc=OE.isCompound(name)?2.5:1;if(blk==='deload')return{action:'deload',weight:Math.round(best*.9*2)/2,msg:'🔄 Deload — 90%'};if(vel==='fatigue_drop')return{action:'maintain',weight:best,msg:'⚠️ Fatigue Drop'};if(avgRPE>9)return{action:'maintain',weight:best,msg:`⚠️ RPE ${avgRPE.toFixed(1)} — لا تزيد`};if(fat==='critical')return{action:'deload',weight:Math.round(best*.9*2)/2,msg:'🚨 Fatigue حرج'};if(avgR>=10&&fat==='low')return{action:'increase',weight:best+inc,msg:`🔥 زود +${inc}كجم`};if(avgR>=10)return{action:'increase',weight:best+inc/2,msg:`⚡ +${inc/2}كجم`};if(avgR>=8&&blk==='intensity')return{action:'increase',weight:best+inc,msg:`💪 Intensity +${inc}كجم`};return{action:'maintain',weight:best,msg:'➡️ حافظ وزود العدات'}}
 function laggingMuscle(){const m={};G.ses.slice(-10).forEach(s=>Object.values(s.exs||{}).forEach(e=>{if(e.muscle){const v=e.sets?.length?e.sets.reduce((v,t)=>v+(t.w||0)*(t.r||1),0):e.vol||0;m[e.muscle]=(m[e.muscle]||0)+v}}));const a=Object.entries(m);if(a.length<2)return null;a.sort((x,y)=>x[1]-y[1]);return a[a.length-1][1]>0&&a[0][1]/a[a.length-1][1]<.6?a[0][0]:null}
 function predictStrength(id){const h=G.ses.filter(s=>s.exs?.[id]).slice(-6);if(h.length<2)return null;const mx=h.map(s=>{const ss=s.exs[id]?.sets?.filter(t=>t.w>0)||[];return ss.length?Math.max(...ss.map(t=>t.w)):s.exs[id].w||0}).filter(v=>v>0);if(mx.length<2)return null;const rate=(mx[mx.length-1]-mx[0])/mx.length;return rate<=0?null:Math.round((mx[mx.length-1]+rate*12)*10)/10}
-// ─── GP date + streak helpers ───
-function GP_ymdLocal(d){d=d||new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-function _GP_updateStreak(){
-  try{
-    const today=GP_ymdLocal();
-    if(G.lastWo!==today){return}
-    // Compute current consecutive streak ending today using session dates
-    if(!Array.isArray(G.ses)||G.ses.length===0){G.streak=1;return}
-    const days=new Set();
-    G.ses.forEach(s=>{if(s&&s.date){days.add(GP_ymdLocal(new Date(s.date)))}});
-    days.add(today);
-    let streak=0;let d=new Date();
-    while(days.has(GP_ymdLocal(d))){streak++;d.setDate(d.getDate()-1);if(streak>365)break}
-    G.streak=streak;
-  }catch(e){console.warn('streak update failed',e)}
-}
-function _GP_checkStreakBreak(){
-  try{
-    if(!G.lastWo){G.streak=0;return}
-    const today=GP_ymdLocal();
-    if(G.lastWo===today)return;
-    const y=new Date();y.setDate(y.getDate()-1);
-    if(G.lastWo===GP_ymdLocal(y))return;// still alive (yesterday)
-    // missed >=1 day — try consume shield
-    if(typeof GAME!=='undefined'&&GAME.consumeShield&&GAME.consumeShield()){return}
-    G.streak=0;
-  }catch(e){console.warn('streak check failed',e)}
-}
-const SCI={calc1RM(w,r){if(!w||!r)return 0;const rr=Math.min(Math.max(parseInt(r)||0,1),12);return rr===1?w:Math.round(w*(1+rr/30)*10)/10},calc1RMBrzycki(w,r){if(!w||!r)return 0;const rr=Math.min(Math.max(parseInt(r)||0,1),10);return Math.round(w*36/(37-rr)*10)/10},calc1RMAvg(w,r){const a=this.calc1RM(w,r),b=this.calc1RMBrzycki(w,r);return a&&b?Math.round((a+b)/2*10)/10:a||b},sessionVolume(s){return Object.values(s.exs||{}).reduce((t,e)=>t+(e.vol>0?e.vol:e.sets?.length?e.sets.reduce((v,t)=>v+(t.w||0)*(t.r||1),0):(e.w||0)*(e.r||1)),0)},weeklyVolume(){const ws=new Date();const dow=ws.getDay();ws.setDate(ws.getDate()-((dow+1)%7));ws.setHours(0,0,0,0);return Math.round(G.ses.filter(s=>new Date(s.date)>=ws).reduce((t,s)=>t+SCI.sessionVolume(s),0))},getBestPR(id){return getBestSet(id)},volumeTrend(id){const r=G.ses.filter(s=>s.exs?.[id]).slice(-6).map(s=>{const e=s.exs[id];return e.vol>0?e.vol:e.sets?.length?e.sets.reduce((v,t)=>v+(t.w||0)*(t.r||1),0):e.w||0}).filter(v=>v>0);return r.length<2?0:r[0]>0?Math.round((r[r.length-1]-r[0])/r[0]*100):0}};
+const SCI={calc1RM(w,r){return!w||!r?0:r===1?w:Math.round(w*(1+r/30)*10)/10},sessionVolume(s){return Object.values(s.exs||{}).reduce((t,e)=>t+(e.vol>0?e.vol:e.sets?.length?e.sets.reduce((v,t)=>v+(t.w||0)*(t.r||1),0):e.w||0),0)},weeklyVolume(){const ws=new Date();ws.setDate(ws.getDate()-ws.getDay());ws.setHours(0,0,0,0);return Math.round(G.ses.filter(s=>new Date(s.date)>=ws).reduce((t,s)=>t+SCI.sessionVolume(s),0))},getBestPR(id){return getBestSet(id)},volumeTrend(id){const r=G.ses.filter(s=>s.exs?.[id]).slice(-6).map(s=>{const e=s.exs[id];return e.vol>0?e.vol:e.sets?.length?e.sets.reduce((v,t)=>v+(t.w||0)*(t.r||1),0):e.w||0}).filter(v=>v>0);return r.length<2?0:r[0]>0?Math.round((r[r.length-1]-r[0])/r[0]*100):0}};
 const OE={CK:['Bench Press','Deadlift','Squat','Row','OHP','Pull','Press','RDL','Hip Thrust','Split Squat','T-Bar','Barbell','Overhead'],isCompound(n){return this.CK.some(c=>n.toLowerCase().includes(c.toLowerCase()))},detectPlateau(id){const h=G.ses.filter(s=>s.exs?.[id]).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,4).map(s=>{const e=s.exs[id];return e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):e.w||0}).filter(w=>w>0);return h.length>=3&&h[0]===h[1]&&h[1]===h[2]},getRecommendation(id,name,lastW){if(!lastW||lastW<=0)return{status:'new',suggestedWeight:lastW,msg:'',trend:0};const h=G.ses.filter(s=>s.exs?.[id]).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5).map(s=>{const e=s.exs[id];return e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):e.w||0}).filter(w=>w>0);const trend=SCI.volumeTrend(id);if(h.length<2)return{status:'stable',suggestedWeight:lastW,msg:'',trend};const inc=this.isCompound(name)?2.5:1,rt=this.isCompound(name)?2.5:1;if(h.length>=4&&h[0]===h[1]&&h[1]===h[2]&&h[2]===h[3]){const dl=Math.round(lastW*.9/rt)*rt;return{status:'deload',suggestedWeight:dl,msg:`⚠️ Deload — ${dl}كجم (90%)`,trend}}if(this.detectPlateau(id)){const sg=Math.round((lastW+inc)/rt)*rt;return{status:'plateau',suggestedWeight:sg,msg:`⚠️ ثبات — جرب ${sg}كجم`,trend}}if(h.length>=2&&h[0]>h[1]){const sg=Math.round((lastW+inc)/rt)*rt;return{status:'progressing',suggestedWeight:sg,msg:`✅ تقدم! الهدف: ${sg}كجم`,trend}}return{status:'stable',suggestedWeight:lastW,msg:'',trend}}};
-function recoveryScore(){const l7=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5),freq=Math.min(l7.length,6),wv=SCI.weeklyVolume(),bwT=G.bw.length>=2?Math.abs(G.bw[G.bw.length-1].w-G.bw[G.bw.length-2].w):0;const td=new Date().toISOString().split('T')[0],wn=G.wellness[td]||{sleep:7,energy:7,stress:3};const slP=Math.max(0,(7-Math.min(parseFloat(wn.sleep)||7,10)))*3;const stP=Math.max(0,(parseFloat(wn.stress)||3)-5)*2;return Math.min(Math.max(Math.round(freq/6*40+Math.min(wv/5000*30,30)+Math.min((G.streak||0)/7*20,20)+(bwT<2?10:5)-slP-stP),0),100)}
+function recoveryScore(){const l7=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5),freq=Math.min(l7.length,6),wv=SCI.weeklyVolume(),bwT=G.bw.length>=2?Math.abs(G.bw[G.bw.length-1].w-G.bw[G.bw.length-2].w):0;return Math.min(Math.max(Math.round(freq/6*40+Math.min(wv/5000*30,30)+Math.min((G.streak||0)/7*20,20)+(bwT<2?10:5)),0),100)}
 function loadD(){try{const s=localStorage.getItem(K);if(s){const d=JSON.parse(s);
 // Migration آمنة — بتحافظ على بيانات المستخدم بدل G={...G,...d}
-G.ses=d.ses||[];G.bw=d.bw||[];G.streak=d.streak||0;setTimeout(()=>_GP_checkStreakBreak(),50);G.lastWo=d.lastWo||null;
+G.ses=d.ses||[];G.bw=d.bw||[];G.streak=d.streak||0;G.lastWo=d.lastWo||null;
 G.doneExs=d.doneExs||{};G.completedDays=d.completedDays||{};
 G.aiKey=d.aiKey||'';G.claudeKey=d.claudeKey||'';G.chatHistory=d.chatHistory||[];
 G.theme=d.theme||'dark';G.notifications=d.notifications!==undefined?d.notifications:true;
@@ -2305,7 +1319,7 @@ const t=document.getElementById('notifToggle');if(t)t.checked=G.notifications;
 function saveD(){try{localStorage.setItem(K,JSON.stringify(G))}catch(e){if(e.name==='QuotaExceededError'||e.code===22){if(G.chatHistory.length>20){G.chatHistory=G.chatHistory.slice(-20);try{localStorage.setItem(K,JSON.stringify(G));return}catch(e2){}}if(G.ses.length>200){G.ses=G.ses.slice(-150);try{localStorage.setItem(K,JSON.stringify(G));return}catch(e3){}}toast('⚠️ مساحة التخزين ممتلئة — صدّر بياناتك','w');}}}
 function rDate(){const d=new Date(),dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],mn=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],el=document.getElementById('tDate');if(el)el.textContent=`${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`}
 function rBlockBadge(){const i=PERIOD.info(),el=document.getElementById('blockBadge');if(!el)return;el.className='block-badge '+i.color;el.textContent=`${i.icon} ${i.label}`}
-function rFatigueBar(){const sc=FATIGUE.score(),lv=FATIGUE.level(),wr=document.getElementById('fatigueBarWrap'),fi=document.getElementById('fatigueBarFill'),lb=document.getElementById('fatigueBarLabel'),bl=document.getElementById('blockLabel');if(!fi||!wr)return;wr.className=`fatigue-bar-wrap fatigue-${lv}`;fi.style.width=`${sc}%`;lb.textContent=`Block ${PERIOD.week()}/4 — ${PERIOD.info().label}`;const lb2=document.getElementById('fatigueBarLabel');if(lb2)lb2.textContent=`Fatigue ${sc}% — ${FATIGUE.label()}`}
+function rFatigueBar(){const sc=FATIGUE.score(),lv=FATIGUE.level(),wr=document.getElementById('fatigueBarWrap'),fi=document.getElementById('fatigueBarFill'),lb=document.getElementById('fatigueBarLabel'),bl=document.getElementById('blockLabel');if(!fi)return;wr.className=`fatigue-bar-wrap fatigue-${lv}`;fi.style.width=`${sc}%`;lb.textContent=`Block ${PERIOD.week()}/4 — ${PERIOD.info().label}`;const lb2=document.getElementById('fatigueBarLabel');if(lb2)lb2.textContent=`Fatigue ${sc}% — ${FATIGUE.label()}`}
 function rPeriodBanner(){const el=document.getElementById('periodBanner');if(!el)return;const i=PERIOD.info(),w=PERIOD.week(),chips=[1,2,3,4].map(n=>`<div class="pw-chip ${n<w?'done':n===w?'active':''}">${n}</div>`).join('');el.innerHTML=`<div class="period-info"><div class="period-title" style="color:var(--p)">${i.icon} ${i.label}</div><div class="period-desc">${i.desc}</div></div><div class="period-week-chips">${chips}</div>`}
 function rRecoveryBadge(){const rs=recoveryScore(),el=document.getElementById('recoveryBadgeArea');if(!el)return;const c=rs>=70?'high':rs>=50?'mid':'low',ic=rs>=70?'✅':rs>=50?'⚡':'⚠️',lb=rs>=70?'استعداد ممتاز':rs>=50?'استعداد جيد':'يُنصح بالراحة';el.innerHTML=`<div class="recovery-badge ${c}">${ic} Recovery ${rs}/100 — ${lb}</div>`}
 function rFatigueBadge(){const el=document.getElementById('fatigueBadgeArea');if(!el)return;el.innerHTML=`<div class="fatigue-badge ${FATIGUE.level()}">🔥 Fatigue ${FATIGUE.score()}/100 — ${FATIGUE.label()}</div>`}
@@ -2316,7 +1330,7 @@ let sessionStartTime=null,sessionTimerInterval=null;
 function fmtElapsed(ms){const t=Math.floor(ms/1000),h=Math.floor(t/3600),m=Math.floor((t%3600)/60),s=t%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
 function rDays(){const wk=weekKey(),done=G.completedDays[wk]||{},c=getCompletedCount(),wb=document.getElementById('weekBdg'),st=document.getElementById('strk'),dl=document.getElementById('dayList');if(wb)wb.textContent=`📅 ${c}/${dayOrder.length}`;if(st)st.textContent=G.streak||0;if(!dl)return;dl.innerHTML=dayOrder.map(k=>{const d=G.days[k];if(!d)return'';const ic=done[k],ia=curDay===k;return`<div class="dchip ${ia?'act':''} ${ic&&!ia?'completed':''}" onclick="selDay('${k}')">${ic?'<div class="done-mark">✓</div>':''}<div class="dn">${d.name}</div><div class="dm">${d.muscles}</div></div>`}).join('')}
 function selDay(k){if(typeof resetJournal==='function')resetJournal();if(curDay!==k){sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;}curDay=k;rDays();rExs();const el=document.getElementById('sesAct');if(el)el.style.display='block';setTimeout(()=>{const w=document.getElementById('woArea');if(w)w.scrollIntoView({behavior:'smooth',block:'start'})},100)}
-function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;wo.innerHTML=`<div class="card"><div class="ct">💪 ${day.muscles} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} تمرين</span></div>${day.exercises.map(ex=>{if(ex.isWarmup)return`<div class="warmup-box"><span style="font-size:1.4em">🔥</span><div><strong>إحماء:</strong> ${ex.reps}</div></div>`;const ns=ex.sets||3,ls=getLastSets(ex.id),be=getBestSet(ex.id)||ex.lastW||0,dn=G.doneExs[sk]&&G.doneExs[sk][ex.id],or=OE.getRecommendation(ex.id,ex.name,be),sg=pfl[ex.id],vs=VELOCITY.state(ex.id),ss=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[],dc=ss.length?eliteDecision(ex.id,ex.name,ss):{action:'stable',weight:be,msg:''};const coachH=getSmartCoach(ex,ex.id,be);const osH='';const edH='';const vcH=vs!=='stable'?`<span class="velocity-chip velocity-${vs}">${VELOCITY.label(vs)}</span>`:'';const lsH=sg?`<div style="background:rgba(254,215,170,.07);border:1px dashed rgba(254,215,170,.25);border-radius:10px;padding:10px;margin-top:8px;font-size:.76em"><strong style="color:var(--pu)">💡 من الجلسة السابقة:</strong> ${sg.reason}<div style="margin-top:4px;color:var(--tx2)">الهدف: ${sg.nextWeight}كجم × ${sg.targetReps}</div></div>`:'';const rows=Array.from({length:ns},(_,i)=>{const ps=ls[i]||null;let _pw=0,_pr=0,_pp=0;if(ps){_pw=ps.w||0;_pr=ps.r||0;_pp=ps.rpe||0;}if(!_pw){const psAny=ls.find(s=>s&&s.w>0);if(psAny){_pw=psAny.w;_pr=psAny.r||0;}}if(!_pw)_pw=be||0;const pw=_pw,pr=_pr,pp=_pp;const pt=pw>0?(pr>0?`${pw}<small style="opacity:.65;font-size:.78em">×</small>${pr}`:`${pw}`):'—';return`<div class="set-row" id="sr-${ex.id}-${i}"><div class="set-num" id="snum-${ex.id}-${i}">${i+1}</div><div class="set-prev">${pt}${pp?'<br><span style="font-size:.7em;color:var(--pu)">RPE '+pp+'</span>':''}</div><input type="number" class="set-in" id="sw-${ex.id}-${i}" placeholder="${pw>0?pw:''}" step="0.5" min="0" inputmode="decimal" oninput="onSetChange('${ex.id}',${i},${be})"><input type="number" class="set-in" id="sr2-${ex.id}-${i}" placeholder="${pr||'عدات'}" step="1" min="1" inputmode="numeric" oninput="onSetChange('${ex.id}',${i},${be})" style="font-size:.78em"><input type="number" class="rpe-in" id="srpe-${ex.id}-${i}" placeholder="${pp||'RPE'}" step="0.5" min="1" max="10" inputmode="decimal" oninput="onRPEChange('${ex.id}',${i},true)"><div class="set-chk" id="sc-${ex.id}-${i}" onclick="toggleSetDone('${ex.id}',${i})"></div></div>`}).join('');const mClr=getMuscleColor(ex.muscle||'');return`<div class="exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="${ex.muscle||''}"><div class="muscle-stripe" style="background:rgb(${mClr})"></div><div class="ext"><div style="flex:1"><div class="exn">${ex.name}</div><div class="exd">${ns} سيتات | ${ex.reps} عدة | ${ex.unit}</div>${ex.muscle?`<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:4px"><span class="muscle-tag">${ex.muscle}</span>${vcH}</div>`:''} ${be>0?`<div style="font-size:.65em;color:var(--wn);margin-top:3px">🏆 أفضل: ${be} ${ex.unit}</div>`:''}</div><div class="done-check ${dn?'checked':''}" id="chk-${ex.id}" onclick="toggleDone('${ex.id}')">${dn?'✓':''}</div></div>${coachH}${lsH}${(()=>{const tk=Object.keys(TIPS).find(k=>ex.name.includes(k)),fpH=renderFormPhases(ex.name);if(!tk&&!fpH)return'';let _th='';if(tk)_th+=`<button class="tip-btn" onclick="this.nextElementSibling.classList.toggle('open')">📋 تقنية</button><div class="tip-box" id="tip-${ex.id}">${TIPS[tk].map(t=>`<div class="tip-item"><span>✦</span><span>${t}</span></div>`).join('')}</div>`;if(fpH)_th+=`<button class="form-btn" onclick="var _fp=document.getElementById('fp-${ex.id}');_fp.style.display=_fp.style.display==='none'?'block':'none'">🎯 حركة صحيحة</button><div id="fp-${ex.id}" style="display:none">${fpH}</div>`;return _th})()}${renderWarmupProto(ex.id,ex.name,be)}<div class="sets-header"><span>#</span><span>سابق</span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE<span class="tt-q" onclick="showTip(this,'RPE (مقياس الجهد المدرَك): من 1 إلى 10. RPE 10 = أقصى جهد مطلق. RPE 8 = يمكنك تكراران إضافيتان. RPE 7 = يمكنك 3 تكرارات إضافية. المثالي: 7-9 في معظم السيتات.')">?</span></span><span>✓</span></div>${rows}<div class="sets-summary" id="sum-${ex.id}"><span class="ss-chip">0/${ns} سيت</span></div><textarea class="ex-note" id="n-${ex.id}" placeholder="📝 ملاحظة..." rows="1"></textarea><div id="injWarn-${ex.id}"></div><div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="swapExercise('${ex.id}','${ex.muscle||''}','${ex.name}')">🔀 بديل</button><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="editExerciseInDay('${ex.id}')">✏️ تعديل</button>${getYTBtn(ex.name)}${G.injuries&&G.injuries.some(i=>i.active&&i.muscle===(ex.muscle||''))?'<span style="font-size:.72em;color:var(--no);padding:5px 0">⚠️ إصابة في '+ex.muscle+'</span>':''}</div></div>`}).join('')}</div>`;updateCompBar();restoreSetInputs();renderDeloadBanner();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
+function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;wo.innerHTML=`<div class="card"><div class="ct">💪 ${day.muscles} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} تمرين</span></div>${day.exercises.map(ex=>{if(ex.isWarmup)return`<div class="warmup-box"><span style="font-size:1.4em">🔥</span><div><strong>إحماء:</strong> ${ex.reps}</div></div>`;const ns=ex.sets||3,ls=getLastSets(ex.id),be=getBestSet(ex.id)||ex.lastW||0,dn=G.doneExs[sk]&&G.doneExs[sk][ex.id],or=OE.getRecommendation(ex.id,ex.name,be),sg=pfl[ex.id],vs=VELOCITY.state(ex.id),ss=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[],dc=ss.length?eliteDecision(ex.id,ex.name,ss):{action:'stable',weight:be,msg:''};const coachH=getSmartCoach(ex,ex.id,be);const osH='';const edH='';const vcH=vs!=='stable'?`<span class="velocity-chip velocity-${vs}">${VELOCITY.label(vs)}</span>`:'';const lsH=sg?`<div style="background:rgba(254,215,170,.07);border:1px dashed rgba(254,215,170,.25);border-radius:10px;padding:10px;margin-top:8px;font-size:.76em"><strong style="color:var(--pu)">💡 من الجلسة السابقة:</strong> ${sg.reason}<div style="margin-top:4px;color:var(--tx2)">الهدف: ${sg.nextWeight}كجم × ${sg.targetReps}</div></div>`:'';const rows=Array.from({length:ns},(_,i)=>{const ps=ls[i]||null,pw=ps?ps.w:be,pr=ps?ps.r:'',pp=ps?ps.rpe:'',pt=pw>0?(pr?`${pw}×${pr}`:`${pw}`):'--';return`<div class="set-row" id="sr-${ex.id}-${i}"><div class="set-num" id="snum-${ex.id}-${i}">${i+1}</div><div class="set-prev">${pt}${pp?'<br><span style="font-size:.7em;color:var(--pu)">RPE '+pp+'</span>':''}</div><input type="number" class="set-in" id="sw-${ex.id}-${i}" placeholder="${pw>0?pw:''}" step="0.5" min="0" inputmode="decimal" oninput="onSetChange('${ex.id}',${i},${be})"><input type="number" class="set-in" id="sr2-${ex.id}-${i}" placeholder="${pr||'عدات'}" step="1" min="1" inputmode="numeric" oninput="onSetChange('${ex.id}',${i},${be})" style="font-size:.78em"><input type="number" class="rpe-in" id="srpe-${ex.id}-${i}" placeholder="${pp||'RPE'}" step="0.5" min="1" max="10" inputmode="decimal" oninput="onRPEChange('${ex.id}',${i},true)"><div class="set-chk" id="sc-${ex.id}-${i}" onclick="toggleSetDone('${ex.id}',${i})"></div></div>`}).join('');const mClr=getMuscleColor(ex.muscle||'');return`<div class="exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="${ex.muscle||''}"><div class="muscle-stripe" style="background:rgb(${mClr})"></div><div class="ext"><div style="flex:1"><div class="exn">${ex.name}</div><div class="exd">${ns} سيتات | ${ex.reps} عدة | ${ex.unit}</div>${ex.muscle?`<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:4px"><span class="muscle-tag">${ex.muscle}</span>${vcH}</div>`:''} ${be>0?`<div style="font-size:.65em;color:var(--wn);margin-top:3px">🏆 أفضل: ${be} ${ex.unit}</div>`:''}</div><div class="done-check ${dn?'checked':''}" id="chk-${ex.id}" onclick="toggleDone('${ex.id}')">${dn?'✓':''}</div></div>${coachH}${lsH}${(()=>{const tk=Object.keys(TIPS).find(k=>ex.name.includes(k)),fpH=renderFormPhases(ex.name);if(!tk&&!fpH)return'';let _th='';if(tk)_th+=`<button class="tip-btn" onclick="this.nextElementSibling.classList.toggle('open')">📋 تقنية</button><div class="tip-box" id="tip-${ex.id}">${TIPS[tk].map(t=>`<div class="tip-item"><span>✦</span><span>${t}</span></div>`).join('')}</div>`;if(fpH)_th+=`<button class="form-btn" onclick="var _fp=document.getElementById('fp-${ex.id}');_fp.style.display=_fp.style.display==='none'?'block':'none'">🎯 حركة صحيحة</button><div id="fp-${ex.id}" style="display:none">${fpH}</div>`;return _th})()}${renderWarmupProto(ex.id,ex.name,be)}<div class="sets-header"><span>#</span><span>سابق</span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE<span class="tt-q" onclick="showTip(this,'RPE (مقياس الجهد المدرَك): من 1 إلى 10. RPE 10 = أقصى جهد مطلق. RPE 8 = يمكنك تكراران إضافيتان. RPE 7 = يمكنك 3 تكرارات إضافية. المثالي: 7-9 في معظم السيتات.')">?</span></span><span>✓</span></div>${rows}<div class="sets-summary" id="sum-${ex.id}"><span class="ss-chip">0/${ns} سيت</span></div><textarea class="ex-note" id="n-${ex.id}" placeholder="📝 ملاحظة..." rows="1"></textarea><div id="injWarn-${ex.id}"></div><div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="swapExercise('${ex.id}','${ex.muscle||''}','${ex.name}')">🔀 بديل</button><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="editExerciseInDay('${ex.id}')">✏️ تعديل</button>${getYTBtn(ex.name)}${G.injuries&&G.injuries.some(i=>i.active&&i.muscle===(ex.muscle||''))?'<span style="font-size:.72em;color:var(--no);padding:5px 0">⚠️ إصابة في '+ex.muscle+'</span>':''}</div></div>`}).join('')}</div>`;updateCompBar();restoreSetInputs();renderDeloadBanner();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
   if(G.homeMode){document.querySelectorAll('.exn').forEach(el=>{const orig=el.textContent.trim();const alt=Object.keys(HOME_ALTS||{}).find(k=>orig.includes(k));if(alt&&HOME_ALTS[alt]!==orig){el.innerHTML=`<span style="text-decoration:line-through;color:var(--tx3);font-size:.85em">${orig}</span><br><span style="color:var(--ok)">${HOME_ALTS[alt]}</span>`;}});}
 }
 function onRPEChange(id,i,isUserInput){
@@ -2365,14 +1379,14 @@ function onSetChange(id,i,be){
   suggestRPE(id,i,false); // forceUpdate=false → respects manual flag
   saveCurrentSet(id,i);updateSetSummary(id);
 }
-function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=document.getElementById(`sr-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(!c)return;const _prevBest=getBestSet(id);if(!c.classList.contains('sc-done')){const w=document.getElementById(`sw-${id}-${i}`);if(w&&!w.value){const ls=getLastSets(id),p=ls[i];if(p&&p.w){w.value=p.w;w.classList.add('si-filled')}}c.classList.add('sc-done');c.textContent='✓';r?.classList.add('set-done');n?.classList.add('sn-done');suggestRPE(id,i);if(!sessionStartTime){sessionStartTime=Date.now();if(sessionTimerInterval)clearInterval(sessionTimerInterval);sessionTimerInterval=setInterval(updateCompBar,1000);}if(navigator.vibrate)navigator.vibrate(20);quickStartTimer(window._timerDefault||90);if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0;if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){if(!window._sessionPRs)window._sessionPRs={};if(!window._sessionPRs[id]||_nw>window._sessionPRs[id]){window._sessionPRs[id]=_nw;fireConfetti(50);toast(`🏆 رقم قياسي جديد! ${_nw}كجم`,'s');document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}}}}
+function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=document.getElementById(`sr-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(!c)return;const _prevBest=getBestSet(id);if(!c.classList.contains('sc-done')){const w=document.getElementById(`sw-${id}-${i}`);if(w&&!w.value){const ls=getLastSets(id),p=ls[i];if(p&&p.w){w.value=p.w;w.classList.add('si-filled')}}c.classList.add('sc-done');c.textContent='✓';r?.classList.add('set-done');n?.classList.add('sn-done');suggestRPE(id,i);if(!sessionStartTime){sessionStartTime=Date.now();if(sessionTimerInterval)clearInterval(sessionTimerInterval);sessionTimerInterval=setInterval(updateCompBar,1000);}if(navigator.vibrate)navigator.vibrate(20);quickStartTimer(window._timerDefault||90);if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0;if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){fireConfetti(50);toast(`🏆 رقم قياسي جديد! ${_nw}كجم`,'s');document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}}}
 function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false};saveD()}
 function updateSetSummary(id){const sm=document.getElementById(`sum-${id}`);if(!sm)return;const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const ds=sets.filter(s=>s.done).length,fs=sets.filter(s=>s.w>0),vol=fs.reduce((t,s)=>t+s.w*(s.r||1),0),topW=fs.length?Math.max(...fs.map(s=>s.w)):0,avgW=fs.length?Math.round(fs.reduce((t,s)=>t+s.w,0)/fs.length*10)/10:0,rpes=sets.filter(s=>s.rpe>0),avgR=rpes.length?Math.round(rpes.reduce((t,s)=>t+s.rpe,0)/rpes.length*10)/10:0,rc=avgR>=9?'ss-rpe-high':avgR>=7?'ss-rpe-warn':'ss-rpe-ok';const max1RM=sets.filter(s=>s.w>0&&s.r>0).reduce((b,s)=>{const e1=SCI.calc1RM(s.w,s.r);return e1>b?e1:b},0);sm.innerHTML=`<span class="ss-chip">✓ ${ds}/${ns}</span>${vol>0?`<span class="ss-chip ss-vol">🏋️ ${Math.round(vol)}كجم</span>`:''}${topW>0?`<span class="ss-chip ss-top">⬆ ${topW}</span>`:''}${avgW>0?`<span class="ss-chip ss-avg">⌀ ${avgW}</span>`:''}${avgR>0?`<span class="ss-chip ${rc}">RPE ${avgR}</span>`:''}${max1RM>0?`<span class="ss-chip ss-1rm">💡 1RM≈${max1RM}</span>`:''}`}
 function checkAllSetsDone(id){const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,all=Array.from({length:ns},(_,i)=>document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false).every(Boolean);if(all){const c=document.getElementById(`chk-${id}`),e=document.getElementById(`exi-${id}`);if(c&&!c.classList.contains('checked')){c.classList.add('checked');c.innerHTML='✓';e?.classList.add('done');const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=true;saveD();toast('✅ '+ex.name+' مكتمل!','s');updateCompBar()}}}
 function toggleDone(id){const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=!G.doneExs[sk][id];saveD();const e=document.getElementById('exi-'+id),c=document.getElementById('chk-'+id);if(!e||!c)return;if(G.doneExs[sk][id]){e.classList.add('done');c.classList.add('checked');c.innerHTML='✓';if(navigator.vibrate)navigator.vibrate(30);toast('✅ تم!','s')}else{e.classList.remove('done');c.classList.remove('checked');c.innerHTML=''}updateCompBar()}
 function updateCompBar(){if(!curDay)return;const day=G.days[curDay],sk=sesKey(curDay),total=day.exercises.filter(e=>!e.isWarmup).length,done=day.exercises.filter(e=>!e.isWarmup&&G.doneExs[sk]&&G.doneExs[sk][e.id]).length,pct=total?Math.round(done/total*100):0,full=done===total&&total>0,el=document.getElementById('compBarArea');if(!el)return;const elapsed=sessionStartTime?fmtElapsed(Date.now()-sessionStartTime):null;el.innerHTML=`<div class="comp-bar"><div class="cb-info"><div class="cb-label">${done}/${total} تمرين مكتمل</div><div class="cb-track"><div class="cb-fill ${full?'full':''}" style="width:${pct}%"></div></div></div><div style="display:flex;align-items:center;gap:10px">${elapsed?`<div class="session-clock" title="وقت الجلسة">⏱️ ${elapsed}</div>`:`<div class="session-clock" style="opacity:.45;font-style:italic">ابدأ أول سيت ⏱️</div>`}<div class="cb-pct ${full?'full':''}">${pct}%</div></div></div>`;if(full&&!isDayCompleted(curDay))markDayComplete()}
 function markDayComplete(){const wk=weekKey();if(!G.completedDays[wk])G.completedDays[wk]={};G.completedDays[wk][curDay]=true;G.streak=(G.streak||0)+1;saveD();toast('🎉 '+G.days[curDay].name+' مكتمل! '+MOTIVATIONAL[Math.floor(Math.random()*MOTIVATIONAL.length)],'s');if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);showNotification('يوم مكتمل!🎉',G.days[curDay].name);rDays();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar()}
-function saveSes(){if(window._savingSes)return;if(!curDay)return toast('اختر يوم التمرين','e');if(!G.days||!G.days[curDay])return toast('يوم غير موجود','e');window._savingSes=true;setTimeout(()=>{window._savingSes=false},800);const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;const _jMood=window._selectedMood||0;const _jNote=document.getElementById('journalNote')?.value?.trim()||'';day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${ex.id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const duration=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0;const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),duration,mood:_jMood,note:_jNote};G.ses.push(sd);G.lastWo=GP_ymdLocal();_GP_updateStreak();if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;updateChallengeProgress();renderWeeklyChallenge();saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);setTimeout(checkBadges,800);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();rLaggingMuscleAlert();setTimeout(()=>showStretchModal(curDay),1800);setTimeout(()=>{if(typeof addXP==='function'){addXP(100,'جلسة مكتملة');if((G.streak||0)>0&&(G.streak%7===0))addXP(200,'أسبوع كامل!');}},2500);if(typeof _ttsSessionDone==='function')setTimeout(_ttsSessionDone,800);if(typeof _wlAutoStop==='function')_wlAutoStop();window._sessionPRs={};}
+function saveSes(){if(!curDay)return toast('اختر يوم التمرين','e');const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;const _jMood=window._selectedMood||0;const _jNote=document.getElementById('journalNote')?.value?.trim()||'';day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${ex.id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const duration=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0;const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),duration,mood:_jMood,note:_jNote};G.ses.push(sd);G.lastWo=new Date().toISOString().split('T')[0];if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;updateChallengeProgress();renderWeeklyChallenge();saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);setTimeout(checkBadges,800);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();rLaggingMuscleAlert();setTimeout(()=>showStretchModal(curDay),1800);setTimeout(()=>{if(typeof addXP==='function'){addXP(100,'جلسة مكتملة');if((G.streak||0)>0&&(G.streak%7===0))addXP(200,'أسبوع كامل!');}},2500);if(typeof _ttsSessionDone==='function')setTimeout(_ttsSessionDone,800);if(typeof _wlAutoStop==='function')_wlAutoStop();}
 function generateNextSessionSuggestions(sd){const r={};Object.entries(sd.exs).forEach(([id,e])=>{const ex=findExerciseById(id);if(!ex||ex.isWarmup)return;const tw=e.sets?.length?Math.max(...e.sets.map(s=>s.w||0)):e.w||0,dc=eliteDecision(id,e.name,e.sets||[]),ic=OE.isCompound(e.name);r[id]={name:e.name,muscle:e.muscle||'',currentWeight:tw,nextWeight:dc.weight||tw,reason:dc.msg||'',status:dc.action,sets:e.sets?.length||3,targetReps:ic?'6-10':'10-12'}});return r}
 function showSessionSummaryModal(s,sug){const tv=Math.round(SCI.sessionVolume(s)),prs=Object.entries(s.exs).filter(([id,e])=>{const prevBest=G.ses.filter(x=>x.id!==s.id).reduce((b,x)=>{const ex=x.exs?.[id];if(!ex)return b;if(ex.sets?.length)ex.sets.forEach(t=>{if((t.w||0)>b)b=t.w||0});else if((ex.w||0)>b)b=ex.w||0;return b},0);const c=e.sets?.length?e.sets.reduce((b,t)=>t.w>b?t.w:b,0):e.w||0;return c>prevBest&&c>0}).length,bl=PERIOD.info(),fa=FATIGUE.level(),sh=Object.values(sug).filter(s=>!s.name.includes('إحماء')).map(s=>`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:8px;border-right:3px solid var(--${s.status==='increase'?'ok':s.status==='deload'?'pu':'bl'})"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-weight:800;font-size:.88em">${s.name}</div><div><span style="color:var(--tx3);font-size:.78em">${s.currentWeight}كجم</span> <span style="color:var(--p)">→</span> <span style="color:var(--p);font-weight:900">${s.nextWeight}كجم</span></div></div><div style="font-size:.76em;color:var(--tx2)">${s.reason}</div></div>`).join('');document.getElementById('aiMoT').textContent='📊 ملخص الجلسة';document.getElementById('aiMoB').innerHTML=`<div style="text-align:center;padding:16px;background:linear-gradient(135deg,rgba(110,231,183,.1),rgba(165,243,252,.06));border-radius:14px;margin-bottom:14px"><div style="font-size:2.2em">🎉</div><div style="font-size:1.1em;font-weight:900;color:var(--ok);margin:8px 0">جلسة ممتازة يا شهاب!</div><div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><div><div style="font-size:1.4em;font-weight:900;color:var(--p)">${tv}</div><div style="font-size:.68em;color:var(--tx2)">حجم كجم</div></div>${prs>0?`<div><div style="font-size:1.4em;font-weight:900;color:var(--wn)">${prs}</div><div style="font-size:.68em;color:var(--tx2)">🏆 PR</div></div>`:''}<div><div style="font-size:1.4em;font-weight:900;color:var(--ok)">${Object.keys(s.exs).length}</div><div style="font-size:.68em;color:var(--tx2)">تمارين</div></div>${s.duration?`<div><div style="font-size:1.4em;font-weight:900;color:var(--bl)">${s.duration}</div><div style="font-size:.68em;color:var(--tx2)">⏱️ دقيقة</div></div>`:''}</div><div style="margin-top:10px;display:flex;gap:8px;justify-content:center"><span class="block-badge ${bl.color}">${bl.icon} ${bl.label}</span><span class="fatigue-badge ${fa}" style="font-size:.68em;padding:3px 9px;margin:0">🔥 ${FATIGUE.label()}</span></div></div><div style="font-weight:800;color:var(--p);margin-bottom:10px">🎯 خطة الجلسة القادمة</div>${sh}<button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت!</button>`;document.getElementById('aiMo').classList.add('act');if(!G.nextSessionPlan)G.nextSessionPlan={};G.nextSessionPlan[curDay]=sug;saveD()}
 function popHSel(){const s=document.getElementById('hSel');if(!s)return;const a={};Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(!ex.isWarmup)a[ex.id]=ex.name}));s.innerHTML='<option value="">-- اختر التمرين --</option>'+Object.entries(a).map(([id,n])=>`<option value="${id}">${n}</option>`).join('')}
@@ -2385,7 +1399,7 @@ function deleteSession(sid){
   const overlay=document.createElement('div');
   overlay.id='_delSesModal';
   overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';
-  overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(248,113,113,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px;box-shadow:0 -10px 40px rgba(0,0,0,.5)"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:#fca5a5">🗑️ حذف الجلسة؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">لا يمكن التراجع عن هذا الإجراء.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_delSesModal').remove();G.ses=G.ses.filter(s=>s.id===${JSON.stringify(sid)}?false:true);saveD();renderSessionsList();rQuickStats();rStats();toast('🗑️ تم حذف الجلسة','w')" style="flex:1;padding:11px;border-radius:10px;border:none;background:#ef4444;color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، احذف</button><button onclick="document.getElementById('_delSesModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;
+  overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(248,113,113,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px;box-shadow:0 -10px 40px rgba(0,0,0,.5)"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:#f87171">🗑️ حذف الجلسة؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">لا يمكن التراجع عن هذا الإجراء.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_delSesModal').remove();G.ses=G.ses.filter(s=>s.id==='${sid}'?false:true);saveD();renderSessionsList();rQuickStats();rStats();toast('🗑️ تم حذف الجلسة','w')" style="flex:1;padding:11px;border-radius:10px;border:none;background:#ef4444;color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، احذف</button><button onclick="document.getElementById('_delSesModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;
   document.body.appendChild(overlay);
   overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
 }
@@ -2425,7 +1439,7 @@ async function analyzeMacros(btn){const p=parseFloat(document.getElementById('ma
 الهدف: ${SHEHAB.macros.train.protein}P/${SHEHAB.macros.train.carbs}C`}],600,0.6,'nutrition');if(r)document.getElementById('macroResult').innerHTML=`<div style="margin-top:10px;background:rgba(254,215,170,.07);border:1px solid rgba(254,215,170,.18);border-radius:12px;padding:12px;font-size:.82em;line-height:1.7;white-space:pre-wrap">${r}</div>`;btn.innerHTML=o;btn.disabled=false}
 async function generateAIPlan(btn){const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const c=buildAdvancedContext(),r=await callGroq([{role:'system',content:'مدرب PPL. خطة مخصصة.'},{role:'user',content:`Block: ${c.block} W${c.blockWeek} · Fatigue: ${c.fatigueScore}\
 ثبات: ${c.plateauExercises} · عضلة متأخرة: ${c.laggingMuscle||'لا'}`}],800,0.7,'training');if(r){document.getElementById('aiMoT').textContent='🤖 خطة AI';document.getElementById('aiMoB').innerHTML=`<div style="white-space:pre-wrap;font-size:.85em;line-height:1.85">${r}</div><button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت</button>`;document.getElementById('aiMo').classList.add('act')}btn.innerHTML=o;btn.disabled=false}
-function _htmlEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}function renderChatHistory(){const b=document.getElementById('aiChatBox');if(!b)return;if(!G.chatHistory.length){b.innerHTML='<div class="empty"><div class="eic">💬</div><h3>ابدأ المحادثة!</h3></div>';return}b.innerHTML=G.chatHistory.map(m=>`<div class="ai-msg-item ${m.role==='ai'?'ai':_htmlEsc(m.role)}">${_htmlEsc(m.content)}</div>`).join('');b.scrollTop=b.scrollHeight}
+function renderChatHistory(){const b=document.getElementById('aiChatBox');if(!b)return;if(!G.chatHistory.length){b.innerHTML='<div class="empty"><div class="eic">💬</div><h3>ابدأ المحادثة!</h3></div>';return}b.innerHTML=G.chatHistory.map(m=>`<div class="ai-msg-item ${m.role==='ai'?'ai':m.role}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`).join('');b.scrollTop=b.scrollHeight}
 async function sendAIMessage(){const inp=document.getElementById('aiChatInput');if(!inp)return;const msg=inp.value.trim();if(!msg)return;inp.value='';G.chatHistory.push({role:'user',content:msg});renderChatHistory();const b=document.getElementById('aiChatBox');if(b){b.innerHTML+=`<div class="ai-msg-item ai"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;b.scrollTop=b.scrollHeight}const c=buildAdvancedContext(),msgs=[{role:'system',content:`شهاب · Block: ${c.block} W${c.blockWeek} · Fatigue: ${c.fatigueScore} · Recovery: ${c.recoveryScore}%`},...G.chatHistory.map(m=>({role:m.role==='user'?'user':'assistant',content:m.content}))],r=await callGroq(msgs,1000,0.8,detectIntent(msg));if(r){G.chatHistory.push({role:'ai',content:r});saveD();renderChatHistory()}else{G.chatHistory.pop();renderChatHistory()}}
 function quickChat(m){document.getElementById('aiChatInput').value=m;sendAIMessage()}
 let libFilter='all';
@@ -2616,7 +1630,7 @@ function isDayCompleted(dk){const wk=weekKey();return G.completedDays[wk]&&G.com
 function getCompletedCount(){const wk=weekKey();if(!G.completedDays[wk])return 0;return Object.values(G.completedDays[wk]).filter(v=>v).length}
 function findExerciseById(id){for(const d of Object.values(G.days)){const ex=d.exercises.find(e=>e.id===id);if(ex)return ex}return null}
 function getBestSet(id){let b=0;G.ses.forEach(s=>{const e=s.exs?.[id];if(!e)return;if(e.sets?.length)e.sets.forEach(t=>{if((t.w||0)>b)b=t.w||0});else if((e.w||0)>b)b=e.w||0});return b}
-function getLastSets(id){if(!Array.isArray(G.ses))return [];const ss=G.ses.filter(s=>s&&s.exs&&s.exs[id]&&Array.isArray(s.exs[id].sets)&&s.exs[id].sets.some(t=>t&&(t.w>0||t.r>0))).sort((a,b)=>new Date(b.date)-new Date(a.date));return ss.length?(ss[0].exs[id].sets||[]).slice():[]}
+function getLastSets(id){const ss=G.ses.filter(s=>s.exs&&s.exs[id]&&s.exs[id].sets&&s.exs[id].sets.length>0).sort((a,b)=>new Date(b.date)-new Date(a.date));return ss.length?ss[0].exs[id].sets:[]}
 function getMuscleColor(m){const MC={'صدر':'252,165,165','ظهر':'186,230,253','أكتاف':'253,230,138','رجلين':'110,231,183','كوادريسبس':'110,231,183','هامسترينج':'110,231,183','بطن':'165,243,252','ثنائي':'221,214,254','ثلاثي':'221,214,254'};const k=Object.keys(MC).find(k=>m&&m.includes(k));return k?MC[k]:'249,115,22'}
 function getSmartCoach(ex,id,be){
   const ls=getLastSets(id),lastBest=ls.filter(s=>s.w>0).reduce((b,s)=>s.w>b?s.w:b,0);
@@ -2681,11 +1695,11 @@ function clearSessions(){
   const overlay=document.createElement('div');
   overlay.id='_clrSesModal';
   overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';
-  overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(248,113,113,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:#fca5a5">⚠️ حذف جميع الجلسات؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">سيتم حذف ${G.ses.length} جلسة نهائياً. لا يمكن التراجع عن هذا الإجراء.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_clrSesModal').remove();G.ses=[];G.doneExs={};G.completedDays={};G.streak=0;G.currentSets={};G.nextSessionPlan={};saveD();toast('🗑️ تم حذف الجلسات','w');rStats();rQuickStats();rDays()" style="flex:1;padding:11px;border-radius:10px;border:none;background:#ef4444;color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، احذف الكل</button><button onclick="document.getElementById('_clrSesModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;
+  overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(248,113,113,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:#f87171">⚠️ حذف جميع الجلسات؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">سيتم حذف ${G.ses.length} جلسة نهائياً. لا يمكن التراجع عن هذا الإجراء.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_clrSesModal').remove();G.ses=[];G.doneExs={};G.completedDays={};G.streak=0;G.currentSets={};G.nextSessionPlan={};saveD();toast('🗑️ تم حذف الجلسات','w');rStats();rQuickStats();rDays()" style="flex:1;padding:11px;border-radius:10px;border:none;background:#ef4444;color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، احذف الكل</button><button onclick="document.getElementById('_clrSesModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;
   document.body.appendChild(overlay);
   overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
 }
-function impD(e){const f=e.target.files[0];if(!f)return;if(f.size>10*1024*1024){toast('⚠️ الملف كبير جداً','e');e.target.value='';return}const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(!d||typeof d!=='object'||!d.days){toast('❌ ملف غير صالح — لا يحتوي على بيانات تمارين','e');e.target.value='';return}window._pendingImport=d;const existing=document.getElementById('_impModal');if(existing)existing.remove();const overlay=document.createElement('div');overlay.id='_impModal';overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';const sesCnt=d.ses?.length||0,daysCnt=Object.keys(d.days||{}).length;overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(251,191,36,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:var(--wn)">⚠️ استبدال جميع البيانات؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">سيحل محل: ${sesCnt} جلسة + ${daysCnt} يوم. لا يمكن التراجع.</div><div style="display:flex;gap:8px"><button onclick="confirmImport()" style="flex:1;padding:11px;border-radius:10px;border:none;background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، استورد</button><button onclick="document.getElementById('_impModal').remove();window._pendingImport=null" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;document.body.appendChild(overlay);overlay.addEventListener('click',ev2=>{if(ev2.target===overlay){overlay.remove();window._pendingImport=null}})}catch(err){toast('❌ خطأ في قراءة الملف','e');console.error(err)}};r.onerror=()=>toast('❌ فشل قراءة الملف','e');r.readAsText(f);e.target.value=''}function confirmImport(){const d=window._pendingImport;if(!d){toast('❌ لا توجد بيانات للاستيراد','e');return}try{const backup=JSON.stringify(G);try{localStorage.setItem(K+'_backup_'+Date.now(),backup)}catch(_){}Object.assign(G,{days:d.days||G.days,ses:Array.isArray(d.ses)?d.ses:G.ses,goals:d.goals||G.goals,bw:Array.isArray(d.bw)?d.bw:G.bw,wellness:d.wellness||G.wellness,settings:d.settings||G.settings,streak:d.streak||G.streak,xp:d.xp||G.xp||0,lastDate:d.lastDate||G.lastDate});saveD();const m=document.getElementById('_impModal');if(m)m.remove();window._pendingImport=null;toast('✅ تم الاستيراد بنجاح','s');setTimeout(()=>location.reload(),900)}catch(err){toast('❌ فشل الاستيراد','e');console.error(err)}}
+function impD(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.days){const existing=document.getElementById('_impModal');if(existing)existing.remove();const overlay=document.createElement('div');overlay.id='_impModal';overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(251,191,36,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:var(--wn)">⚠️ استبدال جميع البيانات؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">ستُستبدل جميع بياناتك الحالية ببيانات الملف المستورد.</div><div style="display:flex;gap:8px"><button onclick="confirmImport()" style="flex:1;padding:11px;border-radius:10px;border:none;background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;font-family:'Cairo';font-weight:800;font-size:.88em;cursor:pointer">نعم، استورد</button><button onclick="document.getElementById('_impModal').remove();window._pendingImport=null" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;document.body.appendChild(overlay);overlay.addEventListener('click',ev2=>{if(ev2.target===overlay)overlay.remove()});}}catch{toast('❌ خطأ في الملف','e')}};r.readAsText(f)}
 /* ══ YMOVE FREE VIDEO LIBRARY — 25 exercises, royalty-free, embeddable ══ */
 const YMOVE_IDS = {
   'Bench Press':               'd09e0ed7-21dd-4f1c-b5cf-3e345e9304ec',
@@ -2961,14 +1975,10 @@ async function callClaudeVision(base64Img, mediaType) {
 }
 function saveAPIKey(){const k=document.getElementById('apiKeyInput')?.value?.trim();if(!k)return toast('أدخل API Key','w');if(k.length<20||k.length>200)return toast('⚠️ مفتاح غير صالح','w');G.aiKey=k;saveD();toast('✅ تم حفظ Groq API Key!','s')}
 function saveClaudeKey(){const k=document.getElementById('claudeKeyInput')?.value?.trim();if(!k)return toast('أدخل Gemini API Key','w');if(k.length<20||k.length>200)return toast('⚠️ مفتاح غير صالح','w');G.claudeKey=k;saveD();toast('✅ تم حفظ Gemini API Key — Vision مفعّل! 👁️','s')}
-// ══ SERVICE WORKER — inline blob (real offline support, no external file needed) ══
+// ══ SERVICE WORKER — single registration ══
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => {
-    try {
-      const swCode = `const CN='gympro-v12';const SH=self;SH.addEventListener('install',e=>{SH.skipWaiting();e.waitUntil(caches.open(CN).then(c=>c.add('./')))});SH.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CN).map(k=>caches.delete(k)))).then(()=>SH.clients.claim()))});SH.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET')return;if(u.origin!==location.origin)return;e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(resp=>{const cl=resp.clone();caches.open(CN).then(c=>c.put(e.request,cl));return resp}).catch(()=>caches.match('./'))))});`;
-      const blob = new Blob([swCode], {type:'text/javascript'});
-      const swUrl = URL.createObjectURL(blob);
-      navigator.serviceWorker.register(swUrl, {scope:'./'})
+    navigator.serviceWorker.register('./sw.js')
       .then(reg => {
         window._swReg = reg;
         reg.onupdatefound = () => {
@@ -2980,9 +1990,9 @@ if('serviceWorker' in navigator){
         };
       })
       .catch(err => {
-        console.info('SW registration failed:', err.message);
+        // sw.js missing — silently continue, notifications work via main thread
+        console.info('SW not registered (sw.js missing) — offline mode disabled');
       });
-    } catch(e) { console.info('SW skipped:', e.message); }
   });
 }
 function swTimerStart(seconds, endAt) {
@@ -5770,13 +4780,11 @@ window.startWarmupTimer = function(btn, sec){
 (function initWakeLock(){
   let _wakeLock = null;
   let _wlActive = false;
-  let _wlIntended = false;
   async function requestWakeLock(){
     if(!('wakeLock' in navigator)) return false;
     try {
       _wakeLock = await navigator.wakeLock.request('screen');
       _wlActive = true;
-      _wlIntended = true;
       _wakeLock.addEventListener('release', () => {
         _wlActive = false;
         updateWLPill();
@@ -5785,10 +4793,9 @@ window.startWarmupTimer = function(btn, sec){
     } catch(e) { return false; }
   }
   function releaseWakeLock(){
-    try { _wakeLock?.release()?.catch?.(()=>{}); } catch(_) {}
+    _wakeLock?.release();
     _wakeLock = null;
     _wlActive = false;
-    _wlIntended = false;
   }
   function updateWLPill(){
     const pill = document.getElementById('wakeLockPill');
@@ -5823,7 +4830,7 @@ window.startWarmupTimer = function(btn, sec){
   };
   // ✅ إعادة الطلب فقط لو كان نشطاً قبل الإخفاء (لا نفرضه تلقائياً)
   document.addEventListener('visibilitychange', async () => {
-    if(document.visibilityState === 'visible' && _wlIntended && !_wakeLock){
+    if(document.visibilityState === 'visible' && _wlActive && !_wakeLock){
       await requestWakeLock();
       updateWLPill();
     }
@@ -5974,7 +4981,7 @@ function showNutSummary(data){
   var calPct=tCal?pct(a.cal,tCal):0;
   var proBw=bw?(a.protein/bw).toFixed(1)+'g/كجم':'';
   var html='<div class="card" style="animation:cardIn .35s ease">'
-    +'<div class="ct" style="color:#86efac">📊 ملخص التقرير — '+data.totalDays+' يوم ('+data.source+')</div>'
+    +'<div class="ct" style="color:#4ade80">📊 ملخص التقرير — '+data.totalDays+' يوم ('+data.source+')</div>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">'
     +'<div style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:12px;padding:12px">'
     +'<div style="font-size:.65em;color:var(--tx3)">🔥 متوسط السعرات</div>'
@@ -5988,7 +4995,7 @@ function showNutSummary(data){
     +(bw?bar(a.protein,bw*2):(tPro?bar(a.protein,tPro):''))+'</div>'
     +'<div style="background:rgba(167,243,208,.08);border:1px solid rgba(167,243,208,.2);border-radius:12px;padding:12px">'
     +'<div style="font-size:.65em;color:var(--tx3)">🍞 كربوهيدرات</div>'
-    +'<div style="font-size:1.5em;font-weight:900;color:#86efac">'+a.carbs+'g</div>'
+    +'<div style="font-size:1.5em;font-weight:900;color:#4ade80">'+a.carbs+'g</div>'
     +'<div style="font-size:.65em;color:var(--tx3)">'+(a.cal>0?Math.round(a.carbs*4/a.cal*100)+'% من السعرات':'')+'</div></div>'
     +'<div style="background:rgba(253,230,138,.08);border:1px solid rgba(253,230,138,.2);border-radius:12px;padding:12px">'
     +'<div style="font-size:.65em;color:var(--tx3)">🧈 دهون</div>'
@@ -6158,7 +5165,7 @@ function renderNutReport(text,goal){
   }).join('');
   document.getElementById('nutAIReport').innerHTML=
     '<div class="card" style="background:'+gc[goal]+';border:1px solid '+gb[goal]+';animation:cardIn .4s ease">'
-    +'<div class="ct" style="color:#86efac">🤖 تقرير الذكاء الاصطناعي</div>'
+    +'<div class="ct" style="color:#4ade80">🤖 تقرير الذكاء الاصطناعي</div>'
     +'<div style="line-height:1.8">'+html+'</div>'
     +'<div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:8px;flex-wrap:wrap">'
     +'<button class="btn btn-dk btn-sm" onclick="document.getElementById(\'nutFileIn\').click()">📂 تقرير جديد</button>'
@@ -6170,702 +5177,6 @@ function nutAlert(msg){
   document.getElementById('nutResultArea').innerHTML='<div class="card" style="border:1px solid rgba(248,113,113,.3);color:var(--no);font-size:.84em">'+msg+'</div>';
 }
 
-
-/* ═══════════════════════════════════════════════════════════════
-   🎮 GAMIFICATION + DOPAMINE MODULE — v1.0
-   نظام تحفيز شامل لإدمان الاستخدام اليومي
-   ═══════════════════════════════════════════════════════════════ */
-(function(){
-'use strict';
-
-// ───── State init ─────
-if(!G.gamify) G.gamify = {
-  dailyQuests: null,        // {date:'YYYY-MM-DD', quests:[{id,text,target,progress,done,xp}]}
-  streakShields: 1,         // مرة كل 30 يوم
-  lastShieldGrant: null,
-  lootHistory: [],          // last 50 loots
-  hypeVoice: true,
-  multiStreak: { daily:0, weeklyPerfect:0, monthlyHero:0, bestDaily:0 },
-  spinnerLastUse: 0,        // timestamp
-  fakeLeaderboard: null,    // generated once per week
-  fakeLBGenerated: 0,
-  badges: G.gamify?.badges || []
-};
-
-const GAME = window.GAME = {
-  // ─── Audio (Web Audio API) ───
-  _ctx: null,
-  _getCtx(){
-    if(this._ctx) return this._ctx;
-    try { this._ctx = new (window.AudioContext||window.webkitAudioContext)(); } catch(_) { return null; }
-    return this._ctx;
-  },
-  beep(freq=440, dur=0.15, type='sine', vol=0.15){
-    const ctx = this._getCtx(); if(!ctx) return;
-    const o = ctx.createOscillator(), g = ctx.createGain();
-    o.type = type; o.frequency.value = freq;
-    g.gain.setValueAtTime(vol, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+dur);
-    o.connect(g); g.connect(ctx.destination);
-    o.start(); o.stop(ctx.currentTime+dur);
-  },
-  playPRSound(weight){
-    // أوزان أعلى = نوتة أعمق
-    const baseFreq = Math.max(220, 880 - (weight||0)*4);
-    this.beep(baseFreq, 0.18, 'triangle', 0.18);
-    setTimeout(()=>this.beep(baseFreq*1.5, 0.16, 'triangle', 0.14), 120);
-    setTimeout(()=>this.beep(baseFreq*2, 0.22, 'triangle', 0.12), 260);
-  },
-  playLevelUp(){
-    this.beep(523, 0.12, 'square', 0.12);
-    setTimeout(()=>this.beep(659, 0.12, 'square', 0.12), 120);
-    setTimeout(()=>this.beep(784, 0.12, 'square', 0.12), 240);
-    setTimeout(()=>this.beep(1047, 0.30, 'square', 0.14), 360);
-  },
-  playLootOpen(){
-    [392, 494, 587, 740, 880].forEach((f,i)=> setTimeout(()=>this.beep(f, 0.10, 'sine', 0.10), i*80));
-  },
-
-  // ─── Haptics ───
-  vibe(pattern){
-    if(navigator.vibrate) try { navigator.vibrate(pattern); } catch(_) {}
-  },
-
-  // ─── Hype Voice (Web Speech) ───
-  _hypeLines: [
-    'وحش! وحش يا بطل!','ده اللي بنتكلم عليه!','استمر يا أسطورة!','رقم قياسي جديد!',
-    'أنت بتكسر حدودك!','مفيش حاجة بتوقفك!','الجيم بيتك!','يا تيتان!',
-    'القوة تتنادى!','أنت من جيل مختلف!','الأبطال بيتولدوا هنا!'
-  ],
-  hypeSay(text){
-    if(!G.gamify.hypeVoice || !('speechSynthesis' in window)) return;
-    try {
-      const u = new SpeechSynthesisUtterance(text || this._hypeLines[Math.floor(Math.random()*this._hypeLines.length)]);
-      u.lang = 'ar-EG'; u.rate = 1.05; u.pitch = 0.9; u.volume = 0.9;
-      // اختيار صوت ذكوري إن وجد
-      const voices = speechSynthesis.getVoices();
-      const arVoice = voices.find(v=>v.lang.startsWith('ar') && /male|man|ahmed|hamed/i.test(v.name)) || voices.find(v=>v.lang.startsWith('ar'));
-      if(arVoice) u.voice = arVoice;
-      speechSynthesis.cancel();
-      speechSynthesis.speak(u);
-    } catch(_) {}
-  },
-
-  // ─── Loot Box ───
-  _lootTiers: [
-    { tier:'bronze', icon:'🥉', name:'صندوق برونزي', chance:0.55, color:'#cd7f32', rewards:[{xp:25},{xp:30},{xp:35},{shield:1}] },
-    { tier:'silver', icon:'🥈', name:'صندوق فضي',   chance:0.30, color:'#c0c0c0', rewards:[{xp:60},{xp:80},{shield:1},{ticket:2}] },
-    { tier:'gold',   icon:'🥇', name:'صندوق ذهبي',  chance:0.12, color:'#ffd700', rewards:[{xp:150},{xp:200},{shield:2},{ticket:3},{spin:1}] },
-    { tier:'mythic', icon:'💎', name:'صندوق أسطوري', chance:0.03, color:'#e879f9', rewards:[{xp:500},{shield:3},{spin:2}] }
-  ],
-  _rollLoot(){
-    const r = Math.random();
-    let acc = 0;
-    for(const t of this._lootTiers){
-      acc += t.chance;
-      if(r <= acc) return t;
-    }
-    return this._lootTiers[0];
-  },
-  openLootBox(){
-    const tier = this._rollLoot();
-    const reward = tier.rewards[Math.floor(Math.random()*tier.rewards.length)];
-
-    const old = document.getElementById('_lootModal'); if(old) old.remove();
-    const overlay = document.createElement('div');
-    overlay.id = '_lootModal';
-    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);animation:fadeIn .3s ease';
-
-    let rewardText = '', rewardIcon = '';
-    if(reward.xp){ rewardText = `+${reward.xp} XP`; rewardIcon = '⭐'; }
-    else if(reward.shield){ rewardText = `+${reward.shield} درع Streak`; rewardIcon = '🛡️'; }
-    else if(reward.ticket){ rewardText = `+${reward.ticket} تذكرة`; rewardIcon = '🎫'; }
-    else if(reward.spin){ rewardText = `+${reward.spin} دورة عجلة`; rewardIcon = '🎰'; }
-
-    overlay.innerHTML = `<div style="background:linear-gradient(180deg,#0d1b2a,#1a0d2a);border:2px solid ${tier.color};border-radius:24px;padding:28px 22px;width:100%;max-width:340px;text-align:center;box-shadow:0 0 60px ${tier.color}55,0 20px 60px rgba(0,0,0,.7);position:relative;overflow:hidden">
-      <div style="position:absolute;inset:-50%;background:radial-gradient(circle,${tier.color}33,transparent 65%);animation:lootGlow 2s ease-in-out infinite;pointer-events:none"></div>
-      <div style="font-size:5em;animation:lootBounce .8s ease;position:relative;z-index:1">${tier.icon}</div>
-      <div style="font-size:1.2em;font-weight:900;color:${tier.color};margin:10px 0 6px;text-shadow:0 0 12px ${tier.color}88;position:relative;z-index:1">${tier.name}</div>
-      <div style="font-size:1em;color:var(--tx);margin-bottom:18px;position:relative;z-index:1">${rewardIcon} <strong>${rewardText}</strong></div>
-      <button onclick="document.getElementById('_lootModal').remove()" style="padding:12px 28px;border-radius:12px;border:none;background:linear-gradient(135deg,${tier.color},${tier.color}cc);color:#000;font-family:'Cairo';font-weight:900;font-size:.92em;cursor:pointer;box-shadow:0 4px 16px ${tier.color}66;position:relative;z-index:1">🎉 رائع!</button>
-    </div>`;
-    document.body.appendChild(overlay);
-    overlay.addEventListener('click', e=>{ if(e.target===overlay) overlay.remove(); });
-
-    // أضف الـ keyframes لو لسه
-    if(!document.getElementById('_lootKF')){
-      const st = document.createElement('style'); st.id = '_lootKF';
-      st.textContent = '@keyframes lootBounce{0%{transform:scale(0) rotate(-180deg)}60%{transform:scale(1.15) rotate(8deg)}100%{transform:scale(1) rotate(0)}}@keyframes lootGlow{0%,100%{opacity:.4}50%{opacity:.9}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes spinWheel{from{transform:rotate(0)}to{transform:rotate(var(--final,1080deg))}}';
-      document.head.appendChild(st);
-    }
-
-    // طبّق المكافأة
-    if(reward.xp && typeof addXP === 'function') setTimeout(()=>addXP(reward.xp, tier.name), 600);
-    if(reward.shield){ G.gamify.streakShields = (G.gamify.streakShields||0) + reward.shield; saveD(); }
-    if(reward.ticket){ G.gamify.tickets = (G.gamify.tickets||0) + reward.ticket; saveD(); }
-    if(reward.spin){ G.gamify.spins = (G.gamify.spins||0) + reward.spin; saveD(); }
-
-    G.gamify.lootHistory.push({tier:tier.tier, reward, at:Date.now()});
-    if(G.gamify.lootHistory.length > 50) G.gamify.lootHistory = G.gamify.lootHistory.slice(-50);
-    saveD();
-
-    this.playLootOpen();
-    this.vibe([20, 60, 20, 60, 80]);
-    if(typeof fireConfetti === 'function') fireConfetti(tier.tier==='mythic'?120: tier.tier==='gold'?80:40);
-  },
-
-  // ─── Daily Quests ───
-  _questPool: [
-    { id:'vol3k',  text:'ارفع 3000كجم اليوم',          target:3000, xp:50, type:'volume' },
-    { id:'vol5k',  text:'ارفع 5000كجم اليوم',          target:5000, xp:80, type:'volume' },
-    { id:'sets15', text:'أكمل 15 سيت',                  target:15,   xp:50, type:'sets'   },
-    { id:'sets20', text:'أكمل 20 سيت',                  target:20,   xp:70, type:'sets'   },
-    { id:'rpe9',   text:'سيت واحد بـ RPE 9+',           target:1,    xp:40, type:'rpe9'   },
-    { id:'pr1',    text:'حقّق رقم قياسي جديد',           target:1,    xp:100,type:'pr'     },
-    { id:'note',   text:'أضف ملاحظة في الجلسة',          target:1,    xp:25, type:'note'   },
-    { id:'mood',   text:'سجّل المزاج بعد التمرين',        target:1,    xp:25, type:'mood'   },
-    { id:'long45', text:'تمرين أطول من 45 دقيقة',         target:45,   xp:50, type:'duration' },
-    { id:'comp3',  text:'3 تمارين مركبة (Compound)',      target:3,    xp:60, type:'compound' }
-  ],
-  _todayKey(){ return (typeof GP_ymdLocal==='function')?GP_ymdLocal():new Date().toISOString().split('T')[0]; },
-  ensureDailyQuests(){
-    const td = this._todayKey();
-    if(!G.gamify.dailyQuests || G.gamify.dailyQuests.date !== td){
-      const pool = [...this._questPool];
-      const picked = [];
-      for(let i=0; i<3 && pool.length; i++){
-        const idx = Math.floor(Math.random()*pool.length);
-        picked.push({...pool[idx], progress:0, done:false});
-        pool.splice(idx,1);
-      }
-      G.gamify.dailyQuests = { date:td, quests:picked };
-      saveD();
-    }
-    return G.gamify.dailyQuests;
-  },
-  updateQuests(session){
-    const q = this.ensureDailyQuests();
-    let changed = false;
-    const vol = (Object.values(session.exs||{})).reduce((t,e)=>t+(e.vol||0),0);
-    const sets = (Object.values(session.exs||{})).reduce((t,e)=>t+(e.sets?.filter(s=>s.done)?.length||0),0);
-    const rpe9 = (Object.values(session.exs||{})).some(e=>e.sets?.some(s=>s.rpe>=9));
-    const hasNote = !!(session.note||'').trim();
-    const hasMood = (session.mood||0)>0;
-    const dur = session.duration||0;
-    const compoundKeys = ['Bench','Deadlift','Squat','Row','OHP','Press','Pull'];
-    const compCnt = Object.values(session.exs||{}).filter(e=>compoundKeys.some(k=>(e.name||'').includes(k))).length;
-
-    q.quests.forEach(qu=>{
-      if(qu.done) return;
-      let prog = qu.progress;
-      switch(qu.type){
-        case 'volume': prog = Math.max(prog, vol); break;
-        case 'sets': prog = Math.max(prog, sets); break;
-        case 'rpe9': if(rpe9) prog = 1; break;
-        case 'note': if(hasNote) prog = 1; break;
-        case 'mood': if(hasMood) prog = 1; break;
-        case 'duration': prog = Math.max(prog, dur); break;
-        case 'compound': prog = Math.max(prog, compCnt); break;
-      }
-      if(prog !== qu.progress){ qu.progress = prog; changed = true; }
-      if(prog >= qu.target && !qu.done){
-        qu.done = true; changed = true;
-        if(typeof addXP === 'function') setTimeout(()=>addXP(qu.xp, '🎯 '+qu.text), 1200);
-        setTimeout(()=>{
-          if(typeof toast === 'function') toast('🎯 مهمة مكتملة: '+qu.text, 's');
-        }, 1400);
-        G.gamify.tickets = (G.gamify.tickets||0) + 1;
-        if((G.gamify.tickets||0) >= 7){
-          G.gamify.tickets -= 7;
-          setTimeout(()=>{ if(typeof toast==='function') toast('🎫 7 تذاكر! صندوق ذهبي 🎁','s'); GAME.openLootBox(); }, 2000);
-        }
-      }
-    });
-    if(changed) saveD();
-  },
-  markPR(){
-    const q = this.ensureDailyQuests();
-    let changed = false;
-    q.quests.forEach(qu=>{ if(qu.type==='pr' && !qu.done){ qu.progress=1; qu.done=true; changed=true; if(typeof addXP==='function') addXP(qu.xp, '🎯 '+qu.text); } });
-    if(changed) saveD();
-  },
-
-  // ─── Streak Shield + Countdown ───
-  consumeShield(){
-    if((G.gamify.streakShields||0) > 0){
-      G.gamify.streakShields--;
-      saveD();
-      if(typeof toast === 'function') toast('🛡️ تم استخدام درع Streak — الحفاظ على السلسلة!','s');
-      return true;
-    }
-    return false;
-  },
-  hoursLeftToday(){
-    const now = new Date();
-    const end = new Date(now); end.setHours(23,59,59,999);
-    return Math.max(0, Math.ceil((end - now)/(1000*60*60)));
-  },
-  todayDone(){
-    const td = this._todayKey();
-    return G.ses.some(s => (s.date||'').split('T')[0] === td);
-  },
-
-  // ─── Multi-Streak ───
-  updateMultiStreak(){
-    if(!G.gamify.multiStreak) G.gamify.multiStreak = {daily:0, weeklyPerfect:0, monthlyHero:0, bestDaily:0};
-    const ms = G.gamify.multiStreak;
-    ms.daily = G.streak || 0;
-    ms.bestDaily = Math.max(ms.bestDaily||0, ms.daily);
-    // weeklyPerfect: 7 جلسات في 7 أيام متتالية
-    const last7 = new Set();
-    G.ses.forEach(s=>{
-      const d = (s.date||'').split('T')[0];
-      const diff = Math.floor((Date.now() - new Date(d))/(86400000));
-      if(diff>=0 && diff<7) last7.add(d);
-    });
-    if(last7.size >= 7 && ms._lastWP !== this._todayKey()){ ms.weeklyPerfect = (ms.weeklyPerfect||0) + 1; ms._lastWP = this._todayKey(); }
-    // monthlyHero: 20+ جلسة في 30 يوم
-    const last30 = G.ses.filter(s=>{
-      const d = new Date(s.date);
-      return (Date.now() - d) < 30*86400000;
-    }).length;
-    if(last30 >= 20 && ms._lastMH !== this._todayKey().slice(0,7)){ ms.monthlyHero = (ms.monthlyHero||0) + 1; ms._lastMH = this._todayKey().slice(0,7); }
-    saveD();
-  },
-
-  // ─── Fake Leaderboard ───
-  _arNames: ['شهاب','أحمد','محمد','يوسف','كريم','عمر','حسن','مصطفى','إبراهيم','بلال','زياد','سامي','رامي','تامر','هشام','وليد'],
-  generateFakeLB(force){
-    const wk = Math.floor(Date.now()/(86400000*7));
-    if(!force && G.gamify.fakeLeaderboard && G.gamify.fakeLBGenerated === wk) return G.gamify.fakeLeaderboard;
-    const myXP = G.xp || 0;
-    const me = { name:'أنت', xp: myXP, me:true };
-    const players = [me];
-    for(let i=0; i<11; i++){
-      const offset = Math.floor((Math.random()-0.5) * Math.max(myXP*0.4, 300));
-      const xp = Math.max(50, myXP + offset);
-      players.push({ name: this._arNames[Math.floor(Math.random()*this._arNames.length)], xp });
-    }
-    players.sort((a,b)=>b.xp-a.xp);
-    G.gamify.fakeLeaderboard = players;
-    G.gamify.fakeLBGenerated = wk;
-    saveD();
-    return players;
-  },
-
-  // ─── Variable Reward Spinner ───
-  spinWheel(){
-    if((G.gamify.spins||0) <= 0){
-      // free spin every 5 sessions
-      const sesSince = G.ses.length - (G.gamify._spinLastSes||0);
-      if(sesSince >= 5){
-        G.gamify.spins = (G.gamify.spins||0)+1;
-        G.gamify._spinLastSes = G.ses.length;
-        saveD();
-      } else {
-        if(typeof toast==='function') toast('🎰 تحتاج '+(5-sesSince)+' جلسات للدوران المجاني','i');
-        return;
-      }
-    }
-    G.gamify.spins--;
-    const segments = [
-      { label:'×2 XP يوم', icon:'⚡', color:'#fbbf24', apply:()=>{ G.gamify.xpBoostUntil = Date.now()+86400000; saveD(); if(typeof toast==='function') toast('⚡ مضاعفة XP لمدة 24 ساعة!','s'); } },
-      { label:'+100 XP',   icon:'⭐', color:'#22d3ee', apply:()=>{ if(typeof addXP==='function') addXP(100,'🎰 عجلة الحظ'); } },
-      { label:'صندوق ذهبي', icon:'🥇', color:'#ffd700', apply:()=>{ setTimeout(()=>this.openLootBox(),400); } },
-      { label:'+200 XP',   icon:'💎', color:'#a78bfa', apply:()=>{ if(typeof addXP==='function') addXP(200,'🎰 جائزة كبرى'); } },
-      { label:'+1 درع',     icon:'🛡️', color:'#67e8f9', apply:()=>{ G.gamify.streakShields=(G.gamify.streakShields||0)+1; saveD(); if(typeof toast==='function') toast('🛡️ +1 درع Streak','s'); } },
-      { label:'+50 XP',    icon:'✨', color:'#fb923c', apply:()=>{ if(typeof addXP==='function') addXP(50,'🎰 عجلة'); } }
-    ];
-    const winIdx = Math.floor(Math.random()*segments.length);
-    const segCount = segments.length;
-    const segAngle = 360/segCount;
-    const finalRotation = 1080 + (360 - winIdx*segAngle - segAngle/2);
-
-    const old = document.getElementById('_spinModal'); if(old) old.remove();
-    const ov = document.createElement('div');
-    ov.id = '_spinModal';
-    ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)';
-    const segHTML = segments.map((s,i)=>{
-      const rot = i*segAngle;
-      return `<div style="position:absolute;inset:0;clip-path:polygon(50% 50%, 50% 0%, ${50+50*Math.tan(segAngle/2*Math.PI/180)}% 0%);background:${s.color};transform:rotate(${rot}deg);transform-origin:50% 50%"><div style="position:absolute;top:18%;left:50%;transform:translate(-50%,0) rotate(${segAngle/2}deg);font-size:1.4em;color:#000;font-weight:900">${s.icon}</div></div>`;
-    }).join('');
-    ov.innerHTML = `<div style="background:#0d1b2a;border:2px solid #f97316;border-radius:24px;padding:24px 20px;width:100%;max-width:340px;text-align:center">
-      <div style="font-weight:900;font-size:1.05em;margin-bottom:14px;color:var(--p)">🎰 عجلة الحظ</div>
-      <div style="position:relative;width:240px;height:240px;margin:10px auto 18px">
-        <div id="_spinWh" style="position:absolute;inset:0;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:0 0 40px rgba(249,115,22,.5);transition:transform 4s cubic-bezier(.17,.67,.32,1)">${segHTML}</div>
-        <div style="position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:22px solid #ef4444;z-index:5"></div>
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;border-radius:50%;background:#f97316;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:1.5em;z-index:4">🎯</div>
-      </div>
-      <div id="_spinResult" style="min-height:24px;font-weight:900;color:var(--p);font-size:.95em">جاري الدوران...</div>
-    </div>`;
-    document.body.appendChild(ov);
-    requestAnimationFrame(()=>{
-      const wh = document.getElementById('_spinWh');
-      if(wh){ wh.style.transform = 'rotate('+finalRotation+'deg)'; }
-    });
-    this.vibe([10,50,10,50,10,50,10,50,10,50,10,80]);
-    setTimeout(()=>{
-      const r = document.getElementById('_spinResult');
-      if(r) r.innerHTML = `${segments[winIdx].icon} <strong>${segments[winIdx].label}</strong>`;
-      segments[winIdx].apply();
-      if(typeof fireConfetti==='function') fireConfetti(70);
-      this.playLevelUp();
-      setTimeout(()=>{ if(document.getElementById('_spinModal')) document.getElementById('_spinModal').remove(); }, 3500);
-    }, 4200);
-  },
-
-  // ─── XP boost multiplier ───
-  isXPBoostActive(){ return (G.gamify.xpBoostUntil||0) > Date.now(); },
-
-  // ─── Render Gamification Panel — Modern v3 ───
-  renderPanel(){
-    const el = document.getElementById('gamifyPanel');
-    if(!el) return;
-    const q = this.ensureDailyQuests();
-    const ms = G.gamify.multiStreak || {daily:0, weeklyPerfect:0, monthlyHero:0, bestDaily:0};
-    const shields = G.gamify.streakShields||0;
-    const tickets = G.gamify.tickets||0;
-    const spins = G.gamify.spins||0;
-    const hoursLeft = this.hoursLeftToday();
-    const todayDone = this.todayDone();
-    const boost = this.isXPBoostActive();
-    const xp = G.xp||0;
-
-    let html = '';
-
-    // ── XP Hero Card ──
-    html += `<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:20px 18px;margin-bottom:14px;text-align:center;position:relative;overflow:hidden">
-      <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.08),transparent 60%);pointer-events:none"></div>
-      <div style="font-size:.62em;color:rgba(255,255,255,.55);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;position:relative">Total XP</div>
-      <div style="font-size:2.6em;font-weight:900;letter-spacing:-0.03em;color:rgba(255,255,255,.98);line-height:1;margin:4px 0 6px;position:relative">${xp.toLocaleString('ar-EG')}</div>
-      ${boost?'<div style="display:inline-block;padding:4px 12px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:9999px;color:rgba(255,255,255,.95);font-weight:700;font-size:.7em;letter-spacing:0.02em;position:relative">⚡ x2 BOOST</div>':''}
-    </div>`;
-
-    // ── Streak Status (urgent or done) ──
-    if(!todayDone){
-      html += `<div style="background:rgba(252,165,165,.06);border:1px solid rgba(252,165,165,.25);border-radius:18px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px">
-        <div style="flex:1">
-          <div style="font-weight:800;font-size:.86em;color:#fca5a5;letter-spacing:-0.01em">السلسلة في خطر</div>
-          <div style="font-size:.72em;color:rgba(255,255,255,.6);margin-top:3px;font-weight:600">باقي ${hoursLeft} ساعة لإكمال اليوم</div>
-        </div>
-        <div style="font-size:2em;animation:criticalPulse 1.5s infinite">⏰</div>
-      </div>`;
-    } else {
-      html += `<div style="background:rgba(134,239,172,.06);border:1px solid rgba(134,239,172,.25);border-radius:18px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <div style="font-weight:800;font-size:.86em;color:#86efac">يوم مكتمل ✓</div>
-          <div style="font-size:.72em;color:rgba(255,255,255,.6);margin-top:3px;font-weight:600">عُد غداً للحفاظ على السلسلة</div>
-        </div>
-        <div style="font-size:1.9em">🔥</div>
-      </div>`;
-    }
-
-    // ── Multi-Streak Bento ──
-    html += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:14px 8px;text-align:center;transition:transform .2s">
-        <div style="font-size:1.5em;line-height:1">🔥</div>
-        <div style="font-size:1.5em;font-weight:900;color:rgba(255,255,255,.95);letter-spacing:-0.02em;line-height:1.1;margin:4px 0 2px">${ms.daily}</div>
-        <div style="font-size:.6em;color:rgba(255,255,255,.5);font-weight:700;text-transform:uppercase;letter-spacing:0.04em">يومي</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:14px 8px;text-align:center">
-        <div style="font-size:1.5em;line-height:1">📅</div>
-        <div style="font-size:1.5em;font-weight:900;color:rgba(255,255,255,.95);letter-spacing:-0.02em;line-height:1.1;margin:4px 0 2px">${ms.weeklyPerfect||0}</div>
-        <div style="font-size:.6em;color:rgba(255,255,255,.5);font-weight:700;text-transform:uppercase;letter-spacing:0.04em">أسبوع</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:14px 8px;text-align:center">
-        <div style="font-size:1.5em;line-height:1">👑</div>
-        <div style="font-size:1.5em;font-weight:900;color:rgba(255,255,255,.95);letter-spacing:-0.02em;line-height:1.1;margin:4px 0 2px">${ms.monthlyHero||0}</div>
-        <div style="font-size:.6em;color:rgba(255,255,255,.5);font-weight:700;text-transform:uppercase;letter-spacing:0.04em">بطل</div>
-      </div>
-    </div>`;
-
-    // ── Resources Row ──
-    html += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:10px 6px;text-align:center">
-        <div style="font-size:1.1em">🛡️</div>
-        <div style="font-weight:900;font-size:.92em;color:rgba(255,255,255,.95);margin-top:2px">${shields}</div>
-        <div style="font-size:.55em;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:0.06em;text-transform:uppercase">دروع</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:10px 6px;text-align:center">
-        <div style="font-size:1.1em">🎫</div>
-        <div style="font-weight:900;font-size:.92em;color:rgba(255,255,255,.95);margin-top:2px">${tickets}<span style="font-size:.7em;color:rgba(255,255,255,.4)">/7</span></div>
-        <div style="font-size:.55em;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:0.06em;text-transform:uppercase">تذاكر</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:10px 6px;text-align:center">
-        <div style="font-size:1.1em">🎰</div>
-        <div style="font-weight:900;font-size:.92em;color:rgba(255,255,255,.95);margin-top:2px">${spins}</div>
-        <div style="font-size:.55em;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:0.06em;text-transform:uppercase">دورات</div>
-      </div>
-    </div>`;
-
-    // ── Daily Quests Section ──
-    html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:0 2px">
-      <div style="font-weight:800;font-size:.9em;color:rgba(255,255,255,.95);letter-spacing:-0.01em">مهمات اليوم</div>
-      <div style="font-size:.65em;color:rgba(255,255,255,.5);font-weight:700;background:rgba(255,255,255,.05);padding:3px 10px;border-radius:9999px">${q.quests.filter(x=>x.done).length}/${q.quests.length}</div>
-    </div>`;
-
-    q.quests.forEach(qu=>{
-      const pct = Math.min(100, Math.round(qu.progress/qu.target*100));
-      const doneColor = qu.done ? '#86efac' : 'rgba(255,255,255,.7)';
-      const bgC = qu.done ? 'rgba(52,211,153,.04)' : 'rgba(255,255,255,.03)';
-      const brC = qu.done ? 'rgba(52,211,153,.25)' : 'rgba(255,255,255,.08)';
-      html += `<div style="background:${bgC};border:1px solid ${brC};border-radius:14px;padding:12px 14px;margin-bottom:6px;transition:all .2s">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:8px">
-          <span style="font-size:.82em;color:${qu.done?'#86efac':'rgba(255,255,255,.9)'};font-weight:700;letter-spacing:-0.005em;line-height:1.4">${qu.done?'✓ ':''}${qu.text}</span>
-          <span style="font-size:.66em;color:rgba(255,255,255,.92);font-weight:800;background:rgba(255,255,255,.08);padding:3px 9px;border-radius:9999px;white-space:nowrap;border:1px solid rgba(255,255,255,.16)">+${qu.xp}</span>
-        </div>
-        <div style="background:rgba(255,255,255,.06);height:5px;border-radius:9999px;overflow:hidden">
-          <div style="width:${pct}%;height:100%;background:${doneColor};transition:width .8s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px ${doneColor}66"></div>
-        </div>
-        <div style="font-size:.64em;color:rgba(255,255,255,.4);margin-top:5px;text-align:left;font-weight:600;letter-spacing:0.01em">${qu.progress.toLocaleString('ar-EG')} / ${qu.target.toLocaleString('ar-EG')}</div>
-      </div>`;
-    });
-
-    // ── Action Buttons ──
-    html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
-      <button onclick="GAME.spinWheel()" style="padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.95);font-family:'Cairo',sans-serif;font-weight:800;font-size:.85em;cursor:pointer;transition:all .2s;letter-spacing:-0.005em">🎰 عجلة الحظ</button>
-      <button onclick="GAME.openLootBox()" style="padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.95);font-family:'Cairo',sans-serif;font-weight:800;font-size:.85em;cursor:pointer;transition:all .2s;letter-spacing:-0.005em">🎁 صندوق</button>
-    </div>`;
-
-    // ── Leaderboard (collapsed style) ──
-    const lb = this.generateFakeLB();
-    const myIdx = lb.findIndex(p=>p.me);
-    const around = lb.slice(Math.max(0,myIdx-1), Math.min(lb.length, myIdx+2));
-    html += `<div style="margin-top:16px;padding:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:18px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <span style="font-weight:800;font-size:.88em;color:rgba(255,255,255,.95);letter-spacing:-0.01em">🏆 الترتيب</span>
-        <span style="font-size:.66em;color:rgba(255,255,255,.5);background:rgba(255,255,255,.08);color:rgba(255,255,255,.95);padding:3px 10px;border-radius:9999px;font-weight:800">#${myIdx+1} / ${lb.length}</span>
-      </div>
-      ${around.map(p=>{
-        const pos = lb.indexOf(p)+1;
-        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;${p.me?'':'border-bottom:1px solid rgba(255,255,255,.04)'};font-size:.82em;${p.me?'color:rgba(255,255,255,.95);font-weight:800':'color:rgba(255,255,255,.65);font-weight:600'}">
-          <span><span style="display:inline-block;width:24px;font-size:.85em;color:rgba(255,255,255,.4);font-weight:700">${pos}.</span> ${p.me?'👤 ':''}${p.name}</span>
-          <span style="font-weight:700">${p.xp.toLocaleString('ar-EG')} XP</span>
-        </div>`;
-      }).join('')}
-    </div>`;
-
-    el.innerHTML = html;
-    if(this.updateFabBadge) this.updateFabBadge();
-  }
-};
-
-// ───── Hook into addXP for multiplier ─────
-if(typeof addXP === 'function' && !window._addXPOrig){
-  window._addXPOrig = addXP;
-  window.addXP = function(amount, reason){
-    let amt = amount;
-    if(GAME.isXPBoostActive()){ amt = Math.round(amount * 2); reason = '⚡ '+reason; }
-    window._addXPOrig(amt, reason);
-    // Level up sound
-    if((G.xp||0) >= 5000 && (G.xp - amt) < 5000){ GAME.playLevelUp(); GAME.hypeSay('مستوى جديد!'); }
-  };
-}
-
-// ───── Hook into saveSes for quests + loot ─────
-if(typeof saveSes === 'function' && !window._saveSesOrig){
-  window._saveSesOrig = saveSes;
-  window.saveSes = function(){
-    const before = G.ses.length;
-    window._saveSesOrig.apply(this, arguments);
-    setTimeout(()=>{
-      if(G.ses.length > before){
-        const last = G.ses[G.ses.length-1];
-        GAME.updateQuests(last);
-        GAME.updateMultiStreak();
-        // 70% chance لـ loot box
-        if(Math.random() < 0.70){
-          setTimeout(()=>GAME.openLootBox(), 3500);
-        }
-        // Hype voice
-        setTimeout(()=>GAME.hypeSay(), 1500);
-        // Re-render panel
-        setTimeout(()=>GAME.renderPanel(), 100);
-      }
-    }, 50);
-  };
-}
-
-// ───── PR sound hook ─────
-const _origToast = window.toast;
-if(_origToast && !window._toastWrapped){
-  window._toastWrapped = true;
-  window.toast = function(m, t){
-    _origToast.apply(this, arguments);
-    if(typeof m === 'string' && /رقم قياسي|🏆/.test(m)){
-      const wMatch = m.match(/(\d+(?:\.\d+)?)/);
-      const w = wMatch ? parseFloat(wMatch[1]) : 50;
-      GAME.playPRSound(w);
-      GAME.vibe([30, 30, 30, 30, 60]);
-      GAME.markPR();
-      setTimeout(()=>GAME.hypeSay('رقم قياسي جديد! وحش!'), 600);
-    }
-  };
-}
-
-// ───── Streak shield auto-grant ─────
-(function autoGrantShield(){
-  const td = GAME._todayKey();
-  const last = G.gamify.lastShieldGrant;
-  if(!last || (Date.now() - new Date(last)) > 30*86400000){
-    G.gamify.streakShields = (G.gamify.streakShields||0) + 1;
-    G.gamify.lastShieldGrant = td;
-    saveD();
-  }
-})();
-
-// ───── Cleanup on unload (fix interval leaks) ─────
-window.addEventListener('beforeunload', ()=>{
-  try {
-    if(typeof sessionTimerInterval !== 'undefined' && sessionTimerInterval) clearInterval(sessionTimerInterval);
-    if(window._wlAutoStop) window._wlAutoStop();
-    if('speechSynthesis' in window) speechSynthesis.cancel();
-  } catch(_) {}
-});
-
-// ───── Inject Panel placeholder + bottom nav button ─────
-function _injectGamifyUI(){
-  if(document.getElementById('_gamifyFab')) return;
-
-  // ── Bottom Sheet (مخفي افتراضياً) ──
-  const sheet = document.createElement('div');
-  sheet.id = '_gamifySheet';
-  sheet.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:998;background:linear-gradient(180deg,#0d1b2a,#091525);border-top:1.5px solid rgba(249,115,22,.3);border-radius:24px 24px 0 0;padding:14px 16px calc(20px + var(--safe-b));max-height:80vh;overflow-y:auto;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:0 -10px 40px rgba(0,0,0,.6);max-width:440px;margin:0 auto;-webkit-overflow-scrolling:touch';
-  sheet.innerHTML = `
-    <div style="display:flex;justify-content:center;margin-bottom:10px"><div style="width:42px;height:4px;background:rgba(255,255,255,.2);border-radius:4px"></div></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding:0 4px">
-      <div style="font-weight:900;font-size:1.05em;color:rgba(255,255,255,.98)">🎮 لوحة التحفيز</div>
-      <button onclick="GAME.closeSheet()" style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:var(--tx);cursor:pointer;font-size:.95em">✕</button>
-    </div>
-    <div id="gamifyPanel"></div>
-  `;
-  document.body.appendChild(sheet);
-
-  // ── Backdrop ──
-  const backdrop = document.createElement('div');
-  backdrop.id = '_gamifyBackdrop';
-  backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(3px);z-index:997;opacity:0;pointer-events:none;transition:opacity .3s';
-  backdrop.onclick = ()=>GAME.closeSheet();
-  document.body.appendChild(backdrop);
-
-  // ── FAB Button (top-right of viewport, مدمج) ──
-  const fab = document.createElement('button');
-  fab.id = '_gamifyFab';
-  fab.setAttribute('aria-label','لوحة التحفيز');
-  fab.style.cssText = 'position:fixed;top:calc(env(safe-area-inset-top,0px) + 70px);right:14px;z-index:150;width:54px;height:54px;border-radius:50%;border:2px solid rgba(255,255,255,.18);background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;cursor:pointer;font-size:1.5em;box-shadow:0 6px 20px rgba(249,115,22,.45),0 2px 8px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s';
-  fab.innerHTML = '🎮';
-  fab.onclick = ()=>GAME.openSheet();
-  fab.onmouseover = ()=>{ fab.style.transform='scale(1.08)'; };
-  fab.onmouseout = ()=>{ fab.style.transform='scale(1)'; };
-  // Notification dot for new quests/loot
-  const dot = document.createElement('span');
-  dot.id = '_gamifyDot';
-  dot.style.cssText = 'position:absolute;top:-3px;right:-3px;width:14px;height:14px;border-radius:50%;background:#ef4444;border:2px solid #0d1b2a;display:none;animation:criticalPulse 1.5s infinite';
-  fab.appendChild(dot);
-  document.body.appendChild(fab);
-
-  GAME.updateFabBadge();
-}
-
-// ── Mini status bar inside .hdr ──
-GAME.renderMiniBar = function(){
-  // Hidden in Liquid Glass v5 — replaced by clean FAB only
-  const old = document.getElementById('_gamifyMini');
-  if(old) old.remove();
-  return;
-  // legacy code below (unreachable) preserved for fallback:
-  const hdr = document.querySelector('.hdr');
-  if(!hdr) return;
-  let bar = document.getElementById('_gamifyMini');
-  if(!bar){
-    bar = document.createElement('div');
-    bar.id = '_gamifyMini';
-    bar.style.cssText = 'display:none';
-    bar.onclick = ()=>GAME.openSheet();
-    hdr.appendChild(bar);
-  }
-  const q = this.ensureDailyQuests();
-  const doneQ = q.quests.filter(x=>x.done).length;
-  const totalQ = q.quests.length;
-  const ms = G.gamify.multiStreak||{daily:0};
-  const shields = G.gamify.streakShields||0;
-  const xp = G.xp||0;
-  const boost = this.isXPBoostActive();
-  bar.innerHTML = `
-    <span style="display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:9999px;background:rgba(255,110,199,.12);color:#ff6ec7;font-weight:800;font-size:.72em;border:1px solid rgba(255,110,199,.3);letter-spacing:-0.005em">🔥 ${ms.daily}</span>
-    <span style="display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:9999px;background:rgba(52,211,153,.10);color:#86efac;font-weight:800;font-size:.72em;border:1px solid rgba(52,211,153,.2);letter-spacing:-0.005em">🎯 ${doneQ}/${totalQ}</span>
-    <span style="display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:9999px;background:${boost?'rgba(251,191,36,.16)':'rgba(255,255,255,.04)'};color:${boost?'#fbbf24':'rgba(255,255,255,.7)'};font-weight:800;font-size:.72em;border:1px solid ${boost?'rgba(251,191,36,.3)':'rgba(255,255,255,.08)'};letter-spacing:-0.005em">${boost?'⚡':'⭐'} ${xp.toLocaleString('ar-EG')}</span>
-    <span style="display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:9999px;background:rgba(167,139,250,.08);color:#a78bfa;font-weight:800;font-size:.72em;border:1px solid rgba(167,139,250,.2);letter-spacing:-0.005em">🛡️ ${shields}</span>
-  `;
-};
-
-GAME.openSheet = function(){
-  const sh = document.getElementById('_gamifySheet'), bd = document.getElementById('_gamifyBackdrop');
-  if(!sh||!bd) return;
-  this.renderPanel();
-  bd.style.opacity = '1'; bd.style.pointerEvents = 'auto';
-  requestAnimationFrame(()=>{ sh.style.transform = 'translateY(0)'; });
-  document.body.style.overflow = 'hidden';
-};
-GAME.closeSheet = function(){
-  const sh = document.getElementById('_gamifySheet'), bd = document.getElementById('_gamifyBackdrop');
-  if(!sh||!bd) return;
-  sh.style.transform = 'translateY(100%)';
-  bd.style.opacity = '0'; bd.style.pointerEvents = 'none';
-  document.body.style.overflow = '';
-};
-GAME.updateFabBadge = function(){
-  const dot = document.getElementById('_gamifyDot'); if(!dot) return;
-  const q = this.ensureDailyQuests();
-  const incompleteQuests = q.quests.filter(x=>!x.done).length;
-  const hasShield = (G.gamify.streakShields||0) > 0;
-  const hasSpins = (G.gamify.spins||0) > 0;
-  const hasTickets = (G.gamify.tickets||0) >= 7;
-  const streakDanger = !this.todayDone();
-  dot.style.display = (incompleteQuests===0 && !hasSpins && !hasTickets && !streakDanger) ? 'none' : 'block';
-};
-
-// Initialize on DOM ready
-function _gamifyBoot(){
-  _injectGamifyUI();
-  GAME.updateMultiStreak();
-  GAME.renderMiniBar();
-  GAME.updateFabBadge();
-}
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', ()=>{ setTimeout(_gamifyBoot, 600); });
-} else {
-  setTimeout(_gamifyBoot, 600);
-}
-
-// Auto-refresh every 60s for countdown + every 5min for panel
-window._gpInt1=setInterval(()=>{ if(GAME.renderMiniBar) GAME.renderMiniBar(); if(GAME.updateFabBadge) GAME.updateFabBadge(); }, 60*1000);
-window._gpInt2=setInterval(()=>{ if(document.getElementById('gamifyPanel')) GAME.renderPanel(); }, 5*60*1000);
-window.addEventListener('beforeunload',()=>{ try{clearInterval(window._gpInt1);clearInterval(window._gpInt2)}catch(_){}});
-
-console.info('🎮 GAME module loaded — XP boost, loot, quests, spinner, hype voice, leaderboard');
-})();
-
-
-/* ─── Global error handler (silent for users, log for debugging) ─── */
-(function(){
-  if(window._gpErrorBound)return; window._gpErrorBound=true;
-  window.addEventListener('error',e=>{try{console.error('[GymPro] uncaught:',e.message,e.filename+':'+e.lineno)}catch(_){}});
-  window.addEventListener('unhandledrejection',e=>{try{console.error('[GymPro] promise:',e.reason)}catch(_){}});
-})();
-
-/* ─── Safe fetch with timeout for AI calls ─── */
-window.gpFetch = async function(url, opts, timeoutMs){
-  timeoutMs = timeoutMs || 25000;
-  const ctrl = new AbortController();
-  const t = setTimeout(()=>ctrl.abort(), timeoutMs);
-  try{
-    const res = await fetch(url, Object.assign({}, opts||{}, {signal: ctrl.signal}));
-    if(res.status === 429){ try{toast('⏱️ تجاوز الحد — انتظر دقيقة','w')}catch(_){} throw new Error('rate_limit'); }
-    if(!res.ok){ throw new Error('http_'+res.status); }
-    return res;
-  } finally { clearTimeout(t); }
-};
 </script>
 <!-- ══ YOUTUBE INLINE PLAYER — popup mode ══ -->
 </body>
