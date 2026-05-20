@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
 <!--
 * ╔══════════════════════════════════════════════════════════════════╗
@@ -52,7 +52,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#060c1a">
+<meta name="theme-color" content="#1e3a8a">
+<meta name="color-scheme" content="dark">
 <script>
 // ✅ Inline PWA manifest — no external manifest.json needed
 (function(){
@@ -2597,6 +2598,65 @@ body.high-contrast .btn-primary { background: #facc15 !important; color: #000 !i
   .exi[data-folded="1"] { padding: 10px 11px !important; }
 }
 
+
+/* ════════════════════════════════════════════════════════════════
+   🌙 FORCE DARK v17 — Disable broken legacy light theme
+   The light theme was designed for v2 (orange) — incompatible with
+   NutriPro v12 blue gradient. Always use dark.
+   ════════════════════════════════════════════════════════════════ */
+
+/* Override any data-theme="light" attribute */
+html[data-theme="light"],
+html[data-theme="light"] body,
+html[data-theme="light"] *::before,
+html[data-theme="light"] *::after {
+  /* Reset all light-theme variables to inherit dark defaults */
+  color-scheme: dark !important;
+}
+
+/* Force consistent dark background regardless of theme attribute */
+html, body {
+  color-scheme: dark !important;
+  background-color: #1e3a8a !important;
+}
+
+/* Ignore prefers-color-scheme: light */
+@media (prefers-color-scheme: light) {
+  html, body {
+    background-color: #1e3a8a !important;
+    color: #fff !important;
+  }
+}
+
+/* Hide theme toggle button (one-direction theme) */
+#themeBtn, .theme-btn { display: none !important; }
+
+/* Defensive: ensure no light fallback colors leak */
+[data-theme="light"] .hdr,
+[data-theme="light"] .card,
+[data-theme="light"] .exi,
+[data-theme="light"] .dchip,
+[data-theme="light"] .bnav,
+[data-theme="light"] .mdl,
+[data-theme="light"] .set-in,
+[data-theme="light"] .set-prev,
+[data-theme="light"] .set-num,
+[data-theme="light"] .sets-summary,
+[data-theme="light"] .ss-chip,
+[data-theme="light"] .qstat,
+[data-theme="light"] .ai-coach-card,
+[data-theme="light"] .rpe-in,
+[data-theme="light"] .mh,
+[data-theme="light"] .coach-prog,
+[data-theme="light"] .alt-chip,
+[data-theme="light"] .coach-rec,
+[data-theme="light"] .bni,
+[data-theme="light"] body::before,
+[data-theme="light"] body::after,
+[data-theme="light"] .ctn::before {
+  all: revert-layer;
+}
+
 </style>
 </head>
 <body>
@@ -3655,20 +3715,18 @@ function go(n,b){document.querySelectorAll('.pg').forEach(p=>p.classList.remove(
 function clM(id){const el=document.getElementById(id);if(el)el.classList.remove('act')}
 document.querySelectorAll('.mo').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('act')}));
 function initTheme(){
-  const t=G.theme||'dark';
-  document.documentElement.setAttribute('data-theme',t);
+  // Force dark theme always (light theme is deprecated and broken)
+  G.theme = 'dark';
+  document.documentElement.setAttribute('data-theme','dark');
+  document.documentElement.style.colorScheme = 'dark';
   const i=document.getElementById('themeBtn');
-  if(i)i.textContent=t==='light'?'☀️':'🌙';
+  if(i){ i.style.display = 'none'; }
 }
 function toggleTheme(){
-  G.theme=G.theme==='dark'?'light':'dark';
-  // smooth transition
-  document.documentElement.style.transition='background .4s,color .3s';
-  document.documentElement.setAttribute('data-theme',G.theme);
-  document.getElementById('themeBtn').textContent=G.theme==='light'?'☀️':'🌙';
-  saveD();
-  toast(G.theme==='light'?'☀️ وضع نهاري':'🌙 وضع ليلي','i');
-  setTimeout(()=>document.documentElement.style.transition='',500);
+  // Theme toggle disabled — NutriPro is dark-only by design
+  G.theme = 'dark';
+  document.documentElement.setAttribute('data-theme','dark');
+  if(typeof toast === 'function') toast('🌙 النمط الليلي مفعّل دائماً','i');
 }
 function initNotifications(){if('Notification'in window&&G.notifications&&Notification.permission==='default')setTimeout(()=>Notification.requestPermission(),3000)}
 function toggleNotifications(){const t=document.getElementById('notifToggle');if(!t)return;G.notifications=t.checked;saveD();if(G.notifications&&'Notification'in window)Notification.requestPermission().then(p=>p==='granted'&&toast('🔔 تفعيل','s'));else toast('🔕 إيقاف','w')}
