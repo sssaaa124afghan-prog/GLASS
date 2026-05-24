@@ -2624,11 +2624,11 @@ function getActiveDayOrder(){
   const prog = typeof PROGRAMS_DEF !== 'undefined' && G.activeProgram && PROGRAMS_DEF[G.activeProgram];
   if(prog && prog.dayOrder) return prog.dayOrder;
   if(window._activeDayOrder) return window._activeDayOrder;
-  return dayOrder; // PPL fallback
+  return (typeof PROGRAMS_DEF!=='undefined'&&PROGRAMS_DEF['ulElite']?.dayOrder)||dayOrder; // ulElite fallback
 }
 const MOTIVATIONAL = ['💪 أنت أقوى مما تفتكر','⭐ النجاح عادة.. وأنت بتبنيها','🔥 كمّل يا أسد الجيم!','💯 Push harder than yesterday','⚡ أنت وحش! كل يوم بتتحسن','🎯 القوة مش بس في الحديد.. في الإصرار','✨ مفيش حاجة اسمها مستحيل','🏆 كل تمرينة بتقربك من هدفك','🌟 الألم مؤقت.. النتيجة دائمة','💎 البطل اللي بيقوم مش اللي مبيوقعش'];
 const SHEHAB={name:'شهاب',age:22,nationality:'مصري',location:'عجمان، الإمارات',job:'محاسب في Noor Al Khaleej Perfume',program:'Push/Pull/Legs PPL · Progressive Overload',macros:{train:{protein:175,carbs:280,fats:65,cals:2385},rest:{protein:160,carbs:180,fats:70,cals:2030}},goals:['زيادة القوة','بناء عضلة','Progressive Overload']};
-const DEFAULT_SCHEDULE={0:{type:'rest',label:'يوم راحة',day:'الأحد'},1:{type:'train',label:'Pull A — ظهر + باي',day:'الإثنين'},2:{type:'train',label:'Push A — صدر + كتف + تراي',day:'الثلاثاء'},3:{type:'train',label:'Leg A — رجل أمامي + سمانة',day:'الأربعاء'},4:{type:'rest',label:'يوم راحة',day:'الخميس'},5:{type:'train',label:'Pull B — ظهر + باي',day:'الجمعة'},6:{type:'train',label:'Push B — صدر + كتف + تراي',day:'السبت'}};
+const DEFAULT_SCHEDULE={0:{type:'rest',label:'يوم راحة',day:'الأحد'},1:{type:'train',label:'Upper A — صدر + ظهر + كتف + ذراع',day:'الإثنين'},2:{type:'train',label:'Lower A — كوادز + هامسترينج + سمانة + بطن',day:'الثلاثاء'},3:{type:'rest',label:'تعافي نشط — مشي خفيف',day:'الأربعاء'},4:{type:'train',label:'Upper B — ظهر + صدر + كتف + ذراع',day:'الخميس'},5:{type:'train',label:'Lower B — ديدليفت + رجل + كور',day:'الجمعة'},6:{type:'rest',label:'يوم راحة',day:'السبت'}};
 const MY_DAYS={pushA:{name:'Push A',muscles:'صدر + كتف + تراي',exercises:[{id:'pa0',name:'إحماء',sets:1,reps:'بار فارغ ×12 + كتف جانب ×20',isWarmup:true},{id:'pa1',name:'Bench Press',sets:4,reps:'8-10',lastW:70,unit:'كجم إجمالي',muscle:'صدر'},{id:'pa2',name:'Incline DB Press',sets:4,reps:'10-12',lastW:35,unit:'كجم/دمبل',muscle:'صدر'},{id:'pa3',name:'Cable Fly',sets:3,reps:'12-15',lastW:60,unit:'بلاطات/جنب',muscle:'صدر'},{id:'pa4',name:'Smith OHP',sets:4,reps:'8-10',lastW:40,unit:'كجم/جنب',muscle:'كتف'},{id:'pa5',name:'Lateral Raises',sets:4,reps:'12-15',lastW:12.5,unit:'كجم',muscle:'كتف'},{id:'pa6',name:'Rope Pushdown',sets:4,reps:'10-12',lastW:40,unit:'كجم',muscle:'تراي'},{id:'pa7',name:'Abs Crunch',sets:3,reps:'15-20',lastW:12,unit:'وزن جسم',muscle:'بطن'}]},pullA:{name:'Pull A',muscles:'ظهر + باي',exercises:[{id:'pla0',name:'إحماء',sets:1,reps:'بار فارغ ×10 + خفيف ×5',isWarmup:true},{id:'pla1',name:'Deadlift',sets:4,reps:'6-8',lastW:100,unit:'كجم إجمالي',muscle:'ظهر'},{id:'pla2',name:'Barbell Row',sets:4,reps:'8-10',lastW:60,unit:'كجم إجمالي',muscle:'ظهر'},{id:'pla3',name:'Lat Pulldown',sets:3,reps:'10-12',lastW:70,unit:'كجم',muscle:'ظهر'},{id:'pla4',name:'Seated Cable Row',sets:3,reps:'10-12',lastW:70,unit:'كجم',muscle:'ظهر'},{id:'pla5',name:'Face Pull',sets:3,reps:'15-20',lastW:40,unit:'كجم',muscle:'كتف خلفي'},{id:'pla6',name:'Barbell Curl',sets:3,reps:'8-10',lastW:30,unit:'كجم إجمالي',muscle:'باي'},{id:'pla7',name:'Hammer Curl',sets:3,reps:'10-12',lastW:15,unit:'كجم/دمبل',muscle:'باي'}]},legA:{name:'Leg A',muscles:'رجل أمامي + سمانة',exercises:[{id:'la0',name:'إحماء',sets:1,reps:'سكوات جسم + مشي 5-10 دق',isWarmup:true},{id:'la1',name:'Back Squat',sets:4,reps:'6-8',lastW:100,unit:'كجم إجمالي',muscle:'رجل'},{id:'la2',name:'Leg Press',sets:3,reps:'8-10',lastW:100,unit:'كجم/جنب',muscle:'رجل'},{id:'la3',name:'Leg Extension',sets:3,reps:'12-15',lastW:60,unit:'كجم',muscle:'رجل أمامي'},{id:'la4',name:'Bulgarian Split Squat',sets:3,reps:'8-10/رجل',lastW:12,unit:'كجم/يد',muscle:'رجل'},{id:'la5',name:'Standing Calf Raise',sets:4,reps:'15-20',lastW:80,unit:'كجم',muscle:'سمانة'},{id:'la6',name:'Abs Leg Raises',sets:3,reps:'12-15',lastW:0,unit:'وزن جسم',muscle:'بطن'}]},pushB:{name:'Push B',muscles:'صدر + كتف + تراي',exercises:[{id:'pb0',name:'إحماء',sets:1,reps:'إنكلاين خفيف ×10-14',isWarmup:true},{id:'pb1',name:'Incline Barbell Press',sets:4,reps:'8-10',lastW:60,unit:'كجم/جنب',muscle:'صدر'},{id:'pb2',name:'Flat DB Press',sets:3,reps:'10-12',lastW:32.5,unit:'كجم/دمبل',muscle:'صدر'},{id:'pb3',name:'Pec Deck Fly',sets:3,reps:'12-15',lastW:60,unit:'كجم',muscle:'صدر'},{id:'pb4',name:'DB Shoulder Press',sets:4,reps:'8-10',lastW:30,unit:'كجم/دمبل',muscle:'كتف'},{id:'pb5',name:'Cable Lateral Raise',sets:3,reps:'12-15',lastW:20,unit:'كجم',muscle:'كتف'},{id:'pb6',name:'Overhead Extension',sets:3,reps:'10-12',lastW:30,unit:'كجم',muscle:'تراي'},{id:'pb7',name:'Cable Crunch',sets:3,reps:'12-15',lastW:50,unit:'كجم',muscle:'بطن'}]},pullB:{name:'Pull B',muscles:'ظهر + باي',exercises:[{id:'plb0',name:'إحماء',sets:1,reps:'Lat Pulldown خفيف ×15',isWarmup:true},{id:'plb1',name:'Pull-Ups',sets:3,reps:'6-10',lastW:10,unit:'وزن جسم',muscle:'ظهر'},{id:'plb2',name:'T-Bar Row',sets:4,reps:'8-10',lastW:50,unit:'كجم',muscle:'ظهر'},{id:'plb3',name:'1-Arm DB Row',sets:3,reps:'10-12',lastW:35,unit:'كجم/ذراع',muscle:'ظهر'},{id:'plb4',name:'Straight Arm Pulldown',sets:3,reps:'12-15',lastW:60,unit:'كجم',muscle:'ظهر'},{id:'plb5',name:'Shrugs',sets:3,reps:'12-15',lastW:40,unit:'كجم/دمبل',muscle:'ترابيس'},{id:'plb6',name:'Incline DB Curl',sets:3,reps:'10-12',lastW:12.5,unit:'كجم/دمبل',muscle:'باي'},{id:'plb7',name:'Cable Curl',sets:3,reps:'12-15',lastW:40,unit:'كجم',muscle:'باي'}]},legB:{name:'Leg B',muscles:'رجل خلفي + سمانة',exercises:[{id:'lb0',name:'إحماء',sets:1,reps:'سكوات جسم + مشي/دراجة',isWarmup:true},{id:'lb1',name:'Romanian Deadlift',sets:4,reps:'8-10',lastW:80,unit:'كجم إجمالي',muscle:'رجل خلفي'},{id:'lb2',name:'Leg Press (Wide)',sets:3,reps:'10-12',lastW:100,unit:'كجم/جنب',muscle:'رجل'},{id:'lb3',name:'Lying Leg Curl',sets:4,reps:'10-12',lastW:56,unit:'كجم',muscle:'رجل خلفي'},{id:'lb4',name:'Hip Thrust',sets:3,reps:'10-12',lastW:60,unit:'كجم',muscle:'مؤخرة'},{id:'lb5',name:'Seated Calf Raise',sets:4,reps:'15-20',lastW:40,unit:'كجم',muscle:'سمانة'},{id:'lb6',name:'Plank',sets:3,reps:'45-60s',lastW:0,unit:'وزن جسم',muscle:'بطن'}]}};
 const EXERCISE_LIBRARY=[
 /* ═══ صدر ═══ */
@@ -2712,7 +2712,7 @@ const EXERCISE_LIBRARY=[
 {id:'ex81', name:'Wrist Curl',                 muscle:'ساعد',     sec:'',                  equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3',   reps:'15-20',focus:'ساعد أمامي',   desc:'يبني قوة وحجم الساعد الأمامي.',                                technique:'الرسغ يتحرك فقط · اتكئ على الركبة.',                    mistake:'تحريك المرفق'},
 {id:'ex82', name:'Reverse Curl',               muscle:'ساعد',     sec:'Brachialis, باي',   equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'ساعد + باي',   desc:'يبني الساعد العلوي والـ Brachialis.',                           technique:'قبضة عكسية · الكوع ثابت.',                               mistake:'الأرجحة الزائدة'}
 ];
-let G={days:{},ses:[],bw:[],streak:0,lastWo:null,doneExs:{},completedDays:{},aiKey:'',claudeKey:'',chatHistory:[],theme:'dark',notifications:true,currentSets:{},schedule:null,wellness:{},nextSessionPlan:{},rpeHistory:{},weeklyChallenge:null,injuries:[],supplements:[],pinnedNote:'',activeProgram:'ppl',lastDeload:null,xp:0,xpLevel:0,smartGoals:[],wellnessLog:[],measurements:[],goals:{},earnedBadges:{}};
+let G={days:{},ses:[],bw:[],streak:0,lastWo:null,doneExs:{},completedDays:{},aiKey:'',claudeKey:'',chatHistory:[],theme:'dark',notifications:true,currentSets:{},schedule:null,wellness:{},nextSessionPlan:{},rpeHistory:{},weeklyChallenge:null,injuries:[],supplements:[],pinnedNote:'',activeProgram:'ulElite',lastDeload:null,xp:0,xpLevel:0,smartGoals:[],wellnessLog:[],measurements:[],goals:{},earnedBadges:{}};
 const FATIGUE={score(){const s=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5).length;const v=SCI.weeklyVolume();const td=new Date().toISOString().split('T')[0];const w=G.wellness[td]||{sleep:7,energy:7,stress:3};return Math.round(Math.min(s/6*30,30)+Math.min(v/6000*25,25)+Math.max(0,(10-Math.min(parseFloat(w.sleep)||7,10)))/6*15+Math.max(0,(10-Math.min(parseFloat(w.energy)||7,10)))/6*15+Math.min(parseFloat(w.stress)||3,10)/10*15)},level(){const s=this.score();return s<40?'low':s<70?'moderate':s<85?'high':'critical'},label(){return{low:'منخفض ✅',moderate:'متوسط ⚡',high:'مرتفع ⚠️',critical:'حرج 🚨'}[this.level()]}};
 const PERIOD={week(){if(!G.blockStart)G.blockStart=Date.now();const w=Math.floor((Date.now()-G.blockStart)/(7*864e5))%4;return w+1},type(){const w=this.week();return w===1?'volume':w===2?'intensity':w===3?'peak':'deload'},info(){return{volume:{label:'Volume Week',color:'block-volume',icon:'📦',desc:'حجم عالي · أوزان متوسطة · 4 سيتات'},intensity:{label:'Intensity Week',color:'block-intensity',icon:'⚡',desc:'أوزان ثقيلة · 3 سيتات · Rep Range أقل'},peak:{label:'Peak Week',color:'block-peak',icon:'🔥',desc:'أقصى قوة · 2-3 سيتات · وزن أقصى'},deload:{label:'Deload Week',color:'block-deload',icon:'🔄',desc:'تعافي · 90% من الأوزان · 2 سيتات'}}[this.type()]}};
 const VELOCITY={state(id){const h=G.ses.filter(s=>s.exs?.[id]).slice(-2);if(h.length<2)return 'stable';const avg=(s,k)=>{const ss=s.exs[id]?.sets?.filter(t=>t.w>0)||[];return ss.length?ss.reduce((v,t)=>v+(t[k]||0),0)/ss.length:0};const r0=avg(h[0],'r'),r1=avg(h[1],'r'),rpe0=avg(h[0],'rpe'),rpe1=avg(h[1],'rpe');if(rpe0>0&&rpe1>0&&r0<r1&&rpe0>rpe1)return 'fatigue_drop';return r0>r1?'improving':'stable'},label(s){return{improving:'📈 تحسن',fatigue_drop:'📉 Fatigue Drop',stable:'➡️ مستقر'}[s]||'➡️ مستقر'}};
@@ -2773,102 +2773,194 @@ const SCI={calc1RM(w,r){if(!w||!r)return 0;const rr=Math.min(Math.max(parseInt(r
 const OE={CK:['Bench Press','Deadlift','Squat','Row','OHP','Pull','Press','RDL','Hip Thrust','Split Squat','T-Bar','Barbell','Overhead'],isCompound(n){return this.CK.some(c=>n.toLowerCase().includes(c.toLowerCase()))},detectPlateau(id){const h=G.ses.filter(s=>s.exs?.[id]).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,4).map(s=>{const e=s.exs[id];return e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):e.w||0}).filter(w=>w>0);return h.length>=3&&h[0]===h[1]&&h[1]===h[2]},getRecommendation(id,name,lastW){if(!lastW||lastW<=0)return{status:'new',suggestedWeight:lastW,msg:'',trend:0};const h=G.ses.filter(s=>s.exs?.[id]).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5).map(s=>{const e=s.exs[id];return e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):e.w||0}).filter(w=>w>0);const trend=SCI.volumeTrend(id);if(h.length<2)return{status:'stable',suggestedWeight:lastW,msg:'',trend};const inc=this.isCompound(name)?2.5:1,rt=this.isCompound(name)?2.5:1;if(h.length>=4&&h[0]===h[1]&&h[1]===h[2]&&h[2]===h[3]){const dl=Math.round(lastW*.9/rt)*rt;return{status:'deload',suggestedWeight:dl,msg:`⚠️ Deload — ${dl}كجم (90%)`,trend}}if(this.detectPlateau(id)){const sg=Math.round((lastW+inc)/rt)*rt;return{status:'plateau',suggestedWeight:sg,msg:`⚠️ ثبات — جرب ${sg}كجم`,trend}}if(h.length>=2&&h[0]>h[1]){const sg=Math.round((lastW+inc)/rt)*rt;return{status:'progressing',suggestedWeight:sg,msg:`✅ تقدم! الهدف: ${sg}كجم`,trend}}return{status:'stable',suggestedWeight:lastW,msg:'',trend}}};
 function recoveryScore(){const l7=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5),freq=Math.min(l7.length,6),wv=SCI.weeklyVolume(),bwT=G.bw.length>=2?Math.abs(G.bw[G.bw.length-1].w-G.bw[G.bw.length-2].w):0;const td=new Date().toISOString().split('T')[0],wn=G.wellness[td]||{sleep:7,energy:7,stress:3};const slP=Math.max(0,(7-Math.min(parseFloat(wn.sleep)||7,10)))*3;const stP=Math.max(0,(parseFloat(wn.stress)||3)-5)*2;return Math.min(Math.max(Math.round(freq/6*40+Math.min(wv/5000*30,30)+Math.min((G.streak||0)/7*20,20)+(bwT<2?10:5)-slP-stP),0),100)}
 // ─── تطبيق البيانات المحفوظة على G ───
+// ═══════════════════════════════════════════════════════════════
+// نظام الحفظ والتحميل — بسيط وموثوق 100%
+// ═══════════════════════════════════════════════════════════════
+
+// ─── تطبيق البيانات على G ───
 function _applyData(d){
-  if(!d)return;
-  G.ses=d.ses||[];G.bw=d.bw||[];G.streak=d.streak||0;
-  setTimeout(()=>_GP_checkStreakBreak(),50);
-  G.lastWo=d.lastWo||null;
-  G.doneExs=d.doneExs||{};G.completedDays=d.completedDays||{};
-  G.aiKey=d.aiKey||'';G.claudeKey=d.claudeKey||'';G.chatHistory=d.chatHistory||[];
-  G.theme=d.theme||'dark';G.notifications=d.notifications!==undefined?d.notifications:true;
-  G.currentSets=d.currentSets||{};G.wellness=d.wellness||{};
-  G.measurements=d.measurements||[];G.goals=d.goals||{};
-  G.earnedBadges=d.earnedBadges||{};G.weeklyChallenge=d.weeklyChallenge||null;
-  G.xp=d.xp||0;G.xpLevel=d.xpLevel||0;G.smartGoals=d.smartGoals||[];
-  G.wellnessLog=d.wellnessLog||[];G.homeMode=false;
-  G.nextSessionPlan=d.nextSessionPlan||{};G.rpeHistory=d.rpeHistory||{};
-  G.schedule=d.schedule||null;
-  G.activeProgram=d.activeProgram||'ppl';
-  G.lastDeload=d.lastDeload||null;
-  // ─── Restore active day order ───
-  if(d.dayOrder)window._activeDayOrder=d.dayOrder;
-  // ─── Days: يدعم أي برنامج ───
-  if(d.days&&typeof d.days==='object'&&Object.keys(d.days).length>=2){
-    G.days=d.days;
-    // تكملة الأيام الناقصة — مؤجّل بعد تحميل PROGRAMS_DEF
-    setTimeout(()=>{
-      try{
-        const prog=typeof PROGRAMS_DEF!=='undefined'&&PROGRAMS_DEF[G.activeProgram];
-        const progDays=prog&&prog.daysData?prog.daysData:(G.activeProgram==='ppl'?MY_DAYS:null);
-        if(progDays){Object.keys(progDays).forEach(k=>{if(!G.days[k])G.days[k]=JSON.parse(JSON.stringify(progDays[k]));});}
-      }catch(_){}
-    },100);
-  }else{
-    G.days=JSON.parse(JSON.stringify(MY_DAYS));
+  if(!d||typeof d!=='object')return;
+  G.ses            = Array.isArray(d.ses)?d.ses:[];
+  G.bw             = Array.isArray(d.bw)?d.bw:[];
+  G.streak         = d.streak||0;
+  G.lastWo         = d.lastWo||null;
+  G.doneExs        = d.doneExs||{};
+  G.completedDays  = d.completedDays||{};
+  G.currentSets    = d.currentSets||{};
+  G.aiKey          = d.aiKey||'';
+  G.claudeKey      = d.claudeKey||'';
+  G.chatHistory    = Array.isArray(d.chatHistory)?d.chatHistory:[];
+  G.theme          = d.theme||'dark';
+  G.notifications  = d.notifications!==undefined?d.notifications:true;
+  G.wellness       = d.wellness||{};
+  G.measurements   = Array.isArray(d.measurements)?d.measurements:[];
+  G.goals          = d.goals||{};
+  G.earnedBadges   = d.earnedBadges||{};
+  G.weeklyChallenge= d.weeklyChallenge||null;
+  G.xp             = d.xp||0;
+  G.xpLevel        = d.xpLevel||0;
+  G.smartGoals     = Array.isArray(d.smartGoals)?d.smartGoals:[];
+  G.wellnessLog    = Array.isArray(d.wellnessLog)?d.wellnessLog:[];
+  G.nextSessionPlan= d.nextSessionPlan||{};
+  G.rpeHistory     = d.rpeHistory||{};
+  // الجدول: المفتاح الصغير المستقل أولاً، ثم البيانات الرئيسية
+  const _savedSched = (()=>{ try{ const s=localStorage.getItem('_gp_sched'); return s?JSON.parse(s):null; }catch(_){ return null; } })();
+  G.schedule = _savedSched || d.schedule || null;
+  G.injuries       = Array.isArray(d.injuries)?d.injuries:[];
+  G.supplements    = Array.isArray(d.supplements)?d.supplements:[];
+  G.pinnedNote     = d.pinnedNote||'';
+  G.lastDeload     = d.lastDeload||null;
+
+  // ─── البرنامج النشط ───
+  // الأولوية: المفتاح الصغير المستقل (أكثر موثوقية) ثم البيانات الرئيسية
+  const _savedProg = (()=>{ try{ return localStorage.getItem('_gp_prog'); }catch(_){ return null; } })();
+  G.activeProgram = _savedProg || d.activeProgram || 'ulElite';
+  if(d.dayOrder) {
+    G.dayOrder = d.dayOrder;
+    window._activeDayOrder = d.dayOrder;
   }
-  if(!G.schedule)G.schedule=JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
-  // ─── UI sync ───
-  if(G.aiKey)setTimeout(()=>{const i=document.getElementById('apiKeyInput');if(i)i.value=G.aiKey;},100);
-  if(G.claudeKey)setTimeout(()=>{const i=document.getElementById('claudeKeyInput');if(i)i.value=G.claudeKey;},100);
-  const t=document.getElementById('notifToggle');if(t)t.checked=G.notifications;
+
+  // ─── أيام التمرين ───
+  const _ap = G.activeProgram;
+  const _prog = typeof PROGRAMS_DEF!=='undefined' && PROGRAMS_DEF[_ap];
+  if(d.days && typeof d.days==='object' && Object.keys(d.days).length >= 2){
+    // تحقق: هل الأيام المحفوظة تنتمي للبرنامج الصحيح؟
+    const _expectedKeys = (_prog && _prog.dayOrder) || [];
+    const _hasMatchingDay = _expectedKeys.length === 0 || _expectedKeys.some(k => d.days[k]);
+    if(_hasMatchingDay){
+      G.days = d.days;
+    } else {
+      // الأيام لا تتطابق مع البرنامج — أعِد بناءها
+      G.days = (_prog && _prog.daysData)
+        ? JSON.parse(JSON.stringify(_prog.daysData))
+        : JSON.parse(JSON.stringify(MY_DAYS));
+    }
+  } else {
+    G.days = (_prog && _prog.daysData)
+      ? JSON.parse(JSON.stringify(_prog.daysData))
+      : JSON.parse(JSON.stringify(MY_DAYS));
+  }
+
+  // ─── الجدول ───
+  if(!G.schedule) G.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+
+  // ─── مزامنة UI ───
+  setTimeout(()=>{
+    const ai = document.getElementById('apiKeyInput');
+    if(ai && G.aiKey) ai.value = G.aiKey;
+    const cl = document.getElementById('claudeKeyInput');
+    if(cl && G.claudeKey) cl.value = G.claudeKey;
+    const nt = document.getElementById('notifToggle');
+    if(nt) nt.checked = G.notifications;
+  }, 50);
+
+  setTimeout(()=>{ try{_GP_checkStreakBreak();}catch(_){} }, 100);
 }
 
-// ─── loadD: IndexedDB أولاً، localStorage كـ fallback ───
-function loadD(){
-  // ── محاولة localStorage أولاً (sync وأسرع) ──
+// ─── حفظ (sync في localStorage + async في IDB) ───
+function saveD(){
+  // ── مفتاح مستقل صغير للبرنامج النشط (لا يمكن أن يفشل) ──
+  try{ if(G.activeProgram) localStorage.setItem('_gp_prog', G.activeProgram); }catch(_){}
+  try{ if(G.schedule) localStorage.setItem('_gp_sched', JSON.stringify(G.schedule)); }catch(_){}
+  // ── محاولات الحفظ بمستويات تقليم ──
+  function _idbBk(s){ try{ _openIDB().then(db=>{ const tx=db.transaction('data','readwrite'); tx.objectStore('data').put(s,K); }).catch(()=>{}); }catch(_){} }
   try{
-    const lsData = localStorage.getItem(K);
-    if(lsData){
-      const parsed = JSON.parse(lsData);
-      _applyData(parsed);
-      _postLoad();
-      // مزامنة مع IDB في الخلفية
-      _openIDB().then(db=>{
-        const tx=db.transaction('data','readwrite');
-        tx.objectStore('data').put(lsData,K);
-      }).catch(()=>{});
-      return;
+    const str = JSON.stringify(G);
+    localStorage.setItem(K, str);
+    _idbBk(str);
+    return;
+  }catch(e){}
+  // مستوى 2: قلّل chatHistory
+  try{ G.chatHistory=(G.chatHistory||[]).slice(-5); const s=JSON.stringify(G); localStorage.setItem(K,s); _idbBk(s); return; }catch(_){}
+  // مستوى 3: قلّل الجلسات أيضاً
+  try{ G.ses=(G.ses||[]).slice(-30); G.chatHistory=[]; const s=JSON.stringify(G); localStorage.setItem(K,s); _idbBk(s); return; }catch(_){}
+  // مستوى 4: حفظ الجوهر فقط
+  try{
+    const ess={ses:G.ses,days:G.days,activeProgram:G.activeProgram,dayOrder:G.dayOrder,
+      currentSets:G.currentSets,doneExs:G.doneExs,completedDays:G.completedDays,
+      streak:G.streak,lastWo:G.lastWo,bw:G.bw,aiKey:G.aiKey,claudeKey:G.claudeKey,
+      theme:G.theme,xp:G.xp,xpLevel:G.xpLevel,earnedBadges:G.earnedBadges,
+      schedule:G.schedule,wellness:G.wellness,goals:G.goals,measurements:G.measurements,
+      injuries:G.injuries,smartGoals:G.smartGoals,nextSessionPlan:G.nextSessionPlan,
+      gamify:G.gamify,lastDeload:G.lastDeload,pinnedNote:G.pinnedNote};
+    const s=JSON.stringify(ess); localStorage.setItem(K,s); _idbBk(s);
+  }catch(_){}
+}
+
+// ─── تحميل (localStorage أولاً — sync وفوري بدون race conditions) ───
+function loadD(){
+  let loaded = false;
+
+  // محاولة 1: localStorage (sync — الأسرع والأموثق)
+  try{
+    const raw = localStorage.getItem(K);
+    if(raw){
+      const d = JSON.parse(raw);
+      if(d && typeof d === 'object'){
+        _applyData(d);
+        loaded = true;
+      }
     }
   }catch(_){}
-  // ── localStorage فارغ — جرب IDB ──
-  _openIDB().then(db=>{
-    const tx=db.transaction('data','readonly');
-    const req=tx.objectStore('data').get(K);
-    req.onsuccess=e=>{
-      if(e.target.result){
-        try{
-          _applyData(JSON.parse(e.target.result));
-          _postLoad();
-          try{localStorage.setItem(K,e.target.result);}catch(_){}
-        }catch(err){_loadFromLS();}
-      }else{_loadFromLS();}
-    };
-    req.onerror=()=>_loadFromLS();
-  }).catch(()=>_loadFromLS());
-}
 
-// ─── Fallback: تحميل من localStorage ───
-function _loadFromLS(){
-  try{
-    const s=localStorage.getItem(K);
-    if(s){
-      _applyData(JSON.parse(s));
-      // احفظ في IDB كذلك
-      _openIDB().then(db=>{
-        const tx=db.transaction('data','readwrite');
-        tx.objectStore('data').put(s,K);
-      }).catch(()=>{});
-    }else{
-      G.days=JSON.parse(JSON.stringify(MY_DAYS));
-      if(!G.schedule)G.schedule=JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
-    }
-  }catch(e){
-    console.warn('loadD fallback:',e);
-    G.days=JSON.parse(JSON.stringify(MY_DAYS));
+  if(!loaded){
+    // محاولة 2: IndexedDB (async — للحالات النادرة)
+    _openIDB().then(db=>{
+      const tx = db.transaction('data','readonly');
+      const req = tx.objectStore('data').get(K);
+      req.onsuccess = e => {
+        if(e.target.result){
+          try{
+            const d = JSON.parse(e.target.result);
+            if(d && typeof d === 'object'){
+              _applyData(d);
+              // حفظ في localStorage للمرة القادمة
+              try{ localStorage.setItem(K, e.target.result); }catch(_){}
+            }
+          }catch(_){}
+        } else {
+          // لا توجد بيانات محفوظة — ابدأ من الصفر
+          const _defProg = typeof PROGRAMS_DEF!=='undefined' && PROGRAMS_DEF['ulElite'];
+          G.activeProgram = 'ulElite';
+          G.days = _defProg && _defProg.daysData ? JSON.parse(JSON.stringify(_defProg.daysData)) : JSON.parse(JSON.stringify(MY_DAYS));
+          G.dayOrder = _defProg ? _defProg.dayOrder : null;
+          window._activeDayOrder = G.dayOrder;
+          G.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+        }
+        _postLoad();
+      };
+      req.onerror = () => {
+        G.days = JSON.parse(JSON.stringify(MY_DAYS));
+        G.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+        _postLoad();
+      };
+    }).catch(()=>{
+      G.days = JSON.parse(JSON.stringify(MY_DAYS));
+      G.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+      _postLoad();
+    });
+    return; // _postLoad سيُستدعى بعد IDB
   }
+
+  // localStorage نجح — استدعي _postLoad مباشرة
   _postLoad();
 }
+
+// ─── IndexedDB ───
+let _idb = null;
+function _openIDB(){
+  return new Promise((res,rej)=>{
+    if(_idb) return res(_idb);
+    const r = indexedDB.open('GymProDB',1);
+    r.onupgradeneeded = e => { e.target.result.createObjectStore('data'); };
+    r.onsuccess = e => { _idb = e.target.result; res(_idb); };
+    r.onerror = e => rej(e);
+  });
+}
+
+// ─── تنفيذ بعد التحميل ───
 function _postLoad(){
+  try{initTheme();}catch(_){}
   try{rDate();}catch(_){}
   try{rDays();}catch(_){}
   try{rQuickStats();}catch(_){}
@@ -2882,23 +2974,8 @@ function _postLoad(){
   try{rMorningCard&&rMorningCard();}catch(_){}
   try{renderWoSummary&&renderWoSummary();}catch(_){}
   try{renderTodayPage&&renderTodayPage();}catch(_){}
-  try{initTheme();}catch(_){}
 }
-// ===== IndexedDB Storage (يحتفظ بالبيانات دائماً) =====
-let _idb=null;
-function _openIDB(){return new Promise((res,rej)=>{if(_idb)return res(_idb);const r=indexedDB.open('GymProDB',1);r.onupgradeneeded=e=>{e.target.result.createObjectStore('data')};r.onsuccess=e=>{_idb=e.target.result;res(_idb)};r.onerror=e=>rej(e)})}
-function saveD(){
-  const str=JSON.stringify(G);
-  // حفظ فوري في localStorage (sync - الأهم)
-  try{localStorage.setItem(K,str);}catch(_){}
-  // حفظ في IndexedDB (async - للديمومة)
-  try{
-    _openIDB().then(db=>{
-      const tx=db.transaction('data','readwrite');
-      tx.objectStore('data').put(str,K);
-    }).catch(()=>{});
-  }catch(_){}
-}
+
 function rDate(){const d=new Date(),dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],mn=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],el=document.getElementById('tDate');if(el)el.textContent=`${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`}
 function rBlockBadge(){const i=PERIOD.info(),el=document.getElementById('blockBadge');if(!el)return;el.className='block-badge '+i.color;el.textContent=`${i.icon} ${i.label}`}
 function rFatigueBar(){const sc=FATIGUE.score(),lv=FATIGUE.level(),wr=document.getElementById('fatigueBarWrap'),fi=document.getElementById('fatigueBarFill'),lb=document.getElementById('fatigueBarLabel'),bl=document.getElementById('blockLabel');if(!fi||!wr)return;wr.className=`fatigue-bar-wrap fatigue-${lv}`;fi.style.width=`${sc}%`;lb.textContent=`Block ${PERIOD.week()}/4 — ${PERIOD.info().label}`;const lb2=document.getElementById('fatigueBarLabel');if(lb2)lb2.textContent=`Fatigue ${sc}% — ${FATIGUE.label()}`}
@@ -2998,7 +3075,7 @@ function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=
   return window._timerDefault||90;
 })();
 quickStartTimer(_restTime);if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0;if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){if(!window._sessionPRs)window._sessionPRs={};if(!window._sessionPRs[id]||_nw>window._sessionPRs[id]){window._sessionPRs[id]=_nw;fireConfetti(50);toast(`🏆 رقم قياسي جديد! ${_nw}كجم`,'s');document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}}}}
-function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false};saveD()}
+function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false};/* saveD() removed — safety script handles lightweight persist */clearTimeout(window._scsDebounce);window._scsDebounce=setTimeout(function(){try{if(typeof window._gpSaveSess==='function')window._gpSaveSess();}catch(_){}},300);}
 function updateSetSummary(id){const sm=document.getElementById(`sum-${id}`);if(!sm)return;const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const ds=sets.filter(s=>s.done).length,fs=sets.filter(s=>s.w>0),vol=fs.reduce((t,s)=>t+s.w*(s.r||1),0),topW=fs.length?Math.max(...fs.map(s=>s.w)):0,avgW=fs.length?Math.round(fs.reduce((t,s)=>t+s.w,0)/fs.length*10)/10:0,rpes=sets.filter(s=>s.rpe>0),avgR=rpes.length?Math.round(rpes.reduce((t,s)=>t+s.rpe,0)/rpes.length*10)/10:0,rc=avgR>=9?'ss-rpe-high':avgR>=7?'ss-rpe-warn':'ss-rpe-ok';const max1RM=sets.filter(s=>s.w>0&&s.r>0).reduce((b,s)=>{const e1=SCI.calc1RM(s.w,s.r);return e1>b?e1:b},0);sm.innerHTML=`<span class="ss-chip">✓ ${ds}/${ns}</span>${vol>0?`<span class="ss-chip ss-vol">🏋️ ${Math.round(vol)}كجم</span>`:''}${topW>0?`<span class="ss-chip ss-top">⬆ ${topW}</span>`:''}${avgW>0?`<span class="ss-chip ss-avg">⌀ ${avgW}</span>`:''}${avgR>0?`<span class="ss-chip ${rc}">RPE ${avgR}</span>`:''}${max1RM>0?`<span class="ss-chip ss-1rm">💡 1RM≈${max1RM}</span>`:''}`}
 function checkAllSetsDone(id){const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,all=Array.from({length:ns},(_,i)=>document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false).every(Boolean);if(all){const c=document.getElementById(`chk-${id}`),e=document.getElementById(`exi-${id}`);if(c&&!c.classList.contains('checked')){c.classList.add('checked');c.innerHTML='✓';e?.classList.add('done');const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=true;saveD();toast('✅ '+ex.name+' مكتمل!','s');updateCompBar()}}}
 function toggleDone(id){const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=!G.doneExs[sk][id];saveD();const e=document.getElementById('exi-'+id),c=document.getElementById('chk-'+id);if(!e||!c)return;if(G.doneExs[sk][id]){e.classList.add('done');c.classList.add('checked');c.innerHTML='✓';if(navigator.vibrate)navigator.vibrate(30);toast('✅ تم!','s')}else{e.classList.remove('done');c.classList.remove('checked');c.innerHTML=''}updateCompBar()}
@@ -3199,7 +3276,7 @@ const SEL_STYLE=`padding:6px;border-radius:8px;border:1px solid rgba(255,255,255
 function rSchedule(){const el=document.getElementById('scheduleArea');if(!el)return;const dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],tp=[{v:'rest',l:'🛌 راحة'},{v:'rest2',l:'🚶 خفيف'},{v:'train',l:'🏋️ تمرين'}];el.innerHTML=dn.map((d,i)=>{const c=(G.schedule||DEFAULT_SCHEDULE)[i];const isTrain=c.type==='train';const opts=isTrain?SCHED_TRAIN_OPTS:SCHED_REST_OPTS;const curLbl=c.label||'';const knownOpt=opts.find(o=>o.v===curLbl&&o.v!=='custom');const selVal=knownOpt?curLbl:'custom';const isCustom=!knownOpt;return`<div style="display:flex;align-items:center;gap:6px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap"><span style="font-size:.8em;font-weight:800;min-width:58px;color:var(--tx)">${d}</span><select id="sched-${i}" onchange="onSchedTypeChange(${i})" style="flex:0 0 auto;${SEL_STYLE}">${tp.map(t=>`<option value="${t.v}" ${c.type===t.v?'selected':''}>${t.l}</option>`).join('')}</select><select id="schedlbl-${i}" onchange="onSchedLblChange(${i})" style="flex:1;min-width:160px;${SEL_STYLE}">${opts.map(o=>`<option value="${o.v}" ${selVal===o.v?'selected':''}>${o.l}</option>`).join('')}</select><input type="text" id="schedcustom-${i}" placeholder="اكتب اسم مخصص..." value="${isCustom?curLbl:''}" style="flex:1;min-width:130px;padding:6px;border-radius:8px;border:1px solid rgba(249,115,22,.3);background:rgba(255,255,255,.07);color:var(--tx);font-family:'Cairo';font-size:.78em;display:${isCustom?'block':'none'}"></div>`}).join('')}
 function onSchedTypeChange(i){const type=document.getElementById(`sched-${i}`).value;const opts=type==='train'?SCHED_TRAIN_OPTS:SCHED_REST_OPTS;const sel=document.getElementById(`schedlbl-${i}`);sel.innerHTML=opts.map(o=>`<option value="${o.v}">${o.l}</option>`).join('');const inp=document.getElementById(`schedcustom-${i}`);if(inp){inp.value='';inp.style.display='none'}onSchedLblChange(i)}
 function onSchedLblChange(i){const val=document.getElementById(`schedlbl-${i}`)?.value;const inp=document.getElementById(`schedcustom-${i}`);if(inp)inp.style.display=val==='custom'?'block':'none'}
-function saveSchedule(){const dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];for(let i=0;i<7;i++){const t=document.getElementById(`sched-${i}`)?.value||'rest';const lv=document.getElementById(`schedlbl-${i}`)?.value||'';const lc=document.getElementById(`schedcustom-${i}`)?.value?.trim()||'';const l=lv==='custom'?lc:lv;if(!G.schedule)G.schedule={};G.schedule[i]={type:t,label:l,day:dn[i]}}saveD();toast('✅ تم حفظ الجدول','s');rDayStatusBanner()}
+function saveSchedule(){const dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];for(let i=0;i<7;i++){const t=document.getElementById(`sched-${i}`)?.value||'rest';const lv=document.getElementById(`schedlbl-${i}`)?.value||'';const lc=document.getElementById(`schedcustom-${i}`)?.value?.trim()||'';const l=lv==='custom'?lc:lv;if(!G.schedule)G.schedule={};G.schedule[i]={type:t,label:l,day:dn[i]}}try{localStorage.setItem('_gp_sched',JSON.stringify(G.schedule));}catch(_){}saveD();toast('✅ تم حفظ الجدول','s');rDayStatusBanner()}
 function rMacroTargets(){const el=document.getElementById('macroTargetsArea');if(!el)return;const t=isRestDay()?SHEHAB.macros.rest:SHEHAB.macros.train;el.innerHTML=`<div class="sg"><div class="sc"><div class="sn" style="color:var(--ok)">${t.protein}g</div><div class="sl">🥩 بروتين</div></div><div class="sc"><div class="sn" style="color:var(--bl)">${t.carbs}g</div><div class="sl">⚡ كارب</div></div><div class="sc"><div class="sn" style="color:var(--wn)">${t.fats}g</div><div class="sl">🥑 دهون</div></div><div class="sc"><div class="sn" style="color:var(--p)">${t.cals}</div><div class="sl">🔥 سعرات</div></div></div><div style="font-size:.72em;color:var(--tx2);margin-top:8px;text-align:center">يوم ${isRestDay()?'راحة':'تمرين'}</div>`}
 
 
@@ -4029,18 +4106,15 @@ function quickStartTimer(seconds){
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&_on&&_ac&&_ac.state==='suspended')_ac.resume().catch(()=>{});});
 })();
 document.addEventListener('DOMContentLoaded',()=>{
-  initTheme();
-  // loadD أولاً — تستدعي _postLoad لما تخلص
+  // loadD تحمل البيانات وتستدعي _postLoad تلقائياً
   loadD();
-  // UI الثابت بعد frame واحد
-  requestAnimationFrame(()=>{
-    initNotifications();
-    showDailyTip();
-    initLibrary();
-    renderChatHistory();
-    renderWeeklyChallenge();
-    initNewFields();
-  });
+  // باقي التهيئة
+  try{initNotifications();}catch(_){}
+  try{showDailyTip();}catch(_){}
+  try{initLibrary();}catch(_){}
+  try{renderChatHistory();}catch(_){}
+  try{renderWeeklyChallenge();}catch(_){}
+  try{initNewFields();}catch(_){}
 });
 /* ══════════════════════════════════════════════
    TECHNIQUE TIPS DATABASE
@@ -5576,7 +5650,7 @@ const PROGRAMS_DEF = {
 function renderProgramSelector() {
   const el = document.getElementById('programSelectorArea');
   if (!el) return;
-  const active = G.activeProgram || 'ppl';
+  const active = G.activeProgram || 'ulElite';
   el.innerHTML = Object.values(PROGRAMS_DEF).map(p => {
     const isAct = active === p.id;
     const days = p.id === 'ppl' ? MY_DAYS : (p.daysData||{});
@@ -5604,7 +5678,7 @@ function renderProgramSelector() {
 }
 function switchProgram(pid) {
   if (!PROGRAMS_DEF[pid]) return;
-  if ((G.activeProgram||'ppl') === pid) return toast('هذا البرنامج مفعّل بالفعل ✅','i');
+  if ((G.activeProgram||'ulElite') === pid) return toast('هذا البرنامج مفعّل بالفعل ✅','i');
   // Inline confirm — replaces native confirm() for CSP/mobile compatibility
   const existing=document.getElementById('_chgProgModal');if(existing)existing.remove();
   const overlay=document.createElement('div');overlay.id='_chgProgModal';
@@ -5623,9 +5697,13 @@ function _doSwitchProgram(pid){
     G.days = JSON.parse(JSON.stringify(MY_DAYS));
   }
   window._activeDayOrder = prog.dayOrder;
-  G.dayOrder = prog.dayOrder; // persist across refresh
+  G.dayOrder = prog.dayOrder;
   curDay = null;
+  // ── حفظ مضمون: مفتاح صغير مستقل + الحفظ الرئيسي ──
+  try{ localStorage.setItem('_gp_prog', pid); }catch(_){}
   saveD();
+  setTimeout(()=>{ try{ localStorage.setItem('_gp_prog', pid); }catch(_){} saveD(); }, 300);
+  setTimeout(()=>{ try{ localStorage.setItem('_gp_prog', pid); }catch(_){} saveD(); }, 1200);
   renderProgramSelector();
   rDays();
   document.getElementById('woArea').innerHTML = '';
@@ -5727,20 +5805,10 @@ function injectStrengthProjTooltip() {
 const _origStart_init = typeof start === 'function' ? start : null;
 // Hook into DOMContentLoaded additions
 document.addEventListener('DOMContentLoaded', () => {
+  // فقط تحديث عرض محدد البرامج — بدون لمس G.days
   setTimeout(() => {
-    renderProgramSelector();
-    // Only restore days if G.days is truly empty (not just IDB timing issue)
-    // Don't overwrite if days already loaded correctly
-    if (G.activeProgram && G.activeProgram !== 'ppl' && PROGRAMS_DEF[G.activeProgram]) {
-      const prog = PROGRAMS_DEF[G.activeProgram];
-      const hasCorrectDays = G.days && Object.keys(G.days).some(k => prog.dayOrder && prog.dayOrder.includes(k));
-      if (!hasCorrectDays && (!G.days || Object.keys(G.days).length < 2)) {
-        // G.days is truly empty - restore from program definition
-        G.days = JSON.parse(JSON.stringify(prog.daysData));
-        saveD();
-      }
-    }
-  }, 600);
+    try{ renderProgramSelector && renderProgramSelector(); }catch(_){}
+  }, 800);
 });
 /* Multi-program rDays — use window.renderProgramDays() instead */
 function renderProgramDays() {
@@ -9828,5 +9896,138 @@ document.addEventListener('visibilitychange',()=>{
 })();
 </script>
 <!-- ══ YOUTUBE INLINE PLAYER — popup mode ══ -->
+
+<script>
+
+<script>
+/* ── GymPro Data Safety v2.0 ── */
+(function(){
+  var SESS_K = '_gp_sess';
+
+  /* 1. حفظ فوري لبيانات الجلسة */
+  window._gpSaveSess = _saveSess; // expose for saveCurrentSet debounce
+  function _saveSess(){
+    try{
+      if(typeof G==='undefined') return;
+      var day = (typeof curDay!=='undefined' && curDay) || null;
+      localStorage.setItem(SESS_K, JSON.stringify({
+        currentSets: G.currentSets || {},
+        doneExs:     G.doneExs    || {},
+        completedDays: G.completedDays || {},
+        schedule:    G.schedule   || null,
+        activeProgram: G.activeProgram || 'ulElite',
+        lastDay:     day
+      }));
+      if(G.activeProgram) localStorage.setItem('_gp_prog', G.activeProgram);
+      if(G.schedule) localStorage.setItem('_gp_sched', JSON.stringify(G.schedule));
+    }catch(_){}
+  }
+
+  /* 2. حفظ فوري على كل تغيير سيت */
+  document.addEventListener('DOMContentLoaded', function(){
+    setTimeout(function(){
+      /* 2a. تغليف saveCurrentSet لحفظ فوري */
+      if(typeof window.saveCurrentSet === 'function' && !window.saveCurrentSet._gpSafe){
+        var _origSCS = window.saveCurrentSet;
+        window.saveCurrentSet = function(id, i){
+          _origSCS.apply(this, arguments);
+          /* debounced — avoid saving on every keystroke */
+          clearTimeout(window._gpScsDb);
+          window._gpScsDb = setTimeout(_saveSess, 400);
+        };
+        window.saveCurrentSet._gpSafe = true;
+      }
+      /* 2b. تغليف toggleSetDone لحفظ فوري */
+      if(typeof window.toggleSetDone === 'function' && !window.toggleSetDone._gpSafe){
+        var _origTSD = window.toggleSetDone;
+        window.toggleSetDone = function(){
+          _origTSD.apply(this, arguments);
+          _saveSess();
+        };
+        window.toggleSetDone._gpSafe = true;
+      }
+      /* 2c. تصحيح البرنامج النشط */
+      try{
+        var sp = localStorage.getItem('_gp_prog');
+        if(sp && typeof PROGRAMS_DEF!=='undefined' && PROGRAMS_DEF[sp] && G.activeProgram!==sp){
+          G.activeProgram = sp;
+          var pg = PROGRAMS_DEF[sp];
+          var ek = (pg.dayOrder||[]);
+          if(!ek.some(function(k){ return G.days&&G.days[k]; })){
+            if(pg.daysData) G.days = JSON.parse(JSON.stringify(pg.daysData));
+          }
+          if(pg.dayOrder){ G.dayOrder=pg.dayOrder; window._activeDayOrder=pg.dayOrder; }
+          try{ if(typeof renderProgramSelector==='function') renderProgramSelector(); }catch(_){}
+          try{ if(typeof rDays==='function') rDays(); }catch(_){}
+        }
+      }catch(_){}
+      /* 2d. استعادة الجلسة الحالية */
+      try{
+        var raw = localStorage.getItem(SESS_K);
+        if(!raw) return;
+        var sr = JSON.parse(raw);
+        /* دمج currentSets بدل استبداله */
+        if(sr.currentSets && Object.keys(sr.currentSets).length){
+          if(!G.currentSets) G.currentSets = {};
+          Object.keys(sr.currentSets).forEach(function(k){
+            if(!G.currentSets[k] || !Object.keys(G.currentSets[k]||{}).length)
+              G.currentSets[k] = sr.currentSets[k];
+          });
+        }
+        if(sr.schedule && !G.schedule) G.schedule = sr.schedule;
+        if(sr.doneExs){
+          Object.keys(sr.doneExs).forEach(function(k){
+            if(!G.doneExs) G.doneExs = {};
+            if(!G.doneExs[k]) G.doneExs[k] = sr.doneExs[k];
+          });
+        }
+        /* استعادة اليوم الأخير تلقائياً */
+        var ld = sr.lastDay;
+        if(!ld || !G.days || !G.days[ld]) return;
+        var sk = (typeof sesKey==='function') ? sesKey(ld) : null;
+        if(!sk) return;
+        var hasSets = G.currentSets && G.currentSets[sk] &&
+                      Object.keys(G.currentSets[sk]).some(function(id){
+                        var arr = G.currentSets[sk][id];
+                        return Array.isArray(arr) && arr.some(function(s){ return s && (s.w||s.r||s.done); });
+                      });
+        if(hasSets){
+          setTimeout(function(){
+            try{
+              if(typeof selDay==='function'){
+                selDay(ld);
+                setTimeout(function(){
+                  try{ if(typeof toast==='function') toast('⏱️ تم استعادة جلستك', 'i'); }catch(_){}
+                }, 400);
+              }
+            }catch(_){}
+          }, 300);
+        }
+      }catch(e){ console.warn('[Safety]', e); }
+    }, 150);
+  });
+
+  /* 3. حفظ عند إخفاء الصفحة أو إغلاقها */
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState==='hidden'){
+      _saveSess();
+      try{ if(typeof saveD==='function') saveD(); }catch(_){}
+    }
+  });
+  window.addEventListener('beforeunload', function(){
+    _saveSess();
+    try{
+      if(typeof G!=='undefined' && typeof localStorage!=='undefined')
+        localStorage.setItem(typeof K!=='undefined'?K:'gymProAI_v12_fixed', JSON.stringify(G));
+    }catch(_){ try{ if(typeof saveD==='function') saveD(); }catch(_){} }
+  }, {capture:true});
+
+  /* 4. حفظ تلقائي كل 30 ثانية (lightweight فقط — saveD عند إخفاء/إغلاق فقط) */
+  setInterval(function(){
+    _saveSess();
+  }, 30000);
+
+})();
+</script>
 </body>
 </html>
