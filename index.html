@@ -377,6 +377,11 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 [data-theme="light"] .ctn::before{background:rgba(147,197,253,.2)}
 [data-theme="light"] .hdr{background:rgba(255,255,255,.75);border-bottom:1px solid rgba(234,88,12,.15)}
 [data-theme="light"] .card{background:rgba(255,255,255,.72);border:1px solid rgba(234,88,12,.12);box-shadow:0 4px 24px rgba(234,88,12,.08)}
+[data-theme="light"] .dash-card{background:rgba(255,255,255,.72);border-color:rgba(234,88,12,.14);box-shadow:0 4px 24px rgba(234,88,12,.08)}
+[data-theme="light"] .dash-stats{background:rgba(234,88,12,.05)}
+[data-theme="light"] .dash-divider{background:rgba(234,88,12,.12)}
+[data-theme="light"] .dash-name{color:#1e1b4b}
+[data-theme="light"] .dash-ai-msg{color:#1e1b4b}
 [data-theme="light"] .ai-coach-card{background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(219,39,119,.08));border:1px solid rgba(251,191,36,.25)}
 [data-theme="light"] .exi{background:rgba(255,255,255,.65);border-color:rgba(234,88,12,.12)}
 [data-theme="light"] .exi.done{background:rgba(5,150,105,.06);border-color:rgba(5,150,105,.25)}
@@ -686,7 +691,48 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .paused-animations *{animation-play-state:paused!important}
 @keyframes _ytFadeIn{from{opacity:0}to{opacity:1}}
 @keyframes _ytZoomIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+
+
+/* ══ PERF: pause animations via class ══ */
+.paused-animations *{animation-play-state:paused!important}
+
+/* ══ COMPACT DASHBOARD CARD ══ */
+.dash-card{background:rgba(255,255,255,.09);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.13);border-radius:24px;padding:14px 15px 13px;margin-bottom:12px;animation:cardIn .35s ease;box-shadow:0 4px 24px rgba(0,0,0,.18)}
+.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.dash-name{font-size:1.05em;font-weight:900;color:var(--tx);letter-spacing:-.01em}
+.dash-date{font-size:.65em;color:var(--tx2);margin-top:2px;font-weight:600}
+.dash-stats{display:flex;align-items:center;background:rgba(0,0,0,.18);border-radius:12px;padding:8px 10px;margin-bottom:9px}
+.ds{flex:1;text-align:center}
+.ds-v{display:block;font-size:1em;font-weight:900;color:var(--p);line-height:1.1}
+.ds-l{font-size:.56em;color:var(--tx3);font-weight:700;margin-top:1px;display:block}
+.ds-sep{width:1px;height:24px;background:rgba(255,255,255,.1);flex-shrink:0}
+.dash-bar-wrap{margin-bottom:9px}
+.dash-bar-row{display:flex;justify-content:space-between;margin-top:4px}
+.dash-bar-row span{font-size:.6em;color:var(--tx3)}
+.dash-coach-row{display:flex;gap:9px;align-items:flex-start;margin-bottom:9px}
+.dash-coach-icon{font-size:1.5em;flex-shrink:0;margin-top:1px;animation:float 3s ease-in-out infinite}
+.dash-ai-msg{font-size:.8em;color:var(--tx);line-height:1.6;font-weight:600}
+.dash-actions{display:flex;gap:6px;flex-wrap:wrap}
+.dash-divider{height:1px;background:rgba(255,255,255,.1);margin:10px -15px;width:calc(100% + 30px)}
+.dash-card .dscroll{padding:6px 0 2px;margin:0}
+.dash-mini-badge{padding:3px 10px;border-radius:20px;font-size:.66em;font-weight:800}
+
+/* Fatigue bars in dash */
+.fatigue-bar-inner{height:4px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden}
+.fatigue-bar-fill{height:100%;border-radius:4px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.fatigue-low .fatigue-bar-fill{background:var(--ok)}
+.fatigue-moderate .fatigue-bar-fill{background:var(--wn)}
+.fatigue-high .fatigue-bar-fill{background:var(--no)}
+.fatigue-critical .fatigue-bar-fill{background:#ff8080;animation:criticalPulse 1s ease-in-out infinite}
+
+/* ══ EXERCISE CARD — color dot design ══ */
+.exi-header{padding:12px 14px 10px;display:flex;align-items:flex-start;gap:10px}
+.exi-color-dot{width:3px;align-self:stretch;border-radius:2px;flex-shrink:0;min-height:34px}
+.exi-info{flex:1;min-width:0}
+.exi-body{padding:0 14px 13px}
+
 </style>
+
 </head>
 <body>
 <div class="tc" id="toasts"></div>
@@ -695,80 +741,118 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 <div class="hdr">
   <div class="hdr-top">
     <div>
-      <h1>🏆 GymPro AI Titan Elite</h1>
+      <h1>🏆 GymPro AI Titan</h1>
       <div class="hdr-sub">
         <span id="tDate"></span>
         <span class="ai-badge">⚡ ELITE</span>
-        <span class="block-badge" id="blockBadge">V1</span><span class="tt-q" onclick="showTip(this,'Block Training: تقسيم التدريب لأسابيع متخصصة. Volume = حجم عالٍ. Intensity = أوزان ثقيلة. Peak = أقصى قوة. Deload = راحة مقصودة للتكيّف والنمو.')">?</span>
+        <span class="block-badge block-volume" id="blockBadge">Volume</span>
       </div>
     </div>
     <div class="hdr-r">
-      <div class="week-badge" id="weekBdg">📅 0/6</div>
-      <div class="streak-badge" title="Streak: عدد أيام التمرين المتتالية">🔥 <span id="strk">0</span><span class="tt-q" onclick="showTip(this,'Streak: عدد أيام التمرين المتتالية دون انقطاع. يُحسب عندما تُسجّل جلسة كل يوم. انقطاع يوم يُعيده لصفر. حاول الحفاظ عليه لبناء عادة قوية.')">?</span></div>
+      <div class="week-badge" id="weekBdg">📅 0/4</div>
+      <div class="streak-badge">🔥 <span id="strk">0</span></div>
       <div class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</div>
     </div>
   </div>
-  <div class="fatigue-bar-wrap" id="fatigueBarWrap">
-    <div class="fatigue-bar-inner"><div class="fatigue-bar-fill" id="fatigueBarFill" style="width:0%"></div></div>
-    <div class="fatigue-label"><span id="fatigueBarLabel">Fatigue 0%</span><span id="blockLabel">Block 1 - Volume</span></div>
-  </div>
-  <div class="qstats" id="quickStats"></div>
 </div>
 
 <div class="ctn">
 
 <!-- ══ WORKOUT PAGE ══ -->
 <div class="pg act" id="pg-wo">
-  <div id="pinnedNoteBar" style="display:none;background:rgba(253,230,138,.12);border:1px solid rgba(253,230,138,.3);border-radius:12px;padding:10px 14px;margin-bottom:8px;align-items:center;gap:10px">
-    <span style="font-size:1.1em">📌</span>
-    <span id="pinnedNoteText" style="flex:1;font-size:.82em;color:var(--wn);line-height:1.5"></span>
-    <button onclick="clearPinnedNote()" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:.8em">✕</button>
-  </div>
-  <div id="readinessBanner" style="margin-bottom:8px"></div>
-  <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">
-    <button id="homeModeBtn" class="btn btn-dk btn-sm" onclick="toggleHomeMode()" style="font-size:.75em">🏠 وضع المنزل: إيقاف</button>
-    <span style="font-size:.7em;color:var(--tx3)">بدائل وزن جسم/دمبل</span>
-  </div>
-  <div id="morningCard"></div>
-  <div id="dayStatusBanner"></div>
-  <div class="period-banner" id="periodBanner"></div>
-  <div class="ai-coach-card">
-    <div class="ai-icon">🤖</div>
-    <div class="ai-title">FITPRO AI TITAN ELITE — شهاب</div>
-    <div id="recoveryBadgeArea"></div>
-    <div id="fatigueBadgeArea"></div>
-    <div class="ai-coach-msg" id="aiCoachMsg">مرحباً شهاب! جاهز للتمرين؟</div>
-    <div class="ai-actions">
-      <button class="btn btn-ai btn-sm" onclick="getAIAdvice(this)">💡 نصيحة AI</button>
-      <button class="btn btn-pu btn-sm" onclick="analyzeSession(this)">📊 حلل الجلسة</button>
-      <button class="btn btn-i btn-sm" onclick="go('ai')">💬 دردشة</button>
+
+  <!-- ══ DASHBOARD CARD — كل شيء في كارت واحدة ══ -->
+  <div class="dash-card">
+
+    <!-- Top row: الاسم + Badge + ثيم -->
+    <div class="dash-top">
+      <div>
+        <div class="dash-name">💪 شهاب</div>
+        <div class="dash-date" id="tDate2"></div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <span class="block-badge block-volume" id="blockBadge2">Volume</span>
+        <div class="theme-btn" onclick="toggleTheme()" id="themeBtn2">🌙</div>
+      </div>
     </div>
-  </div>
-  <div id="laggingMuscleAlert"></div>
-  <div id="weeklyChallenge"></div>
-  <div class="card">
-    <div class="ct">📅 اختر يوم التمرين</div>
+
+    <!-- Stats row -->
+    <div class="dash-stats">
+      <div class="ds"><span class="ds-v" id="hstatStreak">0</span><span class="ds-l">🔥 streak</span></div>
+      <div class="ds-sep"></div>
+      <div class="ds"><span class="ds-v" id="hstatSessions">0</span><span class="ds-l">جلسة</span></div>
+      <div class="ds-sep"></div>
+      <div class="ds"><span class="ds-v" id="hstatWeek">0/4</span><span class="ds-l">الأسبوع</span></div>
+      <div class="ds-sep"></div>
+      <div class="ds"><span class="ds-v" id="hstatRecovery">-</span><span class="ds-l">Recovery</span></div>
+      <div class="ds-sep"></div>
+      <div class="ds"><span class="ds-v" id="hstatFatigue">-</span><span class="ds-l">Fatigue</span></div>
+    </div>
+
+    <!-- Fatigue bar -->
+    <div class="dash-bar-wrap" id="fatigueBarWrap">
+      <div class="fatigue-bar-inner"><div class="fatigue-bar-fill" id="fatigueBarFill" style="width:0%"></div></div>
+      <div class="dash-bar-row">
+        <span id="fatigueBarLabel">Fatigue 0%</span>
+        <span id="blockLabel">Block 1 · Volume</span>
+      </div>
+    </div>
+
+    <!-- AI coach row -->
+    <div class="dash-coach-row">
+      <span class="dash-coach-icon">🤖</span>
+      <div style="flex:1;min-width:0">
+        <div class="dash-ai-msg" id="aiCoachMsg">مرحباً شهاب! جاهز للتمرين؟</div>
+        <div id="recoveryBadgeArea"></div>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="dash-actions">
+      <button class="btn btn-ai btn-sm" onclick="getAIAdvice(this)">💡 نصيحة</button>
+      <button class="btn btn-pu btn-sm" onclick="analyzeSession(this)">📊 تحليل</button>
+      <button class="btn btn-i btn-sm" onclick="go('ai')">💬 دردشة</button>
+      <button id="homeModeBtn" class="btn btn-dk btn-sm" onclick="toggleHomeMode()">🏠 منزل</button>
+    </div>
+
+    <!-- Day chips -->
+    <div class="dash-divider"></div>
     <div class="dscroll" id="dayList"></div>
   </div>
+
+  <!-- العناصر الديناميكية -->
+  <div id="pinnedNoteBar" style="display:none;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:12px;padding:9px 13px;margin-bottom:8px;display:none;align-items:center;gap:10px">
+    <span>📌</span>
+    <span id="pinnedNoteText" style="flex:1;font-size:.8em;color:var(--wn);line-height:1.5"></span>
+    <button onclick="clearPinnedNote()" style="background:none;border:none;color:var(--tx3);cursor:pointer">✕</button>
+  </div>
+  <div id="readinessBanner"></div>
+  <div id="fatigueBadgeArea" style="display:none"></div>
+  <div id="morningCard"></div>
+  <div id="dayStatusBanner"></div>
+  <div id="periodBanner"></div>
+  <div id="laggingMuscleAlert"></div>
+  <div id="weeklyChallenge"></div>
   <div id="deloadBanner"></div>
   <div id="compBarArea"></div>
   <div id="sessionPlanArea"></div>
   <div id="woArea"></div>
+
   <button class="wo-ai-btn" id="woAiBtn" onclick="openWoAI()" title="اسأل AI">🤖</button>
+
   <div id="sesAct" style="display:none">
     <button class="plan-btn" onclick="showSessionPlan(this)">📋 خطة الجلسة من AI — أوزان وعدات مقترحة</button>
-    <!-- ══ SESSION JOURNAL ══ -->
     <div class="journal-card">
-      <div class="journal-title">📝 مذكرة الجلسة <span class="tt-q" onclick="showTip(this,'سجّل حالتك بعد كل جلسة — يساعد الـ AI على فهم أدائك بشكل أعمق وتقديم توصيات أدق.')">?</span></div>
-      <div style="font-size:.74em;color:var(--tx2);margin-bottom:6px;text-align:center">كيف كانت الجلسة؟</div>
+      <div class="journal-title">📝 مذكرة الجلسة <span class="tt-q" onclick="showTip(this,'سجّل حالتك بعد كل جلسة.')">?</span></div>
+      <div style="font-size:.72em;color:var(--tx2);margin-bottom:8px;text-align:center">كيف كانت الجلسة؟</div>
       <div class="mood-row" id="moodRow">
-        <div class="mood-btn" data-mood="1" onclick="selectMood(1)" title="ضعيف جداً">😩</div>
-        <div class="mood-btn" data-mood="2" onclick="selectMood(2)" title="أقل من المعتاد">😕</div>
-        <div class="mood-btn" data-mood="3" onclick="selectMood(3)" title="عادي">😐</div>
-        <div class="mood-btn" data-mood="4" onclick="selectMood(4)" title="جيد">💪</div>
-        <div class="mood-btn" data-mood="5" onclick="selectMood(5)" title="ممتاز">🔥</div>
+        <div class="mood-btn" data-mood="1" onclick="selectMood(1)">😩</div>
+        <div class="mood-btn" data-mood="2" onclick="selectMood(2)">😕</div>
+        <div class="mood-btn" data-mood="3" onclick="selectMood(3)">😐</div>
+        <div class="mood-btn" data-mood="4" onclick="selectMood(4)">💪</div>
+        <div class="mood-btn" data-mood="5" onclick="selectMood(5)">🔥</div>
       </div>
-      <textarea class="journal-note" id="journalNote" rows="2" placeholder="ملاحظات الجلسة... (اختياري) — مثال: شعرت بإجهاد في الكتف، أو قاعدة التمرين ممتازة اليوم"></textarea>
+      <textarea class="journal-note" id="journalNote" rows="2" placeholder="ملاحظات الجلسة..."></textarea>
     </div>
     <button class="save-btn" onclick="saveSes()">💾 حفظ الجلسة</button>
   </div>
@@ -1352,9 +1436,9 @@ if(G.claudeKey)setTimeout(()=>{const i=document.getElementById('claudeKeyInput')
 const t=document.getElementById('notifToggle');if(t)t.checked=G.notifications;
 }catch(e){console.warn('loadD:',e);G.days=JSON.parse(JSON.stringify(MY_DAYS));}}
 function saveD(){try{localStorage.setItem(K,JSON.stringify(G))}catch(e){/* BUG FIX: handle QuotaExceededError — prune old chat history */if(e.name==='QuotaExceededError'||e.code===22){if(G.chatHistory.length>20){G.chatHistory=G.chatHistory.slice(-20);try{localStorage.setItem(K,JSON.stringify(G));return}catch(e2){}}if(G.ses.length>200){G.ses=G.ses.slice(-150);try{localStorage.setItem(K,JSON.stringify(G));return}catch(e3){}}toast('⚠️ مساحة التخزين ممتلئة — صدّر بياناتك','w');}}}
-function rDate(){const d=new Date(),dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],mn=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],el=document.getElementById('tDate');if(el)el.textContent=`${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`}
-function rBlockBadge(){const i=PERIOD.info(),el=document.getElementById('blockBadge');if(!el)return;el.className='block-badge '+i.color;el.textContent=`${i.icon} ${i.label}`}
-function rFatigueBar(){const sc=FATIGUE.score(),lv=FATIGUE.level(),wr=document.getElementById('fatigueBarWrap'),fi=document.getElementById('fatigueBarFill'),lb=document.getElementById('fatigueBarLabel'),bl=document.getElementById('blockLabel');if(!fi)return;wr.className=`fatigue-bar-wrap fatigue-${lv}`;fi.style.width=`${sc}%`;lb.textContent=`Block ${PERIOD.week()}/4 — ${PERIOD.info().label}`;const lb2=document.getElementById('fatigueBarLabel');if(lb2)lb2.textContent=`Fatigue ${sc}% — ${FATIGUE.label()}`}
+function rDate(){const d=new Date(),dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],mn=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];const txt=`${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`;['tDate','tDate2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=txt})}
+function rBlockBadge(){const i=PERIOD.info();['blockBadge','blockBadge2'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.className='block-badge '+i.color;el.textContent=`${i.icon} ${i.label}`;})}
+function rFatigueBar(){const sc=FATIGUE.score(),lv=FATIGUE.level(),fi=document.getElementById('fatigueBarFill');if(!fi)return;const card=document.querySelector('.dash-card');if(card){card.classList.remove('fatigue-low','fatigue-moderate','fatigue-high','fatigue-critical');card.classList.add('fatigue-'+lv);}fi.style.width=`${sc}%`;const lb=document.getElementById('blockLabel');if(lb)lb.textContent=`Block ${PERIOD.week()}/4 — ${PERIOD.info().label}`;const lb2=document.getElementById('fatigueBarLabel');if(lb2)lb2.textContent=`Fatigue ${sc}% — ${FATIGUE.label()}`}
 function rPeriodBanner(){const el=document.getElementById('periodBanner');if(!el)return;const i=PERIOD.info(),w=PERIOD.week(),chips=[1,2,3,4].map(n=>`<div class="pw-chip ${n<w?'done':n===w?'active':''}">${n}</div>`).join('');el.innerHTML=`<div class="period-info"><div class="period-title" style="color:var(--p)">${i.icon} ${i.label}</div><div class="period-desc">${i.desc}</div></div><div class="period-week-chips">${chips}</div>`}
 function rRecoveryBadge(){const rs=recoveryScore(),el=document.getElementById('recoveryBadgeArea');if(!el)return;const c=rs>=70?'high':rs>=50?'mid':'low',ic=rs>=70?'✅':rs>=50?'⚡':'⚠️',lb=rs>=70?'استعداد ممتاز':rs>=50?'استعداد جيد':'يُنصح بالراحة';el.innerHTML=`<div class="recovery-badge ${c}">${ic} Recovery ${rs}/100 — ${lb}</div>`}
 function rFatigueBadge(){const el=document.getElementById('fatigueBadgeArea');if(!el)return;el.innerHTML=`<div class="fatigue-badge ${FATIGUE.level()}">🔥 Fatigue ${FATIGUE.score()}/100 — ${FATIGUE.label()}</div>`}
@@ -1363,9 +1447,57 @@ function rQuickStats(){const el=document.getElementById('quickStats');if(!el)ret
 let curDay=null;
 let sessionStartTime=null,sessionTimerInterval=null;
 function fmtElapsed(ms){const t=Math.floor(ms/1000),h=Math.floor(t/3600),m=Math.floor((t%3600)/60),s=t%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
-function rDays(){const wk=weekKey(),done=G.completedDays[wk]||{},c=getCompletedCount(),wb=document.getElementById('weekBdg'),st=document.getElementById('strk'),dl=document.getElementById('dayList');if(wb)wb.textContent=`📅 ${c}/${dayOrder.length}`;if(st)st.textContent=G.streak||0;if(!dl)return;dl.innerHTML=dayOrder.map(k=>{const d=G.days[k];if(!d)return'';const ic=done[k],ia=curDay===k;return`<div class="dchip ${ia?'act':''} ${ic&&!ia?'completed':''}" onclick="selDay('${k}')">${ic?'<div class="done-mark">✓</div>':''}<div class="dn">${d.name}</div><div class="dm">${d.muscles}</div></div>`}).join('')}
+function rDays(){const wk=weekKey(),done=G.completedDays[wk]||{},c=getCompletedCount(),wb=document.getElementById('weekBdg'),st=document.getElementById('strk'),dl=document.getElementById('dayList');if(wb)wb.textContent=`📅 ${c}/${dayOrder.length}`;if(st)st.textContent=G.streak||0;
+// ── Dash stats ──
+const _rs=recoveryScore(),_fs=FATIGUE.score();
+const _set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+_set('hstatStreak',(G.streak||0)+'🔥');_set('hstatSessions',G.ses.length);
+_set('hstatWeek',`${c}/${dayOrder.length}`);_set('hstatRecovery',_rs+'%');
+_set('hstatFatigue',_fs);
+if(!dl)return;dl.innerHTML=dayOrder.map(k=>{const d=G.days[k];if(!d)return'';const ic=done[k],ia=curDay===k;return`<div class="dchip ${ia?'act':''} ${ic&&!ia?'completed':''}" onclick="selDay('${k}')">${ic?'<div class="done-mark">✓</div>':''}<div class="dn">${d.name}</div><div class="dm">${d.muscles}</div></div>`}).join('')}
 function selDay(k){if(typeof resetJournal==='function')resetJournal();if(curDay!==k){sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;}curDay=k;rDays();rExs();const el=document.getElementById('sesAct');if(el)el.style.display='block';setTimeout(()=>{const w=document.getElementById('woArea');if(w)w.scrollIntoView({behavior:'smooth',block:'start'})},100)}
-function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;wo.innerHTML=`<div class="card"><div class="ct">💪 ${day.muscles} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} تمرين</span></div>${day.exercises.map(ex=>{if(ex.isWarmup)return`<div class="warmup-box"><span style="font-size:1.4em">🔥</span><div><strong>إحماء:</strong> ${ex.reps}</div></div>`;const ns=ex.sets||3,ls=getLastSets(ex.id),be=getBestSet(ex.id)||ex.lastW||0,dn=G.doneExs[sk]&&G.doneExs[sk][ex.id],or=OE.getRecommendation(ex.id,ex.name,be),sg=pfl[ex.id],vs=VELOCITY.state(ex.id),ss=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[],dc=ss.length?eliteDecision(ex.id,ex.name,ss):{action:'stable',weight:be,msg:''};const coachH=getSmartCoach(ex,ex.id,be);const osH='';const edH='';const vcH=vs!=='stable'?`<span class="velocity-chip velocity-${vs}">${VELOCITY.label(vs)}</span>`:'';const lsH=sg?`<div style="background:rgba(254,215,170,.07);border:1px dashed rgba(254,215,170,.25);border-radius:10px;padding:10px;margin-top:8px;font-size:.76em"><strong style="color:var(--pu)">💡 من الجلسة السابقة:</strong> ${sg.reason}<div style="margin-top:4px;color:var(--tx2)">الهدف: ${sg.nextWeight}كجم × ${sg.targetReps}</div></div>`:'';const rows=Array.from({length:ns},(_,i)=>{const ps=ls[i]||null,pw=ps?ps.w:be,pr=ps?ps.r:'',pp=ps?ps.rpe:'',pt=pw>0?(pr?`${pw}×${pr}`:`${pw}`):'--';return`<div class="set-row" id="sr-${ex.id}-${i}"><div class="set-num" id="snum-${ex.id}-${i}">${i+1}</div><div class="set-prev">${pt}${pp?'<br><span style="font-size:.7em;color:var(--pu)">RPE '+pp+'</span>':''}</div><input type="number" class="set-in" id="sw-${ex.id}-${i}" placeholder="${pw>0?pw:''}" step="0.5" min="0" inputmode="decimal" oninput="onSetChange('${ex.id}',${i},${be})"><input type="number" class="set-in" id="sr2-${ex.id}-${i}" placeholder="${pr||'عدات'}" step="1" min="1" inputmode="numeric" oninput="onSetChange('${ex.id}',${i},${be})" style="font-size:.78em"><input type="number" class="rpe-in" id="srpe-${ex.id}-${i}" placeholder="${pp||'RPE'}" step="0.5" min="1" max="10" inputmode="decimal" oninput="onRPEChange('${ex.id}',${i},true)"><div class="set-chk" id="sc-${ex.id}-${i}" onclick="toggleSetDone('${ex.id}',${i})"></div></div>`}).join('');const mClr=getMuscleColor(ex.muscle||'');return`<div class="exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="${ex.muscle||''}"><div class="muscle-stripe" style="background:rgb(${mClr})"></div><div class="ext"><div style="flex:1"><div class="exn">${ex.name}</div><div class="exd">${ns} سيتات | ${ex.reps} عدة | ${ex.unit}</div>${ex.muscle?`<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:4px"><span class="muscle-tag">${ex.muscle}</span>${vcH}</div>`:''} ${be>0?`<div style="font-size:.65em;color:var(--wn);margin-top:3px">🏆 أفضل: ${be} ${ex.unit}</div>`:''}</div><div class="done-check ${dn?'checked':''}" id="chk-${ex.id}" onclick="toggleDone('${ex.id}')">${dn?'✓':''}</div></div>${coachH}${lsH}${(()=>{const tk=Object.keys(TIPS).find(k=>ex.name.includes(k)),fpH=renderFormPhases(ex.name);if(!tk&&!fpH)return'';let _th='';if(tk)_th+=`<button class="tip-btn" onclick="this.nextElementSibling.classList.toggle('open')">📋 تقنية</button><div class="tip-box" id="tip-${ex.id}">${TIPS[tk].map(t=>`<div class="tip-item"><span>✦</span><span>${t}</span></div>`).join('')}</div>`;if(fpH)_th+=`<button class="form-btn" onclick="var _fp=document.getElementById('fp-${ex.id}');_fp.style.display=_fp.style.display==='none'?'block':'none'">🎯 حركة صحيحة</button><div id="fp-${ex.id}" style="display:none">${fpH}</div>`;return _th})()}${renderWarmupProto(ex.id,ex.name,be)}<div class="sets-header"><span>#</span><span>سابق</span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE<span class="tt-q" onclick="showTip(this,'RPE (مقياس الجهد المدرَك): من 1 إلى 10. RPE 10 = أقصى جهد مطلق. RPE 8 = يمكنك تكراران إضافيتان. RPE 7 = يمكنك 3 تكرارات إضافية. المثالي: 7-9 في معظم السيتات.')">?</span></span><span>✓</span></div>${rows}<div class="sets-summary" id="sum-${ex.id}"><span class="ss-chip">0/${ns} سيت</span></div><textarea class="ex-note" id="n-${ex.id}" placeholder="📝 ملاحظة..." rows="1"></textarea><div id="injWarn-${ex.id}"></div><div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="swapExercise('${ex.id}','${ex.muscle||''}','${ex.name}')">🔀 بديل</button><button class="btn btn-dk btn-sm" style="font-size:.72em;padding:5px 10px" onclick="editExerciseInDay('${ex.id}')">✏️ تعديل</button>${G.injuries&&G.injuries.some(i=>i.active&&i.muscle===(ex.muscle||''))?'<span style="font-size:.72em;color:var(--no);padding:5px 0">⚠️ إصابة في '+ex.muscle+'</span>':''}</div></div>`}).join('')}</div>`;updateCompBar();restoreSetInputs();renderDeloadBanner();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
+function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;
+// ── Muscle color map ──
+const MC={'صدر':'255,107,43','ظهر':'96,165,250','كتف':'167,139,250','كتف خلفي':'167,139,250','ترابيس':'167,139,250','رجل':'52,211,153','رجل أمامي':'52,211,153','رجل خلفي':'110,231,183','مؤخرة':'52,211,153','سمانة':'34,211,238','باي':'251,191,36','تراي':'251,191,36','ساعد':'251,191,36','بطن':'248,113,113'};
+const getMC=m=>{const k=Object.keys(MC).find(k=>m&&m.includes(k));return k?MC[k]:'255,255,255'};
+wo.innerHTML=`<div class="card"><div class="ct">💪 ${day.muscles} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} تمرين</span></div>${day.exercises.map(ex=>{
+if(ex.isWarmup)return`<div class="warmup-box"><span style="font-size:1.4em">🔥</span><div><strong>إحماء:</strong> ${ex.reps}</div></div>`;
+const ns=ex.sets||3,ls=getLastSets(ex.id),be=getBestSet(ex.id)||ex.lastW||0,dn=G.doneExs[sk]&&G.doneExs[sk][ex.id],or=OE.getRecommendation(ex.id,ex.name,be),sg=pfl[ex.id],vs=VELOCITY.state(ex.id),ss=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[],dc=ss.length?eliteDecision(ex.id,ex.name,ss):{action:'stable',weight:be,msg:''};
+const coachH=getSmartCoach(ex,ex.id,be);
+const mClr=getMC(ex.muscle||'');
+const vcH=vs!=='stable'?`<span class="velocity-chip velocity-${vs}">${VELOCITY.label(vs)}</span>`:'';
+const tagColor=`rgba(${mClr},.12)`;const tagBorder=`rgba(${mClr},.22)`;const tagText=`rgb(${mClr})`;
+const muscleTagH=ex.muscle?`<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:5px"><span class="muscle-tag" style="background:${tagColor};border-color:${tagBorder};color:${tagText}">${ex.muscle}</span>${vcH}</div>`:'';
+const bestH=be>0?`<div style="font-size:.63em;color:var(--wn);margin-top:3px;font-weight:800">🏆 أفضل: ${be} ${ex.unit}</div>`:'';
+const lsH=sg?`<div style="background:rgba(167,139,250,.06);border:1px dashed rgba(167,139,250,.2);border-radius:10px;padding:9px;margin-top:8px;font-size:.74em"><strong style="color:var(--pu)">💡 من الجلسة السابقة:</strong> ${sg.reason}<div style="margin-top:3px;color:var(--tx2)">الهدف: ${sg.nextWeight}كجم × ${sg.targetReps}</div></div>`:'';
+const rows=Array.from({length:ns},(_,i)=>{const ps=ls[i]||null,pw=ps?ps.w:be,pr=ps?ps.r:'',pp=ps?ps.rpe:'',pt=pw>0?(pr?`${pw}×${pr}`:`${pw}`):'--';return`<div class="set-row" id="sr-${ex.id}-${i}"><div class="set-num" id="snum-${ex.id}-${i}">${i+1}</div><div class="set-prev">${pt}${pp?`<br><span style="font-size:.65em;color:var(--pu)">RPE ${pp}</span>`:''}</div><input type="number" class="set-in" id="sw-${ex.id}-${i}" placeholder="${pw>0?pw:''}" step="0.5" min="0" inputmode="decimal" oninput="onSetChange('${ex.id}',${i},${be})"><input type="number" class="set-in" id="sr2-${ex.id}-${i}" placeholder="${pr||'عدات'}" step="1" min="1" inputmode="numeric" oninput="onSetChange('${ex.id}',${i},${be})" style="font-size:.78em"><input type="number" class="rpe-in" id="srpe-${ex.id}-${i}" placeholder="${pp||'RPE'}" step="0.5" min="1" max="10" inputmode="decimal" oninput="onRPEChange('${ex.id}',${i},true)"><div class="set-chk" id="sc-${ex.id}-${i}" onclick="toggleSetDone('${ex.id}',${i})"></div></div>`}).join('');
+const tipsH=(()=>{const tk=Object.keys(TIPS).find(k=>ex.name.includes(k)),fpH=renderFormPhases(ex.name);if(!tk&&!fpH)return'';let h='';if(tk)h+=`<button class="tip-btn" onclick="this.nextElementSibling.classList.toggle('open')">📋 تقنية</button><div class="tip-box" id="tip-${ex.id}">${TIPS[tk].map(t=>`<div class="tip-item"><span>✦</span><span>${t}</span></div>`).join('')}</div>`;if(fpH)h+=`<button class="form-btn" onclick="var _fp=document.getElementById('fp-${ex.id}');_fp.style.display=_fp.style.display==='none'?'block':'none'">🎯 حركة صحيحة</button><div id="fp-${ex.id}" style="display:none">${fpH}</div>`;return h})();
+return`<div class="exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="${ex.muscle||''}">
+  <div class="exi-header">
+    <div class="exi-color-dot" style="background:linear-gradient(180deg,rgb(${mClr}),rgba(${mClr},.3))"></div>
+    <div class="exi-info">
+      <div class="exn">${ex.name}</div>
+      <div class="exd">${ns} سيتات · ${ex.reps} عدة · ${ex.unit}</div>
+      ${muscleTagH}${bestH}
+    </div>
+    <div class="done-check ${dn?'checked':''}" id="chk-${ex.id}" onclick="toggleDone('${ex.id}')">${dn?'✓':''}</div>
+  </div>
+  <div class="exi-body">
+    ${coachH}${lsH}${tipsH}
+    ${renderWarmupProto(ex.id,ex.name,be)}
+    <div class="sets-header"><span>#</span><span>سابق</span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE<span class="tt-q" onclick="showTip(this,'RPE: 10=أقصى جهد. 8=يمكنك تكراران. 7=3 تكرارات إضافية. المثالي: 7-9.')">?</span></span><span>✓</span></div>
+    ${rows}
+    <div class="sets-summary" id="sum-${ex.id}"><span class="ss-chip">0/${ns} سيت</span></div>
+    <textarea class="ex-note" id="n-${ex.id}" placeholder="📝 ملاحظة..." rows="1"></textarea>
+    <div id="injWarn-${ex.id}"></div>
+    <div style="display:flex;gap:6px;margin-top:8px">
+      <button class="btn btn-dk btn-sm" style="font-size:.71em" onclick="swapExercise('${ex.id}','${ex.muscle||''}','${ex.name}')">🔀 بديل</button>
+      <button class="btn btn-dk btn-sm" style="font-size:.71em" onclick="editExerciseInDay('${ex.id}')">✏️ تعديل</button>
+      ${G.injuries&&G.injuries.some(i=>i.active&&i.muscle===(ex.muscle||''))?`<span style="font-size:.71em;color:var(--no);display:flex;align-items:center">⚠️ إصابة</span>`:''}
+    </div>
+  </div>
+</div>`}).join('')}</div>`;
+updateCompBar();restoreSetInputs();renderDeloadBanner();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
   if(G.homeMode){document.querySelectorAll('.exn').forEach(el=>{const orig=el.textContent.trim();const alt=Object.keys(HOME_ALTS||{}).find(k=>orig.includes(k));if(alt&&HOME_ALTS[alt]!==orig){el.innerHTML=`<span style="text-decoration:line-through;color:var(--tx3);font-size:.85em">${orig}</span><br><span style="color:var(--ok)">${HOME_ALTS[alt]}</span>`;}});}
 }
 function onRPEChange(id,i,isUserInput){
