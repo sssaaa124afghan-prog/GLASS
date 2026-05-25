@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#060c1a">
+<meta name="theme-color" content="#00040f">
 <script>
 // ✅ Inline PWA manifest — no external manifest.json needed
 (function(){
-  const m={name:"GymPro AI Titan Elite",short_name:"GymPro",start_url:"./",display:"standalone",background_color:"#060c1a",theme_color:"#f97316",icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23f97316' width='100' height='100' rx='20'/%3E%3Ctext y='.9em' font-size='80' x='10'%3E🏆%3C/text%3E%3C/svg%3E",sizes:"any",type:"image/svg+xml"}]};
+  const m={name:"GymPro AI Titan Elite",short_name:"GymPro",start_url:"./",display:"standalone",background_color:"#00040f",theme_color:"#00d4ff",icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23f97316' width='100' height='100' rx='20'/%3E%3Ctext y='.9em' font-size='80' x='10'%3E🏆%3C/text%3E%3C/svg%3E",sizes:"any",type:"image/svg+xml"}]};
   const blob=new Blob([JSON.stringify(m)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
   const link=document.createElement('link');
@@ -17,7 +17,7 @@
   document.head.appendChild(link);
 })();
 </script>
-<title>🏆 GymPro AI Titan Elite v12</title>
+<title>⚔️ Solo Gym System</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -461,6 +461,10 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 [data-theme="light"] .sa-warning{background:rgba(217,119,6,.05);border-color:rgba(217,119,6,.2)}
 [data-theme="light"] .sa-solution-box{background:rgba(234,88,12,.04)}
 [data-theme="light"] #floatTimer{background:rgba(255,255,255,.9)!important;border-color:rgba(234,88,12,.3)!important}
+[data-theme="light"] .card:hover{border-color:rgba(234,88,12,.22)}
+[data-theme="light"] .exi:hover{border-color:rgba(234,88,12,.28);box-shadow:0 6px 20px rgba(234,88,12,.08)}
+[data-theme="light"] #profileEditForm input,[data-theme="light"] #profileEditForm textarea{background:rgba(255,255,255,.8)!important;border-color:rgba(234,88,12,.18)!important;color:#1e1b4b!important}
+[data-theme="light"] .dash-card::before{background:linear-gradient(90deg,transparent,rgba(234,88,12,.3),transparent)}
 @media(max-width:380px){
   .hdr h1{font-size:1.05em}
   .dchip{min-width:85px;padding:10px 12px}
@@ -689,12 +693,34 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 
 /* ══ PERF: pause all animations via class (far cheaper than forEach on DOM) ══ */
 .paused-animations *{animation-play-state:paused!important}
+
+/* ══ VISUAL POLISH ══ */
+/* Input focus — orange ring */
+input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(249,115,22,.55)!important;box-shadow:0 0 0 3px rgba(249,115,22,.12)!important}
+/* Exercise card hover lift */
+.exi:hover{border-color:rgba(249,115,22,.22);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+/* Card hover — subtle */
+.card:hover{border-color:rgba(255,255,255,.18)}
+/* Btn-p hover glow boost */
+.btn-p:hover{box-shadow:0 6px 22px rgba(249,115,22,.45)}
+/* Header bottom accent line */
+.hdr{box-shadow:0 4px 24px rgba(0,0,0,.3),0 1px 0 rgba(249,115,22,.06)}
+/* Dash-card top accent line */
+.dash-card::before{content:'';position:absolute;top:0;left:24px;right:24px;height:1px;background:linear-gradient(90deg,transparent,rgba(249,115,22,.35),transparent);border-radius:1px;pointer-events:none}
+.dash-card{position:relative;overflow:hidden}
+/* Streak badge pulse */
+.streak-badge{animation:streakPulse 3s ease-in-out infinite}
+@keyframes streakPulse{0%,100%{box-shadow:0 0 0 0 rgba(249,115,22,.0)}50%{box-shadow:0 0 0 4px rgba(249,115,22,.12)}}
+/* Day chip — smoother active shadow */
+.dchip.act{box-shadow:0 8px 24px rgba(249,115,22,.42),0 2px 8px rgba(0,0,0,.2)}
+/* Stat tab pills */
+.stat-tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.stat-tabs::-webkit-scrollbar{display:none}
+/* Bottom nav — ensure nav text is always one line */
+.bni{white-space:nowrap}
 @keyframes _ytFadeIn{from{opacity:0}to{opacity:1}}
 @keyframes _ytZoomIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
 
-
-/* ══ PERF: pause animations via class ══ */
-.paused-animations *{animation-play-state:paused!important}
 
 /* ══ COMPACT DASHBOARD CARD ══ */
 .dash-card{background:rgba(255,255,255,.09);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.13);border-radius:24px;padding:14px 15px 13px;margin-bottom:12px;animation:cardIn .35s ease;box-shadow:0 4px 24px rgba(0,0,0,.18)}
@@ -717,35 +743,336 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .dash-card .dscroll{padding:6px 0 2px;margin:0}
 .dash-mini-badge{padding:3px 10px;border-radius:20px;font-size:.66em;font-weight:800}
 
-/* Fatigue bars in dash */
-.fatigue-bar-inner{height:4px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden}
-.fatigue-bar-fill{height:100%;border-radius:4px;transition:width .8s cubic-bezier(.4,0,.2,1)}
-.fatigue-low .fatigue-bar-fill{background:var(--ok)}
-.fatigue-moderate .fatigue-bar-fill{background:var(--wn)}
-.fatigue-high .fatigue-bar-fill{background:var(--no)}
-.fatigue-critical .fatigue-bar-fill{background:#ff8080;animation:criticalPulse 1s ease-in-out infinite}
-
 /* ══ EXERCISE CARD — color dot design ══ */
 .exi-header{padding:12px 14px 10px;display:flex;align-items:flex-start;gap:10px}
 .exi-color-dot{width:3px;align-self:stretch;border-radius:2px;flex-shrink:0;min-height:34px}
 .exi-info{flex:1;min-width:0}
 .exi-body{padding:0 14px 13px}
 
+/* ═══ SOLO LEVELING SYSTEM ═══ */
+.wo-level-track{display:flex;gap:5px;align-items:center;padding:10px 0 4px;overflow-x:auto;scrollbar-width:none}
+.wo-level-track::-webkit-scrollbar{display:none}
+.lvl-pip{height:4px;border-radius:2px;flex-shrink:0;transition:all .5s cubic-bezier(.4,0,.2,1);min-width:24px;flex:1}
+.lvl-pip.cleared{background:linear-gradient(90deg,#22d3ee,#00d4ff);box-shadow:0 0 6px rgba(0,212,255,.5)}
+.lvl-pip.active{background:linear-gradient(90deg,#00d4ff,#38bdf8);box-shadow:0 0 10px rgba(0,212,255,.8);animation:pipPulse 1.5s ease-in-out infinite}
+.lvl-pip.locked{background:rgba(255,255,255,.09)}
+@keyframes pipPulse{0%,100%{box-shadow:0 0 10px rgba(0,212,255,.8)}50%{box-shadow:0 0 3px rgba(0,212,255,.3)}}
+.exi.exi-active{border-color:rgba(0,212,255,.55)!important;background:rgba(0,60,120,.08)!important;animation:exiActiveGlow 2.5s ease-in-out infinite,exIn .35s ease!important}
+@keyframes exiActiveGlow{0%,100%{border-color:rgba(0,212,255,.45);box-shadow:0 0 0 1px rgba(0,212,255,.1),0 6px 28px rgba(0,0,0,.25)}50%{border-color:rgba(0,212,255,.72);box-shadow:0 0 0 1px rgba(0,212,255,.22),0 10px 40px rgba(0,212,255,.1)}}
+.exi.exi-cleared{border-color:rgba(34,211,238,.25)!important;background:rgba(0,210,255,.025)!important;opacity:.78;animation:none!important}
+.exi.exi-cleared .exi-body{display:none!important}
+.exi.exi-locked{border-color:rgba(255,255,255,.06)!important;background:rgba(0,0,0,.12)!important;opacity:.35;pointer-events:none!important;user-select:none!important;animation:none!important;filter:saturate(0.3)}
+.exi.exi-locked .exi-body{display:none!important}
+.exi.exi-unlocking{animation:slUnlock .9s cubic-bezier(.15,.85,.3,1) forwards!important}
+@keyframes slUnlock{0%{opacity:.1;transform:translateY(30px) scale(.94);filter:blur(6px);border-color:rgba(0,212,255,1)!important;box-shadow:0 0 80px rgba(0,212,255,.7)!important}30%{border-color:rgba(0,212,255,.9)!important}70%{opacity:1;transform:translateY(-3px) scale(1.01);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);border-color:rgba(0,212,255,.55)!important}}
+.sl-cleared-bar{display:flex;gap:6px;flex-wrap:wrap;padding:6px 0 2px;align-items:center}
+.sl-cl-chip{padding:2px 9px;border-radius:6px;font-size:.7em;font-weight:800;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);color:rgba(0,212,255,.85)}
+.sl-cl-chip.gold{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.25);color:var(--wn)}
+.sl-warmup-card{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(249,115,22,.07),rgba(0,212,255,.04))!important;border:1.5px solid rgba(249,115,22,.35)!important;border-radius:14px;padding:16px;margin-bottom:10px;animation:cardIn .35s ease}
+.sl-warmup-card.cleared{border-color:rgba(34,211,238,.25)!important;background:rgba(34,211,238,.025)!important;opacity:.72;animation:none}
+.sl-warmup-title{font-size:.88em;font-weight:900;color:var(--p);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.sl-warmup-content{font-size:.78em;color:var(--tx2);line-height:1.7;margin-bottom:12px}
+.sl-gate-btn{width:100%;padding:13px;border-radius:10px;border:1.5px solid rgba(249,115,22,.45);background:linear-gradient(135deg,rgba(249,115,22,.25),rgba(0,212,255,.15));color:#fff;font-family:'Cairo';font-weight:900;font-size:.9em;cursor:pointer;transition:all .25s;box-shadow:0 4px 20px rgba(249,115,22,.2)}
+.sl-warmup-done-label{font-size:.76em;color:rgba(34,211,238,.8);font-weight:800;display:flex;align-items:center;gap:6px}
+#slSystemNotif{position:fixed;top:136px;left:50%;transform:translateX(-50%) translateY(-10px);z-index:600;width:min(300px,calc(100vw - 32px));background:rgba(1,3,14,.97);border:1.5px solid rgba(0,212,255,.65);border-radius:3px;padding:14px 18px 16px;box-shadow:0 0 50px rgba(0,212,255,.22),0 0 100px rgba(0,212,255,.08);display:none;pointer-events:none}
+#slSystemNotif.sl-show{display:block;animation:slNIn .42s cubic-bezier(.2,.8,.3,1) forwards}
+#slSystemNotif.sl-hide{animation:slNOut .3s ease-in forwards}
+@keyframes slNIn{from{opacity:0;transform:translateX(-50%) translateY(-20px) scale(.9);filter:blur(8px)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1);filter:blur(0)}}
+@keyframes slNOut{to{opacity:0;transform:translateX(-50%) translateY(-12px) scale(.96);filter:blur(4px)}}
+.sl-n-sys{font-size:.55em;color:rgba(0,212,255,.6);letter-spacing:.2em;font-weight:900;margin-bottom:6px;font-family:monospace}
+.sl-n-title{font-size:.88em;font-weight:900;color:#00d4ff;margin-bottom:4px}
+.sl-n-sub{font-size:.72em;color:rgba(255,255,255,.5);line-height:1.5}
+.sl-n-divider{height:1px;background:rgba(0,212,255,.2);margin:10px 0}
+.exi{border-radius:12px!important}
+.dchip.act{background:linear-gradient(135deg,rgba(0,180,255,.18),rgba(249,115,22,.22))!important;border-color:rgba(0,212,255,.4)!important;box-shadow:0 8px 24px rgba(0,0,0,.3),0 0 20px rgba(0,212,255,.12)!important}
+.set-row.set-done{background:rgba(0,212,255,.04)!important}
+.set-num.sn-done{background:rgba(0,212,255,.25)!important;color:#00d4ff!important}
+.cb-fill{background:linear-gradient(90deg,rgba(0,212,255,.7),rgba(249,115,22,.9))!important}
+.exi.exi-active .set-in:focus{border-color:rgba(0,212,255,.7)!important;background:rgba(0,212,255,.07)!important;box-shadow:0 0 0 3px rgba(0,212,255,.12)!important}
+body::after{background:radial-gradient(circle,rgba(0,100,180,.14),transparent 70%)!important;width:400px!important;height:400px!important}
+
+/* ═══════════════════════════════════════════════════════
+   ⚔️  SOLO LEVELING SYSTEM — Complete App Theme Override
+═══════════════════════════════════════════════════════ */
+
+/* ── 1. Root — swap primary from orange to system cyan ── */
+:root{
+  --p:#00d4ff;--p2:#38bdf8;
+  --gg:linear-gradient(135deg,#00b8e6,#007aad);
+  --gai:linear-gradient(135deg,#00d4ff,#6366f1);
+  --gbl:linear-gradient(135deg,#0099cc,#38bdf8);
+  --gok:linear-gradient(135deg,#00d4ff,#22d3ee);
+  --bd:rgba(0,212,255,.22);--bd2:rgba(0,212,255,.12);--bd3:rgba(0,212,255,.06)
+}
+
+/* ── 2. Body — deep system black + subtle horizontal scanlines ── */
+body{
+  background:
+    repeating-linear-gradient(0deg,rgba(0,212,255,.011) 0px,rgba(0,212,255,.011) 1px,transparent 1px,transparent 5px),
+    linear-gradient(135deg,#00040f 0%,#010d1f 50%,#000c1a 100%)!important
+}
+body::before{
+  background:radial-gradient(circle,rgba(0,150,255,.07),transparent 70%)!important;
+  width:700px!important;height:700px!important;top:-260px!important;right:-260px!important;border-radius:50%!important
+}
+
+/* ── 3. Header — SYSTEM panel ── */
+.hdr{
+  background:rgba(0,3,12,.97)!important;
+  border-bottom:1px solid rgba(0,212,255,.25)!important;
+  box-shadow:0 0 40px rgba(0,212,255,.06),0 4px 20px rgba(0,0,0,.6)!important
+}
+.hdr h1{
+  background:linear-gradient(135deg,#00d4ff,#38bdf8)!important;
+  -webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important
+}
+.ai-badge{background:linear-gradient(135deg,rgba(0,212,255,.85),rgba(0,120,210,.85))!important}
+.streak-badge{background:rgba(0,212,255,.1)!important;border-color:rgba(0,212,255,.3)!important;color:#00d4ff!important}
+.week-badge{background:rgba(0,212,255,.07)!important;border-color:rgba(0,212,255,.2)!important;color:#38bdf8!important}
+.theme-btn{background:rgba(0,212,255,.08)!important;border-color:rgba(0,212,255,.15)!important}
+
+/* ── 4. Quick stats bar ── */
+.qstat{background:rgba(0,6,24,.45)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;border-color:rgba(0,212,255,.12)!important}
+.qstat .qv{color:#00d4ff!important}
+
+/* ── 5. Bottom Nav — SYSTEM dock ── */
+.bnav{
+  background:rgba(0,3,12,.97)!important;
+  border:1px solid rgba(0,212,255,.22)!important;
+  box-shadow:0 0 40px rgba(0,212,255,.07),0 -4px 20px rgba(0,0,0,.7)!important
+}
+.bni{color:rgba(0,212,255,.3)!important}
+.bni.act{color:#00d4ff!important;background:rgba(0,212,255,.1)!important}
+.bni.act .ic{filter:drop-shadow(0 0 9px rgba(0,212,255,.75))!important;opacity:1!important}
+.bnav::before{content:'';position:absolute;top:0;left:16px;right:16px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.5),transparent);pointer-events:none}
+.bnav{position:relative}
+
+/* ── 6. Cards ── */
+.card{
+  background:rgba(0,8,28,.52)!important;
+  backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;
+  border:1px solid rgba(0,212,255,.14)!important;
+  box-shadow:0 4px 28px rgba(0,0,0,.35),inset 0 1px 0 rgba(0,212,255,.07)!important
+}
+.card:hover{border-color:rgba(0,212,255,.3)!important;box-shadow:0 6px 32px rgba(0,212,255,.07),0 4px 28px rgba(0,0,0,.45)!important}
+
+/* ── 7. Card title ── */
+.ct{color:#00d4ff!important;border-bottom-color:rgba(0,212,255,.18)!important}
+.ct .bdg{background:rgba(0,212,255,.1)!important;color:#00d4ff!important;border-color:rgba(0,212,255,.22)!important}
+
+/* ── 8. Dash card ── */
+.dash-card{
+  background:rgba(0,8,28,.58)!important;
+  backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;
+  border-color:rgba(0,212,255,.18)!important;
+  box-shadow:0 6px 30px rgba(0,0,0,.4),0 0 50px rgba(0,212,255,.05),inset 0 1px 0 rgba(0,212,255,.08)!important
+}
+.dash-card::before{background:linear-gradient(90deg,transparent,rgba(0,212,255,.35),transparent)!important}
+.ds-v{color:#00d4ff!important}
+.dash-stats{background:rgba(0,0,0,.3)!important}
+.ds-sep{background:rgba(0,212,255,.12)!important}
+
+/* ── 9. Day chips ── */
+.dchip{background:rgba(0,5,20,.75)!important;border-color:rgba(0,212,255,.1)!important;color:rgba(180,220,255,.5)!important}
+.dchip.act{
+  background:linear-gradient(135deg,rgba(0,212,255,.18),rgba(0,100,200,.15))!important;
+  border-color:rgba(0,212,255,.6)!important;color:#00d4ff!important;
+  box-shadow:0 6px 24px rgba(0,212,255,.2),0 0 0 1px rgba(0,212,255,.15)!important
+}
+.dchip.completed{border-color:rgba(0,212,255,.3)!important;background:rgba(0,212,255,.05)!important}
+.done-mark{background:#00d4ff!important;box-shadow:0 3px 12px rgba(0,212,255,.5)!important}
+
+/* ── 10. Exercise cards ── */
+.exi{background:rgba(0,6,24,.48)!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important;border-color:rgba(0,212,255,.12)!important;box-shadow:inset 0 1px 0 rgba(0,212,255,.06)!important}
+.exi:hover{border-color:rgba(0,212,255,.3)!important;box-shadow:0 6px 24px rgba(0,212,255,.07),inset 0 1px 0 rgba(0,212,255,.1)!important;transform:translateY(-1px)!important}
+.exi.done{border-color:rgba(0,212,255,.32)!important;background:rgba(0,212,255,.06)!important}
+.done-check{border-color:rgba(0,212,255,.3)!important;background:rgba(0,5,20,.5)!important}
+.done-check.checked{background:rgba(0,212,255,.85)!important;border-color:#00d4ff!important;box-shadow:0 4px 16px rgba(0,212,255,.45)!important}
+
+/* ── 11. Set inputs ── */
+.set-in.si-filled{border-color:rgba(0,212,255,.38)!important;background:rgba(0,212,255,.04)!important}
+.set-num.sn-done{background:rgba(0,212,255,.28)!important;color:#00d4ff!important}
+.set-chk.sc-done{background:rgba(0,212,255,.7)!important;border-color:#00d4ff!important}
+.set-row.set-done{background:rgba(0,212,255,.03)!important}
+.sets-summary{background:rgba(0,5,18,.55)!important}
+.ss-chip.ss-vol{color:#00d4ff!important;background:rgba(0,212,255,.08)!important}
+
+/* ── 12. Buttons ── */
+.btn-p{background:linear-gradient(135deg,rgba(0,212,255,.88),rgba(0,140,210,.88))!important;box-shadow:0 4px 18px rgba(0,212,255,.28)!important}
+.btn-p:hover{box-shadow:0 6px 26px rgba(0,212,255,.45)!important}
+.save-btn{background:linear-gradient(135deg,rgba(0,212,255,.9),rgba(0,140,210,.9))!important;box-shadow:0 6px 22px rgba(0,212,255,.3)!important}
+
+/* ── 13. Modal ── */
+.mdl{background:linear-gradient(180deg,rgba(0,8,28,.88),rgba(0,4,18,.92))!important;backdrop-filter:blur(28px)!important;-webkit-backdrop-filter:blur(28px)!important;border-color:rgba(0,212,255,.2)!important;box-shadow:0 -8px 50px rgba(0,212,255,.1),inset 0 1px 0 rgba(0,212,255,.08)!important}
+.mh{border-bottom-color:rgba(0,212,255,.12)!important}
+.mh h2{color:#00d4ff!important}
+.mdl-h{background:rgba(0,212,255,.22)!important}
+
+/* ── 14. Progress / completion bar ── */
+.comp-bar{background:rgba(0,6,22,.7)!important;border-color:rgba(0,212,255,.1)!important}
+.cb-fill{background:linear-gradient(90deg,#00b8e6,#38bdf8)!important}
+.cb-fill.full{background:linear-gradient(90deg,#00d4ff,#22d3ee)!important}
+.cb-pct{color:#00d4ff!important}
+.cb-pct.full{color:#22d3ee!important}
+
+/* ── 15. Profile ── */
+.profile-card{background:linear-gradient(135deg,rgba(0,100,180,.1),rgba(0,212,255,.05))!important;border-color:rgba(0,212,255,.2)!important}
+.profile-avatar{background:linear-gradient(135deg,#00b8e6,#006c9c)!important}
+.ps-val{color:#00d4ff!important}
+.ps-item{background:rgba(0,5,20,.6)!important;border-color:rgba(0,212,255,.1)!important}
+
+/* ── 16. AI coach card ── */
+.ai-coach-card{background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(0,100,200,.03))!important;border-color:rgba(0,212,255,.15)!important;box-shadow:0 8px 32px rgba(0,212,255,.06)!important}
+.ai-coach-card::before{background:radial-gradient(circle at 25% 50%,rgba(0,212,255,.06),transparent 65%)!important}
+.ai-title{background:linear-gradient(135deg,#00d4ff,#38bdf8)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
+
+/* ── 17. Period/week banner ── */
+.period-banner{background:rgba(0,5,20,.7)!important;border-color:rgba(0,212,255,.1)!important}
+.pw-chip.active{border-color:#00d4ff!important;color:#00d4ff!important;background:rgba(0,212,255,.1)!important;box-shadow:0 0 10px rgba(0,212,255,.25)!important}
+.pw-chip.done{border-color:rgba(0,212,255,.25)!important;color:#38bdf8!important;background:rgba(0,212,255,.07)!important}
+
+/* ── 18. Day/morning banners ── */
+.day-banner.train{background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(0,100,200,.03))!important;border-color:rgba(0,212,255,.14)!important}
+.morning-card{background:linear-gradient(135deg,rgba(0,212,255,.06),rgba(0,100,180,.04))!important;border-color:rgba(0,212,255,.15)!important}
+
+/* ── 19. Stats cards ── */
+.sc{background:rgba(0,6,22,.7)!important;border-color:rgba(0,212,255,.1)!important}
+.sn{color:#00d4ff!important}
+.session-clock{background:rgba(0,212,255,.1)!important;color:#38bdf8!important}
+
+/* ── 20. Toasts ── */
+.tst-s{background:rgba(0,18,28,.94)!important;border-color:rgba(0,212,255,.45)!important;color:#00d4ff!important}
+.tst-i{background:rgba(0,8,28,.94)!important;border-color:rgba(99,102,241,.4)!important;color:#818cf8!important}
+
+/* ── 21. Global input focus ── */
+input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:focus,.ex-note:focus{border-color:rgba(0,212,255,.65)!important;box-shadow:0 0 0 3px rgba(0,212,255,.1)!important}
+
+/* ── 22. Loading spinner ── */
+.loading{border-top-color:#00d4ff!important}
+
+/* ── 23. Goals & progress ── */
+.goal-bar-fill,.progress-bar{background:linear-gradient(90deg,#00b8e6,#38bdf8)!important}
+.goal-add-btn{border-color:rgba(0,212,255,.3)!important;color:#00d4ff!important}
+.goal-row{background:rgba(0,5,18,.65)!important}
+.goal-bar-wrap{background:rgba(0,212,255,.07)!important}
+.meas-val{color:#00d4ff!important}
+.meas-card{background:rgba(0,5,18,.65)!important}
+
+/* ── 24. AI chat ── */
+.ai-msg-item.user{background:linear-gradient(135deg,rgba(0,212,255,.72),rgba(0,100,200,.72))!important}
+.ai-input-txt{border-color:rgba(0,212,255,.14)!important;background:rgba(0,5,18,.7)!important}
+.ai-chat-box{background:rgba(0,5,18,.55)!important;border-color:rgba(0,212,255,.1)!important}
+
+/* ── 25. Stat tabs ── */
+.stat-tab{background:rgba(0,5,18,.6)!important;border-color:rgba(0,212,255,.12)!important}
+.stat-tab.act{background:rgba(0,212,255,.12)!important;border-color:rgba(0,212,255,.4)!important;color:#00d4ff!important}
+
+/* ── 26. Library ── */
+.lib-filter.active{background:linear-gradient(135deg,rgba(0,212,255,.75),rgba(0,100,200,.75))!important}
+.lib-item{background:rgba(0,5,18,.65)!important;border-color:rgba(0,212,255,.08)!important}
+.lib-item:active{background:rgba(0,212,255,.06)!important}
+.lib-search input{background:rgba(0,5,18,.7)!important;border-color:rgba(0,212,255,.12)!important}
+
+/* ── 27. Strength standards ── */
+.wilks-box{background:linear-gradient(135deg,rgba(0,212,255,.07),rgba(0,100,200,.05))!important;border-color:rgba(0,212,255,.2)!important}
+.wilks-score{color:#00d4ff!important}
+
+/* ── 28. Weekly challenge ── */
+.challenge-card{background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(0,100,200,.04))!important;border-color:rgba(0,212,255,.18)!important}
+.challenge-title{color:#00d4ff!important}
+.challenge-bar-fill{background:linear-gradient(90deg,#00d4ff,#38bdf8)!important}
+
+/* ── 29. Float buttons ── */
+.wo-ai-btn{background:linear-gradient(135deg,#00d4ff,#6366f1)!important}
+#floatTimer{background:rgba(0,4,15,.97)!important;border-color:rgba(0,212,255,.4)!important;box-shadow:0 0 30px rgba(0,212,255,.15)!important}
+
+/* ── 30. Form phases & tips ── */
+.form-phase-num{background:rgba(0,212,255,.12)!important;border-color:rgba(0,212,255,.28)!important;color:#00d4ff!important}
+.form-phases{border-color:rgba(0,212,255,.1)!important}
+.form-phase-title{color:#00d4ff!important}
+.tip-btn{color:#00d4ff!important;background:rgba(0,212,255,.06)!important;border-color:rgba(0,212,255,.18)!important}
+.tip-box{background:rgba(0,212,255,.03)!important;border-color:rgba(0,212,255,.14)!important}
+
+/* ── 31. Calendar ── */
+.cal-cell.cc-today{border-color:#00d4ff!important}
+.cal-cell.cc-trained{background:rgba(0,212,255,.16)!important;color:#00d4ff!important}
+
+/* ── 32. Recovery & fatigue ── */
+.recovery-badge.high{background:rgba(0,212,255,.08)!important;border-color:rgba(0,212,255,.2)!important;color:#00d4ff!important}
+.fatigue-low .fatigue-bar-fill{background:#00d4ff!important}
+
+/* ── 33. Tool / wellness cards ── */
+.tool-card{background:rgba(0,5,18,.65)!important;border-color:rgba(0,212,255,.09)!important}
+.tool-card:active{background:rgba(0,212,255,.07)!important}
+.w-card{background:rgba(0,5,18,.65)!important;border-color:rgba(0,212,255,.08)!important}
+
+/* ── 34. Block badges ── */
+.block-volume{background:rgba(0,212,255,.1)!important;color:#00d4ff!important}
+
+/* ── 35. Velocity chips ── */
+.velocity-improving{background:rgba(0,212,255,.09)!important;color:#00d4ff!important}
+.velocity-stable{background:rgba(0,212,255,.06)!important;color:#38bdf8!important}
+
+/* ── 36. Elite decision & coach rec ── */
+.elite-decision.increase,.coach-rec.increase{background:rgba(0,212,255,.05)!important;border-color:rgba(0,212,255,.2)!important;color:#00d4ff!important}
+.set-ai-bubble{background:rgba(0,212,255,.06)!important;border-color:rgba(0,212,255,.18)!important}
+
+/* ── 37. Macro upload ── */
+.macro-upload{border-color:rgba(0,212,255,.22)!important}
+.macro-upload:active{border-color:#00d4ff!important}
+
+/* ── 38. Profile edit form ── */
+#profileEditForm input,#profileEditForm textarea{background:rgba(0,5,20,.8)!important;border-color:rgba(0,212,255,.18)!important}
+
+/* ── 39. FI form fields ── */
+.fi input,.fi select,.fi textarea{background:rgba(0,5,18,.7)!important;border-color:rgba(0,212,255,.12)!important}
+.fi input:focus,.fi select:focus,.fi textarea:focus{border-color:rgba(0,212,255,.6)!important}
+.fi label{color:rgba(0,212,255,.65)!important}
+
+/* ── 40. SL header glow pulse ── */
+@keyframes slHdrGlow{0%,100%{box-shadow:0 0 40px rgba(0,212,255,.06),0 4px 20px rgba(0,0,0,.6)}50%{box-shadow:0 0 60px rgba(0,212,255,.1),0 4px 20px rgba(0,0,0,.6)}}
+.hdr{animation:slideDown .4s ease,slHdrGlow 4s ease-in-out infinite}
+
+/* ── 41. Glass restoration — remaining elements ── */
+.dchip{backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;background:rgba(0,6,24,.42)!important}
+.comp-bar{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.period-banner{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.sc{background:rgba(0,6,24,.45)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.ps-item{background:rgba(0,6,24,.45)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.tool-card{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.w-card{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.meas-card{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.goal-row{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.lib-item{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.sets-summary{background:rgba(0,6,24,.35)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}
+.day-banner{backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.morning-card{backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+.profile-card{backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;background:rgba(0,10,30,.45)!important}
+.ai-coach-card{backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;background:rgba(0,8,28,.45)!important}
+.ai-chat-box{backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;background:rgba(0,6,24,.38)!important}
+.warmup-proto{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}
+.sl-warmup-card{backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important}
+
 </style>
 
 </head>
 <body>
 <div class="tc" id="toasts"></div>
+<div id="slSystemNotif">
+  <div class="sl-n-sys">[ S Y S T E M ]</div>
+  <div class="sl-n-title">مهمة جديدة</div>
+  <div class="sl-n-divider"></div>
+  <div class="sl-n-sub"></div>
+</div>
 
 <!-- HEADER -->
 <div class="hdr">
   <div class="hdr-top">
     <div>
-      <h1>🏆 GymPro AI Titan</h1>
+      <h1>⚔️ SOLO GYM SYSTEM</h1>
       <div class="hdr-sub">
         <span id="tDate"></span>
-        <span class="ai-badge">⚡ ELITE</span>
-        <span class="block-badge block-volume" id="blockBadge">Volume</span>
+        <span class="ai-badge" style="font-family:monospace;letter-spacing:.08em">[ S Y S T E M ]</span>
       </div>
     </div>
     <div class="hdr-r">
@@ -767,13 +1094,10 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
     <!-- Top row: الاسم + Badge + ثيم -->
     <div class="dash-top">
       <div>
-        <div class="dash-name">💪 شهاب</div>
+        <div class="dash-name" id="dash-name-txt">💪 شهاب</div>
         <div class="dash-date" id="tDate2"></div>
       </div>
-      <div style="display:flex;gap:6px;align-items:center">
-        <span class="block-badge block-volume" id="blockBadge2">Volume</span>
-        <div class="theme-btn" onclick="toggleTheme()" id="themeBtn2">🌙</div>
-      </div>
+      <span class="block-badge block-volume" id="blockBadge2">Volume</span>
     </div>
 
     <!-- Stats row -->
@@ -1139,11 +1463,21 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
   <div class="profile-card">
     <div style="display:flex;gap:12px;align-items:center">
       <div class="profile-avatar">👤</div>
-      <div>
-        <div class="profile-name">شهاب</div>
-        <div class="profile-sub">22 سنة · محاسب · الإمارات 🇦🇪</div>
+      <div style="flex:1;min-width:0">
+        <div class="profile-name" id="profileNameDisplay">شهاب</div>
+        <div class="profile-sub" id="profileSubDisplay">22 سنة · محاسب · الإمارات 🇦🇪</div>
         <div class="profile-sub" id="profileSubLine" style="margin-top:3px;color:var(--p);font-weight:700"></div>
       </div>
+      <button onclick="toggleProfileEdit()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;color:var(--tx2);font-family:'Cairo';font-size:.72em;cursor:pointer;flex-shrink:0">✏️ تعديل</button>
+    </div>
+    <div id="profileEditForm" style="display:none;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+        <div><div style="font-size:.68em;color:var(--tx3);margin-bottom:3px">الاسم</div><input id="pEdit_name" type="text" style="width:100%;padding:7px 10px;border:1.5px solid rgba(255,255,255,.15);border-radius:9px;background:rgba(255,255,255,.06);color:var(--tx);font-family:'Cairo';font-size:.8em;outline:0;box-sizing:border-box" placeholder="اسمك..."></div>
+        <div><div style="font-size:.68em;color:var(--tx3);margin-bottom:3px">العمر</div><input id="pEdit_age" type="number" style="width:100%;padding:7px 10px;border:1.5px solid rgba(255,255,255,.15);border-radius:9px;background:rgba(255,255,255,.06);color:var(--tx);font-family:'Cairo';font-size:.8em;outline:0;box-sizing:border-box" placeholder="22"></div>
+      </div>
+      <div style="margin-bottom:8px"><div style="font-size:.68em;color:var(--tx3);margin-bottom:3px">المهنة</div><input id="pEdit_job" type="text" style="width:100%;padding:7px 10px;border:1.5px solid rgba(255,255,255,.15);border-radius:9px;background:rgba(255,255,255,.06);color:var(--tx);font-family:'Cairo';font-size:.8em;outline:0;box-sizing:border-box" placeholder="مثال: محاسب"></div>
+      <div style="margin-bottom:12px"><div style="font-size:.68em;color:var(--tx3);margin-bottom:3px">الموقع</div><input id="pEdit_location" type="text" style="width:100%;padding:7px 10px;border:1.5px solid rgba(255,255,255,.15);border-radius:9px;background:rgba(255,255,255,.06);color:var(--tx);font-family:'Cairo';font-size:.8em;outline:0;box-sizing:border-box" placeholder="مثال: دبي، الإمارات"></div>
+      <button onclick="saveProfileEdit()" class="btn btn-p btn-full">💾 حفظ المعلومات</button>
     </div>
     <div class="profile-stats" id="profileStats"></div>
   </div>
@@ -1242,7 +1576,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
   <button class="bni" onclick="go('ai',this)"><span class="ic">🤖</span>AI</button>
   <button class="bni" onclick="go('lib',this)"><span class="ic">📚</span>المكتبة</button>
   <button class="bni" onclick="go('tools',this)"><span class="ic">🛠️</span>أدوات</button>
-  <button class="bni" onclick="go('profile',this)"><span class="ic">👤</span>شهاب</button>
+  <button class="bni" onclick="go('profile',this)"><span class="ic">👤</span><span id="navProfileName">شهاب</span></button>
 </div>
 
 <!-- MODALS -->
@@ -1405,7 +1739,7 @@ const EXERCISE_LIBRARY=[
 {id:'ex81', name:'Wrist Curl',                 muscle:'ساعد',     sec:'',                  equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3',   reps:'15-20',focus:'ساعد أمامي',   desc:'يبني قوة وحجم الساعد الأمامي.',                                technique:'الرسغ يتحرك فقط · اتكئ على الركبة.',                    mistake:'تحريك المرفق'},
 {id:'ex82', name:'Reverse Curl',               muscle:'ساعد',     sec:'Brachialis, باي',   equipment:'بار',       type:'isolation', difficulty:'easy',  sets:'3',   reps:'10-12',focus:'ساعد + باي',   desc:'يبني الساعد العلوي والـ Brachialis.',                           technique:'قبضة عكسية · الكوع ثابت.',                               mistake:'الأرجحة الزائدة'}
 ];
-let G={days:{},ses:[],bw:[],streak:0,lastWo:null,doneExs:{},completedDays:{},aiKey:'',claudeKey:'',chatHistory:[],theme:'dark',notifications:true,currentSets:{},schedule:null,wellness:{},nextSessionPlan:{},rpeHistory:{},weeklyChallenge:null,injuries:[],supplements:[],pinnedNote:''};
+let G={days:{},ses:[],bw:[],streak:0,lastWo:null,doneExs:{},completedDays:{},aiKey:'',claudeKey:'',chatHistory:[],theme:'dark',notifications:true,currentSets:{},schedule:null,wellness:{},nextSessionPlan:{},rpeHistory:{},weeklyChallenge:null,injuries:[],supplements:[],pinnedNote:'',profile:{}};
 const FATIGUE={score(){const s=G.ses.filter(s=>(Date.now()-new Date(s.date))<7*864e5).length;const v=SCI.weeklyVolume();const td=new Date().toISOString().split('T')[0];const w=G.wellness[td]||{sleep:7,energy:7,stress:3};return Math.round(Math.min(s/6*30,30)+Math.min(v/6000*25,25)+(10-Math.min(parseFloat(w.sleep)||7,10))/10*15+(10-Math.min(parseFloat(w.energy)||7,10))/10*15+Math.min(parseFloat(w.stress)||3,10)/10*15)},level(){const s=this.score();return s<40?'low':s<70?'moderate':s<85?'high':'critical'},label(){return{low:'منخفض ✅',moderate:'متوسط ⚡',high:'مرتفع ⚠️',critical:'حرج 🚨'}[this.level()]}};
 const PERIOD={week(){return(Math.floor(G.ses.length/3)%4)+1},type(){const w=this.week();return w===1?'volume':w===2?'intensity':w===3?'peak':'deload'},info(){return{volume:{label:'Volume Week',color:'block-volume',icon:'📦',desc:'حجم عالي · أوزان متوسطة · 4 سيتات'},intensity:{label:'Intensity Week',color:'block-intensity',icon:'⚡',desc:'أوزان ثقيلة · 3 سيتات · Rep Range أقل'},peak:{label:'Peak Week',color:'block-peak',icon:'🔥',desc:'أقصى قوة · 2-3 سيتات · وزن أقصى'},deload:{label:'Deload Week',color:'block-deload',icon:'🔄',desc:'تعافي · 90% من الأوزان · 2 سيتات'}}[this.type()]}};
 const VELOCITY={state(id){const h=G.ses.filter(s=>s.exs?.[id]).slice(-2);/* BUG FIX: slice(0,2)→slice(-2) = آخر جلستين */if(h.length<2)return 'stable';const avg=(s,k)=>{const ss=s.exs[id]?.sets?.filter(t=>t.w>0)||[];return ss.length?ss.reduce((v,t)=>v+(t[k]||0),0)/ss.length:0};const r0=avg(h[0],'r'),r1=avg(h[1],'r'),rpe0=avg(h[0],'rpe'),rpe1=avg(h[1],'rpe');if(rpe0>0&&rpe1>0&&r0<r1&&rpe0>rpe1)return 'fatigue_drop';return r0>r1?'improving':'stable'},label(s){return{improving:'📈 تحسن',fatigue_drop:'📉 Fatigue Drop',stable:'➡️ مستقر'}[s]||'➡️ مستقر'}};
@@ -1421,7 +1755,7 @@ G.ses=d.ses||[];G.bw=d.bw||[];G.streak=d.streak||0;G.lastWo=d.lastWo||null;
 G.doneExs=d.doneExs||{};G.completedDays=d.completedDays||{};
 G.aiKey=d.aiKey||'';G.claudeKey=d.claudeKey||'';G.chatHistory=d.chatHistory||[];
 G.theme=d.theme||'dark';G.notifications=d.notifications!==undefined?d.notifications:true;
-G.currentSets=d.currentSets||{};G.wellness=d.wellness||{};G.measurements=d.measurements||[];G.goals=d.goals||{};G.earnedBadges=d.earnedBadges||{};G.weeklyChallenge=d.weeklyChallenge||null;G.xp=d.xp||0;G.xpLevel=d.xpLevel||0;G.smartGoals=d.smartGoals||[];G.wellnessLog=d.wellnessLog||[];G.homeMode=false;
+G.currentSets=d.currentSets||{};G.wellness=d.wellness||{};G.measurements=d.measurements||[];G.goals=d.goals||{};G.earnedBadges=d.earnedBadges||{};G.weeklyChallenge=d.weeklyChallenge||null;G.xp=d.xp||0;G.xpLevel=d.xpLevel||0;G.smartGoals=d.smartGoals||[];G.wellnessLog=d.wellnessLog||[];G.homeMode=false;G.profile=d.profile||{};
 G.nextSessionPlan=d.nextSessionPlan||{};G.rpeHistory=d.rpeHistory||{};
 G.schedule=d.schedule||null;
 // التحقق الصارم من G.days
@@ -1460,8 +1794,8 @@ function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),
 // ── Muscle color map ──
 const MC={'صدر':'255,107,43','ظهر':'96,165,250','كتف':'167,139,250','كتف خلفي':'167,139,250','ترابيس':'167,139,250','رجل':'52,211,153','رجل أمامي':'52,211,153','رجل خلفي':'110,231,183','مؤخرة':'52,211,153','سمانة':'34,211,238','باي':'251,191,36','تراي':'251,191,36','ساعد':'251,191,36','بطن':'248,113,113'};
 const getMC=m=>{const k=Object.keys(MC).find(k=>m&&m.includes(k));return k?MC[k]:'255,255,255'};
-wo.innerHTML=`<div class="card"><div class="ct">💪 ${day.muscles} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} تمرين</span></div>${day.exercises.map(ex=>{
-if(ex.isWarmup)return`<div class="warmup-box"><span style="font-size:1.4em">🔥</span><div><strong>إحماء:</strong> ${ex.reps}</div></div>`;
+wo.innerHTML=`<div class="card" style="margin-bottom:10px;padding-bottom:10px"><div class="ct">⚔️ ${day.name} <span class="bdg">${day.exercises.filter(e=>!e.isWarmup).length} مهمة</span></div><div style="font-size:.65em;color:var(--tx3);margin:-8px 0 8px;font-weight:600">${day.muscles}</div><div class="wo-level-track" id="sl-level-track"></div></div>${day.exercises.map(ex=>{
+if(ex.isWarmup){const wDone=G.doneExs[sk]&&G.doneExs[sk][ex.id];return`<div class="sl-warmup-card ${wDone?'cleared':''}" id="sl-warmup-${ex.id}"><div class="sl-warmup-title">🔥 إحماء <span style="margin-right:auto;font-size:.65em;color:var(--tx3);font-weight:600">${day.muscles}</span></div><div class="sl-warmup-content">${ex.reps}</div><div class="sl-warmup-done-label" style="display:${wDone?'flex':'none'}">✅ تم الإحماء — الجلسة انطلقت!</div><button class="sl-gate-btn" style="display:${wDone?'none':'block'}" onclick="completeWarmup('${ex.id}')">⚔️ تم الإحماء — ابدأ!</button></div>`;}
 const ns=ex.sets||3,ls=getLastSets(ex.id),be=getBestSet(ex.id)||ex.lastW||0,dn=G.doneExs[sk]&&G.doneExs[sk][ex.id],or=OE.getRecommendation(ex.id,ex.name,be),sg=pfl[ex.id],vs=VELOCITY.state(ex.id),ss=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[],dc=ss.length?eliteDecision(ex.id,ex.name,ss):{action:'stable',weight:be,msg:''};
 const coachH=getSmartCoach(ex,ex.id,be);
 const mClr=getMC(ex.muscle||'');
@@ -1496,8 +1830,8 @@ return`<div class="exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="${ex.musc
       ${G.injuries&&G.injuries.some(i=>i.active&&i.muscle===(ex.muscle||''))?`<span style="font-size:.71em;color:var(--no);display:flex;align-items:center">⚠️ إصابة</span>`:''}
     </div>
   </div>
-</div>`}).join('')}</div>`;
-updateCompBar();restoreSetInputs();renderDeloadBanner();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
+</div>`}).join('')}`;
+updateCompBar();restoreSetInputs();renderDeloadBanner();applyLevelSystem();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
   if(G.homeMode){document.querySelectorAll('.exn').forEach(el=>{const orig=el.textContent.trim();const alt=Object.keys(HOME_ALTS||{}).find(k=>orig.includes(k));if(alt&&HOME_ALTS[alt]!==orig){el.innerHTML=`<span style="text-decoration:line-through;color:var(--tx3);font-size:.85em">${orig}</span><br><span style="color:var(--ok)">${HOME_ALTS[alt]}</span>`;}});}
 }
 function onRPEChange(id,i,isUserInput){
@@ -1549,13 +1883,101 @@ function onSetChange(id,i,be){
 function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=document.getElementById(`sr-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(!c)return;const _prevBest=getBestSet(id);if(!c.classList.contains('sc-done')){const w=document.getElementById(`sw-${id}-${i}`);if(w&&!w.value){const ls=getLastSets(id),p=ls[i];if(p&&p.w){w.value=p.w;w.classList.add('si-filled')}}c.classList.add('sc-done');c.textContent='✓';r?.classList.add('set-done');n?.classList.add('sn-done');suggestRPE(id,i);if(!sessionStartTime){sessionStartTime=Date.now();sessionTimerInterval=setInterval(updateCompBar,1000);}if(navigator.vibrate)navigator.vibrate(20);quickStartTimer(window._timerDefault||90);if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0;if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){fireConfetti(50);toast(`🏆 رقم قياسي جديد! ${_nw}كجم`,'s');document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}}}
 function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false};saveD()}
 function updateSetSummary(id){const sm=document.getElementById(`sum-${id}`);if(!sm)return;const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const ds=sets.filter(s=>s.done).length,fs=sets.filter(s=>s.w>0),vol=fs.reduce((t,s)=>t+s.w*(s.r||1),0),topW=fs.length?Math.max(...fs.map(s=>s.w)):0,avgW=fs.length?Math.round(fs.reduce((t,s)=>t+s.w,0)/fs.length*10)/10:0,rpes=sets.filter(s=>s.rpe>0),avgR=rpes.length?Math.round(rpes.reduce((t,s)=>t+s.rpe,0)/rpes.length*10)/10:0,rc=avgR>=9?'ss-rpe-high':avgR>=7?'ss-rpe-warn':'ss-rpe-ok';const max1RM=sets.filter(s=>s.w>0&&s.r>0).reduce((b,s)=>{const e1=SCI.calc1RM(s.w,s.r);return e1>b?e1:b},0);sm.innerHTML=`<span class="ss-chip">✓ ${ds}/${ns}</span>${vol>0?`<span class="ss-chip ss-vol">🏋️ ${Math.round(vol)}كجم</span>`:''}${topW>0?`<span class="ss-chip ss-top">⬆ ${topW}</span>`:''}${avgW>0?`<span class="ss-chip ss-avg">⌀ ${avgW}</span>`:''}${avgR>0?`<span class="ss-chip ${rc}">RPE ${avgR}</span>`:''}${max1RM>0?`<span class="ss-chip ss-1rm">💡 1RM≈${max1RM}</span>`:''}`}
-function checkAllSetsDone(id){const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,all=Array.from({length:ns},(_,i)=>document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false).every(Boolean);if(all){const c=document.getElementById(`chk-${id}`),e=document.getElementById(`exi-${id}`);if(c&&!c.classList.contains('checked')){c.classList.add('checked');c.innerHTML='✓';e?.classList.add('done');const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=true;saveD();toast('✅ '+ex.name+' مكتمل!','s');updateCompBar()}}}
-function toggleDone(id){const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=!G.doneExs[sk][id];saveD();const e=document.getElementById('exi-'+id),c=document.getElementById('chk-'+id);if(!e||!c)return;if(G.doneExs[sk][id]){e.classList.add('done');c.classList.add('checked');c.innerHTML='✓';if(navigator.vibrate)navigator.vibrate(30);toast('✅ تم!','s')}else{e.classList.remove('done');c.classList.remove('checked');c.innerHTML=''}updateCompBar()}
+function checkAllSetsDone(id){const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,all=Array.from({length:ns},(_,i)=>document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false).every(Boolean);if(all){const c=document.getElementById(`chk-${id}`),e=document.getElementById(`exi-${id}`);if(c&&!c.classList.contains('checked')){c.classList.add('checked');c.innerHTML='✓';e?.classList.add('done');const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=true;saveD();toast('✅ '+ex.name+' مكتمل!','s');updateCompBar();setTimeout(()=>slUnlockNext(id),100)}}}
+function toggleDone(id){const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=!G.doneExs[sk][id];saveD();const e=document.getElementById('exi-'+id),c=document.getElementById('chk-'+id);if(!e||!c)return;if(G.doneExs[sk][id]){e.classList.add('done');c.classList.add('checked');c.innerHTML='✓';if(navigator.vibrate)navigator.vibrate(30);toast('✅ تم!','s');setTimeout(()=>slUnlockNext(id),100)}else{e.classList.remove('done');c.classList.remove('checked');c.innerHTML='';applyLevelSystem()}updateCompBar()}
+function applyLevelSystem(){
+  if(!curDay)return;
+  const day=G.days[curDay];if(!day)return;
+  const sk=sesKey(curDay),done=G.doneExs[sk]||{};
+  const warmup=day.exercises.find(e=>e.isWarmup);
+  const nonWarmups=day.exercises.filter(e=>!e.isWarmup);
+  const warmupDone=!warmup||done[warmup.id];
+  let activeIdx=-1;
+  if(warmupDone){for(let i=0;i<nonWarmups.length;i++){if(!done[nonWarmups[i].id]){activeIdx=i;break;}activeIdx=nonWarmups.length;}}
+  if(warmup){const wEl=document.getElementById('sl-warmup-'+warmup.id);if(wEl){if(done[warmup.id]){wEl.classList.add('cleared');const btn=wEl.querySelector('.sl-gate-btn');if(btn)btn.style.display='none';const dl=wEl.querySelector('.sl-warmup-done-label');if(dl)dl.style.display='flex';}}}
+  nonWarmups.forEach((ex,i)=>{
+    const el=document.getElementById('exi-'+ex.id);if(!el)return;
+    el.classList.remove('exi-active','exi-cleared','exi-locked');
+    if(done[ex.id]){el.classList.add('exi-cleared');if(!el.querySelector('.sl-cleared-bar'))addClearedSummary(el,ex,sk);}
+    else if(!warmupDone||i>activeIdx){el.classList.add('exi-locked');}
+    else if(i===activeIdx){el.classList.add('exi-active');}
+  });
+  updateLevelPips();
+}
+function addClearedSummary(el,ex,sk){
+  const header=el.querySelector('.exi-header');if(!header||el.querySelector('.sl-cleared-bar'))return;
+  const sets=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[];
+  const doneSets=sets.filter(s=>s.done&&s.w>0);
+  let chipsHtml='';
+  if(doneSets.length){const topW=Math.max(...doneSets.map(s=>s.w));const totalVol=Math.round(doneSets.reduce((t,s)=>t+s.w*(s.r||1),0));chipsHtml=`<span class="sl-cl-chip gold">⬆ ${topW}كجم</span><span class="sl-cl-chip">✓ ${doneSets.length} سيت</span><span class="sl-cl-chip">📦 ${totalVol}كجم</span>`;}
+  else chipsHtml='<span class="sl-cl-chip">✓ مكتمل</span>';
+  const bar=document.createElement('div');bar.className='sl-cleared-bar';bar.innerHTML=chipsHtml;header.appendChild(bar);
+}
+function updateLevelPips(){
+  const track=document.getElementById('sl-level-track');if(!track||!curDay)return;
+  const day=G.days[curDay];if(!day)return;
+  const sk=sesKey(curDay),done=G.doneExs[sk]||{};
+  const warmup=day.exercises.find(e=>e.isWarmup);
+  const nonWarmups=day.exercises.filter(e=>!e.isWarmup);
+  const warmupDone=!warmup||done[warmup.id];
+  let activeIdx=-1;
+  if(warmupDone){activeIdx=nonWarmups.length;for(let i=0;i<nonWarmups.length;i++){if(!done[nonWarmups[i].id]){activeIdx=i;break;}}}
+  const pips=[
+    ...(warmup?[`<div class="lvl-pip ${done[warmup.id]?'cleared':'active'}" title="إحماء"></div>`]:[]),
+    ...nonWarmups.map((ex,i)=>{const state=done[ex.id]?'cleared':(!warmupDone||i!==activeIdx?'locked':'active');return`<div class="lvl-pip ${state}" title="${ex.name}"></div>`;})
+  ].join('');
+  track.innerHTML=pips;
+}
+function completeWarmup(id){
+  const sk=sesKey(curDay);
+  if(!G.doneExs[sk])G.doneExs[sk]={};
+  if(G.doneExs[sk][id])return;
+  G.doneExs[sk][id]=true;saveD();
+  if(navigator.vibrate)navigator.vibrate([30,20,60]);
+  const day=G.days[curDay];
+  const firstEx=day?.exercises.filter(e=>!e.isWarmup)[0];
+  if(firstEx){
+    showSystemNotif(firstEx,1);
+    setTimeout(()=>{
+      applyLevelSystem();
+      const el=document.getElementById('exi-'+firstEx.id);
+      if(el){el.classList.add('exi-unlocking');setTimeout(()=>{el.classList.remove('exi-unlocking');applyLevelSystem();},950);}
+    },300);
+  }else{applyLevelSystem();}
+}
+function showSystemNotif(ex,levelNum){
+  const notif=document.getElementById('slSystemNotif');if(!notif)return;
+  clearTimeout(notif._hideTimer);
+  // Reset animation so it plays fresh even if already showing
+  notif.classList.remove('sl-show','sl-hide');
+  void notif.offsetWidth;
+  notif.querySelector('.sl-n-title').textContent='تم فتح مهمة جديدة';
+  notif.querySelector('.sl-n-sub').innerHTML=`<strong style="color:#e0f7ff">${ex.name}</strong><br>${ex.sets||3} سيتات · ${ex.reps} · ${ex.unit}`;
+  notif.classList.add('sl-show');
+  notif._hideTimer=setTimeout(()=>{notif.classList.remove('sl-show');notif.classList.add('sl-hide');setTimeout(()=>notif.classList.remove('sl-hide'),320);},3200);
+}
+function slUnlockNext(doneExId){
+  if(!curDay)return;
+  const day=G.days[curDay];if(!day)return;
+  const sk=sesKey(curDay),done=G.doneExs[sk]||{};
+  const nonWarmups=day.exercises.filter(e=>!e.isWarmup);
+  const doneIdx=nonWarmups.findIndex(e=>e.id===doneExId);
+  const nextEx=nonWarmups[doneIdx+1];
+  if(navigator.vibrate)navigator.vibrate([30,20,80]);
+  applyLevelSystem();
+  if(nextEx&&!done[nextEx.id]){
+    setTimeout(()=>{
+      showSystemNotif(nextEx,doneIdx+2);
+      const el=document.getElementById('exi-'+nextEx.id);
+      if(el){el.classList.remove('exi-locked');el.classList.add('exi-active','exi-unlocking');setTimeout(()=>{el.classList.remove('exi-unlocking');applyLevelSystem();},950);setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),200);}
+    },250);
+  }
+}
 function updateCompBar(){if(!curDay)return;const day=G.days[curDay],sk=sesKey(curDay),total=day.exercises.filter(e=>!e.isWarmup).length,done=day.exercises.filter(e=>!e.isWarmup&&G.doneExs[sk]&&G.doneExs[sk][e.id]).length,pct=total?Math.round(done/total*100):0,full=done===total&&total>0,el=document.getElementById('compBarArea');if(!el)return;const elapsed=sessionStartTime?fmtElapsed(Date.now()-sessionStartTime):null;el.innerHTML=`<div class="comp-bar"><div class="cb-info"><div class="cb-label">${done}/${total} تمرين مكتمل</div><div class="cb-track"><div class="cb-fill ${full?'full':''}" style="width:${pct}%"></div></div></div><div style="display:flex;align-items:center;gap:10px">${elapsed?`<div class="session-clock" title="وقت الجلسة">⏱️ ${elapsed}</div>`:`<div class="session-clock" style="opacity:.45;font-style:italic">ابدأ أول سيت ⏱️</div>`}<div class="cb-pct ${full?'full':''}">${pct}%</div></div></div>`;if(full&&!isDayCompleted(curDay))markDayComplete()}
-function markDayComplete(){const wk=weekKey();if(!G.completedDays[wk])G.completedDays[wk]={};G.completedDays[wk][curDay]=true;G.streak=(G.streak||0)+1;saveD();toast('🎉 '+G.days[curDay].name+' مكتمل! '+MOTIVATIONAL[Math.floor(Math.random()*MOTIVATIONAL.length)],'s');if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);showNotification('يوم مكتمل!🎉',G.days[curDay].name);rDays();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar()}
+function markDayComplete(){const wk=weekKey();if(!G.completedDays[wk])G.completedDays[wk]={};G.completedDays[wk][curDay]=true;const _today=new Date().toISOString().split('T')[0];if(G.lastWo!==_today){G.streak=(G.streak||0)+1;}saveD();toast('🎉 '+G.days[curDay].name+' مكتمل! '+MOTIVATIONAL[Math.floor(Math.random()*MOTIVATIONAL.length)],'s');if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);showNotification('يوم مكتمل!🎉',G.days[curDay].name);rDays();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar()}
 function saveSes(){if(!curDay)return toast('اختر يوم التمرين','e');const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;const _jMood=window._selectedMood||0;const _jNote=document.getElementById('journalNote')?.value?.trim()||'';day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${ex.id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const duration=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0;const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),duration,mood:_jMood,note:_jNote};G.ses.push(sd);G.lastWo=new Date().toISOString().split('T')[0];if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;updateChallengeProgress();renderWeeklyChallenge();saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);setTimeout(checkBadges,800);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();rLaggingMuscleAlert();setTimeout(()=>showStretchModal(curDay),1800);setTimeout(()=>{if(typeof addXP==='function'){addXP(100,'جلسة مكتملة');if((G.streak||0)>0&&(G.streak%7===0))addXP(200,'أسبوع كامل!');}},2500);if(typeof _ttsSessionDone==='function')setTimeout(_ttsSessionDone,800);if(typeof _wlAutoStop==='function')_wlAutoStop();}
 function generateNextSessionSuggestions(sd){const r={};Object.entries(sd.exs).forEach(([id,e])=>{const ex=findExerciseById(id);if(!ex||ex.isWarmup)return;const tw=e.sets?.length?Math.max(...e.sets.map(s=>s.w||0)):e.w||0,dc=eliteDecision(id,e.name,e.sets||[]),ic=OE.isCompound(e.name);r[id]={name:e.name,muscle:e.muscle||'',currentWeight:tw,nextWeight:dc.weight||tw,reason:dc.msg||'',status:dc.action,sets:e.sets?.length||3,targetReps:ic?'6-10':'10-12'}});return r}
-function showSessionSummaryModal(s,sug){const tv=Math.round(SCI.sessionVolume(s)),prs=Object.entries(s.exs).filter(([id,e])=>{/* BUG FIX: getBestSet includes current session (already pushed) → b===c → always 0 PRs. Fix: compute prevBest excluding current session */const prevBest=G.ses.filter(x=>x.id!==s.id).reduce((b,x)=>{const ex=x.exs?.[id];if(!ex)return b;if(ex.sets?.length)ex.sets.forEach(t=>{if((t.w||0)>b)b=t.w||0});else if((ex.w||0)>b)b=ex.w||0;return b},0);const c=e.sets?.length?e.sets.reduce((b,t)=>t.w>b?t.w:b,0):e.w||0;return c>prevBest&&c>0}).length,bl=PERIOD.info(),fa=FATIGUE.level(),sh=Object.values(sug).filter(s=>!s.name.includes('إحماء')).map(s=>`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:8px;border-right:3px solid var(--${s.status==='increase'?'ok':s.status==='deload'?'pu':'bl'})"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-weight:800;font-size:.88em">${s.name}</div><div><span style="color:var(--tx3);font-size:.78em">${s.currentWeight}كجم</span> <span style="color:var(--p)">→</span> <span style="color:var(--p);font-weight:900">${s.nextWeight}كجم</span></div></div><div style="font-size:.76em;color:var(--tx2)">${s.reason}</div></div>`).join('');document.getElementById('aiMoT').textContent='📊 ملخص الجلسة';document.getElementById('aiMoB').innerHTML=`<div style="text-align:center;padding:16px;background:linear-gradient(135deg,rgba(110,231,183,.1),rgba(165,243,252,.06));border-radius:14px;margin-bottom:14px"><div style="font-size:2.2em">🎉</div><div style="font-size:1.1em;font-weight:900;color:var(--ok);margin:8px 0">جلسة ممتازة يا شهاب!</div><div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><div><div style="font-size:1.4em;font-weight:900;color:var(--p)">${tv}</div><div style="font-size:.68em;color:var(--tx2)">حجم كجم</div></div>${prs>0?`<div><div style="font-size:1.4em;font-weight:900;color:var(--wn)">${prs}</div><div style="font-size:.68em;color:var(--tx2)">🏆 PR</div></div>`:''}<div><div style="font-size:1.4em;font-weight:900;color:var(--ok)">${Object.keys(s.exs).length}</div><div style="font-size:.68em;color:var(--tx2)">تمارين</div></div>${s.duration?`<div><div style="font-size:1.4em;font-weight:900;color:var(--bl)">${s.duration}</div><div style="font-size:.68em;color:var(--tx2)">⏱️ دقيقة</div></div>`:''}</div><div style="margin-top:10px;display:flex;gap:8px;justify-content:center"><span class="block-badge ${bl.color}">${bl.icon} ${bl.label}</span><span class="fatigue-badge ${fa}" style="font-size:.68em;padding:3px 9px;margin:0">🔥 ${FATIGUE.label()}</span></div></div><div style="font-weight:800;color:var(--p);margin-bottom:10px">🎯 خطة الجلسة القادمة</div>${sh}<button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت!</button>`;document.getElementById('aiMo').classList.add('act');if(!G.nextSessionPlan)G.nextSessionPlan={};G.nextSessionPlan[curDay]=sug;saveD()}
+function showSessionSummaryModal(s,sug){const tv=Math.round(SCI.sessionVolume(s)),prs=Object.entries(s.exs).filter(([id,e])=>{/* BUG FIX: getBestSet includes current session (already pushed) → b===c → always 0 PRs. Fix: compute prevBest excluding current session */const prevBest=G.ses.filter(x=>x.id!==s.id).reduce((b,x)=>{const ex=x.exs?.[id];if(!ex)return b;if(ex.sets?.length)ex.sets.forEach(t=>{if((t.w||0)>b)b=t.w||0});else if((ex.w||0)>b)b=ex.w||0;return b},0);const c=e.sets?.length?e.sets.reduce((b,t)=>t.w>b?t.w:b,0):e.w||0;return c>prevBest&&c>0}).length,bl=PERIOD.info(),fa=FATIGUE.level(),sh=Object.values(sug).filter(s=>!s.name.includes('إحماء')).map(s=>`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:8px;border-right:3px solid var(--${s.status==='increase'?'ok':s.status==='deload'?'pu':'bl'})"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-weight:800;font-size:.88em">${s.name}</div><div><span style="color:var(--tx3);font-size:.78em">${s.currentWeight}كجم</span> <span style="color:var(--p)">→</span> <span style="color:var(--p);font-weight:900">${s.nextWeight}كجم</span></div></div><div style="font-size:.76em;color:var(--tx2)">${s.reason}</div></div>`).join('');document.getElementById('aiMoT').textContent='📊 ملخص الجلسة';document.getElementById('aiMoB').innerHTML=`<div style="text-align:center;padding:16px;background:linear-gradient(135deg,rgba(110,231,183,.1),rgba(165,243,252,.06));border-radius:14px;margin-bottom:14px"><div style="font-size:2.2em">🎉</div><div style="font-size:1.1em;font-weight:900;color:var(--ok);margin:8px 0">جلسة ممتازة يا ${(G.profile?.name||SHEHAB.name)}!</div><div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><div><div style="font-size:1.4em;font-weight:900;color:var(--p)">${tv}</div><div style="font-size:.68em;color:var(--tx2)">حجم كجم</div></div>${prs>0?`<div><div style="font-size:1.4em;font-weight:900;color:var(--wn)">${prs}</div><div style="font-size:.68em;color:var(--tx2)">🏆 PR</div></div>`:''}<div><div style="font-size:1.4em;font-weight:900;color:var(--ok)">${Object.keys(s.exs).length}</div><div style="font-size:.68em;color:var(--tx2)">تمارين</div></div>${s.duration?`<div><div style="font-size:1.4em;font-weight:900;color:var(--bl)">${s.duration}</div><div style="font-size:.68em;color:var(--tx2)">⏱️ دقيقة</div></div>`:''}</div><div style="margin-top:10px;display:flex;gap:8px;justify-content:center"><span class="block-badge ${bl.color}">${bl.icon} ${bl.label}</span><span class="fatigue-badge ${fa}" style="font-size:.68em;padding:3px 9px;margin:0">🔥 ${FATIGUE.label()}</span></div></div><div style="font-weight:800;color:var(--p);margin-bottom:10px">🎯 خطة الجلسة القادمة</div>${sh}<button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت!</button>`;document.getElementById('aiMo').classList.add('act');if(!G.nextSessionPlan)G.nextSessionPlan={};G.nextSessionPlan[curDay]=sug;saveD()}
 function popHSel(){const s=document.getElementById('hSel');if(!s)return;const a={};Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(!ex.isWarmup)a[ex.id]=ex.name}));s.innerHTML='<option value="">-- اختر التمرين --</option>'+Object.entries(a).map(([id,n])=>`<option value="${id}">${n}</option>`).join('')}
 function renderExerciseChart(sessions,id){const pts=sessions.slice().reverse().map(s=>{const e=s.exs[id];let w=0;if(e.sets?.length){const f=e.sets.filter(t=>t.w>0);w=f.length?Math.max(...f.map(t=>t.w)):0}else w=e.w||0;return{w,dt:new Date(s.date).toLocaleDateString('ar-EG',{month:'numeric',day:'numeric'})}}).filter(p=>p.w>0);if(pts.length<2)return'';const W=300,H=110,PL=32,PR=8,PT=10,PB=26,iW=W-PL-PR,iH=H-PT-PB;const mn=Math.min(...pts.map(p=>p.w)),mx=Math.max(...pts.map(p=>p.w));const range=mx-mn||1;const xS=i=>PL+Math.round(i/(pts.length-1)*iW),yS=v=>PT+iH-Math.round((v-mn)/range*iH);const poly=pts.map((p,i)=>`${xS(i)},${yS(p.w)}`).join(' ');const fill=`${PL},${PT+iH} ${poly} ${xS(pts.length-1)},${PT+iH}`;const bestW=Math.max(...pts.map(p=>p.w));const dots=pts.map((p,i)=>{const isPR=p.w===bestW;return`<circle cx="${xS(i)}" cy="${yS(p.w)}" r="${isPR?5:2.5}" fill="${isPR?'#fde68a':'#f97316'}" opacity="${isPR?1:.75}"/>${isPR?`<text x="${xS(i)}" y="${yS(p.w)-8}" text-anchor="middle" font-size="8" fill="#fde68a" font-weight="bold">${p.w}</text>`:''}`}).join('');const step=Math.max(1,Math.ceil(pts.length/5));const xlbls=pts.map((p,i)=>i%step===0||i===pts.length-1?`<text x="${xS(i)}" y="${H-3}" text-anchor="middle" font-size="8" fill="rgba(255,255,255,.35)">${p.dt}</text>`:'').join('');const ylbls=[mn,Math.round((mn+mx)/2),mx].map(v=>`<text x="${PL-3}" y="${yS(v)+3}" text-anchor="end" font-size="8" fill="rgba(255,255,255,.35)">${Math.round(v)}</text>`).join('');return`<div style="background:rgba(255,255,255,.04);border-radius:12px;padding:10px 8px;margin-bottom:12px;border:1px solid rgba(249,115,22,.12)"><div style="font-size:.7em;font-weight:800;color:var(--p);margin-bottom:5px">📈 منحنى التقدم</div><svg viewBox="0 0 ${W} ${H}" width="100%" style="overflow:visible;max-height:120px"><defs><linearGradient id="ecGrd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f97316" stop-opacity=".25"/><stop offset="100%" stop-color="#f97316" stop-opacity="0"/></linearGradient></defs><line x1="${PL}" y1="${PT}" x2="${PL}" y2="${PT+iH}" stroke="rgba(255,255,255,.07)" stroke-width="1"/><line x1="${PL}" y1="${PT+iH}" x2="${PL+iW}" y2="${PT+iH}" stroke="rgba(255,255,255,.07)" stroke-width="1"/><line x1="${PL}" y1="${yS((mn+mx)/2)}" x2="${PL+iW}" y2="${yS((mn+mx)/2)}" stroke="rgba(255,255,255,.04)" stroke-width="1" stroke-dasharray="3,3"/><polygon points="${fill}" fill="url(#ecGrd)"/><polyline points="${poly}" fill="none" stroke="#f97316" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}${xlbls}${ylbls}</svg></div>`}
 function rHist(){window._injectMoodToSessionsList && setTimeout(window._injectMoodToSessionsList, 200);const id=document.getElementById('hSel').value,c=document.getElementById('hContent');if(!c)return;if(!id){c.innerHTML='<div class="empty"><div class="eic">📊</div><h3>اختر تمرين</h3></div>';return}const ss=G.ses.filter(s=>s.exs&&s.exs[id]&&(s.exs[id].w>0||(s.exs[id].sets&&s.exs[id].sets.some(t=>t.w>0)))).sort((a,b)=>new Date(b.date)-new Date(a.date));setTimeout(()=>renderE1RMChart(id,ss.slice().reverse()),100);if(!ss.length){c.innerHTML='<div class="empty"><div class="eic">📊</div><h3>لا يوجد سجل</h3></div>';return}const best=getBestSet(id),trend=SCI.volumeTrend(id),proj=predictStrength(id);const chartHtml=renderExerciseChart(ss.slice(0,15),id);c.innerHTML=`<div class="sg" style="margin-bottom:12px"><div class="sc"><div class="sn">${best}</div><div class="sl">🏆 أفضل وزن</div></div><div class="sc"><div class="sn">${ss.length}</div><div class="sl">جلسات</div></div><div class="sc wn"><div class="sn">${trend>0?'+':''}${trend}%</div><div class="sl">📈 الاتجاه</div></div>${proj?`<div class="sc"><div class="sn" style="font-size:.9em;color:var(--wn)">${proj}كجم</div><div class="sl">🔮 12 أسبوع</div></div>`:''}</div>${chartHtml}${proj?`<div class="strength-proj"><div class="sp-title">🔮 توقع القوة</div><div class="sp-value">${proj} كجم</div><div class="sp-sub">بناءً على معدل تقدمك</div></div>`:''}${ss.slice(0,15).map((s,i)=>{const e=s.exs[id];let tw=0,vol=0,sh='',rh='';if(e.sets?.length){const f=e.sets.filter(t=>t.w>0);tw=f.length?Math.max(...f.map(t=>t.w)):0;vol=f.reduce((v,t)=>v+(t.w||0)*(t.r||1),0);sh=`<div style="font-size:.68em;color:var(--tx2);margin-top:3px">${f.map(t=>`${t.w}×${t.r||'?'}${t.rpe?'<span style="color:var(--pu)"> R'+t.rpe+'</span>':''}`).join(' | ')}</div>`;const rp=f.filter(t=>t.rpe>0);if(rp.length){const ar=Math.round(rp.reduce((v,t)=>v+t.rpe,0)/rp.length*10)/10;rh=`<span style="font-size:.65em;color:var(--pu)">RPE⌀ ${ar}</span>`}}else tw=e.w||0;const prev=ss[i+1]?ss[i+1].exs[id]:null,pt=prev?(prev.sets?.length?(prev.sets.filter(t=>t.w>0).reduce((b,t)=>t.w>b?t.w:b,0)||prev.w||0):prev.w||0):tw,/* BUG FIX: Math.max(...[]) = -Infinity when all sets have w=0 → use reduce with 0 default */d=Math.round((tw-pt)*10)/10,ip=tw===best&&best>0;return`<div style="background:rgba(255,255,255,.06);padding:10px;border-radius:12px;margin-bottom:6px;${ip?'border:1px solid var(--wn)':''}"><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:.72em;color:var(--tx2)">${new Date(s.date).toLocaleDateString('ar-EG',{weekday:'short',month:'short',day:'numeric'})}</div>${sh}</div><div style="display:flex;gap:5px;align-items:center">${ip?'<span>🏆</span>':''}<span style="font-weight:900;color:var(--p)">${tw}</span>${rh}${d!==0?`<span style="font-size:.68em;padding:2px 7px;border-radius:7px;${d>0?'background:rgba(110,231,183,.1);color:var(--ok)':'background:rgba(252,165,165,.08);color:var(--no)'}">${d>0?'+':''}${d}</span>`:''}</div></div></div>`}).join('')}`}
@@ -1734,7 +2156,47 @@ function confirmAddToWorkout(exId){
   document.getElementById('addToWorkoutArea').innerHTML=`<div style="margin-top:10px;text-align:center;color:var(--ok);font-size:.82em">✅ تم الإضافة بنجاح!</div>`;
 }
 async function getExTips(name,btn){const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const r=await callGroq([{role:'system',content:'اشرح التمرين.'},{role:'user',content:`${name}: الوضعية + الحركة + الأخطاء + نصائح`}],800,0.6,'training');if(r)document.getElementById('exTipsArea').innerHTML=`<div style="background:rgba(254,215,170,.08);border:1px solid rgba(254,215,170,.2);border-radius:12px;padding:13px;margin-top:12px"><div style="font-size:.8em;line-height:1.7;white-space:pre-wrap">${r}</div></div>`;btn.innerHTML=o;btn.disabled=false}
-function renderProfilePage(){const el=document.getElementById('profileSubLine');if(el)el.textContent=`${PERIOD.info().icon} ${PERIOD.info().label} · Fatigue ${FATIGUE.score()}/100`;const ps=document.getElementById('profileStats');if(ps)ps.innerHTML=`<div class="ps-item"><div class="ps-val">${G.ses.length}</div><div class="ps-lbl">جلسات</div></div><div class="ps-item"><div class="ps-val">${G.streak||0}</div><div class="ps-lbl">Streak 🔥</div></div><div class="ps-item"><div class="ps-val">${recoveryScore()}%</div><div class="ps-lbl">Recovery</div></div><div class="ps-item"><div class="ps-val">${FATIGUE.score()}</div><div class="ps-lbl">Fatigue</div></div>`;rSchedule();rMacroTargets();rBodyTrack();renderMeasurements();renderGoals()}
+function renderProfilePage(){
+  const p=G.profile||{};
+  const name=p.name||SHEHAB.name;
+  const age=p.age||SHEHAB.age;
+  const job=p.job||SHEHAB.job.split(' في ')[0];
+  const loc=p.location||SHEHAB.location;
+  const nd=document.getElementById('profileNameDisplay');if(nd)nd.textContent=name;
+  const sd=document.getElementById('profileSubDisplay');if(sd)sd.textContent=`${age} سنة · ${job} · ${loc}`;
+  const nav=document.getElementById('navProfileName');if(nav)nav.textContent=name;
+  const dname=document.getElementById('dash-name-txt');if(dname)dname.textContent='💪 '+name;
+  const el=document.getElementById('profileSubLine');if(el)el.textContent=`${PERIOD.info().icon} ${PERIOD.info().label} · Fatigue ${FATIGUE.score()}/100`;
+  const ps=document.getElementById('profileStats');if(ps)ps.innerHTML=`<div class="ps-item"><div class="ps-val">${G.ses.length}</div><div class="ps-lbl">جلسات</div></div><div class="ps-item"><div class="ps-val">${G.streak||0}</div><div class="ps-lbl">Streak 🔥</div></div><div class="ps-item"><div class="ps-val">${recoveryScore()}%</div><div class="ps-lbl">Recovery</div></div><div class="ps-item"><div class="ps-val">${FATIGUE.score()}</div><div class="ps-lbl">Fatigue</div></div>`;
+  rSchedule();rMacroTargets();rBodyTrack();renderMeasurements();renderGoals();
+}
+function toggleProfileEdit(){
+  const f=document.getElementById('profileEditForm');if(!f)return;
+  const show=f.style.display==='none';
+  if(show){
+    const p=G.profile||{};
+    const ni=document.getElementById('pEdit_name');if(ni)ni.value=p.name||SHEHAB.name;
+    const ai=document.getElementById('pEdit_age');if(ai)ai.value=p.age||SHEHAB.age;
+    const ji=document.getElementById('pEdit_job');if(ji)ji.value=p.job||SHEHAB.job.split(' في ')[0];
+    const li=document.getElementById('pEdit_location');if(li)li.value=p.location||SHEHAB.location;
+  }
+  f.style.display=show?'block':'none';
+}
+function saveProfileEdit(){
+  if(!G.profile)G.profile={};
+  const n=document.getElementById('pEdit_name')?.value.trim();
+  const a=document.getElementById('pEdit_age')?.value.trim();
+  const j=document.getElementById('pEdit_job')?.value.trim();
+  const l=document.getElementById('pEdit_location')?.value.trim();
+  if(n)G.profile.name=n;
+  if(a)G.profile.age=a;
+  if(j)G.profile.job=j;
+  if(l)G.profile.location=l;
+  saveD();
+  document.getElementById('profileEditForm').style.display='none';
+  renderProfilePage();
+  toast('✅ تم حفظ معلوماتك!','s');
+}
 const SCHED_TRAIN_OPTS=[{v:'Push A — صدر + كتف + تراي',l:'💪 Push A — صدر + كتف + تراي'},{v:'Pull A — ظهر + باي',l:'🏋️ Pull A — ظهر + باي'},{v:'Leg A — رجل أمامي + سمانة',l:'🦵 Leg A — رجل أمامي + سمانة'},{v:'Push B — صدر + كتف + تراي',l:'💪 Push B — صدر + كتف + تراي'},{v:'Pull B — ظهر + باي',l:'🏋️ Pull B — ظهر + باي'},{v:'Leg B — رجل خلفي + سمانة',l:'🦵 Leg B — رجل خلفي + سمانة'},{v:'Upper Body — أعلى الجسم',l:'⬆️ Upper Body'},{v:'Lower Body — أسفل الجسم',l:'⬇️ Lower Body'},{v:'Full Body — كامل الجسم',l:'🔥 Full Body'},{v:'Cardio + Core',l:'🏃 Cardio + Core'},{v:'custom',l:'✏️ مخصص...'}];
 const SCHED_REST_OPTS=[{v:'يوم راحة',l:'🛌 يوم راحة'},{v:'تعافي نشط — مشي خفيف',l:'🚶 تعافي نشط'},{v:'إطالة ويوجا',l:'🧘 إطالة / يوجا'},{v:'custom',l:'✏️ مخصص...'}];
 const SEL_STYLE=`padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(20,5,50,.85);color:var(--tx);font-family:'Cairo';font-size:.78em;outline:0`;
@@ -2143,9 +2605,9 @@ function swTimerStop() {
     playBeep();
     if(navigator.vibrate) navigator.vibrate([300,100,300,100,500]);
     if(window._swReg && Notification.permission==='granted'){
-      window._swReg.showNotification('⏰ انتهت الراحة!',{body:'يلا شهاب! 💪',requireInteraction:true,icon:'./icon.svg',vibrate:[300,100,300]});
+      window._swReg.showNotification('⏰ انتهت الراحة!',{body:`يلا ${G.profile?.name||SHEHAB.name}! 💪`,requireInteraction:true,icon:'./icon.svg',vibrate:[300,100,300]});
     } else if('Notification' in window && Notification.permission==='granted'){
-      new Notification('⏰ انتهت الراحة!', {body:'يلا شهاب! 💪', requireInteraction:true});
+      new Notification('⏰ انتهت الراحة!', {body:`يلا ${G.profile?.name||SHEHAB.name}! 💪`, requireInteraction:true});
     }
     toast('⏰ انتهت الراحة! يلا 💪','w');
     if(typeof _ttsTimerDone === 'function') _ttsTimerDone();
@@ -2220,42 +2682,11 @@ function swTimerStop() {
 function quickStartTimer(seconds){
   window._timerDefault = seconds;
   window._timerRemaining = seconds;
-  window._tmrEndAt = Date.now() + seconds * 1000;
-  swTimerStart(seconds, window._tmrEndAt);
   if('Notification' in window && Notification.permission==='default') Notification.requestPermission();
-  if(window._startKeepAlive) window._startKeepAlive();
-  // BUG FIX: استخدام startTimer() بدل RAF loop ثاني — كان يشغّل حلقتين معاً
-  cancelAnimationFrame(window._tmrRAF);
+  const endAt = Date.now() + seconds * 1000;
+  swTimerStart(seconds, endAt); // notify service worker for background alerts
   const ft=document.getElementById('floatTimer');if(ft)ft.style.display='flex';
-  const bn=document.getElementById('timerStartBtn');if(bn){bn.textContent='⏸ شغال...';bn.disabled=true;}
-  (function tick(){
-    if(!window._tmrEndAt) return;
-    const rem = Math.max(0, Math.round((window._tmrEndAt - Date.now()) / 1000));
-    window._timerRemaining = rem;
-    const col=rem<=5?'var(--no)':rem<=15?'var(--wn)':'var(--p)';
-    const fd=document.getElementById('floatTimerDisp'),fi=document.getElementById('floatTimerIcon');
-    if(ft)ft.style.display='flex';
-    if(fd){fd.textContent=`${Math.floor(rem/60)}:${String(rem%60).padStart(2,'0')}`;fd.style.color=col;}
-    if(fi)fi.textContent=rem<=0?'✅':rem<=5?'🚨':rem<=15?'⚠️':'⏱️';
-    const d=document.getElementById('timerDisp');
-    if(d){d.textContent=`${Math.floor(rem/60)}:${String(rem%60).padStart(2,'0')}`;d.style.color=col;}
-    if(rem<=0){
-      window._tmrEndAt=0;
-      if(window._stopKeepAlive) window._stopKeepAlive();
-      window.playBeep();
-      if(navigator.vibrate) navigator.vibrate([300,100,300,100,500]);
-      if(window._swReg && Notification.permission==='granted'){
-        window._swReg.showNotification('⏰ انتهت الراحة!',{body:'يلا شهاب! 💪',requireInteraction:true,icon:'./icon.svg',vibrate:[300,100,300]});
-      } else if('Notification' in window && Notification.permission==='granted'){
-        new Notification('⏰ انتهت الراحة!',{body:'يلا شهاب! 💪',requireInteraction:true});
-      }
-      toast('⏰ انتهت الراحة! يلا 💪','w');
-      if(typeof _ttsTimerDone === 'function') _ttsTimerDone();
-      if(ft) setTimeout(()=>{if(ft)ft.style.display='none';},4000);
-      return;
-    }
-    window._tmrRAF = requestAnimationFrame(tick);
-  })();
+  if(typeof window.startTimer === 'function') window.startTimer();
 }
 // ══ iOS KEEP-ALIVE: Silent Audio Loop ══
 (function initKeepAlive(){
@@ -2279,6 +2710,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   rRecoveryBadge();rFatigueBadge();rFatigueBar();rBlockBadge();
   rPeriodBanner();rDayStatusBanner();rMorningCard();rLaggingMuscleAlert();renderWeeklyChallenge();
   initNewFields();
+  // Update profile name across all dynamic elements
+  (function(){const p=G.profile||{},n=p.name||SHEHAB.name;const nav=document.getElementById('navProfileName');if(nav)nav.textContent=n;const dn=document.getElementById('dash-name-txt');if(dn)dn.textContent='💪 '+n;const nd=document.getElementById('profileNameDisplay');if(nd)nd.textContent=n;})();
   // fallback لو الأيام مش ظاهرة
   setTimeout(()=>{
     const dl=document.getElementById('dayList');
@@ -2699,11 +3132,11 @@ function renderBadges() {
 ═══════════════════════════════════════════════ */
 /* Standards in kg based on ~75kg bodyweight male (Strength Level) */
 const STRENGTH_STANDARDS = {
-  'Bench Press': {exIds:['pa1','pb2'], levels:[50,72,92,120,152], muscle:'صدر'},
-  'Back Squat':  {exIds:['la1'],       levels:[65,95,120,155,197], muscle:'رجل'},
-  'Deadlift':    {exIds:['pla1'],      levels:[80,115,145,185,235], muscle:'ظهر'},
-  'OHP':         {exIds:['pa4','pb4'], levels:[30,47,62,82,104],   muscle:'كتف'},
-  'Barbell Row': {exIds:['pla2'],      levels:[45,67,88,112,142],  muscle:'ظهر'},
+  'Bench Press': {exIds:['ua1'],  levels:[50,72,92,120,152], muscle:'صدر'},
+  'Back Squat':  {exIds:['la1'], levels:[65,95,120,155,197], muscle:'رجل'},
+  'Deadlift':    {exIds:['lb1'], levels:[80,115,145,185,235], muscle:'ظهر'},
+  'OHP':         {exIds:['ub4'], levels:[30,47,62,82,104],   muscle:'كتف'},
+  'Barbell Row': {exIds:['ub2'], levels:[45,67,88,112,142],  muscle:'ظهر'},
 };
 const STD_LABELS = ['مبتدئ','مبتدئ+','متوسط','متقدم','نخبة'];
 const STD_CLASSES = ['std-untrained','std-novice','std-inter','std-advanced','std-elite'];
