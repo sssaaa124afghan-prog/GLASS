@@ -774,15 +774,46 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(249,115,2
 .sl-warmup-content{font-size:.78em;color:var(--tx2);line-height:1.7;margin-bottom:12px}
 .sl-gate-btn{width:100%;padding:13px;border-radius:10px;border:1.5px solid rgba(249,115,22,.45);background:linear-gradient(135deg,rgba(249,115,22,.25),rgba(0,212,255,.15));color:#fff;font-family:'Cairo';font-weight:900;font-size:.9em;cursor:pointer;transition:all .25s;box-shadow:0 4px 20px rgba(249,115,22,.2)}
 .sl-warmup-done-label{font-size:.76em;color:rgba(34,211,238,.8);font-weight:800;display:flex;align-items:center;gap:6px}
-#slSystemNotif{position:fixed;top:136px;left:50%;transform:translateX(-50%) translateY(-10px);z-index:600;width:min(300px,calc(100vw - 32px));background:rgba(1,3,14,.97);border:1.5px solid rgba(0,212,255,.65);border-radius:3px;padding:14px 18px 16px;box-shadow:0 0 50px rgba(0,212,255,.22),0 0 100px rgba(0,212,255,.08);display:none;pointer-events:none}
-#slSystemNotif.sl-show{display:block;animation:slNIn .42s cubic-bezier(.2,.8,.3,1) forwards}
-#slSystemNotif.sl-hide{animation:slNOut .3s ease-in forwards}
-@keyframes slNIn{from{opacity:0;transform:translateX(-50%) translateY(-20px) scale(.9);filter:blur(8px)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1);filter:blur(0)}}
-@keyframes slNOut{to{opacity:0;transform:translateX(-50%) translateY(-12px) scale(.96);filter:blur(4px)}}
-.sl-n-sys{font-size:.55em;color:rgba(0,212,255,.6);letter-spacing:.2em;font-weight:900;margin-bottom:6px;font-family:monospace}
-.sl-n-title{font-size:.88em;font-weight:900;color:#00d4ff;margin-bottom:4px}
-.sl-n-sub{font-size:.72em;color:rgba(255,255,255,.5);line-height:1.5}
-.sl-n-divider{height:1px;background:rgba(0,212,255,.2);margin:10px 0}
+/* ── SYSTEM NOTIFICATION — bottom banner, above nav, slides up ── */
+#slSystemNotif{
+  position:fixed;
+  bottom:calc(env(safe-area-inset-bottom,0px) + 88px);
+  left:50%;
+  transform:translateX(-50%) translateY(18px);
+  z-index:500;
+  width:calc(100% - 28px);
+  max-width:430px;
+  background:rgba(0,3,14,.96);
+  border:1.5px solid rgba(0,212,255,.55);
+  border-radius:14px;
+  padding:11px 14px 12px;
+  box-shadow:0 0 40px rgba(0,212,255,.18),inset 0 1px 0 rgba(0,212,255,.14),0 8px 32px rgba(0,0,0,.5);
+  display:none;
+  pointer-events:none;
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px)
+}
+#slSystemNotif.sl-show{
+  display:flex;align-items:center;gap:12px;
+  animation:slNIn .38s cubic-bezier(.15,.85,.3,1) forwards
+}
+#slSystemNotif.sl-hide{animation:slNOut .28s ease-in forwards}
+@keyframes slNIn{
+  from{opacity:0;transform:translateX(-50%) translateY(22px) scale(.97);filter:blur(5px)}
+  to{opacity:1;transform:translateX(-50%) translateY(0) scale(1);filter:blur(0)}
+}
+@keyframes slNOut{
+  to{opacity:0;transform:translateX(-50%) translateY(14px) scale(.97);filter:blur(3px)}
+}
+/* Notification icon badge */
+.sl-n-icon{width:38px;height:38px;border-radius:10px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);display:flex;align-items:center;justify-content:center;font-size:1.25em;flex-shrink:0}
+/* Notification text body */
+.sl-n-body{flex:1;min-width:0}
+.sl-n-sys{font-size:.5em;color:rgba(0,212,255,.55);letter-spacing:.2em;font-weight:900;margin-bottom:2px;font-family:monospace}
+.sl-n-title{font-size:.82em;font-weight:900;color:#00d4ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Exercise detail — right side */
+.sl-n-sub{font-size:.68em;color:rgba(255,255,255,.5);line-height:1.45;text-align:left;flex-shrink:0;max-width:40%}
+.sl-n-divider{display:none}
 .exi{border-radius:12px!important}
 .dchip.act{background:linear-gradient(135deg,rgba(0,180,255,.18),rgba(249,115,22,.22))!important;border-color:rgba(0,212,255,.4)!important;box-shadow:0 8px 24px rgba(0,0,0,.3),0 0 20px rgba(0,212,255,.12)!important}
 .set-row.set-done{background:rgba(0,212,255,.04)!important}
@@ -805,22 +836,24 @@ body::after{background:radial-gradient(circle,rgba(0,100,180,.14),transparent 70
   --bd:rgba(0,212,255,.22);--bd2:rgba(0,212,255,.12);--bd3:rgba(0,212,255,.06)
 }
 
-/* ── 2. Body — deep system black + subtle horizontal scanlines ── */
+/* ── 2. Body — deep system black + safe areas ── */
 body{
   background:
     repeating-linear-gradient(0deg,rgba(0,212,255,.011) 0px,rgba(0,212,255,.011) 1px,transparent 1px,transparent 5px),
-    linear-gradient(135deg,#00040f 0%,#010d1f 50%,#000c1a 100%)!important
+    linear-gradient(135deg,#00040f 0%,#010d1f 50%,#000c1a 100%)!important;
+  padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))!important
 }
 body::before{
   background:radial-gradient(circle,rgba(0,150,255,.07),transparent 70%)!important;
   width:700px!important;height:700px!important;top:-260px!important;right:-260px!important;border-radius:50%!important
 }
 
-/* ── 3. Header — SYSTEM panel ── */
+/* ── 3. Header — SYSTEM panel + Dynamic Island safe ── */
 .hdr{
   background:rgba(0,3,12,.97)!important;
   border-bottom:1px solid rgba(0,212,255,.25)!important;
-  box-shadow:0 0 40px rgba(0,212,255,.06),0 4px 20px rgba(0,0,0,.6)!important
+  box-shadow:0 0 40px rgba(0,212,255,.06),0 4px 20px rgba(0,0,0,.6)!important;
+  padding-top:max(14px,calc(env(safe-area-inset-top,0px) + 6px))!important
 }
 .hdr h1{
   background:linear-gradient(135deg,#00d4ff,#38bdf8)!important;
@@ -835,17 +868,69 @@ body::before{
 .qstat{background:rgba(0,6,24,.45)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;border-color:rgba(0,212,255,.12)!important}
 .qstat .qv{color:#00d4ff!important}
 
-/* ── 5. Bottom Nav — SYSTEM dock ── */
+/* ── 5. HUNTER DOCK — fixed position + Dynamic Island bottom ── */
 .bnav{
-  background:rgba(0,3,12,.97)!important;
-  border:1px solid rgba(0,212,255,.22)!important;
-  box-shadow:0 0 40px rgba(0,212,255,.07),0 -4px 20px rgba(0,0,0,.7)!important
+  position:fixed!important;
+  bottom:calc(env(safe-area-inset-bottom,0px) + 10px)!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  z-index:200!important;
+  width:calc(100% - 24px)!important;
+  max-width:430px!important;
+  display:flex!important;
+  align-items:stretch!important;
+  background:rgba(0,3,14,.94)!important;
+  backdrop-filter:blur(32px)!important;-webkit-backdrop-filter:blur(32px)!important;
+  border:1px solid rgba(0,212,255,.26)!important;
+  border-radius:22px!important;
+  padding:6px 8px!important;
+  gap:3px!important;
+  box-shadow:
+    0 0 0 1px rgba(0,212,255,.07),
+    0 -2px 24px rgba(0,0,0,.7),
+    inset 0 1px 0 rgba(0,212,255,.22),
+    0 0 40px rgba(0,212,255,.08)!important
 }
-.bni{color:rgba(0,212,255,.3)!important}
-.bni.act{color:#00d4ff!important;background:rgba(0,212,255,.1)!important}
-.bni.act .ic{filter:drop-shadow(0 0 9px rgba(0,212,255,.75))!important;opacity:1!important}
-.bnav::before{content:'';position:absolute;top:0;left:16px;right:16px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.5),transparent);pointer-events:none}
-.bnav{position:relative}
+/* Top glow line */
+.bnav::before{
+  content:''!important;position:absolute!important;
+  top:0!important;left:18px!important;right:18px!important;height:1px!important;
+  background:linear-gradient(90deg,transparent,rgba(0,212,255,.7),transparent)!important;
+  pointer-events:none!important;border-radius:1px!important
+}
+/* Nav item — base */
+.bni{
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;
+  gap:3px!important;padding:8px 2px!important;flex:1!important;
+  cursor:pointer!important;font-size:.59em!important;
+  color:rgba(0,180,230,.42)!important;font-weight:800!important;
+  border:1px solid transparent!important;background:none!important;
+  font-family:'Cairo'!important;transition:all .22s cubic-bezier(.4,0,.2,1)!important;
+  position:relative!important;border-radius:14px!important;
+  white-space:nowrap!important;min-width:0!important;overflow:hidden!important;
+  min-height:52px!important
+}
+/* Inactive icon */
+.bni .ic{
+  font-size:1.5em!important;
+  transition:all .22s!important;
+  opacity:.48!important;
+  filter:grayscale(.6)!important
+}
+/* Active item */
+.bni.act{
+  color:#00d4ff!important;
+  background:rgba(0,212,255,.1)!important;
+  border:1px solid rgba(0,212,255,.25)!important;
+  box-shadow:inset 0 0 18px rgba(0,212,255,.07),0 0 14px rgba(0,212,255,.06)!important
+}
+/* Active icon */
+.bni.act .ic{
+  opacity:1!important;
+  filter:drop-shadow(0 0 8px rgba(0,212,255,.95)) grayscale(0)!important;
+  transform:scale(1.12) translateY(-1px)!important
+}
 
 /* ── 6. Cards ── */
 .card{
@@ -984,7 +1069,7 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
 
 /* ── 29. Float buttons ── */
 .wo-ai-btn{background:linear-gradient(135deg,#00d4ff,#6366f1)!important}
-#floatTimer{background:rgba(0,4,15,.97)!important;border-color:rgba(0,212,255,.4)!important;box-shadow:0 0 30px rgba(0,212,255,.15)!important}
+#floatTimer{background:rgba(0,4,15,.97)!important;border-color:rgba(0,212,255,.4)!important;box-shadow:0 0 30px rgba(0,212,255,.15)!important;top:max(76px,calc(env(safe-area-inset-top,0px) + 18px))!important}
 
 /* ── 30. Form phases & tips ── */
 .form-phase-num{background:rgba(0,212,255,.12)!important;border-color:rgba(0,212,255,.28)!important;color:#00d4ff!important}
@@ -1059,9 +1144,11 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
 <body>
 <div class="tc" id="toasts"></div>
 <div id="slSystemNotif">
-  <div class="sl-n-sys">[ S Y S T E M ]</div>
-  <div class="sl-n-title">مهمة جديدة</div>
-  <div class="sl-n-divider"></div>
+  <div class="sl-n-icon">⚔️</div>
+  <div class="sl-n-body">
+    <div class="sl-n-sys">[ S Y S T E M ]</div>
+    <div class="sl-n-title">مهمة جديدة</div>
+  </div>
   <div class="sl-n-sub"></div>
 </div>
 
@@ -1571,12 +1658,12 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
 
 <!-- BOTTOM NAV -->
 <div class="bnav">
-  <button class="bni act" onclick="go('wo',this)"><span class="ic">🏋️</span>تمارين</button>
-  <button class="bni" onclick="go('hist',this)"><span class="ic">📊</span>السجل</button>
-  <button class="bni" onclick="go('ai',this)"><span class="ic">🤖</span>AI</button>
-  <button class="bni" onclick="go('lib',this)"><span class="ic">📚</span>المكتبة</button>
-  <button class="bni" onclick="go('tools',this)"><span class="ic">🛠️</span>أدوات</button>
-  <button class="bni" onclick="go('profile',this)"><span class="ic">👤</span><span id="navProfileName">شهاب</span></button>
+  <button class="bni act" onclick="go('wo',this)"><span class="ic">⚔️</span>دنجن</button>
+  <button class="bni" onclick="go('hist',this)"><span class="ic">📈</span>تقدم</button>
+  <button class="bni" onclick="go('ai',this)"><span class="ic">🔮</span>نظام</button>
+  <button class="bni" onclick="go('lib',this)"><span class="ic">🗡️</span>مهارات</button>
+  <button class="bni" onclick="go('tools',this)"><span class="ic">⚙️</span>أدوات</button>
+  <button class="bni" onclick="go('profile',this)"><span class="ic">🛡️</span><span id="navProfileName">شهاب</span></button>
 </div>
 
 <!-- MODALS -->
