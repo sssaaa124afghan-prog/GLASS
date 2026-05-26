@@ -18,7 +18,9 @@
 })();
 </script>
 <title>⚔️ Solo Gym System</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=optional" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 /* BUG FIX: limit transitions to interactive elements only — universal * transition kills animations & tanks mobile perf */
@@ -598,10 +600,8 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .challenge-bar-fill{height:100%;background:linear-gradient(90deg,var(--wn),var(--p));border-radius:8px;transition:width .8s cubic-bezier(.4,0,.2,1)}
 .challenge-meta{display:flex;justify-content:space-between;font-size:.68em;color:var(--tx2)}
 /* FORM PHASES */
-.form-phases{background:rgba(0,212,255,.02);border-radius:12px;padding:11px;margin-top:8px;border:1px solid rgba(0,212,255,.1)}
 .form-phase-title{font-size:.72em;font-weight:900;color:var(--p);margin:8px 0 5px;display:flex;align-items:center;gap:5px}
 .form-phase-title:first-child{margin-top:0}
-.form-phase-step{display:flex;gap:7px;align-items:flex-start;padding:3px 0;font-size:.72em;line-height:1.55;color:var(--tx2)}
 .form-phase-num{width:17px;height:17px;border-radius:50%;background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.28);display:flex;align-items:center;justify-content:center;font-size:.68em;font-weight:900;flex-shrink:0;color:var(--p);margin-top:1px}
 .form-cue{font-size:.73em;color:var(--wn);padding:3px 0;line-height:1.5}
 /* SET AI COACH BUBBLE */
@@ -716,8 +716,6 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(0,212,255
 /* Stat tab pills */
 .stat-tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .stat-tabs::-webkit-scrollbar{display:none}
-/* Bottom nav — ensure nav text is always one line */
-.bni{white-space:nowrap}
 @keyframes _ytFadeIn{from{opacity:0}to{opacity:1}}
 @keyframes _ytZoomIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
 
@@ -1109,7 +1107,7 @@ body::before{
 /* ── 6. Cards ── */
 .card{
   background:rgba(0,8,28,.52)!important;
-  backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;
+  backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
   border:1px solid rgba(0,212,255,.14)!important;
   box-shadow:0 4px 28px rgba(0,0,0,.35),inset 0 1px 0 rgba(0,212,255,.07)!important
 }
@@ -1292,24 +1290,27 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
 @keyframes slHdrGlow{0%,100%{box-shadow:0 0 40px rgba(0,212,255,.06),0 4px 20px rgba(0,0,0,.6)}50%{box-shadow:0 0 60px rgba(0,212,255,.1),0 4px 20px rgba(0,0,0,.6)}}
 .hdr{animation:slideDown .4s ease,slHdrGlow 4s ease-in-out infinite}
 
-/* ── 41. Glass restoration — remaining elements ── */
-.dchip{backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;background:rgba(0,6,24,.42)!important}
-.comp-bar{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.period-banner{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.sc{background:rgba(0,6,24,.45)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.ps-item{background:rgba(0,6,24,.45)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.tool-card{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.w-card{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.meas-card{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.goal-row{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.lib-item{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.sets-summary{background:rgba(0,6,24,.35)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}
-.day-banner{backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.morning-card{backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
-.profile-card{backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;background:rgba(0,10,30,.45)!important}
-.ai-coach-card{backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;background:rgba(0,8,28,.45)!important}
-.ai-chat-box{backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;background:rgba(0,6,24,.38)!important}
-.warmup-proto{background:rgba(0,6,24,.42)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}
+/* ── 41. Glass restoration — keep blur only on floating/overlay surfaces ── */
+/* Backdrop-filter budget: header(32px) + nav(32px) + modals = max ~3 active layers */
+/* Non-floating cards: use solid bg, skip blur (no visual benefit on dark bg) */
+.dchip{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(0,6,24,.65)!important}
+.comp-bar{background:rgba(0,6,24,.65)!important}
+.period-banner{background:rgba(0,6,24,.58)!important}
+.sc{background:rgba(0,6,24,.55)!important}
+.ps-item{background:rgba(0,6,24,.55)!important}
+.tool-card{background:rgba(0,6,24,.52)!important}
+.w-card{background:rgba(0,6,24,.52)!important}
+.meas-card{background:rgba(0,6,24,.52)!important}
+.goal-row{background:rgba(0,6,24,.52)!important}
+.lib-item{background:rgba(0,6,24,.52)!important}
+.sets-summary{background:rgba(0,6,24,.55)!important}
+.day-banner{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.morning-card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+/* These overlay content — keep light blur */
+.profile-card{backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;background:rgba(0,10,30,.55)!important}
+.ai-coach-card{backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;background:rgba(0,8,28,.55)!important}
+.ai-chat-box{background:rgba(0,6,24,.55)!important}
+.warmup-proto{background:rgba(0,6,24,.52)!important}
 /* ── 42. Page system headers ── */
 .sl-page-header{
   padding:16px 16px 12px;
@@ -1357,7 +1358,9 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
 .lib-item-meta{font-family:monospace!important;font-size:.65em!important;color:rgba(0,212,255,.5)!important;letter-spacing:.04em!important}
 /* ── Override old remaining classes to match SL style ── */
 .sl-warmup-card{display:none!important} /* replaced by .sl-dungeon-gate */
-.sl-dungeon-gate,.sl-quest,.sl-status-card,.sl-dungeon-header{backdrop-filter:blur(20px)!important;-webkit-backdrop-filter:blur(20px)!important}
+/* backdrop-filter on key surfaces only — quest cards excluded (multiple = GPU cost) */
+.sl-dungeon-gate,.sl-status-card,.sl-dungeon-header{backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important}
+.sl-quest{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 /* Muscle tag override for quests */
 .sl-quest .muscle-tag{background:rgba(0,212,255,.07)!important;border-color:rgba(0,212,255,.15)!important;color:rgba(0,212,255,.65)!important;border-radius:2px!important;font-family:monospace!important;font-size:.58em!important;letter-spacing:.06em!important}
 /* Best weight label */
@@ -1373,6 +1376,71 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
 .sl-quest .set-row{border-bottom-color:rgba(0,212,255,.06)!important}
 /* Active set number */
 .sl-quest.exi-active .set-num{background:rgba(0,212,255,.12)!important;color:rgba(0,212,255,.7)!important}
+
+/* ── 48. HP / MP stat bars ── */
+.sl-statbar-wrap{padding:4px 14px 8px}
+.sl-statbar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.sl-statbar-label{font-family:monospace;font-size:.48em;letter-spacing:.16em;font-weight:900;width:24px;color:rgba(0,212,255,.5);flex-shrink:0}
+.sl-statbar-track{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;border:1px solid rgba(255,255,255,.05)}
+.sl-statbar-fill{height:100%;border-radius:3px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.sl-statbar-val{font-family:monospace;font-size:.5em;font-weight:900;width:36px;text-align:right;flex-shrink:0}
+.sl-hp-fill{background:linear-gradient(90deg,#ef4444 0%,#f59e0b 50%,#22c55e 100%);background-size:200% 100%}
+.sl-mp-fill{background:linear-gradient(90deg,rgba(0,100,200,.5),#00d4ff)}
+
+/* ── 49. Rank-Up ceremony overlay ── */
+.sl-rankup-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:rgba(0,4,15,.92);animation:slRankFadeIn .4s ease}
+@keyframes slRankFadeIn{from{opacity:0}to{opacity:1}}
+.sl-rankup-card{background:linear-gradient(135deg,rgba(0,8,28,.97),rgba(0,20,50,.97));border:2px solid rgba(0,212,255,.6);border-radius:20px;padding:36px 32px;text-align:center;max-width:320px;width:90%;box-shadow:0 0 60px rgba(0,212,255,.25),0 0 120px rgba(0,212,255,.1);animation:slRankPop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes slRankPop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.sl-rankup-sys{font-family:monospace;font-size:.58em;letter-spacing:.3em;color:rgba(0,212,255,.5);margin-bottom:16px}
+.sl-rankup-arrow{font-size:2.8em;margin:12px 0;animation:slRankPulse 1s ease infinite}
+@keyframes slRankPulse{0%,100%{text-shadow:0 0 20px rgba(0,212,255,.4)}50%{text-shadow:0 0 40px rgba(0,212,255,.9)}}
+.sl-rankup-name{font-family:monospace;font-size:1.4em;font-weight:900;color:#00d4ff;letter-spacing:.12em;margin:8px 0 4px;text-shadow:0 0 30px rgba(0,212,255,.5)}
+.sl-rankup-sub{font-family:monospace;font-size:.62em;color:rgba(200,240,255,.5);letter-spacing:.08em;margin-bottom:20px}
+.sl-rankup-lines{position:absolute;inset:0;overflow:hidden;border-radius:20px;pointer-events:none}
+.sl-rankup-lines::before,.sl-rankup-lines::after{content:'';position:absolute;left:-50%;width:200%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.5),transparent);animation:slLineScan 2s linear infinite}
+.sl-rankup-lines::after{animation-delay:1s;opacity:.5}
+@keyframes slLineScan{from{top:-10%}to{top:110%}}
+
+/* ── 50. Volume Gate cleared overlay ── */
+.sl-volgate-overlay{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:9500;background:rgba(0,6,24,.95);border:1.5px solid rgba(0,212,255,.5);border-radius:16px;padding:14px 22px;text-align:center;min-width:260px;box-shadow:0 8px 40px rgba(0,212,255,.2);animation:slGateIn .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes slGateIn{from{opacity:0;transform:translateX(-50%) translateY(20px) scale(.9)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+.sl-volgate-title{font-family:monospace;font-size:.62em;font-weight:900;color:#00d4ff;letter-spacing:.14em;margin-bottom:4px}
+.sl-volgate-name{font-family:monospace;font-size:.9em;font-weight:900;color:#fff;letter-spacing:.08em}
+
+/* ── 51. XP float pop ── */
+.xp-float{position:fixed;font-family:monospace;font-size:.95em;font-weight:900;color:#00d4ff;text-shadow:0 0 12px rgba(0,212,255,.7);pointer-events:none;z-index:9000;animation:xpFloatUp .9s ease forwards}
+@keyframes xpFloatUp{0%{opacity:1;transform:translateY(0) scale(1)}60%{opacity:1;transform:translateY(-40px) scale(1.1)}100%{opacity:0;transform:translateY(-70px) scale(.9)}}
+
+/* ── 52. Exercise complete burst ── */
+@keyframes exiBurst{0%{box-shadow:0 0 0 0 rgba(0,212,255,.5)}50%{box-shadow:0 0 0 12px rgba(0,212,255,.12)}100%{box-shadow:0 0 0 0 rgba(0,212,255,0)}}
+.exi-complete-burst{animation:exiBurst .8s ease!important}
+
+/* ── 53. XP Level-up overlay (upgrade existing unstyled) ── */
+.lvlup-overlay{position:fixed;inset:0;z-index:10001;display:flex;align-items:center;justify-content:center;background:rgba(0,4,15,.9);animation:slRankFadeIn .35s ease}
+.lvlup-card{background:linear-gradient(135deg,rgba(0,8,28,.98),rgba(0,16,44,.98));border:2px solid rgba(0,212,255,.55);border-radius:20px;padding:32px 28px;text-align:center;max-width:300px;width:88%;box-shadow:0 0 50px rgba(0,212,255,.2);animation:slRankPop .45s cubic-bezier(.34,1.56,.64,1);position:relative}
+.lvlup-icon{font-size:3em;margin-bottom:10px}
+.lvlup-title{font-family:monospace;font-size:.55em;letter-spacing:.28em;color:rgba(0,212,255,.5);margin-bottom:8px}
+.lvlup-name{font-family:monospace;font-size:1.3em;font-weight:900;color:#00d4ff;letter-spacing:.1em;text-shadow:0 0 24px rgba(0,212,255,.5);margin-bottom:6px}
+.lvlup-sub{font-family:monospace;font-size:.6em;color:rgba(200,240,255,.5);letter-spacing:.06em}
+
+/* ── 54. Float timer preset row ── */
+.ft-presets{display:flex;gap:5px;justify-content:center;margin-top:6px;flex-wrap:nowrap}
+.ft-preset-btn{font-family:monospace;font-size:.65em;font-weight:900;padding:3px 8px;border-radius:6px;border:1px solid rgba(0,212,255,.25);background:rgba(0,212,255,.08);color:rgba(0,212,255,.8);cursor:pointer;letter-spacing:.04em;white-space:nowrap;transition:background .15s}
+.ft-preset-btn:active{background:rgba(0,212,255,.22)}
+
+/* ── 55. PR Hall of Fame SL cards ── */
+.sl-pr-header{font-family:monospace;font-size:.48em;letter-spacing:.2em;color:rgba(0,212,255,.4);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(0,212,255,.1)}
+.sl-pr-card{background:rgba(0,4,14,.6);padding:9px 11px;border-radius:8px;margin-bottom:5px;border:1px solid rgba(0,212,255,.08);border-left-width:2px;display:flex;align-items:center;gap:10px}
+.sl-pr-num{font-family:monospace;font-size:.6em;font-weight:900;width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sl-pr-info{flex:1;min-width:0}
+.sl-pr-name{font-weight:900;font-size:.82em;font-family:monospace;color:#00d4ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sl-pr-muscle{font-size:.58em;color:rgba(0,212,255,.4);font-family:monospace;margin-top:1px}
+.sl-pr-val{font-family:monospace;font-weight:900;font-size:1em;flex-shrink:0}
+
+/* ── 56. Measurements BW chart ── */
+.sl-bw-chart-wrap{background:rgba(0,4,14,.5);border:1px solid rgba(0,212,255,.1);border-radius:10px;padding:10px 8px;margin-bottom:12px}
+.sl-bw-chart-label{font-family:monospace;font-size:.52em;color:rgba(0,212,255,.5);letter-spacing:.1em;font-weight:900;margin-bottom:6px}
 
 </style>
 
@@ -1924,6 +1992,13 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
     <button onclick="resetFloatTimer()" style="background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.25);color:var(--p);border-radius:8px;padding:4px 10px;font-size:.8em;font-weight:800;cursor:pointer">↺</button>
     <button id="ttsToggleBtn" onclick="toggleTTS()" title="صوت الكوتش" style="background:rgba(110,231,183,.1);border:1px solid rgba(110,231,183,.25);color:var(--ok);border-radius:8px;padding:4px 10px;font-size:.85em;cursor:pointer">🔊</button>
   </div>
+  <div class="ft-presets">
+    <button class="ft-preset-btn" onclick="quickStartTimer(30)">30s</button>
+    <button class="ft-preset-btn" onclick="quickStartTimer(60)">1m</button>
+    <button class="ft-preset-btn" onclick="quickStartTimer(90)">90s</button>
+    <button class="ft-preset-btn" onclick="quickStartTimer(120)">2m</button>
+    <button class="ft-preset-btn" onclick="quickStartTimer(180)">3m</button>
+  </div>
 </div>
 
 <!-- WAKE LOCK PILL -->
@@ -1953,7 +2028,7 @@ const K = 'gymProAI_v12_fixed'; /* v12: fixed laggingMuscle/predictStrength/VELO
 const dayOrder = ['upperA','lowerA','upperB','lowerB'];
 const MOTIVATIONAL = ['💪 أنت أقوى مما تفتكر','⭐ النجاح عادة.. وأنت بتبنيها','🔥 كمّل يا أسد الجيم!','💯 Push harder than yesterday','⚡ أنت وحش! كل يوم بتتحسن','🎯 القوة مش بس في الحديد.. في الإصرار','✨ مفيش حاجة اسمها مستحيل','🏆 كل تمرينة بتقربك من هدفك','🌟 الألم مؤقت.. النتيجة دائمة','💎 البطل اللي بيقوم مش اللي مبيوقعش'];
 const SHEHAB={name:'شهاب',age:22,nationality:'مصري',location:'عجمان، الإمارات',job:'محاسب في Noor Al Khaleej Perfume',program:'Push/Pull/Legs PPL · Progressive Overload',macros:{train:{protein:175,carbs:280,fats:65,cals:2385},rest:{protein:160,carbs:180,fats:70,cals:2030}},goals:['زيادة القوة','بناء عضلة','Progressive Overload']};
-const DEFAULT_SCHEDULE={0:{type:'rest',label:'يوم راحة',day:'الأحد'},1:{type:'train',label:'Pull A — ظهر + باي',day:'الإثنين'},2:{type:'train',label:'Push A — صدر + كتف + تراي',day:'الثلاثاء'},3:{type:'train',label:'Leg A — رجل أمامي + سمانة',day:'الأربعاء'},4:{type:'rest',label:'يوم راحة',day:'الخميس'},5:{type:'train',label:'Pull B — ظهر + باي',day:'الجمعة'},6:{type:'train',label:'Push B — صدر + كتف + تراي',day:'السبت'}};
+const DEFAULT_SCHEDULE={0:{type:'rest',label:'يوم راحة',day:'الأحد'},1:{type:'train',label:'Upper A — صدر علوي + ظهر + كتف + ذراعين',day:'الإثنين'},2:{type:'train',label:'Lower A — كوادز + هامسترينج + مؤخرة + سمانة',day:'الثلاثاء'},3:{type:'rest',label:'يوم راحة',day:'الأربعاء'},4:{type:'train',label:'Upper B — لات + ظهر + صدر سفلي + كتف + ذراعين',day:'الخميس'},5:{type:'train',label:'Lower B — أسفل ظهر + كوادز + هامسترينج + كور',day:'الجمعة'},6:{type:'rest',label:'يوم راحة',day:'السبت'}};
 const MY_DAYS={
 /* ══ UPPER A — صدر + ظهر + كتف + ذراعين ══ */
 upperA:{name:'Upper A',muscles:'صدر علوي + ظهر + كتف + ذراعين + ساعد',exercises:[
@@ -2118,6 +2193,7 @@ G.theme=d.theme||'dark';G.notifications=d.notifications!==undefined?d.notificati
 G.currentSets=d.currentSets||{};G.wellness=d.wellness||{};G.measurements=d.measurements||[];G.goals=d.goals||{};G.earnedBadges=d.earnedBadges||{};G.weeklyChallenge=d.weeklyChallenge||null;G.xp=d.xp||0;G.xpLevel=d.xpLevel||0;G.smartGoals=d.smartGoals||[];G.wellnessLog=d.wellnessLog||[];G.homeMode=false;G.profile=d.profile||{};
 G.nextSessionPlan=d.nextSessionPlan||{};G.rpeHistory=d.rpeHistory||{};
 G.schedule=d.schedule||null;
+G.lastRank=d.lastRank||'E';G.clearedVolumeGates=d.clearedVolumeGates||[];
 // التحقق الصارم من G.days
 if(d.days&&d.days.upperA&&d.days.lowerA&&d.days.upperB&&d.days.lowerB){
   G.days=d.days;
@@ -2129,13 +2205,37 @@ if(G.aiKey)setTimeout(()=>{const i=document.getElementById('apiKeyInput');if(i)i
 if(G.claudeKey)setTimeout(()=>{const i=document.getElementById('claudeKeyInput');if(i)i.value=G.claudeKey;},100);
 const t=document.getElementById('notifToggle');if(t)t.checked=G.notifications;
 }catch(e){console.warn('loadD:',e);G.days=JSON.parse(JSON.stringify(MY_DAYS));}}
+let _saveDt=null;function saveDd(ms=350){clearTimeout(_saveDt);_saveDt=setTimeout(saveD,ms);}
 function saveD(){try{localStorage.setItem(K,JSON.stringify(G))}catch(e){/* BUG FIX: handle QuotaExceededError — prune old chat history */if(e.name==='QuotaExceededError'||e.code===22){if(G.chatHistory.length>20){G.chatHistory=G.chatHistory.slice(-20);try{localStorage.setItem(K,JSON.stringify(G));return}catch(e2){}}if(G.ses.length>200){G.ses=G.ses.slice(-150);try{localStorage.setItem(K,JSON.stringify(G));return}catch(e3){}}toast('⚠️ مساحة التخزين ممتلئة — صدّر بياناتك','w');}}}
 function rDate(){const d=new Date(),dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],mn=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];const txt=`${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`;['tDate','tDate2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=txt})}
 function rBlockBadge(){const i=PERIOD.info();['blockBadge','blockBadge2'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.className='block-badge '+i.color;el.textContent=`${i.icon} ${i.label}`;})}
 function rFatigueBar(){const sc=FATIGUE.score(),lv=FATIGUE.level(),fi=document.getElementById('fatigueBarFill');if(!fi)return;const card=document.querySelector('.sl-status-card,.dash-card');if(card){card.classList.remove('fatigue-low','fatigue-moderate','fatigue-high','fatigue-critical');card.classList.add('fatigue-'+lv);}fi.style.width=`${sc}%`;const lb=document.getElementById('blockLabel');if(lb)lb.textContent=`Block ${PERIOD.week()}/4 — ${PERIOD.info().label}`;const lb2=document.getElementById('fatigueBarLabel');if(lb2)lb2.textContent=`Fatigue ${sc}% — ${FATIGUE.label()}`}
 function rPeriodBanner(){const el=document.getElementById('periodBanner');if(!el)return;const i=PERIOD.info(),w=PERIOD.week(),chips=[1,2,3,4].map(n=>`<div class="pw-chip ${n<w?'done':n===w?'active':''}">${n}</div>`).join('');el.innerHTML=`<div class="period-info"><div class="period-title" style="color:var(--p)">${i.icon} ${i.label}</div><div class="period-desc">${i.desc}</div></div><div class="period-week-chips">${chips}</div>`}
-function rRecoveryBadge(){const rs=recoveryScore(),el=document.getElementById('recoveryBadgeArea');if(!el)return;const c=rs>=70?'high':rs>=50?'mid':'low',ic=rs>=70?'✅':rs>=50?'⚡':'⚠️',lb=rs>=70?'استعداد ممتاز':rs>=50?'استعداد جيد':'يُنصح بالراحة';el.innerHTML=`<div class="recovery-badge ${c}">${ic} Recovery ${rs}/100 — ${lb}</div>`}
-function rFatigueBadge(){const el=document.getElementById('fatigueBadgeArea');if(!el)return;el.innerHTML=`<div class="fatigue-badge ${FATIGUE.level()}">🔥 Fatigue ${FATIGUE.score()}/100 — ${FATIGUE.label()}</div>`}
+function rRecoveryBadge(){
+  const rs=recoveryScore(),el=document.getElementById('recoveryBadgeArea');if(!el)return;
+  const hpPct=rs,hpClr=rs>=70?'#22c55e':rs>=50?'#f59e0b':'#ef4444';
+  const lbl=rs>=70?'READY':'⚠️ LOW';
+  el.innerHTML=`<div class="sl-statbar-wrap" style="padding:4px 0 0">
+    <div class="sl-statbar-row">
+      <span class="sl-statbar-label">HP</span>
+      <div class="sl-statbar-track"><div class="sl-statbar-fill sl-hp-fill" style="width:${hpPct}%;background-position:${100-hpPct}% 0"></div></div>
+      <span class="sl-statbar-val" style="color:${hpClr}">${rs}<span style="font-size:.75em;opacity:.6">/100</span></span>
+    </div>
+  </div>`;
+}
+function rFatigueBadge(){
+  const el=document.getElementById('fatigueBadgeArea');if(!el)return;
+  el.style.display='block';
+  const fs=FATIGUE.score(),mpPct=Math.max(0,100-fs);
+  const mpClr=fs<40?'#00d4ff':fs<70?'#38bdf8':'rgba(0,212,255,.45)';
+  el.innerHTML=`<div class="sl-statbar-wrap" style="padding:2px 14px 6px">
+    <div class="sl-statbar-row">
+      <span class="sl-statbar-label">MP</span>
+      <div class="sl-statbar-track"><div class="sl-statbar-fill sl-mp-fill" style="width:${mpPct}%"></div></div>
+      <span class="sl-statbar-val" style="color:${mpClr}">${fs}<span style="font-size:.75em;opacity:.6">/100</span></span>
+    </div>
+  </div>`;
+}
 function rLaggingMuscleAlert(){const el=document.getElementById('laggingMuscleAlert');if(!el)return;const lg=laggingMuscle();el.innerHTML=lg?`<div class="lagging-alert"><span style="font-size:1.4em">⚠️</span><div><div class="lagging-alert-text">عضلة متأخرة: ${lg}</div><div style="font-size:.7em;color:var(--tx2);margin-top:2px">حجم تدريبها أقل بـ 40%+ — زود التركيز عليها</div></div></div>`:''}
 function rQuickStats(){const el=document.getElementById('quickStats');if(!el)return;const v=SCI.weeklyVolume(),lw=G.bw.length?G.bw[G.bw.length-1].w:0;el.innerHTML=`<div class="qstat"><span>🏋️</span><span class="qv">${v}</span><span class="ql">كجم/أسبوع</span></div><div class="qstat"><span>📊</span><span class="qv">${G.ses.length}</span><span class="ql">جلسة</span></div><div class="qstat"><span>🔥</span><span class="qv">${recoveryScore()}%</span><span class="ql">Recovery</span></div><div class="qstat"><span>⚡</span><span class="qv">${FATIGUE.score()}</span><span class="ql">Fatigue</span></div>${lw?`<div class="qstat"><span>⚖️</span><span class="qv">${lw}</span><span class="ql">كجم</span></div>`:''}`}
 let curDay=null;
@@ -2153,6 +2253,12 @@ const _ns=G.ses.length;
 const _rank=_ns>=100?{r:'S RANK',c:'rank-s'}:_ns>=60?{r:'A RANK',c:'rank-a'}:_ns>=35?{r:'B RANK',c:'rank-b'}:_ns>=15?{r:'C RANK',c:'rank-c'}:_ns>=5?{r:'D RANK',c:'rank-d'}:{r:'E RANK',c:'rank-e'};
 const _hrd=document.getElementById('hunterRankDisplay');if(_hrd){_hrd.textContent=`RANK · ${_rank.r.split(' ')[0]}`;_hrd.className=`sl-rank-pill ${_rank.c}`;}
 const _prd=document.getElementById('profileRankBadge');if(_prd){_prd.textContent=`RANK · ${_rank.r.split(' ')[0]}`;_prd.className=`sl-rank-pill ${_rank.c}`;}
+// Rank-up ceremony
+const _newRankLetter=_rank.r.split(' ')[0];
+if(G.lastRank&&G.lastRank!==_newRankLetter&&_ns>0){
+  const _oldR=G.lastRank;G.lastRank=_newRankLetter;saveD();
+  setTimeout(()=>showRankUpCeremony(_oldR,_newRankLetter,_rank),400);
+}else if(!G.lastRank||G.lastRank===''){G.lastRank=_newRankLetter;saveD();}
 // Update name display
 const _nd=document.getElementById('dash-name-txt');if(_nd&&G.profile&&G.profile.name)_nd.textContent=`HUNTER: ${G.profile.name}`;
 if(!dl)return;
@@ -2264,7 +2370,7 @@ function onSetChange(id,i,be){
   saveCurrentSet(id,i);updateSetSummary(id);
 }
 function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=document.getElementById(`sr-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(!c)return;const _prevBest=getBestSet(id);if(!c.classList.contains('sc-done')){const w=document.getElementById(`sw-${id}-${i}`);if(w&&!w.value){const ls=getLastSets(id),p=ls[i];if(p&&p.w){w.value=p.w;w.classList.add('si-filled')}}c.classList.add('sc-done');c.textContent='✓';r?.classList.add('set-done');n?.classList.add('sn-done');suggestRPE(id,i);if(!sessionStartTime){sessionStartTime=Date.now();sessionTimerInterval=setInterval(updateCompBar,1000);}if(navigator.vibrate)navigator.vibrate(20);quickStartTimer(window._timerDefault||90);if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0;if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){fireConfetti(50);toast(`🏆 رقم قياسي جديد! ${_nw}كجم`,'s');document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}}}
-function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false};saveD()}
+function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false};saveDd();}
 function updateSetSummary(id){const sm=document.getElementById(`sum-${id}`);if(!sm)return;const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const ds=sets.filter(s=>s.done).length,fs=sets.filter(s=>s.w>0),vol=fs.reduce((t,s)=>t+s.w*(s.r||1),0),topW=fs.length?Math.max(...fs.map(s=>s.w)):0,avgW=fs.length?Math.round(fs.reduce((t,s)=>t+s.w,0)/fs.length*10)/10:0,rpes=sets.filter(s=>s.rpe>0),avgR=rpes.length?Math.round(rpes.reduce((t,s)=>t+s.rpe,0)/rpes.length*10)/10:0,rc=avgR>=9?'ss-rpe-high':avgR>=7?'ss-rpe-warn':'ss-rpe-ok';const max1RM=sets.filter(s=>s.w>0&&s.r>0).reduce((b,s)=>{const e1=SCI.calc1RM(s.w,s.r);return e1>b?e1:b},0);sm.innerHTML=`<span class="ss-chip">✓ ${ds}/${ns}</span>${vol>0?`<span class="ss-chip ss-vol">🏋️ ${Math.round(vol)}كجم</span>`:''}${topW>0?`<span class="ss-chip ss-top">⬆ ${topW}</span>`:''}${avgW>0?`<span class="ss-chip ss-avg">⌀ ${avgW}</span>`:''}${avgR>0?`<span class="ss-chip ${rc}">RPE ${avgR}</span>`:''}${max1RM>0?`<span class="ss-chip ss-1rm">💡 1RM≈${max1RM}</span>`:''}`}
 function checkAllSetsDone(id){const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,all=Array.from({length:ns},(_,i)=>document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false).every(Boolean);if(all){const c=document.getElementById(`chk-${id}`),e=document.getElementById(`exi-${id}`);if(c&&!c.classList.contains('checked')){c.classList.add('checked');c.innerHTML='✓';e?.classList.add('done');const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=true;saveD();toast('✅ '+ex.name+' مكتمل!','s');updateCompBar();setTimeout(()=>slUnlockNext(id),100)}}}
 function toggleDone(id){const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=!G.doneExs[sk][id];saveD();const e=document.getElementById('exi-'+id),c=document.getElementById('chk-'+id);if(!e||!c)return;if(G.doneExs[sk][id]){e.classList.add('done');c.classList.add('checked');c.innerHTML='✓';if(navigator.vibrate)navigator.vibrate(30);toast('✅ تم!','s');setTimeout(()=>slUnlockNext(id),100)}else{e.classList.remove('done');c.classList.remove('checked');c.innerHTML='';applyLevelSystem()}updateCompBar()}
@@ -2367,9 +2473,12 @@ function slUnlockNext(doneExId){
 }
 function updateCompBar(){if(!curDay)return;const day=G.days[curDay],sk=sesKey(curDay),total=day.exercises.filter(e=>!e.isWarmup).length,done=day.exercises.filter(e=>!e.isWarmup&&G.doneExs[sk]&&G.doneExs[sk][e.id]).length,pct=total?Math.round(done/total*100):0,full=done===total&&total>0,el=document.getElementById('compBarArea');if(!el)return;const elapsed=sessionStartTime?fmtElapsed(Date.now()-sessionStartTime):null;el.innerHTML=`<div class="comp-bar"><div class="cb-info"><div class="cb-label">${done}/${total} تمرين مكتمل</div><div class="cb-track"><div class="cb-fill ${full?'full':''}" style="width:${pct}%"></div></div></div><div style="display:flex;align-items:center;gap:10px">${elapsed?`<div class="session-clock" title="وقت الجلسة">⏱️ ${elapsed}</div>`:`<div class="session-clock" style="opacity:.45;font-style:italic">ابدأ أول سيت ⏱️</div>`}<div class="cb-pct ${full?'full':''}">${pct}%</div></div></div>`;if(full&&!isDayCompleted(curDay))markDayComplete()}
 function markDayComplete(){const wk=weekKey();if(!G.completedDays[wk])G.completedDays[wk]={};G.completedDays[wk][curDay]=true;const _today=new Date().toISOString().split('T')[0];if(G.lastWo!==_today){G.streak=(G.streak||0)+1;}saveD();toast('🎉 '+G.days[curDay].name+' مكتمل! '+MOTIVATIONAL[Math.floor(Math.random()*MOTIVATIONAL.length)],'s');if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);showNotification('يوم مكتمل!🎉',G.days[curDay].name);rDays();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar()}
-function saveSes(){if(!curDay)return toast('اختر يوم التمرين','e');const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;const _jMood=window._selectedMood||0;const _jNote=document.getElementById('journalNote')?.value?.trim()||'';day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${ex.id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const duration=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0;const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),duration,mood:_jMood,note:_jNote};G.ses.push(sd);G.lastWo=new Date().toISOString().split('T')[0];if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;updateChallengeProgress();renderWeeklyChallenge();saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);setTimeout(checkBadges,800);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();rLaggingMuscleAlert();setTimeout(()=>showStretchModal(curDay),1800);setTimeout(()=>{if(typeof addXP==='function'){addXP(100,'جلسة مكتملة');if((G.streak||0)>0&&(G.streak%7===0))addXP(200,'أسبوع كامل!');}},2500);if(typeof _ttsSessionDone==='function')setTimeout(_ttsSessionDone,800);if(typeof _wlAutoStop==='function')_wlAutoStop();}
+function saveSes(){if(!curDay)return toast('اختر يوم التمرين','e');const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;const _jMood=window._selectedMood||0;const _jNote=document.getElementById('journalNote')?.value?.trim()||'';day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${ex.id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const duration=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0;const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),duration,mood:_jMood,note:_jNote};G.ses.push(sd);G.lastWo=new Date().toISOString().split('T')[0];if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;updateChallengeProgress();renderWeeklyChallenge();saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);setTimeout(checkBadges,800);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();rLaggingMuscleAlert();setTimeout(()=>showStretchModal(curDay),1800);setTimeout(()=>{if(typeof addXP==='function'){addXP(100,'جلسة مكتملة');if((G.streak||0)>0&&(G.streak%7===0))addXP(200,'أسبوع كامل!');}},2500);
+setTimeout(()=>{if(typeof checkVolumeGates==='function')checkVolumeGates();},3000);if(typeof _ttsSessionDone==='function')setTimeout(_ttsSessionDone,800);if(typeof _wlAutoStop==='function')_wlAutoStop();}
 function generateNextSessionSuggestions(sd){const r={};Object.entries(sd.exs).forEach(([id,e])=>{const ex=findExerciseById(id);if(!ex||ex.isWarmup)return;const tw=e.sets?.length?Math.max(...e.sets.map(s=>s.w||0)):e.w||0,dc=eliteDecision(id,e.name,e.sets||[]),ic=OE.isCompound(e.name);r[id]={name:e.name,muscle:e.muscle||'',currentWeight:tw,nextWeight:dc.weight||tw,reason:dc.msg||'',status:dc.action,sets:e.sets?.length||3,targetReps:ic?'6-10':'10-12'}});return r}
-function showSessionSummaryModal(s,sug){const tv=Math.round(SCI.sessionVolume(s)),prs=Object.entries(s.exs).filter(([id,e])=>{/* BUG FIX: getBestSet includes current session (already pushed) → b===c → always 0 PRs. Fix: compute prevBest excluding current session */const prevBest=G.ses.filter(x=>x.id!==s.id).reduce((b,x)=>{const ex=x.exs?.[id];if(!ex)return b;if(ex.sets?.length)ex.sets.forEach(t=>{if((t.w||0)>b)b=t.w||0});else if((ex.w||0)>b)b=ex.w||0;return b},0);const c=e.sets?.length?e.sets.reduce((b,t)=>t.w>b?t.w:b,0):e.w||0;return c>prevBest&&c>0}).length,bl=PERIOD.info(),fa=FATIGUE.level(),sh=Object.values(sug).filter(s=>!s.name.includes('إحماء')).map(s=>`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:8px;border-right:3px solid var(--${s.status==='increase'?'ok':s.status==='deload'?'pu':'bl'})"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-weight:800;font-size:.88em">${s.name}</div><div><span style="color:var(--tx3);font-size:.78em">${s.currentWeight}كجم</span> <span style="color:var(--p)">→</span> <span style="color:var(--p);font-weight:900">${s.nextWeight}كجم</span></div></div><div style="font-size:.76em;color:var(--tx2)">${s.reason}</div></div>`).join('');document.getElementById('aiMoT').textContent='📊 ملخص الجلسة';document.getElementById('aiMoB').innerHTML=`<div style="text-align:center;padding:16px;background:linear-gradient(135deg,rgba(110,231,183,.1),rgba(165,243,252,.06));border-radius:14px;margin-bottom:14px"><div style="font-size:2.2em">🎉</div><div style="font-size:1.1em;font-weight:900;color:var(--ok);margin:8px 0">جلسة ممتازة يا ${(G.profile?.name||SHEHAB.name)}!</div><div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><div><div style="font-size:1.4em;font-weight:900;color:var(--p)">${tv}</div><div style="font-size:.68em;color:var(--tx2)">حجم كجم</div></div>${prs>0?`<div><div style="font-size:1.4em;font-weight:900;color:var(--wn)">${prs}</div><div style="font-size:.68em;color:var(--tx2)">🏆 PR</div></div>`:''}<div><div style="font-size:1.4em;font-weight:900;color:var(--ok)">${Object.keys(s.exs).length}</div><div style="font-size:.68em;color:var(--tx2)">تمارين</div></div>${s.duration?`<div><div style="font-size:1.4em;font-weight:900;color:var(--bl)">${s.duration}</div><div style="font-size:.68em;color:var(--tx2)">⏱️ دقيقة</div></div>`:''}</div><div style="margin-top:10px;display:flex;gap:8px;justify-content:center"><span class="block-badge ${bl.color}">${bl.icon} ${bl.label}</span><span class="fatigue-badge ${fa}" style="font-size:.68em;padding:3px 9px;margin:0">🔥 ${FATIGUE.label()}</span></div></div><div style="font-weight:800;color:var(--p);margin-bottom:10px">🎯 خطة الجلسة القادمة</div>${sh}<button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت!</button>`;document.getElementById('aiMo').classList.add('act');if(!G.nextSessionPlan)G.nextSessionPlan={};G.nextSessionPlan[curDay]=sug;saveD()}
+function showSessionSummaryModal(s,sug){const tv=Math.round(SCI.sessionVolume(s)),prs=Object.entries(s.exs).filter(([id,e])=>{/* BUG FIX: getBestSet includes current session (already pushed) → b===c → always 0 PRs. Fix: compute prevBest excluding current session */const prevBest=G.ses.filter(x=>x.id!==s.id).reduce((b,x)=>{const ex=x.exs?.[id];if(!ex)return b;if(ex.sets?.length)ex.sets.forEach(t=>{if((t.w||0)>b)b=t.w||0});else if((ex.w||0)>b)b=ex.w||0;return b},0);const c=e.sets?.length?e.sets.reduce((b,t)=>t.w>b?t.w:b,0):e.w||0;return c>prevBest&&c>0}).length,bl=PERIOD.info(),fa=FATIGUE.level(),sh=Object.values(sug).filter(s=>!s.name.includes('إحماء')).map(s=>`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:8px;border-right:3px solid var(--${s.status==='increase'?'ok':s.status==='deload'?'pu':'bl'})"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-weight:800;font-size:.88em">${s.name}</div><div><span style="color:var(--tx3);font-size:.78em">${s.currentWeight}كجم</span> <span style="color:var(--p)">→</span> <span style="color:var(--p);font-weight:900">${s.nextWeight}كجم</span></div></div><div style="font-size:.76em;color:var(--tx2)">${s.reason}</div></div>`).join('');document.getElementById('aiMoT').textContent='📊 ملخص الجلسة';document.getElementById('aiMoB').innerHTML=`<div style="text-align:center;padding:16px;background:linear-gradient(135deg,rgba(110,231,183,.1),rgba(165,243,252,.06));border-radius:14px;margin-bottom:14px"><div style="font-size:2.2em">🎉</div><div style="font-size:1.1em;font-weight:900;color:var(--ok);margin:8px 0">جلسة ممتازة يا ${(G.profile?.name||SHEHAB.name)}!</div><div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap"><div><div style="font-size:1.4em;font-weight:900;color:var(--p)">${tv}</div><div style="font-size:.68em;color:var(--tx2)">حجم كجم</div></div>${prs>0?`<div><div style="font-size:1.4em;font-weight:900;color:var(--wn)">${prs}</div><div style="font-size:.68em;color:var(--tx2)">🏆 PR</div></div>`:''}<div><div style="font-size:1.4em;font-weight:900;color:var(--ok)">${Object.keys(s.exs).length}</div><div style="font-size:.68em;color:var(--tx2)">تمارين</div></div>${s.duration?`<div><div style="font-size:1.4em;font-weight:900;color:var(--bl)">${s.duration}</div><div style="font-size:.68em;color:var(--tx2)">⏱️ دقيقة</div></div>`:''}</div><div style="margin-top:10px;display:flex;gap:8px;justify-content:center"><span class="block-badge ${bl.color}">${bl.icon} ${bl.label}</span><span class="fatigue-badge ${fa}" style="font-size:.68em;padding:3px 9px;margin:0">🔥 ${FATIGUE.label()}</span></div></div><div style="font-weight:800;color:var(--p);margin-bottom:10px">🎯 خطة الجلسة القادمة</div>${sh}<div style="display:flex;gap:8px;margin-top:12px"><button class="btn btn-p" style="flex:1" onclick="clM('aiMo')">✅ فهمت!</button><button class="btn btn-ai" style="flex:1;font-family:monospace;font-size:.75em;letter-spacing:.04em" onclick="shareWorkout(arguments[0]||window._lastSd,arguments[1]||window._lastTv,arguments[2]||window._lastPrs)">📤 SHARE</button></div>`;
+window._lastSd=s;window._lastTv=tv;window._lastPrs=prs;
+document.getElementById('aiMo').classList.add('act');if(!G.nextSessionPlan)G.nextSessionPlan={};G.nextSessionPlan[curDay]=sug;saveD()}
 function popHSel(){const s=document.getElementById('hSel');if(!s)return;const a={};Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(!ex.isWarmup)a[ex.id]=ex.name}));s.innerHTML='<option value="">-- اختر التمرين --</option>'+Object.entries(a).map(([id,n])=>`<option value="${id}">${n}</option>`).join('')}
 function renderExerciseChart(sessions,id){const pts=sessions.slice().reverse().map(s=>{const e=s.exs[id];let w=0;if(e.sets?.length){const f=e.sets.filter(t=>t.w>0);w=f.length?Math.max(...f.map(t=>t.w)):0}else w=e.w||0;return{w,dt:new Date(s.date).toLocaleDateString('ar-EG',{month:'numeric',day:'numeric'})}}).filter(p=>p.w>0);if(pts.length<2)return'';const W=300,H=110,PL=32,PR=8,PT=10,PB=26,iW=W-PL-PR,iH=H-PT-PB;const mn=Math.min(...pts.map(p=>p.w)),mx=Math.max(...pts.map(p=>p.w));const range=mx-mn||1;const xS=i=>PL+Math.round(i/(pts.length-1)*iW),yS=v=>PT+iH-Math.round((v-mn)/range*iH);const poly=pts.map((p,i)=>`${xS(i)},${yS(p.w)}`).join(' ');const fill=`${PL},${PT+iH} ${poly} ${xS(pts.length-1)},${PT+iH}`;const bestW=Math.max(...pts.map(p=>p.w));const dots=pts.map((p,i)=>{const isPR=p.w===bestW;return`<circle cx="${xS(i)}" cy="${yS(p.w)}" r="${isPR?5:2.5}" fill="${isPR?'#fbbf24':'#00d4ff'}" opacity="${isPR?1:.75}"/>${isPR?`<text x="${xS(i)}" y="${yS(p.w)-8}" text-anchor="middle" font-size="8" fill="#fbbf24" font-weight="bold">${p.w}</text>`:''}`}).join('');const step=Math.max(1,Math.ceil(pts.length/5));const xlbls=pts.map((p,i)=>i%step===0||i===pts.length-1?`<text x="${xS(i)}" y="${H-3}" text-anchor="middle" font-size="8" fill="rgba(255,255,255,.35)">${p.dt}</text>`:'').join('');const ylbls=[mn,Math.round((mn+mx)/2),mx].map(v=>`<text x="${PL-3}" y="${yS(v)+3}" text-anchor="end" font-size="8" fill="rgba(255,255,255,.35)">${Math.round(v)}</text>`).join('');return`<div style="background:rgba(255,255,255,.04);border-radius:12px;padding:10px 8px;margin-bottom:12px;border:1px solid rgba(0,212,255,.12)"><div style="font-size:.58em;font-weight:900;color:rgba(0,212,255,.6);margin-bottom:5px;font-family:monospace;letter-spacing:.08em">[ STRENGTH · PROGRESSION ]</div><svg viewBox="0 0 ${W} ${H}" width="100%" style="overflow:visible;max-height:120px"><defs><linearGradient id="ecGrd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00d4ff" stop-opacity=".2"/><stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/></linearGradient></defs><line x1="${PL}" y1="${PT}" x2="${PL}" y2="${PT+iH}" stroke="rgba(0,212,255,.1)" stroke-width="1"/><line x1="${PL}" y1="${PT+iH}" x2="${PL+iW}" y2="${PT+iH}" stroke="rgba(0,212,255,.1)" stroke-width="1"/><line x1="${PL}" y1="${yS((mn+mx)/2)}" x2="${PL+iW}" y2="${yS((mn+mx)/2)}" stroke="rgba(0,212,255,.06)" stroke-width="1" stroke-dasharray="3,3"/><polygon points="${fill}" fill="url(#ecGrd)"/><polyline points="${poly}" fill="none" stroke="#00d4ff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}${xlbls}${ylbls}</svg></div>`}
 function rHist(){window._injectMoodToSessionsList && setTimeout(window._injectMoodToSessionsList, 200);const id=document.getElementById('hSel').value,c=document.getElementById('hContent');if(!c)return;if(!id){c.innerHTML='<div class="empty"><div class="eic">📊</div><h3>اختر تمرين</h3></div>';return}const ss=G.ses.filter(s=>s.exs&&s.exs[id]&&(s.exs[id].w>0||(s.exs[id].sets&&s.exs[id].sets.some(t=>t.w>0)))).sort((a,b)=>new Date(b.date)-new Date(a.date));setTimeout(()=>renderE1RMChart(id,ss.slice().reverse()),100);if(!ss.length){c.innerHTML='<div class="empty"><div class="eic">📊</div><h3>لا يوجد سجل</h3></div>';return}const best=getBestSet(id),trend=SCI.volumeTrend(id),proj=predictStrength(id);const chartHtml=renderExerciseChart(ss.slice(0,15),id);c.innerHTML=`<div class="sg" style="margin-bottom:12px"><div class="sc"><div class="sn">${best}</div><div class="sl">🏆 أفضل وزن</div></div><div class="sc"><div class="sn">${ss.length}</div><div class="sl">جلسات</div></div><div class="sc wn"><div class="sn">${trend>0?'+':''}${trend}%</div><div class="sl">📈 الاتجاه</div></div>${proj?`<div class="sc"><div class="sn" style="font-size:.9em;color:var(--wn)">${proj}كجم</div><div class="sl">🔮 12 أسبوع</div></div>`:''}</div>${chartHtml}${proj?`<div class="strength-proj"><div class="sp-title">🔮 توقع القوة</div><div class="sp-value">${proj} كجم</div><div class="sp-sub">بناءً على معدل تقدمك</div></div>`:''}${ss.slice(0,15).map((s,i)=>{const e=s.exs[id];let tw=0,vol=0,sh='',rh='';if(e.sets?.length){const f=e.sets.filter(t=>t.w>0);tw=f.length?Math.max(...f.map(t=>t.w)):0;vol=f.reduce((v,t)=>v+(t.w||0)*(t.r||1),0);sh=`<div style="font-size:.68em;color:var(--tx2);margin-top:3px">${f.map(t=>`${t.w}×${t.r||'?'}${t.rpe?'<span style="color:var(--pu)"> R'+t.rpe+'</span>':''}`).join(' | ')}</div>`;const rp=f.filter(t=>t.rpe>0);if(rp.length){const ar=Math.round(rp.reduce((v,t)=>v+t.rpe,0)/rp.length*10)/10;rh=`<span style="font-size:.65em;color:var(--pu)">RPE⌀ ${ar}</span>`}}else tw=e.w||0;const prev=ss[i+1]?ss[i+1].exs[id]:null,pt=prev?(prev.sets?.length?(prev.sets.filter(t=>t.w>0).reduce((b,t)=>t.w>b?t.w:b,0)||prev.w||0):prev.w||0):tw,/* BUG FIX: Math.max(...[]) = -Infinity when all sets have w=0 → use reduce with 0 default */d=Math.round((tw-pt)*10)/10,ip=tw===best&&best>0;return`<div style="background:rgba(255,255,255,.06);padding:10px;border-radius:12px;margin-bottom:6px;${ip?'border:1px solid var(--wn)':''}"><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:.72em;color:var(--tx2)">${new Date(s.date).toLocaleDateString('ar-EG',{weekday:'short',month:'short',day:'numeric'})}</div>${sh}</div><div style="display:flex;gap:5px;align-items:center">${ip?'<span>🏆</span>':''}<span style="font-weight:900;color:var(--p)">${tw}</span>${rh}${d!==0?`<span style="font-size:.68em;padding:2px 7px;border-radius:7px;${d>0?'background:rgba(110,231,183,.1);color:var(--ok)':'background:rgba(252,165,165,.08);color:var(--no)'}">${d>0?'+':''}${d}</span>`:''}</div></div></div>`}).join('')}`}
@@ -2387,7 +2496,31 @@ function deleteSession(sid){
 function renderVolumeChart(cid='volumeChart'){const el=document.getElementById(cid);if(!el)return;const days=[],td=new Date();for(let i=6;i>=0;i--){const d=new Date(td);d.setDate(d.getDate()-i);const k=d.toISOString().split('T')[0],v=G.ses.filter(s=>s.date.split('T')[0]===k).reduce((t,s)=>t+SCI.sessionVolume(s),0);days.push({vol:v,label:d.toLocaleDateString('ar-EG',{weekday:'short'})})}const mx=Math.max(...days.map(d=>d.vol),1);el.innerHTML=days.map(d=>`<div class="chart-bar"><div style="font-size:.55em;color:var(--p);font-weight:800;margin-bottom:2px">${d.vol||''}</div><div style="width:100%;height:${Math.max(d.vol/mx*80,3)}px;background:var(--gg);border-radius:5px 5px 0 0;min-height:3px"></div><div style="font-size:.55em;color:var(--tx3);margin-top:2px">${d.label}</div></div>`).join('')}
 function rStats(){const el=document.getElementById('oStats');if(!el)return;const wa=weeklyAnalysis();el.innerHTML=`<div class="sc"><div class="sn">${G.ses.length}</div><div class="sl">إجمالي الجلسات</div></div><div class="sc ok"><div class="sn">${wa.weeklyVolume}</div><div class="sl">حجم الأسبوع</div></div><div class="sc wn"><div class="sn">${wa.PRcount}</div><div class="sl">🏆 PRs</div></div><div class="sc"><div class="sn">${recoveryScore()}%</div><div class="sl">Recovery</div></div><div class="sc"><div class="sn">${FATIGUE.score()}</div><div class="sl">Fatigue</div></div><div class="sc"><div class="sn">${PERIOD.info().icon} ${PERIOD.week()}/4</div><div class="sl">${PERIOD.info().label}</div></div>`;renderVolumeChart('weeklyVolumeChart');rMuscleVol();rPRList();rStrengthProjections();renderTrainingCalendar();renderWeekCompare();renderVolLandmarks();checkBadges();}
 function rMuscleVol(){const el=document.getElementById('volInfo');if(!el)return;const m={};G.ses.slice(-10).forEach(s=>Object.values(s.exs||{}).forEach(e=>{if(e.muscle){const v=e.sets?.length?e.sets.reduce((t,s)=>t+(s.w||0)*(s.r||1),0):e.vol||0;m[e.muscle]=(m[e.muscle]||0)+v}}));const a=Object.entries(m).sort((x,y)=>y[1]-x[1]);if(!a.length){el.innerHTML='<div class="empty"><div class="eic">💪</div><h3>لا بيانات</h3></div>';return}const mx=a[0][1],lg=laggingMuscle();el.innerHTML=a.map(([n,v])=>`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:.78em;font-weight:800">${n} ${n===lg?'<span style="color:var(--no)">⚠️</span>':''}</span><span style="font-size:.75em;color:var(--p);font-weight:800">${Math.round(v)}كجم</span></div><div class="progress"><div class="progress-bar" style="width:${Math.round(v/mx*100)}%"></div></div></div>`).join('')}
-function rPRList(){const el=document.getElementById('prL');if(!el)return;const prs=[];Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(!ex.isWarmup){const b=getBestSet(ex.id);if(b>0)prs.push({name:ex.name,best:b,muscle:ex.muscle||'',unit:ex.unit||'كجم'})}}));prs.sort((a,b)=>b.best-a.best);if(!prs.length){el.innerHTML='<div class="empty"><div class="eic">🏆</div><h3>سجل جلسة أولاً</h3></div>';return}el.innerHTML=prs.slice(0,10).map((p,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:9px;background:rgba(255,255,255,.06);border-radius:11px;margin-bottom:6px"><div style="width:28px;height:28px;border-radius:8px;background:${i===0?'var(--wn)':i===1?'rgba(255,255,255,.3)':i===2?'var(--p)':'rgba(255,255,255,.08)'};display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:900;color:#000">${i+1}</div><div style="flex:1"><div style="font-weight:800;font-size:.85em">${p.name}</div><div style="font-size:.65em;color:var(--tx2)">${p.muscle}</div></div><div style="font-weight:900;color:var(--p)">${p.best}<span style="font-size:.65em;color:var(--tx2)"> ${p.unit}</span></div></div>`).join('')}
+function rPRList(){
+  const el=document.getElementById('prL');if(!el)return;
+  const prs=[];
+  Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{
+    if(!ex.isWarmup){const b=getBestSet(ex.id);if(b>0)prs.push({name:ex.name,best:b,muscle:ex.muscle||'',unit:ex.unit||'كجم',id:ex.id});}
+  }));
+  prs.sort((a,b)=>b.best-a.best);
+  if(!prs.length){el.innerHTML='<div class="empty"><div class="eic">🏆</div><h3 style="font-family:monospace">NO RECORDS YET</h3></div>';return;}
+  const rankCol=['#fbbf24','rgba(200,200,200,.9)','rgba(0,212,255,.8)'];
+  const borderCol=['rgba(251,191,36,.5)','rgba(200,200,200,.3)','rgba(0,212,255,.4)','rgba(0,212,255,.15)'];
+  el.innerHTML=`<div class="sl-pr-header">[ PERSONAL RECORDS · ARCHIVE · ${prs.length} ENTRIES ]</div>`+
+  prs.map((p,i)=>{
+    const col=rankCol[i]||'rgba(0,212,255,.55)';
+    const brd=borderCol[Math.min(i,3)];
+    const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
+    return`<div class="sl-pr-card" style="border-left-color:${brd}">
+      <div class="sl-pr-num" style="background:${i<3?col.replace(/[\d.]+\)$/,'0.12)'):'rgba(0,212,255,.06)'};color:${col};border:1px solid ${brd}">${medal||String(i+1).padStart(2,'0')}</div>
+      <div class="sl-pr-info">
+        <div class="sl-pr-name">${p.name}</div>
+        <div class="sl-pr-muscle">${p.muscle||'—'}</div>
+      </div>
+      <div class="sl-pr-val" style="color:${col}">${p.best}<span style="font-size:.58em;color:rgba(0,212,255,.4)"> ${p.unit}</span></div>
+    </div>`;
+  }).join('');
+}
 function rStrengthProjections(){const el=document.getElementById('strengthProjections');if(!el)return;const pj=[];Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(!ex.isWarmup){const p=predictStrength(ex.id);if(p){const c=getBestSet(ex.id);pj.push({name:ex.name,current:c,projected:p,gain:Math.round((p-c)*10)/10,muscle:ex.muscle||''})}}}));if(!pj.length){el.innerHTML='<div class="empty"><div class="eic">🔮</div><h3>سجل جلستين لكل تمرين</h3></div>';return}pj.sort((a,b)=>b.gain-a.gain);el.innerHTML=pj.map(p=>`<div style="background:rgba(255,255,255,.06);padding:12px;border-radius:12px;margin-bottom:8px;border-right:3px solid var(--wn)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div><div style="font-weight:800">${p.name}</div><div style="font-size:.65em;color:var(--tx2)">${p.muscle}</div></div><div style="text-align:right"><div style="font-weight:900;color:var(--wn)">${p.projected}كجم</div><div style="font-size:.65em;color:var(--ok)">+${p.gain}كجم / 12 أسبوع</div></div></div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:.7em;color:var(--tx2)">${p.current}كجم</span><div style="flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:5px;overflow:hidden"><div style="height:100%;width:${Math.min(p.current/p.projected*100,95)}%;background:var(--gg);border-radius:5px"></div></div><span style="font-size:.7em;color:var(--wn)">${p.projected}كجم</span></div></div>`).join('')}
 function weeklyAnalysis(){const wv=SCI.weeklyVolume(),pw=new Date(),pe=new Date();pw.setDate(pw.getDate()-14);pw.setHours(0,0,0,0);pe.setDate(pe.getDate()-7);pe.setHours(23,59,59,999);const pv=G.ses.filter(s=>{const d=new Date(s.date);return d>=pw&&d<=pe}).reduce((t,s)=>t+SCI.sessionVolume(s),0),st=pv>0?Math.round((wv-pv)/pv*100):0,mv={};G.ses.slice(-6).forEach(s=>Object.values(s.exs||{}).forEach(e=>{if(e.w>0&&e.muscle)mv[e.muscle]=(mv[e.muscle]||0)+e.w}));const mt=Object.entries(mv).sort((a,b)=>b[1]-a[1])[0]?.[0]||'--',pc=G.ses.slice(-7).reduce((c,s)=>{Object.entries(s.exs||{}).forEach(([id,e])=>{if(e.w>0&&e.w>=SCI.getBestPR(id))c++});return c},0),pl=[];Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(!ex.isWarmup&&OE.detectPlateau(ex.id))pl.push(ex.name)}));return{weeklyVolume:wv,strengthTrendPercent:st,PRcount:pc,mostTrainedMuscle:mt,plateauList:pl}}
 function getTodaySchedule(){return(G.schedule||DEFAULT_SCHEDULE)[new Date().getDay()]||DEFAULT_SCHEDULE[new Date().getDay()]}
@@ -2589,7 +2722,26 @@ function saveProfileEdit(){
   renderProfilePage();
   toast('✅ تم حفظ معلوماتك!','s');
 }
-const SCHED_TRAIN_OPTS=[{v:'Push A — صدر + كتف + تراي',l:'💪 Push A — صدر + كتف + تراي'},{v:'Pull A — ظهر + باي',l:'🏋️ Pull A — ظهر + باي'},{v:'Leg A — رجل أمامي + سمانة',l:'🦵 Leg A — رجل أمامي + سمانة'},{v:'Push B — صدر + كتف + تراي',l:'💪 Push B — صدر + كتف + تراي'},{v:'Pull B — ظهر + باي',l:'🏋️ Pull B — ظهر + باي'},{v:'Leg B — رجل خلفي + سمانة',l:'🦵 Leg B — رجل خلفي + سمانة'},{v:'Upper Body — أعلى الجسم',l:'⬆️ Upper Body'},{v:'Lower Body — أسفل الجسم',l:'⬇️ Lower Body'},{v:'Full Body — كامل الجسم',l:'🔥 Full Body'},{v:'Cardio + Core',l:'🏃 Cardio + Core'},{v:'custom',l:'✏️ مخصص...'}];
+const SCHED_TRAIN_OPTS=[
+  // ── النظام الحالي: Upper / Lower ──
+  {v:'Upper A — صدر علوي + ظهر + كتف + ذراعين',l:'⚔️ Upper A — صدر + ظهر + كتف + ذراعين'},
+  {v:'Lower A — كوادز + هامسترينج + مؤخرة + سمانة',l:'⚔️ Lower A — كوادز + هامسترينج + سمانة'},
+  {v:'Upper B — لات + ظهر + صدر سفلي + كتف + ذراعين',l:'⚔️ Upper B — لات + ظهر + صدر سفلي'},
+  {v:'Lower B — أسفل ظهر + كوادز + هامسترينج + كور',l:'⚔️ Lower B — أسفل ظهر + هامسترينج + كور'},
+  // ── PPL ──
+  {v:'Push A — صدر + كتف + تراي',l:'💪 Push A — صدر + كتف + تراي'},
+  {v:'Pull A — ظهر + باي',l:'🏋️ Pull A — ظهر + باي'},
+  {v:'Leg A — رجل أمامي + سمانة',l:'🦵 Leg A — رجل أمامي + سمانة'},
+  {v:'Push B — صدر + كتف + تراي',l:'💪 Push B — صدر + كتف + تراي'},
+  {v:'Pull B — ظهر + باي',l:'🏋️ Pull B — ظهر + باي'},
+  {v:'Leg B — رجل خلفي + سمانة',l:'🦵 Leg B — رجل خلفي + سمانة'},
+  // ── عام ──
+  {v:'Upper Body — أعلى الجسم',l:'⬆️ Upper Body'},
+  {v:'Lower Body — أسفل الجسم',l:'⬇️ Lower Body'},
+  {v:'Full Body — كامل الجسم',l:'🔥 Full Body'},
+  {v:'Cardio + Core',l:'🏃 Cardio + Core'},
+  {v:'custom',l:'✏️ مخصص...'},
+];
 const SCHED_REST_OPTS=[{v:'يوم راحة',l:'🛌 يوم راحة'},{v:'تعافي نشط — مشي خفيف',l:'🚶 تعافي نشط'},{v:'إطالة ويوجا',l:'🧘 إطالة / يوجا'},{v:'custom',l:'✏️ مخصص...'}];
 const SEL_STYLE=`padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(20,5,50,.85);color:var(--tx);font-family:'Cairo';font-size:.78em;outline:0`;
 function rSchedule(){const el=document.getElementById('scheduleArea');if(!el)return;const dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],tp=[{v:'rest',l:'🛌 راحة'},{v:'rest2',l:'🚶 خفيف'},{v:'train',l:'🏋️ تمرين'}];el.innerHTML=dn.map((d,i)=>{const c=(G.schedule||DEFAULT_SCHEDULE)[i];const isTrain=c.type==='train';const opts=isTrain?SCHED_TRAIN_OPTS:SCHED_REST_OPTS;const curLbl=c.label||'';const knownOpt=opts.find(o=>o.v===curLbl&&o.v!=='custom');const selVal=knownOpt?curLbl:'custom';const isCustom=!knownOpt;return`<div style="display:flex;align-items:center;gap:6px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap"><span style="font-size:.8em;font-weight:800;min-width:58px;color:var(--tx)">${d}</span><select id="sched-${i}" onchange="onSchedTypeChange(${i})" style="flex:0 0 auto;${SEL_STYLE}">${tp.map(t=>`<option value="${t.v}" ${c.type===t.v?'selected':''}>${t.l}</option>`).join('')}</select><select id="schedlbl-${i}" onchange="onSchedLblChange(${i})" style="flex:1;min-width:160px;${SEL_STYLE}">${opts.map(o=>`<option value="${o.v}" ${selVal===o.v?'selected':''}>${o.l}</option>`).join('')}</select><input type="text" id="schedcustom-${i}" placeholder="اكتب اسم مخصص..." value="${isCustom?curLbl:''}" style="flex:1;min-width:130px;padding:6px;border-radius:8px;border:1px solid rgba(0,212,255,.22);background:rgba(0,5,18,.7);color:var(--tx);font-family:'Cairo';font-size:.78em;display:${isCustom?'block':'none'}"></div>`}).join('')}
@@ -2876,7 +3028,6 @@ function closeYT() { const el = document.getElementById('_ytModal'); if (el) el.
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeYT(); });
 
 /* ══ OLD openYT compat stub ══ */
-function ytFallback() {} // no longer needed
 
 
 /* ══ PERF: Pause animations when page hidden ══ */
@@ -3096,7 +3247,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(!G.days||!G.days.upperA||!G.days.lowerA||!G.days.upperB||!G.days.lowerB){
     G.days=JSON.parse(JSON.stringify(MY_DAYS));saveD();
   }
-  rDate();rDays();rQuickStats();
+  rDate();rDays();rQuickStatsWithTips();
   initTheme();initNotifications();showDailyTip();
   initLibrary();renderChatHistory();
   rRecoveryBadge();rFatigueBadge();rFatigueBar();rBlockBadge();
@@ -3317,8 +3468,10 @@ function saveMeasurements() {
 function renderMeasurements() {
   const el = document.getElementById('measDisplay');
   if (!el) return;
+  // Body weight mini-chart
+  const bwChart = _renderBWMiniChart();
   if (!G.measurements || !G.measurements.length) {
-    el.innerHTML = '<div class="empty" style="grid-column:1/-1"><div class="eic">📏</div><p>لا توجد قياسات بعد</p></div>';
+    el.innerHTML = bwChart + '<div class="empty" style="grid-column:1/-1"><div class="eic">📏</div><p>لا توجد قياسات بعد</p></div>';
     return;
   }
   const last = G.measurements[G.measurements.length-1];
@@ -3331,12 +3484,43 @@ function renderMeasurements() {
     {key:'shoulder', icon:'🏋️', label:'كتف'},
     {key:'calf', icon:'🦶', label:'عجل'},
   ].filter(it => last[it.key]);
-  if (!items.length) { el.innerHTML = '<div style="grid-column:1/-1;font-size:.78em;color:var(--tx2)">تم الحفظ — لا توجد قيم للعرض</div>'; return; }
-  el.innerHTML = items.map(it => {
+  if (!items.length) { el.innerHTML = bwChart + '<div style="grid-column:1/-1;font-size:.78em;color:var(--tx2)">تم الحفظ — لا توجد قيم للعرض</div>'; return; }
+  el.innerHTML = bwChart + items.map(it => {
     const cur = last[it.key], pre = prev?.[it.key];
     const chg = pre ? Math.round((cur - pre) * 10) / 10 : null;
     return `<div class="meas-card"><div class="meas-icon">${it.icon}</div><div class="meas-label">${it.label}</div><div class="meas-val">${cur} <span style="font-size:.55em;font-weight:700;color:var(--tx3)">سم</span></div>${chg !== null ? `<div class="meas-chg" style="color:${chg > 0 ? 'var(--ok)' : chg < 0 ? 'var(--no)' : 'var(--tx3)'}">${chg > 0 ? '+' : ''}${chg} سم</div>` : ''}</div>`;
   }).join('');
+}
+function _renderBWMiniChart(){
+  const pts=(G.bw||[]).slice(-12);
+  if(pts.length<2)return'';
+  const W=300,H=80,PL=28,PR=6,PT=8,PB=20,iW=W-PL-PR,iH=H-PT-PB;
+  const mn=Math.min(...pts.map(p=>p.w)),mx=Math.max(...pts.map(p=>p.w));
+  const range=mx-mn||1;
+  const xS=i=>PL+Math.round(i/(pts.length-1)*iW);
+  const yS=v=>PT+iH-Math.round((v-mn)/range*iH);
+  const poly=pts.map((p,i)=>`${xS(i)},${yS(p.w)}`).join(' ');
+  const fill=`${PL},${PT+iH} ${poly} ${xS(pts.length-1)},${PT+iH}`;
+  const last=pts[pts.length-1],first=pts[0];
+  const trend=last.w-first.w,tCol=trend<0?'#22c55e':trend>0?'#f87171':'#00d4ff';
+  const dots=pts.map((p,i)=>{
+    const isLast=i===pts.length-1;
+    return`<circle cx="${xS(i)}" cy="${yS(p.w)}" r="${isLast?4:2}" fill="${isLast?tCol:'#00d4ff'}" opacity="${isLast?1:.55}"/>${isLast?`<text x="${xS(i)}" y="${yS(p.w)-7}" text-anchor="middle" font-size="8" fill="${tCol}" font-weight="bold">${p.w}</text>`:''}`;
+  }).join('');
+  const xlbls=pts.map((p,i)=>i===0||i===pts.length-1?`<text x="${xS(i)}" y="${H-2}" text-anchor="${i===0?'start':'end'}" font-size="7.5" fill="rgba(255,255,255,.3)">${new Date(p.date||p.d||Date.now()).toLocaleDateString('ar-EG',{month:'numeric',day:'numeric'})}</text>`:'').join('');
+  return`<div class="sl-bw-chart-wrap" style="grid-column:1/-1">
+    <div class="sl-bw-chart-label">[ BODY WEIGHT · TREND ] ${trend!==0?`<span style="color:${tCol}">${trend>0?'+':''}${Math.round(trend*10)/10} KG</span>`:'— STABLE'}</div>
+    <svg viewBox="0 0 ${W} ${H}" width="100%" style="overflow:visible;max-height:90px">
+      <defs><linearGradient id="bwGrd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00d4ff" stop-opacity=".18"/><stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/></linearGradient></defs>
+      <line x1="${PL}" y1="${PT}" x2="${PL}" y2="${PT+iH}" stroke="rgba(0,212,255,.08)" stroke-width="1"/>
+      <line x1="${PL}" y1="${PT+iH}" x2="${PL+iW}" y2="${PT+iH}" stroke="rgba(0,212,255,.08)" stroke-width="1"/>
+      <polygon points="${fill}" fill="url(#bwGrd)"/>
+      <polyline points="${poly}" fill="none" stroke="${tCol}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+      ${dots}${xlbls}
+      <text x="${PL-3}" y="${yS(mn)+3}" text-anchor="end" font-size="7.5" fill="rgba(255,255,255,.3)">${mn}</text>
+      <text x="${PL-3}" y="${yS(mx)+3}" text-anchor="end" font-size="7.5" fill="rgba(255,255,255,.3)">${mx}</text>
+    </svg>
+  </div>`;
 }
 
 /* ══════════════════════════════════════════════
@@ -4406,12 +4590,7 @@ function showStretchModal(dayKey) {
   document.getElementById('aiMo').classList.add('act');
 }
 
-/* ══════════════════════════════════════════════
-   ADDITIONAL TOOLTIPS for key terms
-═══════════════════════════════════════════════ */
-function addHeaderTooltips() {
-  // Dynamic injection of tooltips into quick stats area labels (done via rQuickStats)
-}
+/* ADDITIONAL TOOLTIPS: addHeaderTooltips() removed — merged into rQuickStatsWithTips() */
 
 /* rQuickStats with tooltips — standalone */
 function rQuickStatsWithTips() {
@@ -4940,10 +5119,15 @@ const XP_LEVELS=[
 function getXPLevel(xp){return XP_LEVELS.find(l=>xp>=l.min&&xp<=l.max)||XP_LEVELS[0];}
 function addXP(amount,reason){
   if(!G.xp)G.xp=0;
+  const _prevLv=getXPLevel(G.xp);
   G.xp+=amount;
   saveD();
   toast('⭐ +'+amount+' XP — '+reason,'s');
   renderXPArea();
+  const _nextLv=getXPLevel(G.xp);
+  if(_prevLv.name!==_nextLv.name&&typeof showLevelUpOverlay==='function'){
+    setTimeout(()=>showLevelUpOverlay(_nextLv),600);
+  }
 }
 function renderXPArea(){
   const el=document.getElementById('xpArea');if(!el)return;
@@ -5377,6 +5561,8 @@ window.switchStatTab=function(tab,btn){
   if(tab==='prtimeline')setTimeout(renderPRTimeline,50);
   if(tab==='meso')setTimeout(renderMesoArea,50);
   if(tab==='xp'){setTimeout(()=>{renderXPArea();renderSmartGoals();},50);}
+  if(tab==='proj')setTimeout(injectStrengthProjTooltip,80);
+  if(tab==='prs')setTimeout(rPRList,50);
 };
 
 /* ── INIT ── */
@@ -5502,7 +5688,7 @@ window.toggleSetDone = function(id, i){
   const isPR = newW > prevBest && prevBest > 0;
 
   // TTS after set
-  const exName = document.querySelector(`#exi-${id} .exn`)?.textContent || '';
+  const exName = document.querySelector(`#exi-${id} .sl-quest-name`)?.textContent || document.querySelector(`#exi-${id} .exn`)?.textContent || '';
   if(typeof _ttsSetDone === 'function') _ttsSetDone(exName, i, newW, newR, isPR);
 
   // Wake lock auto-start on first set
@@ -5567,7 +5753,7 @@ window.checkAllSetsDone = function(id){
     setTimeout(()=>card?.classList.remove('exi-complete-burst'), 800);
     if(navigator.vibrate) navigator.vibrate([30,50,80]);
     floatXP('✅ تمرين!', card);
-    const exNameTTS = card?.querySelector('.exn')?.textContent || '';
+    const exNameTTS = card?.querySelector('.sl-quest-name')?.textContent || card?.querySelector('.exn')?.textContent || '';
     if(typeof _ttsExDone === 'function') setTimeout(()=>_ttsExDone(exNameTTS), 300);
     /* check XP level-up */
     if(typeof addXP === 'function') setTimeout(()=>{
@@ -5899,6 +6085,90 @@ window.saveCurrentSet = function(id, i){
     if(typeof renderReadinessBanner==='function') renderReadinessBanner();
   }, 800);
 };
+
+/* ════════════════════════════════════════════════════════════
+   RANK-UP CEREMONY
+═══════════════════════════════════════════════════════════ */
+function showRankUpCeremony(oldRank, newRank, rankObj){
+  const existing=document.querySelector('.sl-rankup-overlay');if(existing)existing.remove();
+  if(typeof fireConfetti==='function'){fireConfetti(80);setTimeout(()=>fireConfetti(60),600);}
+  if(navigator.vibrate)navigator.vibrate([100,80,100,80,300,80,300]);
+  const rankLabels={E:'E RANK',D:'D RANK',C:'C RANK',B:'B RANK',A:'A RANK',S:'S RANK'};
+  const rankColors={E:'rgba(148,163,184,.8)',D:'rgba(110,231,183,.8)',C:'rgba(96,165,250,.8)',B:'rgba(167,139,250,.8)',A:'rgba(251,191,36,.8)',S:'rgba(0,212,255,1)'};
+  const rankIcons={E:'🪨',D:'🥉',C:'🥈',B:'🥇',A:'💎',S:'⚔️'};
+  const col=rankColors[newRank]||'#00d4ff';
+  const icon=rankIcons[newRank]||'⚔️';
+  const el=document.createElement('div');
+  el.className='sl-rankup-overlay';
+  el.innerHTML=`<div class="sl-rankup-card" style="border-color:${col};box-shadow:0 0 60px ${col.replace('1)','0.3)')},0 0 120px ${col.replace('1)','0.1)')}">
+    <div class="sl-rankup-lines"></div>
+    <div class="sl-rankup-sys">[ SYSTEM · ANNOUNCEMENT ]</div>
+    <div style="font-family:monospace;font-size:.6em;color:rgba(200,240,255,.45);letter-spacing:.12em;margin-bottom:10px">HUNTER RANK UPGRADED</div>
+    <div style="font-size:2.8em;margin:8px 0;filter:drop-shadow(0 0 12px ${col})">${icon}</div>
+    <div class="sl-rankup-arrow" style="font-family:monospace;font-size:.95em;color:rgba(200,240,255,.4);letter-spacing:.1em">${rankLabels[oldRank]||oldRank+' RANK'} → <span style="color:${col};font-size:1.2em">${rankLabels[newRank]||newRank+' RANK'}</span></div>
+    <div class="sl-rankup-name" style="color:${col}">${rankLabels[newRank]||newRank+' RANK'}</div>
+    <div class="sl-rankup-sub">HUNTER: ${(G.profile?.name||'SHEHAB').toUpperCase()}</div>
+    <button onclick="this.closest('.sl-rankup-overlay').remove()" style="padding:10px 28px;background:linear-gradient(135deg,${col.replace(/[\d.]+\)$/,'0.15)')},${col.replace(/[\d.]+\)$/,'0.08)')});border:1px solid ${col};border-radius:20px;color:${col};font-family:monospace;font-size:.78em;font-weight:900;cursor:pointer;letter-spacing:.08em;margin-top:4px">⚔️ ACKNOWLEDGED</button>
+  </div>`;
+  document.body.appendChild(el);
+  el.addEventListener('click',e=>{if(e.target===el)el.remove();});
+}
+
+/* ════════════════════════════════════════════════════════════
+   VOLUME MILESTONE GATES
+═══════════════════════════════════════════════════════════ */
+const VOL_GATES=[
+  {kg:5000,   name:'BRONZE GATE',   roman:'I',   icon:'🔶'},
+  {kg:10000,  name:'SILVER GATE',   roman:'II',  icon:'⚪'},
+  {kg:25000,  name:'GOLD GATE',     roman:'III', icon:'🟡'},
+  {kg:50000,  name:'PLATINUM GATE', roman:'IV',  icon:'💠'},
+  {kg:100000, name:'DIAMOND GATE',  roman:'V',   icon:'💎'},
+  {kg:250000, name:'MYTHIC GATE',   roman:'VI',  icon:'🌀'},
+  {kg:500000, name:'SHADOW GATE',   roman:'VII', icon:'⚔️'},
+];
+function getTotalLifted(){return Math.round(G.ses.reduce((t,s)=>t+SCI.sessionVolume(s),0));}
+function checkVolumeGates(){
+  if(!G.clearedVolumeGates)G.clearedVolumeGates=[];
+  const tv=getTotalLifted();
+  let newGate=null;
+  VOL_GATES.forEach(gate=>{
+    if(tv>=gate.kg&&!G.clearedVolumeGates.includes(gate.kg)){
+      G.clearedVolumeGates.push(gate.kg);
+      newGate=gate;
+    }
+  });
+  if(newGate){saveD();setTimeout(()=>showVolumeGateClearedOverlay(newGate),1200);}
+}
+function showVolumeGateClearedOverlay(gate){
+  const existing=document.querySelector('.sl-volgate-overlay');if(existing)existing.remove();
+  const el=document.createElement('div');
+  el.className='sl-volgate-overlay';
+  el.innerHTML=`<div class="sl-volgate-title">[ DUNGEON GATE · ${gate.roman} · CLEARED ]</div>
+    <div class="sl-volgate-name">${gate.icon} ${gate.name}</div>
+    <div style="font-family:monospace;font-size:.52em;color:rgba(0,212,255,.5);margin-top:4px;letter-spacing:.06em">TOTAL VOLUME: ${getTotalLifted().toLocaleString('ar-EG')} KG</div>`;
+  document.body.appendChild(el);
+  if(navigator.vibrate)navigator.vibrate([200,100,200]);
+  setTimeout(()=>{el.style.transition='opacity .5s';el.style.opacity='0';setTimeout(()=>el.remove(),500);},4500);
+}
+
+/* ════════════════════════════════════════════════════════════
+   SHARE WORKOUT
+═══════════════════════════════════════════════════════════ */
+function shareWorkout(sd,tv,prs){
+  const lines=Object.values(sd.exs).filter(e=>(e.sets?.some(t=>t.w>0))||(e.w>0)).map(e=>{
+    const best=e.sets?.length?Math.max(...e.sets.filter(t=>t.w>0).map(t=>t.w)):e.w||0;
+    const sets=e.sets?.filter(t=>t.w>0).map(t=>`${t.w}×${t.r||'?'}`).join(' ') || `${best}kg`;
+    return`⚔️ ${e.name}: ${sets}`;
+  }).join('\n');
+  const hunterName=(G.profile?.name||'SHEHAB').toUpperCase();
+  const rank=document.getElementById('hunterRankDisplay')?.textContent||'RANK E';
+  const text=`⚔️ Solo Gym System\n━━━━━━━━━━━━━━━━━\n[ HUNTER: ${hunterName} · ${rank} ]\n${sd.dn}\n${lines}\n━━━━━━━━━━━━━━━━━\n📊 VOL: ${tv.toLocaleString()}KG${prs>0?' · 🏆 '+prs+' PRs':''}${sd.duration?' · ⏱️ '+sd.duration+'m':''}\n⚡ Fatigue: ${sd.fatigueScore||FATIGUE.score()}/100`;
+  if(navigator.share){
+    navigator.share({title:'Solo Gym System',text}).catch(()=>{});
+  } else {
+    navigator.clipboard?.writeText(text).then(()=>toast('📋 تم نسخ الجلسة','s')).catch(()=>toast('📋 انسخ النتيجة يدوياً','i'));
+  }
+}
 
 
 </script>
