@@ -176,10 +176,10 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .rep-progress-fill{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
 /* ── PO Decision live badge ── */
 .po-live{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:9px;margin-top:6px;font-size:.74em;font-weight:800;animation:fadeSlideIn .3s ease}
-.po-live.increase{background:rgba(110,231,183,.08);border:1px solid rgba(110,231,183,.22);color:var(--ok)}
-.po-live.maintain{background:rgba(186,230,253,.06);border:1px solid rgba(186,230,253,.15);color:var(--bl)}
-.po-live.deload{background:rgba(254,215,170,.07);border:1px solid rgba(254,215,170,.2);color:var(--pu)}
-.po-live.fatigue{background:rgba(252,165,165,.06);border:1px solid rgba(252,165,165,.18);color:var(--no)}
+.po-live.increase{background:rgba(110,231,183,.14);border:1px solid rgba(110,231,183,.35);color:var(--ok)}
+.po-live.maintain{background:rgba(186,230,253,.1);border:1px solid rgba(186,230,253,.25);color:var(--bl)}
+.po-live.deload{background:rgba(254,215,170,.12);border:1px solid rgba(254,215,170,.3);color:var(--pu)}
+.po-live.fatigue{background:rgba(252,165,165,.12);border:1px solid rgba(252,165,165,.3);color:var(--no)}
 @keyframes fadeSlideIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 /* ── TODAY MISSION rate row ── */
 .tm-rate-row{display:flex;gap:5px;flex-wrap:wrap;padding:7px 14px 9px;border-top:1px solid rgba(0,212,255,.07)}
@@ -1432,8 +1432,8 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
 .sl-quest .rep-progress-wrap{background:rgba(0,3,12,.6)!important;border-color:rgba(0,212,255,.1)!important}
 .sl-quest .rep-progress-txt{color:rgba(0,212,255,.4)!important;letter-spacing:.1em!important}
 .sl-quest .po-live{border-radius:2px!important;font-family:monospace!important;font-size:.68em!important;letter-spacing:.04em!important}
-.sl-quest .po-live.increase{background:rgba(0,212,255,.06)!important;border-color:rgba(0,212,255,.22)!important;color:#00d4ff!important}
-.sl-quest .po-live.maintain{background:rgba(56,189,248,.04)!important;border-color:rgba(56,189,248,.14)!important;color:rgba(56,189,248,.8)!important}
+.sl-quest .po-live.increase{background:rgba(0,212,255,.1)!important;border-color:rgba(0,212,255,.35)!important;color:#00d4ff!important}
+.sl-quest .po-live.maintain{background:rgba(56,189,248,.08)!important;border-color:rgba(56,189,248,.25)!important;color:rgba(56,189,248,.9)!important}
 .sl-quest .po-live.fatigue{background:rgba(248,113,113,.05)!important;border-color:rgba(248,113,113,.18)!important;color:var(--no)!important}
 /* Quest body note */
 .sl-quest .ex-note{background:rgba(0,4,14,.6)!important;border-color:rgba(0,212,255,.1)!important;color:rgba(200,240,255,.7)!important;border-radius:3px!important;font-size:.72em!important}
