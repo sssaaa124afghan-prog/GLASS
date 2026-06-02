@@ -474,6 +474,17 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
   .sets-header,.set-row{grid-template-columns:24px 1fr 1fr 1fr 36px 30px}
 }
 
+/* ══ SUPERSET GROUP ══ */
+.ss-group{position:relative;margin-bottom:14px;border-radius:18px;border:2px solid rgba(251,191,36,.32);background:rgba(251,191,36,.04);padding:10px 8px 8px}
+.ss-group::before{content:'';position:absolute;top:0;right:0;bottom:0;left:0;border-radius:16px;pointer-events:none;box-shadow:0 0 24px rgba(251,191,36,.12)}
+.ss-label{display:flex;align-items:center;gap:6px;font-size:.65em;font-weight:900;color:var(--wn);letter-spacing:.08em;margin-bottom:8px;padding:4px 10px;background:rgba(251,191,36,.1);border-radius:8px;border:1px solid rgba(251,191,36,.25);width:fit-content}
+.ss-label .ss-cnt{background:rgba(251,191,36,.2);color:var(--wn);padding:1px 7px;border-radius:5px;font-size:.95em}
+.ss-connector{display:flex;align-items:center;gap:6px;margin:4px 12px;font-size:.6em;color:rgba(251,191,36,.45);font-weight:900;letter-spacing:.1em}
+.ss-connector::before,.ss-connector::after{content:'';flex:1;height:1px;background:rgba(251,191,36,.2)}
+.ss-group .sl-quest,.ss-group .exi{margin-bottom:8px;border-color:rgba(251,191,36,.18)}
+.ss-group .sl-quest:last-child,.ss-group .exi:last-child{margin-bottom:0}
+[data-theme="light"] .ss-group{border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.03)}
+[data-theme="light"] .ss-label{color:rgba(146,64,14,1);background:rgba(217,119,6,.1);border-color:rgba(217,119,6,.22)}
 /* ══ WARM-UP SETS ══ */
 .warmup-proto{background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.15);border-radius:12px;padding:10px 12px;margin:6px 0 10px}
 .wup-title{font-size:.72em;font-weight:800;color:var(--pu);margin-bottom:7px;display:flex;justify-content:space-between;align-items:center}
@@ -2320,6 +2331,37 @@ return`<div class="sl-quest exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="
     </div>
   </div>
 </div>`}).join('')}`;
+/* ── Superset grouping: wrap exercises sharing same numeric prefix ── */
+(()=>{
+  const ssMap={};
+  (G.days[curDay]?.exercises||[]).forEach(ex=>{
+    const m=ex.id.match(/^(.+?\d+)([a-c])$/);
+    if(m){if(!ssMap[m[1]])ssMap[m[1]]=[];ssMap[m[1]].push(ex.id);}
+  });
+  Object.entries(ssMap).forEach(([pfx,ids])=>{
+    if(ids.length<2)return;
+    const els=ids.map(id=>document.getElementById('exi-'+id)).filter(Boolean);
+    if(els.length<2)return;
+    const cnt=els.length;
+    const label=cnt===2?'SUPER SET':'TRI SET';
+    const wrap=document.createElement('div');
+    wrap.className='ss-group';
+    const lbl=document.createElement('div');
+    lbl.className='ss-label';
+    lbl.innerHTML=`⚡ ${label} <span class="ss-cnt">${cnt}×</span>`;
+    wrap.appendChild(lbl);
+    els[0].parentNode.insertBefore(wrap,els[0]);
+    els.forEach((el,i)=>{
+      wrap.appendChild(el);
+      if(i<els.length-1){
+        const conn=document.createElement('div');
+        conn.className='ss-connector';
+        conn.textContent='⚡ '+label;
+        wrap.appendChild(conn);
+      }
+    });
+  });
+})();
 updateCompBar();restoreSetInputs();renderDeloadBanner();applyLevelSystem();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
   if(G.homeMode){document.querySelectorAll('.sl-quest-name,.exn').forEach(el=>{const orig=el.textContent.trim();const alt=Object.keys(HOME_ALTS||{}).find(k=>orig.includes(k));if(alt&&HOME_ALTS[alt]!==orig){el.innerHTML=`<span style="text-decoration:line-through;color:var(--tx3);font-size:.85em">${orig}</span><br><span style="color:var(--ok)">${HOME_ALTS[alt]}</span>`;}});}
 }
@@ -2374,6 +2416,13 @@ function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.curren
 function updateSetSummary(id){const sm=document.getElementById(`sum-${id}`);if(!sm)return;const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const ds=sets.filter(s=>s.done).length,fs=sets.filter(s=>s.w>0),vol=fs.reduce((t,s)=>t+s.w*(s.r||1),0),topW=fs.length?Math.max(...fs.map(s=>s.w)):0,avgW=fs.length?Math.round(fs.reduce((t,s)=>t+s.w,0)/fs.length*10)/10:0,rpes=sets.filter(s=>s.rpe>0),avgR=rpes.length?Math.round(rpes.reduce((t,s)=>t+s.rpe,0)/rpes.length*10)/10:0,rc=avgR>=9?'ss-rpe-high':avgR>=7?'ss-rpe-warn':'ss-rpe-ok';const max1RM=sets.filter(s=>s.w>0&&s.r>0).reduce((b,s)=>{const e1=SCI.calc1RM(s.w,s.r);return e1>b?e1:b},0);sm.innerHTML=`<span class="ss-chip">✓ ${ds}/${ns}</span>${vol>0?`<span class="ss-chip ss-vol">🏋️ ${Math.round(vol)}كجم</span>`:''}${topW>0?`<span class="ss-chip ss-top">⬆ ${topW}</span>`:''}${avgW>0?`<span class="ss-chip ss-avg">⌀ ${avgW}</span>`:''}${avgR>0?`<span class="ss-chip ${rc}">RPE ${avgR}</span>`:''}${max1RM>0?`<span class="ss-chip ss-1rm">💡 1RM≈${max1RM}</span>`:''}`}
 function checkAllSetsDone(id){const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;const ns=ex.sets||3,all=Array.from({length:ns},(_,i)=>document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false).every(Boolean);if(all){const c=document.getElementById(`chk-${id}`),e=document.getElementById(`exi-${id}`);if(c&&!c.classList.contains('checked')){c.classList.add('checked');c.innerHTML='✓';e?.classList.add('done');const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=true;saveD();toast('✅ '+ex.name+' مكتمل!','s');updateCompBar();setTimeout(()=>slUnlockNext(id),100)}}}
 function toggleDone(id){const sk=sesKey(curDay);if(!G.doneExs[sk])G.doneExs[sk]={};G.doneExs[sk][id]=!G.doneExs[sk][id];saveD();const e=document.getElementById('exi-'+id),c=document.getElementById('chk-'+id);if(!e||!c)return;if(G.doneExs[sk][id]){e.classList.add('done');c.classList.add('checked');c.innerHTML='✓';if(navigator.vibrate)navigator.vibrate(30);toast('✅ تم!','s');setTimeout(()=>slUnlockNext(id),100)}else{e.classList.remove('done');c.classList.remove('checked');c.innerHTML='';applyLevelSystem()}updateCompBar()}
+function _buildSsMap(exercises){
+  const m={};
+  exercises.forEach(ex=>{const r=ex.id.match(/^(.+?\d+)[a-c]$/);if(r){if(!m[r[1]])m[r[1]]=[];m[r[1]].push(ex.id);}});
+  Object.keys(m).forEach(k=>{if(m[k].length<2)delete m[k];});
+  return m;
+}
+function _getSsGrp(id,ssMap){const r=id.match(/^(.+?\d+)[a-c]$/);return r&&ssMap[r[1]]?r[1]:null;}
 function applyLevelSystem(){
   if(!curDay)return;
   const day=G.days[curDay];if(!day)return;
@@ -2381,15 +2430,38 @@ function applyLevelSystem(){
   const warmup=day.exercises.find(e=>e.isWarmup);
   const nonWarmups=day.exercises.filter(e=>!e.isWarmup);
   const warmupDone=!warmup||done[warmup.id];
+  const ssMap=_buildSsMap(nonWarmups);
+  /* Find activeIdx treating each superset group as one unit */
   let activeIdx=-1;
-  if(warmupDone){for(let i=0;i<nonWarmups.length;i++){if(!done[nonWarmups[i].id]){activeIdx=i;break;}activeIdx=nonWarmups.length;}}
+  if(warmupDone){
+    for(let i=0;i<nonWarmups.length;i++){
+      const ex=nonWarmups[i];
+      const grp=_getSsGrp(ex.id,ssMap);
+      if(grp){
+        const grpAllDone=ssMap[grp].every(id=>done[id]);
+        if(!grpAllDone){activeIdx=i;break;}
+        /* skip remaining group members so outer loop doesn't re-trigger */
+        const lastInGrp=Math.max(...ssMap[grp].map(id=>nonWarmups.findIndex(e=>e.id===id)));
+        i=lastInGrp;
+      }else{
+        if(!done[ex.id]){activeIdx=i;break;}
+      }
+      activeIdx=nonWarmups.length;
+    }
+  }
   if(warmup){const wEl=document.getElementById('sl-warmup-'+warmup.id);if(wEl){if(done[warmup.id]){wEl.classList.add('cleared');const btn=wEl.querySelector('.sl-gate-enter-btn');if(btn)btn.style.display='none';const dl=wEl.querySelector('.sl-gate-cleared-label');if(dl)dl.style.display='flex';}}}
+  /* active group = the superset group (if any) that contains the active exercise */
+  const activeGrp=activeIdx>=0?_getSsGrp(nonWarmups[activeIdx]?.id||'',ssMap):null;
   nonWarmups.forEach((ex,i)=>{
     const el=document.getElementById('exi-'+ex.id);if(!el)return;
     el.classList.remove('exi-active','exi-cleared','exi-locked');
+    const grp=_getSsGrp(ex.id,ssMap);
+    /* an exercise is "active group member" if it shares a group with the activeIdx exercise */
+    const isGroupActive=activeGrp&&grp===activeGrp;
     if(done[ex.id]){el.classList.add('exi-cleared');if(!el.querySelector('.sl-cleared-bar'))addClearedSummary(el,ex,sk);}
-    else if(!warmupDone||i>activeIdx){el.classList.add('exi-locked');}
-    else if(i===activeIdx){el.classList.add('exi-active');}
+    else if(!warmupDone){el.classList.add('exi-locked');}
+    else if(isGroupActive||i===activeIdx){el.classList.add('exi-active');}
+    else if(i>activeIdx){el.classList.add('exi-locked');}
   });
   updateLevelPips();
 }
@@ -2413,11 +2485,30 @@ function updateLevelPips(){
   const warmup=day.exercises.find(e=>e.isWarmup);
   const nonWarmups=day.exercises.filter(e=>!e.isWarmup);
   const warmupDone=!warmup||done[warmup.id];
+  const ssMap=_buildSsMap(nonWarmups);
+  /* activeIdx with superset-group awareness (same logic as applyLevelSystem) */
   let activeIdx=-1;
-  if(warmupDone){activeIdx=nonWarmups.length;for(let i=0;i<nonWarmups.length;i++){if(!done[nonWarmups[i].id]){activeIdx=i;break;}}}
+  if(warmupDone){
+    for(let i=0;i<nonWarmups.length;i++){
+      const ex=nonWarmups[i];
+      const grp=_getSsGrp(ex.id,ssMap);
+      if(grp){
+        if(!ssMap[grp].every(id=>done[id])){activeIdx=i;break;}
+        const lastInGrp=Math.max(...ssMap[grp].map(id=>nonWarmups.findIndex(e=>e.id===id)));
+        i=lastInGrp;
+      }else{if(!done[ex.id]){activeIdx=i;break;}}
+      activeIdx=nonWarmups.length;
+    }
+  }
+  const activeGrp=activeIdx>=0?_getSsGrp(nonWarmups[activeIdx]?.id||'',ssMap):null;
   const pips=[
     ...(warmup?[`<div class="lvl-pip ${done[warmup.id]?'cleared':'active'}" title="إحماء"></div>`]:[]),
-    ...nonWarmups.map((ex,i)=>{const state=done[ex.id]?'cleared':(!warmupDone||i!==activeIdx?'locked':'active');return`<div class="lvl-pip ${state}" title="${ex.name}"></div>`;})
+    ...nonWarmups.map((ex,i)=>{
+      const grp=_getSsGrp(ex.id,ssMap);
+      const isActive=(activeGrp&&grp===activeGrp)||i===activeIdx;
+      const state=done[ex.id]?'cleared':(!warmupDone||!isActive?'locked':'active');
+      return`<div class="lvl-pip ${state}" title="${ex.name}"></div>`;
+    })
   ].join('');
   track.innerHTML=pips;
 }
@@ -2459,9 +2550,27 @@ function slUnlockNext(doneExId){
   const day=G.days[curDay];if(!day)return;
   const sk=sesKey(curDay),done=G.doneExs[sk]||{};
   const nonWarmups=day.exercises.filter(e=>!e.isWarmup);
+  const ssMap=_buildSsMap(nonWarmups);
+  const grp=_getSsGrp(doneExId,ssMap);
+  if(navigator.vibrate)navigator.vibrate([30,20,80]);
+  /* If in a superset, wait until ALL group members are done before unlocking next quest */
+  if(grp){
+    const grpIds=ssMap[grp];
+    if(!grpIds.every(id=>done[id])){applyLevelSystem();return;}
+    const lastInGrp=Math.max(...grpIds.map(id=>nonWarmups.findIndex(e=>e.id===id)));
+    const nextEx=nonWarmups[lastInGrp+1];
+    applyLevelSystem();
+    if(nextEx&&!done[nextEx.id]){
+      setTimeout(()=>{
+        showSystemNotif(nextEx,lastInGrp+2);
+        const el=document.getElementById('exi-'+nextEx.id);
+        if(el){el.classList.remove('exi-locked');el.classList.add('exi-active','exi-unlocking');setTimeout(()=>{el.classList.remove('exi-unlocking');applyLevelSystem();},950);setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),200);}
+      },250);
+    }
+    return;
+  }
   const doneIdx=nonWarmups.findIndex(e=>e.id===doneExId);
   const nextEx=nonWarmups[doneIdx+1];
-  if(navigator.vibrate)navigator.vibrate([30,20,80]);
   applyLevelSystem();
   if(nextEx&&!done[nextEx.id]){
     setTimeout(()=>{
