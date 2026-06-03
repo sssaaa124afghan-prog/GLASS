@@ -15,12 +15,14 @@
   const link=document.createElement('link');
   link.rel='manifest';link.href=url;
   document.head.appendChild(link);
+  // revoke after browser picks it up to avoid memory leak
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
 })();
 </script>
 <title>⚔️ Solo Gym System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=optional" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 /* BUG FIX: limit transitions to interactive elements only — universal * transition kills animations & tanks mobile perf */
@@ -341,7 +343,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .btn-full{width:100%;justify-content:center;padding:13px}
 .mo{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.62);backdrop-filter:blur(12px);z-index:300;align-items:flex-end;justify-content:center}
 .mo.act{display:flex;animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 .mdl{background:linear-gradient(180deg,rgba(0,8,28,.96),rgba(0,4,18,.98));border-radius:22px 22px 0 0;width:100%;max-width:440px;max-height:88vh;overflow-y:auto;border:1px solid rgba(0,212,255,.18);border-bottom:none;animation:slideUp .35s cubic-bezier(.4,0,.2,1);box-shadow:0 -8px 40px rgba(0,212,255,.12)}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .mdl-h{width:38px;height:4px;background:rgba(255,255,255,.18);border-radius:4px;margin:10px auto}
@@ -753,7 +755,6 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 /* SESSION PLAN BTN */
 .plan-btn{background:rgba(110,231,183,.08);border:1px solid rgba(110,231,183,.25);border-radius:10px;padding:7px 12px;font-size:.78em;font-weight:800;color:var(--ok);cursor:pointer;font-family:'Cairo';width:100%;margin-bottom:8px}
 .plan-btn:hover{background:rgba(110,231,183,.14)}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 .challenge-done{border-color:rgba(110,231,183,.4)!important;background:linear-gradient(135deg,rgba(110,231,183,.08),rgba(165,243,252,.04))!important}
 .form-phases{background:rgba(0,212,255,.02);border-radius:12px;padding:11px;margin-top:6px;border:1px solid rgba(0,212,255,.15)}
 .form-phases-title{font-size:.78em;font-weight:900;color:var(--p);margin-bottom:8px}
@@ -1592,6 +1593,303 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
 .sl-bw-chart-wrap{background:rgba(0,4,14,.5);border:1px solid rgba(0,212,255,.1);border-radius:10px;padding:10px 8px;margin-bottom:12px}
 .sl-bw-chart-label{font-family:monospace;font-size:.52em;color:rgba(0,212,255,.5);letter-spacing:.1em;font-weight:900;margin-bottom:6px}
 
+/* ═══════════════════════════════════════════════════════════════
+   ⚔️  SOLO LEVELING SYSTEM — AUTHENTIC SKIN  (CSS-only override)
+   كل ده CSS فقط — صفر تغيير في الوظائف
+   ═══════════════════════════════════════════════════════════════ */
+
+:root{
+  --sl-cyan:#5bb8ff;          /* the signature system blue — brighter */
+  --sl-cyan-bright:#b8e6ff;
+  --sl-cyan-deep:#0e4a80;
+  --sl-glow:rgba(91,184,255,.6);
+  --sl-glow-soft:rgba(91,184,255,.22);
+  --sl-frame:rgba(150,215,255,.95);
+  --sl-bg-window:rgba(10,22,44,.82);
+  --sl-scan:rgba(120,200,255,.018);
+}
+
+/* خطوط: Orbitron للأرقام/الإنجليزي/الـ system labels + Cairo للعربي */
+.sl-quest-num,.sl-quest-status,.sl-quest-obj,.sl-gate-stage,.sl-gate-sys-label,
+.sl-statbar-label,.sl-statbar-val,.sl-hstat-key,.sl-hstat-val,.sl-rank-pill,
+.sl-ph-sys,.sl-n-sys,.sl-sw-sys,.sl-rankup-sys,.sl-dh-count,.rep-progress-txt,
+.sl-mc-label,.sl-cl-chip,.sl-bw-chart-label,.sl-pr-num,.sl-pr-val{
+  font-family:'Orbitron','Rajdhani',monospace!important;
+}
+/* العناوين الإنجليزية الكبيرة */
+.sl-ph-title,.hdr h1{font-family:'Orbitron','Cairo',sans-serif!important;letter-spacing:.04em}
+
+/* خلفية: تدرّج نظام أعمق + vignette */
+body{
+  background:
+    radial-gradient(ellipse 130% 90% at 50% -5%,rgba(40,100,170,.30),transparent 55%),
+    radial-gradient(ellipse 100% 70% at 50% 110%,rgba(20,70,130,.22),transparent 60%),
+    linear-gradient(160deg,#0a1628 0%,#0d2138 45%,#08182b 100%)!important;
+}
+/* scanlines خفيفة جداً — مجرد لمسة، مش معتمة */
+body::after{
+  content:''!important;position:fixed!important;inset:0!important;
+  width:100%!important;height:100%!important;
+  background:repeating-linear-gradient(0deg,var(--sl-scan) 0px,var(--sl-scan) 1px,transparent 1px,transparent 4px)!important;
+  pointer-events:none!important;z-index:9998!important;mix-blend-mode:screen!important;
+  opacity:.4;border-radius:0!important;
+  animation:slScan 8s linear infinite!important;
+}
+@keyframes slScan{0%{background-position:0 0}100%{background-position:0 6px}}
+
+/* ── إطار النظام بالأركان (THE signature corner brackets) ── */
+/* يتطبق على البطاقات الرئيسية فقط */
+.sl-status-card,.sl-dungeon-gate,.sl-dungeon-header,.sl-quest,
+.sl-pr-card,.sl-warmup-card,.card{
+  position:relative!important;
+  border-radius:2px!important;
+}
+.sl-status-card::before,.sl-dungeon-gate::before,.sl-quest.exi-active::before{
+  /* نستخدم before للأركان العلوية */
+}
+/* الأركان الأربعة عبر طبقة منفصلة */
+.sl-corner-wrap,.sl-status-card,.sl-dungeon-gate{}
+
+/* بنعمل الأركان بـ background gradients على البطاقة نفسها */
+.sl-status-card,.sl-dungeon-gate{
+  background:
+    /* corner brackets */
+    linear-gradient(var(--sl-frame),var(--sl-frame)) left 0 top 0/16px 2px no-repeat,
+    linear-gradient(var(--sl-frame),var(--sl-frame)) left 0 top 0/2px 16px no-repeat,
+    linear-gradient(var(--sl-frame),var(--sl-frame)) right 0 top 0/16px 2px no-repeat,
+    linear-gradient(var(--sl-frame),var(--sl-frame)) right 0 top 0/2px 16px no-repeat,
+    linear-gradient(var(--sl-frame),var(--sl-frame)) left 0 bottom 0/16px 2px no-repeat,
+    linear-gradient(var(--sl-frame),var(--sl-frame)) left 0 bottom 0/2px 16px no-repeat,
+    linear-gradient(var(--sl-frame),var(--sl-frame)) right 0 bottom 0/16px 2px no-repeat,
+    linear-gradient(var(--sl-frame),var(--sl-frame)) right 0 bottom 0/2px 16px no-repeat,
+    var(--sl-bg-window)!important;
+  border:1px solid rgba(91,184,255,.35)!important;
+  box-shadow:
+    0 0 0 1px rgba(91,184,255,.1),
+    0 0 30px rgba(91,184,255,.16),
+    0 0 60px rgba(40,100,170,.12),
+    inset 0 0 30px rgba(30,80,140,.12)!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+}
+
+/* توهج علوي ماسح على الـ status card */
+.sl-status-card::after{
+  content:''!important;position:absolute!important;top:0;left:10%;right:10%;height:2px!important;
+  background:linear-gradient(90deg,transparent,var(--sl-cyan-bright),transparent)!important;
+  box-shadow:0 0 12px var(--sl-glow)!important;
+  animation:slTopGlow 3s ease-in-out infinite!important;
+}
+@keyframes slTopGlow{0%,100%{opacity:.4;left:10%;right:10%}50%{opacity:1;left:5%;right:5%}}
+
+/* ── دخول النوافذ: snap + flash زي النظام ── */
+@keyframes slWindowIn{
+  0%{opacity:0;transform:scale(.92) translateY(8px);filter:brightness(2.5)}
+  55%{opacity:1;filter:brightness(1.4)}
+  100%{opacity:1;transform:scale(1) translateY(0);filter:brightness(1)}
+}
+.sl-status-card,.sl-dungeon-gate{animation:slWindowIn .45s cubic-bezier(.2,.9,.3,1)!important}
+
+/* ── الـ HUNTER STATUS header label ── */
+.sl-hunter-stats{border-bottom:1px solid rgba(59,169,255,.14)!important}
+.sl-hstat-val{
+  color:var(--sl-cyan-bright)!important;
+  text-shadow:0 0 14px var(--sl-glow)!important;
+  font-weight:800!important;
+}
+.sl-hstat-key{color:rgba(120,190,255,.6)!important;letter-spacing:.15em!important}
+
+/* ── RANK pill: شكل معدني أحدّ ── */
+.sl-rank-pill{
+  border-radius:1px!important;
+  border:1px solid rgba(59,169,255,.5)!important;
+  background:linear-gradient(135deg,rgba(59,169,255,.14),rgba(10,58,102,.2))!important;
+  box-shadow:0 0 14px rgba(59,169,255,.2),inset 0 0 8px rgba(59,169,255,.1)!important;
+  text-shadow:0 0 8px var(--sl-glow)!important;
+}
+
+/* ── HP / MP / stat bars: أحدّ + توهج ── */
+.sl-statbar-track{
+  border-radius:1px!important;
+  background:rgba(8,20,40,.8)!important;
+  border:1px solid rgba(59,169,255,.18)!important;
+  box-shadow:inset 0 0 6px rgba(0,0,0,.5)!important;
+}
+.sl-statbar-fill{border-radius:0!important;box-shadow:0 0 10px currentColor!important}
+.sl-mp-fill{background:linear-gradient(90deg,rgba(10,58,102,.6),var(--sl-cyan))!important}
+.sl-statbar-label{color:rgba(120,190,255,.85)!important;letter-spacing:.12em!important}
+.sl-statbar-val{text-shadow:0 0 10px var(--sl-glow)!important}
+
+/* ── DUNGEON gate: بوابة أحدّ + توهج داخلي ── */
+.sl-gate-stage{
+  border-radius:1px!important;
+  border:1px solid rgba(59,169,255,.5)!important;
+  background:rgba(59,169,255,.1)!important;
+  color:var(--sl-cyan-bright)!important;
+  text-shadow:0 0 8px var(--sl-glow)!important;
+}
+.sl-gate-enter-btn{
+  border-radius:1px!important;
+  border:1px solid rgba(59,169,255,.6)!important;
+  background:linear-gradient(135deg,rgba(59,169,255,.14),rgba(10,58,102,.12))!important;
+  color:var(--sl-cyan-bright)!important;
+  text-shadow:0 0 12px var(--sl-glow)!important;
+  box-shadow:0 0 20px rgba(59,169,255,.12),inset 0 0 12px rgba(59,169,255,.06)!important;
+  letter-spacing:.08em!important;
+}
+.sl-gate-enter-btn:active{
+  background:linear-gradient(135deg,rgba(59,169,255,.28),rgba(10,58,102,.2))!important;
+  box-shadow:0 0 30px rgba(59,169,255,.3)!important;
+}
+
+/* ── QUEST cards (التمارين) ── */
+.sl-quest{
+  background:var(--sl-bg-window)!important;
+  border:1px solid rgba(59,169,255,.16)!important;
+  border-radius:2px!important;
+  box-shadow:0 0 20px rgba(20,70,130,.08),inset 0 1px 0 rgba(59,169,255,.06)!important;
+}
+.sl-quest.exi-active{
+  border-color:rgba(59,169,255,.4)!important;
+  box-shadow:0 0 28px rgba(59,169,255,.16),inset 0 0 20px rgba(59,169,255,.05)!important;
+}
+.sl-quest-name{
+  color:#dcf2ff!important;
+  text-shadow:0 0 18px rgba(59,169,255,.3)!important;
+}
+.sl-quest-obj{color:rgba(120,190,255,.78)!important}
+.sl-quest-num{color:rgba(120,190,255,.45)!important}
+.sl-quest.exi-active::before{
+  background:linear-gradient(90deg,transparent,var(--sl-cyan-bright),transparent)!important;
+  box-shadow:0 0 10px var(--sl-glow)!important;
+  height:2px!important;
+}
+
+/* ── البطاقات العامة .card تتحول لنوافذ نظام ── */
+.card{
+  background:var(--sl-bg-window)!important;
+  border:1px solid rgba(59,169,255,.16)!important;
+  border-radius:3px!important;
+  box-shadow:0 0 24px rgba(20,70,130,.08),inset 0 1px 0 rgba(59,169,255,.05)!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+}
+.ct{
+  font-family:'Orbitron','Cairo',sans-serif!important;
+  color:var(--sl-cyan-bright)!important;
+  text-shadow:0 0 12px rgba(59,169,255,.25)!important;
+  letter-spacing:.02em!important;
+}
+
+/* ── HEADER ── */
+.hdr{
+  background:rgba(4,12,28,.85)!important;
+  border-bottom:1px solid rgba(59,169,255,.18)!important;
+  box-shadow:0 2px 20px rgba(20,70,130,.12)!important;
+}
+.hdr h1{
+  color:var(--sl-cyan-bright)!important;
+  -webkit-text-fill-color:var(--sl-cyan-bright)!important;
+  background:none!important;
+  text-shadow:0 0 20px var(--sl-glow),0 0 40px rgba(59,169,255,.2)!important;
+}
+.ai-badge{
+  font-family:'Orbitron',monospace!important;
+  background:linear-gradient(135deg,rgba(59,169,255,.25),rgba(10,58,102,.3))!important;
+  border:1px solid rgba(59,169,255,.4)!important;
+  border-radius:2px!important;letter-spacing:.15em!important;
+  box-shadow:0 0 14px rgba(59,169,255,.2)!important;
+}
+
+/* ── BOTTOM NAV: شريط نظام عائم أحدّ ── */
+.bnav{
+  background:rgba(4,12,28,.92)!important;
+  border:1px solid rgba(59,169,255,.28)!important;
+  border-radius:4px!important;
+  box-shadow:
+    0 0 0 1px rgba(59,169,255,.05),
+    0 8px 36px rgba(0,0,0,.5),
+    0 0 30px rgba(59,169,255,.1),
+    inset 0 1px 0 rgba(59,169,255,.1)!important;
+  backdrop-filter:blur(24px)!important;-webkit-backdrop-filter:blur(24px)!important;
+}
+.bni.act{
+  color:var(--sl-cyan-bright)!important;
+  text-shadow:0 0 12px var(--sl-glow)!important;
+}
+.bni .ic{filter:drop-shadow(0 0 4px rgba(59,169,255,.3))}
+
+/* ── MODALS: نوافذ نظام منبثقة ── */
+.mdl{
+  background:linear-gradient(180deg,rgba(6,16,34,.97),rgba(3,9,20,.98))!important;
+  border:1px solid rgba(59,169,255,.28)!important;
+  border-bottom:none!important;
+  border-radius:6px 6px 0 0!important;
+  box-shadow:0 -8px 50px rgba(59,169,255,.16),0 0 0 1px rgba(59,169,255,.06)!important;
+}
+.mdl::before{
+  content:''!important;position:absolute!important;top:0;left:15%;right:15%;height:2px!important;
+  background:linear-gradient(90deg,transparent,var(--sl-cyan-bright),transparent)!important;
+  box-shadow:0 0 14px var(--sl-glow)!important;z-index:2!important;
+}
+.mh h2{
+  font-family:'Orbitron','Cairo',sans-serif!important;
+  color:var(--sl-cyan-bright)!important;
+  text-shadow:0 0 14px rgba(59,169,255,.25)!important;
+}
+
+/* ── PRIMARY BUTTONS ── */
+.btn-p{
+  background:linear-gradient(135deg,rgba(59,169,255,.85),rgba(10,80,150,.9))!important;
+  border:1px solid rgba(120,200,255,.4)!important;
+  border-radius:2px!important;
+  box-shadow:0 0 20px rgba(59,169,255,.3),inset 0 1px 0 rgba(180,220,255,.3)!important;
+  text-shadow:0 1px 4px rgba(0,20,50,.5)!important;
+  letter-spacing:.02em!important;
+}
+
+/* ── PR / RECORDS cards ── */
+.sl-pr-card{
+  background:var(--sl-bg-window)!important;
+  border:1px solid rgba(59,169,255,.18)!important;
+  border-radius:2px!important;
+}
+.sl-pr-val{color:var(--sl-cyan-bright)!important;text-shadow:0 0 10px var(--sl-glow)!important}
+
+/* ── notification / system message windows ── */
+.sl-n-sys,.sl-sw-sys,.sl-rankup-sys,.sl-ph-sys{
+  color:var(--sl-cyan)!important;letter-spacing:.22em!important;
+  text-shadow:0 0 8px var(--sl-glow)!important;
+}
+
+/* ── page headers ── */
+.sl-ph-title{color:var(--sl-cyan-bright)!important;text-shadow:0 0 18px var(--sl-glow)!important}
+
+/* تأكد إن الـ scanlines مايغطّوش على الـ modals/overlays المهمة */
+.mo,.sl-rankup-overlay,.sl-volgate-overlay{z-index:10000!important}
+
+/* ── تحسين الوضوح والكونتراست (clarity boost) ── */
+:root{
+  --tx:#eaf6ff!important;
+  --tx2:rgba(200,230,255,.92)!important;
+  --tx3:rgba(170,210,250,.7)!important;
+}
+/* النصوص الثانوية في الـ quest/gate تبقى أوضح */
+.sl-quest-obj{color:rgba(150,210,255,.9)!important}
+.sl-quest-num{color:rgba(140,200,255,.62)!important}
+.sl-quest-status{color:rgba(150,210,255,.7)!important}
+.sl-gate-sys-label{color:rgba(120,195,255,.78)!important}
+.sl-dh-muscles,.sl-dh-missions{color:rgba(185,220,255,.82)!important}
+/* البطاقات الداخلية والنوافذ تبقى أفتح شوية */
+.sl-quest{background:rgba(12,26,50,.78)!important}
+.card{background:rgba(12,26,50,.78)!important}
+.sl-dungeon-header{background:rgba(10,22,44,.85)!important}
+/* العناوين الصغيرة (الـ section labels) أوضح */
+.ct{color:#cdeeff!important}
+/* الـ rest/مهمة اليوم النص البنفسجي الباهت → أفتح */
+.sl-mc-label{color:rgba(180,215,255,.85)!important}
+/* حدود الـ inputs أوضح */
+.fi input,.fi select,.set-in{border-color:rgba(91,184,255,.3)!important;background:rgba(15,30,55,.7)!important;color:#eaf6ff!important}
+.fi label{color:rgba(170,210,255,.85)!important}
+
 </style>
 
 </head>
@@ -1690,7 +1988,7 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
   </div>
 
   <!-- العناصر الديناميكية -->
-  <div id="pinnedNoteBar" style="display:none;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:12px;padding:9px 13px;margin-bottom:8px;display:none;align-items:center;gap:10px">
+  <div id="pinnedNoteBar" style="display:none;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:12px;padding:9px 13px;margin-bottom:8px;align-items:center;gap:10px">
     <span>📌</span>
     <span id="pinnedNoteText" style="flex:1;font-size:.8em;color:var(--wn);line-height:1.5"></span>
     <button onclick="clearPinnedNote()" style="background:none;border:none;color:var(--tx3);cursor:pointer">✕</button>
@@ -2436,9 +2734,12 @@ function saveD(){
         const wk=weekKey();
         Object.keys(G.currentSets).forEach(k=>{if(!k.startsWith(wk))delete G.currentSets[k];});
       }
-      try{localStorage.setItem(K,JSON.stringify(G));return;}catch(e2){}
+      try{localStorage.setItem(K,JSON.stringify(G));updateSyncDot('saved');return;}catch(e2){}
       toast('⚠️ مساحة التخزين ممتلئة — صدّر بياناتك','w');
       updateSyncDot('error');
+    } else {
+      // أي خطأ آخر في التخزين — لا تترك المؤشر عالقاً على "saving"
+      console.warn('saveD:',e);updateSyncDot('error');
     }
   }
 }
@@ -3198,7 +3499,15 @@ async function _doEquipAnalysis(desc){const el=document.getElementById('equipAna
 5. ارتباطه ببرنامج PPL إذا أمكن
 استخدم العربية وكن عملياً ومختصراً.`},{role:'user',content:`الجهاز: ${desc}
 قدم الشرح الكامل.`}],1200,0.6);if(r)el.innerHTML=`<div style="margin-top:10px;background:rgba(254,215,170,.07);border:1px solid rgba(254,215,170,.2);border-radius:14px;padding:14px;font-size:.82em;line-height:1.75;white-space:pre-wrap;direction:rtl">${r}</div>`;else el.innerHTML=''}
-function weekKey(){const d=new Date(),y=d.getFullYear(),w=Math.ceil(((d-new Date(y,0,1))/864e5+new Date(y,0,1).getDay()+1)/7);return`${y}-W${w}`}
+function weekKey(){
+  // ISO 8601 week number — correct across year boundaries
+  const d=new Date();
+  const tmp=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  tmp.setUTCDate(tmp.getUTCDate()+4-(tmp.getUTCDay()||7));
+  const yearStart=new Date(Date.UTC(tmp.getUTCFullYear(),0,1));
+  const w=Math.ceil(((tmp-yearStart)/864e5+1)/7);
+  return`${tmp.getUTCFullYear()}-W${w}`;
+}
 function sesKey(dk){return`${weekKey()}_${dk}`}
 function isDayCompleted(dk){const wk=weekKey();return G.completedDays[wk]&&G.completedDays[wk][dk]}
 function getCompletedCount(){const wk=weekKey();if(!G.completedDays[wk])return 0;return Object.values(G.completedDays[wk]).filter(v=>v).length}
@@ -3247,8 +3556,9 @@ function showNotification(title, body){
   if(!('Notification' in window) || Notification.permission !== 'granted' || !G.notifications) return;
   // Use SW for reliable delivery (works when screen is locked on iOS PWA)
   if(window._swReg && window._swReg.showNotification){
+    const _notifIcon="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%2300040f' width='100' height='100' rx='20'/%3E%3Ctext y='.9em' font-size='80' x='10'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E";
     window._swReg.showNotification(title, {
-      body, icon:'./icon-192.png', badge:'./icon-192.png',
+      body, icon:_notifIcon, badge:_notifIcon,
       vibrate:[200,100,200], requireInteraction:true
     });
   } else {
@@ -3268,7 +3578,35 @@ function clearSessions(){
   document.body.appendChild(overlay);
   overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
 }
-function impD(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.days){const existing=document.getElementById('_impModal');if(existing)existing.remove();const overlay=document.createElement('div');overlay.id='_impModal';overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';overlay.innerHTML=`<div style="background:#0d1b2a;border:1.5px solid rgba(251,191,36,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px"><div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:var(--wn)">⚠️ استبدال جميع البيانات؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">ستُستبدل جميع بياناتك الحالية ببيانات الملف المستورد.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_impModal').remove();G=JSON.parse(decodeURIComponent('${encodeURIComponent(JSON.stringify(d))}'));saveD();toast('📥 تم الاستيراد','s');setTimeout(()=>location.reload(),800)" style="flex:1;padding:11px;border-radius:10px;border:none;background:linear-gradient(135deg,#00d4ff,#0088bb);color:#000;font-family:monospace,'Cairo';font-weight:900;font-size:.85em;cursor:pointer;letter-spacing:.04em">IMPORT ✓</button><button onclick="document.getElementById('_impModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:'Cairo';font-size:.88em;cursor:pointer">إلغاء</button></div></div>`;document.body.appendChild(overlay);overlay.addEventListener('click',ev2=>{if(ev2.target===overlay)overlay.remove()});}}catch{toast('❌ خطأ في الملف','e')}};r.readAsText(f)}
+function impD(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const d=JSON.parse(ev.target.result);
+      if(!d.days)return toast('❌ ملف غير صالح','e');
+      // store parsed data in a module-scoped variable — never inject JSON into onclick
+      window._pendingImport=d;
+      const existing=document.getElementById('_impModal');if(existing)existing.remove();
+      const overlay=document.createElement('div');
+      overlay.id='_impModal';
+      overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(3px)';
+      const box=document.createElement('div');
+      box.style.cssText='background:#0d1b2a;border:1.5px solid rgba(251,191,36,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px';
+      box.innerHTML='<div style="font-weight:900;font-size:.92em;margin-bottom:6px;color:var(--wn)">⚠️ استبدال جميع البيانات؟</div><div style="font-size:.78em;color:rgba(255,255,255,.55);margin-bottom:14px">ستُستبدل جميع بياناتك الحالية ببيانات الملف المستورد.</div><div style="display:flex;gap:8px"><button id="_impConfirmBtn" style="flex:1;padding:11px;border-radius:10px;border:none;background:linear-gradient(135deg,#00d4ff,#0088bb);color:#000;font-family:monospace,\'Cairo\';font-weight:900;font-size:.85em;cursor:pointer;letter-spacing:.04em">IMPORT ✓</button><button id="_impCancelBtn" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#f0f0ff;font-family:\'Cairo\';font-size:.88em;cursor:pointer">إلغاء</button></div>';
+      overlay.appendChild(box);
+      document.body.appendChild(overlay);
+      document.getElementById('_impConfirmBtn').addEventListener('click',()=>{
+        overlay.remove();
+        if(window._pendingImport){G=window._pendingImport;window._pendingImport=null;}
+        saveD();toast('📥 تم الاستيراد','s');setTimeout(()=>location.reload(),800);
+      });
+      document.getElementById('_impCancelBtn').addEventListener('click',()=>{overlay.remove();window._pendingImport=null;});
+      overlay.addEventListener('click',ev2=>{if(ev2.target===overlay){overlay.remove();window._pendingImport=null;}});
+    }catch{toast('❌ خطأ في الملف','e');}
+  };
+  r.readAsText(f);
+}
 
 /* ══ YMOVE FREE VIDEO LIBRARY — 25 exercises, royalty-free, embeddable ══ */
 const YMOVE_IDS = {
@@ -5254,6 +5592,55 @@ function confirmSwap(origId, newId, newName){
   clM('toolMo');
   rExs();
   toast('تم الاستبدال بـ '+newName,'s');
+}
+
+/* ── Edit Exercise In Day (FIX: was referenced by ✏️ button but never defined) ── */
+function editExerciseInDay(exId){
+  const day=G.days[curDay];if(!day){toast('لا يوجد يوم نشط','w');return;}
+  const ex=day.exercises.find(e=>e.id===exId);
+  if(!ex){toast('التمرين غير موجود','w');return;}
+  const esc=s=>String(s==null?'':s).replace(/"/g,'&quot;');
+  document.getElementById('toolMoT').textContent='✏️ تعديل: '+ex.name;
+  document.getElementById('toolMoB').innerHTML=`<div style="padding:4px">
+    <div class="fi"><label>اسم التمرين</label><input type="text" id="edExName" value="${esc(ex.name)}"></div>
+    <div class="fi"><label>العضلة</label><input type="text" id="edExMuscle" value="${esc(ex.muscle)}"></div>
+    <div class="fi"><label>الوحدة</label><input type="text" id="edExUnit" value="${esc(ex.unit||'كجم')}"></div>
+    <div class="fi"><label>السيتات</label><input type="number" id="edExSets" min="1" max="12" value="${parseInt(ex.sets)||3}"></div>
+    <div class="fi"><label>نطاق العدات</label><input type="text" id="edExReps" value="${esc(ex.reps||'8-12')}"></div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button class="btn btn-p btn-full" onclick="saveEditExercise('${exId}')">💾 حفظ</button>
+      <button class="btn btn-dk btn-full" onclick="deleteExerciseFromDay('${exId}')" style="color:var(--no)">🗑️ حذف</button>
+    </div>
+  </div>`;
+  document.getElementById('toolMo').classList.add('act');
+}
+function saveEditExercise(exId){
+  const day=G.days[curDay];if(!day)return;
+  const ex=day.exercises.find(e=>e.id===exId);
+  if(!ex)return;
+  const n=document.getElementById('edExName')?.value?.trim();
+  if(!n){toast('أدخل اسم التمرين','w');return;}
+  ex.name=n;
+  ex.muscle=document.getElementById('edExMuscle')?.value?.trim()||'';
+  ex.unit=document.getElementById('edExUnit')?.value?.trim()||'كجم';
+  ex.sets=parseInt(document.getElementById('edExSets')?.value)||ex.sets||3;
+  ex.reps=document.getElementById('edExReps')?.value?.trim()||ex.reps||'8-12';
+  saveD();
+  clM('toolMo');
+  rExs();
+  toast('✅ تم تعديل التمرين','s');
+}
+function deleteExerciseFromDay(exId){
+  const day=G.days[curDay];if(!day)return;
+  const idx=day.exercises.findIndex(e=>e.id===exId);
+  if(idx<0)return;
+  if(!confirm('هل تريد حذف هذا التمرين من اليوم؟'))return;
+  const nm=day.exercises[idx].name;
+  day.exercises.splice(idx,1);
+  saveD();
+  clM('toolMo');
+  rExs();
+  toast('🗑️ تم حذف '+nm,'s');
 }
 
 /* ── Injury Log ── */
