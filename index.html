@@ -1890,6 +1890,125 @@ body::after{
 .fi input,.fi select,.set-in{border-color:rgba(91,184,255,.3)!important;background:rgba(15,30,55,.7)!important;color:#eaf6ff!important}
 .fi label{color:rgba(170,210,255,.85)!important}
 
+/* ═══ ADVANCED FEATURES STYLES ═══ */
+.sl-rank-emblem{width:90px;height:90px;border:3px solid;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;background:radial-gradient(circle,rgba(91,184,255,.08),rgba(4,12,28,.6));position:relative}
+.sl-rank-emblem::before{content:'';position:absolute;inset:-6px;border:1px solid rgba(91,184,255,.2);border-radius:50%;animation:slPulseRing 2.5s ease-in-out infinite}
+@keyframes slPulseRing{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.08);opacity:.15}}
+.sl-rank-stat{text-align:center;background:rgba(91,184,255,.06);border:1px solid rgba(91,184,255,.12);border-radius:2px;padding:10px 4px}
+.sl-rank-stat .v{font-family:'Orbitron',monospace;font-weight:800;font-size:1.3em;color:#b8e6ff}
+.sl-rank-stat .l{font-size:.62em;color:var(--tx3);margin-top:2px}
+.sl-rank-card{border-color:rgba(91,184,255,.3)!important}
+.sl-boss-card{border-color:rgba(244,114,182,.25)!important}
+.sl-report-card{background:linear-gradient(160deg,rgba(10,22,44,.95),rgba(4,12,28,.98));border:2px solid rgba(91,184,255,.35);border-radius:6px;padding:3px;box-shadow:0 0 30px rgba(91,184,255,.15),inset 0 0 30px rgba(30,80,140,.1);position:relative;overflow:hidden}
+.sl-report-card::before{content:'';position:absolute;top:0;left:10%;right:10%;height:2px;background:linear-gradient(90deg,transparent,#b8e6ff,transparent);box-shadow:0 0 14px rgba(91,184,255,.6)}
+.sl-report-inner{padding:18px 16px}
+.sl-report-stat{background:rgba(91,184,255,.06);border:1px solid rgba(91,184,255,.14);border-radius:3px;padding:10px;text-align:center}
+.sl-report-stat .ic{font-size:1.1em}
+.sl-report-stat .v{font-family:'Orbitron',monospace;font-weight:800;font-size:1.15em;color:#b8e6ff;margin-top:2px;text-shadow:0 0 8px rgba(91,184,255,.3)}
+.sl-report-stat .l{font-size:.6em;color:var(--tx3);margin-top:2px}
+.sl-insight{display:flex;gap:10px;align-items:flex-start;background:rgba(91,184,255,.05);border:1px solid rgba(91,184,255,.12);border-radius:3px;padding:10px 12px;font-size:.8em;color:var(--tx2);line-height:1.6}
+.sl-insight .i{font-size:1.1em;flex-shrink:0}
+.sl-insight b{color:#b8e6ff}
+
+/* ═══ COLLAPSIBLE SECTIONS ═══ */
+.sl-collapse-body{transition:max-height .35s ease,opacity .25s ease,padding .25s ease,margin .25s ease;max-height:1500px;overflow:hidden}
+.sl-collapse-chev{display:inline-block;transition:transform .3s ease;font-size:.9em}
+.sl-collapse-head{display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px 14px;user-select:none;border-bottom:1px solid rgba(91,184,255,.1)}
+.sl-collapse-head:active{background:rgba(91,184,255,.06)}
+.sl-collapse-head .sl-collapse-title{font-family:'Orbitron','Cairo',sans-serif;font-size:.82em;font-weight:700;color:#cdeeff;letter-spacing:.02em}
+.sl-collapse-head .sl-collapse-chev{color:rgba(91,184,255,.7)}
+
+/* ═══ START TODAY WORKOUT BUTTON ═══ */
+.tm-start-btn{width:100%;margin:10px 0 4px;padding:14px;border-radius:4px;border:1px solid rgba(91,184,255,.5);background:linear-gradient(135deg,rgba(91,184,255,.85),rgba(10,80,150,.9));color:#fff;font-family:'Orbitron','Cairo',sans-serif;font-size:1em;font-weight:800;letter-spacing:.03em;cursor:pointer;box-shadow:0 0 22px rgba(91,184,255,.3),inset 0 1px 0 rgba(180,220,255,.3);text-shadow:0 1px 4px rgba(0,20,50,.5);transition:transform .15s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.tm-start-btn:active{transform:scale(.98);box-shadow:0 0 30px rgba(91,184,255,.45)}
+.tm-start-btn.active{background:linear-gradient(135deg,rgba(52,211,153,.85),rgba(10,120,90,.9));border-color:rgba(52,211,153,.5);box-shadow:0 0 22px rgba(52,211,153,.3),inset 0 1px 0 rgba(180,255,220,.3)}
+
+/* ═══════════════════════════════════════════════
+   ⚡ SUNG JIN-WOO SYSTEM — POPUP & ATMOSPHERE
+   ═══════════════════════════════════════════════ */
+/* خلفية سداسية/شبكية هولوجرامية خفيفة */
+body::before{
+  content:''!important;position:fixed!important;inset:0!important;z-index:0!important;pointer-events:none!important;
+  background-image:
+    linear-gradient(rgba(91,184,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(91,184,255,.025) 1px,transparent 1px)!important;
+  background-size:44px 44px!important;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 30%,transparent 75%);
+  opacity:.6;
+}
+
+/* النافذة المنبثقة [ NOTIFICATION ] */
+.sj-popup-overlay{position:fixed;inset:0;z-index:11000;display:flex;align-items:center;justify-content:center;background:rgba(2,8,20,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:sjFadeIn .25s ease;padding:20px}
+@keyframes sjFadeIn{from{opacity:0}to{opacity:1}}
+.sj-popup{position:relative;background:linear-gradient(160deg,rgba(8,20,42,.97),rgba(3,10,24,.98));border:1.5px solid var(--sj-c);border-radius:4px;padding:30px 26px 24px;max-width:340px;width:100%;text-align:center;box-shadow:0 0 0 1px rgba(91,184,255,.1),0 0 50px var(--sj-g),0 0 100px rgba(20,80,150,.2),inset 0 0 40px rgba(20,70,130,.12);animation:sjPopIn .45s cubic-bezier(.2,1.3,.4,1)}
+@keyframes sjPopIn{0%{opacity:0;transform:scale(.8) translateY(20px);filter:brightness(2.5)}55%{opacity:1;filter:brightness(1.5)}100%{opacity:1;transform:scale(1) translateY(0);filter:brightness(1)}}
+/* خط ماسح أعلى النافذة */
+.sj-popup-scan{position:absolute;top:0;left:8%;right:8%;height:2px;background:linear-gradient(90deg,transparent,var(--sj-c),transparent);box-shadow:0 0 16px var(--sj-g);animation:sjScanPulse 2s ease-in-out infinite}
+@keyframes sjScanPulse{0%,100%{opacity:.5;left:8%;right:8%}50%{opacity:1;left:3%;right:3%}}
+/* أركان مضيئة */
+.sj-popup-corner{position:absolute;width:18px;height:18px;border:2px solid var(--sj-c);box-shadow:0 0 8px var(--sj-g)}
+.sj-popup-corner.tl{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.sj-popup-corner.tr{top:-1px;right:-1px;border-left:0;border-bottom:0}
+.sj-popup-corner.bl{bottom:-1px;left:-1px;border-right:0;border-top:0}
+.sj-popup-corner.br{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.sj-popup-sys{font-family:'Orbitron',monospace;font-size:.62em;letter-spacing:.28em;color:var(--sj-c);opacity:.85;margin-bottom:14px;text-shadow:0 0 10px var(--sj-g)}
+.sj-popup-icon{font-size:2.6em;line-height:1;margin-bottom:10px;filter:drop-shadow(0 0 14px var(--sj-g));animation:sjIconPulse 1.6s ease-in-out infinite}
+@keyframes sjIconPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.sj-popup-title{font-family:'Orbitron','Cairo',sans-serif;font-size:1.3em;font-weight:900;color:var(--sj-c);text-shadow:0 0 18px var(--sj-g);margin-bottom:12px;letter-spacing:.02em}
+.sj-popup-lines{display:flex;flex-direction:column;gap:7px}
+.sj-popup-line{font-family:'Cairo',sans-serif;font-size:.96em;color:#dcf2ff;line-height:1.5}
+.sj-popup-cta{margin-top:20px;padding:11px 28px;border-radius:3px;border:1px solid var(--sj-c);background:linear-gradient(135deg,color-mix(in srgb,var(--sj-c) 30%,transparent),rgba(10,40,80,.3));color:#fff;font-family:'Orbitron','Cairo',sans-serif;font-weight:800;font-size:.92em;letter-spacing:.05em;cursor:pointer;text-shadow:0 0 10px var(--sj-g);box-shadow:0 0 20px var(--sj-g);transition:transform .15s}
+.sj-popup-cta:active{transform:scale(.96)}
+.sj-popup-hint{margin-top:18px;font-family:'Orbitron',monospace;font-size:.58em;letter-spacing:.2em;color:rgba(180,215,255,.4);text-transform:uppercase;cursor:pointer}
+/* نمط التحذير الأحمر */
+.sj-type-warning .sj-popup{border-style:solid}
+.sj-type-warning .sj-popup-title{animation:sjWarnBlink 1.2s ease-in-out infinite}
+@keyframes sjWarnBlink{0%,100%{opacity:1}50%{opacity:.65}}
+
+/* ═══ COLLAPSIBLE WARMUP ═══ */
+.wup-collapse-body{overflow:hidden;transition:max-height .35s ease,opacity .25s ease,margin .25s ease;max-height:600px;opacity:1}
+.wup-collapse-body.collapsed{max-height:0;opacity:0;margin:0}
+.wup-collapse-head:active{opacity:.8}
+.wup-chev{color:var(--wn)}
+
+/* ═══════════════════════════════════════════════
+   ⚡ DAILY QUEST CARD (Sung Jin-Woo style)
+   ═══════════════════════════════════════════════ */
+.sys-dq-card{position:relative;border:1.5px solid rgba(91,184,255,.35)!important;overflow:hidden;background:linear-gradient(165deg,rgba(8,20,42,.95),rgba(4,12,28,.97))!important}
+.sys-dq-card.done{border-color:rgba(52,211,153,.45)!important}
+.sys-dq-card.urgent{border-color:rgba(255,84,112,.5)!important;animation:sysDqUrgent 2s ease-in-out infinite}
+@keyframes sysDqUrgent{0%,100%{box-shadow:0 0 24px rgba(255,84,112,.12)}50%{box-shadow:0 0 36px rgba(255,84,112,.28)}}
+.sys-dq-scan{position:absolute;top:0;left:10%;right:10%;height:2px;background:linear-gradient(90deg,transparent,#5bb8ff,transparent);box-shadow:0 0 14px rgba(91,184,255,.6);animation:slTopGlow 3s ease-in-out infinite}
+.sys-dq-card.done .sys-dq-scan{background:linear-gradient(90deg,transparent,#34d399,transparent)}
+.sys-dq-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.sys-dq-sys{font-family:'Orbitron',monospace;font-size:.58em;letter-spacing:.2em;color:rgba(91,184,255,.75);text-shadow:0 0 8px rgba(91,184,255,.4)}
+.sys-dq-title{font-family:'Orbitron','Cairo',sans-serif;font-size:1.05em;font-weight:900;color:#b8e6ff;text-shadow:0 0 14px rgba(91,184,255,.4);margin-top:3px}
+.sys-dq-timer{text-align:center;padding:6px 12px;border:1px solid rgba(91,184,255,.25);border-radius:3px;background:rgba(91,184,255,.06)}
+.sys-dq-timer.urgent{border-color:rgba(255,84,112,.5);background:rgba(255,84,112,.08)}
+.sys-dq-timer-lbl{font-size:.52em;color:var(--tx3);letter-spacing:.08em}
+.sys-dq-timer-val{font-family:'Orbitron',monospace;font-weight:800;font-size:1.15em;color:#b8e6ff;text-shadow:0 0 10px rgba(91,184,255,.4)}
+.sys-dq-timer.urgent .sys-dq-timer-val{color:#ff8095;text-shadow:0 0 10px rgba(255,84,112,.5)}
+.sys-dq-penalty-warn{background:rgba(255,84,112,.1);border:1px solid rgba(255,84,112,.3);border-radius:3px;padding:8px 10px;font-size:.74em;color:#ff8095;margin-bottom:10px;text-align:center}
+.sys-dq-tasks{display:flex;flex-direction:column;gap:8px}
+.sys-dq-task{display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(91,184,255,.04);border:1px solid rgba(91,184,255,.12);border-radius:3px;transition:.2s}
+.sys-dq-task.done{background:rgba(52,211,153,.07);border-color:rgba(52,211,153,.3)}
+.sys-dq-task-check{width:24px;height:24px;border-radius:50%;border:2px solid rgba(91,184,255,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;color:#34d399;font-weight:900;flex-shrink:0;transition:.2s}
+.sys-dq-task.done .sys-dq-task-check{background:rgba(52,211,153,.2);border-color:#34d399}
+.sys-dq-task-icon{font-size:1.2em;flex-shrink:0}
+.sys-dq-task-body{flex:1;min-width:0}
+.sys-dq-task-name{font-size:.82em;font-weight:700;color:#dcf2ff;margin-bottom:4px}
+.sys-dq-task-bar{height:5px;background:rgba(8,20,40,.8);border-radius:3px;overflow:hidden}
+.sys-dq-task-fill{height:100%;background:linear-gradient(90deg,#3ba9ff,#5bb8ff);box-shadow:0 0 6px rgba(91,184,255,.5);transition:width .4s}
+.sys-dq-task.done .sys-dq-task-fill{background:linear-gradient(90deg,#22c55e,#34d399)}
+.sys-dq-task-count{display:flex;align-items:center;gap:3px;flex-shrink:0}
+.sys-dq-input{width:42px;background:rgba(15,30,55,.7);border:1px solid rgba(91,184,255,.25);border-radius:3px;color:#eaf6ff;font-family:'Orbitron',monospace;font-size:.8em;font-weight:700;text-align:center;padding:3px 2px}
+.sys-dq-task-target{font-size:.66em;color:var(--tx3);white-space:nowrap}
+.sys-dq-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid rgba(91,184,255,.12)}
+.sys-dq-progress-txt{font-family:'Orbitron','Cairo',sans-serif;font-size:.74em;color:var(--tx2)}
+.sys-dq-complete-msg{font-size:.8em;color:#34d399;font-weight:700}
+.sys-dq-edit-btn{background:rgba(91,184,255,.08);border:1px solid rgba(91,184,255,.2);border-radius:3px;padding:4px 8px;cursor:pointer;font-size:.85em}
+
 </style>
 
 </head>
@@ -1932,12 +2051,15 @@ body::after{
   <div class="sl-status-card">
 
     <!-- System header -->
-    <div class="sl-sw-header">
+    <div class="sl-sw-header" onclick="toggleCollapse('statusDetailsBody')" style="cursor:pointer">
       <span class="sl-sw-sys">[ H U N T E R · S T A T U S ]</span>
-      <span id="blockBadge2" class="block-badge block-volume">Volume</span>
+      <span style="display:flex;align-items:center;gap:8px">
+        <span id="blockBadge2" class="block-badge block-volume">Volume</span>
+        <span class="sl-collapse-chev" id="statusDetailsBody_chev" style="font-size:.8em;color:rgba(91,184,255,.7)">▾</span>
+      </span>
     </div>
 
-    <!-- Hunter identity row -->
+    <!-- Hunter identity row (always visible) -->
     <div class="sl-sw-info-row">
       <div class="sl-sw-avatar">⚔️</div>
       <div class="sl-sw-details">
@@ -1947,6 +2069,8 @@ body::after{
       <div id="hunterRankDisplay" class="sl-rank-pill rank-e">RANK · E</div>
     </div>
 
+    <!-- ▼▼ Collapsible secondary details ▼▼ -->
+    <div id="statusDetailsBody" class="sl-collapse-body">
     <!-- Hunter stats grid -->
     <div class="sl-hunter-stats">
       <div class="sl-hstat"><span class="sl-hstat-key">STR</span><span class="sl-hstat-val" id="hstatStreak">0</span></div>
@@ -1981,6 +2105,8 @@ body::after{
       <button class="btn btn-i btn-sm" onclick="go('ai')">💬 دردشة</button>
       <button id="homeModeBtn" class="btn btn-dk btn-sm" onclick="toggleHomeMode()">🏠 منزل</button>
     </div>
+    </div>
+    <!-- ▲▲ end collapsible ▲▲ -->
 
     <!-- Dungeon select -->
     <div class="sl-sw-divider">[ SELECT DUNGEON ]</div>
@@ -1993,6 +2119,7 @@ body::after{
     <span id="pinnedNoteText" style="flex:1;font-size:.8em;color:var(--wn);line-height:1.5"></span>
     <button onclick="clearPinnedNote()" style="background:none;border:none;color:var(--tx3);cursor:pointer">✕</button>
   </div>
+  <div id="dailyQuestArea"></div>
   <div id="todayMission"></div>
   <!-- legacy containers kept hidden so existing code doesn't break -->
   <div id="readinessBanner" style="display:none"></div>
@@ -2273,6 +2400,9 @@ body::after{
     <button class="stat-tab" onclick="switchStatTab('prtimeline',this)">📅 PRs</button>
     <button class="stat-tab" onclick="switchStatTab('meso',this)">📦 Meso</button>
     <button class="stat-tab" onclick="switchStatTab('xp',this)">⭐ XP</button>
+    <button class="stat-tab" onclick="switchStatTab('rank',this)">⚔️ الرتبة</button>
+    <button class="stat-tab" onclick="switchStatTab('report',this)">📜 التقرير</button>
+    <button class="stat-tab" onclick="switchStatTab('insights',this)">🧠 رؤى AI</button>
     <button class="stat-tab" onclick="switchStatTab('badges',this)">🎖️ شارات</button>
     <button class="stat-tab" onclick="switchStatTab('standards',this)">⚡ معايير</button>
   </div>
@@ -2325,6 +2455,15 @@ body::after{
   </div>
   <div id="statTab-badges" style="display:none">
     <div class="card"><div class="ct">🎖️ الإنجازات والشارات <span class="bdg" id="badgesCount">0</span></div><div id="badgesArea"></div></div>
+  </div>
+  <div id="statTab-rank" style="display:none">
+    <div id="rankSystemArea"></div>
+  </div>
+  <div id="statTab-report" style="display:none">
+    <div id="missionReportArea"></div>
+  </div>
+  <div id="statTab-insights" style="display:none">
+    <div id="aiInsightsArea"></div>
   </div>
   <div id="statTab-standards" style="display:none">
     <div class="card"><div class="ct">⚡ Wilks Score <span class="tt-q" onclick="showTip(this,'Wilks Score: معيار عالمي لقياس القوة بالنسبة لوزن الجسم. يستخدم في بطولات Powerlifting لمقارنة رياضيين بأوزان مختلفة. 100-200 = متوسط، 200-300 = متقدم، 300+ = نخبة عالمية.')">?</span></div><div id="wilksArea"></div></div>
@@ -2446,6 +2585,7 @@ body::after{
     <button onclick="stopTimer()" style="background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);color:var(--no);border-radius:8px;padding:4px 10px;font-size:.8em;font-weight:800;cursor:pointer">⏹</button>
     <button onclick="resetFloatTimer()" style="background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.25);color:var(--p);border-radius:8px;padding:4px 10px;font-size:.8em;font-weight:800;cursor:pointer">↺</button>
     <button id="ttsToggleBtn" onclick="toggleTTS()" title="صوت الكوتش" style="background:rgba(110,231,183,.1);border:1px solid rgba(110,231,183,.25);color:var(--ok);border-radius:8px;padding:4px 10px;font-size:.85em;cursor:pointer">🔊</button>
+    <button id="voiceLiveMini" onclick="toggleVoiceLive()" title="المدرب الصوتي الحي (عدّ تنازلي + تشجيع)" style="background:rgba(91,184,255,.1);border:1px solid rgba(91,184,255,.3);color:#5bb8ff;border-radius:8px;padding:4px 10px;font-size:.85em;cursor:pointer">🎙️</button>
   </div>
   <div class="ft-presets">
     <button class="ft-preset-btn" onclick="quickStartTimer(30)">30s</button>
@@ -2799,8 +2939,9 @@ if(G.lastRank&&G.lastRank!==_newRankLetter&&_ns>0){
 const _nd=document.getElementById('dash-name-txt');if(_nd&&G.profile&&G.profile.name)_nd.textContent=`HUNTER: ${G.profile.name}`;
 if(!dl)return;
 const dungeonNames={upperA:'DUNGEON ALPHA',lowerA:'DUNGEON BETA',upperB:'DUNGEON GAMMA',lowerB:'DUNGEON DELTA'};
-dl.innerHTML=dayOrder.map(k=>{const d=G.days[k];if(!d)return'';const ic=done[k],ia=curDay===k;const dLabel=dungeonNames[k]||d.name.toUpperCase();return`<div class="sl-dchip ${ia?'act':''} ${ic&&!ia?'completed':''}" onclick="selDay('${k}')">${ic?'<div class="sl-done-mark">✓</div>':''}<span class="sl-dchip-label">[ ${dLabel} ]</span><div class="dn">${d.name}</div><div class="dm">${d.muscles}</div></div>`}).join('')}
-function selDay(k){if(typeof resetJournal==='function')resetJournal();if(curDay!==k){sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;}curDay=k;rDays();rExs();const el=document.getElementById('sesAct');if(el)el.style.display='block';setTimeout(()=>{const w=document.getElementById('woArea');if(w)w.scrollIntoView({behavior:'smooth',block:'start'})},100)}
+dl.innerHTML=dayOrder.map(k=>{const d=G.days[k];if(!d)return'';const ic=done[k],ia=curDay===k;const dLabel=dungeonNames[k]||d.name.toUpperCase();return`<div class="sl-dchip ${ia?'act':''} ${ic&&!ia?'completed':''}" onclick="selDay('${k}')">${ic?'<div class="sl-done-mark">✓</div>':''}<span class="sl-dchip-label">[ ${dLabel} ]</span><div class="dn">${d.name}</div><div class="dm">${d.muscles}</div></div>`}).join('');
+if(typeof applyTodayFocus==='function'){try{applyTodayFocus();}catch(e){}}}
+function selDay(k){if(typeof resetJournal==='function')resetJournal();if(curDay!==k){sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;}curDay=k;rDays();rExs();const el=document.getElementById('sesAct');if(el)el.style.display='block';if(!window._suppressDayScroll){setTimeout(()=>{const w=document.getElementById('woArea');if(w)w.scrollIntoView({behavior:'smooth',block:'start'})},100)}}
 function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;
 // ── Muscle color map ──
 const MC={'صدر':'255,107,43','ظهر':'96,165,250','كتف':'167,139,250','كتف خلفي':'167,139,250','ترابيس':'167,139,250','رجل':'52,211,153','رجل أمامي':'52,211,153','رجل خلفي':'110,231,183','مؤخرة':'52,211,153','سمانة':'34,211,238','باي':'251,191,36','تراي':'251,191,36','ساعد':'251,191,36','بطن':'248,113,113'};
@@ -2901,7 +3042,7 @@ return`<div class="sl-quest exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="
     });
   });
 })();
-updateCompBar();restoreSetInputs();renderDeloadBanner();applyLevelSystem();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
+updateCompBar();restoreSetInputs();renderDeloadBanner();applyLevelSystem();if(typeof applyWarmupCollapse==='function')applyWarmupCollapse();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
   if(G.homeMode){document.querySelectorAll('.sl-quest-name,.exn').forEach(el=>{const orig=el.textContent.trim();const alt=Object.keys(HOME_ALTS||{}).find(k=>orig.includes(k));if(alt&&HOME_ALTS[alt]!==orig){el.innerHTML=`<span style="text-decoration:line-through;color:var(--tx3);font-size:.85em">${orig}</span><br><span style="color:var(--ok)">${HOME_ALTS[alt]}</span>`;}});}
 }
 function onRPEChange(id,i,isUserInput){
@@ -2915,7 +3056,7 @@ function onRPEChange(id,i,isUserInput){
   else if(v>=10)el.classList.add('rpe-max');
   saveCurrentSet(id,i);updateSetSummary(id);
 }
-function restoreSetInputs(){if(!curDay)return;const sk=sesKey(curDay),sv=G.currentSets&&G.currentSets[sk];if(!sv)return;Object.entries(sv).forEach(([id,sets])=>{sets.forEach((s,i)=>{const w=document.getElementById(`sw-${id}-${i}`),r=document.getElementById(`sr2-${id}-${i}`),rp=document.getElementById(`srpe-${id}-${i}`),c=document.getElementById(`sc-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(w&&s.w){w.value=s.w;w.classList.add('si-filled')}if(r&&s.r)r.value=s.r;if(rp&&s.rpe){rp.value=s.rpe;onRPEChange(id,i)}if(s.done&&c){c.classList.add('sc-done');c.textContent='✓';document.getElementById(`sr-${id}-${i}`)?.classList.add('set-done');if(n)n.classList.add('sn-done')}});updateSetSummary(id)})}
+function restoreSetInputs(){if(!curDay)return;const sk=sesKey(curDay),sv=G.currentSets&&G.currentSets[sk];if(!sv)return;Object.entries(sv).forEach(([id,sets])=>{sets.forEach((s,i)=>{const w=document.getElementById(`sw-${id}-${i}`),r=document.getElementById(`sr2-${id}-${i}`),rp=document.getElementById(`srpe-${id}-${i}`),c=document.getElementById(`sc-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(w&&s.w){w.value=s.w;w.classList.add('si-filled')}if(r&&s.r)r.value=s.r;if(rp&&s.rpe){rp.value=s.rpe;onRPEChange(id,i)}if(s.done&&c){c.classList.add('sc-done');c.textContent='✓';document.getElementById(`sr-${id}-${i}`)?.classList.add('set-done');if(n)n.classList.add('sn-done')}const _stb=document.getElementById(`stype-${id}-${i}`);if(_stb&&s.type&&s.type!=='normal'&&SET_TYPES[s.type]){_stb.textContent=SET_TYPES[s.type].label;_stb.className=`set-type-btn ${SET_TYPES[s.type].cls}`}});updateSetSummary(id)})}
 function suggestRPE(id,i,forceUpdate){
   const rp=document.getElementById(`srpe-${id}-${i}`);
   if(!rp)return;
@@ -2951,7 +3092,7 @@ function onSetChange(id,i,be){
   saveCurrentSet(id,i);updateSetSummary(id);
 }
 function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=document.getElementById(`sr-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(!c)return;const _prevBest=getBestSet(id);if(!c.classList.contains('sc-done')){const w=document.getElementById(`sw-${id}-${i}`);if(w&&!w.value){const ls=getLastSets(id),p=ls[i];if(p&&p.w){w.value=p.w;w.classList.add('si-filled')}}c.classList.add('sc-done');c.textContent='✓';r?.classList.add('set-done');n?.classList.add('sn-done');suggestRPE(id,i);if(!sessionStartTime){sessionStartTime=Date.now();sessionTimerInterval=setInterval(updateCompBar,1000);}if(navigator.vibrate)navigator.vibrate(20);quickStartTimer(_getSmartTimer(id));if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0;if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){fireConfetti(50);toast(`🏆 رقم قياسي جديد! ${_nw}كجم`,'s');document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}}}
-function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false};saveDd();}
+function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];const _prevType=G.currentSets[sk][id][i]?.type||'normal';G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false,type:_prevType};saveDd();}
 function updateSetSummary(id){
   const sm=document.getElementById(`sum-${id}`);if(!sm)return;
   const ex=G.days[curDay]?.exercises.find(e=>e.id===id);if(!ex)return;
@@ -3531,7 +3672,7 @@ function getSmartCoach(ex,id,be){
   else if(sp&&sp.strategy==='deload'){h+=`<div class="coach-rec deload" style="margin-top:5px"><span>🔄</span><span>${sp.msg}</span></div>`}
   return h
 }
-function go(n,b){document.querySelectorAll('.pg').forEach(p=>p.classList.remove('act'));document.querySelectorAll('.bni').forEach(x=>x.classList.remove('act'));const pg=document.getElementById('pg-'+n);if(pg)pg.classList.add('act');if(b&&typeof b!=='string')b.classList.add('act');if(n==='hist'){popHSel();rHist();renderSessionsList();renderVolumeChart()}if(n==='stats')rStats();if(n==='ai')renderChatHistory();if(n==='lib')renderLibContent();if(n==='profile')renderProfilePage();if(n==='wo'){renderTodayMission()}window.scrollTo(0,0)}
+function go(n,b){document.querySelectorAll('.pg').forEach(p=>p.classList.remove('act'));document.querySelectorAll('.bni').forEach(x=>x.classList.remove('act'));const pg=document.getElementById('pg-'+n);if(pg)pg.classList.add('act');if(b&&typeof b!=='string')b.classList.add('act');if(n==='hist'){popHSel();rHist();renderSessionsList();renderVolumeChart()}if(n==='stats')rStats();if(n==='ai')renderChatHistory();if(n==='lib')renderLibContent();if(n==='profile')renderProfilePage();if(n==='wo'){renderTodayMission();if(typeof renderDailyQuest==='function')renderDailyQuest()}window.scrollTo(0,0)}
 function clM(id){const el=document.getElementById(id);if(el)el.classList.remove('act')}
 document.querySelectorAll('.mo').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('act')}));
 function initTheme(){
@@ -3916,6 +4057,7 @@ function swTimerStop() {
     if(!window._tmrEndAt) return;
     const rem = Math.max(0, Math.round((window._tmrEndAt - Date.now()) / 1000));
     window._timerRemaining = rem;
+    if(typeof _voiceTimerCue==='function') _voiceTimerCue(rem);
     const col = rem<=5?'var(--no)':rem<=15?'var(--wn)':'var(--p)';
     uft(rem, col);
     const d=document.getElementById('timerDisp');
@@ -4341,7 +4483,7 @@ function saveGoal() {
    STATS SUB-TABS
 ═══════════════════════════════════════════════ */
 function switchStatTab(tab, btn) {
-  ['overview','calendar','muscles','prs','proj','badges','standards'].forEach(t => {
+  ['overview','calendar','muscles','prs','proj','heatmap','prpred','prtimeline','meso','xp','badges','standards','rank','report','insights'].forEach(t => {
     const el = document.getElementById('statTab-' + t);
     if (el) el.style.display = t === tab ? 'block' : 'none';
   });
@@ -4354,6 +4496,9 @@ function switchStatTab(tab, btn) {
   if (tab === 'proj') rStrengthProjections();
   if (tab === 'badges') renderBadges();
   if (tab === 'standards') { renderStrengthStandards(); renderWilks(); }
+  if (tab === 'rank') renderRankSystem();
+  if (tab === 'report') renderMissionReport();
+  if (tab === 'insights') renderAIInsightsPanel();
 }
 
 /* ══════════════════════════════════════════════
@@ -6085,6 +6230,7 @@ function renderTodayMission(){
   </div>
   ${_bwWarn}
   <div class="tm-macros">${macH}</div>
+  ${(function(){ try{ const tk=(typeof _scheduleDayKey==='function')?_scheduleDayKey():null; if(tk&&!ir){ const isCur=(curDay===tk); return `<button class="tm-start-btn ${isCur?'active':''}" onclick="startTodayWorkout()">${isCur?'⚔️ التمرين جاهز — اذهب للتمارين':'⚔️ ابدأ تمرين اليوم'}</button>`; } }catch(e){} return ''; })()}
   ${rateChips?`<div class="tm-rate-row">${rateChips}</div>`:''}
   <button class="tm-intel-btn ${_io?'open':''}" id="tmIntelBtn" onclick="(function(){const b=document.getElementById('tmIntelBtn'),d=document.getElementById('tmIntelBody');b.classList.toggle('open');d.classList.toggle('open')})()">
     <span>▼ INTEL — تفاصيل وتحديات</span>
@@ -6266,14 +6412,19 @@ function _renderPOJournal(id){
 const SET_TYPES={normal:{label:'عادي',cls:''},drop:{label:'Drop',cls:'drop'},rp:{label:'R-P',cls:'rest-pause'},myo:{label:'Myo',cls:'myo'}};
 function cycleSetType(id,i){
   const btn=document.getElementById(`stype-${id}-${i}`);if(!btn)return;
-  const sk=sesKey(curDay);if(!G.currentSets?.[sk]?.[id])return;
+  const sk=sesKey(curDay);
+  // أنشئ البنية لو مش موجودة (عشان الزرار يشتغل حتى لو السيت فاضي)
+  if(!G.currentSets)G.currentSets={};
+  if(!G.currentSets[sk])G.currentSets[sk]={};
+  if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];
+  if(!G.currentSets[sk][id][i])G.currentSets[sk][id][i]={w:0,r:0,rpe:0,done:false};
   const cur=G.currentSets[sk][id][i]?.type||'normal';
   const order=['normal','drop','rp','myo'];
   const next=order[(order.indexOf(cur)+1)%order.length];
-  if(!G.currentSets[sk][id][i])G.currentSets[sk][id][i]={};
   G.currentSets[sk][id][i].type=next;
   const t=SET_TYPES[next];
-  btn.textContent=t.label;btn.className=`set-type-btn ${t.cls}`;
+  btn.textContent=next==='normal'?'N':t.label;
+  btn.className=`set-type-btn ${t.cls}`;
   saveDd();
 }
 
@@ -6895,6 +7046,877 @@ document.addEventListener('DOMContentLoaded',function(){
   const btn=document.getElementById('homeModeBtn');
   if(btn)btn.textContent='🏠 وضع المنزل: '+(G.homeMode?'تشغيل ✅':'إيقاف');
 });
+
+/* ═══════════════════════════════════════════════════════════════
+   ⚔️  SOLO LEVELING — ADVANCED SYSTEM FEATURES  (4 modules)
+   1. Rank System + Boss Battles
+   2. Live Voice Coach (countdown + cues)
+   3. Weekly Mission Report (shareable card)
+   4. AI Pattern Analysis
+   كل ده JS مضاف — مبني على الأنظمة الموجودة (XP/streak/SCI/Groq/voice)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────
+   [1] RANK SYSTEM + BOSS BATTLES
+   ─────────────────────────────────────────────── */
+const SL_RANKS = [
+  { id:'E', name:'Rank E',  title:'صياد مبتدئ',   color:'#9ca3af', glow:'rgba(156,163,175,.5)', min:0 },
+  { id:'D', name:'Rank D',  title:'صياد',          color:'#34d399', glow:'rgba(52,211,153,.5)',  min:8 },
+  { id:'C', name:'Rank C',  title:'صياد ماهر',     color:'#60a5fa', glow:'rgba(96,165,250,.5)',  min:20 },
+  { id:'B', name:'Rank B',  title:'صياد نخبة',     color:'#a78bfa', glow:'rgba(167,139,250,.6)', min:40 },
+  { id:'A', name:'Rank A',  title:'صياد رفيع',     color:'#fbbf24', glow:'rgba(251,191,36,.6)',  min:70 },
+  { id:'S', name:'Rank S',  title:'صياد الظل',     color:'#f472b6', glow:'rgba(244,114,182,.7)', min:110 },
+];
+
+// نقاط الرتبة = إنجازات حقيقية (مش وقت): جلسات + PRs + streak + volume gates
+function calcRankPoints(){
+  const sessions = (G.ses||[]).length;
+  // PRs: عدّ أعلى وزن لكل تمرين مرّ في أكتر من جلسة وزاد
+  let prCount = 0;
+  const bestByEx = {};
+  (G.ses||[]).forEach(s=>{
+    Object.entries(s.exs||{}).forEach(([id,e])=>{
+      const w = e.sets?.length ? Math.max(...e.sets.map(t=>t.w||0)) : (e.w||0);
+      if(w>0){ if(bestByEx[id]===undefined){bestByEx[id]=w;} else if(w>bestByEx[id]){prCount++;bestByEx[id]=w;} }
+    });
+  });
+  const streakBonus = Math.floor((G.streak||0)/7) * 2;     // كل أسبوع streak = نقطتين
+  const xpBonus = Math.floor((G.xp||0)/1000);              // كل 1000 XP = نقطة
+  const pts = sessions*1 + prCount*2 + streakBonus + xpBonus;
+  return { pts, sessions, prCount, streakBonus, xpBonus };
+}
+function getCurrentRank(pts){
+  let r = SL_RANKS[0];
+  for(const rk of SL_RANKS){ if(pts >= rk.min) r = rk; }
+  return r;
+}
+function getNextRank(pts){
+  return SL_RANKS.find(rk => rk.min > pts) || null;
+}
+
+// Boss Battle = هدف الحجم الأسبوعي. تكمّله = تهزم البوس
+function getWeeklyBoss(){
+  const wv = (typeof SCI!=='undefined' && SCI.weeklyVolume) ? SCI.weeklyVolume() : 0;
+  // الهدف يتكيّف: متوسط آخر 4 أسابيع + 5% (progressive)، بحد أدنى معقول
+  const target = Math.max(8000, Math.round((wv||5000) * 1.0 / 1000) * 1000) || 10000;
+  // نحسب الهدف من متوسط تاريخي لو متاح
+  let histTarget = 10000;
+  try{
+    const weeks = {};
+    (G.ses||[]).forEach(s=>{
+      const d = new Date(s.date); const wk = `${d.getFullYear()}-W${Math.ceil((((d-new Date(d.getFullYear(),0,1))/86400000)+1)/7)}`;
+      weeks[wk] = (weeks[wk]||0) + (SCI.sessionVolume?SCI.sessionVolume(s):0);
+    });
+    const vals = Object.values(weeks).filter(v=>v>0);
+    if(vals.length){ const avg = vals.reduce((a,b)=>a+b,0)/vals.length; histTarget = Math.max(8000, Math.round(avg*1.05/500)*500); }
+  }catch(e){}
+  const bossHP = histTarget;
+  const dmg = Math.min(wv, bossHP);
+  const pct = Math.min(100, Math.round(dmg/bossHP*100));
+  const bosses = [
+    {n:'بوّابة الظل',      icon:'🐺', rankReq:'E'},
+    {n:'فارس الجليد',      icon:'🛡️', rankReq:'C'},
+    {n:'ملك النمل',        icon:'🐜', rankReq:'B'},
+    {n:'تنين المنطقة',     icon:'🐉', rankReq:'A'},
+  ];
+  const rk = getCurrentRank(calcRankPoints().pts);
+  const idx = Math.min(bosses.length-1, SL_RANKS.findIndex(r=>r.id===rk.id));
+  const boss = bosses[Math.max(0,idx)];
+  return { boss, bossHP, dmg:Math.round(dmg), pct, defeated: pct>=100 };
+}
+
+function renderRankSystem(){
+  const el = document.getElementById('rankSystemArea'); if(!el) return;
+  const rp = calcRankPoints();
+  const rank = getCurrentRank(rp.pts);
+  const next = getNextRank(rp.pts);
+  const pctToNext = next ? Math.min(100, Math.round((rp.pts - rank.min)/(next.min - rank.min)*100)) : 100;
+  const boss = getWeeklyBoss();
+
+  el.innerHTML = `
+  <div class="card sl-rank-card" style="--rk-color:${rank.color};--rk-glow:${rank.glow}">
+    <div class="ct" style="display:flex;justify-content:space-between;align-items:center">⚔️ نظام الرتب
+      <span style="font-family:'Orbitron',monospace;font-size:.6em;color:rgba(120,195,255,.7);letter-spacing:.15em">[ HUNTER · RANK ]</span>
+    </div>
+    <div style="text-align:center;padding:20px 10px">
+      <div class="sl-rank-emblem" style="border-color:${rank.color};box-shadow:0 0 30px ${rank.glow},inset 0 0 20px ${rank.glow}">
+        <div style="font-family:'Orbitron',monospace;font-size:3.4em;font-weight:900;color:${rank.color};text-shadow:0 0 20px ${rank.glow};line-height:1">${rank.id}</div>
+      </div>
+      <div style="font-family:'Orbitron','Cairo',sans-serif;font-size:1.3em;font-weight:900;color:${rank.color};margin-top:14px;text-shadow:0 0 14px ${rank.glow}">${rank.name}</div>
+      <div style="font-size:.82em;color:var(--tx2);margin-top:2px">${rank.title}</div>
+      <div style="font-family:'Orbitron',monospace;font-size:.74em;color:rgba(120,195,255,.75);margin-top:8px">${rp.pts} RANK POINTS</div>
+      ${next ? `
+      <div style="margin-top:14px">
+        <div style="display:flex;justify-content:space-between;font-size:.66em;color:var(--tx3);margin-bottom:4px;font-family:'Orbitron',monospace">
+          <span>${rank.id}</span><span>${next.min - rp.pts} نقطة لـ ${next.id}</span><span>${next.id}</span>
+        </div>
+        <div style="background:rgba(8,20,40,.8);border:1px solid rgba(91,184,255,.2);border-radius:1px;height:10px;overflow:hidden">
+          <div style="width:${pctToNext}%;height:100%;background:linear-gradient(90deg,${rank.color},${next.color});box-shadow:0 0 12px ${rank.glow};transition:width 1s"></div>
+        </div>
+      </div>` : `<div style="margin-top:12px;color:#f472b6;font-weight:800;font-family:'Orbitron','Cairo'">👑 أعلى رتبة — صياد الظل!</div>`}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 4px 8px">
+      <div class="sl-rank-stat"><div class="v">${rp.sessions}</div><div class="l">جلسات</div></div>
+      <div class="sl-rank-stat"><div class="v" style="color:var(--wn)">${rp.prCount}</div><div class="l">🏆 PRs</div></div>
+      <div class="sl-rank-stat"><div class="v" style="color:#34d399">${G.streak||0}</div><div class="l">🔥 streak</div></div>
+    </div>
+  </div>
+
+  <div class="card sl-boss-card">
+    <div class="ct" style="display:flex;justify-content:space-between;align-items:center">${boss.boss.icon} معركة البوس الأسبوعية
+      <span style="font-family:'Orbitron',monospace;font-size:.58em;color:rgba(244,114,182,.8);letter-spacing:.12em">[ WEEKLY · RAID ]</span>
+    </div>
+    <div style="text-align:center;padding:14px 8px">
+      <div style="font-size:2.6em;filter:drop-shadow(0 0 12px rgba(244,114,182,.5))">${boss.boss.icon}</div>
+      <div style="font-family:'Orbitron','Cairo',sans-serif;font-size:1.1em;font-weight:900;color:${boss.defeated?'#34d399':'#f472b6'};margin-top:6px">${boss.boss.n}</div>
+      <div style="font-family:'Orbitron',monospace;font-size:.7em;color:var(--tx3);margin-top:8px">BOSS HP</div>
+      <div style="background:rgba(40,10,20,.6);border:1px solid rgba(244,114,182,.3);border-radius:1px;height:16px;overflow:hidden;margin-top:4px;position:relative">
+        <div style="width:${boss.pct}%;height:100%;background:linear-gradient(90deg,#f472b6,#fb7185);box-shadow:0 0 14px rgba(244,114,182,.6);transition:width 1.2s"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:.66em;font-weight:900;color:#fff;text-shadow:0 0 4px #000">${boss.dmg.toLocaleString()} / ${boss.bossHP.toLocaleString()}</div>
+      </div>
+      <div style="margin-top:10px;font-size:.82em;font-weight:800;color:${boss.defeated?'#34d399':'var(--tx2)'}">
+        ${boss.defeated ? '✅ تم هزيمة البوس! +XP الأسبوع' : `⚔️ ${boss.pct}% — استمر في رفع الحجم لهزيمته`}
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ct">🗺️ مسار الرتب</div>
+    <div style="display:flex;flex-direction:column;gap:6px;padding:4px">
+      ${SL_RANKS.map(rk=>{
+        const unlocked = rp.pts >= rk.min;
+        const isCur = rk.id === rank.id;
+        return `<div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:2px;background:${isCur?'rgba(91,184,255,.1)':unlocked?'rgba(255,255,255,.04)':'rgba(255,255,255,.02)'};border:1px solid ${isCur?rk.color:unlocked?'rgba(91,184,255,.12)':'rgba(255,255,255,.05)'};opacity:${unlocked?1:.4}">
+          <div style="font-family:'Orbitron',monospace;font-size:1.3em;font-weight:900;color:${rk.color};width:30px;text-align:center;${unlocked?`text-shadow:0 0 10px ${rk.glow}`:''}">${rk.id}</div>
+          <div style="flex:1"><div style="font-weight:800;font-size:.84em;color:${unlocked?rk.color:'var(--tx3)'}">${rk.name}</div><div style="font-size:.68em;color:var(--tx3)">${rk.title}</div></div>
+          <div style="font-family:'Orbitron',monospace;font-size:.66em;color:var(--tx3)">${unlocked?(isCur?'الحالية':'✓'):rk.min+' pts'}</div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div style="margin-top:8px;font-size:.66em;color:var(--tx3);text-align:center;line-height:1.7">نقاط الرتبة = جلسة (1) · PR (2) · كل أسبوع streak (2) · كل 1000 XP (1)</div>
+  </div>`;
+}
+
+/* ───────────────────────────────────────────────
+   [2] LIVE VOICE COACH (countdown + cues)
+   يستخدم window.speak الموجود + يربط بتايمر الراحة
+   ─────────────────────────────────────────────── */
+window._voiceLiveEnabled = false;
+window._lastSpokenSec = -1;
+
+function toggleVoiceLive(){
+  if(!('speechSynthesis' in window)){ toast('المتصفح لا يدعم الصوت','e'); return; }
+  window._voiceLiveEnabled = !window._voiceLiveEnabled;
+  // فعّل الـ TTS الأساسي تلقائياً لو مش مفعّل
+  if(window._voiceLiveEnabled && typeof window._forceTTSOn==='function') window._forceTTSOn();
+  const btn = document.getElementById('voiceLiveBtn');
+  if(btn){
+    btn.textContent = window._voiceLiveEnabled ? '🎙️ المدرب الصوتي: مفعّل' : '🎙️ المدرب الصوتي: متوقف';
+    btn.style.background = window._voiceLiveEnabled ? 'linear-gradient(135deg,rgba(91,184,255,.3),rgba(10,80,150,.25))' : 'rgba(91,184,255,.08)';
+  }
+  const mini = document.getElementById('voiceLiveMini');
+  if(mini){ mini.style.background = window._voiceLiveEnabled ? 'rgba(91,184,255,.35)' : 'rgba(91,184,255,.1)'; }
+  if(window._voiceLiveEnabled){
+    toast('🎙️ المدرب الصوتي مفعّل — هيعد الراحة ويشجّعك','s');
+    if(typeof window.speak==='function') window.speak('المدرب الصوتي جاهز يا شهاب. يلا نكسّر الأرقام!');
+  } else {
+    toast('🎙️ المدرب الصوتي متوقف','i');
+    if('speechSynthesis' in window) speechSynthesis.cancel();
+  }
+}
+
+// نداء أثناء عدّ الراحة — يتنده من tick التايمر
+function _voiceTimerCue(rem){
+  if(!window._voiceLiveEnabled || typeof window.speak!=='function') return;
+  if(rem === window._lastSpokenSec) return;
+  window._lastSpokenSec = rem;
+  // عدّ تنازلي صوتي في آخر 3 ثواني + نداء عند 10
+  if(rem === 10){ window.speak('عشرة'); }
+  else if(rem === 3){ window.speak('ثلاثة'); }
+  else if(rem === 2){ window.speak('اثنان'); }
+  else if(rem === 1){ window.speak('واحد'); }
+}
+function _voiceRestDone(){
+  if(!window._voiceLiveEnabled || typeof window.speak!=='function') return;
+  const cues = ['يلا السيت اللي جاي!','وقت الراحة خلص. قوم!','جاهز؟ السيت الجديد يلا!','يلا بينا نكمّل!'];
+  window.speak(cues[Math.floor(Math.random()*cues.length)]);
+}
+
+/* ───────────────────────────────────────────────
+   [3] WEEKLY MISSION REPORT (shareable card)
+   ─────────────────────────────────────────────── */
+function getWeekStats(){
+  const now = new Date();
+  const weekAgo = new Date(now.getTime() - 7*86400000);
+  const weekSes = (G.ses||[]).filter(s => new Date(s.date) >= weekAgo);
+  let totalVol = 0, totalSets = 0, prs = 0, totalRPE = 0, rpeCount = 0;
+  const bestByEx = {}, allBestByEx = {};
+  (G.ses||[]).forEach(s=>{
+    const isThisWeek = new Date(s.date) >= weekAgo;
+    Object.entries(s.exs||{}).forEach(([id,e])=>{
+      const w = e.sets?.length ? Math.max(...e.sets.map(t=>t.w||0)) : (e.w||0);
+      if(w>0){
+        if(allBestByEx[id]===undefined) allBestByEx[id]=w;
+        else { if(isThisWeek && w>allBestByEx[id]) prs++; if(w>allBestByEx[id]) allBestByEx[id]=w; }
+      }
+    });
+  });
+  weekSes.forEach(s=>{
+    totalVol += (typeof SCI!=='undefined' && SCI.sessionVolume) ? SCI.sessionVolume(s) : 0;
+    Object.values(s.exs||{}).forEach(e=>{
+      (e.sets||[]).forEach(t=>{ if(t.w>0){totalSets++; if(t.rpe>0){totalRPE+=t.rpe;rpeCount++;}} });
+    });
+  });
+  return {
+    sessions: weekSes.length,
+    totalVol: Math.round(totalVol),
+    totalSets,
+    prs,
+    avgRPE: rpeCount ? Math.round(totalRPE/rpeCount*10)/10 : 0,
+    streak: G.streak||0,
+  };
+}
+
+function renderMissionReport(){
+  const el = document.getElementById('missionReportArea'); if(!el) return;
+  const w = getWeekStats();
+  const rank = getCurrentRank(calcRankPoints().pts);
+  const name = G.profile?.name || (typeof SHEHAB!=='undefined'?SHEHAB.name:'Hunter');
+  const dateStr = new Date().toLocaleDateString('ar-EG',{day:'numeric',month:'long',year:'numeric'});
+  const grade = w.totalVol>15000?'S':w.totalVol>10000?'A':w.totalVol>6000?'B':w.totalVol>3000?'C':'D';
+  const gradeColor = {S:'#f472b6',A:'#fbbf24',B:'#a78bfa',C:'#60a5fa',D:'#34d399'}[grade];
+
+  el.innerHTML = `
+  <div class="card">
+    <div class="ct" style="display:flex;justify-content:space-between;align-items:center">📜 تقرير المهمة الأسبوعي
+      <span style="font-family:'Orbitron',monospace;font-size:.58em;color:rgba(120,195,255,.7);letter-spacing:.12em">[ MISSION · REPORT ]</span>
+    </div>
+    <div id="missionReportCard" class="sl-report-card">
+      <div class="sl-report-inner">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid rgba(91,184,255,.2);padding-bottom:10px;margin-bottom:12px">
+          <div>
+            <div style="font-family:'Orbitron',monospace;font-size:.6em;color:rgba(120,195,255,.7);letter-spacing:.2em">SOLO GYM SYSTEM</div>
+            <div style="font-family:'Orbitron','Cairo',sans-serif;font-size:1.15em;font-weight:900;color:#b8e6ff;text-shadow:0 0 12px rgba(91,184,255,.4);margin-top:2px">تقرير المهمة</div>
+            <div style="font-size:.64em;color:var(--tx3);margin-top:2px">${dateStr}</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-family:'Orbitron',monospace;font-size:.56em;color:var(--tx3)">GRADE</div>
+            <div style="font-family:'Orbitron',monospace;font-size:2.4em;font-weight:900;color:${gradeColor};text-shadow:0 0 16px ${gradeColor};line-height:1">${grade}</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <div style="font-family:'Orbitron',monospace;font-size:1.6em;font-weight:900;color:${rank.color};text-shadow:0 0 12px ${rank.glow};border:2px solid ${rank.color};border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center">${rank.id}</div>
+          <div>
+            <div style="font-weight:900;font-size:1em;color:#dcf2ff">${name}</div>
+            <div style="font-size:.68em;color:var(--tx2)">${rank.title}</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="sl-report-stat"><div class="ic">🗓️</div><div class="v">${w.sessions}</div><div class="l">جلسات الأسبوع</div></div>
+          <div class="sl-report-stat"><div class="ic">🏋️</div><div class="v">${w.totalVol.toLocaleString()}</div><div class="l">حجم كلي (كجم)</div></div>
+          <div class="sl-report-stat"><div class="ic">📊</div><div class="v">${w.totalSets}</div><div class="l">إجمالي السيتات</div></div>
+          <div class="sl-report-stat"><div class="ic">🏆</div><div class="v" style="color:#fbbf24">${w.prs}</div><div class="l">أرقام قياسية</div></div>
+          <div class="sl-report-stat"><div class="ic">⚡</div><div class="v">${w.avgRPE||'—'}</div><div class="l">متوسط RPE</div></div>
+          <div class="sl-report-stat"><div class="ic">🔥</div><div class="v" style="color:#34d399">${w.streak}</div><div class="l">سلسلة الأيام</div></div>
+        </div>
+        <div style="margin-top:12px;text-align:center;font-family:'Orbitron',monospace;font-size:.54em;color:rgba(120,195,255,.5);letter-spacing:.15em;border-top:1px solid rgba(91,184,255,.15);padding-top:8px">⚔️ ARISE · KEEP LEVELING UP ⚔️</div>
+      </div>
+    </div>
+    <button class="btn btn-p btn-full" style="margin-top:12px" onclick="shareMissionReport()">📤 حفظ ومشاركة كصورة</button>
+  </div>`;
+}
+
+async function shareMissionReport(){
+  const card = document.getElementById('missionReportCard');
+  if(!card){ toast('افتح التقرير أولاً','w'); return; }
+  toast('⏳ جاري إنشاء الصورة...','i');
+  try{
+    if(typeof html2canvas==='undefined'){
+      await new Promise((res,rej)=>{
+        const s=document.createElement('script');
+        s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+        s.onload=res; s.onerror=rej; document.head.appendChild(s);
+      });
+    }
+    const canvas = await html2canvas(card, {backgroundColor:'#0a1628', scale:2, logging:false});
+    canvas.toBlob(async (blob)=>{
+      if(!blob){ toast('فشل إنشاء الصورة','e'); return; }
+      const file = new File([blob], 'mission-report.png', {type:'image/png'});
+      if(navigator.canShare && navigator.canShare({files:[file]})){
+        try{ await navigator.share({files:[file], title:'تقرير المهمة'}); toast('✅ تم','s'); return; }catch(e){ if(e.name==='AbortError') return; }
+      }
+      // fallback: download
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download='mission-report.png'; a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),3000);
+      toast('✅ تم حفظ الصورة','s');
+    }, 'image/png');
+  }catch(e){ toast('❌ '+(e.message||'خطأ'),'e'); }
+}
+
+/* ───────────────────────────────────────────────
+   [4] AI PATTERN ANALYSIS
+   تحليل أنماط من التاريخ كله عبر Groq
+   ─────────────────────────────────────────────── */
+function _buildPatternData(){
+  const ses = G.ses||[];
+  if(!ses.length) return null;
+  // أداء حسب يوم الأسبوع
+  const dayPerf = {}; // 0..6 => {vol, count}
+  const dayNames = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  ses.forEach(s=>{
+    const d = new Date(s.date).getDay();
+    const v = (typeof SCI!=='undefined'&&SCI.sessionVolume)?SCI.sessionVolume(s):0;
+    if(!dayPerf[d]) dayPerf[d]={vol:0,count:0};
+    dayPerf[d].vol += v; dayPerf[d].count++;
+  });
+  const dayAvg = Object.entries(dayPerf).map(([d,o])=>({day:dayNames[d], avg:Math.round(o.vol/o.count), count:o.count})).sort((a,b)=>b.avg-a.avg);
+  // علاقة المزاج بالأداء
+  const moodPerf = {};
+  ses.forEach(s=>{ if(s.mood){ const v=(SCI.sessionVolume?SCI.sessionVolume(s):0); if(!moodPerf[s.mood])moodPerf[s.mood]={vol:0,count:0}; moodPerf[s.mood].vol+=v; moodPerf[s.mood].count++; }});
+  // متوسط مدة الجلسة
+  const durs = ses.filter(s=>s.duration>0).map(s=>s.duration);
+  const avgDur = durs.length ? Math.round(durs.reduce((a,b)=>a+b,0)/durs.length) : 0;
+  // اتجاه الحجم آخر 4 أسابيع
+  const recent = ses.slice(-12);
+  return { totalSessions:ses.length, dayAvg:dayAvg.slice(0,7), avgDur, moodPerf,
+    fatigueAvg: Math.round(ses.filter(s=>s.fatigueScore).reduce((a,s)=>a+s.fatigueScore,0)/Math.max(1,ses.filter(s=>s.fatigueScore).length)) };
+}
+
+function renderAIInsightsPanel(){
+  const el = document.getElementById('aiInsightsArea'); if(!el) return;
+  const data = _buildPatternData();
+  if(!data){
+    el.innerHTML = `<div class="card"><div class="ct">🧠 رؤى الذكاء الاصطناعي</div><div style="padding:20px;text-align:center;color:var(--tx2);font-size:.85em">سجّل بعض الجلسات أولاً عشان النظام يقدر يحلل أنماطك 💪</div></div>`;
+    return;
+  }
+  // رؤى محلية فورية (بدون AI) — تشتغل دايماً
+  const bestDay = data.dayAvg[0];
+  el.innerHTML = `
+  <div class="card">
+    <div class="ct" style="display:flex;justify-content:space-between;align-items:center">🧠 رؤى الأنماط
+      <span style="font-family:'Orbitron',monospace;font-size:.58em;color:rgba(120,195,255,.7);letter-spacing:.12em">[ DATA · INSIGHTS ]</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;padding:4px">
+      ${bestDay?`<div class="sl-insight"><span class="i">📅</span><div><b>أقوى أيامك:</b> ${bestDay.day} — متوسط حجم ${bestDay.avg.toLocaleString()} كجم على ${bestDay.count} جلسة</div></div>`:''}
+      <div class="sl-insight"><span class="i">⏱️</span><div><b>متوسط مدة الجلسة:</b> ${data.avgDur||'—'} دقيقة</div></div>
+      <div class="sl-insight"><span class="i">📊</span><div><b>إجمالي الجلسات المسجّلة:</b> ${data.totalSessions}</div></div>
+      ${data.fatigueAvg?`<div class="sl-insight"><span class="i">🔥</span><div><b>متوسط مؤشر الإجهاد:</b> ${data.fatigueAvg}</div></div>`:''}
+    </div>
+    <div style="margin-top:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:6px;padding:4px">
+      ${data.dayAvg.map(d=>`<div style="text-align:center;background:rgba(91,184,255,.06);border:1px solid rgba(91,184,255,.12);border-radius:2px;padding:8px 4px"><div style="font-size:.62em;color:var(--tx3)">${d.day}</div><div style="font-family:'Orbitron',monospace;font-weight:800;font-size:.82em;color:#b8e6ff">${(d.avg/1000).toFixed(1)}k</div></div>`).join('')}
+    </div>
+  </div>
+  <div class="card">
+    <div class="ct">🤖 تحليل عميق بالذكاء الاصطناعي</div>
+    <div style="font-size:.78em;color:var(--tx2);padding:6px 4px 12px">يحلل النظام تاريخك كله ويطلّع رؤى مخصصة: أنماط القوة، علاقة النوم/المزاج بالأداء، وتوصيات.</div>
+    <button class="btn btn-ai btn-full" id="aiInsightBtn" onclick="runAIPatternAnalysis(this)" style="font-family:monospace,'Cairo';letter-spacing:.03em">⚡ شغّل التحليل العميق</button>
+    <div id="aiInsightResult" style="margin-top:12px"></div>
+  </div>`;
+}
+
+async function runAIPatternAnalysis(btn){
+  if(typeof callGroq!=='function'){ toast('الذكاء الاصطناعي غير متاح','e'); return; }
+  if(!G.aiKey){ toast('أضف Groq API Key في الإعدادات','w'); setTimeout(()=>go('tools'),1200); return; }
+  const data = _buildPatternData();
+  if(!data){ toast('لا توجد بيانات كافية','w'); return; }
+  const o = btn.innerHTML; btn.innerHTML='<span class="loading"></span> جاري التحليل...'; btn.disabled=true;
+  const dayStr = data.dayAvg.map(d=>`${d.day}: ${d.avg}كجم (${d.count}جلسة)`).join(' · ');
+  const msg = `حلّل أنماط تدريبي وأعطني 3-4 رؤى عملية موجزة (كل واحدة سطر واحد):
+- إجمالي الجلسات: ${data.totalSessions}
+- متوسط المدة: ${data.avgDur} دقيقة
+- الأداء حسب اليوم: ${dayStr}
+- متوسط الإجهاد: ${data.fatigueAvg}
+ركّز على: أفضل/أسوأ أيام، اتساق، توصية لتحسين النتائج. عربي مصري، موجز جداً، نقاط.`;
+  try{
+    const r = await callGroq([{role:'user',content:msg}], 500, 0.6, 'training');
+    const res = document.getElementById('aiInsightResult');
+    if(r && res){
+      res.innerHTML = `<div style="background:rgba(91,184,255,.07);border:1px solid rgba(91,184,255,.18);border-radius:3px;padding:14px;font-size:.84em;line-height:1.8;color:#dcf2ff;white-space:pre-wrap">${r.replace(/</g,'&lt;')}</div>`;
+    }
+  }catch(e){ toast('❌ '+e.message,'e'); }
+  btn.innerHTML=o; btn.disabled=false;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   🎯  LAYOUT ORGANIZATION & TODAY-FOCUS  (CSS-aware JS module)
+   - عرض تمرين اليوم فقط حسب الجدول (مع تبديل لكل الأيام)
+   - أقسام قابلة للطي (show/hide) مع حفظ الحالة
+   - وضع مدمج (Compact Mode)
+   كله مبني على الأنظمة الموجودة — صفر كسر
+   ═══════════════════════════════════════════════════════════════ */
+
+// ── [A] خريطة جدول اليوم → مفتاح اليوم الفعلي ──
+function _scheduleDayKey(){
+  const sc = getTodaySchedule();
+  if(!sc || sc.type!=='train') return null;
+  const label = (sc.label||'').toLowerCase();
+  // مطابقة مباشرة بالاسم الإنجليزي
+  const map = [
+    ['upper a','upperA'],['upper b','upperB'],
+    ['lower a','lowerA'],['lower b','lowerB'],
+  ];
+  for(const [needle,key] of map){ if(label.includes(needle) && G.days[key]) return key; }
+  // طابق أي يوم اسمه موجود في الـ label
+  const keys = (typeof dayOrder!=='undefined'?dayOrder:Object.keys(G.days||{}));
+  for(const k of keys){
+    const dn = (G.days[k]?.name||'').toLowerCase();
+    if(dn && dn.length>2 && label.includes(dn)) return k;
+  }
+  // طابق بالكلمات المفتاحية (upper/lower + a/b)
+  const isUpper = label.includes('upper')||label.includes('علوي')||label.includes('بار')||label.includes('صدر');
+  const isLower = label.includes('lower')||label.includes('سفلي')||label.includes('رجل')||label.includes('كوادز');
+  const isB = /\bb\b/.test(label)||label.includes(' b');
+  if(isUpper && G.days[isB?'upperB':'upperA']) return isB?'upperB':'upperA';
+  if(isLower && G.days[isB?'lowerB':'lowerA']) return isB?'lowerB':'lowerA';
+  // آخر حل: أول يوم تدريب متاح
+  return keys.find(k=>G.days[k]) || null;
+}
+
+// ── [B] حالة العرض: تمرين اليوم فقط أو كل الأيام ──
+function _initTodayFocus(){
+  if(typeof G.uiShowAllDays==='undefined') G.uiShowAllDays = false;
+}
+
+// ابدأ تمرين اليوم — موثوق، يختار يوم اليوم ويذهب للتمارين
+function startTodayWorkout(){
+  const tk = _scheduleDayKey();
+  if(!tk){ if(typeof toast==='function') toast('اليوم يوم راحة 🛌 — اختر يوم من القائمة لو حابب تتمرن','i'); return; }
+  if(curDay!==tk){ selDay(tk); }
+  else {
+    // already selected — just scroll to exercises
+    setTimeout(()=>{ const w=document.getElementById('woArea'); if(w)w.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+  }
+}
+
+// تطبيق وضع التركيز على اليوم — لا يخفي شيء، فقط يبرز يوم اليوم في القائمة
+function applyTodayFocus(){
+  _initTodayFocus();
+  const dayList = document.getElementById('dayList');
+  const dungeonDivider = document.querySelector('.sl-sw-divider');
+  // القائمة تظهر دايماً (عشان مفيش حاجة تختفي وتلخبط)
+  if(dayList) dayList.style.display='';
+  if(dungeonDivider) dungeonDivider.style.display='';
+  // شيل أي زرار توجيل قديم (الترتيب الجديد مش محتاجه)
+  const oldHost = document.getElementById('dayToggleHost');
+  if(oldHost) oldHost.remove();
+}
+
+function toggleShowAllDays(){ /* deprecated — kept for compatibility */ applyTodayFocus(); }
+function _renderDayToggleBtn(){ /* deprecated */ }
+
+// ── [C] أقسام قابلة للطي ──
+// نخزن حالة الطي في G.uiCollapsed = { sectionId: true/false }
+function _collapsedState(){ if(!G.uiCollapsed) G.uiCollapsed={}; return G.uiCollapsed; }
+
+function toggleCollapse(sectionId){
+  const st = _collapsedState();
+  st[sectionId] = !st[sectionId];
+  saveD();
+  _applyCollapse(sectionId);
+}
+
+function _applyCollapse(sectionId){
+  const body = document.getElementById(sectionId);
+  const chevron = document.getElementById(sectionId+'_chev');
+  if(!body) return;
+  const collapsed = _collapsedState()[sectionId];
+  if(collapsed){
+    body.style.maxHeight='0';
+    body.style.opacity='0';
+    body.style.overflow='hidden';
+    body.style.paddingTop='0';
+    body.style.paddingBottom='0';
+    body.style.marginTop='0';
+    body.style.marginBottom='0';
+    if(chevron) chevron.style.transform='rotate(-90deg)';
+  } else {
+    body.style.maxHeight='';
+    body.style.opacity='';
+    body.style.overflow='';
+    body.style.paddingTop='';
+    body.style.paddingBottom='';
+    body.style.marginTop='';
+    body.style.marginBottom='';
+    if(chevron) chevron.style.transform='';
+  }
+}
+
+// تحويل كارت لقابل للطي: نلفّ المحتوى ونضيف رأس قابل للضغط
+// sectionId فريد · headerHTML نص الرأس · يبحث عن العنصر بالـ targetId ويطوّيه
+function _makeCollapsible(targetId, sectionKey, titleText){
+  const target = document.getElementById(targetId);
+  if(!target || target.dataset.collapsibleDone) return;
+  target.dataset.collapsibleDone='1';
+  target.id = sectionKey+'_body'; // نعيد التسمية للجسم
+  // أنشئ رأس
+  const header = document.createElement('div');
+  header.className = 'sl-collapse-head';
+  header.onclick = ()=>toggleCollapse(sectionKey+'_body');
+  header.innerHTML = `<span class="sl-collapse-chev" id="${sectionKey}_body_chev">▾</span><span class="sl-collapse-title">${titleText}</span>`;
+  target.parentNode.insertBefore(header, target);
+  // طبّق الحالة المحفوظة
+  _applyCollapse(sectionKey+'_body');
+}
+
+// ── [D] وضع مدمج (Compact) — يطوي كل الأقسام الثانوية دفعة واحدة ──
+function toggleCompactMode(){
+  if(typeof G.uiCompact==='undefined') G.uiCompact=false;
+  G.uiCompact = !G.uiCompact;
+  const st = _collapsedState();
+  // الأقسام الثانوية اللي تتطوي في الوضع المدمج
+  const secondary = ['tmIntelBody']; // سيُضاف لها المزيد عند توفرها
+  document.querySelectorAll('[data-secondary="1"]').forEach(el=>{ secondary.push(el.id); });
+  secondary.forEach(id=>{ if(document.getElementById(id)){ st[id]=G.uiCompact; _applyCollapse(id); } });
+  saveD();
+  const btn = document.getElementById('compactModeBtn');
+  if(btn) btn.textContent = G.uiCompact?'📖 وضع موسّع':'📑 وضع مدمج';
+  if(typeof toast==='function') toast(G.uiCompact?'📑 وضع مدمج — أقل ازدحام':'📖 وضع موسّع','i');
+}
+
+// ── [E] تطبيق كل التحسينات بعد رسم الصفحة ──
+function applyLayoutOrganization(){
+  try{
+    _initTodayFocus();
+    applyTodayFocus();
+    // أول مرة فقط: اطوِ تفاصيل الحالة عشان الصفحة تفتح نضيفة
+    const st = _collapsedState();
+    if(typeof G.uiStatusDefaultSet==='undefined'){
+      st['statusDetailsBody'] = true;   // مطوي افتراضياً
+      G.uiStatusDefaultSet = true;
+      if(typeof saveD==='function') saveD();
+    }
+    // استرجاع حالات الطي المحفوظة
+    Object.keys(st).forEach(id=>{ if(document.getElementById(id)) _applyCollapse(id); });
+  }catch(e){ console.warn('layout org:',e); }
+}
+
+// شغّلها بعد التحميل + بعد رسم الأيام
+window.addEventListener('load', ()=>{ setTimeout(applyLayoutOrganization, 400); });
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ⚡  SUNG JIN-WOO SYSTEM — AUTHENTIC NOTIFICATION ENGINE
+   - [ NOTIFICATION ] popups مع صوت ping
+   - System boot message
+   - PENALTY / WARNING alerts
+   كله JS مضاف — صفر كسر للموجود
+   ═══════════════════════════════════════════════════════════════ */
+
+// ── صوت الـ System ping (Web Audio — بدون ملفات) ──
+let _sysAudioCtx = null;
+function _playSystemPing(type){
+  try{
+    if(G && G.sysSoundOff) return;
+    if(!_sysAudioCtx){ _sysAudioCtx = new (window.AudioContext||window.webkitAudioContext)(); }
+    const ctx = _sysAudioCtx;
+    if(ctx.state==='suspended') ctx.resume();
+    const now = ctx.currentTime;
+    // نغمة بلورية مزدوجة (شبه صوت النظام)
+    const freqs = type==='warning' ? [330,247] : type==='levelup' ? [523,784,1047] : [784,1047];
+    freqs.forEach((f,i)=>{
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(f, now + i*0.08);
+      gain.gain.setValueAtTime(0, now + i*0.08);
+      gain.gain.linearRampToValueAtTime(0.18, now + i*0.08 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i*0.08 + 0.5);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(now + i*0.08); osc.stop(now + i*0.08 + 0.5);
+    });
+  }catch(e){}
+}
+
+// ── النافذة المنبثقة الأيقونية [ NOTIFICATION ] ──
+// type: 'notif' | 'warning' | 'levelup' | 'quest'
+function systemPopup(opts){
+  const o = Object.assign({title:'',lines:[],type:'notif',sound:true,duration:0,sysLabel:'[ SYSTEM ]'}, opts||{});
+  // امنع التكدّس
+  document.querySelectorAll('.sj-popup-overlay').forEach(e=>e.remove());
+
+  const overlay = document.createElement('div');
+  overlay.className = 'sj-popup-overlay sj-type-'+o.type;
+  const color = o.type==='warning' ? '#ff5470' : o.type==='levelup' ? '#fbbf24' : '#5bb8ff';
+  const glow = o.type==='warning' ? 'rgba(255,84,112,.6)' : o.type==='levelup' ? 'rgba(251,191,36,.6)' : 'rgba(91,184,255,.6)';
+  const icon = o.icon || (o.type==='warning'?'⚠':o.type==='levelup'?'⬆':o.type==='quest'?'⚔':'❗');
+
+  overlay.innerHTML = `
+    <div class="sj-popup" style="--sj-c:${color};--sj-g:${glow}">
+      <div class="sj-popup-scan"></div>
+      <div class="sj-popup-corner tl"></div><div class="sj-popup-corner tr"></div>
+      <div class="sj-popup-corner bl"></div><div class="sj-popup-corner br"></div>
+      <div class="sj-popup-sys">${o.sysLabel}</div>
+      <div class="sj-popup-icon">${icon}</div>
+      ${o.title?`<div class="sj-popup-title">${o.title}</div>`:''}
+      <div class="sj-popup-lines">
+        ${o.lines.map(l=>`<div class="sj-popup-line">${l}</div>`).join('')}
+      </div>
+      ${o.cta?`<button class="sj-popup-cta" onclick="this.closest('.sj-popup-overlay').remove()">${o.cta}</button>`:'<div class="sj-popup-hint">اضغط للإغلاق</div>'}
+    </div>`;
+  overlay.onclick = (e)=>{ if(e.target===overlay || e.target.classList.contains('sj-popup-hint')) overlay.remove(); };
+  document.body.appendChild(overlay);
+
+  if(o.sound) _playSystemPing(o.type);
+  if(navigator.vibrate){ navigator.vibrate(o.type==='warning'?[40,30,40]:[30]); }
+  if(o.duration>0){ setTimeout(()=>overlay.remove(), o.duration); }
+  return overlay;
+}
+
+// ── رسالة بدء النظام (مرة واحدة كل جلسة فتح) ──
+function _systemBootMessage(){
+  if(window._sysBooted) return;
+  window._sysBooted = true;
+  const name = (typeof SHEHAB!=='undefined'?SHEHAB.name:'Hunter');
+  const hour = new Date().getHours();
+  const greet = hour<12?'صباح القوة':hour<18?'استعد للدنجن':'وقت الصيد';
+  // متأخر شوية عشان الصفحة تخلص تحميل
+  setTimeout(()=>{
+    systemPopup({
+      type:'notif',
+      sysLabel:'[ SYSTEM ]',
+      icon:'⚡',
+      title:`أهلاً، ${name}`,
+      lines:[`النظام جاهز. ${greet}.`, `<span style="opacity:.7;font-size:.88em">استمر في رفع مستواك أيها الصياد</span>`],
+      cta:'دخول',
+      sound:true
+    });
+  }, 900);
+}
+
+// ── ربط الإشعارات بالأحداث الموجودة (بدون كسر) ──
+(function _hookSystemEvents(){
+  // 1) عند بدء تمرين اليوم
+  if(typeof window.startTodayWorkout==='function'){
+    const _orig = window.startTodayWorkout;
+    window.startTodayWorkout = function(){
+      const tk = (typeof _scheduleDayKey==='function')?_scheduleDayKey():null;
+      const r = _orig.apply(this, arguments);
+      if(tk && G.days[tk]){
+        systemPopup({
+          type:'quest', icon:'⚔',
+          sysLabel:'[ DAILY · QUEST ]',
+          title:'دخلت الدنجن',
+          lines:[`${G.days[tk].name}`, `<span style="opacity:.75;font-size:.9em">${G.days[tk].muscles||''}</span>`, `الهدف: أكمل كل التمارين`],
+          duration:3200, sound:true
+        });
+      }
+      return r;
+    };
+  }
+
+  // 2) عند حفظ الجلسة (إكمال الكويست)
+  if(typeof window.saveSes==='function'){
+    const _origSave = window.saveSes;
+    window.saveSes = function(){
+      const before = (G.ses||[]).length;
+      const r = _origSave.apply(this, arguments);
+      const after = (G.ses||[]).length;
+      if(after>before){
+        const last = G.ses[G.ses.length-1];
+        let vol=0; try{ vol = (typeof SCI!=='undefined'&&SCI.sessionVolume)?SCI.sessionVolume(last):0; }catch(e){}
+        setTimeout(()=>{
+          systemPopup({
+            type:'levelup', icon:'✅',
+            sysLabel:'[ QUEST · COMPLETE ]',
+            title:'اكتملت المهمة',
+            lines:[`${last.dn||'تمرين'}`, vol?`الحجم: ${Math.round(vol).toLocaleString()} كجم`:'', `<span style="color:#fbbf24">+100 XP</span>`].filter(Boolean),
+            cta:'ممتاز', sound:true
+          });
+        }, 400);
+      }
+      return r;
+    };
+  }
+})();
+
+// تشغيل رسالة البدء
+window.addEventListener('load', ()=>{ setTimeout(_systemBootMessage, 600); });
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ⚡  THE SYSTEM — DAILY QUEST & FULL IMMERSION (Sung Jin-Woo mode)
+   - المهمة اليومية (Daily Quest) زي جين-وو + عدّاد + Penalty Zone
+   - النظام بيخاطبك كـ Player
+   كله JS مضاف — صفر كسر
+   ═══════════════════════════════════════════════════════════════ */
+
+// ── المهام اليومية الافتراضية (قابلة للتعديل) ──
+const SYS_DEFAULT_DAILY = [
+  { id:'pushups', icon:'💪', name:'تمرين ضغط', target:100, unit:'عدة' },
+  { id:'situps',  icon:'🔥', name:'تمرين بطن', target:100, unit:'عدة' },
+  { id:'squats',  icon:'🦵', name:'سكوات',     target:100, unit:'عدة' },
+  { id:'walk',    icon:'🏃', name:'مشي/جري',   target:5,   unit:'كم' },
+];
+
+function _todayStr(){ return new Date().toISOString().split('T')[0]; }
+
+function _getDailyQuest(){
+  if(!G.dailyQuest) G.dailyQuest = {};
+  const today = _todayStr();
+  // إعادة تعيين يومية
+  if(G.dailyQuest.date !== today){
+    // تحقق إن أمبارح اكتمل ولا لأ (للـ penalty)
+    const prevDone = G.dailyQuest.date && G.dailyQuest.tasks && G.dailyQuest.tasks.every(t=>t.progress>=t.target);
+    G.dailyQuest = {
+      date: today,
+      tasks: (G.dailyQuestTemplate||SYS_DEFAULT_DAILY).map(t=>({...t, progress:0})),
+      completed: false,
+      penaltyShown: false,
+      prevMissed: G.dailyQuest.date && !prevDone ? true : false
+    };
+    if(typeof saveD==='function') saveD();
+  }
+  return G.dailyQuest;
+}
+
+function _dailyAllDone(dq){ return dq.tasks.length>0 && dq.tasks.every(t=>t.progress>=t.target); }
+
+// ── عدّاد الوقت المتبقي لنهاية اليوم ──
+function _timeToMidnight(){
+  const now = new Date();
+  const mid = new Date(now); mid.setHours(24,0,0,0);
+  const ms = mid - now;
+  const h = Math.floor(ms/3600000);
+  const m = Math.floor((ms%3600000)/60000);
+  return { h, m, ms, str:`${h}:${String(m).padStart(2,'0')}` };
+}
+
+// ── رندر بطاقة المهمة اليومية ──
+function renderDailyQuest(){
+  const el = document.getElementById('dailyQuestArea'); if(!el) return;
+  const dq = _getDailyQuest();
+  const allDone = _dailyAllDone(dq);
+  const t = _timeToMidnight();
+  const urgent = t.h < 3 && !allDone;
+
+  el.innerHTML = `
+  <div class="card sys-dq-card ${allDone?'done':''} ${urgent?'urgent':''}">
+    <div class="sys-dq-scan"></div>
+    <div class="sys-dq-head">
+      <div>
+        <div class="sys-dq-sys">[ DAILY · QUEST ]</div>
+        <div class="sys-dq-title">${allDone?'✅ المهمة اكتملت':'⚡ المهمة اليومية'}</div>
+      </div>
+      <div class="sys-dq-timer ${urgent?'urgent':''}">
+        <div class="sys-dq-timer-lbl">الوقت المتبقي</div>
+        <div class="sys-dq-timer-val" id="sysDqTimer">${t.str}</div>
+      </div>
+    </div>
+    ${dq.prevMissed && !dq.penaltyShown ? `<div class="sys-dq-penalty-warn">⚠ لم تكمل مهمة الأمس — لا تدع ذلك يتكرر أيها الصياد</div>` : ''}
+    <div class="sys-dq-tasks">
+      ${dq.tasks.map((task,i)=>{
+        const pct = Math.min(100, Math.round(task.progress/task.target*100));
+        const done = task.progress>=task.target;
+        return `<div class="sys-dq-task ${done?'done':''}">
+          <div class="sys-dq-task-check" onclick="completeDailyTask('${task.id}')">${done?'✓':''}</div>
+          <div class="sys-dq-task-icon">${task.icon}</div>
+          <div class="sys-dq-task-body">
+            <div class="sys-dq-task-name">${task.name}</div>
+            <div class="sys-dq-task-bar"><div class="sys-dq-task-fill" style="width:${pct}%"></div></div>
+          </div>
+          <div class="sys-dq-task-count">
+            <input type="number" class="sys-dq-input" id="dqIn-${task.id}" value="${task.progress}" min="0" max="${task.target*2}" onchange="setDailyTask('${task.id}',this.value)" onclick="event.stopPropagation()">
+            <span class="sys-dq-task-target">/${task.target} ${task.unit}</span>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="sys-dq-footer">
+      ${allDone
+        ? `<div class="sys-dq-complete-msg">⚔️ أحسنت أيها الصياد. أنت أقوى من الأمس.</div>`
+        : `<div class="sys-dq-progress-txt">${dq.tasks.filter(t=>t.progress>=t.target).length}/${dq.tasks.length} مهام مكتملة</div>`}
+      <button class="sys-dq-edit-btn" onclick="editDailyQuest()" title="تعديل المهام">⚙️</button>
+    </div>
+  </div>`;
+  _startDqTimer();
+}
+
+let _dqTimerInterval = null;
+function _startDqTimer(){
+  if(_dqTimerInterval) clearInterval(_dqTimerInterval);
+  _dqTimerInterval = setInterval(()=>{
+    const el = document.getElementById('sysDqTimer');
+    if(!el){ clearInterval(_dqTimerInterval); return; }
+    const t = _timeToMidnight();
+    el.textContent = t.str;
+    // تحذير عند آخر ساعة
+    if(t.h===0 && t.m===59 && !_getDailyQuest().completed && !_getDailyQuest().penaltyShown){
+      _getDailyQuest().penaltyShown = true;
+      systemPopup({ type:'warning', icon:'⚠', sysLabel:'[ WARNING ]', title:'منطقة العقاب تقترب',
+        lines:['تبقّت ساعة واحدة لإكمال المهمة اليومية.','أكملها الآن أيها الصياد!'], cta:'سأكملها', sound:true });
+    }
+  }, 30000); // تحديث كل 30 ثانية
+}
+
+function completeDailyTask(taskId){
+  const dq = _getDailyQuest();
+  const task = dq.tasks.find(t=>t.id===taskId);
+  if(!task) return;
+  // toggle: لو مكتمل رجّعه صفر، غير كده كمّله للهدف
+  const wasDone = task.progress >= task.target;
+  task.progress = wasDone ? 0 : task.target;
+  _afterDailyChange(dq, wasDone, task);
+}
+function setDailyTask(taskId, val){
+  const dq = _getDailyQuest();
+  const task = dq.tasks.find(t=>t.id===taskId);
+  if(!task) return;
+  const wasDone = task.progress >= task.target;
+  task.progress = Math.max(0, parseInt(val)||0);
+  _afterDailyChange(dq, wasDone, task);
+}
+function _afterDailyChange(dq, wasDone, task){
+  const nowDone = task.progress >= task.target;
+  if(!wasDone && nowDone){ if(navigator.vibrate)navigator.vibrate(20); _playSystemPing&&_playSystemPing('notif'); }
+  const allDone = _dailyAllDone(dq);
+  if(allDone && !dq.completed){
+    dq.completed = true;
+    if(typeof addXP==='function') addXP(50,'مهمة يومية مكتملة');
+    systemPopup({ type:'levelup', icon:'⚔️', sysLabel:'[ DAILY · QUEST · CLEAR ]', title:'اكتملت المهمة اليومية',
+      lines:['أنجزت كل المهام.','<span style="color:#fbbf24">+50 XP</span>','أنت أقوى من الأمس أيها الصياد'], cta:'استمر', sound:true });
+    if(typeof fireConfetti==='function') fireConfetti(60);
+  }
+  if(typeof saveD==='function') saveD();
+  renderDailyQuest();
+}
+
+function editDailyQuest(){
+  const dq = _getDailyQuest();
+  const modal = document.getElementById('toolMo');
+  if(!modal){ return; }
+  document.getElementById('toolMoT').textContent = '⚙️ تعديل المهمة اليومية';
+  document.getElementById('toolMoB').innerHTML = `<div style="padding:4px">
+    <div style="font-size:.8em;color:var(--tx2);margin-bottom:10px">حدّد أهدافك اليومية أيها الصياد:</div>
+    ${dq.tasks.map(t=>`
+      <div class="fi" style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:1.2em">${t.icon}</span>
+        <div style="flex:1">
+          <label style="font-size:.78em">${t.name}</label>
+          <input type="number" id="dqEdit-${t.id}" value="${t.target}" min="1" style="width:100%">
+        </div>
+      </div>`).join('')}
+    <button class="btn btn-p btn-full" style="margin-top:10px" onclick="saveDailyQuestEdit()">💾 حفظ الأهداف</button>
+  </div>`;
+  modal.classList.add('act');
+}
+function saveDailyQuestEdit(){
+  const dq = _getDailyQuest();
+  dq.tasks.forEach(t=>{
+    const v = parseInt(document.getElementById('dqEdit-'+t.id)?.value);
+    if(v>0) t.target = v;
+  });
+  // احفظ كقالب للأيام الجاية
+  G.dailyQuestTemplate = dq.tasks.map(t=>({id:t.id,icon:t.icon,name:t.name,target:t.target,unit:t.unit}));
+  if(typeof saveD==='function') saveD();
+  if(typeof clM==='function') clM('toolMo');
+  renderDailyQuest();
+  if(typeof toast==='function') toast('✅ تم تحديث أهدافك','s');
+}
+
+window.addEventListener('load',()=>{setTimeout(()=>{try{if(typeof renderDailyQuest==='function')renderDailyQuest();}catch(e){console.warn('dq:',e);}},500);});
+
 /* ═══════════════════════════════════════════════════════════ */
 
 </script>
@@ -7134,11 +8156,12 @@ window.renderWarmupProto = function(exId, exName, workingWeight){
     </div>`).join('');
 
   return `<div class="warmup-proto" style="margin-top:10px">
-    <div class="wup-title" style="display:flex;justify-content:space-between;align-items:center">
-      <span>🔥 إحماء تفاعلي</span>
-      <span style="font-size:.72em;color:var(--tx3)">${sets.length} سيتات • اضغط ✓ بعد كل سيت</span>
+    <div class="wup-title wup-collapse-head" onclick="toggleWarmupCollapse('${exId}')" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none">
+      <span><span class="wup-chev" id="wupChev-${exId}" style="display:inline-block;transition:transform .3s;font-size:.85em">▾</span> 🔥 إحماء تفاعلي</span>
+      <span style="font-size:.72em;color:var(--tx3)">${sets.length} سيتات • اضغط للفرد</span>
     </div>
-    ${tip?`<div style="font-size:.72em;color:var(--wn);margin-bottom:8px;padding:6px 10px;background:rgba(251,191,36,.07);border-radius:8px;border-right:2px solid var(--wn)">💡 ${tip}</div>`:''}
+    <div class="wup-collapse-body" id="wupBody-${exId}">
+    ${tip?`<div style="font-size:.72em;color:var(--wn);margin:8px 0;padding:6px 10px;background:rgba(251,191,36,.07);border-radius:8px;border-right:2px solid var(--wn)">💡 ${tip}</div>`:''}
     <div>
       <div style="display:grid;grid-template-columns:26px 1fr 1fr 1fr 36px;gap:4px;padding:0 0 6px;border-bottom:.5px solid rgba(255,255,255,.08)">
         <div style="font-size:.65em;color:var(--tx3)">✓</div>
@@ -7152,7 +8175,34 @@ window.renderWarmupProto = function(exId, exName, workingWeight){
     <div id="wup-prog-${exId}" style="margin-top:8px;font-size:.72em;color:var(--tx3);text-align:center">
       0/${sets.length} سيتات إحماء مكتملة
     </div>
+    </div>
   </div>`;
+};
+
+/* طي/فرد الإحماء — مطوي افتراضياً لتوفير المساحة */
+window._wupCollapsed = {};
+window.toggleWarmupCollapse = function(exId){
+  if(!G.uiWarmupCollapsed) G.uiWarmupCollapsed = {};
+  const body = document.getElementById('wupBody-'+exId);
+  const chev = document.getElementById('wupChev-'+exId);
+  if(!body) return;
+  const nowCollapsed = !body.classList.contains('collapsed');
+  body.classList.toggle('collapsed', nowCollapsed);
+  if(chev) chev.style.transform = nowCollapsed ? 'rotate(-90deg)' : '';
+  G.uiWarmupCollapsed[exId] = nowCollapsed;
+  if(typeof saveDd==='function') saveDd();
+};
+/* تطبيق الحالة المحفوظة (افتراضي: مطوي) بعد الرسم */
+window.applyWarmupCollapse = function(){
+  document.querySelectorAll('[id^="wupBody-"]').forEach(body=>{
+    const exId = body.id.replace('wupBody-','');
+    const saved = G.uiWarmupCollapsed && G.uiWarmupCollapsed[exId];
+    // افتراضي مطوي لو مفيش حالة محفوظة
+    const collapsed = (saved===undefined) ? true : saved;
+    body.classList.toggle('collapsed', collapsed);
+    const chev = document.getElementById('wupChev-'+exId);
+    if(chev) chev.style.transform = collapsed ? 'rotate(-90deg)' : '';
+  });
 };
 
 /* warmup set done */
@@ -7284,8 +8334,16 @@ window.startWarmupTimer = function(btn, sec){
   };
 
   window._ttsTimerDone = function(){
+    window._lastSpokenSec = -1;
     if(!_ttsEnabled) return;
     speak('خلصت الراحة! يلا');
+  };
+  // يسمح لميزة المدرب الصوتي الحي بتفعيل الـ TTS الأساسي
+  window._forceTTSOn = function(){
+    if(!('speechSynthesis' in window)) return;
+    _ttsEnabled = true;
+    const btn = document.getElementById('ttsToggleBtn');
+    if(btn){ btn.style.background='rgba(110,231,183,.25)'; btn.textContent='🔊'; }
   };
 
   window._ttsExDone = function(exName){
