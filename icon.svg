@@ -1,10 +1,198 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- iOS App Icon - Solo Leveling System Gym -->
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#c084fc"/>
-      <stop offset="100%" style="stop-color:#e879f9"/>
+    <!-- Dark cosmic background gradient -->
+    <radialGradient id="bgGradient" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#1a1147"/>
+      <stop offset="45%" stop-color="#0a0628"/>
+      <stop offset="100%" stop-color="#02010a"/>
+    </radialGradient>
+
+    <!-- Cyan/Purple glow gradient (Solo Leveling signature) -->
+    <linearGradient id="systemGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="50%" stop-color="#4a8dff"/>
+      <stop offset="100%" stop-color="#a855f7"/>
     </linearGradient>
+
+    <linearGradient id="systemGlow2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="50%" stop-color="#4a8dff"/>
+      <stop offset="100%" stop-color="#00f0ff"/>
+    </linearGradient>
+
+    <!-- Dumbbell metallic gradient -->
+    <linearGradient id="dumbbellGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e0f7ff"/>
+      <stop offset="50%" stop-color="#7dd3fc"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- iOS rounded mask -->
+    <clipPath id="iosMask">
+      <rect x="0" y="0" width="1024" height="1024" rx="228" ry="228"/>
+    </clipPath>
   </defs>
-  <rect width="192" height="192" rx="40" fill="url(#g)"/>
-  <text x="96" y="130" font-size="90" text-anchor="middle" fill="white">🏋️</text>
+
+  <!-- iOS rounded square background -->
+  <g clip-path="url(#iosMask)">
+    <!-- Cosmic dark background -->
+    <rect width="1024" height="1024" fill="url(#bgGradient)"/>
+
+    <!-- Subtle stars/particles -->
+    <g fill="#a8c8ff" opacity="0.6">
+      <circle cx="120" cy="180" r="1.5"/>
+      <circle cx="880" cy="150" r="2"/>
+      <circle cx="200" cy="850" r="1.5"/>
+      <circle cx="900" cy="900" r="2"/>
+      <circle cx="150" cy="500" r="1"/>
+      <circle cx="870" cy="520" r="1.5"/>
+      <circle cx="300" cy="120" r="1"/>
+      <circle cx="700" cy="100" r="1.5"/>
+      <circle cx="100" cy="700" r="2"/>
+      <circle cx="950" cy="700" r="1"/>
+      <circle cx="450" cy="80" r="1"/>
+      <circle cx="600" cy="960" r="1.5"/>
+      <circle cx="80" cy="350" r="1"/>
+      <circle cx="940" cy="380" r="1.5"/>
+    </g>
+
+    <!-- Outer hexagonal system frame (Solo Leveling signature) -->
+    <g transform="translate(512, 512)" filter="url(#strongGlow)">
+      <!-- Outer hexagon -->
+      <polygon points="0,-420 364,-210 364,210 0,420 -364,210 -364,-210"
+               fill="none" stroke="url(#systemGlow)" stroke-width="6" opacity="0.9"/>
+      <!-- Inner hexagon -->
+      <polygon points="0,-380 329,-190 329,190 0,380 -329,190 -329,-190"
+               fill="none" stroke="url(#systemGlow2)" stroke-width="2" opacity="0.7"/>
+    </g>
+
+    <!-- Corner brackets (system UI style) -->
+    <g stroke="#00f0ff" stroke-width="5" fill="none" filter="url(#glow)" opacity="0.95">
+      <!-- Top-left bracket -->
+      <polyline points="160,250 160,180 230,180"/>
+      <!-- Top-right bracket -->
+      <polyline points="864,250 864,180 794,180"/>
+      <!-- Bottom-left bracket -->
+      <polyline points="160,774 160,844 230,844"/>
+      <!-- Bottom-right bracket -->
+      <polyline points="864,774 864,844 794,844"/>
+    </g>
+
+    <!-- Decorative side runes / tick marks -->
+    <g stroke="#4a8dff" stroke-width="3" opacity="0.6">
+      <line x1="120" y1="450" x2="155" y2="450"/>
+      <line x1="120" y1="490" x2="145" y2="490"/>
+      <line x1="120" y1="530" x2="155" y2="530"/>
+      <line x1="120" y1="570" x2="145" y2="570"/>
+
+      <line x1="869" y1="450" x2="904" y2="450"/>
+      <line x1="879" y1="490" x2="904" y2="490"/>
+      <line x1="869" y1="530" x2="904" y2="530"/>
+      <line x1="879" y1="570" x2="904" y2="570"/>
+    </g>
+
+    <!-- Central glowing orb backdrop -->
+    <circle cx="512" cy="512" r="220" fill="url(#systemGlow)" opacity="0.12" filter="url(#strongGlow)"/>
+    <circle cx="512" cy="512" r="180" fill="none" stroke="url(#systemGlow)" stroke-width="2" opacity="0.5" stroke-dasharray="10 6"/>
+
+    <!-- DUMBBELL (centerpiece) -->
+    <g transform="translate(512, 512) rotate(-25)" filter="url(#strongGlow)">
+      <!-- Bar -->
+      <rect x="-180" y="-22" width="360" height="44" rx="10" fill="url(#dumbbellGrad)"/>
+      <rect x="-180" y="-22" width="360" height="44" rx="10" fill="none" stroke="#00f0ff" stroke-width="3"/>
+
+      <!-- Inner bar highlight -->
+      <rect x="-170" y="-14" width="340" height="6" rx="3" fill="#ffffff" opacity="0.5"/>
+
+      <!-- Left weight (outer) -->
+      <rect x="-260" y="-110" width="48" height="220" rx="14" fill="url(#dumbbellGrad)"/>
+      <rect x="-260" y="-110" width="48" height="220" rx="14" fill="none" stroke="#00f0ff" stroke-width="3"/>
+      <!-- Left weight (inner smaller) -->
+      <rect x="-208" y="-80" width="32" height="160" rx="10" fill="url(#dumbbellGrad)"/>
+      <rect x="-208" y="-80" width="32" height="160" rx="10" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
+
+      <!-- Right weight (outer) -->
+      <rect x="212" y="-110" width="48" height="220" rx="14" fill="url(#dumbbellGrad)"/>
+      <rect x="212" y="-110" width="48" height="220" rx="14" fill="none" stroke="#00f0ff" stroke-width="3"/>
+      <!-- Right weight (inner smaller) -->
+      <rect x="176" y="-80" width="32" height="160" rx="10" fill="url(#dumbbellGrad)"/>
+      <rect x="176" y="-80" width="32" height="160" rx="10" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
+
+      <!-- Highlights on weights -->
+      <rect x="-252" y="-100" width="8" height="200" rx="3" fill="#ffffff" opacity="0.55"/>
+      <rect x="220" y="-100" width="8" height="200" rx="3" fill="#ffffff" opacity="0.55"/>
+    </g>
+
+    <!-- "LEVEL UP" / system text below -->
+    <g filter="url(#softGlow)">
+      <text x="512" y="790" text-anchor="middle"
+            font-family="Impact, 'Arial Black', sans-serif"
+            font-size="56" font-weight="900"
+            fill="url(#systemGlow)"
+            letter-spacing="8">LEVEL UP</text>
+    </g>
+
+    <!-- Small arrow indicators (system notification style) -->
+    <g fill="#00f0ff" filter="url(#glow)">
+      <polygon points="380,790 360,775 360,805"/>
+      <polygon points="644,790 664,775 664,805"/>
+    </g>
+
+    <!-- Top notification text "[ SYSTEM ]" -->
+    <g filter="url(#softGlow)">
+      <text x="512" y="270" text-anchor="middle"
+            font-family="'Courier New', monospace"
+            font-size="32" font-weight="bold"
+            fill="#00f0ff"
+            letter-spacing="4">[ SYSTEM ]</text>
+    </g>
+
+    <!-- Tiny diamond accents at hexagon points -->
+    <g fill="#00f0ff" filter="url(#glow)">
+      <polygon points="512,92 522,102 512,112 502,102"/>
+      <polygon points="512,932 522,922 512,912 502,922"/>
+      <polygon points="876,302 886,312 876,322 866,312"/>
+      <polygon points="148,302 158,312 148,322 138,312"/>
+      <polygon points="876,722 886,712 876,702 866,712"/>
+      <polygon points="148,722 158,712 148,702 138,712"/>
+    </g>
+
+    <!-- Light vignette top -->
+    <rect width="1024" height="1024" fill="url(#bgGradient)" opacity="0"/>
+
+    <!-- Glossy highlight overlay (iOS style) -->
+    <path d="M 0,0 L 1024,0 L 1024,420 Q 512,560 0,420 Z" fill="white" opacity="0.04"/>
+  </g>
+
+  <!-- Subtle outer border for definition -->
+  <rect x="2" y="2" width="1020" height="1020" rx="226" ry="226"
+        fill="none" stroke="#1a2a5a" stroke-width="1" opacity="0.5"/>
 </svg>
