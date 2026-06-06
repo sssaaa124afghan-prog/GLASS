@@ -2008,6 +2008,145 @@ body::before{
 .sys-dq-progress-txt{font-family:'Orbitron','Cairo',sans-serif;font-size:.74em;color:var(--tx2)}
 .sys-dq-complete-msg{font-size:.8em;color:#34d399;font-weight:700}
 .sys-dq-edit-btn{background:rgba(91,184,255,.08);border:1px solid rgba(91,184,255,.2);border-radius:3px;padding:4px 8px;cursor:pointer;font-size:.85em}
+.sys-dq-time-btn{background:rgba(91,184,255,.12);border:1px solid rgba(91,184,255,.3);color:#b8e6ff;border-radius:4px;padding:6px 10px;font-size:.74em;font-weight:700;cursor:pointer;font-family:'Orbitron','Cairo',sans-serif;white-space:nowrap}
+.sys-dq-time-btn:active{transform:scale(.95)}
+.dq-type-btn{transition:.2s}
+.dq-edit-row{transition:.2s}
+
+/* ═══════════ ARISE / SHADOW EXTRACTION ═══════════ */
+.arise-overlay{position:fixed;inset:0;z-index:12000;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(20,8,40,.96),rgba(2,2,8,.99));animation:ariseFadeIn .4s ease;overflow:hidden;cursor:pointer}
+.arise-overlay.arise-out{animation:ariseFadeOut .4s ease forwards}
+@keyframes ariseFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes ariseFadeOut{to{opacity:0}}
+.arise-glow{position:absolute;width:140vw;height:140vw;max-width:900px;max-height:900px;background:radial-gradient(circle,rgba(124,58,237,.35),rgba(91,33,182,.12) 40%,transparent 65%);animation:ariseGlowPulse 2.5s ease-in-out infinite}
+@keyframes ariseGlowPulse{0%,100%{transform:scale(.85);opacity:.6}50%{transform:scale(1.1);opacity:1}}
+.arise-particles{position:absolute;width:0;height:0;left:50%;top:50%}
+.arise-p{position:absolute;width:6px;height:6px;border-radius:50%;background:#a78bfa;box-shadow:0 0 12px #a78bfa;transform:rotate(var(--ang)) translateY(0);animation:ariseParticle var(--d) ease-out infinite}
+@keyframes ariseParticle{0%{transform:rotate(var(--ang)) translateY(20px);opacity:0}30%{opacity:1}100%{transform:rotate(var(--ang)) translateY(220px);opacity:0}}
+.arise-content{position:relative;text-align:center;z-index:2;animation:ariseContentIn .6s cubic-bezier(.2,1.3,.4,1)}
+@keyframes ariseContentIn{0%{transform:scale(.5) translateY(40px);opacity:0;filter:brightness(3)}60%{opacity:1}100%{transform:scale(1) translateY(0);opacity:1;filter:brightness(1)}}
+.arise-sys{font-family:'Orbitron',monospace;font-size:.7em;letter-spacing:.4em;color:rgba(167,139,250,.85);margin-bottom:14px;text-shadow:0 0 12px rgba(167,139,250,.6)}
+.arise-word{font-family:'Orbitron',sans-serif;font-size:4.2em;font-weight:900;letter-spacing:.08em;color:#c4b5fd;text-shadow:0 0 30px rgba(167,139,250,.9),0 0 60px rgba(124,58,237,.6);line-height:1;animation:ariseWordGlow 1.5s ease-in-out infinite}
+@keyframes ariseWordGlow{0%,100%{text-shadow:0 0 30px rgba(167,139,250,.9),0 0 60px rgba(124,58,237,.6)}50%{text-shadow:0 0 45px rgba(167,139,250,1),0 0 90px rgba(124,58,237,.9)}}
+.arise-ar{font-family:'Cairo',sans-serif;font-size:1.6em;font-weight:900;color:#ddd6fe;margin-top:4px;text-shadow:0 0 18px rgba(167,139,250,.7)}
+.arise-detail{margin-top:26px;padding:16px 28px;border:1px solid rgba(167,139,250,.4);border-radius:6px;background:rgba(124,58,237,.1);box-shadow:0 0 30px rgba(124,58,237,.25),inset 0 0 20px rgba(124,58,237,.1)}
+.arise-pr-label{font-family:'Orbitron','Cairo',sans-serif;font-size:.8em;color:#fbbf24;font-weight:800;text-shadow:0 0 10px rgba(251,191,36,.5)}
+.arise-pr-ex{font-size:1.05em;color:#fff;font-weight:700;margin-top:6px}
+.arise-pr-w{font-family:'Orbitron',monospace;font-size:1.8em;font-weight:900;color:#c4b5fd;margin-top:4px;text-shadow:0 0 16px rgba(167,139,250,.7)}
+.arise-hint{margin-top:22px;font-family:'Orbitron',monospace;font-size:.6em;letter-spacing:.2em;color:rgba(221,214,254,.5);text-transform:uppercase}
+
+/* ═══════════ TITLES ═══════════ */
+.sys-active-title{display:flex;align-items:center;gap:12px;padding:12px;background:linear-gradient(135deg,rgba(251,191,36,.12),rgba(124,58,237,.08));border:1px solid rgba(251,191,36,.3);border-radius:6px;margin-bottom:12px}
+.sys-titles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+.sys-title-chip{text-align:center;padding:12px 6px;border-radius:6px;border:1px solid rgba(91,184,255,.15);background:rgba(91,184,255,.04);transition:.2s}
+.sys-title-chip.unlocked{cursor:pointer;border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.06)}
+.sys-title-chip.unlocked:active{transform:scale(.96)}
+.sys-title-chip.active{border-color:#fbbf24;box-shadow:0 0 16px rgba(251,191,36,.25);background:rgba(251,191,36,.12)}
+.sys-title-chip.locked{opacity:.45}
+.sys-title-icon{font-size:1.8em;line-height:1}
+.sys-title-name{font-size:.74em;font-weight:800;color:#dcf2ff;margin-top:6px}
+.sys-title-chip.unlocked .sys-title-name{color:#fbbf24}
+.sys-title-desc{font-size:.6em;color:var(--tx3);margin-top:3px}
+
+/* ═══════════ SYSTEM LOG ═══════════ */
+.sys-log-list{display:flex;flex-direction:column;gap:6px;max-height:480px;overflow-y:auto}
+.sys-log-item{display:flex;align-items:center;gap:10px;padding:9px 11px;background:rgba(91,184,255,.04);border:1px solid rgba(91,184,255,.1);border-radius:4px;border-right:3px solid rgba(91,184,255,.3)}
+.sys-log-item.sys-log-arise{border-right-color:#a78bfa;background:rgba(124,58,237,.07)}
+.sys-log-item.sys-log-title{border-right-color:#fbbf24;background:rgba(251,191,36,.06)}
+.sys-log-item.sys-log-warning,.sys-log-item.sys-log-penalty{border-right-color:#ff5470;background:rgba(255,84,112,.06)}
+.sys-log-item.sys-log-levelup{border-right-color:#34d399;background:rgba(52,211,153,.06)}
+.sys-log-icon{font-size:1.1em;flex-shrink:0}
+.sys-log-text{flex:1;font-size:.8em;color:#dcf2ff;line-height:1.4}
+.sys-log-time{font-family:'Orbitron',monospace;font-size:.6em;color:var(--tx3);white-space:nowrap;flex-shrink:0}
+
+/* ═══════════ PENALTY BANNER ═══════════ */
+.sys-penalty-banner{display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;background:linear-gradient(135deg,rgba(255,84,112,.14),rgba(120,20,40,.1));border:1px solid rgba(255,84,112,.4);border-radius:6px;box-shadow:0 0 20px rgba(255,84,112,.15);animation:sysPenaltyPulse 2.5s ease-in-out infinite}
+@keyframes sysPenaltyPulse{0%,100%{box-shadow:0 0 20px rgba(255,84,112,.12)}50%{box-shadow:0 0 30px rgba(255,84,112,.28)}}
+.sys-penalty-icon{font-size:1.6em;filter:drop-shadow(0 0 8px rgba(255,84,112,.5))}
+
+/* ═══════════════════════════════════════════════
+   ⚡ AUTHENTIC SYSTEM EDGES & BUTTON SHAPES
+   حواف مقطوعة (octagonal) + أزرار مشطوفة زي النظام
+   ═══════════════════════════════════════════════ */
+
+/* ── البطاقات: حواف مقطوعة من الأركان (الشكل الأيقوني) ── */
+.card{
+  clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0 calc(100% - 14px),0 14px)!important;
+  border-radius:0!important;
+  position:relative;
+}
+/* إطار داخلي مزدوج خفيف */
+.card::after{
+  content:'';position:absolute;inset:4px;pointer-events:none;
+  clip-path:polygon(11px 0,calc(100% - 11px) 0,100% 11px,100% calc(100% - 11px),calc(100% - 11px) 100%,11px 100%,0 calc(100% - 11px),0 11px);
+  border:1px solid rgba(91,184,255,.1);
+  z-index:0;
+}
+
+/* ── الأزرار: حواف مشطوفة (beveled) ── */
+.btn{
+  clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,8px 100%,0 50%)!important;
+  border-radius:0!important;
+}
+/* الأزرار الكبيرة والممتدة: شطف بسيط من الأركان بدل المعيّن */
+.btn-full,.tm-start-btn,.sj-popup-cta,.sys-dq-time-btn,.sl-gate-enter-btn{
+  clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px),0 10px)!important;
+  border-radius:0!important;
+}
+
+/* ── أزرار التنقل السفلية: شطف خفيف ── */
+.bnav{
+  clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%,0 16px)!important;
+  border-radius:0!important;
+}
+
+/* ── النوافذ المنبثقة [SYSTEM]: حواف مقطوعة حادة ── */
+.sj-popup{
+  clip-path:polygon(18px 0,calc(100% - 18px) 0,100% 18px,100% calc(100% - 18px),calc(100% - 18px) 100%,18px 100%,0 calc(100% - 18px),0 18px)!important;
+  border-radius:0!important;
+}
+
+/* ── المودالات: حافة علوية مقطوعة ── */
+.mdl{
+  clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%,0 20px)!important;
+  border-radius:0!important;
+}
+
+/* ── بطاقة المهمة اليومية + الرتبة: حواف مقطوعة ── */
+.sys-dq-card,.sl-rank-card,.sl-boss-card,.sl-report-card{
+  clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 16px,100% calc(100% - 16px),calc(100% - 16px) 100%,16px 100%,0 calc(100% - 16px),0 16px)!important;
+  border-radius:0!important;
+}
+
+/* ── مهام اليوم الفردية + شارات الألقاب: شطف خفيف ── */
+.sys-dq-task,.sys-title-chip,.sl-rank-stat,.sl-report-stat,.sys-log-item,.sys-insight,.sl-insight{
+  clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px)!important;
+  border-radius:0!important;
+}
+
+/* ── حقول الإدخال: شطف خفيف جداً ── */
+.fi input,.fi select,.sys-dq-input,.set-in,input[type="number"],input[type="text"]{
+  border-radius:0!important;
+}
+
+/* ── الشارات/الـ pills: حواف حادة ── */
+.sl-rank-pill,.block-badge,.ai-badge,.sl-gate-stage,.bdg{
+  clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)!important;
+  border-radius:0!important;
+}
+
+/* ── علامات الاختيار الدائرية في المهام تفضل دائرية (مش نقطعها) ── */
+.sys-dq-task-check{clip-path:none!important;border-radius:50%!important}
+.sys-title-icon,.sl-rank-emblem,.arise-p{clip-path:none!important}
+
+/* ── tabs الإحصائيات: شطف علوي ── */
+.stat-tab{
+  clip-path:polygon(7px 0,calc(100% - 7px) 0,100% 100%,0 100%)!important;
+  border-radius:0!important;
+}
+
+/* تقوية الحواف المضيئة على الأزرار الأساسية */
+.btn-p,.tm-start-btn{position:relative}
 
 </style>
 
@@ -2119,6 +2258,7 @@ body::before{
     <span id="pinnedNoteText" style="flex:1;font-size:.8em;color:var(--wn);line-height:1.5"></span>
     <button onclick="clearPinnedNote()" style="background:none;border:none;color:var(--tx3);cursor:pointer">✕</button>
   </div>
+  <div id="penaltyBannerHost"></div>
   <div id="dailyQuestArea"></div>
   <div id="todayMission"></div>
   <!-- legacy containers kept hidden so existing code doesn't break -->
@@ -2403,6 +2543,8 @@ body::before{
     <button class="stat-tab" onclick="switchStatTab('rank',this)">⚔️ الرتبة</button>
     <button class="stat-tab" onclick="switchStatTab('report',this)">📜 التقرير</button>
     <button class="stat-tab" onclick="switchStatTab('insights',this)">🧠 رؤى AI</button>
+    <button class="stat-tab" onclick="switchStatTab('titles',this)">👑 الألقاب</button>
+    <button class="stat-tab" onclick="switchStatTab('log',this)">📜 السجل</button>
     <button class="stat-tab" onclick="switchStatTab('badges',this)">🎖️ شارات</button>
     <button class="stat-tab" onclick="switchStatTab('standards',this)">⚡ معايير</button>
   </div>
@@ -2464,6 +2606,12 @@ body::before{
   </div>
   <div id="statTab-insights" style="display:none">
     <div id="aiInsightsArea"></div>
+  </div>
+  <div id="statTab-titles" style="display:none">
+    <div id="titlesArea"></div>
+  </div>
+  <div id="statTab-log" style="display:none">
+    <div id="systemLogArea"></div>
   </div>
   <div id="statTab-standards" style="display:none">
     <div class="card"><div class="ct">⚡ Wilks Score <span class="tt-q" onclick="showTip(this,'Wilks Score: معيار عالمي لقياس القوة بالنسبة لوزن الجسم. يستخدم في بطولات Powerlifting لمقارنة رياضيين بأوزان مختلفة. 100-200 = متوسط، 200-300 = متقدم، 300+ = نخبة عالمية.')">?</span></div><div id="wilksArea"></div></div>
@@ -2821,6 +2969,13 @@ G.poJournal=d.poJournal||{};G.swapHistory=d.swapHistory||{};G.templates=d.templa
 G._lastMilestone=d._lastMilestone||0;G._lastDeloadNotif=d._lastDeloadNotif||'';G._themeManualOverride=d._themeManualOverride||false;
 G.schedule=d.schedule||null;
 G.lastRank=d.lastRank||'E';G.clearedVolumeGates=d.clearedVolumeGates||[];
+/* ── حقول الميزات الجديدة (إصلاح الحفظ) ── */
+G.dailyQuest=d.dailyQuest||null;G.dailyQuestTemplate=d.dailyQuestTemplate||null;
+G.sysLog=d.sysLog||[];G.unlockedTitles=d.unlockedTitles||[];G.activeTitle=d.activeTitle||null;
+G.penaltyActive=d.penaltyActive||false;G.penaltyDate=d.penaltyDate||null;G.penaltyGap=d.penaltyGap||0;
+G.uiCollapsed=d.uiCollapsed||{};G.uiShowAllDays=d.uiShowAllDays||false;G.uiWarmupCollapsed=d.uiWarmupCollapsed||{};
+G.uiStatusDefaultSet=d.uiStatusDefaultSet||false;G.uiCompact=d.uiCompact||false;
+G.sysSoundOff=d.sysSoundOff||false;G.activeStatTitle=d.activeStatTitle||null;
 // التحقق الصارم من G.days
 if(d.days&&d.days.upperA&&d.days.lowerA&&d.days.upperB&&d.days.lowerB){
   G.days=d.days;
@@ -3672,7 +3827,7 @@ function getSmartCoach(ex,id,be){
   else if(sp&&sp.strategy==='deload'){h+=`<div class="coach-rec deload" style="margin-top:5px"><span>🔄</span><span>${sp.msg}</span></div>`}
   return h
 }
-function go(n,b){document.querySelectorAll('.pg').forEach(p=>p.classList.remove('act'));document.querySelectorAll('.bni').forEach(x=>x.classList.remove('act'));const pg=document.getElementById('pg-'+n);if(pg)pg.classList.add('act');if(b&&typeof b!=='string')b.classList.add('act');if(n==='hist'){popHSel();rHist();renderSessionsList();renderVolumeChart()}if(n==='stats')rStats();if(n==='ai')renderChatHistory();if(n==='lib')renderLibContent();if(n==='profile')renderProfilePage();if(n==='wo'){renderTodayMission();if(typeof renderDailyQuest==='function')renderDailyQuest()}window.scrollTo(0,0)}
+function go(n,b){document.querySelectorAll('.pg').forEach(p=>p.classList.remove('act'));document.querySelectorAll('.bni').forEach(x=>x.classList.remove('act'));const pg=document.getElementById('pg-'+n);if(pg)pg.classList.add('act');if(b&&typeof b!=='string')b.classList.add('act');if(n==='hist'){popHSel();rHist();renderSessionsList();renderVolumeChart()}if(n==='stats')rStats();if(n==='ai')renderChatHistory();if(n==='lib')renderLibContent();if(n==='profile')renderProfilePage();if(n==='wo'){renderTodayMission();if(typeof renderDailyQuest==='function')renderDailyQuest();if(typeof renderPenaltyBanner==='function')renderPenaltyBanner()}window.scrollTo(0,0)}
 function clM(id){const el=document.getElementById(id);if(el)el.classList.remove('act')}
 document.querySelectorAll('.mo').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('act')}));
 function initTheme(){
@@ -4483,7 +4638,7 @@ function saveGoal() {
    STATS SUB-TABS
 ═══════════════════════════════════════════════ */
 function switchStatTab(tab, btn) {
-  ['overview','calendar','muscles','prs','proj','heatmap','prpred','prtimeline','meso','xp','badges','standards','rank','report','insights'].forEach(t => {
+  ['overview','calendar','muscles','prs','proj','heatmap','prpred','prtimeline','meso','xp','badges','standards','rank','report','insights','titles','log'].forEach(t => {
     const el = document.getElementById('statTab-' + t);
     if (el) el.style.display = t === tab ? 'block' : 'none';
   });
@@ -4499,6 +4654,8 @@ function switchStatTab(tab, btn) {
   if (tab === 'rank') renderRankSystem();
   if (tab === 'report') renderMissionReport();
   if (tab === 'insights') renderAIInsightsPanel();
+  if (tab === 'titles') renderTitles();
+  if (tab === 'log') renderSystemLog();
 }
 
 /* ══════════════════════════════════════════════
@@ -7744,10 +7901,10 @@ window.addEventListener('load', ()=>{ setTimeout(_systemBootMessage, 600); });
 
 // ── المهام اليومية الافتراضية (قابلة للتعديل) ──
 const SYS_DEFAULT_DAILY = [
-  { id:'pushups', icon:'💪', name:'تمرين ضغط', target:100, unit:'عدة' },
-  { id:'situps',  icon:'🔥', name:'تمرين بطن', target:100, unit:'عدة' },
-  { id:'squats',  icon:'🦵', name:'سكوات',     target:100, unit:'عدة' },
-  { id:'walk',    icon:'🏃', name:'مشي/جري',   target:5,   unit:'كم' },
+  { id:'pushups', icon:'💪', name:'تمرين ضغط', target:100, unit:'عدة', type:'count' },
+  { id:'situps',  icon:'🔥', name:'تمرين بطن', target:100, unit:'عدة', type:'count' },
+  { id:'squats',  icon:'🦵', name:'سكوات',     target:100, unit:'عدة', type:'count' },
+  { id:'walk',    icon:'🏃', name:'مشي/جري',   target:30,  unit:'دقيقة', type:'time' },
 ];
 
 function _todayStr(){ return new Date().toISOString().split('T')[0]; }
@@ -7809,6 +7966,16 @@ function renderDailyQuest(){
       ${dq.tasks.map((task,i)=>{
         const pct = Math.min(100, Math.round(task.progress/task.target*100));
         const done = task.progress>=task.target;
+        const isTime = task.type==='time';
+        const countCtrl = isTime
+          ? `<div class="sys-dq-task-count">
+               <button class="sys-dq-time-btn" id="dqTimeBtn-${task.id}" onclick="event.stopPropagation();toggleDailyTimer('${task.id}')">${done?'✓ تم':'▶ ابدأ'}</button>
+               <span class="sys-dq-task-target" id="dqTimeLbl-${task.id}">${task.progress}/${task.target} ${task.unit}</span>
+             </div>`
+          : `<div class="sys-dq-task-count">
+               <input type="number" class="sys-dq-input" id="dqIn-${task.id}" value="${task.progress}" min="0" max="${task.target*2}" onchange="setDailyTask('${task.id}',this.value)" onclick="event.stopPropagation()">
+               <span class="sys-dq-task-target">/${task.target} ${task.unit}</span>
+             </div>`;
         return `<div class="sys-dq-task ${done?'done':''}">
           <div class="sys-dq-task-check" onclick="completeDailyTask('${task.id}')">${done?'✓':''}</div>
           <div class="sys-dq-task-icon">${task.icon}</div>
@@ -7816,10 +7983,7 @@ function renderDailyQuest(){
             <div class="sys-dq-task-name">${task.name}</div>
             <div class="sys-dq-task-bar"><div class="sys-dq-task-fill" style="width:${pct}%"></div></div>
           </div>
-          <div class="sys-dq-task-count">
-            <input type="number" class="sys-dq-input" id="dqIn-${task.id}" value="${task.progress}" min="0" max="${task.target*2}" onchange="setDailyTask('${task.id}',this.value)" onclick="event.stopPropagation()">
-            <span class="sys-dq-task-target">/${task.target} ${task.unit}</span>
-          </div>
+          ${countCtrl}
         </div>`;
       }).join('')}
     </div>
@@ -7882,40 +8046,393 @@ function _afterDailyChange(dq, wasDone, task){
   renderDailyQuest();
 }
 
+// مؤقّت حي للمهام الزمنية
+window._dqTimers = {};
+window.toggleDailyTimer = function(taskId){
+  const dq = _getDailyQuest();
+  const task = dq.tasks.find(t=>t.id===taskId);
+  if(!task) return;
+  const btn = document.getElementById('dqTimeBtn-'+taskId);
+  const lbl = document.getElementById('dqTimeLbl-'+taskId);
+  // لو شغّال → أوقفه
+  if(window._dqTimers[taskId]){
+    clearInterval(window._dqTimers[taskId].iv);
+    delete window._dqTimers[taskId];
+    if(btn) btn.textContent = task.progress>=task.target?'✓ تم':'▶ متابعة';
+    if(typeof saveD==='function') saveD();
+    return;
+  }
+  // لو مكتمل بالفعل → صفّره (toggle off)
+  if(task.progress>=task.target){
+    task.progress = 0;
+    if(typeof saveD==='function') saveD();
+    renderDailyQuest();
+    return;
+  }
+  // ابدأ العدّ التصاعدي (بالدقائق)
+  const startProgress = task.progress;
+  const startTime = Date.now();
+  if(btn) btn.textContent = '⏸ إيقاف';
+  if(navigator.vibrate) navigator.vibrate(15);
+  window._dqTimers[taskId] = { iv:null, startTime, startProgress };
+  window._dqTimers[taskId].iv = setInterval(()=>{
+    const elapsedMin = startProgress + (Date.now()-startTime)/60000;
+    const t = dq.tasks.find(x=>x.id===taskId);
+    if(!t){ clearInterval(window._dqTimers[taskId].iv); delete window._dqTimers[taskId]; return; }
+    t.progress = Math.min(t.target, Math.round(elapsedMin*10)/10);
+    const lblEl = document.getElementById('dqTimeLbl-'+taskId);
+    if(lblEl) lblEl.textContent = `${t.progress}/${t.target} ${t.unit}`;
+    // حدّث الشريط
+    const taskEl = lblEl?.closest('.sys-dq-task');
+    const fill = taskEl?.querySelector('.sys-dq-task-fill');
+    if(fill) fill.style.width = Math.min(100,Math.round(t.progress/t.target*100))+'%';
+    // اكتمل؟
+    if(t.progress>=t.target){
+      clearInterval(window._dqTimers[taskId].iv);
+      delete window._dqTimers[taskId];
+      _afterDailyChange(dq, false, t);
+    }
+  }, 1000);
+};
+
 function editDailyQuest(){
   const dq = _getDailyQuest();
   const modal = document.getElementById('toolMo');
   if(!modal){ return; }
-  document.getElementById('toolMoT').textContent = '⚙️ تعديل المهمة اليومية';
-  document.getElementById('toolMoB').innerHTML = `<div style="padding:4px">
-    <div style="font-size:.8em;color:var(--tx2);margin-bottom:10px">حدّد أهدافك اليومية أيها الصياد:</div>
-    ${dq.tasks.map(t=>`
-      <div class="fi" style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:1.2em">${t.icon}</span>
-        <div style="flex:1">
-          <label style="font-size:.78em">${t.name}</label>
-          <input type="number" id="dqEdit-${t.id}" value="${t.target}" min="1" style="width:100%">
-        </div>
-      </div>`).join('')}
-    <button class="btn btn-p btn-full" style="margin-top:10px" onclick="saveDailyQuestEdit()">💾 حفظ الأهداف</button>
-  </div>`;
+  document.getElementById('toolMoT').textContent = '⚙️ تعديل المهام اليومية';
+  _renderDqEditor(dq.tasks);
   modal.classList.add('act');
 }
+
+const SYS_DQ_ICONS = ['💪','🔥','🦵','🏃','🏋️','🚴','🧘','🤸','🥊','⛹️','🏊','🚶','🦾','💧','📖','🧠','☀️','🌙'];
+
+function _renderDqEditor(tasks){
+  const body = document.getElementById('toolMoB'); if(!body) return;
+  body.innerHTML = `<div style="padding:4px">
+    <div style="font-size:.8em;color:var(--tx2);margin-bottom:12px">عدّل مهامك أيها الصياد — الاسم، الأيقونة، والقياس (عدد أو وقت):</div>
+    <div id="dqEditList">
+      ${tasks.map((t,idx)=>_dqEditRow(t,idx)).join('')}
+    </div>
+    <button class="btn btn-dk btn-full" style="margin-top:6px;border:1px dashed rgba(91,184,255,.4)" onclick="addDailyTask()">➕ إضافة مهمة</button>
+    <button class="btn btn-p btn-full" style="margin-top:10px" onclick="saveDailyQuestEdit()">💾 حفظ المهام</button>
+    <button class="btn btn-dk btn-full" style="margin-top:6px;font-size:.8em;color:var(--tx3)" onclick="resetDailyQuestDefault()">↺ استعادة الافتراضي</button>
+  </div>`;
+}
+
+function _dqEditRow(t, idx){
+  const isTime = t.type === 'time';
+  return `<div class="dq-edit-row" data-idx="${idx}" style="background:rgba(91,184,255,.05);border:1px solid rgba(91,184,255,.15);border-radius:6px;padding:10px;margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <button class="dq-icon-pick" onclick="cycleDqIcon(${idx})" id="dqIcon-${idx}" style="font-size:1.3em;background:rgba(91,184,255,.1);border:1px solid rgba(91,184,255,.25);border-radius:6px;width:42px;height:42px;cursor:pointer;flex-shrink:0">${t.icon}</button>
+      <input type="text" id="dqName-${idx}" value="${(t.name||'').replace(/"/g,'&quot;')}" placeholder="اسم المهمة" style="flex:1;background:rgba(15,30,55,.7);border:1px solid rgba(91,184,255,.25);border-radius:5px;color:#eaf6ff;padding:8px;font-size:.9em">
+      <button onclick="removeDailyTask(${idx})" title="حذف" style="background:rgba(255,84,112,.1);border:1px solid rgba(255,84,112,.3);color:#ff8095;border-radius:5px;width:38px;height:38px;cursor:pointer;flex-shrink:0">🗑️</button>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div class="dq-type-toggle" style="display:flex;border:1px solid rgba(91,184,255,.25);border-radius:5px;overflow:hidden;flex-shrink:0">
+        <button onclick="setDqType(${idx},'count')" id="dqTypeCount-${idx}" class="dq-type-btn ${!isTime?'act':''}" style="padding:8px 12px;font-size:.78em;cursor:pointer;border:none;background:${!isTime?'rgba(91,184,255,.25)':'transparent'};color:${!isTime?'#b8e6ff':'var(--tx3)'}">🔢 عدد</button>
+        <button onclick="setDqType(${idx},'time')" id="dqTypeTime-${idx}" class="dq-type-btn ${isTime?'act':''}" style="padding:8px 12px;font-size:.78em;cursor:pointer;border:none;background:${isTime?'rgba(91,184,255,.25)':'transparent'};color:${isTime?'#b8e6ff':'var(--tx3)'}">⏱️ وقت</button>
+      </div>
+      <input type="number" id="dqTarget-${idx}" value="${t.target}" min="1" style="flex:1;background:rgba(15,30,55,.7);border:1px solid rgba(91,184,255,.25);border-radius:5px;color:#eaf6ff;padding:8px;font-size:.9em;text-align:center">
+      <span id="dqUnit-${idx}" style="font-size:.78em;color:var(--tx3);white-space:nowrap;min-width:42px">${isTime?'دقيقة':'عدة'}</span>
+    </div>
+  </div>`;
+}
+
+// قراءة الحالة الحالية من الـ DOM (عشان منخسرش التعديلات وقت الإضافة/الحذف)
+function _readDqEditor(){
+  const rows = document.querySelectorAll('#dqEditList .dq-edit-row');
+  const tasks = [];
+  rows.forEach((row,idx)=>{
+    const icon = document.getElementById('dqIcon-'+idx)?.textContent || '⭐';
+    const name = document.getElementById('dqName-'+idx)?.value?.trim() || 'مهمة';
+    const target = parseInt(document.getElementById('dqTarget-'+idx)?.value) || 1;
+    const isTime = document.getElementById('dqTypeTime-'+idx)?.classList.contains('act');
+    tasks.push({ icon, name, target, type:isTime?'time':'count', unit:isTime?'دقيقة':'عدة',
+                 id: 't'+idx+'_'+name.replace(/\s/g,'').slice(0,6) });
+  });
+  return tasks;
+}
+
+window.cycleDqIcon = function(idx){
+  const btn = document.getElementById('dqIcon-'+idx); if(!btn) return;
+  const cur = btn.textContent;
+  const i = SYS_DQ_ICONS.indexOf(cur);
+  btn.textContent = SYS_DQ_ICONS[(i+1)%SYS_DQ_ICONS.length];
+};
+window.setDqType = function(idx, type){
+  const cBtn = document.getElementById('dqTypeCount-'+idx), tBtn = document.getElementById('dqTypeTime-'+idx);
+  const unit = document.getElementById('dqUnit-'+idx);
+  if(!cBtn||!tBtn) return;
+  const isTime = type==='time';
+  cBtn.classList.toggle('act', !isTime); tBtn.classList.toggle('act', isTime);
+  cBtn.style.background = !isTime?'rgba(91,184,255,.25)':'transparent'; cBtn.style.color = !isTime?'#b8e6ff':'var(--tx3)';
+  tBtn.style.background = isTime?'rgba(91,184,255,.25)':'transparent'; tBtn.style.color = isTime?'#b8e6ff':'var(--tx3)';
+  if(unit) unit.textContent = isTime?'دقيقة':'عدة';
+};
+window.addDailyTask = function(){
+  const tasks = _readDqEditor();
+  tasks.push({ icon:'⭐', name:'مهمة جديدة', target:10, type:'count', unit:'عدة', id:'t'+Date.now() });
+  _renderDqEditor(tasks);
+};
+window.removeDailyTask = function(idx){
+  const tasks = _readDqEditor();
+  if(tasks.length<=1){ if(typeof toast==='function')toast('لازم مهمة واحدة على الأقل','w'); return; }
+  tasks.splice(idx,1);
+  _renderDqEditor(tasks);
+};
+window.resetDailyQuestDefault = function(){
+  _renderDqEditor(SYS_DEFAULT_DAILY.map(t=>({...t})));
+};
+
 function saveDailyQuestEdit(){
   const dq = _getDailyQuest();
-  dq.tasks.forEach(t=>{
-    const v = parseInt(document.getElementById('dqEdit-'+t.id)?.value);
-    if(v>0) t.target = v;
-  });
+  const newTasks = _readDqEditor();
+  if(!newTasks.length){ if(typeof toast==='function')toast('أضف مهمة واحدة على الأقل','w'); return; }
+  // احفظ التقدم القديم لو الاسم/المعرّف اتطابق
+  const oldByName = {}; (dq.tasks||[]).forEach(t=>{ oldByName[t.name]=t.progress; });
+  dq.tasks = newTasks.map(t=>({ ...t, progress: oldByName[t.name]!==undefined ? Math.min(oldByName[t.name],t.target) : 0 }));
+  dq.completed = _dailyAllDone(dq);
   // احفظ كقالب للأيام الجاية
-  G.dailyQuestTemplate = dq.tasks.map(t=>({id:t.id,icon:t.icon,name:t.name,target:t.target,unit:t.unit}));
+  G.dailyQuestTemplate = newTasks.map(t=>({id:t.id,icon:t.icon,name:t.name,target:t.target,unit:t.unit,type:t.type}));
   if(typeof saveD==='function') saveD();
   if(typeof clM==='function') clM('toolMo');
   renderDailyQuest();
-  if(typeof toast==='function') toast('✅ تم تحديث أهدافك','s');
+  if(typeof toast==='function') toast('✅ تم تحديث مهامك','s');
 }
 
 window.addEventListener('load',()=>{setTimeout(()=>{try{if(typeof renderDailyQuest==='function')renderDailyQuest();}catch(e){console.warn('dq:',e);}},500);});
+
+
+/* ═══════════════════════════════════════════════════════════════
+   🌑  THE SYSTEM — ARISE · TITLES · PENALTY · LOG
+   مبني على البيانات والأنظمة الموجودة — صفر كسر
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ════════════ [1] SYSTEM LOG (سجل النظام) ════════════ */
+function systemLog(type, text){
+  if(!G.sysLog) G.sysLog = [];
+  G.sysLog.unshift({ t:Date.now(), type:type||'notif', text:text||'' });
+  if(G.sysLog.length > 200) G.sysLog = G.sysLog.slice(0,200); // حد أقصى
+  if(typeof saveD==='function') saveD();
+}
+function _logIcon(type){ return {notif:'⚡',quest:'⚔️',levelup:'⬆️',warning:'⚠️',arise:'🌑',title:'👑',penalty:'⛓️',pr:'🏆'}[type]||'•'; }
+function _logTimeAgo(ts){
+  const d = Date.now()-ts, m=Math.floor(d/60000), h=Math.floor(d/3600000), dy=Math.floor(d/86400000);
+  if(m<1) return 'الآن'; if(m<60) return `منذ ${m} د`; if(h<24) return `منذ ${h} س`; if(dy<7) return `منذ ${dy} يوم`;
+  return new Date(ts).toLocaleDateString('ar-EG',{day:'numeric',month:'short'});
+}
+function renderSystemLog(){
+  const el = document.getElementById('systemLogArea'); if(!el) return;
+  const log = G.sysLog || [];
+  el.innerHTML = `
+  <div class="card">
+    <div class="ct" style="display:flex;justify-content:space-between;align-items:center">📜 سجل النظام
+      <span style="font-family:'Orbitron',monospace;font-size:.58em;color:rgba(120,195,255,.7);letter-spacing:.12em">[ SYSTEM · LOG ]</span>
+    </div>
+    ${log.length===0
+      ? `<div style="padding:24px;text-align:center;color:var(--tx2);font-size:.85em">السجل فارغ — ابدأ رحلتك أيها الصياد ⚔️</div>`
+      : `<div class="sys-log-list">${log.slice(0,60).map(e=>`
+          <div class="sys-log-item sys-log-${e.type}">
+            <span class="sys-log-icon">${_logIcon(e.type)}</span>
+            <span class="sys-log-text">${(e.text||'').replace(/</g,'&lt;')}</span>
+            <span class="sys-log-time">${_logTimeAgo(e.t)}</span>
+          </div>`).join('')}</div>
+        ${log.length>1?`<button class="btn btn-dk btn-full" style="margin-top:10px;font-size:.78em;color:var(--tx3)" onclick="clearSystemLog()">🗑️ مسح السجل</button>`:''}`}
+  </div>`;
+}
+function clearSystemLog(){
+  if(!confirm('مسح كل سجل النظام؟')) return;
+  G.sysLog = [];
+  if(typeof saveD==='function') saveD();
+  renderSystemLog();
+  if(typeof toast==='function') toast('🗑️ تم مسح السجل','i');
+}
+
+/* ════════════ [2] ARISE / SHADOW EXTRACTION (عند PR) ════════════ */
+function ariseAnimation(exName, weight, unit){
+  // امنع التكدّس
+  document.querySelectorAll('.arise-overlay').forEach(e=>e.remove());
+  const ov = document.createElement('div');
+  ov.className = 'arise-overlay';
+  ov.innerHTML = `
+    <div class="arise-glow"></div>
+    <div class="arise-particles">${Array.from({length:14}).map((_,i)=>`<span class="arise-p" style="--ang:${i*25.7}deg;--d:${.3+Math.random()*.5}s"></span>`).join('')}</div>
+    <div class="arise-content">
+      <div class="arise-sys">[ SYSTEM ]</div>
+      <div class="arise-word">ARISE</div>
+      <div class="arise-ar">انهض</div>
+      <div class="arise-detail">
+        <div class="arise-pr-label">🏆 رقم قياسي جديد</div>
+        <div class="arise-pr-ex">${(exName||'').replace(/</g,'&lt;')}</div>
+        <div class="arise-pr-w">${weight} ${unit||'كجم'}</div>
+      </div>
+      <div class="arise-hint">اضغط للمتابعة</div>
+    </div>`;
+  ov.onclick = ()=>{ ov.classList.add('arise-out'); setTimeout(()=>ov.remove(),400); };
+  document.body.appendChild(ov);
+  // صوت درامي
+  try{ _ariseSound(); }catch(e){}
+  if(navigator.vibrate) navigator.vibrate([60,40,120]);
+  // إغلاق تلقائي بعد 5 ثواني
+  setTimeout(()=>{ if(ov.parentNode){ ov.classList.add('arise-out'); setTimeout(()=>ov.remove(),400); } }, 5000);
+  // سجّل
+  systemLog('arise', `استخراج الظل — رقم قياسي: ${exName} ${weight}${unit||'كجم'}`);
+}
+function _ariseSound(){
+  if(G && G.sysSoundOff) return;
+  if(!_sysAudioCtx){ _sysAudioCtx = new (window.AudioContext||window.webkitAudioContext)(); }
+  const ctx = _sysAudioCtx; if(ctx.state==='suspended') ctx.resume();
+  const now = ctx.currentTime;
+  // نغمة هابطة درامية (شبه استدعاء الظل)
+  const o1 = ctx.createOscillator(), g1 = ctx.createGain();
+  o1.type='sawtooth'; o1.frequency.setValueAtTime(180,now); o1.frequency.exponentialRampToValueAtTime(60,now+0.9);
+  g1.gain.setValueAtTime(0,now); g1.gain.linearRampToValueAtTime(0.12,now+0.05); g1.gain.exponentialRampToValueAtTime(0.001,now+1.1);
+  o1.connect(g1); g1.connect(ctx.destination); o1.start(now); o1.stop(now+1.1);
+  // طبقة عالية لامعة
+  [880,1320].forEach((f,i)=>{ const o=ctx.createOscillator(),g=ctx.createGain(); o.type='sine'; o.frequency.setValueAtTime(f,now+0.3+i*0.1); g.gain.setValueAtTime(0,now+0.3+i*0.1); g.gain.linearRampToValueAtTime(0.1,now+0.35+i*0.1); g.gain.exponentialRampToValueAtTime(0.001,now+1+i*0.1); o.connect(g); g.connect(ctx.destination); o.start(now+0.3+i*0.1); o.stop(now+1.2); });
+}
+
+/* ════════════ [3] TITLE SYSTEM (الألقاب) ════════════ */
+const SYS_TITLES = [
+  { id:'first',    name:'الصياد المستيقظ',  icon:'⚡', cond:g=>(g.ses||[]).length>=1,  desc:'أكمل أول جلسة' },
+  { id:'ten',      name:'مُطهّر البوابات',   icon:'🚪', cond:g=>(g.ses||[]).length>=10, desc:'10 جلسات' },
+  { id:'fifty',    name:'مدمّر الدنجن',      icon:'💥', cond:g=>(g.ses||[]).length>=50, desc:'50 جلسة' },
+  { id:'hundred',  name:'سيّد الزنازين',     icon:'🏛️', cond:g=>(g.ses||[]).length>=100,desc:'100 جلسة' },
+  { id:'streak7',  name:'صياد بلا توقف',     icon:'🔥', cond:g=>(g.streak||0)>=7,        desc:'7 أيام متتالية' },
+  { id:'streak30', name:'الإرادة الفولاذية', icon:'⛓️', cond:g=>(g.streak||0)>=30,       desc:'30 يوم متتالي' },
+  { id:'iron',     name:'كاسر الحديد',       icon:'🏋️', cond:g=>_maxLift(g)>=100,         desc:'ارفع 100 كجم+' },
+  { id:'titan',    name:'تيتان القوة',       icon:'💪', cond:g=>_maxLift(g)>=150,         desc:'ارفع 150 كجم+' },
+  { id:'volume',   name:'سيد الحجم',         icon:'📊', cond:g=>_weekVol(g)>=20000,       desc:'20 طن في أسبوع' },
+  { id:'monarch',  name:'مَلِك الظل',        icon:'👑', cond:g=>(g.ses||[]).length>=100&&(g.streak||0)>=30, desc:'النخبة المطلقة' },
+];
+function _maxLift(g){ let m=0; (g.ses||[]).forEach(s=>Object.values(s.exs||{}).forEach(e=>{const w=e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):(e.w||0); if(w>m)m=w;})); return m; }
+function _weekVol(g){ try{ return (typeof SCI!=='undefined'&&SCI.weeklyVolume)?SCI.weeklyVolume():0; }catch(e){ return 0; } }
+
+function getEarnedTitles(){ return SYS_TITLES.filter(t=>{ try{return t.cond(G);}catch(e){return false;} }); }
+function getActiveTitle(){
+  const earned = getEarnedTitles();
+  if(G.activeTitle){ const t = earned.find(x=>x.id===G.activeTitle); if(t) return t; }
+  return earned.length ? earned[earned.length-1] : null; // أحدث/أعلى لقب
+}
+// فحص ألقاب جديدة (يتنده بعد الجلسة)
+function checkNewTitles(){
+  if(!G.unlockedTitles) G.unlockedTitles = [];
+  const earned = getEarnedTitles();
+  const newOnes = earned.filter(t=>!G.unlockedTitles.includes(t.id));
+  newOnes.forEach(t=>{
+    G.unlockedTitles.push(t.id);
+    systemLog('title', `لقب جديد: ${t.name}`);
+    setTimeout(()=>{
+      systemPopup({ type:'levelup', icon:t.icon, sysLabel:'[ TITLE · ACQUIRED ]', title:'لقب جديد',
+        lines:[`<span style="font-size:1.15em;color:#fbbf24;font-weight:900">${t.name}</span>`, `<span style="opacity:.8;font-size:.9em">${t.desc}</span>`], cta:'تجهيز', sound:true });
+    }, 600);
+  });
+  if(newOnes.length && typeof saveD==='function') saveD();
+}
+function setActiveTitle(id){ G.activeTitle = id; if(typeof saveD==='function')saveD(); renderTitles(); if(typeof renderTodayMission==='function')renderTodayMission(); }
+function renderTitles(){
+  const el = document.getElementById('titlesArea'); if(!el) return;
+  const earned = getEarnedTitles(), active = getActiveTitle();
+  el.innerHTML = `
+  <div class="card">
+    <div class="ct" style="display:flex;justify-content:space-between;align-items:center">👑 الألقاب
+      <span style="font-family:'Orbitron',monospace;font-size:.58em;color:rgba(120,195,255,.7);letter-spacing:.12em">[ ${earned.length}/${SYS_TITLES.length} ]</span>
+    </div>
+    ${active?`<div class="sys-active-title"><span style="font-size:1.4em">${active.icon}</span><div><div style="font-size:.58em;color:var(--tx3);font-family:'Orbitron',monospace">اللقب الحالي</div><div style="font-weight:900;color:#fbbf24;font-size:1.05em">${active.name}</div></div></div>`:''}
+    <div class="sys-titles-grid">
+      ${SYS_TITLES.map(t=>{
+        const unlocked = earned.some(e=>e.id===t.id);
+        const isActive = active && active.id===t.id;
+        return `<div class="sys-title-chip ${unlocked?'unlocked':'locked'} ${isActive?'active':''}" ${unlocked?`onclick="setActiveTitle('${t.id}')"`:''}>
+          <div class="sys-title-icon">${unlocked?t.icon:'🔒'}</div>
+          <div class="sys-title-name">${unlocked?t.name:'???'}</div>
+          <div class="sys-title-desc">${t.desc}</div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div style="margin-top:8px;font-size:.66em;color:var(--tx3);text-align:center">اضغط على لقب مفتوح لتجهيزه</div>
+  </div>`;
+}
+
+/* ════════════ [4] PENALTY QUEST (مهمة العقاب) ════════════ */
+function _daysSinceLastWorkout(){
+  if(!G.ses || !G.ses.length) return 0;
+  const last = new Date(G.ses[G.ses.length-1].date);
+  return Math.floor((Date.now()-last)/86400000);
+}
+function checkPenalty(){
+  const gap = _daysSinceLastWorkout();
+  const today = _todayStr();
+  // عقاب لو فات يومين+ ومفيش عقاب اتفعّل النهاردة
+  if(gap>=2 && G.penaltyDate!==today && (G.ses||[]).length>0){
+    G.penaltyActive = true;
+    G.penaltyDate = today;
+    G.penaltyGap = gap;
+    if(typeof saveD==='function') saveD();
+    systemLog('penalty', `مهمة عقاب — غياب ${gap} أيام`);
+    setTimeout(()=>{
+      systemPopup({ type:'warning', icon:'⛓️', sysLabel:'[ PENALTY · QUEST ]', title:'مهمة العقاب',
+        lines:[`غبت ${gap} أيام أيها الصياد.`, `النظام يفرض مهمة تعويضية.`, `<span style="opacity:.8;font-size:.88em">أكمل تمرين اليوم لرفع العقاب</span>`], cta:'سأعوّض', sound:true });
+    }, 1200);
+  }
+  // ارفع العقاب لو اتمرّن
+  if(G.penaltyActive && gap===0){
+    G.penaltyActive = false;
+    if(typeof saveD==='function') saveD();
+  }
+  renderPenaltyBanner();
+}
+function renderPenaltyBanner(){
+  const host = document.getElementById('penaltyBannerHost');
+  if(!host) return;
+  if(G.penaltyActive){
+    host.innerHTML = `<div class="sys-penalty-banner">
+      <span class="sys-penalty-icon">⛓️</span>
+      <div style="flex:1"><div style="font-weight:900;color:#ff8095;font-size:.9em">⚠ مهمة العقاب نشطة</div><div style="font-size:.74em;color:var(--tx2)">أكمل تمرين اليوم لرفع العقاب أيها الصياد</div></div>
+    </div>`;
+  } else {
+    host.innerHTML = '';
+  }
+}
+
+/* ════════════ HOOKS — ربط بالأحداث الموجودة ════════════ */
+(function _hookSystemFeatures(){
+  // ARISE عند PR (نلفّ showSessionSummaryModal)
+  if(typeof window.showSessionSummaryModal==='function'){
+    const _orig = window.showSessionSummaryModal;
+    window.showSessionSummaryModal = function(s, sug){
+      // اكتشف أكبر PR في الجلسة
+      let prEx=null, prW=0, prUnit='كجم';
+      try{
+        Object.entries(s.exs||{}).forEach(([id,e])=>{
+          const prevBest = (G.ses||[]).filter(x=>x.id!==s.id).reduce((b,x)=>{const ex=x.exs?.[id];if(!ex)return b;if(ex.sets?.length)ex.sets.forEach(t=>{if((t.w||0)>b)b=t.w||0});else if((ex.w||0)>b)b=ex.w||0;return b},0);
+          const cur = e.sets?.length?e.sets.reduce((b,t)=>t.w>b?t.w:b,0):(e.w||0);
+          if(cur>prevBest && cur>0 && cur>prW){ prW=cur; prEx=e.name; prUnit=e.unit||'كجم'; }
+        });
+      }catch(err){}
+      const r = _orig.apply(this, arguments);
+      // شغّل ARISE قبل المودال لو في PR
+      if(prEx && prW>0){
+        setTimeout(()=>ariseAnimation(prEx, prW, prUnit), 200);
+      }
+      // فحص ألقاب جديدة
+      setTimeout(checkNewTitles, 2500);
+      systemLog('quest', `أكملت ${s.dn||'تمرين'} — ${Math.round((typeof SCI!=='undefined'&&SCI.sessionVolume)?SCI.sessionVolume(s):0)} كجم`);
+      return r;
+    };
+  }
+})();
+
+// سجّل دخول النظام + افحص العقاب عند التحميل
+window.addEventListener('load', ()=>{
+  setTimeout(()=>{
+    try{
+      if(!G.sysLog || !G.sysLog.length) systemLog('notif','تم تفعيل النظام');
+      checkPenalty();
+      checkNewTitles();
+    }catch(e){ console.warn('sysfeat:',e); }
+  }, 1400);
+});
 
 /* ═══════════════════════════════════════════════════════════ */
 
