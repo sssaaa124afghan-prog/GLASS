@@ -2167,6 +2167,30 @@ html{scroll-behavior:smooth}
 .sys-log-item{transition:background .2s,transform .12s}
 .sys-log-item:active{transform:scale(.99)}
 
+/* ═══════════════════════════════════════════════
+   🔋 تحسينات البطارية والحرارة (Performance)
+   ═══════════════════════════════════════════════ */
+/* 1) إيقاف كل الأنيميشن عند إخفاء التطبيق (الموبايل في الجيب = صفر استهلاك) */
+body.app-hidden *,
+body.app-hidden *::before,
+body.app-hidden *::after{
+  animation-play-state:paused!important;
+}
+/* 2) احترام وضع توفير الطاقة / تقليل الحركة */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+/* 3) تلميحات GPU للعناصر المتحركة المستمرة (يقلل الحِمل على المعالج) */
+.sl-scanline,.sl-status-card::before,.sys-dq-scan,.arise-glow{
+  will-change:transform,opacity;
+  contain:layout style paint;
+}
+
 </style>
 
 </head>
@@ -8467,6 +8491,19 @@ window.addEventListener('load', ()=>{
     }catch(e){ console.warn('sysfeat:',e); }
   }, 1400);
 });
+
+
+/* 🔋 إيقاف الأنيميشن عند إخفاء التطبيق لتوفير البطارية ومنع التسخين */
+(function(){
+  function _onVis(){
+    if(document.hidden){ document.body.classList.add('app-hidden'); }
+    else { document.body.classList.remove('app-hidden'); }
+  }
+  document.addEventListener('visibilitychange', _onVis);
+  // أيضاً عند فقد التركيز (blur) على بعض المتصفحات
+  window.addEventListener('pagehide', ()=>document.body.classList.add('app-hidden'));
+  window.addEventListener('pageshow', ()=>document.body.classList.remove('app-hidden'));
+})();
 
 /* ═══════════════════════════════════════════════════════════ */
 
