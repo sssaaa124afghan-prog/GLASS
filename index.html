@@ -2191,6 +2191,224 @@ body.app-hidden *::after{
   contain:layout style paint;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ⚡ v13 PERFORMANCE MODE — تبريد الهاتف
+   1) إزالة backdrop-filter من العناصر شبه المعتمة (هدر GPU صافي)
+   2) إيقاف أنيميشن box-shadow اللانهائية (أكبر مصدر تسخين)
+   3) تحويل خطوط المسح من تحريك left/right إلى opacity فقط
+   ═══════════════════════════════════════════════════════════ */
+.card,.sl-status-card,.sl-dungeon-gate,.sl-dungeon-header,.sl-quest,.qstat,
+.profile-card,.ai-coach-card,.dash-card,.dchip,.exi,.warmup-proto,.ai-chat-box,
+.day-banner,.morning-card,.tst,#slSystemNotif,#floatTimer,.sj-popup-overlay,.mo{
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.hdr{backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;animation:slideDown .4s ease!important}
+.bnav{backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}
+.mdl{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:linear-gradient(180deg,rgba(5,14,32,.99),rgba(2,8,20,.995))!important}
+/* تعويض إزالة البلور بخلفيات أكثر عتامة */
+.sl-quest{background:rgba(8,18,38,.96)!important}
+.card{background:rgba(9,20,42,.95)!important}
+.sl-status-card,.sl-dungeon-gate{background-color:rgba(7,16,34,.97)!important}
+#slSystemNotif{background:rgba(2,8,22,.97)!important}
+#floatTimer{background:rgba(2,8,22,.97)!important}
+
+/* إيقاف الأنيميشن المستمرة الثقيلة */
+body::after{animation:none!important;opacity:.3!important}
+.streak-badge,.block-badge,.ai-badge,.rank-s,.deload-banner,.sys-penalty-banner,
+.sl-rank-emblem::before,.dash-coach-icon,.ai-icon,.wo-ai-btn,.ai-coach-card::before{animation:none!important}
+.lvl-pip.active{animation:none!important;box-shadow:0 0 8px rgba(0,212,255,.7)!important}
+.sys-dq-card.urgent{animation:none!important;box-shadow:0 0 24px rgba(255,84,112,.2)!important}
+.cb-fill::after{display:none!important}
+
+/* خطوط المسح: نبض opacity بدل تحريك layout */
+@keyframes slGlowOp{0%,100%{opacity:.35}50%{opacity:1}}
+.sl-status-card::after{animation:slGlowOp 4s ease-in-out infinite!important;left:8%!important;right:8%!important}
+.sys-dq-scan{animation:slGlowOp 4s ease-in-out infinite!important;left:10%!important;right:10%!important}
+.sj-popup-scan{animation:slGlowOp 2.2s ease-in-out infinite!important;left:8%!important;right:8%!important}
+
+/* الكويست النشط: توهج ثابت + نبض opacity على الخط العلوي فقط */
+.sl-quest.exi-active,.exi.exi-active{animation:exIn .35s ease!important;box-shadow:0 0 26px rgba(0,212,255,.14),inset 0 0 28px rgba(0,212,255,.04)!important}
+.sl-quest.exi-active::before{opacity:1!important;animation:statusBlink 2.6s ease-in-out infinite!important}
+
+/* ═══════════════════════════════════════════════════════════
+   🌀 v13 SYSTEM TOASTS — رسائل [ SYSTEM ] بهوية سولو ليفيلنج
+   ═══════════════════════════════════════════════════════════ */
+.tst{
+  border-radius:2px!important;
+  clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px),0 10px);
+  box-shadow:0 6px 24px rgba(0,0,0,.45)!important;
+}
+.tst::before{
+  content:'[ S Y S T E M ]';display:block;
+  font-family:'Orbitron',monospace;font-size:.52em;font-weight:900;
+  letter-spacing:.25em;opacity:.6;margin-bottom:3px;
+}
+::selection{background:rgba(0,212,255,.3)}
+
+/* ═══════════════════════════════════════════════════════════════════
+   💧 v16 LIQUID SYSTEM — سولو ليفيلنج × Liquid Glass
+   زجاج سائل حقيقي (blur على النوافذ الكبيرة فقط) · أزرق كهربائي مشبع
+   انعكاسات ضوئية specular · أزرار كبسولات مستقبلية · صفر أنيميشن لانهائية
+   ═══════════════════════════════════════════════════════════════════ */
+:root{
+  --p:#3db8ff;            /* أزرق كهربائي — لون النظام */
+  --cy:#00eaff;--vio:#8b5cf6;
+  --r:18px;--r2:22px;
+  --sl-bg-window:rgba(46,96,200,.16); /* نوافذ SL بقت شفافة (مع الحفاظ على أقواس الزوايا) */
+  --lg-bd:rgba(150,205,255,.30);
+  --lg-hi:inset 0 1px 0 rgba(225,242,255,.34),inset 0 -1px 0 rgba(80,140,255,.10);
+}
+
+/* ── الخلفية: عمق أزرق-بنفسجي زي ليل سولو ليفيلنج ── */
+body{background:
+  radial-gradient(130% 90% at 50% -12%,#0c1a3e 0%,#070d22 46%,#03050f 100%) fixed!important}
+body::after{display:none!important}
+
+/* ═══ A) الزجاج السائل الحقيقي — النوافذ الكبيرة المفردة فقط ═══ */
+.hdr,.bnav,.mdl,.sl-status-card,.sl-dungeon-gate,.tm-card,.sys-dq-card,#floatTimer,#slSystemNotif,.sj-popup{
+  backdrop-filter:blur(24px) saturate(170%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(170%)!important;
+}
+.tm-card,.sys-dq-card{
+  background:linear-gradient(160deg,rgba(110,165,255,.14),rgba(30,60,140,.10) 45%,rgba(12,24,60,.18))!important;
+  border:1px solid var(--lg-bd)!important;border-radius:24px!important;
+  box-shadow:var(--lg-hi),0 18px 44px rgba(0,8,36,.55),0 0 34px rgba(61,160,255,.12)!important}
+.sl-status-card,.sl-dungeon-gate{
+  background-color:rgba(46,96,200,.14)!important;
+  border:1px solid rgba(150,205,255,.34)!important;border-radius:22px!important;
+  box-shadow:var(--lg-hi),0 18px 44px rgba(0,8,36,.55),0 0 40px rgba(61,160,255,.15)!important}
+.sl-dungeon-header{border-radius:16px!important;background:rgba(70,130,255,.10)!important}
+
+/* ═══ B) زجاج خفيف (بدون blur) للعناصر المتكررة ═══ */
+.card,.tool-card,.dash-card,.sc,.profile-card,.ai-coach-card,.morning-card,
+.day-banner,.prog-card,.badge-card,.lib-item,.coach-rec,.elite-decision,
+.warmup-proto,.ai-chat-box,.oe-suggest{
+  border-radius:22px!important;
+  background:linear-gradient(160deg,rgba(105,160,255,.11),rgba(25,50,120,.14) 45%,rgba(10,22,56,.22))!important;
+  border:1px solid rgba(145,200,255,.20)!important;
+  box-shadow:inset 0 1px 0 rgba(220,240,255,.22),0 12px 32px rgba(0,8,32,.45)!important}
+.card{position:relative}
+.card::before,.card::after{display:none!important}
+.sl-quest{border-radius:18px!important;border-color:rgba(120,185,255,.22)!important;
+  background:linear-gradient(160deg,rgba(95,150,255,.09),rgba(12,26,64,.30))!important}
+.sl-quest.exi-active,.exi.exi-active{
+  border-color:rgba(80,180,255,.75)!important;
+  box-shadow:0 0 34px rgba(61,160,255,.28),inset 0 1px 0 rgba(220,240,255,.25),inset 0 0 34px rgba(61,160,255,.06)!important}
+.sys-dq-task{border-radius:16px!important;border:1px solid rgba(130,190,255,.12)!important;
+  background:linear-gradient(160deg,rgba(90,145,255,.08),rgba(12,26,62,.30))!important}
+
+/* ═══ C) الأزرار: كبسولات سائلة مستقبلية ═══ */
+.btn{border-radius:999px!important;border:1px solid rgba(150,205,255,.22)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.02) 45%),rgba(40,80,180,.18)!important;
+  color:#dbeeff!important;
+  box-shadow:inset 0 1px 0 rgba(230,245,255,.30),0 6px 18px rgba(0,10,40,.35)!important;
+  transition:transform .15s ease,box-shadow .2s ease,filter .2s ease!important}
+.btn:active{transform:scale(.95);filter:brightness(1.15)}
+.btn-p,.tm-start-btn{border-radius:999px!important;border:none!important;color:#fff!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 42%),linear-gradient(135deg,#2f8eff,#00cfff)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 0 0 1px rgba(170,225,255,.35),0 10px 30px rgba(36,140,255,.48)!important;
+  text-shadow:0 1px 8px rgba(0,40,100,.45)}
+.tm-start-btn{padding:15px!important}
+.tm-start-btn:active,.btn-p:active{transform:scale(.97);filter:brightness(1.12)}
+.mx{border-radius:999px!important;border:1px solid rgba(255,110,140,.35)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.12),transparent 50%),rgba(120,20,40,.25)!important}
+
+/* ═══ D) الهيدر: لوح زجاجي عائم ═══ */
+.hdr{background:linear-gradient(180deg,rgba(70,120,240,.15),rgba(10,20,52,.55))!important;
+  border-bottom:1px solid rgba(140,200,255,.22)!important;
+  box-shadow:inset 0 1px 0 rgba(220,240,255,.18),0 14px 36px rgba(0,8,36,.45)!important}
+.hdr h1{text-shadow:0 0 22px rgba(61,160,255,.65),0 0 60px rgba(61,160,255,.25)}
+.streak-badge,.theme-btn,.week-badge,.recovery-badge,.fatigue-badge,.block-badge,.ai-badge{
+  border-radius:999px!important;border:1px solid rgba(150,205,255,.26)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.02) 50%),rgba(40,85,190,.18)!important;
+  box-shadow:inset 0 1px 0 rgba(225,242,255,.28)!important}
+.theme-btn:active{transform:scale(.92)}
+.block-badge,.ai-badge,.sl-rank-pill,.sl-gate-stage,.bdg{clip-path:none!important}
+
+/* ═══ E) الدوك: لوح Liquid Glass عائم بكبسولة نشطة متوهجة ═══ */
+.bnav{border-radius:30px!important;border:1px solid rgba(150,205,255,.28)!important;
+  background:linear-gradient(180deg,rgba(80,130,250,.16),rgba(10,20,52,.62))!important;
+  padding:8px 10px!important;
+  box-shadow:inset 0 1px 0 rgba(225,242,255,.25),0 18px 46px rgba(0,6,30,.6),0 0 30px rgba(61,160,255,.10)!important}
+.bni{border-radius:22px!important;transition:transform .15s ease,background .2s ease,box-shadow .2s ease!important}
+.bni.act{color:#eaf6ff!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.20),rgba(255,255,255,.03) 50%),linear-gradient(135deg,rgba(47,142,255,.55),rgba(0,190,255,.40))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.40),0 6px 20px rgba(36,140,255,.40)!important}
+.bni.act .ic{filter:drop-shadow(0 0 9px rgba(120,200,255,.95))}
+.bni:active{transform:scale(.93)}
+
+/* ═══ F) الحقول: كبسولات زجاجية بتركيز كهربائي ═══ */
+.set-in,.rpe-in{border-radius:13px!important;border:1px solid rgba(140,200,255,.20)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),transparent 60%),rgba(10,24,62,.55)!important;color:#eaf4ff!important}
+.set-in:focus,.rpe-in:focus{border-color:rgba(90,180,255,.9)!important;
+  box-shadow:0 0 0 3px rgba(61,160,255,.22),inset 0 1px 0 rgba(220,240,255,.2)!important;
+  background:rgba(14,32,80,.65)!important}
+.lib-search,.ai-input-txt,textarea,select,
+input[type=text],input[type=number],input[type=date],input[type=time]{border-radius:15px!important}
+.set-row{border-bottom:1px solid rgba(130,190,255,.08)!important}
+
+/* ═══ G) الشرائح والتبويبات: كبسولات ═══ */
+.dchip{border-radius:18px!important;border:1px solid rgba(145,200,255,.18)!important;
+  background:linear-gradient(160deg,rgba(100,155,255,.10),rgba(14,30,74,.28))!important;
+  box-shadow:inset 0 1px 0 rgba(220,240,255,.16)!important}
+.dchip.act{border-color:rgba(90,180,255,.75)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 50%),linear-gradient(135deg,rgba(47,142,255,.45),rgba(0,190,255,.30))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 8px 24px rgba(36,140,255,.35)!important}
+.dchip:active{transform:scale(.97)}
+.qstat,.stat-tab,.lib-filter,.ss-chip,.pw-chip,.sys-title-chip,.cal-cell,.tm-rate-chip,.tm-macro,.tm-bw-warn{border-radius:14px!important}
+.stat-tab,.lib-filter{clip-path:none!important}
+.stat-tab.act,.lib-filter.act{border-color:rgba(90,180,255,.7)!important;color:#eaf6ff!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.14),transparent 50%),rgba(47,142,255,.30)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 6px 18px rgba(36,140,255,.30)!important}
+.tm-macro{border:1px solid rgba(145,200,255,.18)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 55%),rgba(24,50,120,.30)!important;color:#dceeff!important}
+.tm-day-chip,.tm-intel-btn{border-radius:999px!important;border:1px solid rgba(150,205,255,.24)!important;
+  background:rgba(47,142,255,.14)!important}
+.tm-header{background:linear-gradient(180deg,rgba(110,165,255,.12),transparent)!important;
+  border-bottom:1px solid rgba(140,200,255,.14)!important}
+.tm-readiness-ring{box-shadow:0 0 22px rgba(61,160,255,.30)!important}
+.tm-week-pip,.tm-ch-bar,.tm-ch-fill{border-radius:99px!important}
+
+/* ═══ H) أشرطة التقدم: أنبوب طاقة سائل ═══ */
+.cb-track{height:9px!important;border-radius:99px!important;border:none!important;overflow:hidden;
+  background:rgba(10,26,66,.65)!important;box-shadow:inset 0 1px 3px rgba(0,6,24,.6)!important}
+.cb-fill{border-radius:99px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.35),transparent 55%),linear-gradient(90deg,#2f8eff,#00e2ff)!important;
+  box-shadow:0 0 16px rgba(61,180,255,.70)}
+
+/* ═══ I) المودالات والنوافذ: شيت زجاجي سائل ═══ */
+.mdl{border-radius:30px 30px 0 0!important;border:1px solid rgba(150,205,255,.26)!important;border-bottom:none!important;
+  background:linear-gradient(180deg,rgba(90,140,250,.15),rgba(8,16,44,.66))!important;
+  box-shadow:inset 0 1px 0 rgba(225,242,255,.25),0 -16px 60px rgba(36,120,255,.16)!important;clip-path:none!important}
+.mh{background:none!important;border-bottom:1px solid rgba(140,200,255,.12)!important}
+.sj-popup{clip-path:none!important;border-radius:26px!important;border:1px solid rgba(150,205,255,.30)!important;
+  background:linear-gradient(160deg,rgba(100,155,255,.14),rgba(12,24,60,.30))!important;
+  box-shadow:inset 0 1px 0 rgba(225,242,255,.30),0 24px 70px rgba(0,8,36,.65),0 0 40px rgba(61,160,255,.18)!important}
+#floatTimer{border-radius:22px!important;border:1px solid rgba(150,205,255,.30)!important;
+  background:linear-gradient(160deg,rgba(100,155,255,.16),rgba(12,24,60,.30))!important}
+#slSystemNotif{border-radius:20px!important;background:linear-gradient(160deg,rgba(100,155,255,.16),rgba(12,24,60,.34))!important}
+
+/* ═══ J) عناوين الأقسام + توستات ═══ */
+.ct{border-bottom:none!important;padding-bottom:4px!important;color:#d2e9ff!important}
+.ct::before{content:'';width:4px;height:17px;border-radius:99px;flex-shrink:0;
+  background:linear-gradient(180deg,#3db8ff,#8b5cf6);box-shadow:0 0 12px rgba(61,160,255,.8)}
+.tst{border-radius:18px!important;clip-path:none!important;
+  border:1px solid rgba(150,205,255,.26)!important;
+  background:linear-gradient(160deg,rgba(100,155,255,.16),rgba(12,24,60,.40))!important;
+  backdrop-filter:blur(18px) saturate(160%)!important;-webkit-backdrop-filter:blur(18px) saturate(160%)!important;
+  box-shadow:inset 0 1px 0 rgba(225,242,255,.28),0 12px 36px rgba(0,8,36,.55)!important}
+
+/* ═══ K) إلغاء بقايا الشطف القديم ═══ */
+.btn,.bnav,.mdl,.sys-dq-card,.sl-rank-card,.sl-boss-card,.sl-report-card{clip-path:none!important}
+.sl-rank-card,.sl-boss-card,.sl-report-card{border-radius:22px!important;border:1px solid rgba(150,205,255,.26)!important;
+  background:linear-gradient(160deg,rgba(100,155,255,.11),rgba(12,26,64,.26))!important;
+  box-shadow:inset 0 1px 0 rgba(220,240,255,.20),0 0 30px rgba(61,160,255,.10)!important}
+.tm-card{border-radius:24px!important}
+
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(90,170,255,.35);border-radius:99px}
+
 </style>
 
 </head>
@@ -2218,7 +2436,7 @@ body.app-hidden *::after{
     <div class="hdr-r">
       <div class="week-badge" id="weekBdg">📅 0/4</div>
       <div class="streak-badge">🔥 <span id="strk">0</span></div>
-      <div class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="F13: auto/manual theme">🌙</div>
+      <div class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="صوت النظام">🔊</div>
       <span id="syncDot" class="sync-dot saved" title="محفوظ ✓"></span>
     </div>
   </div>
@@ -2811,8 +3029,10 @@ body.app-hidden *::after{
 
 <script>
 'use strict';
-const K = 'gymProAI_v12_fixed'; /* v12: fixed laggingMuscle/predictStrength/VELOCITY slices, CSS perf, localStorage quota, added BMI/TDEE/Plate/CSV */
+const K = 'gymProAI_v12_fixed'; /* v13: saveCurrentSet wrapper, loadD whitelist (+injuries/supplements/pinnedNote/activeProgram), program-aware days, badges/standards IDs, streak break, PR dedupe, dark-only + sound toggle, GPU perf pass — المفتاح ثابت عشان البيانات */
 const dayOrder = ['upperA','lowerA','upperB','lowerB'];
+/* v13: ترتيب أيام البرنامج النشط (PPL/UL/FB) — يُستدعى وقت التشغيل فقط */
+function _activeDayOrder(){const p=(typeof G!=='undefined'&&G&&G.activeProgram)||'ppl';if(typeof PROGRAMS_DEF!=='undefined'&&PROGRAMS_DEF[p]&&PROGRAMS_DEF[p].dayOrder)return PROGRAMS_DEF[p].dayOrder;return dayOrder;}
 const MOTIVATIONAL = ['💪 أنت أقوى مما تفتكر','⭐ النجاح عادة.. وأنت بتبنيها','🔥 كمّل يا أسد الجيم!','💯 Push harder than yesterday','⚡ أنت وحش! كل يوم بتتحسن','🎯 القوة مش بس في الحديد.. في الإصرار','✨ مفيش حاجة اسمها مستحيل','🏆 كل تمرينة بتقربك من هدفك','🌟 الألم مؤقت.. النتيجة دائمة','💎 البطل اللي بيقوم مش اللي مبيوقعش'];
 const SHEHAB={name:'شهاب',age:22,nationality:'مصري',location:'عجمان، الإمارات',job:'محاسب في Noor Al Khaleej Perfume',program:'Push/Pull/Legs PPL · Progressive Overload',macros:{train:{protein:175,carbs:280,fats:65,cals:2385},rest:{protein:160,carbs:180,fats:70,cals:2030}},goals:['زيادة القوة','بناء عضلة','Progressive Overload']};
 const DEFAULT_SCHEDULE={0:{type:'rest',label:'يوم راحة',day:'الأحد'},1:{type:'train',label:'Upper A — صدر علوي + ظهر + كتف + ذراعين',day:'الإثنين'},2:{type:'train',label:'Lower A — كوادز + هامسترينج + مؤخرة + سمانة',day:'الثلاثاء'},3:{type:'rest',label:'يوم راحة',day:'الأربعاء'},4:{type:'train',label:'Upper B — لات + ظهر + صدر سفلي + كتف + ذراعين',day:'الخميس'},5:{type:'train',label:'Lower B — أسفل ظهر + كوادز + هامسترينج + كور',day:'الجمعة'},6:{type:'rest',label:'يوم راحة',day:'السبت'}};
@@ -3008,6 +3228,7 @@ G.doneExs=d.doneExs||{};G.completedDays=d.completedDays||{};
 G.aiKey=d.aiKey||'';G.claudeKey=d.claudeKey||'';G.chatHistory=d.chatHistory||[];
 G.theme=d.theme||'dark';G.notifications=d.notifications!==undefined?d.notifications:true;
 G.currentSets=d.currentSets||{};G.wellness=d.wellness||{};G.measurements=d.measurements||[];G.goals=d.goals||{};G.earnedBadges=d.earnedBadges||{};G.weeklyChallenge=d.weeklyChallenge||null;G.xp=d.xp||0;G.xpLevel=d.xpLevel||0;G.smartGoals=d.smartGoals||[];G.wellnessLog=d.wellnessLog||[];G.homeMode=false;G.profile=d.profile||{};
+G.injuries=d.injuries||[];G.supplements=d.supplements||[];G.pinnedNote=d.pinnedNote||'';G.activeProgram=d.activeProgram||'ppl'; /* v13 BUG FIX: حقول كانت بتتحفظ ومش بتترجع */
 G.nextSessionPlan=d.nextSessionPlan||{};G.rpeHistory=d.rpeHistory||{};
 G.poJournal=d.poJournal||{};G.swapHistory=d.swapHistory||{};G.templates=d.templates||[];
 G._lastMilestone=d._lastMilestone||0;G._lastDeloadNotif=d._lastDeloadNotif||'';G._themeManualOverride=d._themeManualOverride||false;
@@ -3020,11 +3241,16 @@ G.penaltyActive=d.penaltyActive||false;G.penaltyDate=d.penaltyDate||null;G.penal
 G.uiCollapsed=d.uiCollapsed||{};G.uiShowAllDays=d.uiShowAllDays||false;G.uiWarmupCollapsed=d.uiWarmupCollapsed||{};
 G.uiStatusDefaultSet=d.uiStatusDefaultSet||false;G.uiCompact=d.uiCompact||false;
 G.sysSoundOff=d.sysSoundOff||false;G.activeStatTitle=d.activeStatTitle||null;
-// التحقق الصارم من G.days
-if(d.days&&d.days.upperA&&d.days.lowerA&&d.days.upperB&&d.days.lowerB){
+// v13 BUG FIX: التحقق من G.days حسب البرنامج النشط — كان بيمسح برامج UL/FB بعد الـ refresh
+const _progDef=(typeof PROGRAMS_DEF!=='undefined')?PROGRAMS_DEF[G.activeProgram||'ppl']:null;
+const _reqKeys=(_progDef&&_progDef.dayOrder)?_progDef.dayOrder:dayOrder;
+if(d.days&&_reqKeys.every(k=>d.days[k])){
   G.days=d.days;
-  dayOrder.forEach(k=>{if(!G.days[k])G.days[k]=JSON.parse(JSON.stringify(MY_DAYS[k]));});
-}else{G.days=JSON.parse(JSON.stringify(MY_DAYS));}
+}else if(_progDef&&_progDef.daysData){
+  G.days=JSON.parse(JSON.stringify(_progDef.daysData));
+}else{
+  G.days=JSON.parse(JSON.stringify(MY_DAYS));G.activeProgram='ppl';
+}
 }else{G.days=JSON.parse(JSON.stringify(MY_DAYS));}
 if(!G.schedule)G.schedule=JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
 if(G.aiKey)setTimeout(()=>{const i=document.getElementById('apiKeyInput');if(i)i.value=G.aiKey;},100);
@@ -3116,7 +3342,7 @@ function rQuickStats(){const el=document.getElementById('quickStats');if(!el)ret
 let curDay=null;
 let sessionStartTime=null,sessionTimerInterval=null;
 function fmtElapsed(ms){const t=Math.floor(ms/1000),h=Math.floor(t/3600),m=Math.floor((t%3600)/60),s=t%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
-function rDays(){const wk=weekKey(),done=G.completedDays[wk]||{},c=getCompletedCount(),wb=document.getElementById('weekBdg'),st=document.getElementById('strk'),dl=document.getElementById('dayList');if(wb)wb.textContent=`📅 ${c}/${dayOrder.length}`;if(st)st.textContent=G.streak||0;
+function rDays(){const wk=weekKey(),done=G.completedDays[wk]||{},c=getCompletedCount(),wb=document.getElementById('weekBdg'),st=document.getElementById('strk'),dl=document.getElementById('dayList');if(wb)wb.textContent=`📅 ${c}/${_activeDayOrder().length}`;if(st)st.textContent=G.streak||0;
 // ── Dash stats ──
 const _rs=recoveryScore(),_fs=FATIGUE.score();
 const _set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
@@ -3138,7 +3364,7 @@ if(G.lastRank&&G.lastRank!==_newRankLetter&&_ns>0){
 const _nd=document.getElementById('dash-name-txt');if(_nd&&G.profile&&G.profile.name)_nd.textContent=`HUNTER: ${G.profile.name}`;
 if(!dl)return;
 const dungeonNames={upperA:'DUNGEON ALPHA',lowerA:'DUNGEON BETA',upperB:'DUNGEON GAMMA',lowerB:'DUNGEON DELTA'};
-dl.innerHTML=dayOrder.map(k=>{const d=G.days[k];if(!d)return'';const ic=done[k],ia=curDay===k;const dLabel=dungeonNames[k]||d.name.toUpperCase();return`<div class="sl-dchip ${ia?'act':''} ${ic&&!ia?'completed':''}" onclick="selDay('${k}')">${ic?'<div class="sl-done-mark">✓</div>':''}<span class="sl-dchip-label">[ ${dLabel} ]</span><div class="dn">${d.name}</div><div class="dm">${d.muscles}</div></div>`}).join('');
+dl.innerHTML=_activeDayOrder().map(k=>{const d=G.days[k];if(!d)return'';const ic=done[k],ia=curDay===k;const dLabel=dungeonNames[k]||d.name.toUpperCase();return`<div class="sl-dchip ${ia?'act':''} ${ic&&!ia?'completed':''}" onclick="selDay('${k}')">${ic?'<div class="sl-done-mark">✓</div>':''}<span class="sl-dchip-label">[ ${dLabel} ]</span><div class="dn">${d.name}</div><div class="dm">${d.muscles}</div></div>`}).join('');
 if(typeof applyTodayFocus==='function'){try{applyTodayFocus();}catch(e){}}}
 function selDay(k){if(typeof resetJournal==='function')resetJournal();if(curDay!==k){sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;}curDay=k;rDays();rExs();const el=document.getElementById('sesAct');if(el)el.style.display='block';if(!window._suppressDayScroll){setTimeout(()=>{const w=document.getElementById('woArea');if(w)w.scrollIntoView({behavior:'smooth',block:'start'})},100)}}
 function rExs(){const day=G.days[curDay];if(!day)return;const sk=sesKey(curDay),pfl=G.nextSessionPlan?.[curDay]||{},wo=document.getElementById('woArea');if(!wo)return;
@@ -3290,7 +3516,7 @@ function onSetChange(id,i,be){
   suggestRPE(id,i,false); // forceUpdate=false → respects manual flag
   saveCurrentSet(id,i);updateSetSummary(id);
 }
-function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=document.getElementById(`sr-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(!c)return;const _prevBest=getBestSet(id);if(!c.classList.contains('sc-done')){const w=document.getElementById(`sw-${id}-${i}`);if(w&&!w.value){const ls=getLastSets(id),p=ls[i];if(p&&p.w){w.value=p.w;w.classList.add('si-filled')}}c.classList.add('sc-done');c.textContent='✓';r?.classList.add('set-done');n?.classList.add('sn-done');suggestRPE(id,i);if(!sessionStartTime){sessionStartTime=Date.now();sessionTimerInterval=setInterval(updateCompBar,1000);}if(navigator.vibrate)navigator.vibrate(20);quickStartTimer(_getSmartTimer(id));if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0;if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){fireConfetti(50);toast(`🏆 رقم قياسي جديد! ${_nw}كجم`,'s');document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}}}
+function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=document.getElementById(`sr-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(!c)return;const _prevBest=getBestSet(id);if(!c.classList.contains('sc-done')){const w=document.getElementById(`sw-${id}-${i}`);if(w&&!w.value){const ls=getLastSets(id),p=ls[i];if(p&&p.w){w.value=p.w;w.classList.add('si-filled')}}c.classList.add('sc-done');c.textContent='✓';r?.classList.add('set-done');n?.classList.add('sn-done');suggestRPE(id,i);if(!sessionStartTime){sessionStartTime=Date.now();sessionTimerInterval=setInterval(updateCompBar,1000);}if(navigator.vibrate)navigator.vibrate(20);quickStartTimer(_getSmartTimer(id));if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0;if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}} /* v13: الاحتفال بالـ PR اتوحّد في باتش ARISE (كان بيتكرر مرتين) */}
 function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];const _prevType=G.currentSets[sk][id][i]?.type||'normal';G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false,type:_prevType};saveDd();}
 function updateSetSummary(id){
   const sm=document.getElementById(`sum-${id}`);if(!sm)return;
@@ -3867,6 +4093,8 @@ function isDayCompleted(dk){const wk=weekKey();return G.completedDays[wk]&&G.com
 function getCompletedCount(){const wk=weekKey();if(!G.completedDays[wk])return 0;return Object.values(G.completedDays[wk]).filter(v=>v).length}
 function findExerciseById(id){for(const d of Object.values(G.days)){const ex=d.exercises.find(e=>e.id===id);if(ex)return ex}return null}
 function getBestSet(id){let b=0;G.ses.forEach(s=>{const e=s.exs?.[id];if(!e)return;if(e.sets?.length)e.sets.forEach(t=>{if((t.w||0)>b)b=t.w||0});else if((e.w||0)>b)b=e.w||0});return b}
+/* v13: أفضل وزن بالاسم — لإصلاح الشارات اللي كانت بتفحص IDs برنامج PPL القديم */
+function getBestByName(inc,exc){const nn=String(inc).toLowerCase(),xx=exc?String(exc).toLowerCase():null;let b=0;G.ses.forEach(s=>Object.values(s.exs||{}).forEach(e=>{const nm=(e.name||'').toLowerCase();if(!nm.includes(nn))return;if(xx&&nm.includes(xx))return;const w=e.sets?.length?e.sets.reduce((m,t)=>(t.w||0)>m?(t.w||0):m,0):(e.w||0);if(w>b)b=w;}));return b}
 function getLastSets(id){const ss=G.ses.filter(s=>s.exs&&s.exs[id]&&s.exs[id].sets&&s.exs[id].sets.length>0).sort((a,b)=>new Date(b.date)-new Date(a.date));return ss.length?ss[0].exs[id].sets:[]}
 function getMuscleColor(m){const MC={'صدر':'252,165,165','ظهر':'186,230,253','أكتاف':'253,230,138','رجلين':'110,231,183','كوادريسبس':'110,231,183','هامسترينج':'110,231,183','بطن':'165,243,252','ثنائي':'221,214,254','ثلاثي':'221,214,254'};const k=Object.keys(MC).find(k=>m&&m.includes(k));return k?MC[k]:'249,115,22'}
 function getSmartCoach(ex,id,be){
@@ -3889,20 +4117,20 @@ function go(n,b){document.querySelectorAll('.pg').forEach(p=>p.classList.remove(
 function clM(id){const el=document.getElementById(id);if(el)el.classList.remove('act')}
 document.querySelectorAll('.mo').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('act')}));
 function initTheme(){
-  const t=G.theme||'dark';
-  document.documentElement.setAttribute('data-theme',t);
+  /* v13: نظام SL داكن فقط — الوضع الفاتح كان بيكسر السكين، والزر بقى مفتاح صوت النظام */
+  G.theme='dark';
+  document.documentElement.setAttribute('data-theme','dark');
   const i=document.getElementById('themeBtn');
-  if(i)i.textContent=t==='light'?'☀️':'🌙';
+  if(i){i.textContent=G.sysSoundOff?'🔇':'🔊';i.title='صوت النظام';}
 }
 function toggleTheme(){
-  G._themeManualOverride=true; // F13: disable auto-theme after manual toggle
-  G.theme=G.theme==='dark'?'light':'dark';
-  document.documentElement.style.transition='background .4s,color .3s';
-  document.documentElement.setAttribute('data-theme',G.theme);
-  document.getElementById('themeBtn').textContent=G.theme==='light'?'☀️':'🌙';
+  /* v13: الزر اتحوّل لمفتاح صوت النظام */
+  G.sysSoundOff=!G.sysSoundOff;
+  G.theme='dark';document.documentElement.setAttribute('data-theme','dark');
+  const b=document.getElementById('themeBtn');if(b)b.textContent=G.sysSoundOff?'🔇':'🔊';
   saveD();
-  toast(G.theme==='light'?'☀️ وضع نهاري':'🌙 وضع ليلي','i');
-  setTimeout(()=>document.documentElement.style.transition='',500);
+  toast(G.sysSoundOff?'🔇 صوت النظام متوقف':'🔊 صوت النظام مفعّل',G.sysSoundOff?'i':'s');
+  if(!G.sysSoundOff&&typeof _playSystemPing==='function')_playSystemPing('notif');
 }
 function initNotifications(){if('Notification'in window&&G.notifications&&Notification.permission==='default')setTimeout(()=>Notification.requestPermission(),3000)}
 function toggleNotifications(){const t=document.getElementById('notifToggle');if(!t)return;G.notifications=t.checked;saveD();if(G.notifications&&'Notification'in window)Notification.requestPermission().then(p=>p==='granted'&&toast('🔔 تفعيل','s'));else toast('🔕 إيقاف','w')}
@@ -4353,9 +4581,19 @@ document.addEventListener('DOMContentLoaded',()=>{
   _pruneStaleKeys(); // تنظيف البيانات القديمة المتراكمة عند كل بوت
   applyAutoTheme();  // F13: auto theme by time
   checkDeloadAutoNotify(); // F3: deload notification
-  // تحقق من صحة الأيام
-  if(!G.days||!G.days.upperA||!G.days.lowerA||!G.days.upperB||!G.days.lowerB){
-    G.days=JSON.parse(JSON.stringify(MY_DAYS));saveD();
+  // v13: كسر السلسلة بعد انقطاع 4+ أيام (كانت بتفضل للأبد مهما غبت)
+  if(G.lastWo&&(G.streak||0)>0){
+    const _gapD=Math.floor((Date.now()-new Date(G.lastWo))/864e5);
+    if(_gapD>=4){
+      const _oldStreak=G.streak;G.streak=0;saveD();
+      if(typeof systemLog==='function')systemLog('penalty',`انكسرت السلسلة بعد ${_gapD} أيام غياب (كانت ${_oldStreak} 🔥)`);
+      setTimeout(()=>{if(typeof systemPopup==='function')systemPopup({type:'warning',icon:'⛓️',sysLabel:'[ STREAK · BROKEN ]',title:'انكسرت السلسلة',lines:[`غياب ${_gapD} أيام — السلسلة عادت للصفر.`,'عُد أقوى أيها الصياد.'],sound:true});},2400);
+    }
+  }
+  // v13: تحقق من صحة الأيام حسب البرنامج النشط
+  if(!G.days||!_activeDayOrder().every(k=>G.days[k])){
+    const _pd=(typeof PROGRAMS_DEF!=='undefined')?PROGRAMS_DEF[G.activeProgram||'ppl']:null;
+    G.days=(_pd&&_pd.daysData)?JSON.parse(JSON.stringify(_pd.daysData)):JSON.parse(JSON.stringify(MY_DAYS));saveD();
   }
   rDate();rDays();rQuickStatsWithTips();
   initTheme();initNotifications();showDailyTip();
@@ -4369,7 +4607,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>{
     const dl=document.getElementById('dayList');
     if(dl&&dl.children.length===0){
-      G.days=JSON.parse(JSON.stringify(MY_DAYS));saveD();rDays();
+      const _pd=(typeof PROGRAMS_DEF!=='undefined')?PROGRAMS_DEF[G.activeProgram||'ppl']:null;
+      G.days=(_pd&&_pd.daysData)?JSON.parse(JSON.stringify(_pd.daysData)):JSON.parse(JSON.stringify(MY_DAYS));saveD();rDays();
       toast('🔄 تم إعادة تحميل أيام التمرين','w');
     }
   },800);
@@ -4771,15 +5010,15 @@ const BADGES_DEF = [
   {id:'streak7',        icon:'🦁', name:'أسبوع كامل',      desc:'Streak 7 أيام متتالية',
    check:()=> (G.streak||0) >= 7},
   {id:'bench100',       icon:'🏆', name:'بنش 100كجم',      desc:'أول مرة ترفع 100كجم في الـ Bench',
-   check:()=> getBestSet('pa1') >= 100 || getBestSet('pb1') >= 100},
+   check:()=> getBestByName('bench') >= 100 || getBestByName('incline barbell') >= 100},
   {id:'squat100',       icon:'🦵', name:'سكوات 100كجم',    desc:'رجلك بقت أقوى — 100كجم في السكوات',
    check:()=> getBestSet('la1') >= 100},
   {id:'dl120',          icon:'👑', name:'ديدليفت 120كجم',  desc:'ملك الحديد — 120كجم في الديدليفت',
-   check:()=> getBestSet('pla1') >= 120},
+   check:()=> getBestByName('deadlift','romanian') >= 120},
   {id:'dl150',          icon:'🌟', name:'ديدليفت 150كجم',  desc:'وحش الجيم — 150كجم في الديدليفت',
-   check:()=> getBestSet('pla1') >= 150},
-  {id:'week_full',      icon:'🎯', name:'أسبوع PPL كامل',  desc:'أكمل Push+Pull+Legs في أسبوع واحد',
-   check:()=>{const wk=weekKey();const cd=G.completedDays[wk]||{};return ['pushA','pullA','legA'].every(d=>cd[d])||['pushB','pullB','legB'].every(d=>cd[d])}},
+   check:()=> getBestByName('deadlift','romanian') >= 150},
+  {id:'week_full',      icon:'🎯', name:'أسبوع تدريبي كامل', desc:'أكمل كل أيام برنامجك في أسبوع واحد',
+   check:()=>{const wk=weekKey();const cd=G.completedDays[wk]||{};return _activeDayOrder().every(d=>cd[d])}},
   {id:'pr_5',           icon:'📈', name:'5 أرقام قياسية',  desc:'سجّل 5 PRs مختلفة',
    check:()=>{const prs=Object.values(G.days).flatMap(d=>d.exercises).filter(ex=>!ex.isWarmup&&getBestSet(ex.id)>0);return prs.length >= 5}},
   {id:'long_session',   icon:'⏱️', name:'جلسة طويلة',       desc:'جلسة تمرين أكثر من 90 دقيقة',
@@ -4823,11 +5062,13 @@ function renderBadges() {
 ═══════════════════════════════════════════════ */
 /* Standards in kg based on ~75kg bodyweight male (Strength Level) */
 const STRENGTH_STANDARDS = {
-  'Bench Press': {exIds:['ua1'],  levels:[50,72,92,120,152], muscle:'صدر'},
-  'Back Squat':  {exIds:['la1'], levels:[65,95,120,155,197], muscle:'رجل'},
-  'Deadlift':    {exIds:['lb1'], levels:[80,115,145,185,235], muscle:'ظهر'},
-  'OHP':         {exIds:['ub4'], levels:[30,47,62,82,104],   muscle:'كتف'},
-  'Barbell Row': {exIds:['ub2'], levels:[45,67,88,112,142],  muscle:'ظهر'},
+  /* v13 BUG FIX: ua1 = Incline (مش Flat) → معايير الإنكلاين · ub4 = دمبل/يد → معايير الدمبل الواحد */
+  'Incline Bench':     {exIds:['ua1'], levels:[42,61,78,102,129],   muscle:'صدر'},
+  'Back Squat':        {exIds:['la1'], levels:[65,95,120,155,197],  muscle:'رجل'},
+  'Deadlift':          {exIds:['lb1'], levels:[80,115,145,185,235], muscle:'ظهر'},
+  'DB Shoulder Press': {exIds:['ub4'], levels:[14,22,32,44,57],     muscle:'كتف'},
+  'Barbell Row':       {exIds:['ub2'], levels:[45,67,88,112,142],   muscle:'ظهر'},
+  'Weighted Pull-Up':  {exIds:['ub1'], levels:[2.5,7.5,15,30,45],   muscle:'ظهر'},
 };
 const STD_LABELS = ['مبتدئ','مبتدئ+','متوسط','متقدم','نخبة'];
 const STD_CLASSES = ['std-untrained','std-novice','std-inter','std-advanced','std-elite'];
@@ -4876,7 +5117,8 @@ function renderWilks() {
   const bwData = G.bw || [];
   const bw = bwData.length ? bwData[bwData.length-1].w : 75;
   const squat = STRENGTH_STANDARDS['Back Squat'].exIds.reduce((b,id)=>Math.max(b,getBestSet(id)),0);
-  const bench = STRENGTH_STANDARDS['Bench Press'].exIds.reduce((b,id)=>Math.max(b,getBestSet(id)),0);
+  const incline = STRENGTH_STANDARDS['Incline Bench'].exIds.reduce((b,id)=>Math.max(b,getBestSet(id)),0);
+  const bench = Math.round(incline*1.15*2)/2; /* v13: تقدير الفلات من الإنكلاين ×1.15 */
   const deadlift = STRENGTH_STANDARDS['Deadlift'].exIds.reduce((b,id)=>Math.max(b,getBestSet(id)),0);
   const total = squat + bench + deadlift;
   if (!total) {
@@ -5629,7 +5871,7 @@ function _doSwitchProgram(pid){
   } else {
     G.days = JSON.parse(JSON.stringify(prog.daysData));
   }
-  window._activeDayOrder = prog.dayOrder;
+  window._activeDayOrderArr = prog.dayOrder; /* v13: إعادة تسمية — كان بيدهس دالة _activeDayOrder */
   curDay = null;
   saveD();
   renderProgramSelector();
@@ -6844,15 +7086,8 @@ function checkStreakMilestone(){
    F13 — Auto Theme by Time
 ══════════════════════════════════ */
 function applyAutoTheme(){
-  if(G._themeManualOverride)return;
-  const h=new Date().getHours();
-  const suggested=h>=7&&h<19?'light':'dark';
-  if(G.theme!==suggested){
-    G.theme=suggested;
-    document.documentElement.setAttribute('data-theme',suggested);
-    const btn=document.getElementById('themeBtn');
-    if(btn)btn.textContent=suggested==='light'?'☀️':'🌙';
-  }
+  /* v13: auto light-theme كان بيكسر سكين SL الساعة 7 صباحًا — داكن دائمًا */
+  if(G.theme!=='dark'){G.theme='dark';document.documentElement.setAttribute('data-theme','dark');}
 }
 
 /* ══════════════════════════════════
@@ -7674,7 +7909,7 @@ function _scheduleDayKey(){
   ];
   for(const [needle,key] of map){ if(label.includes(needle) && G.days[key]) return key; }
   // طابق أي يوم اسمه موجود في الـ label
-  const keys = (typeof dayOrder!=='undefined'?dayOrder:Object.keys(G.days||{}));
+  const keys = _activeDayOrder(); /* v13: program-aware */
   for(const k of keys){
     const dn = (G.days[k]?.name||'').toLowerCase();
     if(dn && dn.length>2 && label.includes(dn)) return k;
@@ -9041,8 +9276,9 @@ window.startWarmupTimer = function(btn, sec){
 })();
 
 
-const _origSaveCS = (typeof saveCurrentSet === 'function' && saveCurrentSet !== window.saveCurrentSet) ? saveCurrentSet : (window._saveCurrentSetOrig || function(){});
-if(typeof saveCurrentSet === 'function') window._saveCurrentSetOrig = saveCurrentSet;
+/* v13 BUG FIX: الشرط القديم كان دايمًا false → _origSaveCS كانت noop → مدخلات التمرين الحية ماكانتش بتتحفظ */
+const _origSaveCS = window._saveCurrentSetOrig || saveCurrentSet;
+window._saveCurrentSetOrig = _origSaveCS;
 window.saveCurrentSet = function(id, i){
   _origSaveCS(id, i);
   /* debounced fatigue refresh */
