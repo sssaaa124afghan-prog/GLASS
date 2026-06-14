@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#00040f">
+<meta name="theme-color" content="#0e1d42">
 <script>
 // ✅ Inline PWA manifest — no external manifest.json needed
 (function(){
@@ -2890,17 +2890,11 @@ html[dir="rtl"] #readbar{transform-origin:right}
 .rv.rv-in{opacity:1;transform:none}
 
 /* ── 5) مؤشر السحب للتحديث (Pull-to-refresh) ── */
-#ptr{position:fixed;top:0;left:50%;transform:translate(-50%,-46px);z-index:9998;
-  width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(160deg,rgba(50,110,220,.6),rgba(8,20,52,.9));
-  border:1px solid rgba(120,200,255,.5);color:#bfe3ff;font-size:1.05em;
-  box-shadow:0 6px 18px rgba(0,8,36,.5);transition:transform .18s ease,opacity .18s ease;opacity:0}
-#ptr.spin{animation:spin .8s linear infinite}
+
+
 
 /* ── 6) إشعار "اسحب لأعلى للأوامر السريعة" (تلميح خفيف أول مرة) ── */
-.qa-hint{position:fixed;bottom:calc(70px + var(--safe-b,0px));left:50%;transform:translateX(-50%);
-  z-index:290;font-size:.62em;color:#7fa8d0;opacity:.6;pointer-events:none;
-  font-family:'Cairo';letter-spacing:.02em}
+
 
 </style>
 
@@ -4920,7 +4914,8 @@ if('serviceWorker' in navigator){
         if(reg.waiting && navigator.serviceWorker.controller) showUpdateBanner(reg);
         let _refreshing=false;
         navigator.serviceWorker.addEventListener('controllerchange',()=>{
-          if(_refreshing)return; _refreshing=true; location.reload();
+          if(_refreshing || !window._userWantsUpdate) return; // فقط لو المستخدم ضغط تحديث بنفسه
+          _refreshing=true; location.reload();
         });
       })
       .catch(err => {
@@ -9934,6 +9929,7 @@ function shareWorkout(sd,tv,prs){
     btn.setAttribute('aria-label','تحديث التطبيق للنسخة الجديدة');
     btn.style.cssText='border:1px solid rgba(150,225,255,.6);border-radius:6px;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);background:linear-gradient(135deg,#2f8eff,#0bd0ff);color:#03203f;font-family:Cairo;font-weight:900;font-size:1em;padding:6px 16px;cursor:pointer';
     btn.onclick=function(){
+      window._userWantsUpdate=true;
       btn.textContent='...'; btn.disabled=true;
       try{ if(reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'}); }catch(e){}
       // لو الـ SW مايدعمش SKIP_WAITING، نعيد التحميل بعد مهلة قصيرة كخطة بديلة
@@ -10151,34 +10147,6 @@ function shareWorkout(sd,tv,prs){
     if(typeof go==='function'){ try{ go(TABS[ni]); window.scrollTo(0,0); if(navigator.vibrate)navigator.vibrate(8); }catch(err){} }
   },{passive:true});
 
-  /* ── السحب للتحديث (Pull-to-refresh) — محميّ: فقط من أعلى الصفحة ── */
-  var ptrEl=null, pulling=false, startY=0, dist=0;
-  function ensurePtr(){ if(!ptrEl){ ptrEl=document.createElement('div'); ptrEl.id='ptr'; ptrEl.textContent='↻'; document.body.appendChild(ptrEl); } return ptrEl; }
-  document.addEventListener('touchstart',function(e){
-    if((window.scrollY||0)<=0 && e.touches.length===1 && !e.target.closest('.su-overlay,.mo,input,textarea')){
-      startY=e.touches[0].clientY; pulling=true; dist=0;
-    } else pulling=false;
-  },{passive:true});
-  document.addEventListener('touchmove',function(e){
-    if(!pulling) return;
-    dist=e.touches[0].clientY-startY;
-    if(dist>0 && (window.scrollY||0)<=0){
-      e.preventDefault(); // فقط أثناء السحب لأسفل من القمة
-      var d=Math.min(dist*0.5,70);
-      ensurePtr().style.opacity=Math.min(1,d/50);
-      ptrEl.style.transform='translate(-50%,'+(d-46)+'px) rotate('+(d*4)+'deg)';
-    }
-  },{passive:false});
-  document.addEventListener('touchend',function(){
-    if(!pulling) return; pulling=false;
-    if(dist>70 && ptrEl){
-      ptrEl.classList.add('spin'); ptrEl.style.transform='translate(-50%,18px)'; ptrEl.style.opacity='1';
-      if(navigator.vibrate) navigator.vibrate(15);
-      setTimeout(function(){ location.reload(); },550);
-    } else if(ptrEl){ ptrEl.style.opacity='0'; ptrEl.style.transform='translate(-50%,-46px)'; }
-    dist=0;
-  },{passive:true});
-
   function init(){
     if(!document.getElementById('readbar')){ var b=document.createElement('div'); b.id='readbar'; document.body.appendChild(b); }
     setupReveal(); onScroll();
@@ -10186,6 +10154,20 @@ function shareWorkout(sd,tv,prs){
   if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
   // إعادة الكشف بعد تبديل تبويب (محتوى جديد)
   if(typeof window.go==='function'){ var _go=window.go; window.go=function(){ var r=_go.apply(this,arguments); try{ window.scrollTo(0,0); setTimeout(setupReveal,60); }catch(e){} return r; }; }
+})();
+</script>
+
+<script>
+/* 🔗 hash router — يخلّي اختصارات الـ PWA تفتح التبويب الصح */
+(function(){
+  var MAP={wo:'wo',hist:'hist',ai:'ai',lib:'lib',tools:'tools',profile:'profile',stats:'hist'};
+  function route(){
+    var h=(location.hash||'').replace('#','').toLowerCase();
+    if(h && MAP[h] && typeof go==='function'){ try{ go(MAP[h]); window.scrollTo(0,0); }catch(e){} }
+  }
+  window.addEventListener('hashchange', route);
+  if(document.readyState!=='loading') setTimeout(route,350);
+  else document.addEventListener('DOMContentLoaded', function(){ setTimeout(route,350); });
 })();
 </script>
 
