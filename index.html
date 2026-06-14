@@ -22,7 +22,7 @@
 <title>⚔️ Solo Gym System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&family=Orbitron:wght@700;900&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 /* BUG FIX: limit transitions to interactive elements only — universal * transition kills animations & tanks mobile perf */
@@ -84,7 +84,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .bni.act{color:var(--p);background:rgba(0,212,255,.1)}
 .bni.act .ic{filter:none;opacity:1;transform:scale(1.15);filter:drop-shadow(0 0 6px rgba(0,212,255,.7))}
 .ctn{max-width:440px;margin:0 auto;padding:12px 14px;position:relative;z-index:1}
-.card{background:rgba(255,255,255,.13);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:var(--r2);padding:16px;margin-bottom:12px;border:1px solid rgba(255,255,255,.22);transition:all .3s;animation:cardIn .35s ease;box-shadow:0 4px 28px rgba(0,0,0,.28)}
+.card{background:rgba(255,255,255,.13);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:var(--r2);padding:16px;margin-bottom:12px;border:1px solid rgba(255,255,255,.22);transition:transform .3s,box-shadow .3s,opacity .3s,background-color .3s,border-color .3s,filter .3s,color .3s;animation:cardIn .35s ease;box-shadow:0 4px 28px rgba(0,0,0,.28)}
 @keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .ct{font-size:.88em;font-weight:800;color:var(--p);margin-bottom:12px;display:flex;align-items:center;gap:7px;padding-bottom:9px;border-bottom:1px solid rgba(0,212,255,.18)}
 .ct .bdg{margin-left:auto;background:rgba(0,212,255,.1);color:var(--p);padding:3px 10px;border-radius:10px;font-size:.68em;border:1px solid rgba(0,212,255,.22)}
@@ -112,7 +112,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .fatigue-badge.high{background:rgba(252,165,165,.08);border:1px solid rgba(252,165,165,.18);color:var(--no)}
 .fatigue-badge.critical{background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.3);color:#ff8080;animation:criticalPulse 1s infinite}
 .dscroll{display:flex;gap:10px;overflow-x:auto;padding:6px 0;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
-.dchip{flex-shrink:0;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.07);backdrop-filter:blur(14px);border:2px solid rgba(255,255,255,.1);cursor:pointer;font-size:.78em;font-weight:700;color:var(--tx2);transition:all .3s;min-width:95px;text-align:center;scroll-snap-align:start;position:relative;animation:chipIn .4s ease backwards}
+.dchip{flex-shrink:0;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.07);backdrop-filter:blur(14px);border:2px solid rgba(255,255,255,.1);cursor:pointer;font-size:.78em;font-weight:700;color:var(--tx2);transition:transform .3s,box-shadow .3s,opacity .3s,background-color .3s,border-color .3s,filter .3s,color .3s;min-width:95px;text-align:center;scroll-snap-align:start;position:relative;animation:chipIn .4s ease backwards}
 @keyframes chipIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
 .dchip:nth-child(1){animation-delay:.05s}.dchip:nth-child(2){animation-delay:.1s}.dchip:nth-child(3){animation-delay:.15s}.dchip:nth-child(4){animation-delay:.2s}.dchip:nth-child(5){animation-delay:.25s}.dchip:nth-child(6){animation-delay:.3s}
 .dchip.act{background:linear-gradient(135deg,rgba(0,212,255,.22),rgba(0,100,200,.18));color:#00d4ff;border-color:rgba(0,212,255,.6);box-shadow:0 6px 20px rgba(0,212,255,.3);transform:translateY(-3px) scale(1.04)}
@@ -120,7 +120,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .dchip .dn{font-weight:900;font-size:.95em}.dchip .dm{font-size:.65em;opacity:.85;margin-top:3px}
 .done-mark{position:absolute;top:-8px;right:-8px;width:22px;height:22px;background:var(--ok);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68em;color:#fff;font-weight:900;box-shadow:0 3px 10px rgba(110,231,183,.42);animation:checkPop .4s ease}
 @keyframes checkPop{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
-.exi{background:rgba(255,255,255,.11);backdrop-filter:blur(14px);border-radius:14px;padding:14px;margin-bottom:10px;border:2px solid rgba(255,255,255,.18);transition:all .3s;animation:exIn .35s ease}
+.exi{background:rgba(255,255,255,.11);backdrop-filter:blur(14px);border-radius:14px;padding:14px;margin-bottom:10px;border:2px solid rgba(255,255,255,.18);transition:transform .3s,box-shadow .3s,opacity .3s,background-color .3s,border-color .3s,filter .3s,color .3s;animation:exIn .35s ease}
 @keyframes exIn{from{opacity:0;transform:translateX(-15px)}to{opacity:1;transform:translateX(0)}}
 .exi.done{border-color:rgba(110,231,183,.32);background:rgba(110,231,183,.05)}
 .exi.pr-glow{border-color:rgba(253,230,138,.38);animation:prGlow 2.5s ease-in-out infinite}
@@ -128,7 +128,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .ext{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
 .exn{font-weight:800;font-size:.92em;color:var(--tx)}.exd{font-size:.7em;color:var(--tx2);margin-top:3px}
 .muscle-tag{display:inline-block;background:rgba(186,230,253,.09);color:var(--bl);padding:2px 9px;border-radius:8px;font-size:.65em;font-weight:700;margin-top:5px;border:1px solid rgba(186,230,253,.18)}
-.done-check{width:34px;height:34px;border-radius:11px;border:2px solid rgba(0,212,255,.28);background:rgba(0,5,20,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;flex-shrink:0;font-size:1em}
+.done-check{width:34px;height:34px;border-radius:11px;border:2px solid rgba(0,212,255,.28);background:rgba(0,5,20,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .3s,box-shadow .3s,opacity .3s,background-color .3s,border-color .3s,filter .3s,color .3s;flex-shrink:0;font-size:1em}
 .done-check:active{transform:scale(.85)}
 .done-check.checked{background:var(--ok);border-color:var(--ok);box-shadow:0 4px 16px rgba(110,231,183,.32);animation:checkBounce .4s ease}
 @keyframes checkBounce{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
@@ -328,9 +328,9 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .sa-trend{background:rgba(110,231,183,.05);border:1px solid rgba(110,231,183,.16);border-radius:10px;padding:10px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .macro-upload{border:2px dashed rgba(0,212,255,.22);border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:.25s;background:rgba(0,212,255,.02)}
 .macro-upload:active{border-color:var(--p)}
-.save-btn{width:100%;padding:15px;border:none;border-radius:14px;background:var(--gg);color:#fff;font-family:'Cairo';font-size:1em;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(0,212,255,.28);transition:all .3s;margin-top:8px}
+.save-btn{width:100%;padding:15px;border:none;border-radius:14px;background:var(--gg);color:#fff;font-family:'Cairo';font-size:1em;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(0,212,255,.28);transition:transform .3s,box-shadow .3s,opacity .3s,background-color .3s,border-color .3s,filter .3s,color .3s;margin-top:8px}
 .save-btn:active{transform:scale(.98)}
-.btn{padding:8px 16px;border:none;border-radius:11px;cursor:pointer;font-family:'Cairo';font-size:.78em;font-weight:800;display:inline-flex;align-items:center;gap:5px;transition:all .25s}
+.btn{padding:8px 16px;border:none;border-radius:11px;cursor:pointer;font-family:'Cairo';font-size:.78em;font-weight:800;display:inline-flex;align-items:center;gap:5px;transition:transform .25s,box-shadow .25s,opacity .25s,background-color .25s,border-color .25s,filter .25s,color .25s}
 .btn:active{transform:scale(.93)}
 .btn-p{background:var(--gg);color:#fff;box-shadow:0 4px 14px rgba(0,212,255,.28)}
 .btn-ai{background:var(--gai);color:#fff;box-shadow:0 4px 14px rgba(251,191,36,.28)}
@@ -774,7 +774,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 [data-theme="light"] .tt-q{background:rgba(234,88,12,.12);border-color:rgba(234,88,12,.28);color:var(--p)}
 
 /* ══ MULTI-PROGRAM SELECTOR ══ */
-.prog-card{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.1);border-radius:14px;padding:13px;cursor:pointer;transition:all .25s;margin-bottom:8px}
+.prog-card{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.1);border-radius:14px;padding:13px;cursor:pointer;transition:transform .25s,box-shadow .25s,opacity .25s,background-color .25s,border-color .25s,filter .25s,color .25s;margin-bottom:8px}
 .prog-card:active{transform:scale(.98)}
 .prog-card.prog-active{border-color:var(--p);background:rgba(0,212,255,.1)}
 .prog-card-name{font-weight:900;font-size:.88em;margin-bottom:3px;display:flex;align-items:center;gap:7px}
@@ -803,7 +803,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .journal-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px;margin-bottom:10px}
 .journal-title{font-size:.82em;font-weight:900;color:var(--p);margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .mood-row{display:flex;gap:8px;justify-content:center;margin:4px 0 10px}
-.mood-btn{width:46px;height:46px;border-radius:50%;font-size:1.4em;background:rgba(255,255,255,.07);border:2px solid transparent;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+.mood-btn{width:46px;height:46px;border-radius:50%;font-size:1.4em;background:rgba(255,255,255,.07);border:2px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,opacity .2s,background-color .2s,border-color .2s,filter .2s,color .2s;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
 .mood-btn:active{transform:scale(.9)}
 .mood-btn.mood-sel{border-color:var(--p);background:rgba(0,212,255,.12);transform:scale(1.15)}
 .journal-note{width:100%;padding:9px 11px;border-radius:11px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--tx);font-family:'Cairo';font-size:.8em;resize:none;outline:none;transition:.25s;line-height:1.65}
@@ -895,7 +895,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(0,212,255
 /* ═══ SOLO LEVELING SYSTEM ═══ */
 .wo-level-track{display:flex;gap:5px;align-items:center;padding:10px 0 4px;overflow-x:auto;scrollbar-width:none}
 .wo-level-track::-webkit-scrollbar{display:none}
-.lvl-pip{height:4px;border-radius:2px;flex-shrink:0;transition:all .5s cubic-bezier(.4,0,.2,1);min-width:24px;flex:1}
+.lvl-pip{height:4px;border-radius:2px;flex-shrink:0;transition:transform .5s cubic-bezier(.4,0,.2,1),box-shadow .5s cubic-bezier(.4,0,.2,1),opacity .5s cubic-bezier(.4,0,.2,1),background-color .5s cubic-bezier(.4,0,.2,1),border-color .5s cubic-bezier(.4,0,.2,1),filter .5s cubic-bezier(.4,0,.2,1),color .5s cubic-bezier(.4,0,.2,1);min-width:24px;flex:1}
 .lvl-pip.cleared{background:linear-gradient(90deg,#22d3ee,#00d4ff);box-shadow:0 0 6px rgba(0,212,255,.5)}
 .lvl-pip.active{background:linear-gradient(90deg,#00d4ff,#38bdf8);box-shadow:0 0 10px rgba(0,212,255,.8);animation:pipPulse 1.5s ease-in-out infinite}
 .lvl-pip.locked{background:rgba(255,255,255,.09)}
@@ -961,7 +961,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(0,212,255
 /* Dungeon select divider */
 .sl-sw-divider{padding:7px 14px;font-size:.5em;font-family:monospace;color:rgba(0,212,255,.4);letter-spacing:.2em;font-weight:900;border-top:1px solid rgba(0,212,255,.08);background:rgba(0,212,255,.02)}
 /* Day chips SL style */
-.sl-dchip{flex-shrink:0;padding:10px 14px;border-radius:3px;background:rgba(0,8,32,.82);border:1px solid rgba(0,212,255,.25);cursor:pointer;font-size:.78em;font-weight:700;color:rgba(180,220,255,.75);transition:all .25s;min-width:100px;text-align:center;scroll-snap-align:start;position:relative;animation:chipIn .4s ease backwards}
+.sl-dchip{flex-shrink:0;padding:10px 14px;border-radius:3px;background:rgba(0,8,32,.82);border:1px solid rgba(0,212,255,.25);cursor:pointer;font-size:.78em;font-weight:700;color:rgba(180,220,255,.75);transition:transform .25s,box-shadow .25s,opacity .25s,background-color .25s,border-color .25s,filter .25s,color .25s;min-width:100px;text-align:center;scroll-snap-align:start;position:relative;animation:chipIn .4s ease backwards}
 .sl-dchip .sl-dchip-label{font-size:.52em;font-family:monospace;letter-spacing:.15em;color:rgba(0,212,255,.4);font-weight:900;display:block;margin-bottom:3px}
 .sl-dchip .dn{font-weight:900;font-size:.88em;color:rgba(200,240,255,.7)}
 .sl-dchip .dm{font-size:.6em;color:rgba(0,212,255,.35);margin-top:2px;font-family:monospace}
@@ -1005,7 +1005,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(0,212,255
   border-radius:3px;
   background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,80,160,.08));
   color:#00d4ff;font-family:'Cairo';font-weight:900;font-size:.88em;
-  cursor:pointer;letter-spacing:.05em;transition:all .25s;
+  cursor:pointer;letter-spacing:.05em;transition:transform .25s,box-shadow .25s,opacity .25s,background-color .25s,border-color .25s,filter .25s,color .25s;
   text-shadow:0 0 10px rgba(0,212,255,.5);
 }
 .sl-gate-enter-btn:active{transform:scale(.98);background:linear-gradient(135deg,rgba(0,212,255,.2),rgba(0,80,160,.15))}
@@ -1223,7 +1223,7 @@ body::before{
   cursor:pointer!important;font-size:.59em!important;
   color:rgba(0,180,230,.42)!important;font-weight:800!important;
   border:1px solid transparent!important;background:none!important;
-  font-family:'Cairo'!important;transition:all .22s cubic-bezier(.4,0,.2,1)!important;
+  font-family:'Cairo'!important;transition:transform .22s cubic-bezier(.4,0,.2,1),box-shadow .22s cubic-bezier(.4,0,.2,1),opacity .22s cubic-bezier(.4,0,.2,1),background-color .22s cubic-bezier(.4,0,.2,1),border-color .22s cubic-bezier(.4,0,.2,1),filter .22s cubic-bezier(.4,0,.2,1),color .22s cubic-bezier(.4,0,.2,1)!important;
   position:relative!important;border-radius:14px!important;
   white-space:nowrap!important;min-width:0!important;overflow:hidden!important;
   min-height:52px!important
@@ -1231,7 +1231,7 @@ body::before{
 /* Inactive icon */
 .bni .ic{
   font-size:1.5em!important;
-  transition:all .22s!important;
+  transform .22s,box-shadow .22s,opacity .22s,background-color .22s,border-color .22s,filter .22s,color .22s!important;
   opacity:.48!important;
   filter:grayscale(.6)!important
 }
@@ -2408,6 +2408,499 @@ input[type=text],input[type=number],input[type=date],input[type=time]{border-rad
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(90,170,255,.35);border-radius:99px}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   ⚡💧 v17 — تبريد إضافي + ترقية الهوية البصرية (يُطبَّق أخيراً = يفوز)
+   كله تقليل حِمل: صفر أنيميشن جديدة لانهائية · صفر JS تقيل
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1) content-visibility: المتصفح ميرسمش عناصر القوائم اللي تحت الطية ── */
+.exi,.lib-item,.sc,.sys-dq-task,.badge-card,.coach-rec,.prog-card{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 90px; /* تقدير ارتفاع يمنع قفز السكرول */
+}
+
+/* ── 2) الهيدر والدوك (ظاهرين دايماً): blur أخف بلا saturate = أبرد جهاز ── */
+.hdr,.bnav{
+  backdrop-filter:blur(16px)!important;
+  -webkit-backdrop-filter:blur(16px)!important;
+}
+
+/* ── 3) ظل واحد بسيط على العناصر المتكررة (يقلل repaint وقت السكرول) ── */
+.card,.exi,.lib-item,.sc,.dash-card,.tool-card,.coach-rec{
+  box-shadow:0 8px 24px rgba(0,8,32,.42)!important;
+}
+
+/* ── 4) إيقاف أي أنيميشن لانهائية باقية على عناصر مش محورية (توهجات/نبضات) ── */
+.streak-badge,.week-badge,.recovery-badge,.fatigue-badge,.block-badge,.ai-badge,
+.theme-btn,.qstat,.sl-rank-pill,.bdg,.wo-ai-btn,.dash-coach-icon{
+  animation:none!important;
+}
+/* أنيميشن أزرار الـ AI: نبضة opacity خفيفة بدل box-shadow المتحرك (أبرد بكتير) */
+@keyframes v17SoftPulse{0%,100%{opacity:.85}50%{opacity:1}}
+.wo-ai-btn{animation:v17SoftPulse 2.6s ease-in-out infinite!important}
+
+/* ═══ 5) هوية بصرية: توحيد لون النظام على الأزرق الكهربائي ═══ */
+:root{
+  --p:#3db8ff;            /* لون النظام الأساسي */
+  --cy:#22d3ff;           /* درجة منه بدل سماوي منفصل */
+  --vio:#5b8cff;          /* بنفسجي اتحوّل لأزرق-بنفسجي قريب للهوية */
+  --sys-glow:rgba(61,160,255,.18);
+}
+
+/* ── 6) noise/grain خفيف جداً = عمق هولوجرام · تكلفة GPU = صفر (طبقة ثابتة) ── */
+body::after{
+  content:''!important;display:block!important;position:fixed!important;inset:0!important;
+  z-index:1!important;pointer-events:none!important;opacity:.035!important;animation:none!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")!important;
+  background-size:160px 160px!important;mix-blend-mode:overlay!important;
+}
+
+/* ── 7) حواف مقطوعة (HUD notches) على النوافذ الكبيرة فقط = إحساس واجهة نظام ── */
+.sl-status-card,.sl-dungeon-gate{
+  clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 16px,100% calc(100% - 16px),calc(100% - 16px) 100%,16px 100%,0 calc(100% - 16px),0 16px)!important;
+}
+
+/* ── 8) ترابط الـ accent: شريط التقدم والحلقات يستخدموا لون النظام الموحّد ── */
+.cb-fill{background:linear-gradient(180deg,rgba(255,255,255,.35),transparent 55%),linear-gradient(90deg,var(--p),var(--cy))!important}
+.bni.act .ic{filter:drop-shadow(0 0 9px var(--sys-glow))!important}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   ⚔️ v18 — أزرار النظام (System HUD) — مستقبلي حاد بدل الكبسولات الدايرية
+   حواف مقطوعة · حدود كهربائية رفيعة · انعكاس علوي · أبعاد مضبوطة
+   صفر أنيميشن لانهائية · توهج عبر drop-shadow (يحترم القطع)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── الزر العادي: لوح زجاجي غامق بحافة كهربائية + زاويتين مقطوعتين ── */
+.btn{
+  border-radius:7px!important;
+  clip-path:polygon(11px 0,100% 0,100% calc(100% - 11px),calc(100% - 11px) 100%,0 100%,0 11px)!important;
+  padding:10px 20px!important;
+  font-family:'Cairo',sans-serif!important;font-weight:800!important;
+  font-size:.8em!important;letter-spacing:.01em!important;
+  border:1px solid rgba(120,195,255,.40)!important;
+  background:
+    linear-gradient(180deg,rgba(140,200,255,.16),transparent 42%),
+    linear-gradient(160deg,rgba(30,70,160,.40),rgba(8,20,52,.72))!important;
+  color:#dcefff!important;
+  box-shadow:inset 0 1px 0 rgba(210,238,255,.30),inset 0 0 18px rgba(40,120,255,.10)!important;
+  position:relative!important;overflow:hidden!important;
+  transition:transform .14s ease,border-color .18s ease,filter .18s ease,background .2s ease!important;
+}
+/* شريط طاقة رفيع على الحافة القائدة (يمين RTL) = توقيع "النظام" */
+.btn::after{content:''!important;position:absolute!important;top:18%!important;bottom:18%!important;
+  right:0!important;width:2px!important;background:linear-gradient(180deg,transparent,var(--p),transparent)!important;
+  box-shadow:0 0 8px var(--p)!important;opacity:.65!important}
+.btn:active{transform:translateY(1px) scale(.985)!important;border-color:rgba(120,210,255,.95)!important;
+  filter:brightness(1.18)!important;background:linear-gradient(160deg,rgba(45,110,220,.5),rgba(10,26,66,.8))!important}
+
+/* ── الزر الأساسي: طاقة كهربائية صلبة + توهج خارجي ── */
+.btn-p,.tm-start-btn{
+  border-radius:7px!important;border:1px solid rgba(150,225,255,.6)!important;
+  clip-path:polygon(13px 0,100% 0,100% calc(100% - 13px),calc(100% - 13px) 100%,0 100%,0 13px)!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.32),transparent 38%),
+    linear-gradient(135deg,#2f8eff 0%,#0bd0ff 100%)!important;
+  color:#03203f!important;font-family:'Cairo',sans-serif!important;font-weight:900!important;
+  letter-spacing:.015em!important;text-shadow:0 1px 6px rgba(180,235,255,.55)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 0 0 1px rgba(180,235,255,.25)!important;
+  filter:drop-shadow(0 6px 16px rgba(36,150,255,.5))!important; /* التوهج يحترم clip-path */
+  overflow:hidden!important;position:relative!important;
+  transition:transform .14s ease,filter .18s ease!important;
+}
+.btn-p:active,.tm-start-btn:active{transform:translateY(1px) scale(.975)!important;
+  filter:drop-shadow(0 3px 10px rgba(36,150,255,.7)) brightness(1.12)!important}
+
+/* ── العريض والصغير: نفس الهوية بأبعاد مضبوطة ── */
+.btn-full{width:100%!important;justify-content:center!important;padding:14px!important;font-size:.92em!important}
+.btn-sm{padding:6px 13px!important;font-size:.74em!important;
+  clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)!important}
+
+/* ── زر الحذف/الإغلاق (mx): مربع نظام أحمر بزاوية مقطوعة ── */
+.mx{width:34px!important;height:34px!important;border-radius:6px!important;
+  clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)!important;
+  border:1px solid rgba(255,120,150,.45)!important;
+  background:linear-gradient(160deg,rgba(160,40,70,.30),rgba(40,10,24,.6))!important;
+  color:#ff9bb0!important;transition:transform .14s ease,filter .18s ease!important}
+.mx:active{transform:scale(.9)!important;filter:brightness(1.2)!important}
+
+/* ── الشرائح والتبويبات: زوايا حادة عشان تتماشى مع لغة النظام ── */
+.dchip{border-radius:8px!important;
+  clip-path:polygon(9px 0,100% 0,100% 100%,0 100%,0 9px)!important}
+.dchip.act{border-color:rgba(110,205,255,.85)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 4px 16px rgba(36,150,255,.4)!important}
+.stat-tab,.lib-filter{border-radius:7px!important}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   🗔 v19 — لغة النظام على الكروت (زوايا مقطوعة موحّدة مع الأزرار)
+   العمق عبر الحدود والانعكاس الداخلي بدل الظل الخارجي (لأن clip-path
+   بيقص الظل) — ده أخف على الجهاز + هوية HUD متماسكة
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── الكروت الرئيسية: زاويتان مقطوعتان قُطري + حد كهربائي + انعكاس ── */
+.card,.dash-card,.tool-card,.profile-card,.morning-card,.day-banner,
+.prog-card,.badge-card,.coach-rec,.elite-decision,.warmup-proto,
+.ai-chat-box,.oe-suggest,.ai-coach-card{
+  border-radius:10px!important;
+  clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px)!important;
+  border:1px solid rgba(140,200,255,.26)!important;
+  box-shadow:inset 0 1px 0 rgba(215,240,255,.22),inset 0 0 24px rgba(40,120,255,.05)!important;
+  position:relative!important;
+}
+
+/* خط طاقة علوي رفيع = إحساس "لوحة نظام" (طبقة ثابتة، صفر أنيميشن) */
+.card::before,.dash-card::before,.ai-coach-card::before{
+  content:''!important;display:block!important;position:absolute!important;
+  top:0!important;right:16px!important;left:0!important;height:1px!important;
+  background:linear-gradient(90deg,transparent,rgba(90,190,255,.55),transparent)!important;
+  opacity:.7!important;animation:none!important;
+}
+
+/* ── عناصر القوائم (التمارين/الكويست): قطعة واحدة أصغر = إيقاع نظيف ── */
+.exi,.sl-quest,.sys-dq-task{
+  border-radius:9px!important;
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)!important;
+  box-shadow:inset 0 1px 0 rgba(215,240,255,.16)!important;
+}
+/* التمرين النشط: نفس القطع + توهج داخلي بدل الخارجي (مايتقصّش) */
+.exi.exi-active,.sl-quest.exi-active{
+  border-color:rgba(90,195,255,.85)!important;
+  box-shadow:inset 0 1px 0 rgba(225,245,255,.28),inset 0 0 30px rgba(61,160,255,.14)!important;
+}
+
+/* ── النوافذ الكبيرة (Status/Gate): قطع أوسع للإحساس الضخم ── */
+.sl-status-card,.sl-dungeon-gate{
+  clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 20px,100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,0 calc(100% - 20px),0 20px)!important;
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   ♿🔢 v20 — وصول (Accessibility) + أرقام ثابتة العرض
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1) حلقة تركيز كهربائية واضحة للكيبورد (focus-visible فقط = ماتظهرش للماوس) ── */
+.btn:focus-visible,.btn-p:focus-visible,.btn-sm:focus-visible,.btn-full:focus-visible,
+.bni:focus-visible,.dchip:focus-visible,.mx:focus-visible,.theme-btn:focus-visible,
+.stat-tab:focus-visible,.lib-filter:focus-visible,.tm-start-btn:focus-visible,
+input:focus-visible,select:focus-visible,textarea:focus-visible,
+[role="button"]:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--p)!important;outline-offset:2px!important;
+  box-shadow:0 0 0 4px rgba(61,160,255,.25),0 0 16px rgba(61,160,255,.35)!important;
+}
+
+/* ── 2) أرقام ثابتة العرض = مفيش ترجرج وقت تغيّر المؤقت/الـ XP/الأوزان ── */
+body{font-variant-numeric:tabular-nums!important}
+.set-in,.rpe-in,.qstat,.cb-pct,.sl-rank-pill,
+input[type="number"],input[type="text"]{font-variant-numeric:tabular-nums!important}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   🛡️🧰 v21 — أدوات النظام + شاشة إقلاع + مؤشر اتصال + لمسات استخدام
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── إطار استهداف (HUD targeting frame) — أقواس ركنية متوهجة ── */
+.hud-frame{position:relative}
+.hud-frame::before,.hud-frame::after{content:'';position:absolute;width:20px;height:20px;pointer-events:none;z-index:2}
+.hud-frame::before{top:8px;right:8px;border-top:2px solid var(--p);border-right:2px solid var(--p);box-shadow:0 0 8px var(--sys-glow)}
+.hud-frame::after{bottom:8px;left:8px;border-bottom:2px solid var(--p);border-left:2px solid var(--p);box-shadow:0 0 8px var(--sys-glow)}
+
+/* ── زر أدوات النظام العائم (يمين، مقابل زر الـ AI) ── */
+.sys-util-btn{position:fixed;bottom:calc(110px + var(--safe-b,0px));right:16px;z-index:300;
+  width:46px;height:46px;border-radius:8px;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  border:1px solid rgba(150,205,255,.5);font-size:1.3em;cursor:pointer;
+  background:linear-gradient(160deg,rgba(50,110,220,.5),rgba(8,20,52,.85));color:#dcefff;
+  box-shadow:inset 0 1px 0 rgba(220,240,255,.3),0 6px 20px rgba(0,8,36,.5);
+  display:flex;align-items:center;justify-content:center;transition:transform .15s ease,filter .2s ease}
+.sys-util-btn:active{transform:scale(.92);filter:brightness(1.2)}
+
+/* ── نافذة الأدوات ── */
+.su-overlay{position:fixed;inset:0;z-index:11500;display:none;align-items:flex-end;justify-content:center;
+  background:rgba(2,8,20,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.su-overlay.act{display:flex;animation:fadeIn .25s ease}
+.su-sheet{width:100%;max-width:480px;max-height:88vh;overflow-y:auto;
+  background:linear-gradient(180deg,rgba(8,20,44,.99),rgba(3,10,26,.995));
+  border:1px solid rgba(150,205,255,.3);border-bottom:none;border-radius:24px 24px 0 0;
+  padding:20px 18px calc(28px + var(--safe-b,0px));animation:slideUp .35s cubic-bezier(.2,1,.3,1)}
+@keyframes slideUp{from{transform:translateY(40px);opacity:.5}to{transform:translateY(0);opacity:1}}
+.su-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.su-h h3{font-family:'Orbitron','Cairo';font-size:.95em;font-weight:800;color:#dcefff;letter-spacing:.08em}
+.su-sec{margin-bottom:18px;padding:14px;border-radius:10px;
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  background:linear-gradient(160deg,rgba(90,150,255,.08),rgba(12,26,62,.3));border:1px solid rgba(140,200,255,.18)}
+.su-sec h4{font-size:.82em;font-weight:800;color:#bae0ff;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.su-sec p.hint{font-size:.7em;color:#7fa8d0;line-height:1.6;margin-bottom:10px}
+.su-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.su-in{flex:1;min-width:70px;background:rgba(10,24,62,.6);border:1px solid rgba(140,200,255,.22);
+  border-radius:9px;color:#eaf4ff;padding:9px 11px;font-size:.85em;font-family:'Cairo';
+  font-variant-numeric:tabular-nums}
+.su-in:focus{border-color:rgba(90,180,255,.9);outline:none;box-shadow:0 0 0 3px rgba(61,160,255,.2)}
+.su-lbl{font-size:.72em;color:#9cc4e8;min-width:54px}
+.su-out{margin-top:11px;font-family:'Orbitron','Cairo';font-size:.95em;color:#7ee0ff;
+  font-weight:700;text-shadow:0 0 12px var(--sys-glow);min-height:1.2em;font-variant-numeric:tabular-nums}
+.su-plate{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;
+  margin:3px;border-radius:7px;background:linear-gradient(160deg,#2f8eff,#0b5fa8);color:#fff;
+  font-weight:900;font-size:.78em;box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.su-backup-info{font-size:.68em;color:#7fa8d0;margin-top:8px}
+
+/* ── شاشة الإقلاع ── */
+.boot-overlay{position:fixed;inset:0;z-index:20000;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:18px;
+  background:radial-gradient(130% 90% at 50% 30%,#0c1a3e,#03050f);transition:opacity .6s ease}
+.boot-overlay.gone{opacity:0;pointer-events:none}
+.boot-ring{width:90px;height:90px;border-radius:50%;border:2px solid rgba(61,160,255,.2);
+  border-top-color:var(--p);animation:spin .9s linear infinite;box-shadow:0 0 30px var(--sys-glow)}
+.boot-txt{font-family:'Orbitron','Cairo';font-size:1.1em;font-weight:900;letter-spacing:.3em;
+  color:#7ee0ff;text-shadow:0 0 18px var(--sys-glow)}
+.boot-sub{font-family:'Orbitron';font-size:.6em;letter-spacing:.4em;color:#5a86b0;opacity:.8}
+
+/* ── مؤشر عدم الاتصال ── */
+.net-badge{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);
+  z-index:11000;display:none;align-items:center;gap:6px;padding:5px 14px;border-radius:8px;
+  clip-path:polygon(9px 0,100% 0,100% 100%,0 100%,0 9px);
+  background:rgba(120,40,40,.92);border:1px solid rgba(255,140,140,.4);color:#ffd8d8;
+  font-size:.7em;font-weight:800;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.is-offline .net-badge{display:flex}
+
+/* ── لمسات استخدام: أهداف لمس أكبر للأزرار الأساسية ── */
+.btn-full,.btn-p,.tm-start-btn{min-height:44px}
+.su-sheet input,.su-sheet button{font-family:'Cairo'}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   ✨ v22 — تحسين شامل: انضباط بصري · هيدر مظبوط · إيقاع موحّد
+   الفلسفة: الهندسة المقطوعة + الأزرق الكهربائي = التوقيع.
+   اللافتات والتوهجات تهدأ وتبقى بيانات هادئة، مش صراخ.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1) الهيدر: عنوان في سطر واحد + شرائح مرتبة ── */
+.hdr{padding-bottom:4px}
+/* العنوان في صف مستقل فوق الشرائح = مستحيل يتصادم مهما كان عرض الخط */
+.hdr-top{flex-direction:column!important;align-items:flex-start!important;gap:9px!important}
+.hdr h1{
+  font-size:1.05em!important;font-weight:900!important;line-height:1.1!important;
+  white-space:nowrap!important;letter-spacing:.02em!important;gap:7px!important;
+}
+.hdr-sub{font-size:.62em!important;opacity:.85;margin-top:3px!important}
+.hdr-r{gap:6px!important;flex-wrap:wrap;justify-content:flex-start;width:100%}
+
+/* شرائح موحّدة على هوية النظام (بدل أخضر/برتقالي متنافرين) */
+.streak-badge,.week-badge{
+  background:linear-gradient(160deg,rgba(60,130,230,.16),rgba(12,28,64,.4))!important;
+  border:1px solid rgba(120,195,255,.30)!important;color:#cfe8ff!important;
+  padding:5px 10px!important;border-radius:8px!important;font-size:.7em!important;
+  clip-path:polygon(7px 0,100% 0,100% 100%,0 100%,0 7px)!important;
+  animation:none!important;font-variant-numeric:tabular-nums!important;
+}
+.streak-badge{color:#ffd9a8!important;border-color:rgba(255,180,120,.30)!important;
+  background:linear-gradient(160deg,rgba(230,140,60,.16),rgba(48,24,12,.4))!important}
+
+/* ── 2) تهدئة لافتات النظام [ ... ] — تبقى بيانات هادئة مش عناوين صارخة ── */
+.sl-ph-sys,.sl-sw-sys,.sl-n-sys,.sys-dq-sys,.tm-sys,.sl-rankup-sys,
+.sl-gate-sys-label,.sl-pr-header,.ai-badge,.sl-sw-divider{
+  font-size:.56em!important;opacity:.45!important;font-weight:600!important;
+  letter-spacing:.18em!important;
+}
+
+/* ── 3) تباين أفضل للنص الثانوي (كان باهت زيادة) ── */
+:root{--tx2:#9fc0e0!important}
+
+/* ── 4) إيقاع موحّد للأقسام والكروت ── */
+.ctn{padding-top:6px}
+.card,.dash-card,.tool-card,.sl-status-card,.sl-dungeon-gate{margin-bottom:14px!important}
+h2,h3,.sec-title{letter-spacing:.01em}
+
+/* ── 5) عناوين الأقسام: خط علوي رفيع موحّد بدل التكرار العشوائي ── */
+.sl-sw-header,.sec-head{align-items:center}
+
+/* ── 6) تقليل توهج النصوص المتدرّجة لو أضرّ بالوضوح (نص أنظف) ── */
+.exi-name,.lib-name{text-shadow:none!important}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   🪶⚡ v23 — وضع الخفة: أقصى سرعة بأقل خسارة بصرية
+   المبدأ: backdrop-filter و mix-blend-mode أتقل عمليتين على الـ GPU
+   وبيتعاد حسابهم كل فريم وقت السكرول → نلغيهم ونعوّض بخلفيات معتمة.
+   الهوية (الزوايا المقطوعة + الأزرق + الحدود) تفضل زي ما هي.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1) قتل backdrop-filter على العناصر المتكررة/الكبيرة (أكبر مكسب) ── */
+.card,.exi,.qstat,.dash-card,.ai-coach-card,.profile-card,.tool-card,
+.coach-rec,.lib-item,.sc,.prog-card,.badge-card,.elite-decision,
+.warmup-proto,.ai-chat-box,.oe-suggest,.sl-status-card,.sl-dungeon-gate,
+.sl-dungeon-header,.day-banner,.morning-card,.sl-quest,.sys-dq-task{
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+/* تعويض الزجاج بخلفية معتمة (بدل ما الخلفية المزدحمة تبان وراها) */
+.card,.dash-card,.ai-coach-card,.profile-card,.tool-card,.coach-rec,
+.prog-card,.badge-card,.elite-decision,.warmup-proto,.ai-chat-box,.oe-suggest{
+  background:linear-gradient(160deg,rgba(20,38,78,.72),rgba(8,18,42,.86))!important;
+}
+.exi,.lib-item,.sc,.sl-quest,.sys-dq-task{
+  background:linear-gradient(160deg,rgba(16,32,68,.6),rgba(8,18,40,.8))!important;
+}
+.sl-status-card,.sl-dungeon-gate{
+  background:linear-gradient(160deg,rgba(14,30,66,.9),rgba(6,14,36,.95))!important;
+}
+
+/* ── 2) الهيدر والدوك: خلفية صلبة بدون تغبيش (ثابتين والصفحة بتعدّي تحتهم) ── */
+.hdr,.bnav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.hdr{background:rgba(6,12,30,.92)!important}
+.bnav{background:rgba(7,14,34,.95)!important}
+
+/* ── 3) إلغاء mix-blend-mode (بيجبر تركيب كامل للطبقة كل فريم) ── */
+body::before{mix-blend-mode:normal!important}
+body::after{mix-blend-mode:normal!important;opacity:.025!important}
+
+/* ── 4) المودالات: تغبيش خفيف فقط لما تكون مفتوحة (مش وقت السكرول) ── */
+.mo,.su-overlay{backdrop-filter:blur(6px)!important;-webkit-backdrop-filter:blur(6px)!important}
+
+/* ── 5) تهدئة أنيميشنات لانهائية على عناصر دايمة الظهور (توفير GPU مستمر) ── */
+.ai-coach-card,.dash-coach-icon{animation:none!important}
+/* الخلفية المتحركة: إبطاء بسيط يقلل إيقاظ الـ GPU بدون ما توقف الإحساس */
+body::before{animation-duration:24s!important}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   🔆 v24 — تخفيف العتمة (بدون أي تكلفة أداء)
+   نرفع إضاءة لون الأسطح فقط — لا تغبيش، لا blend → نفس الخفة بالظبط
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── الكروت الرئيسية: كحلي/أزرق أفتح بدل الأسود القريب ── */
+.card,.dash-card,.ai-coach-card,.profile-card,.tool-card,.coach-rec,
+.prog-card,.badge-card,.elite-decision,.warmup-proto,.ai-chat-box,.oe-suggest{
+  background:linear-gradient(160deg,rgba(44,70,128,.80),rgba(24,44,90,.86))!important;
+}
+
+/* ── عناصر القوائم (تمارين/مكتبة/سجل): أفتح شوية وأوضح ── */
+.exi,.lib-item,.sc,.sl-quest,.sys-dq-task{
+  background:linear-gradient(160deg,rgba(38,62,116,.70),rgba(20,38,80,.82))!important;
+}
+
+/* ── النوافذ الكبيرة (Status/Gate): تظل أعمق للإحساس لكن أقل سواداً ── */
+.sl-status-card,.sl-dungeon-gate{
+  background:linear-gradient(160deg,rgba(32,56,112,.90),rgba(16,32,72,.93))!important;
+}
+
+/* ── الهيدر والدوك: أفتح قليلاً مع بقاء التغطية للوضوح ── */
+.hdr{background:rgba(14,26,58,.90)!important}
+.bnav{background:rgba(16,30,66,.93)!important}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   🔆🔆 v25 — تخفيف العتمة (الجولة 2): خلفية الصفحة نفسها
+   الخلفية كانت سوداء تقريباً (#00040f) → كحلي أعمق وأغنى.
+   لا تغبيش · لا blend · لا أنيميشن جديدة → نفس الخفة بالظبط.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── خلفية الصفحة: من شبه-أسود لكحلي عميق (أكبر فرق في العتمة) ── */
+body{
+  background:linear-gradient(150deg,#0e1d42 0%,#142a54 48%,#0c1a3a 100%)!important;
+}
+
+/* ── الكروت: درجة أفتح كمان للاتساق مع الخلفية الجديدة ── */
+.card,.dash-card,.ai-coach-card,.profile-card,.tool-card,.coach-rec,
+.prog-card,.badge-card,.elite-decision,.warmup-proto,.ai-chat-box,.oe-suggest{
+  background:linear-gradient(160deg,rgba(56,86,150,.78),rgba(32,54,108,.84))!important;
+}
+.exi,.lib-item,.sc,.sl-quest,.sys-dq-task{
+  background:linear-gradient(160deg,rgba(48,76,138,.66),rgba(28,50,102,.78))!important;
+}
+.sl-status-card,.sl-dungeon-gate{
+  background:linear-gradient(160deg,rgba(42,70,132,.88),rgba(22,42,92,.92))!important;
+}
+
+/* ── الهيدر والدوك: أفتح خطوة مع بقاء التغطية ── */
+.hdr{background:rgba(18,32,68,.90)!important}
+.bnav{background:rgba(20,36,76,.93)!important}
+
+/* ── توهجات الخلفية الزرقاء: أوضح شوية تدّي حيوية بدون تكلفة ── */
+body::before{background:rgba(40,110,220,.12)!important}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   🔆🔆🔆 v26 — تخفيف عتمة صفحة التمارين (حالات التمرين كانت سودا)
+   حالات .exi-cleared/.exi-locked/.exi-active كانت تلغي الخلفية بـ
+   !important وتفضل شبه سودا → نفتّحها مع الحفاظ على تمييز الحالة.
+   كله ألوان فقط → نفس الخفة بالظبط.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── حالات التمرين: أفتح مع تمييز واضح بين نشط/مكتمل/مقفول ── */
+.exi-active{
+  background:linear-gradient(160deg,rgba(54,100,186,.55),rgba(34,64,128,.6))!important;
+  border-color:rgba(90,200,255,.7)!important;
+}
+.exi-cleared{
+  background:linear-gradient(160deg,rgba(40,64,118,.7),rgba(24,44,92,.78))!important;
+}
+.exi-locked{
+  background:linear-gradient(160deg,rgba(40,54,92,.62),rgba(26,38,72,.7))!important;
+}
+
+/* ── العناصر الداخلية في كارت التمرين ── */
+.done-check{background:rgba(34,58,112,.5)!important}
+.rep-progress-wrap{background:rgba(34,58,110,.55)!important}
+.e1rm-wrap{background:rgba(36,60,116,.5)!important}
+.dash-stats{background:rgba(40,64,120,.35)!important}
+
+/* ── شرائح اختيار اليوم + كارت المؤقت (كانت شبه سودا) ── */
+.sl-dchip{background:rgba(38,62,118,.82)!important}
+.tm-card{background:linear-gradient(160deg,rgba(40,66,128,.9),rgba(22,42,90,.94))!important}
+
+/* ── منطقة رسائل النظام في الورك آوت ── */
+.sl-sw-msg-row{background:rgba(60,130,230,.08)!important}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   🛰️ v27 — عرض/تفاعل/تمرير احترافي مستقبلي · كله transform/opacity = خفيف
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1) شريط تقدّم القراءة (أعلى الشاشة، رفيع، scaleX فقط) ── */
+#readbar{position:fixed;top:0;left:0;right:0;height:2.5px;z-index:9999;
+  transform:scaleX(0);transform-origin:left;
+  background:linear-gradient(90deg,var(--p),var(--cy));
+  box-shadow:0 0 8px var(--sys-glow);transition:transform .08s linear;pointer-events:none}
+html[dir="rtl"] #readbar{transform-origin:right}
+
+/* ── 2) الهيدر المتقلّص (يتحوّل لشريط حالة وأنت بتنزل) ── */
+.hdr{transition:padding .28s ease}
+.hdr h1{transition:font-size .28s ease,opacity .25s ease,margin .25s ease}
+.hdr-sub{transition:max-height .28s ease,opacity .25s ease}
+.hdr.hdr-min{padding-top:7px!important;padding-bottom:6px!important}
+.hdr.hdr-min h1{font-size:.82em!important}
+.hdr.hdr-min .hdr-sub{max-height:0!important;opacity:0!important;overflow:hidden;margin:0!important}
+.hdr.hdr-min .hdr-top{flex-direction:row!important;align-items:center!important;justify-content:space-between!important}
+.hdr.hdr-min .hdr-r{width:auto!important}
+
+/* ── 3) رؤوس أقسام لاصقة (تفضل ملزوقة فوق وأنت بتسكرول) ── */
+.sl-sw-header,.sec-head{
+  position:sticky;top:48px;z-index:40;
+  background:linear-gradient(180deg,rgba(14,28,62,.97),rgba(14,28,62,.86));
+  backdrop-filter:none;border-radius:8px;margin-bottom:8px;
+}
+
+/* ── 4) كشف العناصر بالتدريج عند الظهور (fade+slide خفيف) ── */
+/* الإخفاء يتفعّل فقط لو JS أضاف الكلاس → بدون JS كله ظاهر (أمان) */
+.rv{opacity:0;transform:translateY(14px);
+  transition:opacity .5s ease,transform .5s cubic-bezier(.2,.8,.3,1);will-change:opacity,transform}
+.rv.rv-in{opacity:1;transform:none}
+
+/* ── 5) مؤشر السحب للتحديث (Pull-to-refresh) ── */
+#ptr{position:fixed;top:0;left:50%;transform:translate(-50%,-46px);z-index:9998;
+  width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,rgba(50,110,220,.6),rgba(8,20,52,.9));
+  border:1px solid rgba(120,200,255,.5);color:#bfe3ff;font-size:1.05em;
+  box-shadow:0 6px 18px rgba(0,8,36,.5);transition:transform .18s ease,opacity .18s ease;opacity:0}
+#ptr.spin{animation:spin .8s linear infinite}
+
+/* ── 6) إشعار "اسحب لأعلى للأوامر السريعة" (تلميح خفيف أول مرة) ── */
+.qa-hint{position:fixed;bottom:calc(70px + var(--safe-b,0px));left:50%;transform:translateX(-50%);
+  z-index:290;font-size:.62em;color:#7fa8d0;opacity:.6;pointer-events:none;
+  font-family:'Cairo';letter-spacing:.02em}
 
 </style>
 
@@ -4421,9 +4914,14 @@ if('serviceWorker' in navigator){
           const nw = reg.installing;
           if(nw) nw.onstatechange = () => {
             if(nw.state === 'installed' && navigator.serviceWorker.controller)
-              toast('🔄 تحديث متاح — أعد تحميل الصفحة','i');
+              showUpdateBanner(reg);
           };
         };
+        if(reg.waiting && navigator.serviceWorker.controller) showUpdateBanner(reg);
+        let _refreshing=false;
+        navigator.serviceWorker.addEventListener('controllerchange',()=>{
+          if(_refreshing)return; _refreshing=true; location.reload();
+        });
       })
       .catch(err => {
         // sw.js missing — silently continue, notifications work via main thread
@@ -7439,6 +7937,9 @@ h2{color:#38bdf8;font-size:1.1em;margin-top:20px;font-family:monospace;letter-sp
 .pr{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.2);border-radius:8px;padding:8px 14px;margin:5px 0;display:flex;justify-content:space-between}
 .ses{background:rgba(255,255,255,.04);border-radius:8px;padding:8px 14px;margin:4px 0;font-size:.85em}
 footer{margin-top:30px;text-align:center;font-size:.75em;color:#6b7280}
+
+
+
 </style></head><body>
 <h1>📊 تقرير ${monthName}</h1>
 <p style="color:#9ca3af;font-size:.85em">شهاب · PPL Progressive Overload · تم التوليد: ${now.toLocaleDateString('ar-EG')}</p>
@@ -9378,5 +9879,315 @@ function shareWorkout(sd,tv,prs){
 </script>
 
 <!-- ══ YOUTUBE INLINE PLAYER — popup mode ══ -->
+<script>
+/* ⚡ v17 micro-interactions — haptic + ripple خفيف (مفوّض، عنصر واحد يتمسح لوحده) */
+(function(){
+  var canVibe = 'vibrate' in navigator;
+  document.addEventListener('pointerdown', function(e){
+    var t = e.target.closest('.btn,.btn-p,.bni,.dchip,.theme-btn,.stat-tab,.lib-filter,.tm-start-btn,.mx');
+    if(!t) return;
+    if(canVibe){ try{ navigator.vibrate(t.classList.contains('btn-p')||t.classList.contains('tm-start-btn')?18:10); }catch(_){} }
+    // ripple
+    var r = t.getBoundingClientRect();
+    var d = Math.max(r.width, r.height);
+    var rip = document.createElement('span');
+    rip.style.cssText='position:absolute;border-radius:50%;pointer-events:none;width:'+d+'px;height:'+d+'px;left:'+(e.clientX-r.left-d/2)+'px;top:'+(e.clientY-r.top-d/2)+'px;background:radial-gradient(circle,rgba(180,225,255,.45),transparent 65%);transform:scale(0);opacity:.9;transition:transform .45s ease,opacity .55s ease;z-index:0';
+    var cs=getComputedStyle(t);
+    if(cs.position==='static') t.style.position='relative';
+    if(cs.overflow==='visible') t.style.overflow='hidden';
+    t.appendChild(rip);
+    requestAnimationFrame(function(){ rip.style.transform='scale(2.4)'; rip.style.opacity='0'; });
+    setTimeout(function(){ rip.remove(); }, 600);
+  }, {passive:true});
+})();
+</script>
+
+<script>
+/* ♿ v20 — وصول تلقائي + 🔄 بانر تحديث الـ PWA */
+(function(){
+  function applyA11y(){
+    // أزرار أيقونات بس: استنسخ aria-label من title، وحط افتراضي للـ X
+    document.querySelectorAll('.mx').forEach(function(b){ if(!b.getAttribute('aria-label')) b.setAttribute('aria-label','إغلاق'); });
+    document.querySelectorAll('[title]').forEach(function(el){
+      if(!el.getAttribute('aria-label')) el.setAttribute('aria-label', el.getAttribute('title'));
+    });
+    // أزرار الدوك: نص مرئي موجود، بس نأكّد role
+    document.querySelectorAll('.bni,.dchip,.theme-btn,.stat-tab,.lib-filter').forEach(function(el){
+      if(!el.getAttribute('role') && el.tagName!=='BUTTON') el.setAttribute('role','button');
+      if(el.tabIndex<0 && el.tagName!=='BUTTON') el.tabIndex=0;
+    });
+  }
+  if(document.readyState!=='loading') applyA11y(); else document.addEventListener('DOMContentLoaded',applyA11y);
+  // إعادة التطبيق بعد أي تحديث ديناميكي للواجهة
+  setTimeout(applyA11y, 1500);
+
+  // بانر تحديث فعّال: ضغطة واحدة تفعّل النسخة الجديدة وتعيد التحميل
+  window.showUpdateBanner = function(reg){
+    if(document.getElementById('_swUpdateBar')) return;
+    var bar=document.createElement('div');
+    bar.id='_swUpdateBar';
+    bar.setAttribute('role','status');
+    bar.style.cssText='position:fixed;bottom:calc(100px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:12000;display:flex;align-items:center;gap:12px;padding:11px 16px;border-radius:8px;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);background:linear-gradient(160deg,rgba(40,90,200,.95),rgba(8,20,52,.97));border:1px solid rgba(120,200,255,.5);box-shadow:inset 0 1px 0 rgba(220,240,255,.3),0 10px 30px rgba(0,8,36,.6);color:#eaf6ff;font-family:Cairo,sans-serif;font-size:.82em;font-weight:800;max-width:92vw';
+    var txt=document.createElement('span'); txt.textContent='🔄 نسخة جديدة جاهزة';
+    var btn=document.createElement('button');
+    btn.type='button'; btn.textContent='تحديث';
+    btn.setAttribute('aria-label','تحديث التطبيق للنسخة الجديدة');
+    btn.style.cssText='border:1px solid rgba(150,225,255,.6);border-radius:6px;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);background:linear-gradient(135deg,#2f8eff,#0bd0ff);color:#03203f;font-family:Cairo;font-weight:900;font-size:1em;padding:6px 16px;cursor:pointer';
+    btn.onclick=function(){
+      btn.textContent='...'; btn.disabled=true;
+      try{ if(reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'}); }catch(e){}
+      // لو الـ SW مايدعمش SKIP_WAITING، نعيد التحميل بعد مهلة قصيرة كخطة بديلة
+      setTimeout(function(){ location.reload(); }, 1200);
+    };
+    bar.appendChild(txt); bar.appendChild(btn);
+    document.body.appendChild(bar);
+  };
+})();
+</script>
+
+<script>
+/* 🛡️🧰 v21 — أدوات النظام: نسخ احتياطي · حاسبة أقراص · 1RM · إقلاع · اتصال */
+(function(){
+  var K='gymProAI_v12_fixed', BK='soloGym_lastBackup';
+  function T(m,t){ try{ if(window.toast) toast(m,t||'s'); }catch(e){} }
+  function safeParse(t,f){ try{ return JSON.parse(t); }catch(e){ return f; } }
+
+  /* ── شاشة الإقلاع (مرة كل جلسة) ── */
+  function boot(){
+    try{ if(sessionStorage.getItem('soloBooted')) return; sessionStorage.setItem('soloBooted','1'); }catch(e){}
+    var o=document.createElement('div'); o.className='boot-overlay hud-frame';
+    o.innerHTML='<div class="boot-ring"></div><div class="boot-txt">SOLO&nbsp;SYSTEM</div><div class="boot-sub">A R I S E</div>';
+    document.body.appendChild(o);
+    o.addEventListener('click',function(){ done(); });
+    var t=setTimeout(done,1500);
+    function done(){ clearTimeout(t); o.classList.add('gone'); setTimeout(function(){ o.remove(); },650); }
+  }
+
+  /* ── النسخ الاحتياطي ── */
+  function exportBackup(){
+    var data=localStorage.getItem(K);
+    if(!data){ T('لا توجد بيانات للحفظ','w'); return; }
+    var payload=JSON.stringify({app:'SoloGym',key:K,ts:Date.now(),data:safeParse(data,{})});
+    var blob=new Blob([payload],{type:'application/json'});
+    var url=URL.createObjectURL(blob), a=document.createElement('a');
+    a.href=url; a.download='SoloGym-backup-'+new Date().toISOString().slice(0,10)+'.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); },3000);
+    try{ localStorage.setItem(BK,String(Date.now())); }catch(e){}
+    T('✓ تم حفظ النسخة الاحتياطية','s'); refreshBackupInfo();
+  }
+  function importBackup(file){
+    var r=new FileReader();
+    r.onload=function(){
+      var parsed=safeParse(r.result,null);
+      if(!parsed){ T('الملف غير صالح','e'); return; }
+      var inner=(parsed&&parsed.data!==undefined)?parsed.data:parsed;
+      if(!inner||typeof inner!=='object'){ T('ملف نسخة غير معروف','e'); return; }
+      if(!confirm('سيتم استبدال كل بياناتك الحالية بالنسخة المستوردة. متأكد؟')) return;
+      try{ localStorage.setItem(K,JSON.stringify(inner)); T('✓ تم الاستيراد — إعادة تحميل','s'); setTimeout(function(){ location.reload(); },900); }
+      catch(e){ T('فشل الحفظ (الذاكرة ممتلئة؟)','e'); }
+    };
+    r.readAsText(file);
+  }
+  function refreshBackupInfo(){
+    var el=document.getElementById('suBackupInfo'); if(!el) return;
+    var ts=localStorage.getItem(BK);
+    if(!ts){ el.textContent='⚠ لم تعمل نسخة احتياطية من قبل'; return; }
+    var days=Math.floor((Date.now()-parseInt(ts))/86400000);
+    el.textContent='آخر نسخة: '+(days===0?'اليوم':('منذ '+days+' يوم'));
+  }
+
+  /* ── حاسبة الأقراص + 1RM ── */
+  function calcPlates(){
+    var target=parseFloat(document.getElementById('suTarget').value)||0;
+    var bar=parseFloat(document.getElementById('suBar').value)||20;
+    var out=document.getElementById('suPlateOut');
+    if(target<bar){ out.innerHTML='<span style="color:#ff9bb0">الوزن أقل من البار</span>'; return; }
+    var perSide=(target-bar)/2, plates=[25,20,15,10,5,2.5,1.25], used=[];
+    plates.forEach(function(p){ while(perSide+1e-9>=p){ used.push(p); perSide-=p; } });
+    var html=used.length?used.map(function(p){ return '<span class="su-plate">'+p+'</span>'; }).join(''):'<span style="color:#9cc4e8">البار فقط</span>';
+    var lo=Math.round(perSide*100)/100;
+    out.innerHTML='كل جنب: '+html+(lo>0?'<div style="color:#ffcf8a;font-size:.8em;margin-top:6px">باقي '+lo+'kg متعذّر بالأقراص المتاحة</div>':'');
+  }
+  function calc1RM(){
+    var w=parseFloat(document.getElementById('su1w').value)||0;
+    var reps=parseInt(document.getElementById('su1r').value)||0;
+    var out=document.getElementById('su1Out');
+    if(w<=0||reps<=0){ out.textContent=''; return; }
+    var orm=w*(1+reps/30); // Epley
+    out.innerHTML='1RM ≈ '+ (Math.round(orm*10)/10) +'kg'+
+      '<div style="font-size:.72em;color:#9cc4e8;margin-top:5px">85%: '+(Math.round(orm*.85*10)/10)+' · 70%: '+(Math.round(orm*.7*10)/10)+'kg</div>';
+  }
+
+  /* ── النافذة ── */
+  function buildSheet(){
+    if(document.getElementById('suOverlay')) return;
+    var ov=document.createElement('div'); ov.className='su-overlay'; ov.id='suOverlay';
+    ov.innerHTML=
+      '<div class="su-sheet hud-frame" role="dialog" aria-label="أدوات النظام">'+
+        '<div class="su-h"><h3>⚙ أدوات النظام</h3><button class="mx" aria-label="إغلاق" id="suClose">&times;</button></div>'+
+        '<div class="su-sec"><h4>💾 النسخة الاحتياطية</h4>'+
+          '<p class="hint">بياناتك محفوظة محلياً فقط. احفظ نسخة بانتظام حتى لا تفقد تقدّمك عند تغيير الجهاز أو مسح المتصفح.</p>'+
+          '<div class="su-row"><button class="btn btn-p" id="suExp">تصدير نسخة</button>'+
+          '<button class="btn" id="suImpBtn">استيراد نسخة</button>'+
+          '<input type="file" accept="application/json,.json" id="suImpFile" style="display:none"></div>'+
+          '<div class="su-backup-info" id="suBackupInfo"></div></div>'+
+        '<div class="su-sec"><h4>🏋 حاسبة الأقراص</h4>'+
+          '<div class="su-row"><span class="su-lbl">الوزن</span><input class="su-in" type="number" inputmode="decimal" id="suTarget" placeholder="100"><span class="su-lbl">البار</span><input class="su-in" type="number" inputmode="decimal" id="suBar" value="20"></div>'+
+          '<div class="su-out" id="suPlateOut"></div></div>'+
+        '<div class="su-sec"><h4>📊 تقدير أقصى وزن (1RM)</h4>'+
+          '<div class="su-row"><span class="su-lbl">الوزن</span><input class="su-in" type="number" inputmode="decimal" id="su1w" placeholder="80"><span class="su-lbl">عدّات</span><input class="su-in" type="number" inputmode="numeric" id="su1r" placeholder="5"></div>'+
+          '<div class="su-out" id="su1Out"></div></div>'+
+      '</div>';
+    document.body.appendChild(ov);
+    ov.addEventListener('click',function(e){ if(e.target===ov) closeSheet(); });
+    document.getElementById('suClose').onclick=closeSheet;
+    document.getElementById('suExp').onclick=exportBackup;
+    document.getElementById('suImpBtn').onclick=function(){ document.getElementById('suImpFile').click(); };
+    document.getElementById('suImpFile').onchange=function(e){ if(e.target.files[0]) importBackup(e.target.files[0]); };
+    ['suTarget','suBar'].forEach(function(id){ document.getElementById(id).oninput=calcPlates; });
+    ['su1w','su1r'].forEach(function(id){ document.getElementById(id).oninput=calc1RM; });
+  }
+  function openSheet(){ buildSheet(); refreshBackupInfo(); document.getElementById('suOverlay').classList.add('act'); }
+  function closeSheet(){ var o=document.getElementById('suOverlay'); if(o) o.classList.remove('act'); }
+
+  /* ── الزر العائم + مؤشر الاتصال ── */
+  function mountUI(){
+    if(!document.getElementById('sysUtilBtn')){
+      var b=document.createElement('button'); b.id='sysUtilBtn'; b.className='sys-util-btn';
+      b.setAttribute('aria-label','أدوات النظام'); b.textContent='⚙';
+      b.onclick=openSheet; document.body.appendChild(b);
+    }
+    if(!document.getElementById('netBadge')){
+      var n=document.createElement('div'); n.id='netBadge'; n.className='net-badge';
+      n.setAttribute('role','status'); n.textContent='⚠ غير متصل — البيانات محفوظة محلياً';
+      document.body.appendChild(n);
+    }
+    updateNet();
+    // تذكير النسخ الاحتياطي لو قديمة (>14 يوم)
+    try{
+      var ts=localStorage.getItem(BK);
+      if(localStorage.getItem(K) && (!ts || (Date.now()-parseInt(ts))>14*86400000)){
+        setTimeout(function(){ T('💾 ذكّر نفسك بعمل نسخة احتياطية من قائمة أدوات النظام','i'); },4000);
+      }
+    }catch(e){}
+  }
+  function updateNet(){ document.documentElement.classList.toggle('is-offline', !navigator.onLine); }
+  window.addEventListener('online',function(){ updateNet(); T('✓ عاد الاتصال','s'); });
+  window.addEventListener('offline',function(){ updateNet(); T('غير متصل','w'); });
+
+  function start(){ boot(); mountUI(); }
+  if(document.readyState!=='loading') start(); else document.addEventListener('DOMContentLoaded',start);
+  window.openSysUtils=openSheet;
+})();
+</script>
+
+<script>
+/* 🛰️ v27 — تفاعل/تمرير احترافي · transform/opacity · passive · محميّ */
+(function(){
+  var hdr=null, ticking=false, lastMin=false;
+
+  /* ── شريط تقدّم القراءة + الهيدر المتقلّص (rAF، passive) ── */
+  function onScroll(){
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(function(){
+      var y=window.scrollY||document.documentElement.scrollTop||0;
+      var h=(document.documentElement.scrollHeight-window.innerHeight)||1;
+      var bar=document.getElementById('readbar');
+      if(bar) bar.style.transform='scaleX('+Math.min(1,Math.max(0,y/h))+')';
+      if(!hdr) hdr=document.querySelector('.hdr');
+      if(hdr){ var min=y>40; if(min!==lastMin){ hdr.classList.toggle('hdr-min',min); lastMin=min; } }
+      ticking=false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* ── كشف العناصر بالتدريج (IntersectionObserver + فول-باك أمان) ── */
+  function setupReveal(){
+    var els=document.querySelectorAll('.card,.dash-card,.sl-status-card,.tool-card,.sec-head,.profile-card,.ai-coach-card');
+    if(!('IntersectionObserver' in window) || !els.length) return;
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('rv-in'); io.unobserve(e.target); } });
+    },{threshold:.08, rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.top < window.innerHeight*1.1){ el.classList.add('rv','rv-in'); } // فوق الطية = ظاهر فوراً
+      else { el.classList.add('rv'); io.observe(el); }
+    });
+    // أمان: أظهر كل حاجة بعد 3 ثوانٍ مهما حصل
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.rv-in)').forEach(function(e){ e.classList.add('rv-in'); }); },1500);
+  }
+
+  /* ── السحب الأفقي بين التبويبات (محميّ من القوائم الأفقية) ── */
+  var TABS=['wo','hist','ai','lib','tools','profile'];
+  function curTab(){
+    var a=document.querySelector('.bni.act'); // قد لا يعكس الاسم؛ نستخدم الصفحة الظاهرة
+    var pg=[].find ? Array.prototype.find.call(document.querySelectorAll('.pg.act'),function(){return true;}) : null;
+    return pg ? pg.id : null;
+  }
+  function hScrollAncestor(el){
+    while(el && el!==document.body){
+      if(el.scrollWidth - el.clientWidth > 8){ var o=getComputedStyle(el).overflowX; if(o==='auto'||o==='scroll') return true; }
+      el=el.parentElement;
+    }
+    return false;
+  }
+  var tsx=0,tsy=0,tracking=false;
+  document.addEventListener('touchstart',function(e){
+    if(e.touches.length!==1){ tracking=false; return; }
+    if(hScrollAncestor(e.target)){ tracking=false; return; } // داخل قائمة أفقية → تجاهل
+    if(e.target.closest('input,textarea,select,button,.su-overlay,.mo')){ tracking=false; return; }
+    tsx=e.touches[0].clientX; tsy=e.touches[0].clientY; tracking=true;
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(!tracking) return; tracking=false;
+    var t=e.changedTouches[0], dx=t.clientX-tsx, dy=t.clientY-tsy;
+    if(Math.abs(dx)<70 || Math.abs(dx)<Math.abs(dy)*1.7) return; // لازم أفقي واضح
+    var pg=document.querySelector('.pg.act'); if(!pg) return;
+    var i=TABS.indexOf(pg.id); if(i<0) return;
+    // RTL: السحب لليمين = التالي
+    var dir = dx>0 ? 1 : -1;
+    var ni=i+dir; if(ni<0||ni>=TABS.length) return;
+    if(typeof go==='function'){ try{ go(TABS[ni]); window.scrollTo(0,0); if(navigator.vibrate)navigator.vibrate(8); }catch(err){} }
+  },{passive:true});
+
+  /* ── السحب للتحديث (Pull-to-refresh) — محميّ: فقط من أعلى الصفحة ── */
+  var ptrEl=null, pulling=false, startY=0, dist=0;
+  function ensurePtr(){ if(!ptrEl){ ptrEl=document.createElement('div'); ptrEl.id='ptr'; ptrEl.textContent='↻'; document.body.appendChild(ptrEl); } return ptrEl; }
+  document.addEventListener('touchstart',function(e){
+    if((window.scrollY||0)<=0 && e.touches.length===1 && !e.target.closest('.su-overlay,.mo,input,textarea')){
+      startY=e.touches[0].clientY; pulling=true; dist=0;
+    } else pulling=false;
+  },{passive:true});
+  document.addEventListener('touchmove',function(e){
+    if(!pulling) return;
+    dist=e.touches[0].clientY-startY;
+    if(dist>0 && (window.scrollY||0)<=0){
+      e.preventDefault(); // فقط أثناء السحب لأسفل من القمة
+      var d=Math.min(dist*0.5,70);
+      ensurePtr().style.opacity=Math.min(1,d/50);
+      ptrEl.style.transform='translate(-50%,'+(d-46)+'px) rotate('+(d*4)+'deg)';
+    }
+  },{passive:false});
+  document.addEventListener('touchend',function(){
+    if(!pulling) return; pulling=false;
+    if(dist>70 && ptrEl){
+      ptrEl.classList.add('spin'); ptrEl.style.transform='translate(-50%,18px)'; ptrEl.style.opacity='1';
+      if(navigator.vibrate) navigator.vibrate(15);
+      setTimeout(function(){ location.reload(); },550);
+    } else if(ptrEl){ ptrEl.style.opacity='0'; ptrEl.style.transform='translate(-50%,-46px)'; }
+    dist=0;
+  },{passive:true});
+
+  function init(){
+    if(!document.getElementById('readbar')){ var b=document.createElement('div'); b.id='readbar'; document.body.appendChild(b); }
+    setupReveal(); onScroll();
+  }
+  if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
+  // إعادة الكشف بعد تبديل تبويب (محتوى جديد)
+  if(typeof window.go==='function'){ var _go=window.go; window.go=function(){ var r=_go.apply(this,arguments); try{ window.scrollTo(0,0); setTimeout(setupReveal,60); }catch(e){} return r; }; }
+})();
+</script>
+
 </body>
 </html>
