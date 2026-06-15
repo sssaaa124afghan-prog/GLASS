@@ -3286,6 +3286,441 @@ body{
 /* ── إلغاء أي brightness زائد على الزجاج (كان بيزوّد الزهو) ── */
 .card,.dash-card,.sl-status-card,.sl-dungeon-gate,.btn-p,.tm-start-btn{filter:none!important}
 
+
+/* ═══════════════════════════════════════════════════════════════════
+   💎 v38 — Clean Liquid Glass (وصفة NutriPro) + هوية Solo Leveling
+   زجاج أبيض شفّاف · blur بدون saturate · نص أبيض صافي · أكسنت كهربائي
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1) خلفية أزرق متدرّجة نظيفة (Solo: كحلي غامق → أزرق كهربائي) ── */
+body{
+  background:linear-gradient(150deg,#03082a 0%,#06184e 40%,#0a378e 78%,#0c4fb0 100%)!important;
+  background-attachment:fixed!important;
+}
+body::before{background:rgba(40,120,235,.14)!important} /* توهج خفيف واحد للعمق */
+body::after{opacity:.4!important} /* خفّض النويز */
+
+/* ── 2) ألوان النص: أبيض صافي + رمادي-أزرق هادي (أعلى تباين) ── */
+:root{
+  --tx:#ffffff !important;
+  --tx2:#cdd9ec !important;
+  --tx3:#9fb0c8 !important;
+  --p:#4ab4ff !important;     /* أكسنت كهربائي نظيف */
+  --p2:#7cc8ff !important;
+}
+body{color:#fff!important}
+.ct,.dash-title,.sec-title,h1,h2,h3,.exi-name,.lib-item-name{color:#fff!important}
+
+/* ── 3) الكروت: زجاج أبيض شفّاف (blur فقط) ── */
+.card,.dash-card,.ai-coach-card,.profile-card,.tool-card,.coach-rec,
+.prog-card,.elite-decision,.warmup-proto,.ai-chat-box,.oe-suggest{
+  background:rgba(255,255,255,.10)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.15),rgba(255,255,255,.05))!important;
+  backdrop-filter:blur(20px)!important;-webkit-backdrop-filter:blur(20px)!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 8px 26px rgba(0,8,32,.32)!important;
+}
+
+/* ── 4) عناصر القوائم: زجاج أبيض أخف ── */
+.exi,.lib-item,.sc,.sl-quest,.sys-dq-task{
+  background:rgba(255,255,255,.07)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.04))!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+  border:1px solid rgba(255,255,255,.15)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25)!important;
+}
+
+/* ── 5) النوافذ الكبيرة: زجاج أبيض أوضح ── */
+.sl-status-card,.sl-dungeon-gate{
+  background:rgba(255,255,255,.12)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.18),rgba(255,255,255,.06))!important;
+  backdrop-filter:blur(26px)!important;-webkit-backdrop-filter:blur(26px)!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 12px 34px rgba(0,10,40,.38)!important;
+}
+
+/* ── 6) الهيدر والدوك: زجاج أبيض شفّاف ── */
+.hdr,.bnav{backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important}
+.hdr{background:rgba(255,255,255,.08)!important;border-bottom:1px solid rgba(255,255,255,.14)!important}
+.bnav{background:rgba(255,255,255,.09)!important;border-top:1px solid rgba(255,255,255,.14)!important}
+
+/* ── 7) الزر الثانوي: زجاج أبيض ── */
+.btn,.btn-sm,.btn-full{
+  background:rgba(255,255,255,.10)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05))!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+  border:1px solid rgba(255,255,255,.22)!important;color:#fff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 5px 16px rgba(0,8,32,.28)!important;
+  text-shadow:none!important;
+}
+/* ── الزر الأساسي: أكسنت كهربائي أزرق (هوية Solo) ── */
+.btn-p,.tm-start-btn{
+  background:rgba(74,180,255,.30)!important;
+  background-image:linear-gradient(150deg,rgba(110,200,255,.42),rgba(40,140,240,.4))!important;
+  backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important;
+  border:1px solid rgba(160,215,255,.6)!important;color:#fff!important;font-weight:900!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 22px rgba(40,140,240,.4)!important;
+  text-shadow:0 1px 4px rgba(0,40,90,.4)!important;filter:none!important;
+}
+
+/* ── 8) الشرائح/التبويبات: زجاج أبيض · النشط كهربائي ── */
+.dchip,.stat-tab,.lib-filter,.streak-badge,.week-badge{
+  background:rgba(255,255,255,.09)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.04))!important;
+  backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+}
+.streak-badge{color:#fdd9a8!important}.week-badge{color:#bfe3ff!important}
+.dchip.act,.stat-tab.act,.lib-filter.act{
+  background-image:linear-gradient(150deg,rgba(110,200,255,.4),rgba(40,140,240,.38))!important;
+  border-color:rgba(160,215,255,.6)!important;color:#fff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 4px 14px rgba(40,140,240,.35)!important;
+}
+/* زر الإغلاق/الحذف: زجاج بلمسة حمراء هادية */
+.mx{background:rgba(255,120,140,.16)!important;background-image:linear-gradient(160deg,rgba(255,160,175,.2),rgba(255,255,255,.04))!important;
+  border:1px solid rgba(255,170,185,.4)!important;color:#ffd2db!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}
+
+/* ── 9) شريحة الرتبة: زجاج أبيض + الحرف النيون يفضل بارز ── */
+.sl-rank-pill,.sl-rank-pill.rank-e,.sl-rank-pill.rank-d,.sl-rank-pill.rank-c,
+.sl-rank-pill.rank-b,.sl-rank-pill.rank-a,.sl-rank-pill.rank-s{
+  background:rgba(255,255,255,.10)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05))!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+  border:1px solid rgba(255,255,255,.24)!important;color:#e8eef8!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 5px 16px rgba(0,8,32,.3)!important;
+}
+
+/* ── 10) دواير "تم": زجاج أبيض · المكتمل كهربائي ── */
+.done-check{
+  background:rgba(255,255,255,.08)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04))!important;
+  backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;
+  border:2px solid rgba(255,255,255,.3)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4)!important;
+}
+.done-check.done,.done-check.checked,.done-check.active{
+  background-image:linear-gradient(160deg,#6ec8ff,#1f8cff)!important;border-color:rgba(190,230,255,.8)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 0 16px rgba(60,160,255,.55)!important;
+}
+
+/* ── 11) شريط التقدّم: محزّز شفّاف + تعبئة كهربائية ── */
+.rep-progress-wrap{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.14)!important}
+.rep-progress-bar{background:rgba(255,255,255,.12)!important;border:1px solid rgba(255,255,255,.1)!important}
+.rep-progress-fill{background:linear-gradient(90deg,#1f8cff,#6ec8ff)!important;box-shadow:0 0 10px rgba(60,170,255,.6)!important}
+
+/* ── 12) شرائح الماكروز/الحالة: زجاج أبيض ── */
+.dash-stats,.sl-dchip,.tm-card,.macro-chip,.sl-stat-chip{
+  background:rgba(255,255,255,.08)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   📱 v39 — ألوان مضبوطة لشاشة الأيفون (Display P3)
+   خلفية أوضح · زجاج أكثر وضوحاً · تباين أعلى · ألوان حيوية ومتوازنة
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── خلفية: أكثر وضوحاً على P3 (مش أسود غامق) ── */
+body{
+  background:
+    radial-gradient(ellipse 120% 70% at 85% 0%,   rgba(30,100,255,.55), transparent 55%),
+    radial-gradient(ellipse 100% 80% at 10% 30%,  rgba(0,160,255,.30), transparent 55%),
+    radial-gradient(ellipse 90%  60% at 60% 110%, rgba(90,60,220,.35), transparent 52%),
+    linear-gradient(160deg,#071535 0%,#0d2460 55%,#0a1e50 100%)!important;
+  background-attachment:fixed!important;
+}
+
+/* ── meta color-scheme + color-profile hint لـ P3 ── */
+
+/* ── الزجاج: شفافية أعلى عشان يبان على P3 ── */
+.card,.dash-card,.ai-coach-card,.profile-card,.tool-card,.coach-rec,
+.prog-card,.elite-decision,.warmup-proto,.ai-chat-box,.oe-suggest{
+  background:rgba(255,255,255,.13)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.20),rgba(255,255,255,.07))!important;
+  border:1px solid rgba(255,255,255,.26)!important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.45),0 8px 28px rgba(0,5,25,.38)!important;
+}
+.exi,.lib-item,.sc,.sl-quest,.sys-dq-task{
+  background:rgba(255,255,255,.09)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.05))!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.30)!important;
+}
+.sl-status-card,.sl-dungeon-gate{
+  background:rgba(255,255,255,.15)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,.08))!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.50),0 12px 36px rgba(0,5,28,.42)!important;
+}
+.hdr{background:rgba(255,255,255,.11)!important;border-bottom:1px solid rgba(255,255,255,.18)!important}
+.bnav{background:rgba(255,255,255,.12)!important;border-top:1px solid rgba(255,255,255,.18)!important}
+
+/* ── الأزرار: وضوح أقوى على P3 ── */
+.btn,.btn-sm,.btn-full{
+  background:rgba(255,255,255,.13)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.19),rgba(255,255,255,.07))!important;
+  border:1px solid rgba(255,255,255,.26)!important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.45),0 5px 16px rgba(0,5,25,.30)!important;
+}
+.btn-p,.tm-start-btn{
+  background:rgba(40,130,255,.40)!important;
+  background-image:linear-gradient(150deg,rgba(90,175,255,.55),rgba(30,110,245,.48))!important;
+  border:1px solid rgba(160,215,255,.70)!important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.65),0 8px 24px rgba(30,120,255,.48)!important;
+}
+
+/* ── شرائح الرتبة والتبويبات ── */
+.sl-rank-pill,.sl-rank-pill.rank-e,.sl-rank-pill.rank-d,.sl-rank-pill.rank-c,
+.sl-rank-pill.rank-b,.sl-rank-pill.rank-a,.sl-rank-pill.rank-s{
+  background:rgba(255,255,255,.13)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.20),rgba(255,255,255,.07))!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.50)!important;
+}
+.dchip,.stat-tab,.lib-filter,.streak-badge,.week-badge{
+  background:rgba(255,255,255,.11)!important;
+  background-image:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.06))!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+}
+.dchip.act,.stat-tab.act{
+  background:rgba(50,150,255,.42)!important;
+  background-image:linear-gradient(150deg,rgba(90,175,255,.52),rgba(30,110,245,.44))!important;
+  border-color:rgba(160,215,255,.65)!important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),0 4px 14px rgba(30,120,255,.38)!important;
+}
+
+/* ── النص: تباين عالي ومريح لعين الأيفون ── */
+:root{
+  --tx :#f8faff !important;    /* أبيض بارد نضيف */
+  --tx2:#c8d8ee !important;    /* رمادي-أزرق فاتح واضح */
+  --tx3:#90a4be !important;    /* مكتوم مقروء */
+  --p  :#5bc2ff !important;    /* أكسنت أزرق سماوي P3-friendly */
+  --p2 :#8dd4ff !important;
+}
+
+/* ── حرف الرتبة: توهج أقوى على P3 ── */
+.rg-e{color:#e8f2ff!important;text-shadow:0 0 8px rgba(200,220,255,.8),0 0 16px rgba(160,190,240,.5)!important}
+.rg-d{color:#a0ffda!important;text-shadow:0 0 8px rgba(100,240,180,.9),0 0 18px rgba(60,210,150,.6)!important}
+.rg-c{color:#a8d8ff!important;text-shadow:0 0 8px rgba(80,180,255,.9),0 0 18px rgba(40,140,255,.6)!important}
+.rg-b{color:#d0b8ff!important;text-shadow:0 0 8px rgba(170,130,255,.9),0 0 18px rgba(130,90,250,.6)!important}
+.rg-a{color:#ffe599!important;text-shadow:0 0 8px rgba(255,210,80,.9),0 0 20px rgba(240,170,0,.6)!important}
+.rg-s{color:#80f0ff!important;text-shadow:0 0 8px rgba(0,220,255,1),0 0 20px rgba(0,190,240,.8),0 0 35px rgba(0,160,220,.4)!important}
+
+/* ── شريط التقدّم: أوضح على P3 ── */
+.rep-progress-bar{background:rgba(255,255,255,.14)!important}
+.rep-progress-fill{background:linear-gradient(90deg,#2090ff,#70d0ff)!important;
+  box-shadow:0 0 12px rgba(50,180,255,.7)!important}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   ⚔️ v40 — Solo Leveling Original Manhwa Color System
+   خلفية سوداء عميقة · نوافذ شفّافة · حدود cyan · نص أبيض + ذهبي
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   1) الخلفية — أسود عميق + أورب كهربائية خفيفة
+   ───────────────────────────────────────────── */
+body{
+  background:
+    radial-gradient(ellipse 70% 55% at 75% 8%,  rgba(0,100,255,.18), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 15% 35%, rgba(0,180,255,.12), transparent 58%),
+    radial-gradient(ellipse 60% 50% at 55% 105%,rgba(60,0,160,.20),  transparent 55%),
+    linear-gradient(180deg,#050810 0%,#070c18 60%,#060a14 100%)!important;
+  background-attachment:fixed!important;
+}
+body::before{background:rgba(0,150,255,.08)!important}
+body::after{opacity:.25!important}
+
+/* ─────────────────────────────────────────────
+   2) متغيرات اللون — باليت المانهوا الأصلي
+   ───────────────────────────────────────────── */
+:root{
+  --p   :#00d4ff !important;   /* cyan النظام */
+  --p2  :#4dcfff !important;   /* cyan ثانوي */
+  --ok  :#4ade80 !important;   /* أخضر */
+  --no  :#f87171 !important;   /* أحمر */
+  --wn  :#fbbf24 !important;   /* ذهبي/تحذير */
+  --pu  :#a78bfa !important;   /* بنفسجي */
+  --cy  :#00e5ff !important;   /* cyan نيون */
+  --tx  :#ffffff !important;   /* أبيض صافي */
+  --tx2 :#a0b8cc !important;   /* رمادي-أزرق */
+  --tx3 :#5a7a94 !important;   /* مكتوم */
+  --gold:#c8a44e !important;   /* ذهبي المانهوا */
+}
+body{color:#fff!important}
+
+/* ─────────────────────────────────────────────
+   3) نوافذ النظام — أسود شفّاف + حد cyan
+   ───────────────────────────────────────────── */
+.card,.dash-card,.ai-coach-card,.profile-card,.tool-card,.coach-rec,
+.prog-card,.elite-decision,.warmup-proto,.ai-chat-box,.oe-suggest{
+  background:rgba(5,10,25,.82)!important;
+  background-image:linear-gradient(160deg,rgba(0,180,255,.06),rgba(0,0,0,0))!important;
+  backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;
+  border:1px solid rgba(0,200,255,.28)!important;
+  box-shadow:inset 0 1px 0 rgba(0,200,255,.15),0 8px 28px rgba(0,0,0,.55)!important;
+}
+
+/* ─────────────────────────────────────────────
+   4) عناصر القوائم — أسود شفّاف أخف
+   ───────────────────────────────────────────── */
+.exi,.lib-item,.sc,.sl-quest,.sys-dq-task{
+  background:rgba(5,10,22,.70)!important;
+  background-image:linear-gradient(160deg,rgba(0,160,255,.05),rgba(0,0,0,0))!important;
+  backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+  border:1px solid rgba(0,180,255,.20)!important;
+  box-shadow:inset 0 1px 0 rgba(0,180,255,.10)!important;
+}
+
+/* ─────────────────────────────────────────────
+   5) نوافذ كبيرة (Status/Gate) — أعمق وأوضح
+   ───────────────────────────────────────────── */
+.sl-status-card,.sl-dungeon-gate{
+  background:rgba(4,8,20,.88)!important;
+  background-image:linear-gradient(160deg,rgba(0,200,255,.08),rgba(0,0,0,0))!important;
+  backdrop-filter:blur(24px)!important;-webkit-backdrop-filter:blur(24px)!important;
+  border:1px solid rgba(0,210,255,.38)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(0,210,255,.20),
+    inset 0 -1px 0 rgba(0,150,255,.08),
+    0 0 0 1px rgba(0,180,255,.06),
+    0 12px 40px rgba(0,0,0,.65)!important;
+}
+
+/* ─────────────────────────────────────────────
+   6) الهيدر والدوك — أسود شفّاف + حد cyan خفيف
+   ───────────────────────────────────────────── */
+.hdr{
+  background:rgba(4,7,18,.86)!important;
+  border-bottom:1px solid rgba(0,200,255,.22)!important;
+  backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;
+}
+.bnav{
+  background:rgba(4,7,18,.90)!important;
+  border-top:1px solid rgba(0,200,255,.22)!important;
+  backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;
+}
+
+/* ─────────────────────────────────────────────
+   7) الأزرار — نظام HUD أسود + حد cyan
+   ───────────────────────────────────────────── */
+.btn,.btn-sm,.btn-full{
+  background:rgba(5,12,28,.80)!important;
+  background-image:linear-gradient(160deg,rgba(0,160,255,.10),rgba(0,0,0,0))!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+  border:1px solid rgba(0,200,255,.35)!important;
+  color:#c8e8ff!important;
+  box-shadow:inset 0 1px 0 rgba(0,200,255,.12),0 4px 14px rgba(0,0,0,.45)!important;
+  text-shadow:none!important;
+}
+/* الزر الأساسي — cyan كهربائي (زي زر ARISE) */
+.btn-p,.tm-start-btn{
+  background:rgba(0,180,255,.15)!important;
+  background-image:linear-gradient(150deg,rgba(0,210,255,.25),rgba(0,140,240,.20))!important;
+  backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important;
+  border:1.5px solid rgba(0,212,255,.70)!important;
+  color:#fff!important;font-weight:900!important;
+  box-shadow:inset 0 1px 0 rgba(0,220,255,.30),0 0 18px rgba(0,190,255,.28),0 6px 20px rgba(0,0,0,.50)!important;
+  text-shadow:0 0 12px rgba(0,200,255,.6)!important;
+  filter:none!important;
+}
+.mx{
+  background:rgba(30,5,10,.75)!important;
+  border:1px solid rgba(255,100,120,.35)!important;
+  color:#ffa0b0!important;
+  backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+}
+
+/* ─────────────────────────────────────────────
+   8) الشرائح والتبويبات — HUD داكن
+   ───────────────────────────────────────────── */
+.dchip,.stat-tab,.lib-filter{
+  background:rgba(5,10,24,.75)!important;
+  background-image:linear-gradient(160deg,rgba(0,150,255,.08),rgba(0,0,0,0))!important;
+  backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+  border:1px solid rgba(0,190,255,.25)!important;
+  color:#a0c4d8!important;
+}
+.dchip.act,.stat-tab.act{
+  background:rgba(0,170,255,.16)!important;
+  background-image:linear-gradient(150deg,rgba(0,210,255,.22),rgba(0,140,240,.16))!important;
+  border:1.5px solid rgba(0,212,255,.65)!important;
+  color:#00e5ff!important;
+  box-shadow:inset 0 1px 0 rgba(0,220,255,.20),0 0 12px rgba(0,190,255,.22)!important;
+}
+.streak-badge,.week-badge{
+  background:rgba(5,10,24,.75)!important;
+  backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;
+}
+.streak-badge{border:1px solid rgba(255,170,80,.35)!important;color:#ffcc88!important}
+.week-badge{border:1px solid rgba(0,190,255,.30)!important;color:#88ccff!important}
+
+/* ─────────────────────────────────────────────
+   9) شريحة الرتبة — HUD داكن + حد لون الرتبة
+   ───────────────────────────────────────────── */
+.sl-rank-pill,.sl-rank-pill.rank-e,.sl-rank-pill.rank-d,.sl-rank-pill.rank-c,
+.sl-rank-pill.rank-b,.sl-rank-pill.rank-a,.sl-rank-pill.rank-s{
+  background:rgba(4,8,20,.88)!important;
+  background-image:linear-gradient(160deg,rgba(0,160,255,.10),rgba(0,0,0,0))!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+  border:1.5px solid rgba(0,200,255,.45)!important;
+  color:#a0c8e0!important;
+  box-shadow:inset 0 1px 0 rgba(0,200,255,.15),0 0 10px rgba(0,150,255,.12)!important;
+}
+
+/* ─────────────────────────────────────────────
+   10) حروف الرتبة — نيون بالباليت الأصلي
+   ───────────────────────────────────────────── */
+.rg-e{color:#b8cfe0!important;text-shadow:0 0 6px rgba(180,210,240,.7),0 0 14px rgba(140,180,220,.4)!important}
+.rg-d{color:#4ade80!important;text-shadow:0 0 8px rgba(74,222,128,.9),0 0 20px rgba(34,197,94,.5)!important}
+.rg-c{color:#60a5fa!important;text-shadow:0 0 8px rgba(96,165,250,.9),0 0 20px rgba(59,130,246,.5)!important}
+.rg-b{color:#a78bfa!important;text-shadow:0 0 8px rgba(167,139,250,.9),0 0 20px rgba(139,92,246,.5)!important}
+.rg-a{color:#fbbf24!important;text-shadow:0 0 8px rgba(251,191,36,.9),0 0 22px rgba(245,158,11,.6)!important}
+.rg-s{color:#00e5ff!important;text-shadow:0 0 10px rgba(0,229,255,1),0 0 22px rgba(0,212,255,.8),0 0 40px rgba(0,180,240,.4)!important}
+
+/* ─────────────────────────────────────────────
+   11) دواير "تم" — HUD داكن + مكتمل cyan
+   ───────────────────────────────────────────── */
+.done-check{
+  background:rgba(5,10,24,.80)!important;
+  backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;
+  border:2px solid rgba(0,190,255,.35)!important;
+  box-shadow:inset 0 1px 0 rgba(0,190,255,.10)!important;
+}
+.done-check.done,.done-check.checked,.done-check.active{
+  background:rgba(0,180,255,.22)!important;
+  border-color:rgba(0,220,255,.85)!important;
+  box-shadow:0 0 16px rgba(0,200,255,.55),inset 0 1px 0 rgba(0,220,255,.30)!important;
+}
+
+/* ─────────────────────────────────────────────
+   12) شريط التقدّم — أسود + تعبئة cyan نيون
+   ───────────────────────────────────────────── */
+.rep-progress-wrap{background:rgba(4,8,20,.80)!important;border:1px solid rgba(0,180,255,.18)!important}
+.rep-progress-bar{background:rgba(0,0,0,.60)!important;border:1px solid rgba(0,150,255,.12)!important}
+.rep-progress-fill{
+  background:linear-gradient(90deg,#0088ff,#00d4ff)!important;
+  box-shadow:0 0 12px rgba(0,200,255,.65)!important;
+}
+
+/* ─────────────────────────────────────────────
+   13) عناوين النظام — ذهبي المانهوا
+   ───────────────────────────────────────────── */
+.sl-ph-sys,.sl-sw-label,[class*="sys-label"],[class*="section-label"],
+.sl-dchip-label,.rep-progress-txt{
+  color:rgba(0,200,255,.55)!important;
+  letter-spacing:.12em!important;
+}
+
+/* ─────────────────────────────────────────────
+   14) تنبيهات الـ toast — داكن + حد ملوّن
+   ───────────────────────────────────────────── */
+.tst{border-radius:4px!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important}
+.tst-s{background:rgba(2,14,8,.90)!important;border-color:rgba(74,222,128,.45)!important;color:#4ade80!important}
+.tst-e{background:rgba(14,3,6,.90)!important;border-color:rgba(248,113,113,.45)!important;color:#fca5a5!important}
+.tst-w{background:rgba(14,10,2,.90)!important;border-color:rgba(251,191,36,.45)!important;color:#fde68a!important}
+.tst-i{background:rgba(4,8,20,.90)!important;border-color:rgba(0,200,255,.40)!important;color:#7dd3fc!important}
+
 </style>
 
 </head>
