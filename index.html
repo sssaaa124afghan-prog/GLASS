@@ -3004,6 +3004,202 @@ body::before{background:rgba(56,130,240,.18)!important}
     linear-gradient(180deg,rgba(255,255,255,.35),transparent 45%),
     linear-gradient(135deg,#3aa0ff 0%,#22d3ee 55%,#7c5cff 100%)!important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   🎖️💡 v32 — حرف الرتبة نيون بلون الرتبة (خلفية غامقة عشان يتوهّج)
+   ═══════════════════════════════════════════════════════════════════ */
+/* خلفية الشريحة غامقة موحّدة (تُلغي تدرّج v31) عشان الحرف النيون يبان */
+.sl-rank-pill,.sl-rank-pill.rank-e,.sl-rank-pill.rank-d,.sl-rank-pill.rank-c,
+.sl-rank-pill.rank-b,.sl-rank-pill.rank-a,.sl-rank-pill.rank-s{
+  background:linear-gradient(160deg,rgba(22,38,76,.92),rgba(9,18,44,.96))!important;
+  background-image:linear-gradient(180deg,rgba(255,255,255,.12),transparent 40%),linear-gradient(160deg,rgba(22,38,76,.92),rgba(9,18,44,.96))!important;
+  color:#aebfd8!important; /* لون "RANK ·" الهادي */
+  border:1.5px solid rgba(150,185,225,.45)!important;
+}
+/* حد الشريحة بلون خفيف من الرتبة */
+.sl-rank-pill.rank-d{border-color:rgba(110,231,183,.5)!important}
+.sl-rank-pill.rank-c{border-color:rgba(96,165,250,.5)!important}
+.sl-rank-pill.rank-b{border-color:rgba(167,139,250,.5)!important}
+.sl-rank-pill.rank-a{border-color:rgba(251,191,36,.55)!important}
+.sl-rank-pill.rank-s{border-color:rgba(0,212,255,.7)!important}
+
+/* ✨ حرف الرتبة — نيون متوهّج بلون الرتبة ✨ */
+.rank-glyph{font-weight:900!important;font-size:1.18em!important;padding:0 1px;
+  filter:saturate(1.2)}
+.rg-e{color:#dbe9ff!important;text-shadow:0 0 5px #bcd2f0,0 0 11px #93b4e0,0 0 18px #6f9ad0!important}
+.rg-d{color:#9bffd4!important;text-shadow:0 0 5px #6ee7b7,0 0 12px #34d399,0 0 20px #10b981!important}
+.rg-c{color:#a9d4ff!important;text-shadow:0 0 5px #60a5fa,0 0 12px #3b82f6,0 0 20px #2563eb!important}
+.rg-b{color:#cdb8ff!important;text-shadow:0 0 5px #a78bfa,0 0 12px #8b5cf6,0 0 20px #7c3aed!important}
+.rg-a{color:#ffe08a!important;text-shadow:0 0 5px #fbbf24,0 0 12px #f59e0b,0 0 22px #d97706!important}
+.rg-s{color:#7df2ff!important;text-shadow:0 0 6px #22e3ff,0 0 14px #00d4ff,0 0 26px #00b4e0!important}
+
+/* ═══════════════════════════════════════════════════════════════════
+   💧💎 v33 — زجاج سائل واضح جداً (Ultra Liquid Glass)
+   خلفية غنية بأورب ملوّنة (ثابتة) + تغبيش وإشباع أعلى + لمعان قوي
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── خلفية الصفحة: أورب ملوّنة عشان الزجاج يكسر ألوانها (ثابتة = صفر تكلفة) ── */
+body{
+  background:
+    radial-gradient(115% 85% at 82% 6%, rgba(40,130,255,.32), transparent 48%),
+    radial-gradient(95% 75% at 10% 28%, rgba(0,210,255,.26), transparent 52%),
+    radial-gradient(105% 80% at 65% 102%, rgba(130,90,255,.30), transparent 52%),
+    radial-gradient(80% 60% at 95% 70%, rgba(0,255,220,.14), transparent 55%),
+    linear-gradient(150deg,#0e1d42 0%,#142a54 50%,#0b1838 100%)!important;
+  background-attachment:fixed!important;
+}
+
+/* ── الكروت: زجاج شفّاف واضح + لمعان سائل قوي ── */
+.card,.dash-card,.ai-coach-card,.profile-card,.tool-card,.coach-rec,
+.prog-card,.elite-decision,.warmup-proto,.ai-chat-box,.oe-suggest{
+  background-image:
+    linear-gradient(125deg,rgba(255,255,255,.28) 0%,transparent 20%,transparent 76%,rgba(150,210,255,.16) 100%),
+    linear-gradient(160deg,rgba(140,185,255,.18),rgba(50,90,180,.20))!important;
+  backdrop-filter:blur(22px) saturate(180%) brightness(1.06)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(180%) brightness(1.06)!important;
+  border:1px solid rgba(195,228,255,.42)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -22px 44px rgba(70,150,255,.10),0 10px 30px rgba(0,10,42,.34)!important;
+}
+
+/* ── عناصر القوائم: زجاج واضح أخف (محدود بـ content-visibility) ── */
+.exi,.lib-item,.sc,.sl-quest,.sys-dq-task{
+  background-image:
+    linear-gradient(125deg,rgba(255,255,255,.20) 0%,transparent 22%,transparent 100%),
+    linear-gradient(160deg,rgba(130,175,255,.15),rgba(44,80,165,.18))!important;
+  backdrop-filter:blur(16px) saturate(165%)!important;-webkit-backdrop-filter:blur(16px) saturate(165%)!important;
+  border:1px solid rgba(180,218,255,.34)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.42)!important;
+}
+
+/* ── النوافذ الكبيرة: أقصى زجاج (Status/Gate) ── */
+.sl-status-card,.sl-dungeon-gate{
+  background-image:
+    linear-gradient(120deg,rgba(255,255,255,.30) 0%,transparent 18%,transparent 80%,rgba(140,200,255,.18) 100%),
+    linear-gradient(160deg,rgba(120,170,255,.20),rgba(40,75,165,.26))!important;
+  backdrop-filter:blur(28px) saturate(195%) brightness(1.05)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(195%) brightness(1.05)!important;
+  border:1px solid rgba(200,230,255,.45)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 12px 38px rgba(0,12,48,.4)!important;
+}
+
+/* ── الهيدر والدوك: زجاج شفّاف واضح ── */
+.hdr,.bnav{backdrop-filter:blur(24px) saturate(175%)!important;-webkit-backdrop-filter:blur(24px) saturate(175%)!important}
+.hdr{background:rgba(16,32,72,.42)!important;border-bottom:1px solid rgba(170,215,255,.20)!important}
+.bnav{background:rgba(18,36,80,.46)!important;border-top:1px solid rgba(170,215,255,.20)!important}
+
+/* ── توهجات الخلفية المتحركة: أوضح عشان الزجاج يبان عليها ── */
+body::before{background:rgba(70,150,255,.22)!important}
+
+
+/* ═══ v33b — إصلاح ترتيب الرتبة (RTL عكس عناصر الـ flex) + تقوية لمعان الزجاج ═══ */
+/* الشريحة محتوى لاتيني → نخليها LTR عشان "RANK · E" تفضل بترتيبها الصح */
+.sl-rank-pill{direction:ltr!important}
+
+/* لمعان أقوى على كل الأسطح الزجاجية = إحساس "سائل" أوضح */
+.card,.dash-card,.sl-status-card,.sl-dungeon-gate,.tool-card,.ai-coach-card{
+  position:relative;
+}
+.card::after,.dash-card::after{content:none} /* تأكيد عدم تعارض */
+
+/* ═══════════════════════════════════════════════════════════════════
+   💧🔘 v34 — الأزرار زجاج سائل (نفس إحساس الكروت + الزوايا المقطوعة)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── الزر العادي: زجاج سائل شفّاف ── */
+.btn,.btn-sm,.btn-full{
+  background-image:
+    linear-gradient(125deg,rgba(255,255,255,.30) 0%,transparent 26%,transparent 100%),
+    linear-gradient(160deg,rgba(140,185,255,.18),rgba(50,92,185,.22))!important;
+  backdrop-filter:blur(14px) saturate(165%)!important;-webkit-backdrop-filter:blur(14px) saturate(165%)!important;
+  border:1px solid rgba(195,228,255,.42)!important;color:#eaf4ff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -10px 20px rgba(70,150,255,.08),0 6px 18px rgba(0,10,40,.3)!important;
+  text-shadow:0 1px 3px rgba(0,10,36,.5)!important;
+}
+
+/* ── الزر الأساسي: زجاج كهربائي لامع وحيوي (يفضل بارز كـ CTA) ── */
+.btn-p,.tm-start-btn{
+  background-image:
+    linear-gradient(125deg,rgba(255,255,255,.45) 0%,transparent 30%,transparent 100%),
+    linear-gradient(150deg,rgba(70,190,255,.46),rgba(24,128,238,.54))!important;
+  backdrop-filter:blur(16px) saturate(185%) brightness(1.06)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(185%) brightness(1.06)!important;
+  border:1px solid rgba(205,238,255,.65)!important;color:#ffffff!important;
+  text-shadow:0 1px 6px rgba(0,46,96,.55)!important;font-weight:900!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 0 0 1px rgba(190,235,255,.2),0 8px 24px rgba(28,135,255,.42)!important;
+  filter:none!important; /* نلغي drop-shadow القديم اللي كان يتعارض */
+}
+
+/* ── زر الحذف/الإغلاق mx: زجاج بلمسة حمراء ── */
+.mx{
+  background-image:
+    linear-gradient(125deg,rgba(255,255,255,.25) 0%,transparent 30%,transparent 100%),
+    linear-gradient(160deg,rgba(255,120,150,.20),rgba(120,30,55,.30))!important;
+  backdrop-filter:blur(12px) saturate(150%)!important;-webkit-backdrop-filter:blur(12px) saturate(150%)!important;
+  border:1px solid rgba(255,160,180,.45)!important;color:#ffd0db!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35)!important;
+}
+
+/* ── الشرائح والتبويبات: زجاج خفيف ── */
+.dchip,.stat-tab,.lib-filter{
+  background-image:
+    linear-gradient(125deg,rgba(255,255,255,.20) 0%,transparent 28%,transparent 100%),
+    linear-gradient(160deg,rgba(120,165,235,.14),rgba(40,75,160,.18))!important;
+  backdrop-filter:blur(12px) saturate(150%)!important;-webkit-backdrop-filter:blur(12px) saturate(150%)!important;
+  border:1px solid rgba(170,210,255,.30)!important;
+}
+.dchip.act{
+  background-image:
+    linear-gradient(125deg,rgba(255,255,255,.40) 0%,transparent 30%,transparent 100%),
+    linear-gradient(150deg,rgba(70,190,255,.4),rgba(24,128,238,.46))!important;
+  border-color:rgba(200,235,255,.65)!important;color:#fff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 4px 16px rgba(36,150,255,.4)!important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   ✨ v35 — تحسينات تناسق: شريحة الرتبة زجاج · شريط التقدّم مصقول
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── شريحة الرتبة: زجاج سائل (متناسقة مع الباقي) + الحرف النيون يفضل بارز ── */
+.sl-rank-pill,.sl-rank-pill.rank-e,.sl-rank-pill.rank-d,.sl-rank-pill.rank-c,
+.sl-rank-pill.rank-b,.sl-rank-pill.rank-a,.sl-rank-pill.rank-s{
+  background-image:
+    linear-gradient(125deg,rgba(255,255,255,.30) 0%,transparent 26%,transparent 100%),
+    linear-gradient(160deg,rgba(120,162,232,.20),rgba(34,60,128,.30))!important;
+  backdrop-filter:blur(14px) saturate(165%)!important;-webkit-backdrop-filter:blur(14px) saturate(165%)!important;
+  border:1px solid rgba(190,225,255,.42)!important;color:#d7e6fa!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 6px 18px rgba(0,10,40,.32)!important;
+}
+/* الحرف النيون أقوى شوية عشان يبان على الزجاج الفاتح */
+.rank-glyph{filter:saturate(1.3) brightness(1.1)!important}
+
+/* ── شريط تقدّم التمرين: محزّز زجاجي + تعبئة متوهّجة ── */
+.rep-progress-wrap{
+  background:linear-gradient(160deg,rgba(80,130,210,.14),rgba(20,40,90,.3))!important;
+  border:1px solid rgba(130,185,255,.22)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12)!important;
+}
+.rep-progress-bar{
+  height:6px!important;background:rgba(8,18,42,.7)!important;
+  box-shadow:inset 0 1px 3px rgba(0,8,30,.6)!important;border:1px solid rgba(120,180,255,.12)!important;
+}
+.rep-progress-fill{
+  background:linear-gradient(90deg,#2f8eff,#22d3ff)!important;
+  box-shadow:0 0 10px rgba(34,200,255,.7),inset 0 1px 0 rgba(255,255,255,.5)!important;
+}
+.rep-progress-txt{color:rgba(150,210,255,.7)!important}
+
+/* ── شريط الإدخال (الخط تحت اسم التمرين) أنضف ── */
+.set-in,.rpe-in{
+  background:rgba(8,18,42,.55)!important;border:1px solid rgba(120,180,255,.25)!important;
+}
+
+/* ── لمسة عمق: حافة داخلية سفلية خفيفة على الكروت لإحساس زجاج ثلاثي الأبعاد ── */
+.card,.dash-card,.sl-status-card{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.06),
+    inset 0 -22px 44px rgba(70,150,255,.09),0 12px 32px rgba(0,10,42,.36)!important;
+}
+
 </style>
 
 </head>
@@ -10276,6 +10472,30 @@ function shareWorkout(sd,tv,prs){
   window.addEventListener('hashchange', route);
   if(document.readyState!=='loading') setTimeout(route,350);
   else document.addEventListener('DOMContentLoaded', function(){ setTimeout(route,350); });
+})();
+</script>
+
+<script>
+/* 🎖️ v32 (fixed) — حرف الرتبة نيون حسب الرتبة — بدون MutationObserver (آمن من التجمّد) */
+(function(){
+  var TIERS=['s','a','b','c','d','e'];
+  function tier(el){ for(var i=0;i<TIERS.length;i++){ if(el.classList.contains('rank-'+TIERS[i])) return TIERS[i]; } return 'e'; }
+  function process(){
+    var pills=document.querySelectorAll('.sl-rank-pill');
+    for(var k=0;k<pills.length;k++){
+      var el=pills[k], t=tier(el), g=el.querySelector('.rank-glyph'), want='rank-glyph rg-'+t;
+      if(g){ if(g.className!==want) g.className=want; continue; }   /* تحديث فقط عند اختلاف حقيقي = لا حلقة */
+      var txt=(el.textContent||'').trim(); if(!txt) continue;
+      var m=txt.match(/^([\s\S]*?[·•:.\u2022\-]\s*)([A-Za-z+]{1,3})\s*$/), pre, letter;
+      if(m){ pre=m[1]; letter=m[2]; } else { var pa=txt.split(/\s+/); letter=pa.pop(); pre=pa.join(' ')+' '; }
+      var esc=function(x){var d=document.createElement('div');d.textContent=x;return d.innerHTML;};
+      el.innerHTML=esc(pre)+'<span class="rank-glyph rg-'+t+'">'+esc(letter)+'</span>';
+    }
+  }
+  function init(){ process(); }
+  if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
+  setTimeout(process, 1000);
+  setInterval(process, 2500); /* يلتقط الترقية بأمان — بلا مراقب ولا حلقة */
 })();
 </script>
 
