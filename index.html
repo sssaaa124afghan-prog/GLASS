@@ -3793,6 +3793,18 @@ input,textarea,select{
 
 
 /* v40b fix */ .sys-dq-timer{background:rgba(4,8,20,.88)!important;border:1px solid rgba(0,180,255,.22)!important;color:#a0d4f0!important}
+
+/* ═══ v41 — إزالة الضوضاء والـ scan lines (زجاج ناعم) ═══ */
+body::after{
+  content:''!important;position:fixed!important;inset:0!important;
+  width:100%!important;height:100%!important;
+  background:none!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  animation:none!important;
+}
+/* إلغاء أي scan/noise variable */
+:root{--sl-scan:transparent!important}
 </style>
 
 </head>
