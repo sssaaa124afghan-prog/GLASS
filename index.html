@@ -3200,6 +3200,46 @@ body::before{background:rgba(70,150,255,.22)!important}
     inset 0 -22px 44px rgba(70,150,255,.09),0 12px 32px rgba(0,10,42,.36)!important;
 }
 
+
+/* ═══════════════════════════════════════════════════════════════════
+   ✨ v36 — تكملة الصقل: تنبيهات أسفل (بلا تداخل) · دواير "تم" زجاج · شرائح الهيدر
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── التنبيهات: تنزل من أسفل فوق شريط التنقّل (ماتطفوش على الهيدر) ── */
+.tc{top:auto!important;bottom:calc(86px + var(--safe-b,0px))!important;z-index:9000!important}
+.tst{
+  backdrop-filter:blur(20px) saturate(170%)!important;-webkit-backdrop-filter:blur(20px) saturate(170%)!important;
+  border-radius:12px!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 8px 26px rgba(0,8,32,.5)!important;
+  clip-path:polygon(11px 0,100% 0,100% calc(100% - 11px),calc(100% - 11px) 100%,0 100%,0 11px)!important;
+}
+
+/* ── دواير "تم" بتاعة التمارين: زجاج راقي + حالة مكتملة متوهّجة ── */
+.done-check{
+  background-image:
+    linear-gradient(125deg,rgba(255,255,255,.30) 0%,transparent 32%,transparent 100%),
+    linear-gradient(160deg,rgba(90,150,235,.18),rgba(24,46,104,.36))!important;
+  backdrop-filter:blur(10px) saturate(150%)!important;-webkit-backdrop-filter:blur(10px) saturate(150%)!important;
+  border:2px solid rgba(130,195,255,.45)!important;border-radius:12px!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 3px 10px rgba(0,10,40,.35)!important;
+}
+.done-check.done,.done-check.checked,.done-check.active{
+  background-image:linear-gradient(160deg,#2f8eff,#22d3ff)!important;
+  border-color:rgba(200,240,255,.8)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 0 16px rgba(34,200,255,.6)!important;
+}
+
+/* ── شرائح الهيدر (streak/week): زجاج متناسق مع لمسة اللون ── */
+.streak-badge,.week-badge{
+  background-image:
+    linear-gradient(125deg,rgba(255,255,255,.26) 0%,transparent 34%,transparent 100%),
+    linear-gradient(160deg,rgba(110,160,235,.16),rgba(36,64,140,.26))!important;
+  backdrop-filter:blur(12px) saturate(155%)!important;-webkit-backdrop-filter:blur(12px) saturate(155%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4)!important;
+}
+.streak-badge{color:#ffd9a8!important;border:1px solid rgba(255,180,120,.4)!important}
+.week-badge{color:#bfe3ff!important;border:1px solid rgba(130,195,255,.4)!important}
+
 </style>
 
 </head>
