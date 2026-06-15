@@ -3240,6 +3240,52 @@ body::before{background:rgba(70,150,255,.22)!important}
 .streak-badge{color:#ffd9a8!important;border:1px solid rgba(255,180,120,.4)!important}
 .week-badge{color:#bfe3ff!important;border:1px solid rgba(130,195,255,.4)!important}
 
+
+/* ═══════════════════════════════════════════════════════════════════
+   🎨 v37 — ألوان نص نظيفة وواضحة + تهدئة التشبّع (تقليل الزهو)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── ألوان النص: أبيض نظيف + رمادي-أزرق هادي (بدل السماوي الزاهي) ── */
+:root{
+  --tx:#eef3fa !important;            /* رئيسي: أبيض بارد نظيف وواضح */
+  --tx2:#b8c5d8 !important;           /* ثانوي: رمادي-أزرق هادي وواضح */
+  --tx3:#8c9bb2 !important;           /* ثالثي: مكتوم بس مقروء (كان شفّاف وباهت) */
+}
+/* النص الأساسي في الجسم نظيف */
+body,.card,.dash-card,p,span,div,li,td,th,label{color:inherit}
+
+/* ── تهدئة تشبّع الزجاج (كان 150-195% = زاهي) → ~120% هادي ── */
+.card,.dash-card,.ai-coach-card,.profile-card,.tool-card,.coach-rec,
+.prog-card,.elite-decision,.warmup-proto,.ai-chat-box,.oe-suggest{
+  backdrop-filter:blur(20px) saturate(120%)!important;-webkit-backdrop-filter:blur(20px) saturate(120%)!important;
+}
+.exi,.lib-item,.sc,.sl-quest,.sys-dq-task{
+  backdrop-filter:blur(15px) saturate(118%)!important;-webkit-backdrop-filter:blur(15px) saturate(118%)!important;
+}
+.sl-status-card,.sl-dungeon-gate{
+  backdrop-filter:blur(24px) saturate(125%)!important;-webkit-backdrop-filter:blur(24px) saturate(125%)!important;
+}
+.hdr,.bnav{backdrop-filter:blur(22px) saturate(120%)!important;-webkit-backdrop-filter:blur(22px) saturate(120%)!important}
+.btn,.btn-sm,.btn-full{backdrop-filter:blur(13px) saturate(120%)!important;-webkit-backdrop-filter:blur(13px) saturate(120%)!important}
+.btn-p,.tm-start-btn{backdrop-filter:blur(15px) saturate(130%)!important;-webkit-backdrop-filter:blur(15px) saturate(130%)!important}
+.dchip,.stat-tab,.lib-filter,.mx,.streak-badge,.week-badge,.done-check{
+  backdrop-filter:blur(11px) saturate(118%)!important;-webkit-backdrop-filter:blur(11px) saturate(118%)!important}
+
+/* ── تهدئة أورب الخلفية (كانت زاهية) عشان النص فوقها يبقى أوضح ── */
+body{
+  background:
+    radial-gradient(115% 85% at 82% 6%, rgba(40,120,235,.20), transparent 50%),
+    radial-gradient(95% 75% at 10% 28%, rgba(0,180,235,.16), transparent 54%),
+    radial-gradient(105% 80% at 65% 102%, rgba(115,90,225,.18), transparent 54%),
+    linear-gradient(150deg,#0e1d42 0%,#142a52 50%,#0b1838 100%)!important;
+}
+
+/* ── العناوين الزاهية (سماوي نيون كنص) تهدأ شوية للوضوح ── */
+.ct,.dash-title,.sec-title,h2,h3{color:#dbe8f7!important}
+
+/* ── إلغاء أي brightness زائد على الزجاج (كان بيزوّد الزهو) ── */
+.card,.dash-card,.sl-status-card,.sl-dungeon-gate,.btn-p,.tm-start-btn{filter:none!important}
+
 </style>
 
 </head>
