@@ -3805,6 +3805,350 @@ body::after{
 }
 /* إلغاء أي scan/noise variable */
 :root{--sl-scan:transparent!important}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ⚔️ v42 — تطوير: شريط التنقّل · Wake Lock pill · تفاصيل HUD
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1) شريط التنقّل: أيقونات أوضح + النشط بارز ── */
+.bni .ic{
+  font-size:1.55em!important;
+  filter:grayscale(.6) brightness(.7)!important;
+  opacity:.7!important;
+  transition:all .22s ease!important;
+}
+.bni{
+  color:rgba(120,170,200,.65)!important;
+  font-size:.58em!important;
+  letter-spacing:.02em!important;
+  border-radius:16px!important;
+  transition:all .22s ease!important;
+}
+/* النشط: بارز بلون cyan + خلفية + توهّج */
+.bni.act{
+  color:#00d4ff!important;
+  background:rgba(0,180,255,.14)!important;
+  box-shadow:0 0 18px rgba(0,180,255,.18) inset!important;
+}
+.bni.act .ic{
+  filter:none!important;
+  opacity:1!important;
+  transform:scale(1.2) translateY(-1px)!important;
+  filter:drop-shadow(0 0 8px rgba(0,212,255,.85))!important;
+}
+.bni.act span:not(.ic){color:#00d4ff!important}
+
+/* ── 2) Wake Lock pill: أصغر وأنضف ── */
+#wakeLockPill{
+  font-size:.58em!important;padding:3px 8px!important;
+  border-radius:6px!important;
+  background:rgba(0,200,100,.08)!important;
+  border:1px solid rgba(0,200,100,.30)!important;
+  color:rgba(100,230,160,.85)!important;
+  letter-spacing:.04em!important;
+}
+
+/* ── 3) الهيدر: عنوان أكبر وأوضح + تاريخ أنضف ── */
+.hdr h1{
+  font-size:1.05em!important;
+  letter-spacing:.06em!important;
+  color:#fff!important;
+  text-shadow:0 0 20px rgba(0,200,255,.35)!important;
+}
+.hdr-sub,.sl-ph-date,.hdr-date{
+  font-size:.58em!important;
+  color:rgba(0,190,255,.55)!important;
+  letter-spacing:.08em!important;
+}
+
+/* ── 4) تبويبات الصفحات (stat-tab): تمييز أوضح للنشط ── */
+.stat-tab{
+  font-size:.68em!important;
+  letter-spacing:.04em!important;
+  padding:5px 12px!important;
+  border-radius:6px!important;
+}
+.stat-tab.act{
+  color:#00e5ff!important;
+  border-color:rgba(0,212,255,.65)!important;
+  text-shadow:0 0 10px rgba(0,200,255,.5)!important;
+}
+
+/* ── 5) عناوين الأقسام [SYSTEM · RECORDS] أنضف ── */
+.sl-pg-eyebrow,.pg-eyebrow,[class*="eyebrow"]{
+  font-size:.58em!important;
+  color:rgba(0,180,255,.45)!important;
+  letter-spacing:.14em!important;
+}
+.sl-pg-title,.pg-title{
+  font-size:1.35em!important;
+  color:#fff!important;
+  letter-spacing:.06em!important;
+  text-shadow:0 0 24px rgba(0,190,255,.28)!important;
+}
+
+/* ── 6) "NO RECORDS" empty state: أجمل ── */
+.empty-state,.no-records,.sl-empty{
+  color:rgba(0,160,220,.45)!important;
+  letter-spacing:.10em!important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   ⚔️ v43 — تطوير مستمر: كروت الدنجن · أزرار التمرين · تفاصيل دقيقة
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1) كروت اختيار الدنجن (Lower A / Upper A): أوضح وأكبر ── */
+.sl-dungeon-day,.dungeon-select-card,.day-select-card{
+  border:1px solid rgba(0,200,255,.30)!important;
+  transition:all .22s ease!important;
+}
+.sl-dungeon-day:hover,.dungeon-select-card:hover{
+  border-color:rgba(0,220,255,.65)!important;
+  box-shadow:0 0 20px rgba(0,180,255,.22)!important;
+}
+/* تسمية [DUNGEON BETA] / [DUNGEON ALPHA] */
+.sl-dungeon-label,.dungeon-label,.day-type-label{
+  font-size:.55em!important;color:rgba(0,180,255,.55)!important;
+  letter-spacing:.12em!important;
+}
+/* اسم الدنجن (Lower A / Upper A) */
+.sl-dungeon-name,.dungeon-name,.day-name{
+  font-size:1.1em!important;font-weight:800!important;
+  color:#fff!important;letter-spacing:.04em!important;
+}
+
+/* ── 2) زر ابدأ التمرين: أكثر حضوراً + توهّج ── */
+.btn-p,.tm-start-btn{
+  font-size:1.02em!important;letter-spacing:.04em!important;
+  border-radius:10px!important;
+  transition:all .22s ease!important;
+}
+.btn-p:active,.tm-start-btn:active{
+  transform:scale(.97)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 4px 12px rgba(0,180,255,.35)!important;
+}
+
+/* ── 3) عناصر التمرين (تمرين بطن / سكوات...): أوضح وأكبر ── */
+.exi-name,.lib-item-name{
+  font-size:1.0em!important;font-weight:700!important;color:#fff!important;
+}
+.exi-meta,.exi-info,.lib-item-meta{
+  font-size:.62em!important;color:rgba(0,170,220,.60)!important;
+}
+/* عدد / وزن (الأرقام): بارزة */
+.set-num,.set-in,.exi-count{
+  font-family:'Orbitron',monospace!important;
+  color:#00d4ff!important;font-weight:700!important;
+}
+
+/* ── 4) شريط الستريك/الأسبوع في الهيدر: مكتنز ── */
+.streak-badge,.week-badge{
+  font-size:.64em!important;padding:3px 8px!important;
+  font-weight:700!important;letter-spacing:.02em!important;
+}
+
+/* ── 5) شريحة "اليوم" (الإثنين/الثلاثاء): cyan نضيف ── */
+.day-chip,.today-chip,.current-day-chip{
+  background:rgba(0,180,255,.14)!important;
+  border:1px solid rgba(0,200,255,.45)!important;
+  color:#00d4ff!important;font-size:.62em!important;
+  padding:2px 8px!important;border-radius:5px!important;
+  letter-spacing:.06em!important;
+}
+
+/* ── 6) بطاقة "SYSTEM" (تذكير النسخة الاحتياطية): أهدى ── */
+#slSystemNotif{
+  background:rgba(4,8,20,.94)!important;
+  border-color:rgba(0,180,255,.40)!important;
+  font-size:.88em!important;
+}
+
+/* ── 7) شريط "[ TODAY · MISSION · BRIEFING ]": أجمل ── */
+.sl-briefing-header,.mission-header,[class*="briefing-hdr"]{
+  color:rgba(0,180,255,.50)!important;
+  letter-spacing:.12em!important;font-size:.58em!important;
+}
+
+/* ── 8) رقم FATIGUE: لون حسب القيمة (أخضر → أصفر → أحمر) ── */
+[class*="fatigue-val"]{font-family:'Orbitron',monospace!important;font-weight:700!important}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   ⚔️ v44 — تطوير: Empty State · Profile · System Popup · تفاصيل HUD
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1) Empty State "NO RECORDS": مصمّم زي رسالة النظام ── */
+.no-ses,.no-data,.sl-empty-state,[class*="no-rec"]{
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;gap:10px!important;
+  padding:40px 20px!important;
+  color:rgba(0,170,220,.45)!important;
+}
+.no-ses::before,.no-data::before{
+  content:'[ NO DATA ]';
+  display:block;font-family:'Orbitron',monospace;font-size:.65em;
+  letter-spacing:.18em;color:rgba(0,160,210,.35);margin-bottom:4px;
+}
+
+/* ── 2) System Popup (المودال الترحيبي وكل النوافذ المنبثقة): تحسين ── */
+.sl-popup-overlay{
+  background:rgba(0,0,0,.75)!important;
+  backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important;
+}
+.sl-popup,.sys-popup,.system-popup,[class*="popup-box"]{
+  background:rgba(4,8,22,.95)!important;
+  border:1.5px solid rgba(0,200,255,.55)!important;
+  border-radius:12px!important;
+  box-shadow:0 0 40px rgba(0,180,255,.20),inset 0 1px 0 rgba(0,200,255,.18)!important;
+}
+/* عنوان الـ popup */
+.sl-popup-title,.popup-title,[class*="popup-h"]{
+  color:#fff!important;font-size:1.2em!important;
+  text-shadow:0 0 16px rgba(0,200,255,.4)!important;
+}
+/* نص الـ popup */
+.sl-popup-body,.popup-body,[class*="popup-txt"]{
+  color:rgba(190,215,235,.85)!important;line-height:1.65!important;
+}
+/* زر الـ popup */
+.sl-popup-cta,.popup-cta{
+  background:rgba(0,170,255,.18)!important;
+  border:1.5px solid rgba(0,212,255,.65)!important;
+  color:#fff!important;font-weight:800!important;
+  box-shadow:0 0 16px rgba(0,180,255,.25)!important;
+}
+
+/* ── 3) Profile page: بطاقة الهنتر أوضح ── */
+.profile-card,.hunter-profile-card{
+  border-color:rgba(0,200,255,.38)!important;
+}
+/* اسم الهنتر */
+.hunter-name,.profile-name{
+  color:#fff!important;font-size:1.3em!important;font-weight:800!important;
+  text-shadow:0 0 18px rgba(0,190,255,.30)!important;
+}
+/* معلومات (22 سنة · عجمان) */
+.hunter-meta,.profile-meta{
+  color:rgba(0,170,210,.65)!important;font-size:.72em!important;
+  letter-spacing:.05em!important;
+}
+/* [ HUNTER · STATUS · WINDOW ] label */
+.profile-label,.hunter-label,.prof-sys-label{
+  color:rgba(0,160,200,.45)!important;
+  font-size:.56em!important;letter-spacing:.14em!important;
+}
+
+/* ── 4) جدول الأسبوع في profile: صف اليوم النشط ── */
+.week-row.today,.week-row.active,.schedule-row.today{
+  background:rgba(0,170,255,.12)!important;
+  border-color:rgba(0,200,255,.40)!important;
+}
+.week-day-name{
+  color:rgba(0,170,210,.70)!important;
+  font-size:.72em!important;font-weight:700!important;
+}
+.week-workout{color:#fff!important;font-size:.82em!important}
+.week-rest{color:rgba(0,150,190,.45)!important;font-size:.76em!important}
+
+/* ── 5) تحسين مودال الـ System: الأيقونة والعنوان ── */
+.sl-mo,.sl-overlay,.sl-n-overlay{
+  background:rgba(0,0,0,.72)!important;
+  backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;
+}
+/* الصندوق الداخلي */
+.sl-mo-box,.sl-n-box,[class*="mo-inner"]{
+  background:rgba(4,8,22,.96)!important;
+  border:1.5px solid rgba(0,200,255,.50)!important;
+  box-shadow:0 0 50px rgba(0,170,255,.18),inset 0 1px 0 rgba(0,200,255,.16)!important;
+}
+/* [ SYSTEM ] label */
+.sl-n-sys,.sys-label{
+  color:rgba(0,180,255,.60)!important;
+  font-size:.60em!important;letter-spacing:.16em!important;
+  font-family:'Orbitron',monospace!important;
+}
+/* أيقونة البرق ⚡ */
+.sl-n-icon{font-size:2.4em!important}
+/* عنوان المودال */
+.sl-n-title,.mo-title{
+  color:#00d4ff!important;font-size:1.3em!important;
+  text-shadow:0 0 20px rgba(0,200,255,.50)!important;
+}
+/* نص المودال */
+.sl-n-line,.mo-line{color:rgba(200,225,240,.85)!important}
+/* زر دخول */
+.sl-n-cta,.mo-cta{
+  background:rgba(0,160,255,.18)!important;
+  border:1.5px solid rgba(0,212,255,.62)!important;color:#fff!important;
+  font-weight:800!important;font-size:1.0em!important;
+  box-shadow:0 0 18px rgba(0,180,255,.24)!important;
+}
+
+/* ── 6) حواف المودال (الزوايا المقطوعة): أوضح ── */
+.sl-n-corner,.mo-corner,[class*="hud-corner"]{
+  border-color:rgba(0,200,255,.75)!important;
+  opacity:.9!important;
+}
+
+/* ── 7) AI tab: حقل الإدخال والزر أوضح ── */
+.ai-input-txt,.ai-chat-input{
+  background:rgba(4,8,20,.88)!important;
+  border:1px solid rgba(0,180,255,.30)!important;
+  color:#e8f4ff!important;
+  border-radius:8px!important;
+}
+.ai-input-txt::placeholder{color:rgba(0,160,200,.40)!important}
+.ai-send-btn,[class*="send-btn"]{
+  background:rgba(0,160,255,.20)!important;
+  border:1px solid rgba(0,200,255,.50)!important;
+  color:#00d4ff!important;
+}
+
+
+/* ═══ v45b — floatTimer بتصميم Solo Leveling ═══ */
+#floatTimer{
+  background:rgba(4,8,22,.96)!important;
+  border:1.5px solid rgba(0,200,255,.55)!important;
+  border-radius:14px!important;
+  box-shadow:0 0 30px rgba(0,180,255,.22)!important;
+  top:76px!important;
+}
+#floatTimerIcon{filter:none!important}
+#floatTimerDisp{
+  color:#00d4ff!important;
+  text-shadow:0 0 16px rgba(0,200,255,.7)!important;
+  font-family:'Orbitron',monospace!important;
+  font-size:1.6em!important;
+}
+.ft-preset-btn{
+  border-color:rgba(0,200,255,.30)!important;
+  background:rgba(0,200,255,.08)!important;
+  color:rgba(0,200,255,.85)!important;
+}
+.ft-preset-btn.active,.ft-preset-btn:active{
+  background:rgba(0,200,255,.22)!important;
+  border-color:rgba(0,220,255,.65)!important;
+  color:#00e5ff!important;
+}
+
+/* ═══ v46 — floatTimer دائري ═══ */
+#floatTimer{flex-direction:column!important;gap:8px!important;
+  border:1.5px solid rgba(0,200,255,.45)!important;
+  background:rgba(4,8,22,.96)!important;
+  box-shadow:0 0 30px rgba(0,180,255,.22),0 8px 28px rgba(0,0,0,.55)!important;
+  border-radius:20px!important;padding:14px 18px 10px!important}
+#floatTimerDisp{font-family:'Orbitron',monospace!important;font-size:1.55em!important;
+  color:#00d4ff!important;line-height:1!important}
+#floatTimerIcon{font-size:.52em!important;font-family:monospace!important;
+  letter-spacing:.12em!important;color:rgba(0,180,255,.55)!important}
+#floatTimer .ft-presets{justify-content:center!important;gap:4px!important;flex-wrap:wrap!important}
+#floatTimer .ft-preset-btn{font-size:.62em!important;padding:4px 10px!important}
+
+/* ═══ v46b — floatTimer أزرار محسّنة ═══ */
+#floatTimer .ft-presets{justify-content:center!important;gap:5px!important;flex-wrap:wrap!important;margin-top:2px!important}
+#floatTimer .ft-preset-btn{font-size:.65em!important;padding:5px 12px!important;border-radius:6px!important}
+#ttsToggleBtn,#voiceLiveMini{font-size:.78em!important;padding:5px 10px!important}
 </style>
 
 </head>
@@ -4384,14 +4728,31 @@ body::after{
 <div id="confettiContainer" style="pointer-events:none;position:fixed;inset:0;z-index:9999;overflow:hidden"></div>
 
 <!-- FLOAT TIMER -->
-<div id="floatTimer" style="display:none;position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:500;background:rgba(20,5,50,.85);border:2px solid rgba(255,107,53,.5);border-radius:16px;padding:8px 18px;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(255,107,53,.3);backdrop-filter:blur(20px);min-width:190px;justify-content:center">
-  <span style="font-size:1.5em" id="floatTimerIcon">⏱️</span>
-  <span style="font-size:1.5em;font-weight:900;color:var(--p);font-variant-numeric:tabular-nums" id="floatTimerDisp">1:30</span>
-  <div style="display:flex;gap:5px">
-    <button onclick="stopTimer()" style="background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);color:var(--no);border-radius:8px;padding:4px 10px;font-size:.8em;font-weight:800;cursor:pointer">⏹</button>
-    <button onclick="resetFloatTimer()" style="background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.25);color:var(--p);border-radius:8px;padding:4px 10px;font-size:.8em;font-weight:800;cursor:pointer">↺</button>
-    <button id="ttsToggleBtn" onclick="toggleTTS()" title="صوت الكوتش" style="background:rgba(110,231,183,.1);border:1px solid rgba(110,231,183,.25);color:var(--ok);border-radius:8px;padding:4px 10px;font-size:.85em;cursor:pointer">🔊</button>
-    <button id="voiceLiveMini" onclick="toggleVoiceLive()" title="المدرب الصوتي الحي (عدّ تنازلي + تشجيع)" style="background:rgba(91,184,255,.1);border:1px solid rgba(91,184,255,.3);color:#5bb8ff;border-radius:8px;padding:4px 10px;font-size:.85em;cursor:pointer">🎙️</button>
+<div id="floatTimer" style="display:none;position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:500;
+  background:rgba(4,8,22,.96);border:1.5px solid rgba(0,200,255,.45);border-radius:20px;
+  padding:14px 18px 10px;align-items:center;flex-direction:column;gap:8px;
+  box-shadow:0 0 30px rgba(0,180,255,.22),0 8px 28px rgba(0,0,0,.55);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);min-width:160px;justify-content:center">
+  <!-- Ring دائري -->
+  <div style="position:relative;display:flex;align-items:center;justify-content:center">
+    <svg id="ftRingSvg" width="126" height="126" viewBox="0 0 126 126" style="transform:rotate(-90deg)">
+      <circle cx="63" cy="63" r="52" fill="none" stroke="rgba(0,180,255,.10)" stroke-width="7"/>
+      <circle id="ftRing" cx="63" cy="63" r="52" fill="none" stroke="#00d4ff" stroke-width="7"
+        stroke-linecap="round"
+        stroke-dasharray="326.73" stroke-dashoffset="0"
+        style="transition:stroke-dashoffset .9s linear,stroke .3s;filter:drop-shadow(0 0 8px rgba(0,200,255,.85))"/>
+    </svg>
+    <div style="position:absolute;display:flex;flex-direction:column;align-items:center;gap:1px">
+      <span style="font-size:.52em;font-family:monospace;letter-spacing:.12em;color:rgba(0,180,255,.55)" id="floatTimerIcon">REST</span>
+      <span style="font-size:1.55em;font-weight:900;font-family:'Orbitron',monospace;color:#00d4ff;
+        font-variant-numeric:tabular-nums;line-height:1" id="floatTimerDisp">1:30</span>
+    </div>
+  </div>
+  <div style="display:flex;gap:6px;justify-content:center">
+    <button onclick="stopTimer()" style="background:rgba(248,113,113,.18);border:1px solid rgba(248,113,113,.45);color:#f87171;border-radius:8px;padding:6px 14px;font-size:.75em;font-weight:900;cursor:pointer;letter-spacing:.04em">⏹ إيقاف</button>
+    <button onclick="resetFloatTimer()" style="background:rgba(0,180,255,.14);border:1px solid rgba(0,200,255,.40);color:#00d4ff;border-radius:8px;padding:6px 14px;font-size:.75em;font-weight:900;cursor:pointer">↺ إعادة</button>
+    <button id="ttsToggleBtn" onclick="toggleTTS()" title="صوت الكوتش" style="background:rgba(74,222,128,.10);border:1px solid rgba(74,222,128,.30);color:#4ade80;border-radius:8px;padding:6px 12px;font-size:.72em;font-weight:800;cursor:pointer">🔊 صوت</button>
+    <button id="voiceLiveMini" onclick="toggleVoiceLive()" title="المدرب الصوتي الحي" style="background:rgba(0,180,255,.10);border:1px solid rgba(0,180,255,.30);color:#60a5fa;border-radius:8px;padding:6px 12px;font-size:.72em;font-weight:800;cursor:pointer">🎙 مدرب</button>
   </div>
   <div class="ft-presets">
     <button class="ft-preset-btn" onclick="quickStartTimer(30)">30s</button>
@@ -5871,10 +6232,23 @@ function swTimerStop() {
   const uft = (s, col) => {
     const ft=document.getElementById('floatTimer'),
           fd=document.getElementById('floatTimerDisp'),
-          fi=document.getElementById('floatTimerIcon');
+          fi=document.getElementById('floatTimerIcon'),
+          ring=document.getElementById('ftRing');
     if(ft) ft.style.display='flex';
-    if(fd){ fd.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; fd.style.color=col||'var(--p)'; }
-    if(fi) fi.textContent=s<=0?'✅':s<=5?'🚨':s<=15?'⚠️':'⏱️';
+    if(fd){ fd.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; fd.style.color=col||'#00d4ff'; }
+    if(fi) fi.textContent=s<=0?'DONE':s<=5?'GO!':s<=15?'SOON':'REST';
+    /* تحديث الـ ring الدائري */
+    if(ring){
+      const total=window._timerDefault||90;
+      const C=326.73; /* circumference */
+      const pct=total>0?Math.max(0,s/total):0;
+      ring.style.strokeDashoffset=(C*(1-pct))+'';
+      /* لون حسب الوقت المتبقي */
+      const rc=s<=5?'#f87171':s<=15?'#fbbf24':'#00d4ff';
+      ring.style.stroke=rc;
+      ring.style.filter=`drop-shadow(0 0 ${s<=5?'10':'6'}px ${rc}${s<=5?'cc':'88'})`;
+      if(fd) fd.style.color=rc;
+    }
   };
   const hft = () => { const ft=document.getElementById('floatTimer'); if(ft) ft.style.display='none'; };
   window._hft = hft;
@@ -11101,6 +11475,270 @@ function shareWorkout(sd,tv,prs){
   if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
   setTimeout(process, 1000);
   setInterval(process, 2500); /* يلتقط الترقية بأمان — بلا مراقب ولا حلقة */
+})();
+</script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   ⚔️ v45 — الـ 5 Features:
+   1) أزرار +/- أكبر + اقتراح الوزن التلقائي
+   2) عداد راحة دائري تلقائي بعد كل سيت
+   3) شاشة إكمال الدنجن (بعد ARISE)
+   4) Progressive Overload badge
+   5) Rank Road في صفحة التقدّم
+   ═══════════════════════════════════════════════════════════════════ */
+(function(){
+
+/* ══════════════════════════════════════════════════════
+   1 + 4) أزرار +/- أكبر + badge التقدّم التلقائي
+   نحقن CSS فوراً عشان يشتغل قبل رندر أي سيت
+   ══════════════════════════════════════════════════════ */
+var _css=`
+.qw-btn{width:32px!important;height:22px!important;font-size:.75em!important;border-radius:5px!important;
+  border:1px solid rgba(0,212,255,.35)!important;background:rgba(0,200,255,.10)!important;
+  color:#00d4ff!important;font-weight:900!important;touch-action:manipulation!important}
+.qw-btn:active{background:rgba(0,212,255,.28)!important;transform:scale(.93)!important}
+.qw-wrap{gap:4px!important}
+.set-in{font-size:.95em!important;font-weight:700!important;color:#00e5ff!important;
+  text-align:center!important}
+/* badge تقدّم فوق حقل الوزن */
+.po-badge{display:inline-block;font-size:.55em;font-weight:900;padding:1px 5px;border-radius:4px;
+  margin-bottom:2px;font-family:monospace;letter-spacing:.04em}
+.po-badge.up{background:rgba(74,222,128,.14);border:1px solid rgba(74,222,128,.4);color:#4ade80}
+.po-badge.same{background:rgba(0,180,255,.10);border:1px solid rgba(0,180,255,.30);color:#60a5fa}
+.po-badge.new{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);color:#fbbf24}
+/* rest-timer-overlay: دُمج مع floatTimer الموجود */
+/* شاشة إكمال الدنجن */
+.dungeon-complete-overlay{position:fixed;inset:0;z-index:11000;
+  background:radial-gradient(ellipse at 50% 40%,rgba(0,30,60,.97),rgba(2,4,12,.99));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;padding:24px;animation:dcFadeIn .5s ease}
+@keyframes dcFadeIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.dc-label{font-family:monospace;font-size:.62em;color:rgba(0,180,255,.55);letter-spacing:.18em}
+.dc-title{font-family:'Orbitron',monospace;font-size:1.8em;font-weight:900;color:#fff;
+  text-shadow:0 0 30px rgba(0,200,255,.6);text-align:center;letter-spacing:.08em}
+.dc-xp{font-family:monospace;font-size:1.0em;font-weight:900;color:#fbbf24;
+  text-shadow:0 0 14px rgba(251,191,36,.6);letter-spacing:.06em}
+.dc-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:320px;margin:8px 0}
+.dc-stat{background:rgba(255,255,255,.06);border:1px solid rgba(0,180,255,.20);
+  border-radius:10px;padding:12px;text-align:center}
+.dc-stat-val{font-family:'Orbitron',monospace;font-size:1.2em;font-weight:900;color:#00d4ff}
+.dc-stat-lbl{font-size:.58em;color:rgba(0,180,255,.55);letter-spacing:.10em;margin-top:3px}
+.dc-cta{background:rgba(0,160,255,.20);border:1.5px solid rgba(0,212,255,.70);
+  color:#fff;font-weight:900;font-size:1.0em;padding:12px 32px;border-radius:10px;cursor:pointer;
+  box-shadow:0 0 20px rgba(0,180,255,.30);letter-spacing:.06em}
+/* Rank Road */
+.rank-road{padding:12px 0;display:flex;flex-direction:column;gap:0}
+.rr-row{display:flex;align-items:center;gap:10px;padding:10px 0;position:relative}
+.rr-row:not(:last-child)::after{content:'';position:absolute;left:19px;top:44px;bottom:-10px;
+  width:2px;background:rgba(0,180,255,.18)}
+.rr-circle{width:38px;height:38px;border-radius:50%;border:2px solid rgba(0,180,255,.30);
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.75em;
+  flex-shrink:0;position:relative;z-index:1;font-family:monospace;transition:.3s}
+.rr-circle.done{border-color:rgba(74,222,128,.7);background:rgba(74,222,128,.12);color:#4ade80}
+.rr-circle.active{border-color:#00d4ff;background:rgba(0,212,255,.12);color:#00d4ff;
+  box-shadow:0 0 12px rgba(0,200,255,.4)}
+.rr-circle.locked{border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.25);
+  background:rgba(255,255,255,.04)}
+.rr-info{flex:1}
+.rr-name{font-size:.85em;font-weight:700;letter-spacing:.06em}
+.rr-name.done{color:#4ade80}.rr-name.active{color:#00d4ff}.rr-name.locked{color:rgba(255,255,255,.3)}
+.rr-req{font-size:.62em;color:rgba(0,170,210,.55);margin-top:2px;font-family:monospace}
+.rr-bar-wrap{width:100%;height:5px;background:rgba(255,255,255,.07);border-radius:3px;margin-top:6px;overflow:hidden}
+.rr-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#0088ff,#00d4ff);
+  box-shadow:0 0 8px rgba(0,200,255,.6);transition:width .6s ease}
+`;
+var st=document.createElement('style'); st.textContent=_css; document.head.appendChild(st);
+
+/* ══════════════════════════════════════════════════════
+   2) عداد الراحة — يستخدم quickStartTimer الموجود
+   (دُمج مع float timer الأصلي — SW notifications + صوت + presets)
+   ══════════════════════════════════════════════════════ */
+function showRestTimer(secs){
+  if(typeof quickStartTimer==='function') quickStartTimer(secs);
+}
+function clearRestTimer(){
+  if(typeof stopTimer==='function') stopTimer();
+}
+
+/* ══════════════════════════════════════════════════════
+   3) شاشة إكمال الدنجن
+   ══════════════════════════════════════════════════════ */
+function showDungeonComplete(sessionData){
+  var el=document.createElement('div'); el.className='dungeon-complete-overlay';
+  var ses=sessionData||{};
+  var vol=Math.round((typeof SCI!=='undefined'?SCI.sessionVolume(ses):0));
+  var dur=ses.duration?Math.round(ses.duration/60000)+'د':'-';
+  var prs=0;
+  if(ses.exs){
+    Object.entries(ses.exs).forEach(function(e){
+      var ex=e[1];
+      var prev=(G.ses||[]).filter(function(x){return x.id!==ses.id;})
+        .reduce(function(b,x){var xe=x.exs&&x.exs[e[0]];if(!xe)return b;
+          if(xe.sets&&xe.sets.length)xe.sets.forEach(function(t){if((t.w||0)>b)b=t.w||0;});
+          else if((xe.w||0)>b)b=xe.w||0; return b;},0);
+      var curr=ex.sets&&ex.sets.length?ex.sets.reduce(function(b,t){return t.w>b?t.w:b;},0):ex.w||0;
+      if(curr>prev&&curr>0)prs++;
+    });
+  }
+  var xp=100+(prs*50);
+  el.innerHTML=`
+    <div class="dc-label">[ DUNGEON · CLEARED ]</div>
+    <div style="font-size:3em;margin:4px 0">⚔️</div>
+    <div class="dc-title">MISSION COMPLETE</div>
+    <div class="dc-xp">+${xp} XP EARNED</div>
+    <div class="dc-stats">
+      <div class="dc-stat"><div class="dc-stat-val">${vol.toLocaleString()}</div><div class="dc-stat-lbl">KG TOTAL VOL</div></div>
+      <div class="dc-stat"><div class="dc-stat-val">${dur}</div><div class="dc-stat-lbl">BATTLE TIME</div></div>
+      <div class="dc-stat"><div class="dc-stat-val">${prs}</div><div class="dc-stat-lbl">NEW RECORDS</div></div>
+      <div class="dc-stat"><div class="dc-stat-val">${(G.streak||0)+1}</div><div class="dc-stat-lbl">STREAK 🔥</div></div>
+    </div>
+    <button class="dc-cta" onclick="this.closest('.dungeon-complete-overlay').remove()">ARISE →</button>
+  `;
+  document.body.appendChild(el);
+  setTimeout(function(){if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);},300);
+}
+
+/* ══════════════════════════════════════════════════════Hook على toggleSetDone → يشغّل quickStartTimer تلقائياً بالوقت الصح
+   ══════════════════════════════════════════════════════ */
+var _origToggle=window.toggleSetDone;
+if(typeof _origToggle==='function'){
+  window.toggleSetDone=function(id,ix){
+    _origToggle.apply(this,arguments);
+    var c=document.getElementById('sc-'+id+'-'+ix);
+    if(c&&c.classList.contains('sc-done')){
+      var exEl=document.getElementById('exi-'+id);
+      var secs=90;
+      if(exEl){
+        var badge=exEl.querySelector('.smart-timer-badge');
+        if(badge){
+          var ds=badge.getAttribute('data-secs');
+          if(ds){ secs=parseInt(ds)||90; }
+          else if(exEl.querySelector('.stb-superset')){ secs=60; }
+          else if(exEl.querySelector('.stb-compound')){ secs=180; }
+        }
+      }
+      setTimeout(function(){ showRestTimer(secs); }, 350);
+    } else {
+      /* لو ألغى السيت — مش هنوقّف التايمر (ممكن لسه في راحة) */
+    }
+  };
+}
+
+/* Hook على showSessionSummaryModal → عرض شاشة الإكمال */
+var _origSummary=window.showSessionSummaryModal;
+if(typeof _origSummary==='function'){
+  window.showSessionSummaryModal=function(sd,sug){
+    _origSummary.apply(this,arguments);
+    clearRestTimer();
+    setTimeout(function(){showDungeonComplete(sd);},1400);
+  };
+}
+
+/* ══════════════════════════════════════════════════════
+   4) Progressive Overload badge (اقتراح الوزن)
+   نضيف badge فوق خانة الوزن بعد الرندر
+   ══════════════════════════════════════════════════════ */
+function _addPOBadges(){
+  document.querySelectorAll('.set-row').forEach(function(row){
+    var id=row.id; if(!id)return;
+    var m=id.match(/^sr-(.+)-(\d+)$/); if(!m)return;
+    var exId=m[1], idx=parseInt(m[2]);
+    var inp=document.getElementById('sw-'+exId+'-'+idx);
+    if(!inp||inp._poBadged)return;
+    inp._poBadged=true;
+    var ls=typeof getLastSets==='function'?getLastSets(exId):[];
+    var be=typeof getBestSet==='function'?getBestSet(exId):0;
+    var ps=ls[idx];
+    var pw=ps?ps.w:be;
+    if(!pw||pw<=0)return;
+    var suggest=Math.round((pw+2.5)*4)/4;
+    var badge=document.createElement('div');
+    badge.className='po-badge '+(ls.length>0?'up':'new');
+    badge.textContent=(ls.length>0?'▲ ':'★ ')+suggest+'kg';
+    badge.title='اقتراح الوزن بناءً على آخر جلسة';
+    badge.style.cssText='cursor:pointer;display:block;margin-bottom:2px;text-align:center';
+    badge.onclick=function(){inp.value=suggest;inp.dispatchEvent(new Event('input'));};
+    inp.parentNode.insertBefore(badge,inp);
+  });
+}
+/* شغّل badges بعد رندر التمارين */
+var _origRD=window.rDays;
+if(typeof _origRD==='function'){
+  window.rDays=function(){
+    _origRD.apply(this,arguments);
+    setTimeout(_addPOBadges,200);
+  };
+}
+setTimeout(_addPOBadges,1500);
+document.addEventListener('click',function(e){
+  if(e.target.closest('.sl-quest'))setTimeout(_addPOBadges,150);
+},true);
+
+/* ══════════════════════════════════════════════════════
+   5) Rank Road في صفحة التقدّم
+   ══════════════════════════════════════════════════════ */
+var RANKS=[
+  {id:'e',name:'E RANK',min:0, max:4, color:'#b8cfe0',req:'0 → 4 جلسات'},
+  {id:'d',name:'D RANK',min:5, max:14,color:'#4ade80',req:'5 → 14 جلسة'},
+  {id:'c',name:'C RANK',min:15,max:34,color:'#60a5fa',req:'15 → 34 جلسة'},
+  {id:'b',name:'B RANK',min:35,max:59,color:'#a78bfa',req:'35 → 59 جلسة'},
+  {id:'a',name:'A RANK',min:60,max:99,color:'#fbbf24',req:'60 → 99 جلسة'},
+  {id:'s',name:'S RANK',min:100,max:999,color:'#00e5ff',req:'100+ جلسة'}
+];
+function renderRankRoad(){
+  var ns=(typeof G!=='undefined'?G.ses&&G.ses.length:0)||0;
+  var html='<div class="rank-road">';
+  RANKS.forEach(function(r,i){
+    var done=ns>r.max, active=ns>=r.min&&ns<=r.max, locked=ns<r.min;
+    var st=done?'done':active?'active':'locked';
+    var pct=done?100:active?Math.round((ns-r.min)/(r.max-r.min+1)*100):0;
+    html+=`<div class="rr-row">
+      <div class="rr-circle ${st}" style="${active?'border-color:${r.color};color:${r.color}':''}">
+        ${done?'✓':r.id.toUpperCase()}
+      </div>
+      <div class="rr-info">
+        <div class="rr-name ${st}" style="${active?'color:'+r.color:''}">${r.name}</div>
+        <div class="rr-req">${r.req}${active?' · أنت هنا ('+ns+' جلسة)':done?' · مكتمل ✓':''}</div>
+        ${(done||active)?`<div class="rr-bar-wrap"><div class="rr-bar-fill" style="width:${pct}%;background:linear-gradient(90deg,${r.color}88,${r.color})"></div></div>`:''}
+      </div>
+    </div>`;
+  });
+  html+='</div>';
+  return html;
+}
+/* حقن Rank Road في صفحة التقدّم */
+function _injectRankRoad(){
+  var hist=document.getElementById('pg-hist');
+  if(!hist||hist.querySelector('.rank-road'))return;
+  var existing=hist.querySelector('.no-ses,.no-data,[class*="no-rec"]');
+  var card=document.createElement('div');
+  card.className='card';
+  card.style.cssText='margin:12px 0';
+  card.innerHTML=`
+    <div style="font-size:.58em;color:rgba(0,180,255,.55);letter-spacing:.14em;font-family:monospace;margin-bottom:10px">
+      [ HUNTER · RANK · ROAD ]
+    </div>
+    <div style="font-size:.78em;color:rgba(0,180,255,.45);margin-bottom:8px">
+      الجلسات المكتملة: <span style="color:#00d4ff;font-weight:900;font-family:monospace">${(G&&G.ses?G.ses.length:0)}</span>
+    </div>
+    ${renderRankRoad()}
+  `;
+  if(existing)existing.before(card);
+  else hist.prepend(card);
+}
+
+/* Hook على go() لحقن الـ Road لما يفتح التقدّم */
+var _origGo=window.go;
+if(typeof _origGo==='function'){
+  window.go=function(tab){
+    var r=_origGo.apply(this,arguments);
+    if(tab==='hist')setTimeout(_injectRankRoad,300);
+    return r;
+  };
+}
+setTimeout(_injectRankRoad,2000);
+
 })();
 </script>
 
