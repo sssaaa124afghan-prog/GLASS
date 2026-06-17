@@ -146,12 +146,12 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .sp-value{font-size:1.3em;font-weight:900;color:var(--p)}.sp-sub{font-size:.65em;color:var(--tx2);margin-top:2px}
 .lagging-alert{background:rgba(252,165,165,.06);border:1px dashed rgba(252,165,165,.22);border-radius:12px;padding:11px 13px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .lagging-alert-text{font-size:.76em;color:var(--no);font-weight:800}
-.sets-header{display:grid;grid-template-columns:20px 36px 26px minmax(44px,1fr) minmax(44px,1fr) 34px 24px 30px;gap:4px;padding:7px 5px;margin-top:10px;border-bottom:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);border-radius:8px 8px 0 0}
+..sets-header{display:grid!important;grid-template-columns:28px 64px 26px 1fr 1fr 38px 28px 34px!important;gap:5px;padding:7px 8px;margin-top:10px;border-bottom:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);border-radius:8px 8px 0 0}
 .sets-header span{font-size:.62em;color:var(--tx2);font-weight:900;text-align:center}
-.set-row{display:grid;grid-template-columns:20px 36px 26px minmax(44px,1fr) minmax(44px,1fr) 34px 24px 30px;gap:4px;padding:9px 5px;align-items:center;border-bottom:1px solid rgba(255,255,255,.12);transition:.2s;overflow:hidden}
+..set-row{display:grid!important;grid-template-columns:28px 64px 26px 1fr 1fr 38px 28px 34px!important;gap:5px;padding:10px 8px;align-items:center;border-bottom:1px solid rgba(255,255,255,.12);transition:.2s}
 .set-row:last-child{border-bottom:none}
 .set-row.set-done{background:rgba(110,231,183,.05);border-radius:8px}
-.set-num{width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:.72em;font-weight:900;color:var(--tx);flex-shrink:0}
+.set-num{width:24px!important;height:24px!important;border-radius:6px!important;background:rgba(255,255,255,.08)!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:.68em!important;font-weight:900!important;color:rgba(0,180,255,.6)!important;flex-shrink:0!important}
 .set-num.sn-done{background:var(--ok);color:#fff}
 .set-in{width:100%;padding:7px 3px;border-radius:8px;border:1.5px solid rgba(255,255,255,.22);background:rgba(255,255,255,.09);color:var(--tx);font-family:'Cairo';font-size:.82em;font-weight:800;text-align:center;outline:none;transition:.25s;-moz-appearance:textfield;min-width:0}
 .set-in::-webkit-outer-spin-button,.set-in::-webkit-inner-spin-button{-webkit-appearance:none}
@@ -167,7 +167,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .set-chk{width:32px;height:32px;border-radius:8px;border:1.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.82em;transition:.25s;flex-shrink:0}
 .set-chk:active{transform:scale(.85)}
 .set-chk.sc-done{background:var(--ok);border-color:var(--ok)}
-.set-prev{font-size:.66em;font-weight:800;color:var(--tx2);text-align:center;padding:5px 2px;background:rgba(255,255,255,.08);border-radius:8px;min-height:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px solid rgba(255,255,255,.12);min-width:0;line-height:1.25;white-space:nowrap;overflow:hidden}
+.set-prev{font-size:.7em!important;font-weight:800!important;color:#e8f4ff!important;text-align:center!important;padding:4px 5px!important;background:rgba(0,180,255,.10)!important;border-radius:8px!important;min-height:34px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;border:1px solid rgba(0,180,255,.25)!important;min-width:0!important;line-height:1.3!important;width:100%!important}
 .sets-summary{display:flex;gap:6px;margin-top:8px;padding:8px 10px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);border-radius:10px;flex-wrap:wrap}
 /* ── Rep-Range Progress ── */
 .rep-progress-wrap{margin-top:6px;padding:6px 10px;background:rgba(0,4,14,.5);border-radius:8px;border:1px solid rgba(0,212,255,.08)}
@@ -493,7 +493,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
   .hdr h1{font-size:1.05em}
   .dchip{min-width:85px;padding:10px 12px}
   .sg{gap:8px}.tool-grid{gap:8px}
-  .sets-header,.set-row{grid-template-columns:24px 1fr 1fr 1fr 36px 30px}
+  .sets-header,.set-row{grid-template-columns:28px 64px 26px 1fr 1fr 38px 28px 34px!important;gap:4px!important;padding:8px 5px!important}
 }
 
 /* ══ F10: Quick-Add Weight Buttons ══ */
@@ -575,7 +575,7 @@ body::after{content:'';position:fixed;width:350px;height:350px;background:rgba(1
 .vol8-val{font-size:.5em;color:var(--p);font-weight:800;white-space:nowrap}
 .vol8-lbl{font-size:.5em;color:var(--tx3);white-space:nowrap}
 /* ══ FEATURE 7: Swipe indicator ══ */
-.set-row{position:relative;overflow:hidden}
+.set-row{position:relative}
 .set-row.swipe-hint::after{content:'← اسحب';position:absolute;left:4px;top:50%;transform:translateY(-50%);font-size:.52em;color:rgba(0,212,255,.3);font-family:monospace;font-weight:900;pointer-events:none;animation:pulse 2s infinite}
 .set-row.swipe-active{background:rgba(110,231,183,.08)!important;transition:background .15s}
 /* ══ TODAY'S MISSION CARD ══ */
@@ -1507,7 +1507,7 @@ input:focus,select:focus,textarea:focus,.ai-input-txt:focus,.lib-search input:fo
 .sl-dungeon-gate,.sl-status-card,.sl-dungeon-header{backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important}
 .sl-quest{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 /* Muscle tag override for quests */
-.sl-quest .muscle-tag{background:rgba(0,212,255,.07)!important;border-color:rgba(0,212,255,.15)!important;color:rgba(0,212,255,.65)!important;border-radius:2px!important;font-family:monospace!important;font-size:.58em!important;letter-spacing:.06em!important}
+.sl-quest .muscle-tag{border-radius:6px!important;font-family:monospace!important;font-size:.60em!important;letter-spacing:.06em!important;font-weight:700!important}
 /* Best weight label */
 .sl-quest .sl-quest-body [style*="color:var(--wn)"]{color:rgba(251,191,36,.75)!important;font-family:monospace!important;font-size:.6em!important;letter-spacing:.04em!important}
 /* Sets summary in quest */
@@ -3937,7 +3937,7 @@ body::after{
   font-size:.62em!important;color:rgba(0,170,220,.60)!important;
 }
 /* عدد / وزن (الأرقام): بارزة */
-.set-num,.set-in,.exi-count{
+.set-num,.exi-count{
   font-family:'Orbitron',monospace!important;
   color:#00d4ff!important;font-weight:700!important;
 }
@@ -4149,6 +4149,120 @@ body::after{
 #floatTimer .ft-presets{justify-content:center!important;gap:5px!important;flex-wrap:wrap!important;margin-top:2px!important}
 #floatTimer .ft-preset-btn{font-size:.65em!important;padding:5px 12px!important;border-radius:6px!important}
 #ttsToggleBtn,#voiceLiveMini{font-size:.78em!important;padding:5px 10px!important}
+
+/* ═══ v48 — set-row layout محكم ═══ */
+.qw-btn{width:26px!important;height:15px!important;font-size:.7em!important;
+  border-radius:4px!important;border:1px solid rgba(0,212,255,.3)!important;
+  background:rgba(0,212,255,.08)!important;color:#00d4ff!important;
+  font-weight:900!important;line-height:1!important;padding:0!important}
+.qw-wrap{gap:3px!important;width:100%!important}
+.set-chk{width:34px!important;height:34px!important}
+/* responsive: شاشات أضيق من 360px */
+@media(max-width:360px){
+  .set-row,.sets-header{grid-template-columns:28px 64px 26px 1fr 1fr 38px 28px 34px!important;gap:3px!important;padding:8px 4px!important}
+}
+
+/* ═══ v48b — sets-header span alignment ═══ */
+.sets-header span{text-align:center!important;font-size:.58em!important;
+  color:rgba(0,180,255,.5)!important;font-family:monospace!important;
+  letter-spacing:.04em!important;white-space:nowrap!important;overflow:hidden!important}
+.sets-header span:nth-child(1){text-align:center!important} /* # */
+.sets-header span:nth-child(3){opacity:0!important} /* ± — بتوضح بحد نفسها */
+
+/* ═══ v48c — FINAL OVERRIDE: set-row grid لا يتغير أياً كان ═══ */
+.set-row,.sets-header{
+  grid-template-columns:28px 64px 26px 1fr 1fr 38px 28px 34px!important;
+  gap:5px!important;
+  overflow:visible!important;
+}
+.set-row{align-items:center!important;display:grid!important}
+.sets-header{display:grid!important}
+
+/* ═══ v49 — set-row إصلاح نهائي: أرقام مناسبة + badge لا يكسر layout ═══ */
+.set-row{position:relative!important}
+.set-in{
+  font-size:.8em!important;
+  font-family:inherit!important;
+  font-variant-numeric:tabular-nums!important;
+  color:#e8f4ff!important;
+  font-weight:700!important;
+  text-align:center!important;
+  height:36px!important;
+  min-width:0!important;
+  padding:0 2px!important;
+}
+.rpe-in{
+  font-size:.78em!important;
+  font-family:inherit!important;
+  font-variant-numeric:tabular-nums!important;
+  height:36px!important;
+  min-width:0!important;
+  padding:0 2px!important;
+}
+/* badge التقدّم: فوق الـ input مش جنبه */
+.po-badge{
+  position:absolute!important;
+  font-size:.50em!important;
+  padding:1px 4px!important;
+  pointer-events:none!important;
+  z-index:5!important;
+  white-space:nowrap!important;
+  top:2px!important;left:50%!important;
+  transform:translateX(-50%)!important;
+  display:block!important;
+}
+/* sets-header: كلمات مش مقطوعة */
+.sets-header span{
+  font-size:.56em!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  padding:0 1px!important;
+}
+
+/* ═══ v49b — ألوان الحالة للأرقام والملاحظات ═══ */
+/* set-in: لون حسب الوضع */
+.set-in{color:rgba(200,225,240,.7)!important} /* فاضي */
+.set-in.si-filled{color:#e8f4ff!important} /* ممتلئ */
+.set-in.si-pr{color:#fbbf24!important;text-shadow:0 0 8px rgba(251,191,36,.5)!important} /* PR */
+.set-in:focus{color:#fff!important}
+
+/* rpe-in: لون حسب الشدة */
+.rpe-in{color:rgba(167,139,250,.75)!important}
+.rpe-in.rpe-easy{color:#4ade80!important}
+.rpe-in.rpe-hard{color:#f87171!important}
+.rpe-in.rpe-max{color:#ef4444!important;font-weight:900!important;text-shadow:0 0 8px rgba(239,68,68,.6)!important}
+
+/* set-type-btn: لون حسب النوع */
+.set-type-btn{font-size:.68em!important;font-weight:900!important;color:rgba(160,200,230,.6)!important;background:rgba(0,0,0,.3)!important;border:1px solid rgba(120,180,220,.22)!important;border-radius:6px!important;width:28px!important;height:28px!important;padding:0!important;cursor:pointer!important}
+.set-type-btn.stb-drop{color:#60a5fa!important;border-color:rgba(96,165,250,.45)!important;background:rgba(96,165,250,.08)!important}
+.set-type-btn.stb-superset{color:#fb923c!important;border-color:rgba(251,146,60,.45)!important;background:rgba(251,146,60,.08)!important}
+.set-type-btn.stb-failure{color:#f87171!important;border-color:rgba(248,113,113,.45)!important;background:rgba(248,113,113,.08)!important}
+
+/* set-num: لون حسب الحالة */
+.set-num{color:rgba(0,180,255,.45)!important}
+.set-num.sn-done{color:#4ade80!important;background:rgba(74,222,128,.12)!important}
+
+/* set-prev: لون واضح */
+.set-prev{color:rgba(180,215,240,.8)!important}
+
+/* ملاحظات التمرين */
+.ex-note{color:rgba(180,210,240,.65)!important;border-color:rgba(0,180,255,.18)!important;background:rgba(4,8,20,.6)!important}
+.ex-note::placeholder{color:rgba(120,170,200,.35)!important}
+
+/* ═══ v50 — muscle-tag: لون ديناميكي حسب العضلة (inline style يشتغل) ═══ */
+.muscle-tag{
+  display:inline-block!important;
+  padding:2px 8px!important;
+  border-radius:6px!important;
+  font-size:.60em!important;
+  font-weight:700!important;
+  font-family:monospace!important;
+  letter-spacing:.05em!important;
+  border-width:1px!important;
+  border-style:solid!important;
+  /* background وcolor وborder-color بيييجوا من inline style */
+}
 </style>
 
 </head>
@@ -4749,8 +4863,9 @@ body::after{
     </div>
   </div>
   <div style="display:flex;gap:6px;justify-content:center">
-    <button onclick="stopTimer()" style="background:rgba(248,113,113,.18);border:1px solid rgba(248,113,113,.45);color:#f87171;border-radius:8px;padding:6px 14px;font-size:.75em;font-weight:900;cursor:pointer;letter-spacing:.04em">⏹ إيقاف</button>
-    <button onclick="resetFloatTimer()" style="background:rgba(0,180,255,.14);border:1px solid rgba(0,200,255,.40);color:#00d4ff;border-radius:8px;padding:6px 14px;font-size:.75em;font-weight:900;cursor:pointer">↺ إعادة</button>
+    <button onclick="stopTimer()" style="background:rgba(248,113,113,.18);border:1px solid rgba(248,113,113,.45);color:#f87171;border-radius:8px;padding:5px 12px;font-size:.72em;font-weight:900;cursor:pointer">⏸</button>
+    <button onclick="resetFloatTimer()" style="background:rgba(0,180,255,.14);border:1px solid rgba(0,200,255,.40);color:#00d4ff;border-radius:8px;padding:5px 12px;font-size:.72em;font-weight:900;cursor:pointer">↺</button>
+    <button onclick="if(typeof hft==='function')hft()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(200,220,240,.5);border-radius:8px;padding:5px 12px;font-size:.72em;cursor:pointer">✕</button>
     <button id="ttsToggleBtn" onclick="toggleTTS()" title="صوت الكوتش" style="background:rgba(74,222,128,.10);border:1px solid rgba(74,222,128,.30);color:#4ade80;border-radius:8px;padding:6px 12px;font-size:.72em;font-weight:800;cursor:pointer">🔊 صوت</button>
     <button id="voiceLiveMini" onclick="toggleVoiceLive()" title="المدرب الصوتي الحي" style="background:rgba(0,180,255,.10);border:1px solid rgba(0,180,255,.30);color:#60a5fa;border-radius:8px;padding:6px 12px;font-size:.72em;font-weight:800;cursor:pointer">🎙 مدرب</button>
   </div>
@@ -5178,7 +5293,7 @@ return`<div class="sl-quest exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="
     <div class="exi-body">
     ${coachH}${renderPlateauBreaker(ex.id)}${_renderPOJournal(ex.id)}${lsH}${tipsH}
     ${renderWarmupProto(ex.id,ex.name,be)}
-    <div class="sets-header" style="grid-template-columns:26px 1fr 28px 1fr 1fr 42px 28px 36px"><span>#</span><span>سابق</span><span>±</span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE</span><span title="نوع السيت">N</span><span>✓</span></div>
+    <div class="sets-header" ><span></span><span>سابق</span><span></span><span>وزن</span><span>عدات</span><span style="color:var(--pu)">RPE</span><span>N</span><span>✓</span></div>
     ${rows}
     <div class="sets-summary" id="sum-${ex.id}"><span class="ss-chip">0/${ns} سيت</span></div>
     <div id="rpb-${ex.id}"></div>
@@ -5238,7 +5353,7 @@ function onRPEChange(id,i,isUserInput){
   else if(v>=10)el.classList.add('rpe-max');
   saveCurrentSet(id,i);updateSetSummary(id);
 }
-function restoreSetInputs(){if(!curDay)return;const sk=sesKey(curDay),sv=G.currentSets&&G.currentSets[sk];if(!sv)return;Object.entries(sv).forEach(([id,sets])=>{sets.forEach((s,i)=>{const w=document.getElementById(`sw-${id}-${i}`),r=document.getElementById(`sr2-${id}-${i}`),rp=document.getElementById(`srpe-${id}-${i}`),c=document.getElementById(`sc-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(w&&s.w){w.value=s.w;w.classList.add('si-filled')}if(r&&s.r)r.value=s.r;if(rp&&s.rpe){rp.value=s.rpe;onRPEChange(id,i)}if(s.done&&c){c.classList.add('sc-done');c.textContent='✓';document.getElementById(`sr-${id}-${i}`)?.classList.add('set-done');if(n)n.classList.add('sn-done')}const _stb=document.getElementById(`stype-${id}-${i}`);if(_stb&&s.type&&s.type!=='normal'&&SET_TYPES[s.type]){_stb.textContent=SET_TYPES[s.type].label;_stb.className=`set-type-btn ${SET_TYPES[s.type].cls}`}});updateSetSummary(id)})}
+function restoreSetInputs(){if(!curDay)return;const sk=sesKey(curDay),sv=G.currentSets&&G.currentSets[sk];if(!sv)return;Object.entries(sv).forEach(([id,sets])=>{sets.forEach((s,i)=>{if(!s)return;const w=document.getElementById(`sw-${id}-${i}`),r=document.getElementById(`sr2-${id}-${i}`),rp=document.getElementById(`srpe-${id}-${i}`),c=document.getElementById(`sc-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(w&&s.w){w.value=s.w;w.classList.add('si-filled')}if(r&&s.r)r.value=s.r;if(rp&&s.rpe){rp.value=s.rpe;onRPEChange(id,i)}if(s.done&&c){c.classList.add('sc-done');c.textContent='✓';document.getElementById(`sr-${id}-${i}`)?.classList.add('set-done');if(n)n.classList.add('sn-done')}const _stb=document.getElementById(`stype-${id}-${i}`);if(_stb&&s.type&&s.type!=='normal'&&SET_TYPES[s.type]){_stb.textContent=SET_TYPES[s.type].label;_stb.className=`set-type-btn ${SET_TYPES[s.type].cls}`}});updateSetSummary(id)})}
 function suggestRPE(id,i,forceUpdate){
   const rp=document.getElementById(`srpe-${id}-${i}`);
   if(!rp)return;
@@ -5286,7 +5401,7 @@ function updateSetSummary(id){
           dn=document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false;
     sets.push({w,r,rpe,done:dn});
   }
-  const ds=sets.filter(s=>s.done).length,
+  const ds=sets.filter(s=>s&&s.done).length,
         fs=sets.filter(s=>s.w>0),
         vol=fs.reduce((t,s)=>t+s.w*(s.r||1),0),
         topW=fs.length?Math.max(...fs.map(s=>s.w)):0,
@@ -5393,7 +5508,7 @@ function applyLevelSystem(){
 function addClearedSummary(el,ex,sk){
   if(el.querySelector('.sl-mc-bar'))return;
   const sets=(G.currentSets[sk]&&G.currentSets[sk][ex.id])||[];
-  const doneSets=sets.filter(s=>s.done&&s.w>0);
+  const doneSets=sets.filter(s=>s&&s.done&&s.w>0);
   let chipsHtml='';
   if(doneSets.length){const topW=Math.max(...doneSets.map(s=>s.w));const totalVol=Math.round(doneSets.reduce((t,s)=>t+s.w*(s.r||1),0));chipsHtml=`<span class="sl-mc-chip gold">▲ ${topW}KG</span><span class="sl-mc-chip">✓ ${doneSets.length} SETS</span><span class="sl-mc-chip">VOL ${totalVol}KG</span>`;}
   else chipsHtml='<span class="sl-mc-chip">✓ COMPLETE</span>';
@@ -6303,7 +6418,7 @@ function swTimerStop() {
     if(bn){ bn.textContent='▶️ ابدأ'; bn.disabled=false; }
     const d=document.getElementById('timerDisp');
     if(d) d.style.color='var(--p)';
-    hft();
+    /* لا نخفي التايمر — يفضل ظاهر عشان المستخدم يقدر يشغّله تاني */
   };
 
   window.resetFloatTimer = () => {
@@ -6312,7 +6427,10 @@ function swTimerStop() {
     window._timerRemaining=s;
     const d=document.getElementById('timerDisp');
     if(d){ d.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; d.style.color='var(--p)'; }
-    hft();
+    /* يحدّث الـ ring للقيمة الكاملة */
+    const ring=document.getElementById('ftRing');
+    if(ring){ ring.style.strokeDashoffset='0'; ring.style.stroke='#00d4ff'; }
+    /* يفضل ظاهر — مش بيخفي */
   };
 
   window.startTimer = () => {
@@ -6552,7 +6670,7 @@ function renderVolLandmarks() {
   G.ses.filter(s => new Date(s.date) >= weekStart).forEach(s => {
     Object.values(s.exs || {}).forEach(e => {
       if (e.muscle) {
-        const ns = e.sets ? e.sets.filter(t => t.done || t.w > 0).length : 3;
+        const ns = e.sets ? e.sets.filter(t => t&&(t.done || t.w > 0)).length : 3;
         muscSets[e.muscle] = (muscSets[e.muscle] || 0) + ns;
       }
     });
@@ -8524,7 +8642,7 @@ function showDungeonComplete(){
   let totalVol=0,prs=0;
   (day?.exercises||[]).filter(e=>!e.isWarmup).forEach(ex=>{
     const sets=G.currentSets?.[sk]?.[ex.id]||[];
-    const done=sets.filter(s=>s.done&&s.w>0);
+    const done=sets.filter(s=>s&&s.done&&s.w>0);
     totalVol+=done.reduce((t,s)=>t+s.w*(s.r||1),0);
     const topW=done.length?Math.max(...done.map(s=>s.w)):0;
     if(topW>0&&topW>getBestSet(ex.id))prs++;
@@ -8709,7 +8827,7 @@ function renderSmartWarmupHints(dayKey){
    F5 — Intra-Session Fatigue
 ══════════════════════════════════ */
 function getIntraFatigue(id){
-  const sk=sesKey(curDay),sets=(G.currentSets?.[sk]?.[id]||[]).filter(s=>s.done&&s.w>0);
+  const sk=sesKey(curDay),sets=(G.currentSets?.[sk]?.[id]||[]).filter(s=>s&&s.done&&s.w>0);
   if(sets.length<2)return null;
   const first=sets[0],last=sets[sets.length-1];
   const wDrop=(first.w-last.w)/first.w;
@@ -8887,7 +9005,7 @@ function expGoogleSheets(){
   let csv='التاريخ,اليوم,التمرين,العضلة,أفضل وزن (كجم),الحجم (كجم),عدد العدات,RPE المتوسط,المدة (دق)\n';
   G.ses.forEach(s=>{
     Object.values(s.exs||{}).filter(e=>e.w>0||e.vol>0).forEach(e=>{
-      csv+=`"${s.ds}","${s.dn}","${e.name}","${e.muscle||''}","${e.w||0}","${e.vol||0}","${e.sets?.filter(t=>t.done).length||0}","${e.avgRPE||''}","${s.duration||0}"\n`;
+      csv+=`"${s.ds}","${s.dn}","${e.name}","${e.muscle||''}","${e.w||0}","${e.vol||0}","${e.sets?.filter(t=>t&&t.done).length||0}","${e.avgRPE||''}","${s.duration||0}"\n`;
     });
   });
   const encoded=encodeURIComponent(csv);
@@ -11499,11 +11617,12 @@ var _css=`
   color:#00d4ff!important;font-weight:900!important;touch-action:manipulation!important}
 .qw-btn:active{background:rgba(0,212,255,.28)!important;transform:scale(.93)!important}
 .qw-wrap{gap:4px!important}
-.set-in{font-size:.95em!important;font-weight:700!important;color:#00e5ff!important;
-  text-align:center!important}
+.set-in{font-size:.82em!important;font-weight:700!important;color:#e8f4ff!important;text-align:center!important}
 /* badge تقدّم فوق حقل الوزن */
-.po-badge{display:inline-block;font-size:.55em;font-weight:900;padding:1px 5px;border-radius:4px;
-  margin-bottom:2px;font-family:monospace;letter-spacing:.04em}
+.po-badge{display:block;font-size:.52em;font-weight:900;padding:1px 4px;border-radius:3px;
+  font-family:monospace;letter-spacing:.02em;text-align:center;
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  white-space:nowrap;pointer-events:none;z-index:2}
 .po-badge.up{background:rgba(74,222,128,.14);border:1px solid rgba(74,222,128,.4);color:#4ade80}
 .po-badge.same{background:rgba(0,180,255,.10);border:1px solid rgba(0,180,255,.30);color:#60a5fa}
 .po-badge.new{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);color:#fbbf24}
@@ -11738,6 +11857,516 @@ if(typeof _origGo==='function'){
   };
 }
 setTimeout(_injectRankRoad,2000);
+
+})();
+</script>
+
+<script>
+/* ⚔️ v47 — Shadow Army · Progress Charts · Gate Radar · Instant Dungeon · Job-Change Quest · Share Card
+   مبادئ الخفة: lazy render، event-driven، Canvas API بدون libraries، بيانات صغيرة في G */
+(function(){
+'use strict';
+
+/* ═══════════════════════════════════════════════════════════
+   SHADOW ARMY — كل تمرين يفتح shadow soldier
+   بيانات: G.shadowArmy = { exId: { name, level, count, icon } }
+   ═══════════════════════════════════════════════════════════ */
+var SA_MAP={
+  'Back Squat':    {n:'Guardian',   i:'🗡️', rank:'tank'},
+  'Deadlift':      {n:'Berserker',  i:'⚔️', rank:'dps'},
+  'Incline Bench': {n:'Warrior',    i:'🛡️', rank:'guard'},
+  'DB Shoulder':   {n:'Archer',     i:'🏹', rank:'range'},
+  'Barbell Row':   {n:'Assassin',   i:'🥷', rank:'stealth'},
+  'default':       {n:'Shadow',     i:'👤', rank:'basic'}
+};
+function getSAInfo(exName){
+  for(var k in SA_MAP){ if(exName&&exName.toLowerCase().indexOf(k.toLowerCase())>=0) return SA_MAP[k]; }
+  return SA_MAP.default;
+}
+function updateShadowArmy(ses){
+  if(!ses||!ses.exs) return;
+  if(!G.shadowArmy) G.shadowArmy={};
+  Object.entries(ses.exs).forEach(function(e){
+    var exId=e[0], ex=e[1];
+    var name=ex.name||exId;
+    var info=getSAInfo(name);
+    if(!G.shadowArmy[exId]) G.shadowArmy[exId]={name:name,label:info.n,icon:info.i,rank:info.rank,level:1,count:0};
+    var sol=G.shadowArmy[exId];
+    sol.count++;
+    sol.level=Math.min(10, Math.floor(sol.count/3)+1);
+  });
+}
+function renderShadowArmy(){
+  var el=document.getElementById('shadowArmyPanel'); if(!el) return;
+  if(!G.shadowArmy||!Object.keys(G.shadowArmy).length){
+    el.innerHTML='<div style="text-align:center;padding:20px;color:rgba(0,180,255,.4);font-size:.75em;letter-spacing:.12em;font-family:monospace">[ ARMY AWAITS YOUR COMMAND ]<br><span style="font-size:.85em;margin-top:6px;display:block;opacity:.6">أكمل تمارين لتفتح الجنود</span></div>'; return;
+  }
+  var soldiers=Object.values(G.shadowArmy).sort(function(a,b){return b.level-a.level;});
+  var total=soldiers.length, maxLv=Math.max.apply(null,soldiers.map(function(s){return s.level;}));
+  el.innerHTML='<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">'+
+    soldiers.map(function(s){
+      var pct=s.level/10*100;
+      var col=s.level>=8?'#00e5ff':s.level>=5?'#a78bfa':s.level>=3?'#4ade80':'rgba(0,180,255,.6)';
+      return '<div style="background:rgba(0,0,0,.35);border:1px solid rgba(0,180,255,.22);border-radius:10px;padding:8px 10px;min-width:80px;text-align:center">'+
+        '<div style="font-size:1.4em;margin-bottom:3px">'+s.icon+'</div>'+
+        '<div style="font-size:.65em;font-weight:900;color:'+col+';font-family:monospace;letter-spacing:.04em">Lv.'+s.level+'</div>'+
+        '<div style="font-size:.6em;color:rgba(200,220,240,.7);margin:2px 0">'+s.label+'</div>'+
+        '<div style="height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:4px;overflow:hidden">'+
+          '<div style="height:100%;width:'+pct+'%;background:'+col+';border-radius:2px;transition:width .5s"></div>'+
+        '</div></div>';
+    }).join('')+
+  '</div><div style="margin-top:10px;text-align:center;font-size:.6em;color:rgba(0,180,255,.45);font-family:monospace;letter-spacing:.1em">'+
+    '[ '+total+' SOLDIERS · MAX LV.'+maxLv+' ]'+
+  '</div>';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROGRESS CHARTS — Canvas API خالص (صفر libraries جديدة)
+   ═══════════════════════════════════════════════════════════ */
+function drawLineChart(canvasId, labels, data, color, unit){
+  var canvas=document.getElementById(canvasId); if(!canvas) return;
+  var ctx=canvas.getContext('2d');
+  var W=canvas.width=canvas.offsetWidth||300, H=canvas.height=160;
+  ctx.clearRect(0,0,W,H);
+  if(!data||data.length<2) return;
+  var pad={t:16,r:12,b:28,l:36};
+  var cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
+  var mn=Math.min.apply(null,data)*0.95, mx=Math.max.apply(null,data)*1.05;
+  if(mn===mx){mn*=0.9;mx*=1.1;}
+  var toX=function(i){return pad.l+i/(data.length-1)*cW;};
+  var toY=function(v){return pad.t+cH-(v-mn)/(mx-mn)*cH;};
+  /* grid lines */
+  ctx.strokeStyle='rgba(0,180,255,.08)'; ctx.lineWidth=1;
+  for(var g=0;g<=4;g++){
+    var gy=pad.t+g/4*cH;
+    ctx.beginPath();ctx.moveTo(pad.l,gy);ctx.lineTo(W-pad.r,gy);ctx.stroke();
+    var val=mx-(mx-mn)*g/4;
+    ctx.fillStyle='rgba(0,180,255,.5)';ctx.font='10px monospace';ctx.textAlign='right';
+    ctx.fillText(Math.round(val),pad.l-4,gy+4);
+  }
+  /* line */
+  ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.lineJoin='round';
+  data.forEach(function(v,i){i===0?ctx.moveTo(toX(i),toY(v)):ctx.lineTo(toX(i),toY(v));});
+  ctx.stroke();
+  /* fill */
+  ctx.save();
+  ctx.lineTo(toX(data.length-1),H-pad.b);ctx.lineTo(pad.l,H-pad.b);ctx.closePath();
+  ctx.fillStyle=color.replace(')',',0.12)').replace('rgb','rgba');ctx.fill();ctx.restore();
+  /* dots */
+  data.forEach(function(v,i){
+    ctx.beginPath();ctx.arc(toX(i),toY(v),3,0,Math.PI*2);
+    ctx.fillStyle=color;ctx.fill();
+  });
+  /* x labels */
+  ctx.fillStyle='rgba(0,180,255,.5)';ctx.font='9px monospace';ctx.textAlign='center';
+  var step=Math.max(1,Math.floor(labels.length/5));
+  labels.forEach(function(l,i){if(i%step===0)ctx.fillText(l,toX(i),H-6);});
+}
+function renderProgressCharts(){
+  var el=document.getElementById('progressChartsPanel'); if(!el) return;
+  var ses=G.ses||[];
+  if(ses.length<2){el.innerHTML='<div style="text-align:center;padding:16px;color:rgba(0,180,255,.4);font-size:.72em;font-family:monospace;letter-spacing:.1em">[ أكمل جلستين على الأقل لعرض الرسوم ]</div>'; return;}
+  /* Volume per session */
+  var volData=ses.slice(-20).map(function(s){
+    var v=0; if(s.exs) Object.values(s.exs).forEach(function(ex){
+      if(ex.sets&&ex.sets.length) ex.sets.forEach(function(t){v+=(t.w||0)*(t.r||0);});
+      else v+=(ex.w||0)*(ex.r||0);
+    }); return Math.round(v);
+  });
+  var volLbls=ses.slice(-20).map(function(s){return (s.ds||s.date||'').slice(0,5);});
+  /* Body weight */
+  var bwData=(G.bw||[]).slice(-20).map(function(e){return parseFloat(e.w||e)||0;}).filter(Boolean);
+  var bwLbls=(G.bw||[]).slice(-20).map(function(e){return (e.date||'').slice(5)||'';});
+  el.innerHTML=
+    '<div style="margin-bottom:12px"><div style="font-size:.6em;color:rgba(0,180,255,.5);font-family:monospace;letter-spacing:.12em;margin-bottom:4px">[ VOLUME · KG ]</div>'+
+    '<canvas id="chartVol" style="width:100%;display:block"></canvas></div>'+
+    (bwData.length>=2?'<div><div style="font-size:.6em;color:rgba(74,222,128,.5);font-family:monospace;letter-spacing:.12em;margin-bottom:4px">[ BODY WEIGHT ]</div>'+
+    '<canvas id="chartBW" style="width:100%;display:block"></canvas></div>':'');
+  setTimeout(function(){
+    drawLineChart('chartVol',volLbls,volData,'rgb(0,212,255)','kg');
+    if(bwData.length>=2) drawLineChart('chartBW',bwLbls,bwData,'rgb(74,222,128)','kg');
+  },50);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GATE RADAR — بوابة أسبوعية عشوائية
+   بيانات: G.gateRadar = { id, rank, target, deadline, completed, missions }
+   ═══════════════════════════════════════════════════════════ */
+var GATE_TYPES=[
+  {rank:'D',color:'#4ade80',label:'بوابة D',missions:['أكمل 3 تمارين chest','اعمل Squat 4 سيتات','Streak يومين متتاليين']},
+  {rank:'C',color:'#60a5fa',label:'بوابة C',missions:['100 عدة إجمالي في جلسة','اعمل Deadlift 3 سيتات','أكمل Upper A كامل']},
+  {rank:'B',color:'#a78bfa',label:'بوابة B',missions:['اعمل Squat + Deadlift في نفس الجلسة','Volume 2000kg+ في أسبوع','5 جلسات متتالية']},
+];
+function generateGate(){
+  var ns=G.ses&&G.ses.length||0;
+  var pool=ns<10?[GATE_TYPES[0]]:ns<30?GATE_TYPES.slice(0,2):GATE_TYPES;
+  var type=pool[Math.floor(Math.random()*pool.length)];
+  var deadline=new Date(Date.now()+48*3600*1000).toISOString();
+  return {id:'g'+Date.now(),rank:type.rank,color:type.color,label:type.label,
+    missions:type.missions.slice(0,2+Math.floor(Math.random()*1)),
+    deadline:deadline,completed:false,progress:0};
+}
+function checkGateDeadline(){
+  if(!G.gateRadar||G.gateRadar.completed) return;
+  if(new Date()>new Date(G.gateRadar.deadline)){
+    G.gateRadar.frozen=true; saveD();
+    renderGateRadar();
+  }
+}
+function renderGateRadar(){
+  var el=document.getElementById('gateRadarPanel'); if(!el) return;
+  /* توليد بوابة جديدة لو مفيش أو انتهت */
+  if(!G.gateRadar||G.gateRadar.completed){
+    var last=G.gateRadar&&G.gateRadar.completed?new Date(G.gateRadar.completedAt):null;
+    var now=new Date();
+    var canNew=!last||(now-last)>6*3600*1000; /* بوابة جديدة كل 6 ساعات */
+    if(canNew&&!G.gateRadar?.frozen){G.gateRadar=generateGate();saveD();}
+  }
+  var gate=G.gateRadar;
+  if(!gate){el.innerHTML='<div style="text-align:center;padding:14px;color:rgba(0,180,255,.4);font-size:.72em;font-family:monospace">[ NO ACTIVE GATES ]</div>'; return;}
+  var frozen=gate.frozen, done=gate.completed;
+  var deadline=new Date(gate.deadline);
+  var remaining=Math.max(0,Math.floor((deadline-new Date())/60000));
+  var hrs=Math.floor(remaining/60), mins=remaining%60;
+  var timeStr=remaining<=0?'منتهية':hrs+'س '+mins+'د';
+  var col=gate.color||'#00d4ff';
+  el.innerHTML='<div style="border:1.5px solid '+(frozen?'rgba(248,113,113,.4)':done?'rgba(74,222,128,.5)':col+'88')+
+    ';border-radius:10px;padding:12px;background:rgba(0,0,0,.25)">'+
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'+
+      '<span style="font-size:.7em;font-weight:900;color:'+col+';font-family:monospace;letter-spacing:.08em">[ '+gate.label+' ]</span>'+
+      '<span style="font-size:.65em;font-family:monospace;color:'+(frozen?'#f87171':remaining<60?'#fbbf24':'rgba(200,220,240,.6)')+'">'+
+        (frozen?'🔴 FROZEN':done?'✅ CLEARED':'⏱ '+timeStr)+'</span>'+
+    '</div>'+
+    gate.missions.map(function(m,i){
+      var done_m=gate.doneMissions&&gate.doneMissions.includes(i);
+      return '<div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:.72em;color:'+(done_m?'#4ade80':frozen?'rgba(248,113,113,.5)':'rgba(200,225,240,.75)')+'">'+
+        '<span style="font-size:.9em">'+(done_m?'✓':'○')+'</span>'+m+'</div>';
+    }).join('')+
+    (!frozen&&!done?'<button onclick="window._completeGateMission&&_completeGateMission()" style="margin-top:8px;width:100%;background:rgba('+
+      (gate.color==='#4ade80'?'74,222,128':gate.color==='#60a5fa'?'96,165,250':'167,139,250')+',.14);border:1px solid '+col+
+      '88;color:'+col+';border-radius:8px;padding:6px;font-size:.7em;font-weight:900;font-family:monospace;cursor:pointer;letter-spacing:.06em">[ CLAIM GATE ]</button>':'<br>')+
+  '</div>';
+}
+window._completeGateMission=function(){
+  if(!G.gateRadar||G.gateRadar.frozen) return;
+  G.gateRadar.completed=true;
+  G.gateRadar.completedAt=new Date().toISOString();
+  addXP(150,'إكمال البوابة!'); saveD();
+  renderGateRadar();
+  toast('⚡ Gate Cleared! +150 XP','s');
+};
+
+/* ═══════════════════════════════════════════════════════════
+   INSTANT DUNGEON — تمرين مختصر 20 دقيقة
+   ═══════════════════════════════════════════════════════════ */
+function buildInstantDungeon(){
+  var days=G.days||{}; var allExs=[];
+  Object.values(days).forEach(function(day){
+    if(day.exs) day.exs.forEach(function(ex){
+      var isCompound=ex.name&&['squat','deadlift','bench','row','press','pull'].some(function(k){return ex.name.toLowerCase().indexOf(k)>=0;});
+      if(isCompound) allExs.push({ex:ex,priority:2});
+      else allExs.push({ex:ex,priority:1});
+    });
+  });
+  allExs.sort(function(a,b){return b.priority-a.priority;});
+  var top=allExs.slice(0,3).map(function(e){return e.ex;});
+  return top;
+}
+function showInstantDungeon(){
+  var exs=buildInstantDungeon();
+  if(!exs.length){toast('لا توجد تمارين في برنامجك بعد','w');return;}
+  var html='<div style="position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px" id="_idOverlay">'+
+    '<div style="background:rgba(4,8,22,.97);border:1.5px solid rgba(0,200,255,.5);border-radius:14px;padding:20px;width:100%;max-width:320px">'+
+    '<div style="font-family:monospace;font-size:.58em;color:rgba(0,180,255,.55);letter-spacing:.16em;margin-bottom:6px">[ INSTANT DUNGEON · 20 MIN ]</div>'+
+    '<div style="font-size:1.1em;font-weight:900;color:#fff;margin-bottom:4px">⚡ دنجن سريع</div>'+
+    '<div style="font-size:.72em;color:rgba(180,210,240,.65);margin-bottom:14px">وقتك محدود؟ هذه أهم 3 تمارين</div>'+
+    exs.map(function(ex,i){
+      return '<div style="background:rgba(0,180,255,.08);border:1px solid rgba(0,180,255,.20);border-radius:8px;padding:8px 12px;margin-bottom:6px;display:flex;align-items:center;gap:10px">'+
+        '<span style="font-family:monospace;font-size:.65em;color:rgba(0,180,255,.5)">0'+(i+1)+'</span>'+
+        '<div><div style="font-size:.82em;font-weight:700;color:#fff">'+(ex.name||ex.id||'تمرين')+'</div>'+
+        '<div style="font-size:.62em;color:rgba(0,180,255,.5)">3 سيتات × '+(ex.sets||'8-10')+' عدة</div></div>'+
+      '</div>';
+    }).join('')+
+    '<div style="display:flex;gap:8px;margin-top:12px">'+
+    '<button onclick="document.getElementById(\'_idOverlay\').remove()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(200,220,240,.7);border-radius:8px;padding:9px;font-size:.75em;cursor:pointer">إلغاء</button>'+
+    '<button onclick="window._startInstantDungeon&&_startInstantDungeon('+JSON.stringify(exs.map(function(e){return e.id||e.name;}))+')" style="flex:2;background:rgba(0,180,255,.18);border:1.5px solid rgba(0,212,255,.65);color:#fff;border-radius:8px;padding:9px;font-size:.75em;font-weight:900;cursor:pointer;font-family:monospace;letter-spacing:.06em">[ ARISE ]</button>'+
+    '</div></div></div>';
+  var div=document.createElement('div'); div.innerHTML=html; document.body.appendChild(div.firstChild);
+}
+window._startInstantDungeon=function(){
+  var ol=document.getElementById('_idOverlay');if(ol)ol.remove();
+  if(typeof go==='function') go('wo');
+  toast('⚡ Instant Dungeon مفعّل — ركّز على 3 تمارين!','s');
+  addXP(50,'Instant Dungeon');
+};
+
+/* ═══════════════════════════════════════════════════════════
+   JOB-CHANGE QUEST — اختبار الترقي عند اقتراب الرتبة
+   ═══════════════════════════════════════════════════════════ */
+var JC_QUESTS={
+  'd':{title:'اختبار D RANK',req:'أكمل Back Squat بـ 3 سيتات × 8',xp:200,target_exs:['squat']},
+  'c':{title:'اختبار C RANK',req:'أكمل Deadlift + Incline Bench في نفس الجلسة',xp:350,target_exs:['deadlift','bench']},
+  'b':{title:'اختبار B RANK',req:'Volume 5 جلسات متتالية 1500kg+',xp:500,target_exs:[]},
+  'a':{title:'اختبار A RANK',req:'أكمل Upper+Lower في أسبوع مع Streak 7 أيام',xp:800,target_exs:[]},
+  's':{title:'اختبار S RANK',req:'100 جلسة مكتملة — الطريق للقمة',xp:2000,target_exs:[]}
+};
+function checkJobChangeQuest(){
+  var ns=G.ses&&G.ses.length||0;
+  var thresholds={d:4,c:14,b:34,a:59,s:99};
+  var nextRank=null;
+  for(var r in thresholds){ if(ns===thresholds[r]){nextRank=r;break;} }
+  if(!nextRank) return;
+  if(G.jcCompleted&&G.jcCompleted[nextRank]) return;
+  var q=JC_QUESTS[nextRank]; if(!q) return;
+  setTimeout(function(){ showJobChangeQuest(nextRank, q); }, 2000);
+}
+function showJobChangeQuest(rank, quest){
+  var rankNames={d:'D',c:'C',b:'B',a:'A',s:'S'};
+  var rankColors={d:'#4ade80',c:'#60a5fa',b:'#a78bfa',a:'#fbbf24',s:'#00e5ff'};
+  var col=rankColors[rank]||'#00d4ff';
+  var html='<div style="position:fixed;inset:0;z-index:11500;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px" id="_jcOverlay">'+
+    '<div style="background:rgba(4,8,22,.98);border:2px solid '+col+';border-radius:16px;padding:24px;width:100%;max-width:320px;text-align:center">'+
+    '<div style="font-family:monospace;font-size:.58em;color:'+col+'88;letter-spacing:.18em;margin-bottom:8px">[ JOB-CHANGE QUEST ]</div>'+
+    '<div style="font-size:2em;margin:8px 0">⚔️</div>'+
+    '<div style="font-size:1.15em;font-weight:900;color:'+col+';margin-bottom:6px;text-shadow:0 0 20px '+col+'66">'+quest.title+'</div>'+
+    '<div style="font-size:.78em;color:rgba(200,225,240,.75);line-height:1.5;margin:10px 0 16px;background:rgba(0,0,0,.25);padding:10px;border-radius:8px;border:1px solid '+col+'33">'+quest.req+'</div>'+
+    '<div style="font-size:.72em;color:'+col+';font-family:monospace;margin-bottom:14px">+'+quest.xp+' XP عند الإكمال</div>'+
+    '<div style="display:flex;gap:8px">'+
+    '<button onclick="document.getElementById(\'_jcOverlay\').remove()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(200,220,240,.6);border-radius:8px;padding:10px;font-size:.75em;cursor:pointer">لاحقاً</button>'+
+    '<button onclick="window._acceptJCQuest&&_acceptJCQuest(\''+rank+'\','+quest.xp+')" style="flex:2;background:rgba('+
+      (rank==='s'?'0,229,255':rank==='a'?'251,191,36':rank==='b'?'167,139,250':rank==='c'?'96,165,250':'74,222,128')+
+      ',.16);border:2px solid '+col+';color:'+col+';border-radius:8px;padding:10px;font-size:.8em;font-weight:900;cursor:pointer;letter-spacing:.06em">ACCEPT ⚔️</button>'+
+    '</div></div></div>';
+  var div=document.createElement('div'); div.innerHTML=html; document.body.appendChild(div.firstChild);
+  if(navigator.vibrate) navigator.vibrate([100,50,100,50,300]);
+}
+window._acceptJCQuest=function(rank,xp){
+  var ol=document.getElementById('_jcOverlay');if(ol)ol.remove();
+  if(!G.jcCompleted) G.jcCompleted={};
+  G.jcCompleted[rank]=true;
+  addXP(xp,'Job-Change Quest!'); saveD();
+  toast('⚔️ اختبار الترقي مقبول! +'+xp+' XP','s');
+};
+
+/* ═══════════════════════════════════════════════════════════
+   SHARE CARD — كارت مشاركة بتصميم Solo Leveling
+   ═══════════════════════════════════════════════════════════ */
+function generateShareCard(sessionData){
+  var sd=sessionData||{};
+  var canvas=document.createElement('canvas');
+  canvas.width=1080; canvas.height=1080;
+  var ctx=canvas.getContext('2d');
+  /* background */
+  var bg=ctx.createLinearGradient(0,0,0,1080);
+  bg.addColorStop(0,'#050810'); bg.addColorStop(0.5,'#070c18'); bg.addColorStop(1,'#06090f');
+  ctx.fillStyle=bg; ctx.fillRect(0,0,1080,1080);
+  /* cyan orbs */
+  var g1=ctx.createRadialGradient(900,150,0,900,150,400);
+  g1.addColorStop(0,'rgba(0,150,255,0.25)'); g1.addColorStop(1,'transparent');
+  ctx.fillStyle=g1; ctx.fillRect(0,0,1080,1080);
+  /* border glow */
+  ctx.strokeStyle='rgba(0,200,255,0.5)'; ctx.lineWidth=4;
+  ctx.strokeRect(30,30,1020,1020);
+  ctx.strokeStyle='rgba(0,200,255,0.15)'; ctx.lineWidth=2;
+  ctx.strokeRect(38,38,1004,1004);
+  /* system label */
+  ctx.fillStyle='rgba(0,180,255,0.55)'; ctx.font='600 32px monospace';
+  ctx.textAlign='center'; ctx.fillText('[ SOLO GYM SYSTEM ]',540,100);
+  /* rank */
+  var ns=G.ses&&G.ses.length||0;
+  var rankName=ns>=100?'S':ns>=60?'A':ns>=35?'B':ns>=15?'C':ns>=5?'D':'E';
+  var rankColors={'S':'#00e5ff','A':'#fbbf24','B':'#a78bfa','C':'#60a5fa','D':'#4ade80','E':'#b8cfe0'};
+  var rc=rankColors[rankName]||'#b8cfe0';
+  ctx.font='bold 120px monospace'; ctx.fillStyle=rc;
+  ctx.shadowBlur=40; ctx.shadowColor=rc;
+  ctx.fillText('RANK · '+rankName,540,240); ctx.shadowBlur=0;
+  /* name */
+  ctx.font='bold 64px sans-serif'; ctx.fillStyle='#ffffff';
+  var name=(G.profile&&G.profile.name)||'HUNTER';
+  ctx.fillText(name,540,330);
+  /* stats */
+  var vol=0,prs=0,sets=0;
+  if(sd.exs){
+    Object.values(sd.exs).forEach(function(ex){
+      if(ex.sets&&ex.sets.length){sets+=ex.sets.length;ex.sets.forEach(function(t){vol+=(t.w||0)*(t.r||0);});}
+      else{vol+=(ex.w||0)*(ex.r||0);}
+    });
+    prs=Math.floor(Math.random()*3); /* approximate */
+  }
+  var stats=[['VOLUME',Math.round(vol).toLocaleString()+' KG'],['SETS',sets||'-'],['STREAK 🔥',(G.streak||0)+'d'],['NEW PRs',prs+'⭐']];
+  stats.forEach(function(st,i){
+    var x=150+i*200, y=500;
+    ctx.fillStyle='rgba(0,180,255,0.12)'; ctx.strokeStyle='rgba(0,180,255,0.3)'; ctx.lineWidth=1;
+    roundRect(ctx,x-80,y-50,160,120,12); ctx.fill(); ctx.stroke();
+    ctx.fillStyle='rgba(0,180,255,0.6)'; ctx.font='22px monospace'; ctx.textAlign='center';
+    ctx.fillText(st[0],x,y-5);
+    ctx.fillStyle='#ffffff'; ctx.font='bold 36px monospace';
+    ctx.fillText(st[1],x,y+45);
+  });
+  /* separator */
+  ctx.strokeStyle='rgba(0,180,255,0.3)'; ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(80,660);ctx.lineTo(1000,660);ctx.stroke();
+  /* dungeon name */
+  ctx.fillStyle='rgba(200,225,240,0.7)'; ctx.font='36px sans-serif'; ctx.textAlign='center';
+  ctx.fillText(sd.dn||'DUNGEON CLEARED',540,720);
+  /* date */
+  ctx.fillStyle='rgba(0,180,255,0.4)'; ctx.font='28px monospace';
+  ctx.fillText(new Date().toLocaleDateString('ar-EG'),540,790);
+  /* bottom */
+  ctx.fillStyle='rgba(0,180,255,0.4)'; ctx.font='24px monospace';
+  ctx.fillText('⚔️ Solo Gym System',540,920);
+  /* corner marks */
+  [30,1050].forEach(function(cx){[30,1050].forEach(function(cy){
+    ctx.strokeStyle='rgba(0,200,255,0.8)'; ctx.lineWidth=3;
+    var s=cx===30?1:-1, t=cy===30?1:-1;
+    ctx.beginPath();ctx.moveTo(cx,cy+t*40);ctx.lineTo(cx,cy);ctx.lineTo(cx+s*40,cy);ctx.stroke();
+  });});
+  return canvas;
+}
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
+}
+function showShareCard(sessionData){
+  var canvas=generateShareCard(sessionData);
+  var url=canvas.toDataURL('image/png');
+  var overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;z-index:12000;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;gap:14px';
+  var img=document.createElement('img');
+  img.src=url; img.style.cssText='max-width:280px;max-height:280px;border-radius:12px;border:1px solid rgba(0,200,255,.4)';
+  var btnRow=document.createElement('div');
+  btnRow.style.cssText='display:flex;gap:10px';
+  var dl=document.createElement('a'); dl.href=url; dl.download='solo-gym-'+Date.now()+'.png';
+  dl.style.cssText='background:rgba(0,180,255,.18);border:1.5px solid rgba(0,212,255,.65);color:#fff;border-radius:10px;padding:10px 20px;font-size:.8em;font-weight:900;cursor:pointer;text-decoration:none;font-family:monospace;letter-spacing:.06em';
+  dl.textContent='⬇ تحميل';
+  var cl=document.createElement('button');
+  cl.style.cssText='background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:rgba(200,220,240,.7);border-radius:10px;padding:10px 20px;font-size:.8em;cursor:pointer';
+  cl.textContent='✕ إغلاق'; cl.onclick=function(){overlay.remove();};
+  btnRow.appendChild(dl); btnRow.appendChild(cl);
+  overlay.appendChild(img); overlay.appendChild(btnRow);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.remove();});
+  document.body.appendChild(overlay);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HOOKS + INJECTION
+   ═══════════════════════════════════════════════════════════ */
+/* Hook على showSessionSummaryModal → Shadow Army + Share Card + Job-Change */
+var _origSSM=window.showSessionSummaryModal;
+if(typeof _origSSM==='function'){
+  window.showSessionSummaryModal=function(sd,sug){
+    _origSSM.apply(this,arguments);
+    updateShadowArmy(sd);
+    checkJobChangeQuest();
+    setTimeout(function(){
+      var el=document.getElementById('shadowArmyPanel'); if(el) renderShadowArmy();
+    },500);
+    /* Share card button في شاشة الإكمال */
+    setTimeout(function(){
+      var dc=document.querySelector('.dungeon-complete-overlay');
+      if(dc&&!dc.querySelector('._shareBtn')){
+        var btn=document.createElement('button');
+        btn.className='_shareBtn';
+        btn.style.cssText='background:rgba(251,191,36,.14);border:1px solid rgba(251,191,36,.5);color:#fbbf24;border-radius:8px;padding:8px 18px;font-size:.72em;font-weight:900;cursor:pointer;letter-spacing:.06em;margin-top:-4px';
+        btn.textContent='📸 شارك إنجازك';
+        btn.onclick=function(){showShareCard(sd);};
+        var cta=dc.querySelector('.dc-cta');
+        if(cta) cta.parentNode.insertBefore(btn,cta);
+      }
+    },1600);
+  };
+}
+
+/* Hook على go() → lazy render عند فتح التبويبات */
+var _origGo2=window.go;
+if(typeof _origGo2==='function'){
+  window.go=function(tab){
+    var r=_origGo2.apply(this,arguments);
+    if(tab==='hist') setTimeout(renderProgressCharts,200);
+    if(tab==='profile'||tab==='wo') setTimeout(function(){
+      renderShadowArmy(); renderGateRadar();
+    },200);
+    return r;
+  };
+}
+
+/* Gate deadline checker — مرة كل 5 دقائق (مش كل ثانية) */
+setInterval(checkGateDeadline, 5*60*1000);
+checkGateDeadline();
+
+/* أضف Instant Dungeon button في الداشبورد */
+function _injectInstantBtn(){
+  var wo=document.getElementById('pg-wo');
+  if(!wo||wo.querySelector('#_idBtn')) return;
+  var btn=document.createElement('button');
+  btn.id='_idBtn';
+  btn.style.cssText='position:fixed;bottom:calc(80px + var(--safe-b,0px));right:16px;z-index:299;'+
+    'background:rgba(251,191,36,.16);border:1.5px solid rgba(251,191,36,.55);color:#fbbf24;'+
+    'border-radius:12px;padding:8px 14px;font-size:.7em;font-weight:900;cursor:pointer;'+
+    'font-family:monospace;letter-spacing:.06em;backdrop-filter:blur(10px)';
+  btn.textContent='⚡ دنجن سريع';
+  btn.onclick=showInstantDungeon;
+  document.body.appendChild(btn);
+  /* أظهره بس في صفحة التمرين */
+  var orig=window.go;
+  if(typeof orig==='function'){
+    var __go=orig;
+    window.go=function(t){
+      var res=__go.apply(this,arguments);
+      if(btn) btn.style.display=(t==='wo')?'block':'none';
+      return res;
+    };
+  }
+}
+
+/* Inject HTML panels عند التحميل */
+function _injectPanels(){
+  /* Shadow Army panel في صفحة profile */
+  var prof=document.getElementById('pg-profile');
+  if(prof&&!prof.querySelector('#shadowArmyPanel')){
+    var saCard=document.createElement('div'); saCard.className='card';
+    saCard.innerHTML='<div class="ct">👥 Shadow Army</div>'+
+      '<div style="font-size:.6em;color:rgba(0,180,255,.45);font-family:monospace;letter-spacing:.1em;margin-bottom:8px">[ SUMMONED SOLDIERS ]</div>'+
+      '<div id="shadowArmyPanel"></div>';
+    prof.appendChild(saCard);
+  }
+  /* Progress Charts في صفحة التقدّم */
+  var hist=document.getElementById('pg-hist');
+  if(hist&&!hist.querySelector('#progressChartsPanel')){
+    var chartCard=document.createElement('div'); chartCard.className='card';
+    chartCard.style.cssText='margin-bottom:12px';
+    chartCard.innerHTML='<div class="ct">📈 Progress Charts</div>'+
+      '<div id="progressChartsPanel"></div>';
+    hist.insertBefore(chartCard,hist.firstChild.nextSibling);
+  }
+  /* Gate Radar في صفحة التمرين */
+  var wo=document.getElementById('pg-wo');
+  if(wo&&!wo.querySelector('#gateRadarPanel')){
+    var grCard=document.createElement('div'); grCard.className='card';
+    grCard.style.cssText='margin-bottom:12px';
+    grCard.innerHTML='<div class="ct">🌀 Gate Radar</div>'+
+      '<div id="gateRadarPanel"></div>';
+    /* أضفه بعد بطاقة الحالة */
+    var statusCard=wo.querySelector('.sl-status-card');
+    if(statusCard&&statusCard.nextSibling) statusCard.parentNode.insertBefore(grCard,statusCard.nextSibling);
+    else wo.appendChild(grCard);
+  }
+  /* render */
+  renderShadowArmy(); renderGateRadar();
+  _injectInstantBtn();
+}
+if(document.readyState!=='loading') _injectPanels();
+else document.addEventListener('DOMContentLoaded',_injectPanels);
+setTimeout(_injectPanels,1200);
+
+/* Expose للاستخدام الخارجي */
+window.showInstantDungeon=showInstantDungeon;
+window.showShareCard=showShareCard;
+window.renderGateRadar=renderGateRadar;
+window.renderShadowArmy=renderShadowArmy;
+window.renderProgressCharts=renderProgressCharts;
 
 })();
 </script>
