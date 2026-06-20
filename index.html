@@ -4423,6 +4423,21 @@ body::after{
 #exEditOverlay{position:fixed;inset:0;z-index:9790;background:rgba(0,0,0,0);
   transition:background .28s;display:none}
 #exEditOverlay.open{display:block;background:rgba(0,0,0,.5)}
+
+/* ═══ Plan Editor Drag & Drop ═══ */
+.ped-drag-handle{
+  font-size:1.1em;color:rgba(0,180,255,.3);cursor:grab;
+  padding:0 4px 0 2px;flex-shrink:0;user-select:none;
+  line-height:1;transition:.15s;
+}
+.ped-drag-handle:hover{color:rgba(0,180,255,.7)}
+.ped-drag-handle:active{cursor:grabbing}
+.ped-ex-row{transition:background .15s,opacity .2s}
+.ped-ex-row.drag-over{
+  background:rgba(0,180,255,.15)!important;
+  border-top:2px solid rgba(0,200,255,.7)!important;
+}
+.ped-ex-row.dragging{opacity:.4;background:rgba(0,0,0,.3)!important}
 </style>
 
 </head>
@@ -13481,7 +13496,8 @@ window.renderPlanEditor=function(){
     exs.forEach(function(ex,idx){
       var muscle=ex.muscle||'';
       var mColor=typeof getMC==='function'?getMC(muscle):'100,180,255';
-      html+='<div class="ped-ex-row" id="ped-ex-'+dk+'-'+idx+'">';
+      html+='<div class="ped-ex-row" id="ped-ex-'+dk+'-'+idx+'" data-dk="'+dk+'" data-idx="'+idx+'" draggable="true">';
+      html+='<div class="ped-drag-handle" title="اسحب لإعادة الترتيب">⠿</div>';
       // اسم + meta
       html+='<div class="ped-ex-info">';
       html+='<div class="ped-ex-name">'+escHtml(ex.name)+'</div>';
@@ -13661,6 +13677,114 @@ if(typeof _origGoForPlan==='function'){
   };
 }
 
+})();
+</script>
+
+
+<script>
+/* ══ Plan Editor Drag & Drop ══ */
+(function(){
+
+var _dragSrc=null; // {dk, realIdx, el}
+var _touchDrag=null;
+
+/* ── Mouse/Desktop Drag ── */
+document.addEventListener('dragstart',function(e){
+  var row=e.target.closest('.ped-ex-row');
+  if(!row) return;
+  var dk=row.dataset.dk, idx=parseInt(row.dataset.idx);
+  _dragSrc={dk:dk,idx:idx,el:row};
+  row.classList.add('dragging');
+  e.dataTransfer.effectAllowed='move';
+},true);
+
+document.addEventListener('dragend',function(e){
+  var row=e.target.closest('.ped-ex-row');
+  if(row) row.classList.remove('dragging');
+  document.querySelectorAll('.ped-ex-row.drag-over').forEach(function(r){r.classList.remove('drag-over');});
+  _dragSrc=null;
+},true);
+
+document.addEventListener('dragover',function(e){
+  var row=e.target.closest('.ped-ex-row');
+  if(!row||!_dragSrc) return;
+  e.preventDefault();
+  document.querySelectorAll('.ped-ex-row.drag-over').forEach(function(r){r.classList.remove('drag-over');});
+  if(row!==_dragSrc.el) row.classList.add('drag-over');
+},true);
+
+document.addEventListener('drop',function(e){
+  var row=e.target.closest('.ped-ex-row');
+  if(!row||!_dragSrc) return;
+  e.preventDefault();
+  row.classList.remove('drag-over');
+  var tDk=row.dataset.dk, tIdx=parseInt(row.dataset.idx);
+  if(tDk!==_dragSrc.dk) return; /* نفس اليوم فقط */
+  if(tIdx===_dragSrc.idx) return;
+  _moveExercise(_dragSrc.dk, _dragSrc.idx, tIdx);
+},true);
+
+/* ── Touch Drag (Mobile) ── */
+document.addEventListener('touchstart',function(e){
+  var handle=e.target.closest('.ped-drag-handle');
+  if(!handle) return;
+  var row=handle.closest('.ped-ex-row');
+  if(!row) return;
+  var dk=row.dataset.dk, idx=parseInt(row.dataset.idx);
+  _touchDrag={dk:dk,idx:idx,el:row,startY:e.touches[0].clientY};
+  row.classList.add('dragging');
+  e.preventDefault();
+},{passive:false});
+
+document.addEventListener('touchmove',function(e){
+  if(!_touchDrag) return;
+  e.preventDefault();
+  var y=e.touches[0].clientY;
+  /* دوّر على الـ row تحت الإصبع */
+  document.querySelectorAll('.ped-ex-row.drag-over').forEach(function(r){r.classList.remove('drag-over');});
+  var el=document.elementFromPoint(e.touches[0].clientX, y);
+  var row=el&&el.closest('.ped-ex-row');
+  if(row&&row!==_touchDrag.el&&row.dataset.dk===_touchDrag.dk){
+    row.classList.add('drag-over');
+    _touchDrag.overRow=row;
+  } else {
+    _touchDrag.overRow=null;
+  }
+},{passive:false});
+
+document.addEventListener('touchend',function(e){
+  if(!_touchDrag) return;
+  document.querySelectorAll('.ped-ex-row.drag-over').forEach(function(r){r.classList.remove('drag-over');});
+  if(_touchDrag.el) _touchDrag.el.classList.remove('dragging');
+  var over=_touchDrag.overRow;
+  if(over&&over.dataset.dk===_touchDrag.dk){
+    var tIdx=parseInt(over.dataset.idx);
+    _moveExercise(_touchDrag.dk, _touchDrag.idx, tIdx);
+  }
+  _touchDrag=null;
+},true);
+
+/* ── Move Logic ── */
+function _moveExercise(dk, fromIdx, toIdx){
+  var day=G.days&&G.days[dk]; if(!day) return;
+  /* انبسط على non-warmup exercises فقط */
+  var realExs=day.exercises.filter(function(e){return !e.isWarmup;});
+  var warmups=day.exercises.filter(function(e){return e.isWarmup;});
+  if(fromIdx<0||fromIdx>=realExs.length) return;
+  if(toIdx<0||toIdx>=realExs.length) return;
+  /* إزالة وإعادة إدراج */
+  var moved=realExs.splice(fromIdx,1)[0];
+  realExs.splice(toIdx,0,moved);
+  /* أعد بناء exercises مع الـ warmups في الأول */
+  day.exercises=[].concat(warmups,realExs);
+  saveD();
+  /* أعد رندر */
+  if(typeof renderPlanEditor==='function') renderPlanEditor();
+  /* toast بسيط */
+  if(typeof toast==='function') toast('↕ تم إعادة الترتيب','s');
+}
+
+window._pedMoveExercise=_moveExercise;
 })();
 </script>
 
