@@ -13421,6 +13421,7 @@ window._showSupersetCountdown=_showSupersetCountdown;
     if(tab==='tools'){
       setTimeout(function(){
         if(typeof renderProgramSelector==='function') renderProgramSelector();
+        if(typeof renderPlanEditor==='function') renderPlanEditor();
         if(typeof applyCollapsible==='function') applyCollapsible();
       }, 200);
     }
@@ -13864,16 +13865,7 @@ function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&l
 window.renderPlanEditor=window.renderPlanEditor;
 
 /* شغّل عند فتح tools tab */
-var _origGoForPlan=window.go;
-if(typeof _origGoForPlan==='function'){
-  window.go=function(t){
-    var r=_origGoForPlan.apply(this,arguments);
-    if(t==='tools') setTimeout(function(){
-      if(typeof renderPlanEditor==='function') renderPlanEditor();
-    },300);
-    return r;
-  };
-}
+/* plan editor go merged into unified */
 
 })();
 </script>
