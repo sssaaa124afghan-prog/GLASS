@@ -864,7 +864,6 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(0,212,255
 @keyframes _ytFadeIn{from{opacity:0}to{opacity:1}}
 @keyframes _ytZoomIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
 
-
 /* ══ COMPACT DASHBOARD CARD ══ */
 .dash-card{background:rgba(255,255,255,.09);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.13);border-radius:24px;padding:14px 15px 13px;margin-bottom:12px;animation:cardIn .35s ease;box-shadow:0 4px 24px rgba(0,0,0,.18)}
 .dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
@@ -2409,7 +2408,6 @@ input[type=text],input[type=number],input[type=date],input[type=time]{border-rad
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(90,170,255,.35);border-radius:99px}
 
-
 /* ═══════════════════════════════════════════════════════════════════
    ⚡💧 v17 — تبريد إضافي + ترقية الهوية البصرية (يُطبَّق أخيراً = يفوز)
    كله تقليل حِمل: صفر أنيميشن جديدة لانهائية · صفر JS تقيل
@@ -2465,7 +2463,6 @@ body::after{
 /* ── 8) ترابط الـ accent: شريط التقدم والحلقات يستخدموا لون النظام الموحّد ── */
 .cb-fill{background:linear-gradient(180deg,rgba(255,255,255,.35),transparent 55%),linear-gradient(90deg,var(--p),var(--cy))!important}
 .bni.act .ic{filter:drop-shadow(0 0 9px var(--sys-glow))!important}
-
 
 /* ═══════════════════════════════════════════════════════════════════
    ⚔️ v18 — أزرار النظام (System HUD) — مستقبلي حاد بدل الكبسولات الدايرية
@@ -2533,7 +2530,6 @@ body::after{
   box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 4px 16px rgba(36,150,255,.4)!important}
 .stat-tab,.lib-filter{border-radius:7px!important}
 
-
 /* ═══════════════════════════════════════════════════════════════════
    🗔 v19 — لغة النظام على الكروت (زوايا مقطوعة موحّدة مع الأزرار)
    العمق عبر الحدود والانعكاس الداخلي بدل الظل الخارجي (لأن clip-path
@@ -2576,8 +2572,6 @@ body::after{
   clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 20px,100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,0 calc(100% - 20px),0 20px)!important;
 }
 
-
-
 /* ═══════════════════════════════════════════════════════════════════
    ♿🔢 v20 — وصول (Accessibility) + أرقام ثابتة العرض
    ═══════════════════════════════════════════════════════════════════ */
@@ -2596,7 +2590,6 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,
 body{font-variant-numeric:tabular-nums!important}
 .set-in,.rpe-in,.qstat,.cb-pct,.sl-rank-pill,
 input[type="number"],input[type="text"]{font-variant-numeric:tabular-nums!important}
-
 
 /* ═══════════════════════════════════════════════════════════════════
    🛡️🧰 v21 — أدوات النظام + شاشة إقلاع + مؤشر اتصال + لمسات استخدام
@@ -2670,7 +2663,6 @@ input[type="number"],input[type="text"]{font-variant-numeric:tabular-nums!import
 .btn-full,.btn-p,.tm-start-btn{min-height:44px}
 .su-sheet input,.su-sheet button{font-family:'Cairo'}
 
-
 /* ═══════════════════════════════════════════════════════════════════
    ✨ v22 — تحسين شامل: انضباط بصري · هيدر مظبوط · إيقاع موحّد
    الفلسفة: الهندسة المقطوعة + الأزرق الكهربائي = التوقيع.
@@ -2720,7 +2712,6 @@ h2,h3,.sec-title{letter-spacing:.01em}
 /* ── 6) تقليل توهج النصوص المتدرّجة لو أضرّ بالوضوح (نص أنظف) ── */
 .exi-name,.lib-name{text-shadow:none!important}
 
-
 /* ═══════════════════════════════════════════════════════════════════
    🪶⚡ v23 — وضع الخفة: أقصى سرعة بأقل خسارة بصرية
    المبدأ: backdrop-filter و mix-blend-mode أتقل عمليتين على الـ GPU
@@ -2764,7 +2755,6 @@ body::after{mix-blend-mode:normal!important;opacity:.025!important}
 /* الخلفية المتحركة: إبطاء بسيط يقلل إيقاظ الـ GPU بدون ما توقف الإحساس */
 body::before{animation-duration:24s!important}
 
-
 /* ═══════════════════════════════════════════════════════════════════
    🔆 v24 — تخفيف العتمة (بدون أي تكلفة أداء)
    نرفع إضاءة لون الأسطح فقط — لا تغبيش، لا blend → نفس الخفة بالظبط
@@ -2789,7 +2779,6 @@ body::before{animation-duration:24s!important}
 /* ── الهيدر والدوك: أفتح قليلاً مع بقاء التغطية للوضوح ── */
 .hdr{background:rgba(14,26,58,.90)!important}
 .bnav{background:rgba(16,30,66,.93)!important}
-
 
 /* ═══════════════════════════════════════════════════════════════════
    🔆🔆 v25 — تخفيف العتمة (الجولة 2): خلفية الصفحة نفسها
@@ -2820,7 +2809,6 @@ body{
 
 /* ── توهجات الخلفية الزرقاء: أوضح شوية تدّي حيوية بدون تكلفة ── */
 body::before{background:rgba(40,110,220,.12)!important}
-
 
 /* ═══════════════════════════════════════════════════════════════════
    🔆🔆🔆 v26 — تخفيف عتمة صفحة التمارين (حالات التمرين كانت سودا)
@@ -2853,7 +2841,6 @@ body::before{background:rgba(40,110,220,.12)!important}
 
 /* ── منطقة رسائل النظام في الورك آوت ── */
 .sl-sw-msg-row{background:rgba(60,130,230,.08)!important}
-
 
 /* ═══════════════════════════════════════════════════════════════════
    🛰️ v27 — عرض/تفاعل/تمرير احترافي مستقبلي · كله transform/opacity = خفيف
@@ -2888,11 +2875,7 @@ html[dir="rtl"] #readbar{transform-origin:right}
 
 /* ── 5) مؤشر السحب للتحديث (Pull-to-refresh) ── */
 
-
-
 /* ── 6) إشعار "اسحب لأعلى للأوامر السريعة" (تلميح خفيف أول مرة) ── */
-
-
 
 /* ═══════════════════════════════════════════════════════════════════
    💧🔷 v28 — الزجاج السائل مرئي (متوازن مع الأداء)
@@ -2943,7 +2926,6 @@ html[dir="rtl"] #readbar{transform-origin:right}
 /* ── توهج الخلفية أوضح شوية عشان الزجاج يبان عليه ── */
 body::before{background:rgba(56,130,240,.18)!important}
 
-
 /* ═══════════════════════════════════════════════════════════════════
    🎖️ v29 — إصلاح وضوح شريحة الرتبة (كانت باهتة وذابت في الزجاج الفاتح)
    نضيف قاعدة داكنة شفافة تحت لون الرتبة + نص أوضح → تبان على أي خلفية
@@ -2968,7 +2950,6 @@ body::before{background:rgba(56,130,240,.18)!important}
 .rank-s{background:linear-gradient(160deg,rgba(0,212,255,.32),rgba(8,24,54,.62))!important;
   border:1px solid rgba(0,212,255,.85)!important;color:#5fe6ff!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 0 16px rgba(0,212,255,.4)!important}
-
 
 /* ═══════════════════════════════════════════════════════════════════
    🎖️ v30 — إبراز زر/شريحة HUNTER RANK بوضوح تام (كزر بارز)
@@ -3090,7 +3071,6 @@ body{
 /* ── توهجات الخلفية المتحركة: أوضح عشان الزجاج يبان عليها ── */
 body::before{background:rgba(70,150,255,.22)!important}
 
-
 /* ═══ v33b — إصلاح ترتيب الرتبة (RTL عكس عناصر الـ flex) + تقوية لمعان الزجاج ═══ */
 /* الشريحة محتوى لاتيني → نخليها LTR عشان "RANK · E" تفضل بترتيبها الصح */
 .sl-rank-pill{direction:ltr!important}
@@ -3155,7 +3135,6 @@ body::before{background:rgba(70,150,255,.22)!important}
   box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 4px 16px rgba(36,150,255,.4)!important;
 }
 
-
 /* ═══════════════════════════════════════════════════════════════════
    ✨ v35 — تحسينات تناسق: شريحة الرتبة زجاج · شريط التقدّم مصقول
    ═══════════════════════════════════════════════════════════════════ */
@@ -3200,7 +3179,6 @@ body::before{background:rgba(70,150,255,.22)!important}
     inset 0 -22px 44px rgba(70,150,255,.09),0 12px 32px rgba(0,10,42,.36)!important;
 }
 
-
 /* ═══════════════════════════════════════════════════════════════════
    ✨ v36 — تكملة الصقل: تنبيهات أسفل (بلا تداخل) · دواير "تم" زجاج · شرائح الهيدر
    ═══════════════════════════════════════════════════════════════════ */
@@ -3239,7 +3217,6 @@ body::before{background:rgba(70,150,255,.22)!important}
 }
 .streak-badge{color:#ffd9a8!important;border:1px solid rgba(255,180,120,.4)!important}
 .week-badge{color:#bfe3ff!important;border:1px solid rgba(130,195,255,.4)!important}
-
 
 /* ═══════════════════════════════════════════════════════════════════
    🎨 v37 — ألوان نص نظيفة وواضحة + تهدئة التشبّع (تقليل الزهو)
@@ -3285,7 +3262,6 @@ body{
 
 /* ── إلغاء أي brightness زائد على الزجاج (كان بيزوّد الزهو) ── */
 .card,.dash-card,.sl-status-card,.sl-dungeon-gate,.btn-p,.tm-start-btn{filter:none!important}
-
 
 /* ═══════════════════════════════════════════════════════════════════
    💎 v38 — Clean Liquid Glass (وصفة NutriPro) + هوية Solo Leveling
@@ -3414,7 +3390,6 @@ body{color:#fff!important}
   border:1px solid rgba(255,255,255,.16)!important;
 }
 
-
 /* ═══════════════════════════════════════════════════════════════════
    📱 v39 — ألوان مضبوطة لشاشة الأيفون (Display P3)
    خلفية أوضح · زجاج أكثر وضوحاً · تباين أعلى · ألوان حيوية ومتوازنة
@@ -3510,7 +3485,6 @@ body{
 .rep-progress-bar{background:rgba(255,255,255,.14)!important}
 .rep-progress-fill{background:linear-gradient(90deg,#2090ff,#70d0ff)!important;
   box-shadow:0 0 12px rgba(50,180,255,.7)!important}
-
 
 /* ═══════════════════════════════════════════════════════════════════
    ⚔️ v40 — Solo Leveling Original Manhwa Color System
@@ -3721,7 +3695,6 @@ body{color:#fff!important}
 .tst-w{background:rgba(14,10,2,.90)!important;border-color:rgba(251,191,36,.45)!important;color:#fde68a!important}
 .tst-i{background:rgba(4,8,20,.90)!important;border-color:rgba(0,200,255,.40)!important;color:#7dd3fc!important}
 
-
 /* ═══ v40b — تغطية شاملة للكروت البيضاء المتبقية بباليت المانهوا ═══ */
 
 /* ── كروت/حاويات عامة ── */
@@ -3790,7 +3763,6 @@ input,textarea,select{
   border:1px solid rgba(0,180,255,.25)!important;
   color:#e0eeff!important;
 }
-
 
 /* v40b fix */ .sys-dq-timer{background:rgba(4,8,20,.88)!important;border:1px solid rgba(0,180,255,.22)!important;color:#a0d4f0!important}
 
@@ -3893,7 +3865,6 @@ body::after{
   letter-spacing:.10em!important;
 }
 
-
 /* ═══════════════════════════════════════════════════════════════════
    ⚔️ v43 — تطوير مستمر: كروت الدنجن · أزرار التمرين · تفاصيل دقيقة
    ═══════════════════════════════════════════════════════════════════ */
@@ -3972,7 +3943,6 @@ body::after{
 
 /* ── 8) رقم FATIGUE: لون حسب القيمة (أخضر → أصفر → أحمر) ── */
 [class*="fatigue-val"]{font-family:'Orbitron',monospace!important;font-weight:700!important}
-
 
 /* ═══════════════════════════════════════════════════════════════════
    ⚔️ v44 — تطوير: Empty State · Profile · System Popup · تفاصيل HUD
@@ -4104,7 +4074,6 @@ body::after{
   border:1px solid rgba(0,200,255,.50)!important;
   color:#00d4ff!important;
 }
-
 
 /* ═══ v45b — floatTimer بتصميم Solo Leveling ═══ */
 #floatTimer{
@@ -5221,7 +5190,6 @@ body::after{
 <div class="mo" id="libMo"><div class="mdl"><div class="mdl-h"></div><div class="mh"><h2 id="libMoT">📚 التمرين</h2><button class="mx" onclick="clM('libMo')">&times;</button></div><div class="mb" id="libMoB"></div></div></div>
 <div class="mo" id="statsMo"><div class="mdl"><div class="mdl-h"></div><div class="mh"><h2 id="statsMoT">📊</h2><button class="mx" onclick="clM('statsMo')">&times;</button></div><div class="mb" id="statsMoB"></div></div></div>
 
-
 <script>
 'use strict';
 const K = 'gymProAI_v12_fixed'; /* v13: saveCurrentSet wrapper, loadD whitelist (+injuries/supplements/pinnedNote/activeProgram), program-aware days, badges/standards IDs, streak break, PR dedupe, dark-only + sound toggle, GPU perf pass — المفتاح ثابت عشان البيانات */
@@ -5542,7 +5510,7 @@ function rDays(){const wk=weekKey(),done=G.completedDays[wk]||{},c=getCompletedC
 const _rs=recoveryScore(),_fs=FATIGUE.score();
 const _set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
 _set('hstatStreak',(G.streak||0)+'🔥');_set('hstatSessions',G.ses.length);
-_set('hstatWeek',`${c}/${dayOrder.length}`);_set('hstatRecovery',_rs+'%');
+_set('hstatWeek',`${c}/${_activeDayOrder().length}`);_set('hstatRecovery',_rs+'%');
 _set('hstatFatigue',_fs);
 // Update hunter rank display
 const _ns=G.ses.length;
@@ -5677,17 +5645,7 @@ return`<div class="sl-quest exi ${dn?'done':''}" id="exi-${ex.id}" data-muscle="
 updateCompBar();restoreSetInputs();renderDeloadBanner();applyLevelSystem();if(typeof applyWarmupCollapse==='function')applyWarmupCollapse();const _wab=document.getElementById('woAiBtn');if(_wab)_wab.classList.add('visible');
   if(G.homeMode){document.querySelectorAll('.sl-quest-name,.exn').forEach(el=>{const orig=el.textContent.trim();const alt=Object.keys(HOME_ALTS||{}).find(k=>orig.includes(k));if(alt&&HOME_ALTS[alt]!==orig){el.innerHTML=`<span style="text-decoration:line-through;color:var(--tx3);font-size:.85em">${orig}</span><br><span style="color:var(--ok)">${HOME_ALTS[alt]}</span>`;}});}
 }
-function onRPEChange(id,i,isUserInput){
-  const el=document.getElementById(`srpe-${id}-${i}`);if(!el)return;
-  // Mark as manually set so suggestRPE won't overwrite user's choice
-  if(isUserInput)el.dataset.manual='1';
-  const v=parseFloat(el.value)||0;
-  el.classList.remove('rpe-easy','rpe-hard','rpe-max');
-  if(v>0&&v<=6)el.classList.add('rpe-easy');
-  else if(v>8.5&&v<10)el.classList.add('rpe-hard');
-  else if(v>=10)el.classList.add('rpe-max');
-  saveCurrentSet(id,i);updateSetSummary(id);
-}
+
 /* مصدر موحّد للـ RPE الحقيقي (0-10): الحقل يعرض RIR، والـ storedRpe يحمل RPE المحوّل */
 function _trueRpe(id,i){const el=document.getElementById(`srpe-${id}-${i}`);if(!el)return 0;const s=parseFloat(el.dataset.storedRpe);return !isNaN(s)?s:parseFloat(el.value)||0;}
 function onRIRChange(id,ix,isUserInput){
@@ -6047,16 +6005,13 @@ function weeklyAnalysis(){const wv=SCI.weeklyVolume(),pw=new Date(),pe=new Date(
 function getTodaySchedule(){return(G.schedule||DEFAULT_SCHEDULE)[new Date().getDay()]||DEFAULT_SCHEDULE[new Date().getDay()]}
 function isRestDay(){return getTodaySchedule().type!=='train'}
 function getTodayMacros(){return isRestDay()?SHEHAB.macros.rest:SHEHAB.macros.train}
-function rDayStatusBanner(){const el=document.getElementById('dayStatusBanner');if(!el)return;const sc=getTodaySchedule(),ir=sc.type!=='train',mc=getTodayMacros(),bw=G.bw.length?G.bw[G.bw.length-1].w:null,dn=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],dw=new Date().getDay(),fl=FATIGUE.level(),fn=fl==='critical'?'🚨 Fatigue حرج!':fl==='high'?'⚠️ Fatigue مرتفع':'';const mac=`<div class="db-macros"><div class="db-macro">🥩 <span>${mc.protein}g</span></div><div class="db-macro">⚡ <span>${mc.carbs}g</span></div><div class="db-macro">🥑 <span>${mc.fats}g</span></div><div class="db-macro">🔥 <span>${mc.cals}</span></div>${bw?`<div class="db-macro">⚖️ <span>${bw}كجم</span></div>`:''}</div>`;if(ir){el.innerHTML=`<div class="day-banner ${sc.type==='rest'?'rest':'rest2'}"><div class="db-top"><div class="db-title">${sc.type==='rest'?'🛌':'🚶'} ${dn[dw]} — ${sc.label}</div><div class="db-badge ${sc.type==='rest'?'rest':'rest2'}">${sc.type==='rest'?'راحة':'خفيف'}</div></div><div class="db-msg">جسمك بيتعافى الآن.${fn?' '+fn:''}</div>${mac}</div>`}else{const rs=recoveryScore(),rm=rs>=70?'🔥 استعدادك ممتاز!':rs>=50?'⚡ جاهز.':'⚠️ Recovery منخفض.';el.innerHTML=`<div class="day-banner train"><div class="db-top"><div class="db-title">🏋️ ${dn[dw]} — ${sc.label}</div><div class="db-badge train">تمرين</div></div><div class="db-msg">${rm}${fn?' '+fn:''}</div>${mac}</div>`}}
-function rMorningCard(){const el=document.getElementById('morningCard');if(!el)return;const h=new Date().getHours();const icon=h<12?'🌅':h<18?'☀️':'🌙';const sc=getTodaySchedule(),ir=sc.type!=='train',rs=recoveryScore(),mc=getTodayMacros(),wa=weeklyAnalysis(),bl=PERIOD.info();let msg=ir?`يومك راحة.\n🍗 ${mc.protein}g بروتين · ${mc.cals} سعر\n${bl.icon} ${bl.label}`:`${sc.label}\n${rs>=70?'🔥 استعدادك ممتاز!':rs>=50?'⚡ تمرن بتركيز':'⚠️ خفف الشدة'}\nFatigue: ${FATIGUE.score()}/100 · ${bl.icon} ${bl.label}\n🍗 ${mc.protein}g بروتين · ${mc.cals} سعر`;if(wa.plateauList.length)msg+=`\n⚠️ ثبات: ${wa.plateauList.slice(0,2).join('، ')}`;el.innerHTML=`<div class="morning-card"><div class="mc-time">${icon} ${new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'})}</div><div class="mc-title">${ir?'🛌 يوم راحة':'🏋️ يوم تمرين'} — Recovery ${rs}%</div><div class="mc-msg">${msg}</div><div class="mc-actions"><button class="btn btn-ai btn-sm" onclick="getMorningAIBrief(this)">💡 ملخص AI</button></div><div id="morningAIContent"></div></div>`}
+
 async function getAIAdvice(btn){const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const c=buildAdvancedContext(),r=await callGroq([{role:'system',content:`FITPRO AI TITAN ELITE. Fatigue: ${FATIGUE.score()} (${FATIGUE.label()}). Block: ${PERIOD.info().label}.`},{role:'user',content:`نصيحة اليوم:\nRecovery: ${c.recoveryScore}% · Fatigue: ${c.fatigueScore} · Block: ${c.block} W${c.blockWeek}/4\nثبات: ${c.plateauExercises}`}],600,0.7,'training');if(r){const el=document.getElementById('aiCoachMsg');if(el)el.textContent=r}btn.innerHTML=o;btn.disabled=false}
 async function analyzeSession(btn){const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const c=buildAdvancedContext(),r=await callGroq([{role:'system',content:'حلل جلسة التمرين. مختصر. عربي مصري.'},{role:'user',content:`Recovery: ${c.recoveryScore}% · Fatigue: ${c.fatigueScore} · Block: ${c.block} W${c.blockWeek}\nحجم: ${c.weeklyVolume}كجم · ثبات: ${c.plateauExercises}`}],800,0.7,'training');if(r){document.getElementById('aiMoT').textContent='📊 تحليل';document.getElementById('aiMoB').innerHTML=`<div style="white-space:pre-wrap;font-size:.85em;line-height:1.8">${r}</div><button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت</button>`;document.getElementById('aiMo').classList.add('act')}btn.innerHTML=o;btn.disabled=false}
 async function analyzeSpecificSession(sid){const s=G.ses.find(x=>x.id===sid);if(!s)return;document.getElementById('aiMoT').textContent='🔍 تحليل الجلسة';document.getElementById('aiMoB').innerHTML='<div style="text-align:center;padding:20px"><span class="loading"></span></div>';document.getElementById('aiMo').classList.add('act');const tw=Object.entries(s.exs).map(([,e])=>{const t=e.sets?.length?Math.max(...e.sets.map(t=>t.w||0)):e.w||0;return`${e.name}: ${t}كجم`}).join('\n'),r=await callGroq([{role:'system',content:'حلل جلسة. مختصر. عربي مصري.'},{role:'user',content:`${s.dn} (${s.ds})\n${tw}`}],700,0.7,'training');if(r)document.getElementById('aiMoB').innerHTML=`<div style="white-space:pre-wrap;font-size:.85em;line-height:1.8">${r}</div><button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت</button>`}
 async function runFullAnalysis(btn){const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const c=buildAdvancedContext(),r=await callGroq([{role:'system',content:'تحليل شامل لشهاب. 5-8 نقاط. عربي مصري.'},{role:'user',content:`Recovery: ${c.recoveryScore}% · Fatigue: ${c.fatigueScore} (${c.fatigueLevel})\nBlock: ${c.block} W${c.blockWeek}/4 · حجم: ${c.weeklyVolume}كجم\nثبات: ${c.plateauExercises} · عضلة متأخرة: ${c.laggingMuscle||'لا'}`}],1200,0.7,'general');if(r)document.getElementById('aiAnalysisArea').innerHTML=`<div style="white-space:pre-wrap;font-size:.82em;line-height:1.85;padding:10px 0">${r}</div><button class="btn btn-ai btn-sm" onclick="runFullAnalysis(this)" style="margin-top:8px">🔄 تحديث</button>`;btn.innerHTML=o;btn.disabled=false}
 async function showWeeklyAnalysis(){const el=document.getElementById('weeklyAnalysisArea');el.innerHTML='<div style="text-align:center;padding:20px"><span class="loading"></span></div>';const wa=weeklyAnalysis(),c=buildAdvancedContext(),r=await callGroq([{role:'system',content:'ملخص أسبوعي. عربي مصري.'},{role:'user',content:`Block: ${c.block} W${c.blockWeek}/4 · Fatigue: ${c.fatigueScore}\nحجم: ${wa.weeklyVolume}كجم · PRs: ${wa.PRcount} · ثبات: ${wa.plateauList.join(',')||'لا'}`}],1000,0.7,'weekly');if(r)el.innerHTML=`<div style="white-space:pre-wrap;font-size:.82em;line-height:1.85">${r}</div><button class="btn btn-pu btn-sm" onclick="showWeeklyAnalysis()" style="margin-top:8px">🔄 تحديث</button>`;else el.innerHTML='<button class="btn btn-pu btn-full" onclick="showWeeklyAnalysis()">📊 عرض تحليل الأسبوع</button>'}
-async function getMorningAIBrief(btn){const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const sc=getTodaySchedule(),c=buildAdvancedContext(),r=await callGroq([{role:'system',content:'ملخص صباحي موجز لشهاب. 4-5 جمل.'},{role:'user',content:`${sc.label} (${isRestDay()?'راحة':'تمرين'}) · Fatigue: ${c.fatigueScore} · Recovery: ${c.recoveryScore}%`}],400,0.7,'general');if(r){const el=document.getElementById('morningAIContent');if(el)el.innerHTML=`<div style="margin-top:10px;padding:10px;background:rgba(254,215,170,.08);border-radius:10px;font-size:.8em;line-height:1.7">${r}</div>`}btn.innerHTML=o;btn.disabled=false}
-function calcMacroCals(){const p=parseFloat(document.getElementById('macroProtein').value)||0,c=parseFloat(document.getElementById('macroCarbs').value)||0,f=parseFloat(document.getElementById('macroFats').value)||0;document.getElementById('macroCals').value=Math.round(p*4+c*4+f*9)}
-async function analyzeMacros(btn){const p=parseFloat(document.getElementById('macroProtein').value)||0,c=parseFloat(document.getElementById('macroCarbs').value)||0,f=parseFloat(document.getElementById('macroFats').value)||0;if(!p&&!c&&!f)return toast('أدخل الماكروز','w');const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const r=await callGroq([{role:'system',content:'خبير تغذية. قيّم الماكروز.'},{role:'user',content:`${isRestDay()?'راحة':'تمرين'}: ${p}P/${c}C/${f}F (${p*4+c*4+f*9}kcal)\nالهدف: ${SHEHAB.macros.train.protein}P/${SHEHAB.macros.train.carbs}C`}],600,0.6,'nutrition');if(r)document.getElementById('macroResult').innerHTML=`<div style="margin-top:10px;background:rgba(254,215,170,.07);border:1px solid rgba(254,215,170,.18);border-radius:12px;padding:12px;font-size:.82em;line-height:1.7;white-space:pre-wrap">${r}</div>`;btn.innerHTML=o;btn.disabled=false}
+
 async function generateAIPlan(btn){const o=btn.innerHTML;btn.innerHTML='<span class="loading"></span>';btn.disabled=true;const c=buildAdvancedContext(),r=await callGroq([{role:'system',content:'مدرب PPL. خطة مخصصة.'},{role:'user',content:`Block: ${c.block} W${c.blockWeek} · Fatigue: ${c.fatigueScore}\nثبات: ${c.plateauExercises} · عضلة متأخرة: ${c.laggingMuscle||'لا'}`}],800,0.7,'training');if(r){document.getElementById('aiMoT').textContent='🤖 خطة AI';document.getElementById('aiMoB').innerHTML=`<div style="white-space:pre-wrap;font-size:.85em;line-height:1.85">${r}</div><button class="btn btn-p btn-full" style="margin-top:12px" onclick="clM('aiMo')">✅ فهمت</button>`;document.getElementById('aiMo').classList.add('act')}btn.innerHTML=o;btn.disabled=false}
 function renderChatHistory(){const b=document.getElementById('aiChatBox');if(!b)return;if(!G.chatHistory.length){b.innerHTML='<div class="empty"><div class="eic">💬</div><h3>ابدأ المحادثة!</h3></div>';return}b.innerHTML=G.chatHistory.map(m=>`<div class="ai-msg-item ${m.role==='ai'?'ai':m.role}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`).join('');b.scrollTop=b.scrollHeight}
 async function sendAIMessage(){const inp=document.getElementById('aiChatInput');if(!inp)return;const msg=inp.value.trim();if(!msg)return;inp.value='';G.chatHistory.push({role:'user',content:msg});renderChatHistory();const b=document.getElementById('aiChatBox');if(b){b.innerHTML+=`<div class="ai-msg-item ai"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;b.scrollTop=b.scrollHeight}const c=buildAdvancedContext(),msgs=[{role:'system',content:`شهاب · Block: ${c.block} W${c.blockWeek} · Fatigue: ${c.fatigueScore} · Recovery: ${c.recoveryScore}%`},...G.chatHistory.map(m=>({role:m.role==='user'?'user':'assistant',content:m.content}))],r=await callGroq(msgs,1000,0.8,detectIntent(msg));if(r){G.chatHistory.push({role:'ai',content:r});saveD();renderChatHistory()}else{G.chatHistory.pop();renderChatHistory()}}
@@ -6185,7 +6140,7 @@ function showAddToWorkout(exId){
 }
 
 // ✅ XSS safe: escape single quotes in dynamic onclick IDs
-function escId(id){ return String(id).replace(/'/g,"\'").replace(/"/g,'\"'); }
+
 function confirmAddToWorkout(exId){
   const ex=EXERCISE_LIBRARY.find(e=>e.id===exId);if(!ex)return;
   const dk=document.getElementById('addToDay')?.value;
@@ -6277,7 +6232,7 @@ function openTool(tool){if(tool==='bodyfat'){openBodyFatTool();return;}if(tool==
 document.getElementById('toolMo').classList.add('act')}
 function saveBW(){const w=parseFloat(document.getElementById('bWInput').value);if(!w)return toast('أدخل الوزن','w');G.bw.push({w,date:new Date().toISOString(),ds:new Date().toLocaleDateString('ar-EG')});saveD();document.getElementById('bWInput').value='';rBW();rQuickStats();rRecoveryBadge();toast('⚖️ تم','s')}
 function rBW(){const c=document.getElementById('bwH');if(!c)return;const data=(G.bw||[]).slice(-15).reverse();if(!data.length){c.innerHTML='<div class="empty"><div class="eic">⚖️</div><h3>ابدأ بتسجيل وزنك</h3></div>';return}c.innerHTML=data.map((d,i)=>{const p=data[i+1]?data[i+1].w:d.w,df=Math.round((d.w-p)*10)/10;return`<div class="hist-row"><span style="font-size:.72em;color:var(--tx2)">${d.ds}</span><div style="display:flex;gap:5px;align-items:center"><span style="font-weight:900;color:var(--p)">${d.w}</span>${df!==0?`<span style="font-size:.68em;padding:2px 7px;border-radius:7px;${df<0?'background:rgba(110,231,183,.1);color:var(--ok)':'background:rgba(252,165,165,.07);color:var(--no)'}">${df>0?'+':''}${df}</span>`:''}</div></div>`}).join('')}
-function showAddEx(){document.getElementById('addMoB').innerHTML=`<div style="padding:4px"><div class="fi"><label>اسم التمرين</label><input type="text" id="newExName"></div><div class="fi"><label>العضلة</label><input type="text" id="newExMuscle"></div><div class="fi"><label>الوحدة</label><input type="text" id="newExUnit" value="كجم"></div><div class="fi"><label>السيتات</label><input type="number" id="newExSets" value="3"></div><div class="fi"><label>نطاق العدات</label><input type="text" id="newExReps" value="8-12"></div><div class="fi"><label>اليوم</label><select id="newExDay">${dayOrder.map(d=>`<option value="${d}">${G.days[d]?.name||d}</option>`).join('')}</select></div><button class="btn btn-p btn-full" onclick="addExercise()" style="margin-top:6px">➕ إضافة</button></div>`;document.getElementById('addMo').classList.add('act')}
+function showAddEx(){document.getElementById('addMoB').innerHTML=`<div style="padding:4px"><div class="fi"><label>اسم التمرين</label><input type="text" id="newExName"></div><div class="fi"><label>العضلة</label><input type="text" id="newExMuscle"></div><div class="fi"><label>الوحدة</label><input type="text" id="newExUnit" value="كجم"></div><div class="fi"><label>السيتات</label><input type="number" id="newExSets" value="3"></div><div class="fi"><label>نطاق العدات</label><input type="text" id="newExReps" value="8-12"></div><div class="fi"><label>اليوم</label><select id="newExDay">${_activeDayOrder().map(d=>`<option value="${d}">${G.days[d]?.name||d}</option>`).join('')}</select></div><button class="btn btn-p btn-full" onclick="addExercise()" style="margin-top:6px">➕ إضافة</button></div>`;document.getElementById('addMo').classList.add('act')}
 function addExercise(){const n=document.getElementById('newExName')?.value?.trim(),mu=document.getElementById('newExMuscle')?.value?.trim(),u=document.getElementById('newExUnit')?.value?.trim()||'كجم',s=parseInt(document.getElementById('newExSets')?.value)||3,r=document.getElementById('newExReps')?.value?.trim()||'8-12',dk=document.getElementById('newExDay')?.value;if(!n||!dk)return toast('أدخل الاسم واليوم','w');const id='custom_'+Date.now();G.days[dk].exercises.push({id,name:n,sets:s,reps:r,lastW:0,unit:u,muscle:mu||'',isCustom:true});saveD();clM('addMo');if(curDay===dk)rExs();toast(`✅ ${n}`,'s')}
 function buildAdvancedContext(){const wa=weeklyAnalysis(),rs=recoveryScore(),pe=[],pl=[];Object.values(G.days).forEach(d=>d.exercises.forEach(ex=>{if(ex.isWarmup)return;if(SCI.volumeTrend(ex.id)>5)pe.push(ex.name);if(OE.detectPlateau(ex.id))pl.push(ex.name)}));return{recoveryScore:rs,weeklyVolume:wa.weeklyVolume,strengthTrendPercent:wa.strengthTrendPercent,PRcount:wa.PRcount,plateauExercises:pl.join(',')||'لا',progressionExercises:pe.join(',')||'لا',totalSessions:G.ses.length,streak:G.streak||0,weekCompleted:getCompletedCount(),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),laggingMuscle:laggingMuscle(),imbalanceWarning:'بيانات متاحة'}}
 function detectIntent(m){const t=m.toLowerCase();if(/غذا|بروتين|كارب|وجبة|ماكرو|سعرات/.test(t))return 'nutrition';if(/fatigue|تعب/.test(t))return 'fatigue';if(/block|period|deload/.test(t))return 'periodization';if(/plateau|ثبات/.test(t))return 'plateau';if(/تمرين|برنامج/.test(t))return 'training';return 'general'}
@@ -6300,7 +6255,7 @@ function getBestSet(id){let b=0;G.ses.forEach(s=>{const e=s.exs?.[id];if(!e)retu
 /* v13: أفضل وزن بالاسم — لإصلاح الشارات اللي كانت بتفحص IDs برنامج PPL القديم */
 function getBestByName(inc,exc){const nn=String(inc).toLowerCase(),xx=exc?String(exc).toLowerCase():null;let b=0;G.ses.forEach(s=>Object.values(s.exs||{}).forEach(e=>{const nm=(e.name||'').toLowerCase();if(!nm.includes(nn))return;if(xx&&nm.includes(xx))return;const w=e.sets?.length?e.sets.reduce((m,t)=>(t.w||0)>m?(t.w||0):m,0):(e.w||0);if(w>b)b=w;}));return b}
 function getLastSets(id){const ss=G.ses.filter(s=>s.exs&&s.exs[id]&&s.exs[id].sets&&s.exs[id].sets.length>0).sort((a,b)=>new Date(b.date)-new Date(a.date));return ss.length?ss[0].exs[id].sets:[]}
-function getMuscleColor(m){const MC={'صدر':'252,165,165','ظهر':'186,230,253','أكتاف':'253,230,138','رجلين':'110,231,183','كوادريسبس':'110,231,183','هامسترينج':'110,231,183','بطن':'165,243,252','ثنائي':'221,214,254','ثلاثي':'221,214,254'};const k=Object.keys(MC).find(k=>m&&m.includes(k));return k?MC[k]:'249,115,22'}
+
 function getSmartCoach(ex,id,be){
   const ls=getLastSets(id),lastBest=ls.filter(s=>s.w>0).reduce((b,s)=>s.w>b?s.w:b,0);
   const pct=lastBest>0?Math.round((be-lastBest)/lastBest*100):0;
@@ -6444,9 +6399,6 @@ const YMOVE_IDS = {
 function ymoveVideoUrl(id) {
   return 'https://ymove.app/api/free/' + id + '?type=video';
 }
-function ymoveThumbnailUrl(id) {
-  return 'https://ymove.app/api/free/' + id + '?type=thumbnail';
-}
 
 /* ══ VIDEO MODAL — YMove (direct mp4) primary + YouTube fallback ══ */
 function openYT(url, title, exName) { openVideo(url, title, exName || title); }
@@ -6575,7 +6527,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeYT(); }
 
 /* ══ OLD openYT compat stub ══ */
 
-
 /* ══ PERF: Pause animations when page hidden ══ */
 document.addEventListener('visibilitychange',()=>{
   // BUG FIX: querySelectorAll('*') يعمل على كل عناصر DOM = CPU spike على الموبايل
@@ -6588,38 +6539,6 @@ document.addEventListener('visibilitychange',()=>{
 });
 
 /* ══ GEMINI VISION — تحليل صورة الجهاز الرياضي ══ */
-async function callClaudeVision(base64Img, mediaType) {
-  const key = G.claudeKey; // reused field — stores Gemini key
-  if (!key) { toast('أضف Gemini API Key في الإعدادات للتحليل البصري', 'w'); return null; }
-  const prompt = `أنت خبير أجهزة رياضية. حلّل هذه الصورة وحدد:
-1. اسم الجهاز الرياضي (عربي + إنجليزي)
-2. العضلات المستهدفة
-3. 3-4 تمارين تُؤدَّى عليه مع الوضعية الصحيحة
-4. أخطاء شائعة يجب تجنبها
-5. ارتباطه ببرنامج PPL
-أجب بالعربية بشكل منظم ومختصر.`;
-  try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{
-            parts: [
-              { inline_data: { mime_type: mediaType, data: base64Img } },
-              { text: prompt }
-            ]
-          }],
-          generationConfig: { maxOutputTokens: 1024, temperature: 0.4 }
-        })
-      }
-    );
-    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'Gemini API Error'); }
-    const data = await res.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || null;
-  } catch(e) { toast('❌ ' + e.message, 'e'); return null; }
-}
 
 function saveAPIKey(){const k=document.getElementById('apiKeyInput')?.value?.trim();if(!k)return toast('أدخل API Key','w');G.aiKey=k;saveD();toast('✅ تم حفظ Groq API Key!','s')}
 function saveClaudeKey(){const k=document.getElementById('claudeKeyInput')?.value?.trim();if(!k)return toast('أدخل Gemini API Key','w');G.claudeKey=k;saveD();toast('✅ تم حفظ Gemini API Key — Vision مفعّل! 👁️','s')}
@@ -6851,6 +6770,13 @@ document.addEventListener('DOMContentLoaded',()=>{
   initTheme();initNotifications();showDailyTip();
   initLibrary();renderChatHistory();
   rRecoveryBadge();rFatigueBadge();rFatigueBar();rBlockBadge();
+  /* تنبيهات الكوتش — تفعيل ميزات كانت مبنية وغير موصّلة */
+  try{
+    if(typeof rPeriodBanner==='function')rPeriodBanner();
+    if(typeof renderReadinessBanner==='function')renderReadinessBanner();
+    if(typeof rLaggingMuscleAlert==='function')rLaggingMuscleAlert();
+    if(typeof renderWeeklyChallenge==='function')renderWeeklyChallenge();
+  }catch(e){console.warn('coach banners:',e);}
   renderTodayMission();
   initNewFields();
   // Update profile name across all dynamic elements
@@ -6880,13 +6806,6 @@ const TIPS = {
   'لات':['اسحب من الكوع وليس اليد','ثنّي ظهرك للخلف قليلاً عند السحب','انتهِ بالبار عند مستوى الذقن أو الصدر','تمديد كامل في الأعلى = عمل كامل','التركيز على عضلة الظهر وليس اليد'],
   'فلاي':['انحناء طفيف في الكوع — ثابت طوال الحركة','افتح على أوسع ما تستطيع بأمان','التركيز على الشعور بشد الصدر في الأسفل','الحركة مثل "حضن شجرة" لا ضغط مستقيم','لا تنزل أقل من مستوى الكتف']
 };
-
-function showTechTip(exId, exName) {
-  const tipKey = Object.keys(TIPS).find(k => exName.includes(k));
-  if (!tipKey) return;
-  const box = document.getElementById('tip-' + exId);
-  if (box) { box.classList.toggle('open'); return; }
-}
 
 /* ══════════════════════════════════════════════
    WARM-UP PROTOCOL GENERATOR
@@ -7794,8 +7713,6 @@ async function setAICoach(id, i, w, r, rpe) {
   } catch(e) { /* silent fail */ }
 }
 
-
-
 /* ══════════════════════════════════════════════
    GLOBAL TOOLTIP SYSTEM
 ═══════════════════════════════════════════════ */
@@ -8045,6 +7962,72 @@ const PROGRAMS_DEF = {
         {id:'ul_llc',name:'Lying Leg Curl',sets:4,reps:'10-12',lastW:50,unit:'كجم',muscle:'رجل خلفي'},
         {id:'ul_scr',name:'Seated Calf Raise',sets:4,reps:'15-20',lastW:35,unit:'كجم',muscle:'سمانة'},
         {id:'ul_plk',name:'Plank',sets:3,reps:'45-60s',lastW:0,unit:'وزن جسم',muscle:'بطن'},
+      ]},
+    }
+  },
+  pplab: {
+    id: 'pplab',
+    name: 'Push / Pull / Legs — A·B (6 أيام)',
+    icon: '🔱',
+    desc: 'بوش/بُل/ليج بنسختين A·B — 6 أيام، كل عضلة مرتين أسبوعياً. نفس تمارين الملوك والقبضات. البنش 2× (نقطة الضعف)، كتف جانبي 12 سيت. جلسات أقصر وأكثر تكراراً.',
+    dayOrder: ['pushA','pullA','legsA','pushB','pullB','legsB'],
+    daysData: {
+      pushA: { name:'Push A', muscles:'صدر مسطّح(ثقيل) + كتف أمامي/جانبي + تراي', exercises:[
+        {id:'pp_wA',name:'إحماء',sets:1,reps:'باند بول أبارت ×15 + بار فارغ بنش ×10',isWarmup:true},
+        {id:'pp_fbb',name:'Flat Barbell Bench Press · بار · قبضة أمامية',sets:4,reps:'5-8',lastW:60,unit:'كجم إجمالي',muscle:'صدر'},
+        {id:'pp_ohpA',name:'Standing Barbell OHP · بار · قبضة أمامية عرض الكتف',sets:3,reps:'6-8',lastW:40,unit:'كجم إجمالي',muscle:'كتف'},
+        {id:'pp_idp',name:'Incline DB Press 30° · دمبل · قبضة محايدة',sets:3,reps:'8-12',lastW:26,unit:'كجم/دمبل',muscle:'صدر'},
+        {id:'pp_clrA',name:'Cable Lateral Raise · كابل',sets:4,reps:'12-20',lastW:9,unit:'كجم',muscle:'كتف'},
+        {id:'pp_oht',name:'Overhead Cable Triceps Ext · حبل فوق الرأس',sets:3,reps:'10-12',lastW:30,unit:'كجم',muscle:'تراي'},
+        {id:'pp_rpd',name:'Rope Pushdown · حبل',sets:3,reps:'10-12',lastW:40,unit:'كجم',muscle:'تراي'},
+      ]},
+      pullA: { name:'Pull A', muscles:'ظهر عمودي+أفقي + كتف خلفي + باي', exercises:[
+        {id:'pp_wPa',name:'إحماء',sets:1,reps:'تعليق على البار + Face Pull خفيف ×15',isWarmup:true},
+        {id:'pp_pu',name:'Weighted Pull-Up · قبضة أمامية واسعة',sets:4,reps:'6-8',lastW:10,unit:'وزن مضاف',muscle:'ظهر'},
+        {id:'pp_bbr',name:'Barbell Row Bent-Over · بار · قبضة أمامية',sets:4,reps:'6-8',lastW:60,unit:'كجم إجمالي',muscle:'ظهر'},
+        {id:'pp_tbar',name:'Chest-Supported T-Bar Row · قبضة محايدة',sets:3,reps:'8-10',lastW:40,unit:'كجم',muscle:'ظهر'},
+        {id:'pp_rpdc',name:'Reverse Pec-Dec · قبضة محايدة',sets:3,reps:'15',lastW:25,unit:'كجم',muscle:'كتف خلفي'},
+        {id:'pp_ezc',name:'EZ-Bar Curl · EZ بار · قبضة سفلية',sets:3,reps:'8-10',lastW:25,unit:'كجم إجمالي',muscle:'باي'},
+        {id:'pp_icb',name:'Incline DB Curl · دمبل · قبضة سفلية',sets:3,reps:'8-12',lastW:12,unit:'كجم/دمبل',muscle:'باي'},
+      ]},
+      legsA: { name:'Legs A', muscles:'كوادز(سكوات) + هامسترينج + سمانة + كتف جانبي + بطن', exercises:[
+        {id:'pp_wLa',name:'إحماء',sets:1,reps:'سكوات جسم ×15 + هيب هينج ×10',isWarmup:true},
+        {id:'pp_sq',name:'Back Squat High-Bar · بار · قبضة أمامية',sets:4,reps:'5-8',lastW:100,unit:'كجم إجمالي',muscle:'رجل'},
+        {id:'pp_rdl',name:'Romanian Deadlift · بار · قبضة خطافية',sets:3,reps:'6-8',lastW:85,unit:'كجم إجمالي',muscle:'رجل خلفي'},
+        {id:'pp_lpr',name:'Leg Press · ماكينة',sets:3,reps:'8-12',lastW:120,unit:'كجم',muscle:'رجل'},
+        {id:'pp_slc',name:'Seated Leg Curl · ماكينة (ممدود)',sets:3,reps:'10-12',lastW:55,unit:'كجم',muscle:'رجل خلفي'},
+        {id:'pp_scrA',name:'Standing Calf Raise · ركبة مستقيمة (جاستروك)',sets:4,reps:'10-15',lastW:80,unit:'كجم',muscle:'سمانة'},
+        {id:'pp_clrLa',name:'Cable Lateral Raise · كابل',sets:2,reps:'15-20',lastW:9,unit:'كجم',muscle:'كتف'},
+        {id:'pp_hlr',name:'Hanging Leg Raise · وزن جسم',sets:3,reps:'12-15',lastW:0,unit:'وزن جسم',muscle:'بطن'},
+      ]},
+      pushB: { name:'Push B', muscles:'صدر مسطّح(دمبل)+أوسط+سفلي + كتف + تراي', exercises:[
+        {id:'pp_wB',name:'إحماء',sets:1,reps:'كتف جانب ×20 + بار فارغ ×10',isWarmup:true},
+        {id:'pp_fdp',name:'Flat DB Press · دمبل · قبضة محايدة→أمامية',sets:4,reps:'8-12',lastW:30,unit:'كجم/دمبل',muscle:'صدر'},
+        {id:'pp_dbsp',name:'Seated DB Shoulder Press · دمبل · قبضة محايدة',sets:3,reps:'8-10',lastW:26,unit:'كجم/دمبل',muscle:'كتف'},
+        {id:'pp_mdp',name:'Machine Decline Press · ماكينة',sets:3,reps:'8-12',lastW:50,unit:'كجم',muscle:'صدر'},
+        {id:'pp_clrB',name:'Cable Lateral Raise · كابل',sets:4,reps:'12-20',lastW:9,unit:'كجم',muscle:'كتف'},
+        {id:'pp_ccr',name:'Cable Crossover · كابل (أوسط)',sets:3,reps:'12-15',lastW:15,unit:'كجم',muscle:'صدر'},
+        {id:'pp_skl',name:'EZ Skull Crusher · EZ بار',sets:3,reps:'8-10',lastW:30,unit:'كجم إجمالي',muscle:'تراي'},
+      ]},
+      pullB: { name:'Pull B', muscles:'ظهر(ديدليفت+عمودي+أفقي) + كتف خلفي + باي + ساعد', exercises:[
+        {id:'pp_wPb',name:'إحماء',sets:1,reps:'ديدليفت رومانياني خفيف ×10',isWarmup:true},
+        {id:'pp_dl',name:'Deadlift Conventional · بار · قبضة خطافية/متعاكسة',sets:3,reps:'3-5',lastW:110,unit:'كجم إجمالي',muscle:'ظهر'},
+        {id:'pp_lpd',name:'Lat Pulldown · قبضة محايدة (تنويع)',sets:3,reps:'9-12',lastW:60,unit:'كجم',muscle:'ظهر'},
+        {id:'pp_scr',name:'Seated Cable Row · قبضة محايدة',sets:3,reps:'8-10',lastW:65,unit:'كجم',muscle:'ظهر'},
+        {id:'pp_fp',name:'Face Pull · حبل · قبضة محايدة',sets:3,reps:'15',lastW:35,unit:'كجم',muscle:'كتف خلفي'},
+        {id:'pp_hc',name:'Hammer Curl · دمبل · قبضة محايدة',sets:3,reps:'10-12',lastW:15,unit:'كجم/دمبل',muscle:'باي'},
+        {id:'pp_cc',name:'Cable Curl · كابل · قبضة سفلية',sets:3,reps:'12-15',lastW:25,unit:'كجم',muscle:'باي'},
+        {id:'pp_wc',name:'Wrist Curl · بار/دمبل',sets:2,reps:'15',lastW:15,unit:'كجم',muscle:'ساعد'},
+      ]},
+      legsB: { name:'Legs B', muscles:'كوادز(هاك+أحادي) + هامسترينج + مؤخرة + سمانة + كتف + بطن', exercises:[
+        {id:'pp_wLb',name:'إحماء',sets:1,reps:'سكوات جسم ×15 + تمدد ورك',isWarmup:true},
+        {id:'pp_hack',name:'Hack Squat · ماكينة',sets:4,reps:'8-12',lastW:80,unit:'كجم',muscle:'رجل'},
+        {id:'pp_bss',name:'Bulgarian Split Squat · دمبل · قبضة محايدة',sets:3,reps:'8-10/رجل',lastW:14,unit:'كجم/يد',muscle:'رجل'},
+        {id:'pp_llc',name:'Lying Leg Curl · ماكينة',sets:3,reps:'10-12',lastW:55,unit:'كجم',muscle:'رجل خلفي'},
+        {id:'pp_ht',name:'Barbell Hip Thrust · بار على الورك',sets:3,reps:'8-10',lastW:80,unit:'كجم إجمالي',muscle:'مؤخرة'},
+        {id:'pp_scrB',name:'Seated Calf Raise · ركبة مثنية (سوليس)',sets:4,reps:'12-20',lastW:40,unit:'كجم',muscle:'سمانة'},
+        {id:'pp_clrLb',name:'Cable Lateral Raise · كابل',sets:2,reps:'15-20',lastW:9,unit:'كجم',muscle:'كتف'},
+        {id:'pp_ccrn',name:'Cable Crunch · حبل',sets:3,reps:'12-15',lastW:50,unit:'كجم',muscle:'بطن'},
       ]},
     }
   },
@@ -8310,7 +8293,6 @@ window._injectMoodToSessionsList = function() {
   }, 150);
 };
 
-
 /* ===== Training Load Calculator ===== */
 function populateTLExercises() {
   const sel = document.getElementById('tlExSelect');
@@ -8391,7 +8373,6 @@ function calcTrainingLoad() {
 /* ═══════════════════════════════════════════
    NEW FEATURES JS
    ═══════════════════════════════════════════ */
-
 
 /* ── Smart Goal confirm helper (replaces prompt-chain) ── */
 function _confirmSmartGoal(){
@@ -9021,38 +9002,6 @@ function _sparkChart(id,unit){
 /* ══════════════════════════════════════════
    FEATURE 3 — Dungeon Complete Overlay
 ═══════════════════════════════════════════ */
-function showDungeonComplete(){
-  if(document.getElementById('_dungeonCompleteOverlay'))return;
-  const sk=sesKey(curDay);
-  const day=G.days[curDay];
-  // حساب الإحصائيات من السيتات الحالية
-  let totalVol=0,prs=0;
-  (day?.exercises||[]).filter(e=>!e.isWarmup).forEach(ex=>{
-    const sets=G.currentSets?.[sk]?.[ex.id]||[];
-    const done=sets.filter(s=>s&&s.done&&s.w>0);
-    totalVol+=done.reduce((t,s)=>t+s.w*(s.r||1),0);
-    const topW=done.length?Math.max(...done.map(s=>s.w)):0;
-    if(topW>0&&topW>getBestSet(ex.id))prs++;
-  });
-  const dur=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0;
-  const ov=document.createElement('div');
-  ov.id='_dungeonCompleteOverlay';
-  ov.className='dungeon-complete-overlay';
-  ov.innerHTML=`<div class="dungeon-complete-card">
-    <span class="dc-sys">[ D U N G E O N · C L E A R E D ]</span>
-    <div class="dc-title">⚔️ MISSION COMPLETE</div>
-    <div class="dc-sub">${day?.name||''} · ${new Date().toLocaleDateString('ar-EG',{weekday:'long'})}</div>
-    <div class="dc-stats">
-      <div class="dc-stat"><div class="dc-stat-val">${Math.round(totalVol)}</div><div class="dc-stat-lbl">🏋️ حجم<br>كجم</div></div>
-      <div class="dc-stat"><div class="dc-stat-val">${dur||'—'}</div><div class="dc-stat-lbl">⏱️ مدة<br>دقيقة</div></div>
-      <div class="dc-stat"><div class="dc-stat-val" style="color:var(--wn)">${prs}</div><div class="dc-stat-lbl">🏆 PRs<br>جديدة</div></div>
-    </div>
-    <button class="dc-save-btn" onclick="document.getElementById('_dungeonCompleteOverlay').remove();saveSes()">💾 حفظ الجلسة وعرض التحليل</button>
-    <span class="dc-skip" onclick="document.getElementById('_dungeonCompleteOverlay').remove()">تخطي ←</span>
-  </div>`;
-  if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);
-  document.body.appendChild(ov);
-}
 
 /* ══════════════════════════════════════════
    FEATURE 4 — Superset Next Toast
@@ -9148,23 +9097,6 @@ function _renderPOJournal(id){
    F2 — Set Type (Drop/Rest-Pause/Myo)
 ══════════════════════════════════ */
 const SET_TYPES={normal:{label:'عادي',cls:''},drop:{label:'Drop',cls:'drop'},rp:{label:'R-P',cls:'rest-pause'},myo:{label:'Myo',cls:'myo'}};
-function cycleSetType(id,i){
-  const btn=document.getElementById(`stype-${id}-${i}`);if(!btn)return;
-  const sk=sesKey(curDay);
-  // أنشئ البنية لو مش موجودة (عشان الزرار يشتغل حتى لو السيت فاضي)
-  if(!G.currentSets)G.currentSets={};
-  if(!G.currentSets[sk])G.currentSets[sk]={};
-  if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];
-  if(!G.currentSets[sk][id][i])G.currentSets[sk][id][i]={w:0,r:0,rpe:0,done:false};
-  const cur=G.currentSets[sk][id][i]?.type||'normal';
-  const order=['normal','drop','rp','myo'];
-  const next=order[(order.indexOf(cur)+1)%order.length];
-  G.currentSets[sk][id][i].type=next;
-  const t=SET_TYPES[next];
-  btn.textContent=next==='normal'?'N':t.label;
-  btn.className=`set-type-btn ${t.cls}`;
-  saveDd();
-}
 
 /* ══════════════════════════════════
    F3 — Deload Auto-Notification
@@ -9721,8 +9653,6 @@ h2{color:#38bdf8;font-size:1.1em;margin-top:20px;font-family:monospace;letter-sp
 .ses{background:rgba(255,255,255,.04);border-radius:8px;padding:8px 14px;margin:4px 0;font-size:.85em}
 footer{margin-top:30px;text-align:center;font-size:.75em;color:#6b7280}
 
-
-
 </style></head><body>
 <h1>📊 تقرير ${monthName}</h1>
 <p style="color:#9ca3af;font-size:.85em">شهاب · PPL Progressive Overload · تم التوليد: ${now.toLocaleDateString('ar-EG')}</p>
@@ -9746,18 +9676,6 @@ ${monthSes.map(s=>`<div class="ses"><span style="color:#fb923c">${new Date(s.dat
 }
 
 /* ── DROP SETS ── */
-function markAsDropSet(exId, setIdx, currentW){
-  const dropW=Math.round(currentW*0.7*2)/2;
-  const wInput=document.getElementById(`sw-${exId}-${setIdx}`);
-  if(wInput){
-    wInput.style.borderColor='var(--bl)';
-    wInput.title='Drop Set — وزن مقترح: '+dropW+'كجم';
-  }
-  const snum=document.getElementById(`snum-${exId}-${setIdx}`);
-  if(snum){snum.textContent='DS';snum.style.color='var(--bl)';}
-  toast(`💧 Drop Set — اخفض إلى ${dropW}كجم`,'s');
-  if(wInput&&!wInput.value)wInput.value=dropW;
-}
 
 /* saveSes XP: merged into original above */
 
@@ -9972,11 +9890,6 @@ function _voiceTimerCue(rem){
   else if(rem === 2){ window.speak('اثنان'); }
   else if(rem === 1){ window.speak('واحد'); }
 }
-function _voiceRestDone(){
-  if(!window._voiceLiveEnabled || typeof window.speak!=='function') return;
-  const cues = ['يلا السيت اللي جاي!','وقت الراحة خلص. قوم!','جاهز؟ السيت الجديد يلا!','يلا بينا نكمّل!'];
-  window.speak(cues[Math.floor(Math.random()*cues.length)]);
-}
 
 /* ───────────────────────────────────────────────
    [3] WEEKLY MISSION REPORT (shareable card)
@@ -10174,7 +10087,6 @@ async function runAIPatternAnalysis(btn){
   btn.innerHTML=o; btn.disabled=false;
 }
 
-
 /* ═══════════════════════════════════════════════════════════════
    🎯  LAYOUT ORGANIZATION & TODAY-FOCUS  (CSS-aware JS module)
    - عرض تمرين اليوم فقط حسب الجدول (مع تبديل لكل الأيام)
@@ -10239,9 +10151,6 @@ function applyTodayFocus(){
   if(oldHost) oldHost.remove();
 }
 
-function toggleShowAllDays(){ /* deprecated — kept for compatibility */ applyTodayFocus(); }
-function _renderDayToggleBtn(){ /* deprecated */ }
-
 // ── [C] أقسام قابلة للطي ──
 // نخزن حالة الطي في G.uiCollapsed = { sectionId: true/false }
 function _collapsedState(){ if(!G.uiCollapsed) G.uiCollapsed={}; return G.uiCollapsed; }
@@ -10281,35 +10190,8 @@ function _applyCollapse(sectionId){
 
 // تحويل كارت لقابل للطي: نلفّ المحتوى ونضيف رأس قابل للضغط
 // sectionId فريد · headerHTML نص الرأس · يبحث عن العنصر بالـ targetId ويطوّيه
-function _makeCollapsible(targetId, sectionKey, titleText){
-  const target = document.getElementById(targetId);
-  if(!target || target.dataset.collapsibleDone) return;
-  target.dataset.collapsibleDone='1';
-  target.id = sectionKey+'_body'; // نعيد التسمية للجسم
-  // أنشئ رأس
-  const header = document.createElement('div');
-  header.className = 'sl-collapse-head';
-  header.onclick = ()=>toggleCollapse(sectionKey+'_body');
-  header.innerHTML = `<span class="sl-collapse-chev" id="${sectionKey}_body_chev">▾</span><span class="sl-collapse-title">${titleText}</span>`;
-  target.parentNode.insertBefore(header, target);
-  // طبّق الحالة المحفوظة
-  _applyCollapse(sectionKey+'_body');
-}
 
 // ── [D] وضع مدمج (Compact) — يطوي كل الأقسام الثانوية دفعة واحدة ──
-function toggleCompactMode(){
-  if(typeof G.uiCompact==='undefined') G.uiCompact=false;
-  G.uiCompact = !G.uiCompact;
-  const st = _collapsedState();
-  // الأقسام الثانوية اللي تتطوي في الوضع المدمج
-  const secondary = ['tmIntelBody']; // سيُضاف لها المزيد عند توفرها
-  document.querySelectorAll('[data-secondary="1"]').forEach(el=>{ secondary.push(el.id); });
-  secondary.forEach(id=>{ if(document.getElementById(id)){ st[id]=G.uiCompact; _applyCollapse(id); } });
-  saveD();
-  const btn = document.getElementById('compactModeBtn');
-  if(btn) btn.textContent = G.uiCompact?'📖 وضع موسّع':'📑 وضع مدمج';
-  if(typeof toast==='function') toast(G.uiCompact?'📑 وضع مدمج — أقل ازدحام':'📖 وضع موسّع','i');
-}
 
 // ── [E] تطبيق كل التحسينات بعد رسم الصفحة ──
 function applyLayoutOrganization(){
@@ -10330,7 +10212,6 @@ function applyLayoutOrganization(){
 
 // شغّلها بعد التحميل + بعد رسم الأيام
 window.addEventListener('load', ()=>{ setTimeout(applyLayoutOrganization, 400); });
-
 
 /* ═══════════════════════════════════════════════════════════════
    ⚡  SUNG JIN-WOO SYSTEM — AUTHENTIC NOTIFICATION ENGINE
@@ -10469,7 +10350,6 @@ function _systemBootMessage(){
 
 // تشغيل رسالة البدء
 window.addEventListener('load', ()=>{ setTimeout(_systemBootMessage, 600); });
-
 
 /* ═══════════════════════════════════════════════════════════════
    ⚡  THE SYSTEM — DAILY QUEST & FULL IMMERSION (Sung Jin-Woo mode)
@@ -10781,7 +10661,6 @@ function saveDailyQuestEdit(){
 
 window.addEventListener('load',()=>{setTimeout(()=>{try{if(typeof renderDailyQuest==='function')renderDailyQuest();}catch(e){console.warn('dq:',e);}},500);});
 
-
 /* ═══════════════════════════════════════════════════════════════
    🌑  THE SYSTEM — ARISE · TITLES · PENALTY · LOG
    مبني على البيانات والأنظمة الموجودة — صفر كسر
@@ -11012,7 +10891,6 @@ window.addEventListener('load', ()=>{
     }catch(e){ console.warn('sysfeat:',e); }
   }, 1400);
 });
-
 
 /* 🔋 إيقاف الأنيميشن عند إخفاء التطبيق لتوفير البطارية ومنع التسخين */
 (function(){
@@ -11561,7 +11439,6 @@ window.startWarmupTimer = function(btn, sec){
   }
 })();
 
-
 /* v13 BUG FIX: الشرط القديم كان دايمًا false → _origSaveCS كانت noop → مدخلات التمرين الحية ماكانتش بتتحفظ */
 const _origSaveCS = window._saveCurrentSetOrig || saveCurrentSet;
 window._saveCurrentSetOrig = _origSaveCS;
@@ -11659,7 +11536,6 @@ function shareWorkout(sd,tv,prs){
     navigator.clipboard?.writeText(text).then(()=>toast('📋 تم نسخ الجلسة','s')).catch(()=>toast('📋 انسخ النتيجة يدوياً','i'));
   }
 }
-
 
 </script>
 
@@ -12062,12 +11938,6 @@ var st=document.createElement('style'); st.textContent=_css; document.head.appen
    2) عداد الراحة — يستخدم quickStartTimer الموجود
    (دُمج مع float timer الأصلي — SW notifications + صوت + presets)
    ══════════════════════════════════════════════════════ */
-function showRestTimer(secs){
-  if(typeof quickStartTimer==='function') quickStartTimer(secs);
-}
-function clearRestTimer(){
-  if(typeof stopTimer==='function') stopTimer();
-}
 
 /* ══════════════════════════════════════════════════════
    3) شاشة إكمال الدنجن
@@ -12110,9 +11980,7 @@ function showDungeonComplete(sessionData){
 /* ══════════════════════════════════════════════════════Hook على toggleSetDone → يشغّل quickStartTimer تلقائياً بالوقت الصح
    ══════════════════════════════════════════════════════ */
 
-
 /* Hook على showSessionSummaryModal → عرض شاشة الإكمال */
-
 
 /* ══════════════════════════════════════════════════════
    4) Progressive Overload badge (اقتراح الوزن)
@@ -12540,9 +12408,7 @@ function showShareCard(sessionData){
    ═══════════════════════════════════════════════════════════ */
 /* Hook على showSessionSummaryModal → Shadow Army + Share Card + Job-Change */
 
-
 /* Hook على go() → lazy render عند فتح التبويبات */
-
 
 /* Gate deadline checker — مرة كل 5 دقائق (مش كل ثانية) *//* _injectInstantBtn removed */
 
@@ -12582,7 +12448,6 @@ window.renderProgressCharts=renderProgressCharts;
 
 })();
 </script>
-
 
 <script>
 /* ⚡ Smart Summary — ملخص ذكي مبسّط يحل محل Gate Radar + Instant Dungeon */
@@ -12695,14 +12560,11 @@ else document.addEventListener('DOMContentLoaded',initSS);
 
 // Hook على showSessionSummaryModal لتحديث الملخص بعد الجلسة
 
-
 // Hook على go لتحديث عند فتح wo
-
 
 window.buildSmartSummary=buildSmartSummary;
 })();
 </script>
-
 
 <script>
 /* ═══ UX1 — Collapsible Cards System ═══ */
@@ -13008,8 +12870,6 @@ function _initV52(){
   setTimeout(_addWeekDelta,800);
 }
 
-
-
 /* شغّل عند تحميل الصفحة */
 if(document.readyState!=='loading') setTimeout(_initV52,1000);
 else document.addEventListener('DOMContentLoaded',function(){setTimeout(_initV52,1000);});
@@ -13304,7 +13164,6 @@ function _addSupersetButtons(){
 
 /* Hook toggleSetDone لتشغيل superset countdown */
 
-
 /* ════════════════════════════════════════════════
    6) COMPOUND vs ISOLATION VISUAL
    Border + badge على exercise cards
@@ -13375,7 +13234,6 @@ window._showSupersetCountdown=_showSupersetCountdown;
 })();
 </script>
 
-
 <script>
 
   /* ── Unified toggleSetDone hook ── */
@@ -13405,7 +13263,6 @@ window._showSupersetCountdown=_showSupersetCountdown;
       }
     };
   })();
-
 
   /* ── Unified showSessionSummaryModal hook ── */
   (function(){
@@ -13503,7 +13360,6 @@ window._showSupersetCountdown=_showSupersetCountdown;
 })();
 </script>
 
-
 <!-- Exercise Edit Bottom Sheet -->
 <div id="exEditOverlay" onclick="closeExEditSheet()"></div>
 <div id="exEditSheet">
@@ -13540,7 +13396,6 @@ window._showSupersetCountdown=_showSupersetCountdown;
     <button class="ees-btn-save" onclick="eesSave()">✓ حفظ</button>
   </div>
 </div>
-
 
 <script>
 /* ── Exercise Edit Bottom Sheet ── */
@@ -13624,7 +13479,6 @@ function eesDelete(){
   });
 })();
 </script>
-
 
 <!-- Plan Editor Picker Modal -->
 <div id="pedPickerModal" onclick="if(event.target===this)pedClosePicker()">
@@ -13895,14 +13749,12 @@ window.pedSelectEx=function(exId){
 function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 /* ── Expose ── */
-window.renderPlanEditor=window.renderPlanEditor;
 
 /* شغّل عند فتح tools tab */
 /* plan editor go merged into unified */
 
 })();
 </script>
-
 
 <script>
 /* ══ Plan Editor Drag & Drop ══ */
@@ -14135,7 +13987,6 @@ window.toggleRIRGauge=toggleGauge;
 })();
 </script>
 
-
 <script>
 /* Long-press على الوزن → ± quick adjust */
 (function(){
@@ -14178,7 +14029,6 @@ window.toggleRIRGauge=toggleGauge;
 })();
 </script>
 
-
 <script>
 /* ── Set Done Summary ── */
 (function(){
@@ -14219,7 +14069,6 @@ window.toggleRIRGauge=toggleGauge;
 })();
 </script>
 
-
 <script>
 /* ── Exercise Header Dots ── */
 (function(){
@@ -14245,7 +14094,6 @@ window.toggleRIRGauge=toggleGauge;
 </body>
 </html>  <!-- pg-tools merged into pg-ai -->
 
-  
   <!-- ═══ SYSTEM TOOLS (merged from pg-tools) ═══ -->
   <div id="toolsSectionInAI">
     <div style="height:1px;background:rgba(0,180,255,.15);margin:16px 0"></div>
