@@ -5232,57 +5232,55 @@ const MOTIVATIONAL = ['💪 أنت أقوى مما تفتكر','⭐ النجاح
 const SHEHAB={name:'شهاب',age:22,nationality:'مصري',location:'عجمان، الإمارات',job:'محاسب في Noor Al Khaleej Perfume',program:'Push/Pull/Legs PPL · Progressive Overload',macros:{train:{protein:175,carbs:280,fats:65,cals:2385},rest:{protein:160,carbs:180,fats:70,cals:2030}},goals:['زيادة القوة','بناء عضلة','Progressive Overload']};
 const DEFAULT_SCHEDULE={0:{type:'rest',label:'يوم راحة',day:'الأحد'},1:{type:'train',label:'Upper A — صدر علوي + ظهر + كتف + ذراعين',day:'الإثنين'},2:{type:'train',label:'Lower A — كوادز + هامسترينج + مؤخرة + سمانة',day:'الثلاثاء'},3:{type:'rest',label:'يوم راحة',day:'الأربعاء'},4:{type:'train',label:'Upper B — لات + ظهر + صدر سفلي + كتف + ذراعين',day:'الخميس'},5:{type:'train',label:'Lower B — أسفل ظهر + كوادز + هامسترينج + كور',day:'الجمعة'},6:{type:'rest',label:'يوم راحة',day:'السبت'}};
 const MY_DAYS={
-/* ══ UPPER A — صدر + ظهر + كتف + ذراعين ══ */
-upperA:{name:'Upper A',muscles:'صدر علوي + ظهر + كتف + ذراعين + ساعد',exercises:[
-  {id:'ua0', name:'إحماء',sets:1,reps:'باند بول أبارت ×15 + Face Pull خفيف ×15',isWarmup:true},
-  {id:'ua1', name:'Incline Barbell Press',sets:4,reps:'6-8', lastW:70, unit:'كجم إجمالي',muscle:'صدر'},
-  {id:'ua2', name:'Chest Supported DB Row',sets:3,reps:'8-10',lastW:28, unit:'كجم/دمبل',muscle:'ظهر'},
-  {id:'ua3', name:'Cable Fly Low to High',sets:3,reps:'12-15',lastW:15,unit:'كجم/بلاطة',muscle:'صدر'},
-  {id:'ua4', name:'Seated Cable Row',sets:3,reps:'10-12',lastW:65,unit:'كجم',muscle:'ظهر'},
-  {id:'ua5a',name:'Lateral Raise',sets:3,reps:'15',lastW:12,unit:'كجم',muscle:'كتف'},
-  {id:'ua5b',name:'Rear Delt Fly',sets:3,reps:'15',lastW:10,unit:'كجم',muscle:'كتف خلفي'},
-  {id:'ua5c',name:'Face Pull',sets:3,reps:'15',lastW:35,unit:'كجم',muscle:'ترابيس'},
-  {id:'ua6a',name:'Barbell Curl',sets:3,reps:'10',lastW:30,unit:'كجم إجمالي',muscle:'باي'},
-  {id:'ua6b',name:'Skull Crusher',sets:3,reps:'10',lastW:30,unit:'كجم إجمالي',muscle:'تراي'},
-  {id:'ua7a',name:'Wrist Curl',sets:2,reps:'15',lastW:15,unit:'كجم',muscle:'ساعد'},
-  {id:'ua7b',name:'Reverse Wrist Curl',sets:2,reps:'15',lastW:10,unit:'كجم',muscle:'ساعد'},
+/* ══ UPPER A — بنش (نقطة الضعف) + سحب عمودي + كتف + ذراع ══ */
+upperA:{name:'Upper A',muscles:'صدر (مسطّح+علوي) + ظهر عمودي+أفقي + كتف جانبي/خلفي + ذراع',exercises:[
+  {id:'ua0', name:'إحماء',sets:1,reps:'باند بول أبارت ×15 + كتف خفيف ×15 + بار فارغ بنش ×10',isWarmup:true},
+  {id:'uaFB',name:'Flat Barbell Bench Press · بار · قبضة أمامية',sets:4,reps:'5-8', lastW:60, unit:'كجم إجمالي',muscle:'صدر'},
+  {id:'ub1', name:'Weighted Pull-Up · قبضة أمامية واسعة',sets:4,reps:'6-8',lastW:10,unit:'وزن مضاف',muscle:'ظهر'},
+  {id:'uaID',name:'Incline DB Press 30° · دمبل · قبضة محايدة',sets:3,reps:'8-12',lastW:26,unit:'كجم/دمبل',muscle:'صدر'},
+  {id:'uaTBR',name:'Chest-Supported T-Bar Row · قبضة محايدة',sets:3,reps:'8-10',lastW:40,unit:'كجم',muscle:'ظهر'},
+  {id:'ua5a',name:'Cable Lateral Raise · كابل',sets:4,reps:'12-20',lastW:9,unit:'كجم',muscle:'كتف'},
+  {id:'uaRPD',name:'Reverse Pec-Dec · قبضة محايدة',sets:3,reps:'15',lastW:25,unit:'كجم',muscle:'كتف خلفي'},
+  {id:'uaOHT',name:'Overhead Cable Triceps Ext · حبل فوق الرأس',sets:3,reps:'10-12',lastW:30,unit:'كجم',muscle:'تراي'},
+  {id:'uaICB',name:'Incline DB Curl · دمبل · قبضة سفلية',sets:3,reps:'8-12',lastW:12,unit:'كجم/دمبل',muscle:'باي'},
 ]},
-/* ══ LOWER A — كوادز + هامسترينج + مؤخرة + سمانة + بطن ══ */
-lowerA:{name:'Lower A',muscles:'كوادز + هامسترينج + مؤخرة + سمانة + بطن',exercises:[
-  {id:'la0', name:'إحماء',sets:1,reps:'سكوات جسم ×15 + هيب هينج ×10',isWarmup:true},
-  {id:'la1', name:'Back Squat',sets:4,reps:'5-8',lastW:100,unit:'كجم إجمالي',muscle:'رجل'},
-  {id:'la2', name:'Romanian Deadlift',sets:3,reps:'6-8',lastW:85,unit:'كجم إجمالي',muscle:'رجل خلفي'},
-  {id:'la3', name:'Barbell Hip Thrust',sets:3,reps:'8-10',lastW:80,unit:'كجم إجمالي',muscle:'مؤخرة'},
-  {id:'la4', name:'Lying Leg Curl',sets:3,reps:'12',lastW:55,unit:'كجم',muscle:'رجل خلفي'},
-  {id:'la5a',name:'Standing Calf Raise',sets:2,reps:'12-15',lastW:80,unit:'كجم',muscle:'سمانة'},
-  {id:'la5b',name:'Seated Calf Raise',sets:2,reps:'15-20',lastW:40,unit:'كجم',muscle:'سمانة'},
-  {id:'la6a',name:'Hanging Leg Raise',sets:3,reps:'12-15',lastW:0,unit:'وزن جسم',muscle:'بطن'},
-  {id:'la6b',name:'Cable Crunch',sets:3,reps:'12-15',lastW:50,unit:'كجم',muscle:'بطن'},
+/* ══ LOWER A — سكوات + هامسترينج + مؤخرة + سمانة + كتف + بطن ══ */
+lowerA:{name:'Lower A',muscles:'كوادز + هامسترينج + مؤخرة + سمانة + كتف جانبي + بطن',exercises:[
+  {id:'la0', name:'إحماء',sets:1,reps:'سكوات جسم ×15 + هيب هينج ×10 + كور خفيف',isWarmup:true},
+  {id:'la1', name:'Back Squat High-Bar · بار · قبضة أمامية',sets:4,reps:'5-8',lastW:100,unit:'كجم إجمالي',muscle:'رجل'},
+  {id:'la2', name:'Romanian Deadlift · بار · قبضة خطافية',sets:3,reps:'6-8',lastW:85,unit:'كجم إجمالي',muscle:'رجل خلفي'},
+  {id:'la3', name:'Barbell Hip Thrust · بار على الورك',sets:3,reps:'8-10',lastW:80,unit:'كجم إجمالي',muscle:'مؤخرة'},
+  {id:'lb4', name:'Seated Leg Curl · ماكينة (وضع ممدود)',sets:3,reps:'10-12',lastW:55,unit:'كجم',muscle:'رجل خلفي'},
+  {id:'lb3', name:'Leg Extension · ماكينة',sets:3,reps:'12-15',lastW:65,unit:'كجم',muscle:'رجل أمامي'},
+  {id:'la5a',name:'Standing Calf Raise · ركبة مستقيمة (جاستروك)',sets:3,reps:'10-15',lastW:80,unit:'كجم',muscle:'سمانة'},
+  {id:'la_lr',name:'Cable Lateral Raise · كابل',sets:3,reps:'15-20',lastW:9,unit:'كجم',muscle:'كتف'},
+  {id:'la6a',name:'Hanging Leg Raise · وزن جسم',sets:3,reps:'12-15',lastW:0,unit:'وزن جسم',muscle:'بطن'},
 ]},
-/* ══ UPPER B — ظهر + صدر + كتف + ذراعين + ساعد ══ */
-upperB:{name:'Upper B',muscles:'لات + ظهر + صدر سفلي + كتف + ذراعين + ساعد',exercises:[
-  {id:'ub0', name:'إحماء',sets:1,reps:'بار فارغ ×10 + كتف جانب ×20',isWarmup:true},
-  {id:'ub1', name:'Pull-Ups Weighted',sets:4,reps:'6-8',lastW:10,unit:'وزن مضاف',muscle:'ظهر'},
-  {id:'ub2', name:'Barbell Row',sets:3,reps:'6-8',lastW:60,unit:'كجم إجمالي',muscle:'ظهر'},
-  {id:'ub3', name:'Dips Chest Focus',sets:3,reps:'8-12',lastW:10,unit:'وزن مضاف',muscle:'صدر'},
-  {id:'ub4', name:'Seated DB Shoulder Press',sets:3,reps:'8-10',lastW:26,unit:'كجم/دمبل',muscle:'كتف'},
-  {id:'ub5a',name:'Lateral Raise',sets:3,reps:'15',lastW:12,unit:'كجم',muscle:'كتف'},
-  {id:'ub5b',name:'Barbell Shrugs',sets:3,reps:'12',lastW:80,unit:'كجم إجمالي',muscle:'ترابيس'},
-  {id:'ub6a',name:'Hammer Curl',sets:3,reps:'10-12',lastW:15,unit:'كجم/دمبل',muscle:'باي'},
-  {id:'ub6b',name:'Rope Pushdown',sets:2,reps:'10-12',lastW:40,unit:'كجم',muscle:'تراي'},
-  {id:'ub7a',name:'Wrist Curl',sets:2,reps:'15',lastW:15,unit:'كجم',muscle:'ساعد'},
-  {id:'ub7b',name:'Farmers Walk',sets:2,reps:'40 ثانية',lastW:20,unit:'كجم/يد',muscle:'ساعد'},
+/* ══ UPPER B — أوفرهيد + سحب أفقي + صدر سفلي + كتف + ذراع + ساعد ══ */
+upperB:{name:'Upper B',muscles:'كتف أمامي + ظهر أفقي+عمودي + صدر سفلي + ذراع + ساعد',exercises:[
+  {id:'ub0', name:'إحماء',sets:1,reps:'بار فارغ أوفرهيد ×10 + كتف جانب ×20',isWarmup:true},
+  {id:'ubOHP',name:'Standing Barbell Overhead Press · بار · قبضة أمامية عرض الكتف',sets:4,reps:'6-8',lastW:40,unit:'كجم إجمالي',muscle:'كتف'},
+  {id:'ub2', name:'Barbell Row Bent-Over · بار · قبضة أمامية',sets:4,reps:'6-8',lastW:60,unit:'كجم إجمالي',muscle:'ظهر'},
+  {id:'ub3', name:'Machine Decline Press · ماكينة',sets:3,reps:'8-12',lastW:50,unit:'كجم',muscle:'صدر'},
+  {id:'ua4', name:'Lat Pulldown · قبضة محايدة (تنويع)',sets:3,reps:'9-12',lastW:60,unit:'كجم',muscle:'ظهر'},
+  {id:'ub5a',name:'Cable Lateral Raise · كابل',sets:4,reps:'12-20',lastW:9,unit:'كجم',muscle:'كتف'},
+  {id:'ua5c',name:'Face Pull · حبل · قبضة محايدة',sets:3,reps:'15',lastW:35,unit:'كجم',muscle:'كتف خلفي'},
+  {id:'ubEZ',name:'EZ-Bar Curl · EZ بار · قبضة سفلية',sets:3,reps:'8-10',lastW:25,unit:'كجم إجمالي',muscle:'باي'},
+  {id:'ub6b',name:'Rope Pushdown · حبل',sets:3,reps:'10-12',lastW:40,unit:'كجم',muscle:'تراي'},
+  {id:'ub7b',name:'Farmers Walk · قبضة محايدة ثقيلة',sets:2,reps:'40 ثانية',lastW:24,unit:'كجم/يد',muscle:'ساعد'},
 ]},
-/* ══ LOWER B — ديدليفت + سبليت سكوات + عزل + سمانة + كور ══ */
-lowerB:{name:'Lower B',muscles:'أسفل ظهر + كوادز + هامسترينج + ظليمة + كور عميق',exercises:[
-  {id:'lb0', name:'إحماء',sets:1,reps:'ديدليفت رومانياني خفيف ×10',isWarmup:true},
-  {id:'lb1', name:'Deadlift',sets:3,reps:'4-6',lastW:110,unit:'كجم إجمالي',muscle:'ظهر'},
-  {id:'lb2', name:'Bulgarian Split Squat',sets:3,reps:'8-10/رجل',lastW:14,unit:'كجم/يد',muscle:'رجل'},
-  {id:'lb3', name:'Leg Extension',sets:3,reps:'15',lastW:65,unit:'كجم',muscle:'رجل أمامي'},
-  {id:'lb4', name:'Seated Leg Curl',sets:3,reps:'12',lastW:55,unit:'كجم',muscle:'رجل خلفي'},
-  {id:'lb5', name:'Seated Calf Raise',sets:3,reps:'15-20',lastW:40,unit:'كجم',muscle:'سمانة'},
-  {id:'lb6a',name:'Weighted Plank',sets:3,reps:'45 ثانية',lastW:10,unit:'كجم على الظهر',muscle:'بطن'},
-  {id:'lb6b',name:'Cable Woodchopper',sets:3,reps:'12/جنب',lastW:25,unit:'كجم',muscle:'بطن'},
+/* ══ LOWER B — ديدليفت + هاك + أحادي + هامسترينج + سمانة + كور ══ */
+lowerB:{name:'Lower B',muscles:'سلسلة خلفية + كوادز + هامسترينج + سمانة + كتف جانبي + كور + ساعد',exercises:[
+  {id:'lb0', name:'إحماء',sets:1,reps:'ديدليفت رومانياني خفيف ×10 + كور',isWarmup:true},
+  {id:'lb1', name:'Deadlift Conventional · بار · قبضة خطافية/متعاكسة',sets:3,reps:'3-5',lastW:110,unit:'كجم إجمالي',muscle:'ظهر'},
+  {id:'lbHACK',name:'Hack Squat · ماكينة',sets:3,reps:'8-12',lastW:80,unit:'كجم',muscle:'رجل'},
+  {id:'lb2', name:'Bulgarian Split Squat · دمبل · قبضة محايدة',sets:3,reps:'8-10/رجل',lastW:14,unit:'كجم/يد',muscle:'رجل'},
+  {id:'la4', name:'Lying Leg Curl · ماكينة',sets:3,reps:'10-12',lastW:55,unit:'كجم',muscle:'رجل خلفي'},
+  {id:'lb5', name:'Seated Calf Raise · ركبة مثنية (سوليس)',sets:3,reps:'12-20',lastW:40,unit:'كجم',muscle:'سمانة'},
+  {id:'lb_lr',name:'Cable Lateral Raise · كابل',sets:2,reps:'15-20',lastW:9,unit:'كجم',muscle:'كتف'},
+  {id:'lb6b',name:'Cable Crunch · حبل',sets:3,reps:'12-15',lastW:50,unit:'كجم',muscle:'بطن'},
+  {id:'lbWC',name:'Cable Woodchopper · كابل (مائل)',sets:3,reps:'12/جنب',lastW:25,unit:'كجم',muscle:'بطن'},
+  {id:'ua7a',name:'Wrist Curl · بار/دمبل',sets:2,reps:'15',lastW:15,unit:'كجم',muscle:'ساعد'},
 ]}};
 const EXERCISE_LIBRARY=[
 /* ═══ صدر ═══ */
@@ -5399,9 +5397,11 @@ function eliteDecision(id,name,sets){
   const topRep=parseInt(String(repRange).split(/[-–]/)[1]||repRange)||12;
   const incThreshold=topRep; /* يُوصى بالزيادة عند بلوغ الحد الأعلى من النطاق */
   /* قرار التدرج */
+  /* Deload يدوي مفعّل من بوابة الراحة — أعلى أولوية، ينتهي تلقائياً بعد 7 أيام */
+  if(G.isDeloadWeek){const _ds=G.deloadStart?new Date(G.deloadStart):null;if(_ds&&(Date.now()-_ds)>7*864e5){G.isDeloadWeek=false;G.deloadStart=null;if(typeof saveD==='function')saveD();}else return{action:'deload',weight:Math.round(best*.6*2)/2,msg:'🔄 أسبوع Deload نشط — 60%'};}
   if(blk==='deload')return{action:'deload',weight:Math.round(best*.9*2)/2,msg:'🔄 Deload — 90%'};
   if(vel==='fatigue_drop')return{action:'maintain',weight:best,msg:'⚠️ Fatigue Drop — حافظ على الوزن'};
-  if(avgRPE>9)return{action:'maintain',weight:best,msg:`⚠️ RIR ${Math.max(0,Math.round(10-avgRIR))} — شغّال على الحد، حافظ على الوزن`};
+  if(avgRPE>9)return{action:'maintain',weight:best,msg:`⚠️ RIR ${Math.max(0,Math.round(10-avgRPE))} — شغّال على الحد، حافظ على الوزن`};
   if(fat==='critical')return{action:'deload',weight:Math.round(best*.9*2)/2,msg:'🚨 Fatigue حرج'};
   /* Feature 5: BW drop > 2kg → maintain */
   if(G.bw&&G.bw.length>=3){const _recent=G.bw[G.bw.length-1].w,_old=G.bw.slice(-5,-1).reduce((s,e)=>s+e.w,0)/Math.min(G.bw.slice(-5,-1).length,4);if(_old-_recent>2)return{action:'maintain',weight:best,msg:'⚖️ وزن جسمك نزل — ركز على البروتين'}; }
@@ -5688,6 +5688,8 @@ function onRPEChange(id,i,isUserInput){
   else if(v>=10)el.classList.add('rpe-max');
   saveCurrentSet(id,i);updateSetSummary(id);
 }
+/* مصدر موحّد للـ RPE الحقيقي (0-10): الحقل يعرض RIR، والـ storedRpe يحمل RPE المحوّل */
+function _trueRpe(id,i){const el=document.getElementById(`srpe-${id}-${i}`);if(!el)return 0;const s=parseFloat(el.dataset.storedRpe);return !isNaN(s)?s:parseFloat(el.value)||0;}
 function onRIRChange(id,ix,isUserInput){
   const el=document.getElementById('srpe-'+id+'-'+ix);if(!el)return;
   if(isUserInput)el.dataset.manual='1';
@@ -5741,7 +5743,7 @@ function onSetChange(id,i,be){
   suggestRPE(id,i,false); // forceUpdate=false → respects manual flag
   saveCurrentSet(id,i);updateSetSummary(id);
 }
-function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=document.getElementById(`sr-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(!c)return;const _prevBest=getBestSet(id);if(!c.classList.contains('sc-done')){const w=document.getElementById(`sw-${id}-${i}`);if(w&&!w.value){const ls=getLastSets(id),p=ls[i];if(p&&p.w){w.value=p.w;w.classList.add('si-filled')}}c.classList.add('sc-done');c.textContent='✓';r?.classList.add('set-done');n?.classList.add('sn-done');suggestRPE(id,i);if(!sessionStartTime){sessionStartTime=Date.now();sessionTimerInterval=setInterval(updateCompBar,1000);}if(navigator.vibrate)navigator.vibrate(20);quickStartTimer(_getSmartTimer(id));if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0;if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}} /* v13: الاحتفال بالـ PR اتوحّد في باتش ARISE (كان بيتكرر مرتين) */}
+function toggleSetDone(id,i){const c=document.getElementById(`sc-${id}-${i}`),r=document.getElementById(`sr-${id}-${i}`),n=document.getElementById(`snum-${id}-${i}`);if(!c)return;const _prevBest=getBestSet(id);if(!c.classList.contains('sc-done')){const w=document.getElementById(`sw-${id}-${i}`);if(w&&!w.value){const ls=getLastSets(id),p=ls[i];if(p&&p.w){w.value=p.w;w.classList.add('si-filled')}}c.classList.add('sc-done');c.textContent='✓';r?.classList.add('set-done');n?.classList.add('sn-done');suggestRPE(id,i);if(!sessionStartTime){sessionStartTime=Date.now();sessionTimerInterval=setInterval(updateCompBar,1000);}if(navigator.vibrate)navigator.vibrate(20);quickStartTimer(_getSmartTimer(id));if(G.aiKey){const _w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,_r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,_rpe=_trueRpe(id,i);if(_w&&_r)setTimeout(()=>setAICoach(id,i,_w,_r,_rpe),700);}}else{c.classList.remove('sc-done');c.textContent='';r?.classList.remove('set-done');n?.classList.remove('sn-done')}saveCurrentSet(id,i);updateSetSummary(id);checkAllSetsDone(id);if(c.classList.contains('sc-done')){const _nw=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0;if(_nw>_prevBest&&_prevBest>0){document.getElementById(`sr-${id}-${i}`)?.classList.add('new-pr');}} /* v13: الاحتفال بالـ PR اتوحّد في باتش ARISE (كان بيتكرر مرتين) */}
 function saveCurrentSet(id,i){const sk=sesKey(curDay);if(!G.currentSets)G.currentSets={};if(!G.currentSets[sk])G.currentSets[sk]={};if(!G.currentSets[sk][id])G.currentSets[sk][id]=[];const _prevType=G.currentSets[sk][id][i]?.type||'normal';G.currentSets[sk][id][i]={w:parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,r:parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,rpe:(()=>{const el=document.getElementById(`srpe-${id}-${i}`);if(!el)return 0;const stored=parseFloat(el.dataset.storedRpe);return !isNaN(stored)?stored:parseFloat(el.value)||0;})(),done:document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false,type:_prevType};saveDd();}
 function updateSetSummary(id){
   const sm=document.getElementById(`sum-${id}`);if(!sm)return;
@@ -5750,7 +5752,7 @@ function updateSetSummary(id){
   for(let i=0;i<ns;i++){
     const w=parseFloat(document.getElementById(`sw-${id}-${i}`)?.value)||0,
           r=parseInt(document.getElementById(`sr2-${id}-${i}`)?.value)||0,
-          rpe=parseFloat(document.getElementById(`srpe-${id}-${i}`)?.value)||0,
+          rpe=_trueRpe(id,i),
           dn=document.getElementById(`sc-${id}-${i}`)?.classList.contains('sc-done')||false;
     sets.push({w,r,rpe,done:dn});
   }
@@ -5976,7 +5978,7 @@ function updateCompBar(){if(!curDay)return;const day=G.days[curDay],sk=sesKey(cu
 function markDayComplete(){const wk=weekKey();if(!G.completedDays[wk])G.completedDays[wk]={};G.completedDays[wk][curDay]=true;const _today=new Date().toISOString().split('T')[0];if(G.lastWo!==_today){G.streak=(G.streak||0)+1;}saveD();showNotification('يوم مكتمل!🎉',G.days[curDay].name);rDays();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();setTimeout(showDungeonComplete,500);
 /* F12 */ setTimeout(checkStreakMilestone,1500);
 /* F14 */ const dur=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0; scheduleNutritionReminder(dur);}
-function saveSes(){if(!curDay)return toast('اختر يوم التمرين','e');const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;const _jMood=window._selectedMood||0;const _jNote=document.getElementById('journalNote')?.value?.trim()||'';day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=parseFloat(document.getElementById(`srpe-${ex.id}-${i}`)?.value)||0,dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const duration=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0;const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),duration,mood:_jMood,note:_jNote};G.ses.push(sd);G.lastWo=new Date().toISOString().split('T')[0];if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;updateChallengeProgress();saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);setTimeout(checkBadges,800);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();renderTodayMission();setTimeout(()=>showStretchModal(curDay),1800);setTimeout(()=>{if(typeof addXP==='function'){addXP(100,'جلسة مكتملة');if((G.streak||0)>0&&(G.streak%7===0))addXP(200,'أسبوع كامل!');}},2500);
+function saveSes(){if(!curDay)return toast('اختر يوم التمرين','e');const day=G.days[curDay],exs={},sk=sesKey(curDay);let has=false;const _jMood=window._selectedMood||0;const _jNote=document.getElementById('journalNote')?.value?.trim()||'';day.exercises.forEach(ex=>{if(ex.isWarmup)return;const ns=ex.sets||3,sets=[];for(let i=0;i<ns;i++){const w=parseFloat(document.getElementById(`sw-${ex.id}-${i}`)?.value)||0,r=parseInt(document.getElementById(`sr2-${ex.id}-${i}`)?.value)||0,rpe=_trueRpe(ex.id,i),dn=document.getElementById(`sc-${ex.id}-${i}`)?.classList.contains('sc-done')||false;sets.push({w,r,rpe,done:dn})}const fs=sets.filter(s=>s.w>0),tw=fs.length?Math.max(...fs.map(s=>s.w||0)):0,vol=fs.reduce((t,s)=>t+(s.w||0)*(s.r||1),0),avgR=fs.filter(s=>s.rpe>0).length?Math.round(fs.filter(s=>s.rpe>0).reduce((t,s)=>t+s.rpe,0)/fs.filter(s=>s.rpe>0).length*10)/10:0;if(tw>0)has=true;exs[ex.id]={id:ex.id,name:ex.name,w:tw,vol:Math.round(vol),sets,note:document.getElementById('n-'+ex.id)?.value||'',unit:ex.unit||'كجم',muscle:ex.muscle||'',avgRPE:avgR}});if(!has)return toast('أدخل وزن واحد على الأقل','w');const duration=sessionStartTime?Math.round((Date.now()-sessionStartTime)/60000):0;const sd={id:'s'+Date.now(),dk:curDay,dn:day.name,ms:day.muscles,exs,date:new Date().toISOString(),ds:new Date().toLocaleString('ar-EG'),fatigueScore:FATIGUE.score(),fatigueLevel:FATIGUE.level(),block:PERIOD.type(),blockWeek:PERIOD.week(),duration,mood:_jMood,note:_jNote};G.ses.push(sd);G.lastWo=new Date().toISOString().split('T')[0];if(G.currentSets&&G.currentSets[sk])delete G.currentSets[sk];sessionStartTime=null;clearInterval(sessionTimerInterval);sessionTimerInterval=null;updateChallengeProgress();saveD();toast('تم حفظ الجلسة!✅','s');showNotification('جلسة محفوظة✅',day.name);setTimeout(checkBadges,800);const sug=generateNextSessionSuggestions(sd);showSessionSummaryModal(sd,sug);rExs();rQuickStats();rRecoveryBadge();rFatigueBadge();rFatigueBar();renderTodayMission();setTimeout(()=>showStretchModal(curDay),1800);setTimeout(()=>{if(typeof addXP==='function'){addXP(100,'جلسة مكتملة');if((G.streak||0)>0&&(G.streak%7===0))addXP(200,'أسبوع كامل!');}},2500);
 setTimeout(()=>{if(typeof checkVolumeGates==='function')checkVolumeGates();},3000);if(typeof _ttsSessionDone==='function')setTimeout(_ttsSessionDone,800);if(typeof _wlAutoStop==='function')_wlAutoStop();}
 function resetCurrentSession(){
   if(!curDay){ if(typeof toast==='function')toast('اختر يوم أولاً','w'); return; }
@@ -8101,8 +8103,37 @@ function renderProgramSelector() {
       <div class="prog-card-days">${dayChips}</div>
     </div>`;
   }).join('');
+  if((active||'ppl')==='ppl'){
+    el.innerHTML+=`<button class="btn btn-p btn-full" style="margin-top:10px;font-family:monospace,'Cairo';letter-spacing:.03em" onclick="upgradePlanToLatest()">⚔️ ترقية الخطة لأحدث نسخة (كتف + زوايا)</button><div style="font-size:.66em;color:rgba(0,180,255,.45);text-align:center;margin-top:5px">سجل جلساتك وأوزانك محفوظة — التحديث يطال خطة التمارين فقط</div>`;
+  }
 }
 
+/* ترقية الخطة الحالية (ppl) لأحدث نسخة من MY_DAYS مع الحفاظ على السجل والأوزان */
+function upgradePlanToLatest(){
+  const existing=document.getElementById('_upgPlanModal');if(existing)existing.remove();
+  const overlay=document.createElement('div');overlay.id='_upgPlanModal';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:20px;backdrop-filter:blur(4px)';
+  overlay.innerHTML=`<div style="background:rgba(0,6,24,.97);border:1.5px solid rgba(0,212,255,.3);border-radius:18px 18px 14px 14px;padding:18px 20px;width:100%;max-width:400px"><div style="font-weight:900;font-size:.72em;margin-bottom:6px;color:#00d4ff;font-family:monospace;letter-spacing:.06em">[ PLAN · UPGRADE ]</div><div style="font-weight:900;font-size:.9em;margin-bottom:8px;color:#00d4ff">ترقية الخطة لأحدث نسخة</div><div style="font-size:.76em;color:rgba(200,225,240,.8);line-height:1.7;margin-bottom:14px">• كتف جانبي 12 سيت (بدل 6)<br>• صدر: علوي + أوسط + سفلي (3 زوايا)<br>• ظهر متوازن (عمودي + أفقي)<br>• Machine Decline بدل Dips · تراي +1<br><br><strong style="color:#6ee7b7">سجل جلساتك وأوزانك السابقة محفوظة بالكامل.</strong> التمارين اللي ضفتها يدوياً للخطة هتتستبدل بالخطة الجديدة.</div><div style="display:flex;gap:8px"><button onclick="document.getElementById('_upgPlanModal').remove();_doUpgradePlan()" style="flex:2;padding:11px;border-radius:10px;border:none;background:linear-gradient(135deg,#00d4ff,#0088bb);color:#000;font-family:monospace,'Cairo';font-weight:900;font-size:.85em;cursor:pointer;letter-spacing:.04em">⚔️ ترقية الآن</button><button onclick="document.getElementById('_upgPlanModal').remove()" style="flex:1;padding:11px;border-radius:10px;border:1px solid rgba(0,212,255,.2);background:rgba(0,5,18,.7);color:rgba(0,212,255,.7);font-family:monospace,'Cairo';font-size:.85em;cursor:pointer">إلغاء</button></div></div>`;
+  document.body.appendChild(overlay);overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
+}
+function _doUpgradePlan(){
+  try{
+    const oldEx={};
+    Object.values(G.days||{}).forEach(d=>(d.exercises||[]).forEach(e=>{if(e&&e.id)oldEx[e.id]=e;}));
+    const fresh=JSON.parse(JSON.stringify(MY_DAYS));
+    /* حافظ على آخر وزن للمستخدم فقط للتمارين اللي لم يتغير اسمها (نفس الحركة) */
+    Object.values(fresh).forEach(d=>(d.exercises||[]).forEach(e=>{
+      const o=oldEx[e.id];
+      if(o&&o.name===e.name&&o.lastW!=null)e.lastW=o.lastW;
+    }));
+    G.days=fresh;G.activeProgram='ppl';curDay=null;
+    saveD();
+    if(typeof renderProgramSelector==='function')renderProgramSelector();
+    if(typeof rDays==='function')rDays();
+    if(typeof renderPlanEditor==='function')renderPlanEditor();
+    toast('✅ تم ترقية الخطة — سجلك محفوظ','s');
+  }catch(e){toast('❌ خطأ في الترقية','e');console.warn('upgradePlan',e);}
+}
 function switchProgram(pid) {
   if (!PROGRAMS_DEF[pid]) return;
   if ((G.activeProgram||'ppl') === pid) return toast('هذا البرنامج مفعّل بالفعل ✅','i');
@@ -8774,7 +8805,7 @@ const XP_LEVELS=[
   {min:6000, max:9999,  name:'خبير',       icon:'🏆', color:'#fbbf24'},
   {min:10000,max:99999, name:'Legend',     icon:'👑', color:'#fbbf24'},
 ];
-function getXPLevel(xp){return XP_LEVELS.find(l=>xp>=l.min&&xp<=l.max)||XP_LEVELS[0];}
+function getXPLevel(xp){for(let i=XP_LEVELS.length-1;i>=0;i--){if(xp>=XP_LEVELS[i].min)return XP_LEVELS[i];}return XP_LEVELS[0];}
 function addXP(amount,reason){
   if(!G.xp)G.xp=0;
   const _prevLv=getXPLevel(G.xp);
@@ -9764,11 +9795,11 @@ document.addEventListener('DOMContentLoaded',function(){
    ─────────────────────────────────────────────── */
 const SL_RANKS = [
   { id:'E', name:'Rank E',  title:'صياد مبتدئ',   color:'#9ca3af', glow:'rgba(156,163,175,.5)', min:0 },
-  { id:'D', name:'Rank D',  title:'صياد',          color:'#34d399', glow:'rgba(52,211,153,.5)',  min:8 },
-  { id:'C', name:'Rank C',  title:'صياد ماهر',     color:'#60a5fa', glow:'rgba(96,165,250,.5)',  min:20 },
-  { id:'B', name:'Rank B',  title:'صياد نخبة',     color:'#a78bfa', glow:'rgba(167,139,250,.6)', min:40 },
-  { id:'A', name:'Rank A',  title:'صياد رفيع',     color:'#fbbf24', glow:'rgba(251,191,36,.6)',  min:70 },
-  { id:'S', name:'Rank S',  title:'صياد الظل',     color:'#f472b6', glow:'rgba(244,114,182,.7)', min:110 },
+  { id:'D', name:'Rank D',  title:'صياد',          color:'#34d399', glow:'rgba(52,211,153,.5)',  min:5 },
+  { id:'C', name:'Rank C',  title:'صياد ماهر',     color:'#60a5fa', glow:'rgba(96,165,250,.5)',  min:15 },
+  { id:'B', name:'Rank B',  title:'صياد نخبة',     color:'#a78bfa', glow:'rgba(167,139,250,.6)', min:35 },
+  { id:'A', name:'Rank A',  title:'صياد رفيع',     color:'#fbbf24', glow:'rgba(251,191,36,.6)',  min:60 },
+  { id:'S', name:'Rank S',  title:'صياد الظل',     color:'#f472b6', glow:'rgba(244,114,182,.7)', min:100 },
 ];
 
 // نقاط الرتبة = إنجازات حقيقية (مش وقت): جلسات + PRs + streak + volume gates
@@ -9831,9 +9862,11 @@ function getWeeklyBoss(){
 function renderRankSystem(){
   const el = document.getElementById('rankSystemArea'); if(!el) return;
   const rp = calcRankPoints();
-  const rank = getCurrentRank(rp.pts);
-  const next = getNextRank(rp.pts);
-  const pctToNext = next ? Math.min(100, Math.round((rp.pts - rank.min)/(next.min - rank.min)*100)) : 100;
+  /* الرتبة موحّدة على عدد الجلسات (نفس مصدر شارة الداشبورد + Rank Road + احتفال الترقية) */
+  const _sess = rp.sessions;
+  const rank = getCurrentRank(_sess);
+  const next = getNextRank(_sess);
+  const pctToNext = next ? Math.min(100, Math.round((_sess - rank.min)/(next.min - rank.min)*100)) : 100;
   const boss = getWeeklyBoss();
 
   el.innerHTML = `
@@ -9847,11 +9880,11 @@ function renderRankSystem(){
       </div>
       <div style="font-family:'Orbitron','Cairo',sans-serif;font-size:1.3em;font-weight:900;color:${rank.color};margin-top:14px;text-shadow:0 0 14px ${rank.glow}">${rank.name}</div>
       <div style="font-size:.82em;color:var(--tx2);margin-top:2px">${rank.title}</div>
-      <div style="font-family:'Orbitron',monospace;font-size:.74em;color:rgba(120,195,255,.75);margin-top:8px">${rp.pts} RANK POINTS</div>
+      <div style="font-family:'Orbitron',monospace;font-size:.74em;color:rgba(120,195,255,.75);margin-top:8px">${_sess} جلسة · ${rp.pts} نقطة قوة</div>
       ${next ? `
       <div style="margin-top:14px">
         <div style="display:flex;justify-content:space-between;font-size:.66em;color:var(--tx3);margin-bottom:4px;font-family:'Orbitron',monospace">
-          <span>${rank.id}</span><span>${next.min - rp.pts} نقطة لـ ${next.id}</span><span>${next.id}</span>
+          <span>${rank.id}</span><span>${next.min - _sess} جلسة لـ ${next.id}</span><span>${next.id}</span>
         </div>
         <div style="background:rgba(8,20,40,.8);border:1px solid rgba(91,184,255,.2);border-radius:1px;height:10px;overflow:hidden">
           <div style="width:${pctToNext}%;height:100%;background:linear-gradient(90deg,${rank.color},${next.color});box-shadow:0 0 12px ${rank.glow};transition:width 1s"></div>
