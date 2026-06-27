@@ -14091,6 +14091,173 @@ window.toggleRIRGauge=toggleGauge;
 })();
 </script>
 
+<style id="vfx-styles">
+/* ════ VISUAL FX LAYER — طبقة بصرية مستقلة (Solo Leveling) ════ */
+:root{ --vfx-int:0,212,255; }
+@keyframes vfxFloatXP{0%{opacity:0;transform:translateY(0) scale(.8)}15%{opacity:1}100%{opacity:0;transform:translateY(-46px) scale(1.05)}}
+@keyframes vfxRipple{0%{transform:scale(.6);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+@keyframes vfxPageIn{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes vfxShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes vfxEdge{0%{opacity:0}20%{opacity:1}100%{opacity:0}}
+@keyframes vfxTimerGlow{0%,100%{box-shadow:0 0 0 0 rgba(0,212,255,.0)}50%{box-shadow:0 0 22px 4px rgba(0,212,255,.45)}}
+@keyframes vfxSpin{to{transform:rotate(360deg)}}
+@keyframes vfxPartFall{to{transform:translate(var(--dx),var(--dy)) rotate(var(--dr));opacity:0}}
+
+/* 2 — تغذية راجعة عند إكمال السيت */
+.vfx-xp{position:fixed;z-index:99999;font-family:'Orbitron',monospace;font-weight:900;font-size:.9em;color:#67e8f9;text-shadow:0 0 10px rgba(0,212,255,.9);pointer-events:none;animation:vfxFloatXP 1.05s ease-out forwards}
+.vfx-ripple{position:fixed;z-index:99998;width:34px;height:34px;border-radius:9px;border:2px solid #00d4ff;pointer-events:none;animation:vfxRipple .55s ease-out forwards}
+
+/* 3 — إطار نافذة النظام (أقواس زوايا) عبر عنصر مستقل لتفادي التعارض */
+.vfx-corners{position:absolute;inset:5px;pointer-events:none;z-index:2}
+.vfx-corners::before,.vfx-corners::after{content:'';position:absolute;width:14px;height:14px;border:1.5px solid rgba(0,212,255,.45);filter:drop-shadow(0 0 3px rgba(0,212,255,.4))}
+.vfx-corners::before{top:0;left:0;border-right:0;border-bottom:0;border-radius:6px 0 0 0}
+.vfx-corners::after{bottom:0;right:0;border-left:0;border-top:0;border-radius:0 0 6px 0}
+.vfx-corners i::before,.vfx-corners i::after{content:'';position:absolute;width:14px;height:14px;border:1.5px solid rgba(0,212,255,.45)}
+.vfx-corners i::before{top:0;right:0;border-left:0;border-bottom:0;border-radius:0 6px 0 0}
+.vfx-corners i::after{bottom:0;left:0;border-right:0;border-top:0;border-radius:0 0 0 6px}
+
+/* 4 — أرقام HUD متوهّجة */
+.vfx-num{font-family:'Orbitron',monospace!important;font-variant-numeric:tabular-nums;letter-spacing:.02em;text-shadow:0 0 9px rgba(var(--vfx-int),.55)}
+
+/* 3+ — حلقة دائرية conic لإحصائيات الجاهزية/التعافي */
+.vfx-ring{position:relative}
+.vfx-ring::before{content:'';position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(var(--rc,#00d4ff) calc(var(--rp,0)*1%), rgba(255,255,255,.08) 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 3px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 3px));z-index:-1;opacity:.9}
+
+/* 6 — مؤقّت الراحة: توهّج نابض */
+.vfx-timer-glow{animation:vfxTimerGlow 1.6s ease-in-out infinite}
+
+/* 7 — انتقال الصفحات + سكيليتون شيمر */
+.vfx-page-in{animation:vfxPageIn .34s ease both}
+.vfx-skel,.loading.vfx-skel{background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(0,212,255,.14) 37%,rgba(255,255,255,.05) 63%);background-size:200% 100%;animation:vfxShimmer 1.3s linear infinite;border-radius:10px}
+
+/* 8 — خلفية تتفاعل مع الشدّة */
+#vfxIntensity{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s,background .6s;background:radial-gradient(120% 80% at 50% 100%,rgba(var(--vfx-int),.16),transparent 70%)}
+body.vfx-train #vfxIntensity{opacity:1}
+
+/* 9 — حالة فارغة مُثيمة */
+.vfx-empty{text-align:center;padding:30px 16px;color:rgba(0,212,255,.6);font-family:'Orbitron',monospace}
+.vfx-empty .vfx-emoji{font-size:2.4em;filter:drop-shadow(0 0 12px rgba(0,212,255,.5));margin-bottom:8px}
+
+/* 1+9 — وميض الحواف للحظات PR/ترقية */
+#vfxEdge{position:fixed;inset:0;z-index:99990;pointer-events:none;opacity:0;box-shadow:inset 0 0 90px 14px rgba(0,212,255,.55),inset 0 0 30px 4px rgba(103,232,249,.5)}
+#vfxEdge.go{animation:vfxEdge 1.5s ease-out}
+.vfx-part{position:fixed;z-index:99991;width:9px;height:9px;pointer-events:none;border-radius:2px;animation:vfxPartFall var(--t,1.2s) ease-in forwards}
+
+/* 10 — احترام تقليل الحركة */
+@media (prefers-reduced-motion: reduce){
+  .vfx-xp,.vfx-ripple,.vfx-page-in,.vfx-skel,.vfx-timer-glow,#vfxEdge.go,.vfx-part{animation:none!important}
+  #vfxIntensity{transition:none}
+}
+</style>
+<script id="vfx-script">
+(function(){
+  'use strict';
+  try{
+    var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // عناصر التراكب
+    function mk(id){ if(document.getElementById(id))return document.getElementById(id); var d=document.createElement('div'); d.id=id; document.body.appendChild(d); return d; }
+    mk('vfxIntensity'); var edge=mk('vfxEdge');
+
+    // ── 2) تغذية راجعة عند إكمال السيت ──
+    document.addEventListener('click', function(e){
+      var chk = e.target.closest && e.target.closest('.set-chk'); if(!chk) return;
+      setTimeout(function(){
+        if(!chk.classList.contains('sc-done')) return;
+        var r = chk.getBoundingClientRect();
+        if(!RM){
+          var rip=document.createElement('div'); rip.className='vfx-ripple';
+          rip.style.left=(r.left+r.width/2-17)+'px'; rip.style.top=(r.top+r.height/2-17)+'px';
+          document.body.appendChild(rip); setTimeout(function(){rip.remove();},560);
+        }
+        var xp=document.createElement('div'); xp.className='vfx-xp'; xp.textContent='+XP';
+        xp.style.left=(r.left+r.width/2-12)+'px'; xp.style.top=(r.top-6)+'px';
+        document.body.appendChild(xp); setTimeout(function(){xp.remove();},1100);
+      }, 30);
+    }, true);
+
+    // ── 3) أقواس الزوايا + 4) أرقام HUD + 3+) حلقات conic ──
+    function frame(el){ if(!el||el.querySelector(':scope > .vfx-corners'))return; var c=document.createElement('div'); c.className='vfx-corners'; var i=document.createElement('i'); c.appendChild(i); if(getComputedStyle(el).position==='static')el.style.position='relative'; el.appendChild(c); }
+    function num(el){ if(el)el.classList.add('vfx-num'); }
+    function ringStat(label,color){
+      try{
+        var qs=document.querySelectorAll('#quickStats .qstat');
+        qs.forEach(function(q){ var ql=q.querySelector('.ql'); var qv=q.querySelector('.qv'); if(!ql||!qv)return;
+          if(ql.textContent.indexOf(label)>-1){ var v=parseInt(qv.textContent)||0; q.classList.add('vfx-ring'); q.style.setProperty('--rp',Math.max(0,Math.min(100,v))); q.style.setProperty('--rc',color); }
+        });
+      }catch(e){}
+    }
+    function enhance(){
+      try{
+        // أقواس على البطاقات والعناوين
+        document.querySelectorAll('.card, .sl-dungeon-header, .pg.act .glass, .modal.act .sheet').forEach(frame);
+        // أرقام HUD
+        ['hstatStreak','hstatSessions','hstatWeek','hstatRecovery','hstatFatigue'].forEach(function(id){ num(document.getElementById(id)); });
+        document.querySelectorAll('#quickStats .qv').forEach(num);
+        // حلقات
+        ringStat('Recovery','#22d3ee'); ringStat('Fatigue','#fbbf24');
+      }catch(e){}
+    }
+    // 7) سكيليتون شيمر على عناصر التحميل النصية
+    function skel(){ try{ document.querySelectorAll('.loading').forEach(function(l){ l.classList.add('vfx-skel'); }); }catch(e){} }
+
+    // ── 6) توهّج مؤقّت الراحة ──
+    function timerGlow(){ try{ var ft=document.getElementById('floatTimer'); if(!ft)return; var on=getComputedStyle(ft).display!=='none' && ft.offsetParent!==null; ft.classList.toggle('vfx-timer-glow', !!on && !RM); }catch(e){} }
+
+    // ── 8) خلفية الشدّة من قيم RIR ──
+    function intensity(){
+      try{
+        var inps=document.querySelectorAll('input[id^="srpe-"]'); var best=null;
+        inps.forEach(function(el){ var s=parseFloat(el.dataset.storedRpe); var rir=isNaN(s)?(parseFloat(el.value)):(10-s); if(!isNaN(rir)){ if(best===null||rir<best)best=rir; } });
+        var train=document.body.classList.contains('vfx-train');
+        if(best===null){ return; }
+        // RIR منخفض=مجهود عالٍ=أحمر ، RIR عالٍ=سماوي
+        var rgb = best<=0?'248,113,113' : best<=1?'251,146,60' : best<=2?'251,191,36' : best<=3?'103,232,249' : '0,212,255';
+        document.documentElement.style.setProperty('--vfx-int', rgb);
+      }catch(e){}
+    }
+    // فعّل خلفية الشدّة فقط أثناء وجود حقول التمرين
+    function trainMode(){ try{ document.body.classList.toggle('vfx-train', !!document.querySelector('input[id^="srpe-"]')); }catch(e){} }
+
+    // ── 1+9) وميض الحواف + جزيئات للحظات الإنجاز ──
+    function celebrate(palette){
+      try{
+        edge.classList.remove('go'); void edge.offsetWidth; edge.classList.add('go');
+        if(RM)return;
+        var cols=palette||['#00d4ff','#67e8f9','#38bdf8','#a5f3fc'];
+        for(var k=0;k<26;k++){ (function(){ var p=document.createElement('div'); p.className='vfx-part';
+          p.style.left=(50+(Math.random()*40-20))+'%'; p.style.top=(38+(Math.random()*16-8))+'%';
+          p.style.background=cols[k%cols.length];
+          p.style.setProperty('--dx',(Math.random()*260-130)+'px');
+          p.style.setProperty('--dy',(Math.random()*220+90)+'px');
+          p.style.setProperty('--dr',(Math.random()*540-270)+'deg');
+          p.style.setProperty('--t',(0.9+Math.random()*0.8)+'s');
+          document.body.appendChild(p); setTimeout(function(){p.remove();},1800);
+        })(); }
+      }catch(e){}
+    }
+    function wrap(name,palette){ try{ var f=window[name]; if(typeof f!=='function')return; window[name]=function(){ try{celebrate(palette);}catch(e){} return f.apply(this,arguments); }; }catch(e){} }
+    wrap('showPRBanner',['#fbbf24','#fde68a','#f59e0b','#fff']);
+    wrap('showRankUpCeremony',['#00d4ff','#67e8f9','#a5f3fc','#fff']);
+    wrap('showLevelUpOverlay',['#22d3ee','#67e8f9','#38bdf8']);
+
+    // ── 7) انتقال الصفحات (تغليف go) ──
+    try{ var _go=window.go; if(typeof _go==='function'){ window.go=function(){ var r=_go.apply(this,arguments); try{ var a=document.querySelector('.pg.act'); if(a&&!RM){ a.classList.remove('vfx-page-in'); void a.offsetWidth; a.classList.add('vfx-page-in'); } setTimeout(allPass,50); }catch(e){} return r; }; } }catch(e){}
+    // ── 8) تغليف onRIRChange لتحديث الشدّة ──
+    try{ var _or=window.onRIRChange; if(typeof _or==='function'){ window.onRIRChange=function(){ var r=_or.apply(this,arguments); try{intensity();}catch(e){} return r; }; } }catch(e){}
+
+    // ── 9) حالة فارغة مُثيمة لقائمة الجلسات ──
+    function emptyStates(){ try{ var sl=document.getElementById('sessionsList'); if(sl && sl.children.length===0 && (!G||!G.ses||G.ses.length===0)){ sl.innerHTML='<div class="vfx-empty"><div class="vfx-emoji">🗡️</div><div>لا مهام مُسجّلة بعد</div><div style="font-size:.8em;opacity:.7;margin-top:4px">ابدأ صعودك أيها الصياد</div></div>'; } }catch(e){} }
+
+    function allPass(){ enhance(); skel(); timerGlow(); trainMode(); intensity(); emptyStates(); }
+
+    // تشغيل دوري خفيف يلتقط أي رندر جديد
+    var lastRun=0;
+    function loop(){ var t=Date.now(); if(t-lastRun>700){ lastRun=t; allPass(); } requestAnimationFrame(loop); }
+    if(document.readyState!=='loading'){ allPass(); requestAnimationFrame(loop); }
+    else document.addEventListener('DOMContentLoaded',function(){ allPass(); requestAnimationFrame(loop); });
+  }catch(e){ console.warn('vfx layer:',e); }
+})();
+</script>
 </body>
 </html>  <!-- pg-tools merged into pg-ai -->
 
