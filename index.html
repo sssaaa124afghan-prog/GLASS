@@ -14258,6 +14258,133 @@ body.vfx-train #vfxIntensity{opacity:1}
   }catch(e){ console.warn('vfx layer:',e); }
 })();
 </script>
+<style id="rx-styles">
+#recoveryOverlay{position:fixed;inset:0;z-index:99995;background:rgba(0,6,20,.97);backdrop-filter:blur(8px);display:none;flex-direction:column;overflow-y:auto;font-family:'Cairo',sans-serif;direction:rtl;color:#eaf6ff}
+#recoveryOverlay.act{display:flex}
+.rx-head{position:sticky;top:0;background:rgba(0,8,26,.9);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,212,255,.18);z-index:2}
+.rx-head h2{margin:0;font-family:'Orbitron',monospace;font-size:1.02em;color:#00d4ff;letter-spacing:.05em}
+.rx-x{background:rgba(255,255,255,.06);border:1px solid rgba(0,212,255,.2);color:#9fdcff;width:34px;height:34px;border-radius:9px;font-size:1.1em;cursor:pointer}
+.rx-body{padding:16px 18px 40px;max-width:520px;margin:0 auto;width:100%}
+.rx-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 16px;margin-bottom:14px;position:relative}
+.rx-card h3{margin:0 0 4px;font-size:.92em;color:#67e8f9;display:flex;align-items:center;gap:7px}
+.rx-sub{font-size:.74em;color:#9fb6cc;line-height:1.7}
+.rx-opt{display:flex;gap:10px;margin-top:10px}
+.rx-opt .o{flex:1;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.18);border-radius:12px;padding:10px;font-size:.76em;line-height:1.6}
+.rx-opt .o b{color:#bfe9ff;font-size:1.05em;display:block;margin-bottom:3px}
+.rx-z2{margin-top:10px;background:rgba(34,211,238,.08);border-right:3px solid #22d3ee;border-radius:8px;padding:8px 12px;font-size:.74em;color:#b8f0f5}
+/* دائرة المؤقّت */
+.rx-timer-wrap{display:flex;flex-direction:column;align-items:center;margin:6px 0 14px}
+.rx-ring{width:200px;height:200px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;background:conic-gradient(var(--rxc,#00d4ff) calc(var(--rxp,0)*1%),rgba(255,255,255,.07) 0)}
+.rx-ring::after{content:'';position:absolute;inset:12px;border-radius:50%;background:#04102a}
+.rx-ring .in{position:relative;z-index:2;text-align:center}
+.rx-time{font-family:'Orbitron',monospace;font-size:2.6em;font-weight:900;color:#eaf6ff;text-shadow:0 0 14px rgba(0,212,255,.5);line-height:1}
+.rx-side{font-size:.82em;color:#67e8f9;margin-top:4px}
+.rx-stname{text-align:center;font-weight:800;font-size:1.05em;margin:4px 0 2px}
+.rx-sttip{text-align:center;font-size:.76em;color:#9fb6cc;margin-bottom:8px;min-height:1.2em}
+.rx-prog{text-align:center;font-size:.72em;color:#6f8aa6;font-family:'Orbitron',monospace;margin-bottom:10px}
+.rx-ctrls{display:flex;gap:10px;justify-content:center;margin-top:6px}
+.rx-btn{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:#bfe9ff;border-radius:12px;padding:11px 16px;font-family:'Cairo';font-weight:700;font-size:.86em;cursor:pointer;min-width:54px}
+.rx-btn.main{background:linear-gradient(135deg,#00d4ff,#0088bb);color:#001018;flex:1;max-width:200px;font-family:'Orbitron',monospace}
+.rx-steps{margin-top:14px}
+.rx-step{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;font-size:.78em;opacity:.5;transition:.3s}
+.rx-step.cur{opacity:1;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2)}
+.rx-step.done{opacity:.4}
+.rx-step .ic{font-size:1.2em}
+.rx-chk{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(0,212,255,.3);display:inline-flex;align-items:center;justify-content:center;font-size:.72em;font-weight:900;flex-shrink:0;color:transparent;transition:.25s}
+.rx-chk.done{background:#22d3ee;border-color:#22d3ee;color:#04102a;box-shadow:0 0 8px rgba(34,211,238,.5)}
+.rx-chk.cur{border-color:#00d4ff;color:#00d4ff;animation:rxBreath 1.4s ease-in-out infinite}
+.rx-launch{width:100%;margin:6px 0 12px;background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(0,212,255,.1));border:1px solid rgba(34,211,238,.3);border-radius:14px;padding:13px;color:#bfe9ff;font-family:'Cairo';font-weight:800;font-size:.9em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.rx-breathe{text-align:center;font-size:.78em;color:#86efac;margin-top:8px;animation:rxBreath 10s ease-in-out infinite}
+@keyframes rxBreath{0%,100%{opacity:.5}40%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.rx-breathe{animation:none}}
+</style>
+<div id="recoveryOverlay">
+  <div class="rx-head"><h2>🧘 RECOVERY · يوم التعافي</h2><button class="rx-x" onclick="closeRecovery()">✕</button></div>
+  <div class="rx-body">
+    <div class="rx-card">
+      <h3>🚴 كارديو · 18 دقيقة (Zone 2)</h3>
+      <div class="rx-sub">شدّة منخفضة تحافظ على الكورتيزول منخفضاً وتضخّ الدم للعضلات المتعبة = تعافٍ أنشط.</div>
+      <div class="rx-opt">
+        <div class="o"><b>🚶 سير مائل</b>ميل 5-8% · سرعة 4.5-5.5 كم/س</div>
+        <div class="o"><b>🚲 دراجة ثابتة</b>مقاومة متوسطة · RPM 70-80</div>
+      </div>
+      <div class="rx-z2">🎯 المعيار: تقدر تتكلم بجمل كاملة دون انقطاع نفَس = أنت في Zone 2 الصح.</div>
+      <button class="rx-btn" style="width:100%;margin-top:12px" onclick="rxStartCardio(this)">▶ مؤقّت كارديو 18:00</button>
+    </div>
+    <div class="rx-card">
+      <h3>🤸 دائرة الإطالة الموجّهة · ~12 دقيقة</h3>
+      <div class="rx-timer-wrap">
+        <div class="rx-ring" id="rxRing" style="--rxp:0"><div class="in"><div class="rx-time" id="rxTime">00:00</div><div class="rx-side" id="rxSide">جاهز</div></div></div>
+        <div class="rx-stname" id="rxName">اضغط ابدأ</div>
+        <div class="rx-sttip" id="rxTip"></div>
+        <div class="rx-prog" id="rxProg"></div>
+        <div class="rx-breathe" id="rxBreathe" style="display:none">🫁 شهيق 4 ثوانٍ … زفير 6 ثوانٍ</div>
+      </div>
+      <div class="rx-ctrls">
+        <button class="rx-btn" onclick="rxPrev()">⏮</button>
+        <button class="rx-btn main" id="rxPlay" onclick="rxToggle()">▶ ابدأ الدائرة</button>
+        <button class="rx-btn" onclick="rxSkip()">⏭</button>
+      </div>
+      <div class="rx-steps" id="rxSteps"></div>
+    </div>
+  </div>
+</div>
+<script id="rx-script">
+(function(){
+'use strict';
+var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var STATIONS=[
+ {n:"World's Greatest Stretch",t:"تحضير حركي · فتح الحوض والظهر",ic:"🤸",ph:[["الجانب الأيمن",60],["الجانب الأيسر",60]]},
+ {n:"Deep Lunge Stretch",t:"Hip Flexors · تحرير الـ Psoas",ic:"🦵",ph:[["الجانب الأيمن",60],["الجانب الأيسر",60]]},
+ {n:"Downward Facing Dog",t:"Hamstrings + فك ضغط أسفل الظهر",ic:"🐕",ph:[["ثابت عميق",90]]},
+ {n:"Child's Pose with Reach",t:"Thoracic + إطالة الـ Lats",ic:"🧎",ph:[["المنتصف",60],["ميل يمين",30],["ميل يسار",30]]},
+ {n:"Doorway Chest Stretch",t:"فتح القفص الصدري + التنفّس",ic:"🚪",ph:[["الجانب الأيمن",60],["الجانب الأيسر",60]]},
+ {n:"Supine Spinal Twist",t:"ختام استشفائي · تنفّس 4-6",ic:"🌀",breathe:true,ph:[["الجانب الأيمن",60],["الجانب الأيسر",60]]},
+];
+// بناء قائمة مراحل مسطّحة
+var PHASES=[]; STATIONS.forEach(function(s,si){ s.ph.forEach(function(p){ PHASES.push({si:si,name:s.n,tip:s.t,ic:s.ic,side:p[0],dur:p[1],breathe:!!s.breathe}); }); });
+var TOTAL=PHASES.reduce(function(a,p){return a+p.dur;},0);
+var idx=0, left=0, running=false, tk=null, cardioTk=null, cardioLeft=0, finished=false;
+
+function $(id){return document.getElementById(id);}
+function fmt(s){var m=Math.floor(s/60),x=s%60;return (m<10?'0':'')+m+':'+(x<10?'0':'')+x;}
+function beep(){ try{ if(RM)return; var C=window.AudioContext||window.webkitAudioContext; if(!C)return; var a=new C(); var o=a.createOscillator(),g=a.createGain(); o.connect(g);g.connect(a.destination); o.frequency.value=660; g.gain.setValueAtTime(.0001,a.currentTime); g.gain.exponentialRampToValueAtTime(.25,a.currentTime+.02); g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.4); o.start(); o.stop(a.currentTime+.42);}catch(e){} }
+function vib(ms){ try{ if(navigator.vibrate)navigator.vibrate(ms); }catch(e){} }
+
+function renderSteps(){ var h=''; STATIONS.forEach(function(s,si){ var cur=!finished&&PHASES[idx]&&PHASES[idx].si===si; var done=finished||(PHASES[idx]?PHASES[idx].si>si:false); var mark=done?'<span class="rx-chk done">✓</span>':cur?'<span class="rx-chk cur">●</span>':'<span class="rx-chk"></span>'; h+='<div class="rx-step '+(cur?'cur':done?'done':'')+'">'+mark+'<span class="ic">'+s.ic+'</span><span>'+(si+1)+'. '+s.n+'</span></div>'; }); var el=$('rxSteps'); if(el)el.innerHTML=h; }
+function paint(){
+  var p=PHASES[idx]; if(!p)return;
+  $('rxTime').textContent=fmt(left);
+  $('rxSide').textContent=p.side;
+  $('rxName').textContent=p.ic+' '+p.name;
+  $('rxTip').textContent=p.tip;
+  var globalDone=0; for(var i=0;i<idx;i++)globalDone+=PHASES[i].dur; globalDone+=(p.dur-left);
+  $('rxProg').textContent='المحطة '+(p.si+1)+'/'+STATIONS.length+' · '+fmt(globalDone)+' / '+fmt(TOTAL);
+  var pct=Math.round(((p.dur-left)/p.dur)*100);
+  var ring=$('rxRing'); ring.style.setProperty('--rxp',pct);
+  ring.style.setProperty('--rxc', p.breathe?'#86efac':(left<=5?'#fbbf24':'#00d4ff'));
+  $('rxBreathe').style.display=p.breathe?'block':'none';
+  renderSteps();
+}
+function loadPhase(i){ finished=false; idx=Math.max(0,Math.min(PHASES.length-1,i)); left=PHASES[idx].dur; paint(); }
+function tick(){ left--; if(left<=0){ beep(); vib(120); if(idx>=PHASES.length-1){ finish(); return; } idx++; left=PHASES[idx].dur; } paint(); }
+function play(){ if(running)return; if(idx>=PHASES.length)loadPhase(0); running=true; $('rxPlay').innerHTML='⏸ إيقاف'; tk=setInterval(tick,1000); }
+function pause(){ running=false; if(tk)clearInterval(tk); $('rxPlay').innerHTML='▶ متابعة'; }
+function finish(){ running=false; finished=true; if(tk)clearInterval(tk); $('rxPlay').innerHTML='✓ تمّت'; $('rxTime').textContent='✓'; $('rxName').textContent='🎉 انتهى التعافي'; $('rxSide').textContent='ممتاز'; $('rxTip').textContent=''; $('rxRing').style.setProperty('--rxp',100); $('rxRing').style.setProperty('--rxc','#22d3ee'); $('rxBreathe').style.display='none'; renderSteps(); vib([90,60,90]);
+  try{ if(typeof G!=='undefined'){ if(!G.recoveryLog)G.recoveryLog=[]; G.recoveryLog.push({d:new Date().toISOString().slice(0,10)}); if(typeof saveD==='function')saveD(); } if(typeof toast==='function')toast('🧘 تمّت جلسة التعافي — لا تُحسب في رتبة الرفع','s'); }catch(e){}
+}
+window.rxToggle=function(){ if(idx===0&&left===0)loadPhase(0); running?pause():play(); };
+window.rxSkip=function(){ var was=running; if(tk)clearInterval(tk); if(idx>=PHASES.length-1){finish();return;} loadPhase(idx+1); if(was){running=false;play();} };
+window.rxPrev=function(){ var was=running; if(tk)clearInterval(tk); loadPhase(idx>0?idx-1:0); if(was){running=false;play();} };
+window.rxStartCardio=function(btn){ if(cardioTk){clearInterval(cardioTk);cardioTk=null;cardioLeft=0;btn.innerHTML='▶ مؤقّت كارديو 18:00';return;} cardioLeft=18*60; btn.innerHTML='⏸ '+fmt(cardioLeft); cardioTk=setInterval(function(){ cardioLeft--; if(cardioLeft<=0){clearInterval(cardioTk);cardioTk=null;beep();vib([90,60,90]);btn.innerHTML='✓ خلص الكارديو';if(typeof toast==='function')toast('✅ خلصت كارديو Zone 2','s');return;} btn.innerHTML='⏸ '+fmt(cardioLeft); },1000); };
+window.openRecovery=function(){ var o=$('recoveryOverlay'); if(!o)return; idx=0;left=0;running=false;finished=false; if(tk)clearInterval(tk); $('rxPlay').innerHTML='▶ ابدأ الدائرة'; $('rxTime').textContent='00:00'; $('rxSide').textContent='جاهز'; $('rxName').textContent='اضغط ابدأ'; $('rxTip').textContent=''; $('rxRing').style.setProperty('--rxp',0); renderSteps(); o.classList.add('act'); document.body.style.overflow='hidden'; };
+window.closeRecovery=function(){ var o=$('recoveryOverlay'); if(o)o.classList.remove('act'); if(tk)clearInterval(tk); if(cardioTk){clearInterval(cardioTk);cardioTk=null;} running=false; document.body.style.overflow=''; };
+// حقن زر التشغيل في لوحة القيادة (مرة واحدة)
+function injectLauncher(){ try{ if(document.getElementById('rxLaunchBtn'))return; var dl=document.getElementById('dayList'); if(!dl)return; var b=document.createElement('button'); b.id='rxLaunchBtn'; b.className='rx-launch'; b.innerHTML='🧘 يوم التعافي · كارديو Zone 2 + إطالة موجّهة'; b.onclick=window.openRecovery; dl.parentNode.insertBefore(b, dl.nextSibling); }catch(e){} }
+if(document.readyState!=='loading')setTimeout(injectLauncher,400); else document.addEventListener('DOMContentLoaded',function(){setTimeout(injectLauncher,400);});
+setInterval(injectLauncher,1500);
+})();
+</script>
 </body>
 </html>  <!-- pg-tools merged into pg-ai -->
 
