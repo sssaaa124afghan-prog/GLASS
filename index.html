@@ -5563,7 +5563,7 @@ const bestH=be>0?`<div style="font-size:.63em;color:var(--wn);margin-top:3px;fon
 /* Feature 2: spark chart + smart timer badge */
 const sparkH=_sparkChart(ex.id,ex.unit);
 const _inSs=_getSsGrp(ex.id,ssMap_),_isCmp=OE.isCompound(ex.name);
-const _timerSecs=_inSs?(_isCmp?REST_TIMES.compoundSuperset:REST_TIMES.superset):(_isCmp?REST_TIMES.compound:REST_TIMES.isolation);
+const _timerSecs=_inSs?(_isCmp?90:40):(_isCmp?150:90);
 const _timerBadge=`<span class="smart-timer-badge ${_inSs?(_isCmp?'stb-csuperset':'stb-superset'):_isCmp?'stb-compound':'stb-isolation'}">⏱ ${_timerSecs}s</span>`;
 const lsH=sg?`<div style="background:rgba(167,139,250,.06);border:1px dashed rgba(167,139,250,.2);border-radius:10px;padding:9px;margin-top:8px;font-size:.74em"><strong style="color:var(--pu)">💡 من الجلسة السابقة:</strong> ${sg.reason}<div style="margin-top:3px;color:var(--tx2)">الهدف: ${sg.nextWeight}كجم × ${sg.targetReps}</div></div>`:'';
 const rows=Array.from({length:ns},(_,i)=>{const ps=ls[i]||null,pw=ps?ps.w:be,pr=ps?ps.r:'',pp=ps?ps.rpe:'',pt=pw>0?(pr?`${pw}×${pr}`:`${pw}`):'--';
